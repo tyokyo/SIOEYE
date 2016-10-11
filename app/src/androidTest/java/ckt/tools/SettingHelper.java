@@ -1,18 +1,19 @@
-package ckt;
+package ckt.tools;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import java.util.logging.Logger;
 
+import ckt.base.VP;
+
 /**
  * Created by elon on 2016/9/12.
  */
-public class SettingHelper extends  VP{
+public class SettingHelper extends VP {
     public static String TAG = VP.class.getName();
     public static void timeout(){
         ContentResolver resolver = context.getContentResolver();

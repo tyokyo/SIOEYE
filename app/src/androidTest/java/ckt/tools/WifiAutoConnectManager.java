@@ -1,17 +1,15 @@
-package ckt;
+package ckt.tools;
 
-import android.content.Context;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.logging.Logger;
 
-public class WifiAutoConnectManager extends VP{
+import ckt.base.VP;
+
+public class WifiAutoConnectManager extends VP {
 
     private static final String TAG = WifiAutoConnectManager.class.getSimpleName();
 

@@ -2,7 +2,7 @@
  * ImageLib,图像相关的操作都放置到这里面来。
  */
 
-package ckt;
+package ckt.image;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

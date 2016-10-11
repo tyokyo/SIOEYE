@@ -1,4 +1,4 @@
-package ckt;
+package ckt.base;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,11 +15,11 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
+
+import ckt.tools.Common;
+import ckt.image.ImageTools;
 
 import static junit.framework.Assert.assertTrue;
 

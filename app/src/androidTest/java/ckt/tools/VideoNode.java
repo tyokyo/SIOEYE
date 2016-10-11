@@ -1,4 +1,4 @@
-package ckt;
+package ckt.tools;
 
 public class VideoNode {
 	@Override

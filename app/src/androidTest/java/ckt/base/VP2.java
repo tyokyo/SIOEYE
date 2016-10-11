@@ -1,6 +1,5 @@
-package ckt;
+package ckt.base;
 
-import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,9 +23,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.logging.Logger;
 
+import ckt.tools.VideoNode;
 import page.App;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -100,7 +99,7 @@ public class VP2 extends  VP{
     }
 
     public static void makeToast(String message,int time) throws IOException{
-        String command = String.format("am broadcast -a com.sioeye.alert.action -e %s -e %d",message,time);
+        String command = String.format("am broadcast -a com..alert.action -e %s -e %d",message,time);
         Logger.getLogger(TAG).info(command);
         gDevice.executeShellCommand(command);
     }
