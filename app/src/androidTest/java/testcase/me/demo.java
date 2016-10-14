@@ -8,7 +8,6 @@ import ckt.tools.Spoon2;
  */
 public class demo extends VP2 {
     public void testD1(){
-
-
+        System.out.println("hello world");
     }
 }
