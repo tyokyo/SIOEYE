@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import ckt.tools.VideoNode;
@@ -99,7 +100,7 @@ public class VP2 extends  VP{
     }
 
     public static void makeToast(String message,int time) throws IOException{
-        String command = String.format("am broadcast -a com..alert.action -e %s -e %d",message,time);
+        String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
         Logger.getLogger(TAG).info(command);
         gDevice.executeShellCommand(command);
     }
@@ -306,7 +307,16 @@ public class VP2 extends  VP{
         initDevice();
         return gDevice.findObject(new UiSelector().text(TragetObject));
     }
-
+    /**
+     * This method can return a UI Element by text.
+     *
+     * @param id
+     * @return UiObject
+     */
+    public static UiObject getUiObjectById(String id) {
+        initDevice();
+        return gDevice.findObject(new UiSelector().resourceId(id));
+    }
 
     /**
      * 精确查找
@@ -338,7 +348,23 @@ public class VP2 extends  VP{
         }
         return false;
     }
-
+    /**
+     * Find a UI Element by Resource ID.
+     *
+     * @param ResourceID
+     * @param index
+     */
+    public static boolean clickById(String ResourceID,int index) throws UiObjectNotFoundException {
+        initDevice();
+        gDevice.wait(Until.findObject(By.res(ResourceID)), 10000);
+        if (gDevice.findObject(new UiSelector().resourceId(ResourceID).index(index)).exists()) {
+            gDevice.findObject(new UiSelector().resourceId(ResourceID).index(index)).clickAndWaitForNewWindow();
+            return true;
+        } else {
+            fail("Time Out,Not found the UI Element："+ResourceID);
+        }
+        return false;
+    }
 
     /**
      * This method can be use for operation hardware key.
@@ -411,7 +437,18 @@ public class VP2 extends  VP{
             e.printStackTrace();
         }
     }
-
+    /**
+     * This Method  will return a UI Element by class.
+     *
+     * @param ClassName
+     */
+    public static void clickByClass(String ClassName) {
+        try {
+            gDevice.findObject(new UiSelector().className(ClassName)).clickAndWaitForNewWindow();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * This method  wil click a point on screen.
      *
@@ -423,7 +460,19 @@ public class VP2 extends  VP{
         gDevice.click(x, y);
     }
 
-
+    /**
+     * 获得随机字符
+     */
+    public String getRandomString(int length) {
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
+    }
 
     /**
      * Scroll to Found a UI Element
@@ -605,7 +654,17 @@ public class VP2 extends  VP{
         initDevice();
         return gDevice.findObject(new UiSelector().resourceId(ResourceID));
     }
-
+    /**
+     * Get a UI Element.
+     *
+     * @param ResourceID
+     * @param index
+     * @return UiObject
+     */
+    public static UiObject getObjectById(String ResourceID,int index) {
+        initDevice();
+        return gDevice.findObject(new UiSelector().resourceId(ResourceID).index(index));
+    }
     /**
      * Get the Launcher Package Name.
      *
