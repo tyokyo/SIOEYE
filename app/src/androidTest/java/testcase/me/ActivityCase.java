@@ -168,6 +168,7 @@ public class ActivityCase extends VP2{
 
         Assert.assertTrue(" My Interests is null",0==re2.size());
         Spoon2.screenshot(gDevice,"My_Interests_All");
+
     }
 
 }

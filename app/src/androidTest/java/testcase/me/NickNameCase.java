@@ -32,8 +32,8 @@ public class NickNameCase  extends VP2 {
         Spoon2.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Nick Name");
-        getObjectById(Me.SETNICKNAMECONTENT).clearTextField();
-        getObjectById(Me.SETNICKNAMECONTENT).setText(getRandomString(3));
+        getObjectById(Me.SAMPLE_CONTENT).clearTextField();
+        getObjectById(Me.SAMPLE_CONTENT).setText(getRandomString(3));
         clickByText("Done");
         getUiObjectByText("Done");
         getUiObjectByText("Done");
@@ -45,9 +45,9 @@ public class NickNameCase  extends VP2 {
         Spoon2.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Nick Name");
-        getObjectById(Me.SETNICKNAMECONTENT).clearTextField();
+        getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         String nickname = getRandomString(4);
-        getObjectById(Me.SETNICKNAMECONTENT).setText(nickname);
+        getObjectById(Me.SAMPLE_CONTENT).setText(nickname);
         clickByText("Done");
         waitTime(3);
         String currentNick = getObjectById(Me.GETNICKNAMECONTENT).getText();
@@ -62,7 +62,7 @@ public class NickNameCase  extends VP2 {
         Spoon2.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Nick Name");
-        getObjectById(Me.SETNICKNAMECONTENT).clearTextField();
+        getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         String nickname = getRandomString(60);
         try {
             gDevice.executeShellCommand("input text "+nickname);
@@ -87,7 +87,7 @@ public class NickNameCase  extends VP2 {
         String nicknameBefore = getObjectById(Me.GETNICKNAMECONTENT).getText();
 
         clickByText("Nick Name");
-        getObjectById(Me.SETNICKNAMECONTENT).clearTextField();
+        getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         String nickname = getRandomString(20);
         try {
             gDevice.executeShellCommand("input text "+nickname);
