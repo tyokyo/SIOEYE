@@ -26,12 +26,12 @@ import page.Me;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class HeadImgCase extends VP2 {
+
     private Logger logger =  Logger.getLogger(HeadImgCase.this.getClass().getName());
     @Before
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME);
     }
-
     @Test
     public void editHeadImgFromCamera() throws InterruptedException {
         clickByText("Me");

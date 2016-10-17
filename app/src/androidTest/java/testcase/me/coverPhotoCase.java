@@ -20,7 +20,7 @@ import page.Me;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
-public class CoverPhotoCase  extends VP2 {
+public class CoverPhotoCase extends VP2 {
     @Before
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME);
