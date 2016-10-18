@@ -59,4 +59,32 @@ public class Me {
     public static final String BROADCAST_LIKE="com.sioeye.sioeyeapp:id/broadcast_like";
 
 
+    public static final String BROADCAST_VIEW_TIPTEXT="com.sioeye.sioeyeapp:id/tipText";
+    public static final String BROADCAST_VIEW_ZAN="com.sioeye.sioeyeapp:id/watch_player_portrait_like";
+    public static final String BROADCAST_VIEW_SHARE="com.sioeye.sioeyeapp:id/iv_share";
+
+    public static final String BROADCAST_VIEW_MESSAGE_TEXT="com.sioeye.sioeyeapp:id/message_text";
+    public static final String BROADCAST_VIEW_WATCHER_COUNT="com.sioeye.sioeyeapp:id/watch_player_portrait_watcher_count";
+
+    //video loading
+    public static final String BROADCAST_VIEW_VIDEO_LOADING="com.sioeye.sioeyeapp:id/app_video_loading";
+    //play video
+    public static final String BROADCAST_VIEW_VIDEO_PLAY="com.sioeye.sioeyeapp:id/app_video_play";
+    //current video time
+    public static final String BROADCAST_VIEW_VIDEO_CURRENT_TIME="com.sioeye.sioeyeapp:id/app_video_currentTime";
+    //播放进度
+    public static final String BROADCAST_VIEW_VIDEO_SEEKBAR="com.sioeye.sioeyeapp:id/app_video_seekBar";
+    //video end time
+    public static final String BROADCAST_VIEW_VIDEO_END_TIME="com.sioeye.sioeyeapp:id/app_video_endTime";
+    //全屏播放按钮
+    public static final String BROADCAST_VIEW_VIDEO_FULL_SCREEN="com.sioeye.sioeyeapp:id/app_video_fullscreen";
+    //modify title
+    public static final String BROADCAST_VIEW_VIDEO_TITLE_MODIFY="com.sioeye.sioeyeapp:id/content_dialog";
+
+    //delete a video
+    public static final String BROADCAST_VIEW_VIDEO_DELETE="com.sioeye.sioeyeapp:id/delete_ok";
+
+    //refresh ui
+    public static final String BROADCAST_VIEW_STATUS_IMAGE="com.sioeye.sioeyeapp:id/status_image";
+
 }

@@ -12,6 +12,7 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Configurator;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
@@ -98,7 +99,16 @@ public class VP2 extends  VP{
         //获取Selector timeout
         confg.setWaitForSelectorTimeout(timeout+time);
     }
-
+    public void shellInputText(String text) throws IOException {
+        String command = String.format("input text %s",text);
+        Logger.getLogger(TAG).info(command);
+        gDevice.executeShellCommand("input text "+text);
+    }
+    public static void makeToast(String message,float time) throws IOException{
+        String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %f",message,time);
+        Logger.getLogger(TAG).info(command);
+        gDevice.executeShellCommand(command);
+    }
     public static void makeToast(String message,int time) throws IOException{
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
         Logger.getLogger(TAG).info(command);
@@ -352,6 +362,25 @@ public class VP2 extends  VP{
      * Find a UI Element by Resource ID.
      *
      * @param ResourceID
+     */
+    public static boolean clickById(String ResourceID,int x_offsize,int y_offsize) throws  UiObjectNotFoundException{
+        initDevice();
+        gDevice.wait(Until.findObject(By.res(ResourceID)), 10000);
+        if (gDevice.findObject(new UiSelector().resourceId(ResourceID)).exists()) {
+            UiObject obj = gDevice.findObject(new UiSelector().resourceId(ResourceID));
+            int x = obj.getBounds().centerX()-x_offsize;
+            int y = obj.getBounds().centerY()-y_offsize;
+            gDevice.click(x,y);
+            return true;
+        } else {
+            fail("Time Out,Not found the UI Element："+ResourceID);
+        }
+        return false;
+    }
+    /**
+     * Find a UI Element by Resource ID.
+     *
+     * @param ResourceID
      * @param index
      */
     public static boolean clickById(String ResourceID,int index) throws UiObjectNotFoundException {
@@ -589,7 +618,7 @@ public class VP2 extends  VP{
         //Initialize UiDevice instance.
         gDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         //Start form the home screen.
-        gDevice.pressHome();
+        gDevice.pressBack();
         //Wait for launcher
         final String launcherPackage = getLauncherPackageName();
         assertThat(launcherPackage, notNullValue());

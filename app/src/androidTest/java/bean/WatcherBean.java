@@ -4,7 +4,7 @@ package bean;
  * Created by elon on 2016/10/17.
  */
 public class WatcherBean {
-    private String watch;
+
 
     public String getWatch() {
         return watch;
@@ -32,6 +32,6 @@ public class WatcherBean {
 
     private String comments;
     private String zan;
-
+    private String watch;
 
 }

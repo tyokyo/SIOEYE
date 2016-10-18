@@ -67,8 +67,32 @@ public class BroadCastsCase extends VP2{
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME);
     }
+    public void getPlayTime() throws UiObjectNotFoundException, IOException {
+        String startTime="";
+        String endTime="";
+        //click play screen center
+        clickById(Me.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+        for (int i=0;i<10;i++){
+            if (getObjectById(Me.BROADCAST_VIEW_VIDEO_CURRENT_TIME).exists()){
+                startTime = getObjectById(Me.BROADCAST_VIEW_VIDEO_CURRENT_TIME).getText();
+                break;
+            }else{
+                clickById(Me.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+            }
+        }
+        for (int i=0;i<10;i++){
+            if (getObjectById(Me.BROADCAST_VIEW_VIDEO_END_TIME).exists()){
+                endTime = getObjectById(Me.BROADCAST_VIEW_VIDEO_END_TIME).getText();
+                break;
+            }else{
+                clickById(Me.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+            }
+        }
+        makeToast(startTime+"|"+endTime,10);
 
-    public void testViewVideo(){
+    }
+    @Test
+    public void testViewVideo() throws UiObjectNotFoundException, IOException {
         clickByText("Me");
         clickByText("Broadcasts");
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
@@ -81,18 +105,165 @@ public class BroadCastsCase extends VP2{
         int rd = random.nextInt(size);
         UiObject2 bsobj = lisCollect.get(rd);
         bsobj.click();
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_VIDEO_LOADING)),20000);
-        //com.sioeye.sioeyeapp.ijkplayer.media.TextureRenderView
+        waitTime(3);
+        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+        Assert.assertTrue("video start play in 60 seconds.",!getObjectById(Me.BROADCAST_VIEW_VIDEO_LOADING).exists());
+        //click play screen center
+        clickById(Me.BROADCAST_VIEW_WATCHER_COUNT,0,100);
 
     }
-    public void testEditTitle(){
+    @Test
+    public void testEditTitleCancel() throws UiObjectNotFoundException, IOException {
+        clickByText("Me");
+        clickByText("Broadcasts");
+        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
+        waitTime(5);
+        List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
+        int size = lisCollect.size();
+        Random random = new Random();
+        int rd = random.nextInt(size);
+        BroadcastBean bbe = getBean(rd);
 
-    }
-    public void testDeleteBroadcastsVideo(){
+        UiObject2 obj = lisCollect.get(rd);
+        obj.swipe(Direction.LEFT,0.9f);
+        clickByText("Edit Title");
+        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY)),20000);
+        getUiObjectById(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
+        String expect_title=getRandomString(3);
+        getUiObjectById(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).setText(expect_title);
+        clickByText("Cancel");
+        obj.swipe(Direction.RIGHT,0.9f);
 
+        BroadcastBean bs = getBean(rd);
+        String active_title = bs.getBroadcast_title();
+        Assert.assertEquals("modify title cancel",bbe.getBroadcast_title(),active_title);
+        makeToast(expect_title,3);
+        Spoon2.screenshot(gDevice,"modify_title_cancel");
     }
-    public void testPlayVideoViewers()
-    {
+    @Test
+    public void testEditTitle3() throws UiObjectNotFoundException, IOException {
+        clickByText("Me");
+        clickByText("Broadcasts");
+        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
+        waitTime(5);
+        List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
+        int size = lisCollect.size();
+        Random random = new Random();
+        int rd = random.nextInt(size);
+        BroadcastBean bbe = getBean(rd);
+
+        UiObject2 obj = lisCollect.get(rd);
+        obj.swipe(Direction.LEFT,0.9f);
+        clickByText("Edit Title");
+        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY)),20000);
+        getUiObjectById(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
+        String expect_title=getRandomString(3);
+        getUiObjectById(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).setText(expect_title);
+        clickByText("OK");
+
+        BroadcastBean bs = getBean(rd);
+        String active_title = bs.getBroadcast_title();
+        Assert.assertEquals("modify title",expect_title,active_title);
+        makeToast(expect_title,3);
+        Spoon2.screenshot(gDevice,"modify_title_3");
+    }
+    @Test
+    public void testEditTitle70() throws UiObjectNotFoundException, IOException {
+        clickByText("Me");
+        clickByText("Broadcasts");
+        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
+        waitTime(5);
+        List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
+        int size = lisCollect.size();
+        Random random = new Random();
+        int rd = random.nextInt(size);
+        BroadcastBean bbe = getBean(rd);
+
+        UiObject2 obj = lisCollect.get(rd);
+        obj.swipe(Direction.LEFT,0.9f);
+        clickByText("Edit Title");
+        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY)),20000);
+        getUiObjectById(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
+        String expect_title=getRandomString(70);
+        getUiObjectById(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).setText(expect_title);
+        clickByText("OK");
+
+        BroadcastBean bs = getBean(rd);
+        String active_title = bs.getBroadcast_title();
+        Assert.assertEquals("modify title",expect_title,active_title);
+        makeToast(expect_title,3);
+        Spoon2.screenshot(gDevice,"modify_title_max");
+    }
+    @Test
+    public void testEditTitleMoreThan70() throws UiObjectNotFoundException, IOException {
+        clickByText("Me");
+        clickByText("Broadcasts");
+        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
+        waitTime(5);
+        List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
+        int size = lisCollect.size();
+        Random random = new Random();
+        int rd = random.nextInt(size);
+        BroadcastBean bbe = getBean(rd);
+
+        UiObject2 obj = lisCollect.get(rd);
+        obj.swipe(Direction.LEFT,0.9f);
+        clickByText("Edit Title");
+        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY)),20000);
+        getUiObjectById(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
+        String expect_title=getRandomString(80);
+        shellInputText(expect_title);
+        //getUiObjectById(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).setText(expect_title);
+        clickByText("OK");
+
+        BroadcastBean bs = getBean(rd);
+        String active_title = bs.getBroadcast_title();
+        Assert.assertEquals("modify title",expect_title.substring(0,70),active_title);
+        makeToast(active_title,3);
+        Spoon2.screenshot(gDevice,"modify_title_more_than_max");
+    }
+    @Test
+    public void testDeleteBroadcastsVideo() throws UiObjectNotFoundException, IOException {
+        clickByText("Me");
+        clickByText("Broadcasts");
+        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
+        waitTime(5);
+        List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
+        int size = lisCollect.size();
+        Random random = new Random();
+        int rd = random.nextInt(size);
+        BroadcastBean bbe = getBean(rd);
+
+        UiObject2 obj = lisCollect.get(rd);
+        obj.swipe(Direction.LEFT,0.9f);
+
+        clickByText("Edit Title");
+        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY)),20000);
+        getUiObjectById(Me.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
+        String expect_title=getRandomString(10);
+        shellInputText(expect_title);
+        clickByText("OK");
+        waitTime(3);
+        obj.swipe(Direction.LEFT,0.9f);
+        clickByText("Delete");
+        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_VIDEO_DELETE)),20000);
+        clickById(Me.BROADCAST_VIEW_VIDEO_DELETE);
+        getUiObjectById(Me.BROADCASTS_LIST).swipeDown(3);
+        waitTime(3);
+        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_STATUS_IMAGE)),60000);
+        Assert.assertTrue("delete",!getUiObjectByText(bbe.getBroadcast_title()).exists());
+    }
+    @Test
+    public void testPlayVideoViewers() throws UiObjectNotFoundException {
+        clickByText("Me");
+        clickByText("Broadcasts");
+        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        getUiObjectById(Me.BROADCASTS_LIST).swipeDown(3);
 
     }
     @Test
@@ -239,7 +410,7 @@ public class BroadCastsCase extends VP2{
         int x = zan.getBounds().centerX();
         int y = zan.getBounds().centerY();
 
-        for (int i =0;i<=1000;i++){
+        for (int i =0;i<10;i++){
             gDevice.click(x,y);
             //makeToast("ZAN+"+i, (float) 0.2);
         }
