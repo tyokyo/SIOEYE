@@ -28,7 +28,6 @@ import page.Me;
 public class HeadImgCase extends VP2 {
 
     private Logger logger =  Logger.getLogger(HeadImgCase.this.getClass().getName());
-
     @Before
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME);
