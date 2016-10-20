@@ -340,7 +340,6 @@ public class VP3 extends  VP{
      * @return The result is form 0 to 10.
      */
     public static int getPictureCompareResult(String originFilePath, String comparedFilePath) {
-
         Bitmap origin = ImageTools.readImage(originFilePath);// Read the origin image.
         int origin_fingerprint = getFingerPrint(origin);// get the orgin fingerprint.
 
@@ -350,7 +349,7 @@ public class VP3 extends  VP{
         int different_num = compareFingerPrint(origin_fingerprint,compared_fingerprint);
         return different_num;
     }
-    private static Bitmap drawTextBitmap(Bitmap bitmap,String text){
+    public static Bitmap drawTextBitmap(Bitmap bitmap,String text){
         int x=bitmap.getWidth();
         int y=bitmap.getHeight();
 
@@ -368,7 +367,7 @@ public class VP3 extends  VP{
         canvans.restore();
         return newBitmap;
     }
-    private Bitmap drawTextRectBitmap(Bitmap bitmap,String text,Rect rect){
+    public static Bitmap drawTextRectBitmap(Bitmap bitmap,String text,Rect rect){
         int x=bitmap.getWidth();
         int y=bitmap.getHeight();
 
@@ -402,24 +401,27 @@ public class VP3 extends  VP{
         return newBitmap;
     }
 
-    public static void takeScreenshotAndDrawText(String path, String imageName, String text){
+    public static void takeScreenshotAndDrawText(String path, String imageNamePath, String text){
+        initDevice();
         File file=new File(path);
         gDevice.takeScreenshot(file);
         Bitmap bitmap=BitmapFactory.decodeFile(path);
         Bitmap drawBitmap=drawTextBitmap(bitmap, text);
-        saveBitMapToSdcard(drawBitmap, imageName);
+        saveBitMapToSdcard(drawBitmap, imageNamePath);
     }
-    public void takeScreenshotAndDrawTextAndRect(String path,String imageName,String text,Rect rect){
+    public void takeScreenshotAndDrawTextAndRect(String path,String imageNamePath,String text,Rect rect){
+        initDevice();
         File file=new File(path);
         gDevice.takeScreenshot(file);
         Bitmap bitmap=BitmapFactory.decodeFile(path);
         Bitmap drawBitmap=drawTextRectBitmap(bitmap, text, rect);
-        saveBitMapToSdcard(drawBitmap, imageName);
+        saveBitMapToSdcard(drawBitmap, imageNamePath);
     }
-    private static void saveBitMapToSdcard(Bitmap bitmap,String newName){
+    public static void saveBitMapToSdcard(Bitmap bitmap,String imageNamePath){
         FileOutputStream out=null;
         try {
-            String fileToWrite = "/mnt/sdcard/"+newName+".jpg";
+            //String fileToWrite = "/mnt/sdcard/"+newName+".jpg";
+            String fileToWrite = imageNamePath;
             out=new FileOutputStream(fileToWrite);
             System.out.println(fileToWrite);
             if(out!=null){

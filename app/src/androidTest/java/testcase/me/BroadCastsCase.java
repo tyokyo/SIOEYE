@@ -344,6 +344,9 @@ public class BroadCastsCase extends VP2{
         Spoon2.screenshot(gDevice,"add_comments_length_130");
 
     }
+
+
+
     @Test
     public void testComments_Length_20() throws UiObjectNotFoundException, IOException {
         clickByText("Me");
@@ -420,6 +423,7 @@ public class BroadCastsCase extends VP2{
 
         //listView.swipe(Direction.LEFT, 0.8f, 3000);
         //listView.scroll(Direction.DOWN, 0.8f, 3000);
+
 
         /*clickById(Me.BROADCAST_VIEW,1);
         getObjectById(Me.BROAD_TIP_TEXT).setText("test");

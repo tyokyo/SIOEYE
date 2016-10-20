@@ -36,7 +36,8 @@ public class AboutMeCase extends VP2 {
     }
     @Test
     public void testEdit10C() throws UiObjectNotFoundException {
-        clickByText("Me");
+        //clickByText("Me");
+        clickById(Me.ID_MAIN_TAB_ME);
         String user_id = getObjectById(Me.SIOEYE_USER_ID).getText();
         Spoon2.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);

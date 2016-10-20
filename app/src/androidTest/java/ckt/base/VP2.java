@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -100,16 +101,19 @@ public class VP2 extends  VP{
         confg.setWaitForSelectorTimeout(timeout+time);
     }
     public void shellInputText(String text) throws IOException {
+        initDevice();
         String command = String.format("input text %s",text);
         Logger.getLogger(TAG).info(command);
         gDevice.executeShellCommand("input text "+text);
     }
     public static void makeToast(String message,float time) throws IOException{
+        initDevice();
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %f",message,time);
         Logger.getLogger(TAG).info(command);
         gDevice.executeShellCommand(command);
     }
     public static void makeToast(String message,int time) throws IOException{
+        initDevice();
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
         Logger.getLogger(TAG).info(command);
         gDevice.executeShellCommand(command);
@@ -618,7 +622,7 @@ public class VP2 extends  VP{
         //Initialize UiDevice instance.
         gDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         //Start form the home screen.
-        gDevice.pressBack();
+        gDevice.pressHome();
         //Wait for launcher
         final String launcherPackage = getLauncherPackageName();
         assertThat(launcherPackage, notNullValue());
@@ -682,6 +686,17 @@ public class VP2 extends  VP{
     public static UiObject getObjectById(String ResourceID) {
         initDevice();
         return gDevice.findObject(new UiSelector().resourceId(ResourceID));
+    }
+    /**
+     * Get a UI Element.
+     *
+     * @param ResourceID
+     * @return UiObject
+     */
+    public static List<UiObject2> getObjectsById(String ResourceID) {
+        initDevice();
+        List<UiObject2> lists =gDevice.findObjects(By.res(ResourceID));
+        return  lists;
     }
     /**
      * Get a UI Element.

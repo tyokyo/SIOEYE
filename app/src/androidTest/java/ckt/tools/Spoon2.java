@@ -2,12 +2,21 @@ package ckt.tools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.os.Build;
 import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
+import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.util.Log;
 import java.io.File;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+
+import ckt.base.VP3;
+
 import static android.os.Environment.getExternalStorageDirectory;
 
 /**
@@ -58,7 +67,7 @@ public final  class Spoon2 {
                                                   String testMethodName) throws IllegalAccessException {
         return filesDirectory( uiDevice, SPOON_SCREENSHOTS, testClassName, testMethodName);
     }
-    public static File screenshot(UiDevice uiDevice, String tag, String testClassName,
+    private static File screenshot(UiDevice uiDevice, String tag, String testClassName,
                                   String testMethodName) {
         if (!TAG_VALIDATION.matcher(tag).matches()) {
             throw new IllegalArgumentException("Tag must match " + TAG_VALIDATION.pattern() + ".");
@@ -71,6 +80,74 @@ public final  class Spoon2 {
             File screenshotFile = new File(screenshotDirectory, screenshotName);
             Logger.getLogger("").info(screenshotFile.getAbsolutePath());
             uiDevice.takeScreenshot(screenshotFile);
+            Log.d(TAG, "Captured screenshot '" + tag + "'.");
+            return screenshotFile;
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to capture screenshot.", e);
+        }
+    }
+    private static File screenshot(UiDevice uiDevice, String tag, String testClassName,
+                                  String testMethodName,String drawText) {
+        if (!TAG_VALIDATION.matcher(tag).matches()) {
+            throw new IllegalArgumentException("Tag must match " + TAG_VALIDATION.pattern() + ".");
+        }
+        try {
+            File screenshotDirectory =
+                    obtainScreenshotDirectory(uiDevice, testClassName,
+                            testMethodName);
+            String screenshotName = System.currentTimeMillis() + NAME_SEPARATOR + tag + EXTENSION;
+            File screenshotFile = new File(screenshotDirectory, screenshotName);
+            Logger.getLogger("").info(screenshotFile.getAbsolutePath());
+            uiDevice.takeScreenshot(screenshotFile);
+            Bitmap bitmap= BitmapFactory.decodeFile(screenshotFile.getAbsolutePath());
+            Bitmap drawBitmap= VP3.drawTextBitmap(bitmap, drawText);
+            VP3.saveBitMapToSdcard(drawBitmap, screenshotFile.getAbsolutePath());
+            Log.d(TAG, "Captured screenshot '" + tag + "'.");
+            return screenshotFile;
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to capture screenshot.", e);
+        }
+    }
+    private static File screenshot(UiDevice uiDevice, String tag, String testClassName,
+                                    String testMethodName,String drawText,UiObject uiObject) throws UiObjectNotFoundException {
+        if (!TAG_VALIDATION.matcher(tag).matches()) {
+            throw new IllegalArgumentException("Tag must match " + TAG_VALIDATION.pattern() + ".");
+        }
+        Rect rect = uiObject.getBounds();
+        try {
+            File screenshotDirectory =
+                    obtainScreenshotDirectory(uiDevice, testClassName,
+                            testMethodName);
+            String screenshotName = System.currentTimeMillis() + NAME_SEPARATOR + tag + EXTENSION;
+            File screenshotFile = new File(screenshotDirectory, screenshotName);
+            Logger.getLogger("").info(screenshotFile.getAbsolutePath());
+            uiDevice.takeScreenshot(screenshotFile);
+            Bitmap bitmap= BitmapFactory.decodeFile(screenshotFile.getAbsolutePath());
+            Bitmap drawBitmap= VP3.drawTextRectBitmap(bitmap, drawText,rect);
+            VP3.saveBitMapToSdcard(drawBitmap, screenshotFile.getAbsolutePath());
+            Log.d(TAG, "Captured screenshot '" + tag + "'.");
+            return screenshotFile;
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to capture screenshot.", e);
+        }
+    }
+    private static File screenshot(UiDevice uiDevice, String tag, String testClassName,
+                                   String testMethodName,String drawText,UiObject2 uiObject2) throws UiObjectNotFoundException {
+        if (!TAG_VALIDATION.matcher(tag).matches()) {
+            throw new IllegalArgumentException("Tag must match " + TAG_VALIDATION.pattern() + ".");
+        }
+        Rect rect = uiObject2.getVisibleBounds();
+        try {
+            File screenshotDirectory =
+                    obtainScreenshotDirectory(uiDevice, testClassName,
+                            testMethodName);
+            String screenshotName = System.currentTimeMillis() + NAME_SEPARATOR + tag + EXTENSION;
+            File screenshotFile = new File(screenshotDirectory, screenshotName);
+            Logger.getLogger("").info(screenshotFile.getAbsolutePath());
+            uiDevice.takeScreenshot(screenshotFile);
+            Bitmap bitmap= BitmapFactory.decodeFile(screenshotFile.getAbsolutePath());
+            Bitmap drawBitmap= VP3.drawTextRectBitmap(bitmap, drawText,rect);
+            VP3.saveBitMapToSdcard(drawBitmap, screenshotFile.getAbsolutePath());
             Log.d(TAG, "Captured screenshot '" + tag + "'.");
             return screenshotFile;
         } catch (Exception e) {
@@ -97,14 +174,35 @@ public final  class Spoon2 {
 
         throw new IllegalArgumentException("Could not find test class!");
     }
+
     public static void screenshot(UiDevice uiDevice, String tag) {
         StackTraceElement testClass = findTestClassTraceElement(Thread.currentThread().getStackTrace());
         String className = testClass.getClassName().replaceAll("[^A-Za-z0-9._-]", "_");
         String methodName = testClass.getMethodName();
-        Logger.getLogger("").info(testClass.getClassName());
-        Logger.getLogger("").info(className);
-        Logger.getLogger("").info(methodName);
-        Logger.getLogger("").info(tag);
+        Logger.getLogger("screenshot").info(testClass.getClassName()+"|"+className+"|"+methodName+"|"+tag);
         screenshot(uiDevice,tag,className,methodName);
+    }
+    public static void screenshot(UiDevice uiDevice, String tag,String drawText) {
+        StackTraceElement testClass = findTestClassTraceElement(Thread.currentThread().getStackTrace());
+        String className = testClass.getClassName().replaceAll("[^A-Za-z0-9._-]", "_");
+        String methodName = testClass.getMethodName();
+        Logger.getLogger("screenshot").info(testClass.getClassName()+"|"+className+"|"+methodName+"|"+tag);
+        screenshot(uiDevice,tag,className,methodName,drawText);
+    }
+    //截取图片,1：图片上写文字，2：图片的给定的UiObject2对象上绘制边框，
+    public static void screenshot(UiDevice uiDevice, String tag, String drawText,UiObject2 uiObject2) throws UiObjectNotFoundException {
+        StackTraceElement testClass = findTestClassTraceElement(Thread.currentThread().getStackTrace());
+        String className = testClass.getClassName().replaceAll("[^A-Za-z0-9._-]", "_");
+        String methodName = testClass.getMethodName();
+        Logger.getLogger("screenshot").info(testClass.getClassName()+"|"+className+"|"+methodName+"|"+tag);
+        screenshot(uiDevice,tag,className,methodName,drawText,uiObject2);
+    }
+    //截取图片,1：图片上写文字，2：图片的给定的UiObject对象上绘制边框，
+    public static void screenshot(UiDevice uiDevice,String tag, String drawText,UiObject uiObject) throws UiObjectNotFoundException {
+        StackTraceElement testClass = findTestClassTraceElement(Thread.currentThread().getStackTrace());
+        String className = testClass.getClassName().replaceAll("[^A-Za-z0-9._-]", "_");
+        String methodName = testClass.getMethodName();
+        Logger.getLogger("screenshot").info(testClass.getClassName()+"|"+className+"|"+methodName+"|"+tag);
+        screenshot(uiDevice,tag,className,methodName,drawText,uiObject);
     }
 }

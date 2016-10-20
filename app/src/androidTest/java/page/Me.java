@@ -4,6 +4,15 @@ package page;
  * Created by elon on 2016/10/11.
  */
 public class Me {
+    //navigate to Me
+    public static final String ID_MAIN_TAB_ME="com.sioeye.sioeyeapp:id/main_tab_me";
+    //following
+    public static final String ID_ME_FOLLOWING="com.sioeye.sioeyeapp:id/llt_following";
+    //broadcast
+    public static final String ID_ME_BROADCAST="com.sioeye.sioeyeapp:id/llt_broadcast";
+    //followers
+    public static final String ID_ME_FOLLOWERS="com.sioeye.sioeyeapp:id/llt_followes";
+
     public static final String ID_HEAD_IMAGE="com.sioeye.sioeyeapp:id/load_headimg";
     public static final String ID_USER_EDIT="com.sioeye.sioeyeapp:id/user_edit";
     public static final String ID_CAMERA_SELECT="org.codeaurora.snapcam:id/btn_done";
@@ -86,5 +95,19 @@ public class Me {
 
     //refresh ui
     public static final String BROADCAST_VIEW_STATUS_IMAGE="com.sioeye.sioeyeapp:id/status_image";
+
+    //allow sioeye to access this devices location
+    public static final String LOCATION_PERMISSION_DENY="com.android.packageinstaller:id/permission_deny_button";
+    public static final String LOCATION_PERMISSION_ALLOW="com.android.packageinstaller:id/permission_allow_button";
+
+    //loading for followers
+    public static final String LOADING_FOLLOWERS="com.sioeye.sioeyeapp:id/anim_view";
+    //following view list
+    public static final String FOLLOWERING_VIEW="com.sioeye.sioeyeapp:id/recycleview_follwing";
+    //following 取消关注
+    public static final String FOLLOWERING_DELETE="com.sioeye.sioeyeapp:id/icon_qr_code";
+    //用户头像
+    public static final String FOLLOWERING_AVATAR="com.sioeye.sioeyeapp:id/user_avatar";
+    public static final String FOLLOWERING_USERNAME="com.sioeye.sioeyeapp:id/user_name";
 
 }

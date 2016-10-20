@@ -32,6 +32,7 @@ public class LocationCase extends VP2{
         Spoon2.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Location");
+
         if (getObjectById(Me.IS_LOCATING).exists()){
             gDevice.pressBack();
         }
@@ -51,8 +52,8 @@ public class LocationCase extends VP2{
         if (getUiObjectByText("locating").exists()){
             clickByText("locating");
             waitTime(2);
-            gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
-            Assert.assertTrue("locating time out in 20 seconds",!getObjectById(Me.IS_LOCATING).exists());
+            gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),60000);
+            Assert.assertTrue("locating time out in 60 seconds",!getObjectById(Me.IS_LOCATING).exists());
             Spoon2.screenshot(gDevice,"locate_result");
         }
     }
