@@ -18,6 +18,7 @@ public class AlertReceiver extends BroadcastReceiver {
 		String message=bundle.getString("message");
 		int time = bundle.getInt("time");
 		Logger.getLogger(TAG).info(message+"-"+time+" seconds");
+		FileUtil.writeToFile("/mnt/sdcard/11.txt",message,true);
 		setToastBytTime(context,message,3000);
 	}
 	/**
