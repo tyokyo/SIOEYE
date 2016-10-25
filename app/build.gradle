@@ -43,7 +43,9 @@ dependencies {
     compile files('../libs/junit-4.12.jar')
     compile files('../libs/rules-0.3-release-no-dep.jar')
     compile files('../libs/runner-0.3-release-no-dep.jar')
-    compile files('../libs/uiautomator-v18-2.1.1-release-no-dep.jar')
-    compile files('../libs/spoon-client-1.6.2.jar')
+    //use source code
+    //compile files('../libs/uiautomator-v18-2.1.1-release-no-dep.jar')
+    //use source code
+    //compile files('../libs/spoon-client-1.6.2.jar')
 
 }
