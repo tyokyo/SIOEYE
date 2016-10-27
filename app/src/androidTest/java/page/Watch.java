@@ -16,6 +16,8 @@ public class Watch {
     public static final String WATCH_SEARCH_TRENDING_LIST="com.sioeye.sioeyeapp:id/contacts_list_container";
     //user follow btn
     public static final String WATCH_SEARCH_USER_FOLLOW="com.sioeye.sioeyeapp:id/user_follow";
+    //user follow  clear search btn
+    public static final String WATCH_SEARCH_FILTER_CLEAR="com.sioeye.sioeyeapp:id/search_filter_clear";
 
     //search people  contacts
     public static final String WATCH_SEARCH_TYPE_CONTACTS="com.sioeye.sioeyeapp:id/search_type_contacts";

@@ -8,6 +8,8 @@ public class Me {
     public static final String ID_MAIN_TAB_ME="com.sioeye.sioeyeapp:id/main_tab_me";
     //following
     public static final String ID_ME_FOLLOWING="com.sioeye.sioeyeapp:id/llt_following";
+    public static final String ID_ME_TYPE_FOLLOWING="com.sioeye.sioeyeapp:id/profile_type_following";
+
     //broadcast
     public static final String ID_ME_BROADCAST="com.sioeye.sioeyeapp:id/llt_broadcast";
     //followers
@@ -41,6 +43,8 @@ public class Me {
 
     //user id
     public static final String SIOEYE_USER_ID="com.sioeye.sioeyeapp:id/user_sioeye_id";
+    //user user_like_count
+    public static final String SIOEYE_USER_LIKE_COUNT="com.sioeye.sioeyeapp:id/user_like_count";
     //watch search button
     public static final String SEARCH_BTN_WATCH="com.sioeye.sioeyeapp:id/search_button";
     public static final String SEARCH_BTN_WATCH_FILTER="com.sioeye.sioeyeapp:id/search_filter_input";
@@ -66,6 +70,7 @@ public class Me {
     public static final String BROADCAST_DESC="com.sioeye.sioeyeapp:id/broadcast_desc";
     public static final String BROADCAST_TIME="com.sioeye.sioeyeapp:id/broadcast_time";
     public static final String BROADCAST_LIKE="com.sioeye.sioeyeapp:id/broadcast_like";
+    public static final String BROADCAST_CONTENT="com.sioeye.sioeyeapp:id/llt_broadcast_content";
 
 
     public static final String BROADCAST_VIEW_TIPTEXT="com.sioeye.sioeyeapp:id/tipText";
@@ -109,5 +114,36 @@ public class Me {
     //用户头像
     public static final String FOLLOWERING_AVATAR="com.sioeye.sioeyeapp:id/user_avatar";
     public static final String FOLLOWERING_USERNAME="com.sioeye.sioeyeapp:id/user_name";
+
+    //直播数
+    public static final String USER_BROADCASTS="com.sioeye.sioeyeapp:id/profile_type_broadcast";
+    //关注数
+    public static final String USER_FOLLOWING="com.sioeye.sioeyeapp:id/profile_type_following";
+    //粉丝数
+    public static final String USER_FOLLOWERS="com.sioeye.sioeyeapp:id/profile_type_follower";
+
+    //关注按钮
+    public static final String USER_FOLLOW="com.sioeye.sioeyeapp:id/user_follow";
+    //Following 列表
+    public static final String USER_FOLLOW_LIST="com.sioeye.sioeyeapp:id/list";
+
+    //进入live configuration 界面
+    public static final String LIVE_CONFIGURATION="com.sioeye.sioeyeapp:id/user_main_live_configuation";
+    public static final String LIVE_CONFIGURATION_VIDEO_TITLE="com.sioeye.sioeyeapp:id/video_title";
+    public static final String LIVE_CONFIGURATION_PRIVACY_SETTINGS="com.sioeye.sioeyeapp:id/privacy_settings";
+    public static final String LIVE_CONFIGURATION_SLV_VIDEO="com.sioeye.sioeyeapp:id/slv_video";
+    public static final String LIVE_CONFIGURATION_LINK="com.sioeye.sioeyeapp:id/link";
+    public static final String LIVE_CONFIGURATION_SLV_SHARE_CONTENT="com.sioeye.sioeyeapp:id/share_content";
+
+    //done
+    public static final String LIVE_CONFIGURATION_DONE_TITLE="com.sioeye.sioeyeapp:id/right";
+    public static final String LIVE_CONFIGURATION_DONE_PRIVACY="com.sioeye.sioeyeapp:id/done";
+    public static final String LIVE_CONFIGURATION_DONE_SLV_VIDEO="com.sioeye.sioeyeapp:id/right";
+
+    //privacy settings
+    public static final String LIVE_CONFIGURATION_PRIVACY_SETTINGS_SELECT_PEOPLE="com.sioeye.sioeyeapp:id/llt_select_people";
+
+    //checkbox for select
+    public static final String LIVE_CONFIGURATION_PRIVACY_SELECT="com.sioeye.sioeyeapp:id/select_select";
 
 }
