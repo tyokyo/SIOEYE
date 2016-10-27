@@ -404,6 +404,12 @@ public final class Spoon extends VP2{
         Logger.getLogger("screenshot").info(testClass.getClassName()+"|"+className+"|"+methodName+"|"+tag);
         screenshot(uiDevice,tag,className,methodName);
     }
+    /**
+     *
+     * @param tag screenshot picture name
+     * @param drawText String to be drawing on picture
+     * @return void
+     */
     public static void screenshot(String tag,String drawText) {
         initDevice();
         StackTraceElement testClass = findTestClassTraceElement(Thread.currentThread().getStackTrace());
