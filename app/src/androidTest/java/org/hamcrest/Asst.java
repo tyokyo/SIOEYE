@@ -8,12 +8,14 @@ import org.junit.internal.ArrayComparisonFailure;
 import org.junit.internal.ExactComparisonCriteria;
 import org.junit.internal.InexactComparisonCriteria;
 
+import java.util.logging.Logger;
+
 import ckt.base.VP2;
 
 public class Asst extends VP2{
+    private static Logger logger = Logger.getLogger(Asst.class.getName());
     protected Asst() {
     }
-
     public static void assertTrue(String message, boolean condition) {
         if(!condition) {
             fail(message);
@@ -33,16 +35,25 @@ public class Asst extends VP2{
     }
 
     public static void fail(String message){
-        Spoon.screenshot("fail",message==null?"message is null":message);
         //Spoon.screenshot(gDevice,"fail","message is null");
         try {
-            if (getObjectByTextReg("Unfortunately").exists()) {
+            if (getObjectByTextContains("Unfortunately").exists()) {
                 //Exception_Crash
-                clickByTextReg("OK");
-            }
-            if (getObjectByTextReg("isn't responding").exists()) {
+                message="Exception_Crash->"+message;
+                Spoon.screenshot("fail",message==null?"message is null":message);
+                logger.info("Exception_Crash");
+                Spoon.screenshot("Exception_Crash");
+                clickByText("OK");
+
+            }else if(getObjectByTextContains("isn't responding").exists()){
                 //Exception_ANR
-                clickByTextReg("OK");
+                message="Exception_ANR->"+message;
+                Spoon.screenshot("fail",message==null?"message is null":message);
+                logger.info("Exception_ANR");
+                Spoon.screenshot("Exception_ANR");
+                clickByText("OK");
+            }else{
+                Spoon.screenshot("fail",message==null?"message is null":message);
             }
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();

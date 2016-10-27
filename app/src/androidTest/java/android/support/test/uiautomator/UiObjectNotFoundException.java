@@ -18,6 +18,8 @@ package android.support.test.uiautomator;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
+
 import java.util.logging.Logger;
 
 /**
@@ -34,7 +36,8 @@ public class UiObjectNotFoundException extends Exception {
      **/
     public UiObjectNotFoundException(String msg) {
         super(msg);
-        Spoon.screenshot("UiObjectNotFoundException",msg);
+        Asst.fail("UiObjectNotFoundException:"+msg);
+        //Spoon.screenshot("UiObjectNotFoundException",msg);
         Logger.getLogger("UiObjectNotFoundException").info(msg);
     }
 
@@ -43,7 +46,8 @@ public class UiObjectNotFoundException extends Exception {
      **/
     public UiObjectNotFoundException(String detailMessage, Throwable throwable) {
         super(detailMessage, throwable);
-        Spoon.screenshot("throwable"+System.currentTimeMillis());
+        Asst.fail("UiObjectNotFoundException:"+detailMessage+throwable.toString());
+        //Spoon.screenshot("throwable"+System.currentTimeMillis());
         Logger.getLogger("throwable").info("detailMessage"+detailMessage);
     }
 
@@ -52,7 +56,8 @@ public class UiObjectNotFoundException extends Exception {
      **/
     public UiObjectNotFoundException(Throwable throwable) {
         super(throwable);
-        Spoon.screenshot("UiObjectNotFoundException",throwable.toString());
+        Asst.fail("UiObjectNotFoundException:"+throwable.toString());
+        //Spoon.screenshot("UiObjectNotFoundException",throwable.toString());
         Logger.getLogger("UiObjectNotFoundException").info("qqqqqqqqqqqqqqqqqqqqqq3");
     }
 
