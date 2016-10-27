@@ -18,6 +18,9 @@ import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.util.Log;
+
+import org.hamcrest.Asst;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -32,14 +35,13 @@ import ckt.tools.VideoNode;
 import page.App;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 /**
  * Created by admin on 2016/9/6.
  */
 public class VP2 extends  VP{
-    private static String TAG = VP2.class.getName();
+    private static final int LAUNCH_TIMEOUT = 10000;
+    private static Logger logger = Logger.getLogger(VP.class.getName());
     /**
      * 获取视频文件信息
      * @param videoPath
@@ -47,18 +49,18 @@ public class VP2 extends  VP{
      */
     public VideoNode VideoInfo(String videoPath){
         VideoNode vd = new VideoNode();
-        Logger.getLogger(TAG).info(videoPath);
+        logger.info(videoPath);
         MediaMetadataRetriever retr = new MediaMetadataRetriever();
         retr.setDataSource(videoPath);
         String duration = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
         vd.setDuration(Integer.parseInt(duration));
-        Logger.getLogger(TAG).info("-VIDEO_DURATION-"+Integer.parseInt(duration)/1000+"s");
+        logger.info("-VIDEO_DURATION-"+Integer.parseInt(duration)/1000+"s");
         String height = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);
         vd.setHeight(Integer.parseInt(height));
-        Logger.getLogger(TAG).info("-VIDEO_HEIGHT-"+height);
+        logger.info("-VIDEO_HEIGHT-"+height);
         String width = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);
         vd.setWidth(Integer.parseInt(width));
-        Logger.getLogger(TAG).info("-VIDEO_WIDTH-"+width);
+        logger.info("-VIDEO_WIDTH-"+width);
         return vd;
     }
     /**
@@ -71,9 +73,9 @@ public class VP2 extends  VP{
         HashSet<String> result = new HashSet<String>();
         result.addAll(tSet1);
         result.removeAll(tSet2);
-        Logger.getLogger(TAG).info("Old Folder List:"+tSet2);
-        Logger.getLogger(TAG).info("New FolderList:"+tSet1);
-        Logger.getLogger(TAG).info("The File added:"+result);
+        logger.info("Old Folder List:"+tSet2);
+        logger.info("New FolderList:"+tSet1);
+        logger.info("The File added:"+result);
         return result;
     }
     /**
@@ -100,22 +102,35 @@ public class VP2 extends  VP{
         //获取Selector timeout
         confg.setWaitForSelectorTimeout(timeout+time);
     }
-    public void shellInputText(String text) throws IOException {
+    public static void shellInputText(String text) throws IOException {
         initDevice();
         String command = String.format("input text %s",text);
-        Logger.getLogger(TAG).info(command);
+        logger.info(command);
         gDevice.executeShellCommand("input text "+text);
     }
     public static void makeToast(String message,float time) throws IOException{
         initDevice();
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %f",message,time);
-        Logger.getLogger(TAG).info(command);
+        logger.info(command);
         gDevice.executeShellCommand(command);
     }
     public static void makeToast(String message,int time) throws IOException{
         initDevice();
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
-        Logger.getLogger(TAG).info(command);
+        logger.info(command);
+        gDevice.executeShellCommand(command);
+    }
+    public static void startLog() throws IOException{
+        initDevice();
+        stopLog();
+        String command = "am broadcast -a com.sioeye.log.action -e TAG true";
+        logger.info(command);
+        gDevice.executeShellCommand(command);
+    }
+    public static void stopLog() throws IOException{
+        initDevice();
+        String command = "am broadcast -a com.sioeye.log.action -e TAG false";
+        logger.info(command);
         gDevice.executeShellCommand(command);
     }
     public static void playVideo(String path) throws IOException, InterruptedException {
@@ -125,14 +140,14 @@ public class VP2 extends  VP{
             Uri uri = Uri.parse(path);
             //调用系统自带的播放器
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            Logger.getLogger(TAG).info("play video-"+path);
+            logger.info("play video-"+path);
             intent.setDataAndType(uri, "video/mp4");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
             for (int i=0;i<30;i++){
                 String currentPackageName= gDevice.getCurrentPackageName();
-                if (App.SIOEYE_PACKAGE_NAME.equals(currentPackageName)){
-                    Logger.getLogger(TAG).info("Gallery Launch Success");
+                if (App.SIOEYE_PACKAGE_NAME_USA.equals(currentPackageName)){
+                    logger.info("Gallery Launch Success");
                     break;
                 }else{
                     Thread.sleep(2000);
@@ -140,7 +155,7 @@ public class VP2 extends  VP{
             }
         }
         else{
-            Logger.getLogger(TAG).info(path + " not exists");
+            logger.info(path + " not exists");
         }
 
     }
@@ -241,6 +256,16 @@ public class VP2 extends  VP{
     public static UiObject getObjectByTextReg(String ObjectByTextReg) throws UiObjectNotFoundException {
         initDevice();
         return gDevice.findObject(new UiSelector().textMatches(ObjectByTextReg));
+    }
+    /**
+     * This method use regular expression to find a ui element
+     *
+     * @param textContains
+     * @return  UiObject
+     */
+    public static UiObject getObjectByTextContains(String textContains) throws UiObjectNotFoundException {
+        initDevice();
+        return gDevice.findObject(new UiSelector().textContains(textContains));
     }
     /**
      * Find a TextEdit by class name,  and set text.
@@ -358,7 +383,7 @@ public class VP2 extends  VP{
             gDevice.wait(Until.findObject(By.res(ResourceID)), 500).click();
             return true;
         } else {
-            fail("Time Out,Not found the UI Element："+ResourceID);
+            Asst.fail("Time Out,Not found the UI Element："+ResourceID);
         }
         return false;
     }
@@ -377,7 +402,7 @@ public class VP2 extends  VP{
             gDevice.click(x,y);
             return true;
         } else {
-            fail("Time Out,Not found the UI Element："+ResourceID);
+            Asst.fail("Time Out,Not found the UI Element："+ResourceID);
         }
         return false;
     }
@@ -394,7 +419,7 @@ public class VP2 extends  VP{
             gDevice.findObject(new UiSelector().resourceId(ResourceID).index(index)).clickAndWaitForNewWindow();
             return true;
         } else {
-            fail("Time Out,Not found the UI Element："+ResourceID);
+            Asst.fail("Time Out,Not found the UI Element："+ResourceID);
         }
         return false;
     }
@@ -516,18 +541,16 @@ public class VP2 extends  VP{
      * @throws UiObjectNotFoundException
      */
     public static UiObject scrollAndGetUIObject(String TargetText) throws UiObjectNotFoundException {
-        UiScrollable obj = new UiScrollable(new UiSelector().scrollable(true));
-        obj.setAsHorizontalList();
+        UiScrollable obj = new UiScrollable(new UiSelector()).setAsVerticalList();
         if (obj.scrollTextIntoView(TargetText)) {
             return getObjectByTextReg(TargetText);
         } else {
-            Log.e("scrollAndFindObject", "Can not found any match Element!");
+            Log.e("scrollAndFindObject", "Can not found text:"+TargetText);
             return null;
         }
     }
     public static UiObject scrollAndGetUIObject(String TargetText,int maxSearchStrps) throws UiObjectNotFoundException {
-        UiScrollable obj = new UiScrollable(new UiSelector().scrollable(true));
-        obj.setAsHorizontalList();
+        UiScrollable obj = new UiScrollable(new UiSelector()).setAsVerticalList();
         obj.setMaxSearchSwipes(maxSearchStrps);
         if (obj.scrollTextIntoView(TargetText)) {
             return getObjectByTextReg(TargetText);
@@ -546,8 +569,7 @@ public class VP2 extends  VP{
         initDevice();
         // Back to home
 
-        UiScrollable obj = new UiScrollable(
-                new UiSelector().resourceId(Performs));
+        UiScrollable obj = new UiScrollable(new UiSelector().resourceId(Performs));
         obj.setAsVerticalList();
 
         if (obj.scrollTextIntoView(TargetName)) {
@@ -616,16 +638,16 @@ public class VP2 extends  VP{
      * @param BASIC_PACKAGE_NAME The package Name
      */
     public static void openAppByPackageName(String BASIC_PACKAGE_NAME)
-
     {
         initDevice();
+        grantAll();
         //Initialize UiDevice instance.
         gDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         //Start form the home screen.
         gDevice.pressHome();
         //Wait for launcher
         final String launcherPackage = getLauncherPackageName();
-        assertThat(launcherPackage, notNullValue());
+        Asst.assertThat(launcherPackage, notNullValue());
         gDevice.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), 5000);
 
         //Launch the blueprint app
@@ -633,7 +655,8 @@ public class VP2 extends  VP{
         final Intent intent = context.getPackageManager().getLaunchIntentForPackage(BASIC_PACKAGE_NAME);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);//Clear out any previous instances.
         context.startActivity(intent);
-
+        // Wait for the app to appear
+        gDevice.wait(Until.hasObject(By.pkg(BASIC_PACKAGE_NAME).depth(0)), LAUNCH_TIMEOUT);
     }
     public static void killAppByPackage(String packageName) {
         initDevice();
@@ -658,25 +681,6 @@ public class VP2 extends  VP{
             e.printStackTrace();
         }
     }
-
-    /**
-     * @return true of false,If the target app is open return true,else return false.
-     * If you want to test open one app,please use this method.else you can use openAppByActivity.
-     */
-    public static boolean openAppByText(String TargetText) {
-        try {
-            UiObject Target = scrollAndGetUIObject(TargetText);
-            if (Target.exists()) {
-                if (Target.click()) {
-                    return true;
-                }
-            }
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     /**
      * Get a UI Element.
      *
@@ -735,6 +739,19 @@ public class VP2 extends  VP{
             }
             Log.i("CheckScreenStatus", "The screen is screen is on");
         } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+    //add permission for READ_EXTERNAL_STORAGE WRITE_EXTERNAL_STORAGE
+    public static void grantAll(){
+        try {
+            String appPackage =App.SIOEYE_PACKAGE_NAME_EN;
+            String READ_EXTERNAL_STORAGE = "pm grant " + appPackage + " android.permission.READ_EXTERNAL_STORAGE";
+            gDevice.executeShellCommand(READ_EXTERNAL_STORAGE);
+            String WRITE_EXTERNAL_STORAGE = "pm grant " + appPackage + " android.permission.WRITE_EXTERNAL_STORAGE";
+            gDevice.executeShellCommand(WRITE_EXTERNAL_STORAGE);
+        } catch (Exception e) {
+            Logger.getLogger("GrantAll").info("Exception while granting external storage access to application apk" + "on device ");
             e.printStackTrace();
         }
     }
