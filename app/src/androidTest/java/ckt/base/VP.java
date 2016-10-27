@@ -14,7 +14,11 @@ import org.junit.Rule;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import ckt.tools.Common;
@@ -27,6 +31,7 @@ import static org.junit.Assert.fail;
  * Created by admin on 2016/9/6.
  */
 public class VP {
+    private static Logger logger = Logger.getLogger(VP.class.getName());
     public static UiDevice gDevice=null;
     public static Instrumentation instrument=null;
     public static Context context=null;
@@ -46,16 +51,19 @@ public class VP {
             instrument = InstrumentationRegistry.getInstrumentation();
             context = instrument.getContext();
         }
-
         if (gDevice == null) {
             gDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         }
     }
 
-    public static void logStart(){
+    public static void logStart() throws InterruptedException {
+        Date date = new Date();
+        DateFormat format2 = new SimpleDateFormat("yyyyMMddHHmmss");
+        logName = "log_"+format2.format(date);
+        System.out.println(logName);
         isStop=false;
-        logName = System.currentTimeMillis()+"";
-        String logDir = Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"log";
+
+        String logDir = Environment.getExternalStorageDirectory()+ File.separator+"log";
         logAbsPath=logDir+ File.separator+logName+".txt";
         if (!new File(logDir).exists()){
             new File(logDir).mkdirs();
@@ -74,12 +82,21 @@ public class VP {
                     logcatProcess = Runtime.getRuntime().exec("logcat -v time *.E");
                     bufferedReader = new BufferedReader(new InputStreamReader(logcatProcess.getInputStream()));
                     String line;
-                    while ((line = bufferedReader.readLine()) != null) {
+                    while(true){
+                        if (isStop==true) {
+                            logcatProcess.destroy();
+                            break;
+                        }
+                        if ((line = bufferedReader.readLine()) != null){
+                            Common.writeToFile(logAbsPath, line, true);
+                        }
+                    }
+                   /* while ((line = bufferedReader.readLine()) != null) {
                         Common.writeToFile(logAbsPath, line, true);
                         if (isStop==true) {
                             logcatProcess.destroy();
                         }
-                    }
+                    }*/
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
