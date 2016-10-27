@@ -7,15 +7,14 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
 
-import org.junit.Assert;
+import com.squareup.spoon.Spoon;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 
-import ckt.tools.Spoon2;
 import ckt.base.VP2;
 import page.App;
 import page.Me;
@@ -30,12 +29,12 @@ public class HeadImgCase extends VP2 {
     private Logger logger =  Logger.getLogger(HeadImgCase.this.getClass().getName());
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
     public void editHeadImgFromCamera() throws InterruptedException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickById(Me.ID_HEAD_IMAGE);
         clickByText("Camera");
@@ -56,13 +55,14 @@ public class HeadImgCase extends VP2 {
         }
         gDevice.wait(Until.gone(By.res(Me.ID_IMAGE_CHANGE)),20000);
         waitTime(5);
-        Spoon2.screenshot(gDevice,"change_head_img");
+        Spoon.screenshot(gDevice,"change_head_img");
         //killAppByPackage(App.SIOEYE_PACKAGE_NAME);
     }
+
     @Test
     public void editHeadImgFromCameraCancel() throws InterruptedException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickById(Me.ID_HEAD_IMAGE);
         clickByText("Camera");
@@ -75,13 +75,13 @@ public class HeadImgCase extends VP2 {
         }
         gDevice.pressBack();
         waitTime(5);
-        Spoon2.screenshot(gDevice,"change_head_img");
+        Spoon.screenshot(gDevice,"change_head_img");
         //killAppByPackage(App.SIOEYE_PACKAGE_NAME);
     }
     @Test
     public void editHeadImgFromAlbum() throws UiObjectNotFoundException, InterruptedException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
 
         clickById(Me.ID_USER_EDIT);
         clickById(Me.ID_HEAD_IMAGE);
@@ -98,13 +98,13 @@ public class HeadImgCase extends VP2 {
             clickByText("Done");
         }
         waitTime(5);
-        Spoon2.screenshot(gDevice,"change_head_img");
+        Spoon.screenshot(gDevice,"change_head_img");
         //killAppByPackage(App.SIOEYE_PACKAGE_NAME);
     }
     @Test
     public void editHeadImgFromAlbumCancel() throws UiObjectNotFoundException, InterruptedException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickById(Me.ID_HEAD_IMAGE);
         clickByText("Album");
@@ -116,7 +116,7 @@ public class HeadImgCase extends VP2 {
         gDevice.pressBack();
 
         waitTime(5);
-        Spoon2.screenshot(gDevice,"change_head_img");
+        Spoon.screenshot(gDevice,"change_head_img");
         //killAppByPackage(App.SIOEYE_PACKAGE_NAME);
     }
 

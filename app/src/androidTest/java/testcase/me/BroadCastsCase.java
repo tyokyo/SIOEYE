@@ -4,22 +4,20 @@ import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Direction;
-import android.support.test.uiautomator.EventCondition;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.widget.HorizontalScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.squareup.spoon.Spoon;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -27,7 +25,6 @@ import java.util.Random;
 import bean.BroadcastBean;
 import bean.WatcherBean;
 import ckt.base.VP2;
-import ckt.tools.Spoon2;
 import page.App;
 import page.Me;
 
@@ -65,7 +62,7 @@ public class BroadCastsCase extends VP2{
     }
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     public void getPlayTime() throws UiObjectNotFoundException, IOException {
         String startTime="";
@@ -139,7 +136,7 @@ public class BroadCastsCase extends VP2{
         String active_title = bs.getBroadcast_title();
         Assert.assertEquals("modify title cancel",bbe.getBroadcast_title(),active_title);
         makeToast(expect_title,3);
-        Spoon2.screenshot(gDevice,"modify_title_cancel");
+        Spoon.screenshot(gDevice,"modify_title_cancel");
     }
     @Test
     public void testEditTitle3() throws UiObjectNotFoundException, IOException {
@@ -167,7 +164,7 @@ public class BroadCastsCase extends VP2{
         String active_title = bs.getBroadcast_title();
         Assert.assertEquals("modify title",expect_title,active_title);
         makeToast(expect_title,3);
-        Spoon2.screenshot(gDevice,"modify_title_3");
+        Spoon.screenshot(gDevice,"modify_title_3");
     }
     @Test
     public void testEditTitle70() throws UiObjectNotFoundException, IOException {
@@ -195,7 +192,7 @@ public class BroadCastsCase extends VP2{
         String active_title = bs.getBroadcast_title();
         Assert.assertEquals("modify title",expect_title,active_title);
         makeToast(expect_title,3);
-        Spoon2.screenshot(gDevice,"modify_title_max");
+        Spoon.screenshot(gDevice,"modify_title_max");
     }
     @Test
     public void testEditTitleMoreThan70() throws UiObjectNotFoundException, IOException {
@@ -224,7 +221,7 @@ public class BroadCastsCase extends VP2{
         String active_title = bs.getBroadcast_title();
         Assert.assertEquals("modify title",expect_title.substring(0,70),active_title);
         makeToast(active_title,3);
-        Spoon2.screenshot(gDevice,"modify_title_more_than_max");
+        Spoon.screenshot(gDevice,"modify_title_more_than_max");
     }
     @Test
     public void testDeleteBroadcastsVideo() throws UiObjectNotFoundException, IOException {
@@ -301,7 +298,7 @@ public class BroadCastsCase extends VP2{
         String comments2 = watcherBean2.getComments();
         int tip2=Integer.parseInt(comments2);
         Assert.assertEquals(tip1+1,tip2);
-        Spoon2.screenshot(gDevice,"add_comments_length_120");
+        Spoon.screenshot(gDevice,"add_comments_length_120");
 
     }
     @Test
@@ -341,7 +338,7 @@ public class BroadCastsCase extends VP2{
         String comments2 = watcherBean2.getComments();
         int tip2=Integer.parseInt(comments2);
         Assert.assertEquals(tip1+1,tip2);
-        Spoon2.screenshot(gDevice,"add_comments_length_130");
+        Spoon.screenshot(gDevice,"add_comments_length_130");
 
     }
 
@@ -383,7 +380,7 @@ public class BroadCastsCase extends VP2{
         String comments2 = watcherBean2.getComments();
         int tip2=Integer.parseInt(comments2);
         Assert.assertEquals(tip1+1,tip2);
-        Spoon2.screenshot(gDevice,"add_comments_length_20");
+        Spoon.screenshot(gDevice,"add_comments_length_20");
     }
 
     @Test
@@ -432,7 +429,7 @@ public class BroadCastsCase extends VP2{
         int h =gDevice.getDisplayHeight()-120;*/
         //gDevice.click(w,h);
 
-        Spoon2.screenshot(gDevice,"zan_1000");
+        Spoon.screenshot(gDevice,"zan_1000");
     }
 
 }

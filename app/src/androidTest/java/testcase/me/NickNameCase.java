@@ -4,6 +4,8 @@ import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
+import com.squareup.spoon.Spoon;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +14,6 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 
 import ckt.base.VP2;
-import ckt.tools.Spoon2;
 import page.App;
 import page.Me;
 
@@ -25,12 +26,12 @@ public class NickNameCase  extends VP2 {
 
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
     public void testChangeNickNameLessThan4Character() throws UiObjectNotFoundException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Nick Name");
         getObjectById(Me.SAMPLE_CONTENT).clearTextField();
@@ -38,12 +39,12 @@ public class NickNameCase  extends VP2 {
         clickByText("Done");
         getUiObjectByText("Done");
         getUiObjectByText("Done");
-        Spoon2.screenshot(gDevice,"change_nick_name");
+        Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
     public void testChangeNickNameMoreThan4Character() throws UiObjectNotFoundException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Nick Name");
         getObjectById(Me.SAMPLE_CONTENT).clearTextField();
@@ -55,12 +56,12 @@ public class NickNameCase  extends VP2 {
         if (!nickname.equals(currentNick)){
             Assert.fail("nick name change failed");
         }
-        Spoon2.screenshot(gDevice,"change_nick_name");
+        Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
     public void testChangeNickNameMaxCharacter() throws UiObjectNotFoundException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Nick Name");
         getObjectById(Me.SAMPLE_CONTENT).clearTextField();
@@ -77,12 +78,12 @@ public class NickNameCase  extends VP2 {
         if (currentNick.length()!=30){
             Assert.fail("max length is 30");
         }
-        Spoon2.screenshot(gDevice,"change_nick_name");
+        Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
     public void testChangeNickNameNotSave() throws UiObjectNotFoundException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
 
         String nicknameBefore = getObjectById(Me.GETNICKNAMECONTENT).getText();
@@ -102,6 +103,6 @@ public class NickNameCase  extends VP2 {
         if (!nicknameBefore.equals(currentNick)){
             Assert.fail("change nick but not save it");
         }
-        Spoon2.screenshot(gDevice,"change_nick_name");
+        Spoon.screenshot(gDevice,"change_nick_name");
     }
 }

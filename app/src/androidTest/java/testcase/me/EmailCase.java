@@ -1,6 +1,5 @@
 package testcase.me;
 
-import android.os.SystemClock;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
@@ -8,19 +7,17 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
-import android.widget.TextView;
+
+import com.squareup.spoon.Spoon;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import ckt.base.VP2;
-import ckt.tools.Spoon2;
 import page.App;
 import page.Me;
 
@@ -33,7 +30,7 @@ public class EmailCase extends VP2 {
     String result="";
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     public String getEmailAddress() throws UiObjectNotFoundException {
         UiObject u =  gDevice.findObject(new UiSelector().resourceId(Me.EMAIL_ID));
@@ -44,11 +41,11 @@ public class EmailCase extends VP2 {
     public void testModifyEmailAddress() throws UiObjectNotFoundException {
         clickByText("Me");
         String user_id = getObjectById(Me.SIOEYE_USER_ID).getText();
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         String email = getEmailAddress();
         clickByText("Email");
-        getObjectById(Me.SAMPLE_CONTENT).clearTextField();;
+        getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         String modifyAddress = "add"+email;
         getObjectById(Me.SAMPLE_CONTENT).setText(modifyAddress);
         clickByText("Done");
@@ -74,11 +71,11 @@ public class EmailCase extends VP2 {
     public void testModifyEmailAddressAlreadyExist() throws UiObjectNotFoundException, IOException, InterruptedException {
         clickByText("Me");
         String user_id = getObjectById(Me.SIOEYE_USER_ID).getText();
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         String email = getEmailAddress();
         clickByText("Email");
-        getObjectById(Me.SAMPLE_CONTENT).clearTextField();;
+        getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         String modifyAddress = "ge.liu@ckt.com";
         getObjectById(Me.SAMPLE_CONTENT).setText(modifyAddress);
         clickByText("Done");

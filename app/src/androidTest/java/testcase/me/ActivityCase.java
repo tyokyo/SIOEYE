@@ -9,6 +9,8 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 
+import com.squareup.spoon.Spoon;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +21,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import ckt.base.VP2;
-import ckt.tools.Spoon2;
 import page.App;
 import page.Me;
 
@@ -31,8 +32,9 @@ import page.Me;
 public class ActivityCase extends VP2{
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
+
     public void deleteMyInterests(){
         clickById(Me.ACTIVITY_INTERESTS);
         waitTime(1);
@@ -84,7 +86,7 @@ public class ActivityCase extends VP2{
     @Test
     public void testAddOneActivity() throws UiObjectNotFoundException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Activity");
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
@@ -100,13 +102,13 @@ public class ActivityCase extends VP2{
         Set re2 = getAllMyInterests();
         Assert.assertTrue("Add My Interests ",re2.size()==1);
         Assert.assertTrue("Add My Interests ",re2.contains(added));
-        Spoon2.screenshot(gDevice,"My_Interests_"+added);
+        Spoon.screenshot(gDevice,"My_Interests_"+added);
 
     }
     @Test
     public void testAddAllActivity() throws UiObjectNotFoundException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Activity");
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
@@ -117,20 +119,21 @@ public class ActivityCase extends VP2{
         //check
         clickByText("Activity");
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
-        Set re2 = getAllMyInterests();
+        Set<String> re2 = getAllMyInterests();
 
-        Iterator<String> it = re2.iterator();
+        Iterator<String> it;
+        it = re2.iterator();
         while (it.hasNext()) {
             String str = it.next();
             Assert.assertTrue(str+" Added to My Interests ",addSets.contains(str));
         }
         Assert.assertTrue(" Added to My Interests ",addSets.size()==re2.size());
-        Spoon2.screenshot(gDevice,"My_Interests_All");
+        Spoon.screenshot(gDevice,"My_Interests_All");
     }
     @Test
     public void testDelSomeActivity() throws UiObjectNotFoundException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Activity");
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
@@ -138,7 +141,7 @@ public class ActivityCase extends VP2{
         addInterested(0);
         String add =addInterested(1);
 
-        deleteMyInterests();;
+        deleteMyInterests();
         clickByText("Done");
 
         //check
@@ -148,12 +151,12 @@ public class ActivityCase extends VP2{
 
         Assert.assertTrue(" My Interests "+re2,1==re2.size());
         Assert.assertTrue(" My Interests "+re2,re2.contains(add));
-        Spoon2.screenshot(gDevice,"My_Interests_All");
+        Spoon.screenshot(gDevice,"My_Interests_All");
     }
     @Test
     public void testDelAllActivity() throws UiObjectNotFoundException {
         clickByText("Me");
-        Spoon2.screenshot(gDevice,"Me");
+        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickByText("Activity");
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
@@ -167,7 +170,7 @@ public class ActivityCase extends VP2{
         Set re2 = getAllMyInterests();
 
         Assert.assertTrue(" My Interests is null",0==re2.size());
-        Spoon2.screenshot(gDevice,"My_Interests_All");
+        Spoon.screenshot(gDevice,"My_Interests_All");
 
     }
 
