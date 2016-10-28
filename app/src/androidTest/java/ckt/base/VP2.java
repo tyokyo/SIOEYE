@@ -640,9 +640,6 @@ public class VP2 extends  VP{
     public static void openAppByPackageName(String BASIC_PACKAGE_NAME)
     {
         initDevice();
-        grantAll();
-        //Initialize UiDevice instance.
-        gDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         //Start form the home screen.
         gDevice.pressHome();
         //Wait for launcher
@@ -745,11 +742,15 @@ public class VP2 extends  VP{
     //add permission for READ_EXTERNAL_STORAGE WRITE_EXTERNAL_STORAGE
     public static void grantAll(){
         try {
-            String appPackage =App.SIOEYE_PACKAGE_NAME_EN;
-            String READ_EXTERNAL_STORAGE = "pm grant " + appPackage + " android.permission.READ_EXTERNAL_STORAGE";
+            String READ_EXTERNAL_STORAGE = "pm grant " + App.SIOEYE_PACKAGE_NAME_USA + " android.permission.READ_EXTERNAL_STORAGE";
             gDevice.executeShellCommand(READ_EXTERNAL_STORAGE);
-            String WRITE_EXTERNAL_STORAGE = "pm grant " + appPackage + " android.permission.WRITE_EXTERNAL_STORAGE";
+            String WRITE_EXTERNAL_STORAGE = "pm grant " + App.SIOEYE_PACKAGE_NAME_USA + " android.permission.WRITE_EXTERNAL_STORAGE";
             gDevice.executeShellCommand(WRITE_EXTERNAL_STORAGE);
+            String CAMERA = "pm grant " + App.SIOEYE_PACKAGE_NAME_USA + " android.permission.CAMERA";
+            gDevice.executeShellCommand(CAMERA);
+            String RECORD_AUTO = "pm grant " + App.SIOEYE_PACKAGE_NAME_USA + " android.permission.RECORD_AUDIO";
+            gDevice.executeShellCommand(RECORD_AUTO);
+
         } catch (Exception e) {
             Logger.getLogger("GrantAll").info("Exception while granting external storage access to application apk" + "on device ");
             e.printStackTrace();

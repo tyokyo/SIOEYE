@@ -1,11 +1,20 @@
 package ckt.base;
 
+import android.Manifest;
 import android.app.Instrumentation;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
+import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
+import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
+import android.support.v4.app.ActivityCompat;
 
 import com.sioeye.MainActivity;
 import com.squareup.spoon.Spoon;
@@ -22,10 +31,9 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import ckt.tools.Common;
+import page.App;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static android.support.v4.app.ActivityCompat.requestPermissions;
 
 /**
  * Created by admin on 2016/9/6.
@@ -45,14 +53,25 @@ public class VP {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
-
-    public static void initDevice() {
+    public static void doNotAskPermission() throws UiObjectNotFoundException {
+        UiObject uiObject = gDevice.findObject(new UiSelector().resourceId(App.PERMISSION_ALLOW));
+        if (uiObject.exists()){
+            logger.info("click allow-permission setting");
+            uiObject.clickAndWaitForNewWindow();
+        }
+    }
+    public static void initDevice(){
         if (instrument==null){
             instrument = InstrumentationRegistry.getInstrumentation();
             context = instrument.getContext();
         }
         if (gDevice == null) {
             gDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        }
+        try {
+            doNotAskPermission();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
