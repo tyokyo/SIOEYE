@@ -1,5 +1,7 @@
 package org.hamcrest;
+import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
 
 import com.squareup.spoon.Spoon;
 
@@ -11,6 +13,7 @@ import org.junit.internal.InexactComparisonCriteria;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
+import page.App;
 
 public class Asst extends VP2{
     private static Logger logger = Logger.getLogger(Asst.class.getName());
@@ -37,9 +40,15 @@ public class Asst extends VP2{
     public static void fail(String message){
         //Spoon.screenshot(gDevice,"fail","message is null");
         try {
+            String ANR="";
+            if (getObjectById("android:id/message").exists()){
+                ANR=getObjectById("android:id/message").getText();
+            }
             if (getObjectByTextContains("Unfortunately").exists()) {
                 //Exception_Crash
                 message="Exception_Crash->"+message;
+                message=ANR+"-"+message;
+
                 Spoon.screenshot("fail",message==null?"message is null":message);
                 logger.info("Exception_Crash");
                 Spoon.screenshot("Exception_Crash");
@@ -48,12 +57,19 @@ public class Asst extends VP2{
             }else if(getObjectByTextContains("isn't responding").exists()){
                 //Exception_ANR
                 message="Exception_ANR->"+message;
+                message=ANR+"-"+message;
                 Spoon.screenshot("fail",message==null?"message is null":message);
                 logger.info("Exception_ANR");
                 Spoon.screenshot("Exception_ANR");
                 clickByText("OK");
             }else{
                 Spoon.screenshot("fail",message==null?"message is null":message);
+            }
+            //permission dialog
+            UiObject uiObject = gDevice.findObject(new UiSelector().resourceId(App.PERMISSION_ALLOW));
+            if (uiObject.exists()){
+                logger.info("click allow-permission setting");
+                uiObject.clickAndWaitForNewWindow();
             }
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
