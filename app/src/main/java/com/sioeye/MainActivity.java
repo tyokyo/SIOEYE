@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             for (String str : permissions) {
                 if (this.checkSelfPermission(str) != PackageManager.PERMISSION_GRANTED) {
                     //申请权限
-                    Logger.getLogger("MainActivity").info(str);
+                    Logger.getLogger("申请权限").info(str);
                     this.requestPermissions(permissions, REQUEST_CODE_CONTACT);
                     return;
                 }

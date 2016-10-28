@@ -217,13 +217,67 @@ public class LiveConfigCase extends VP2{
         clickById(Me.LIVE_CONFIGURATION_SLV_VIDEO);
         String active = getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
         expect=expect.substring(0,120);
-        Asst.assertEquals("SLV:",expect.length(),active.length());
+        Asst.assertEquals("SLV:",expect,active);
         gDevice.pressBack();
         gDevice.pressBack();
     }
-    public void test_public_viewing_link(){
+    @Test
+    public void test_public_viewing_link_10char() throws UiObjectNotFoundException, IOException {
+        MeAction.navToLiveConfiguration();
+        clickById(Me.LIVE_CONFIGURATION_LINK);
+        getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
+        String expect = getRandomString(10);
+        shellInputText(expect);
+        clickById(Me.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
 
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        MeAction.navToLiveConfiguration();
+        clickById(Me.LIVE_CONFIGURATION_LINK);
+        String active = getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
+        //expect=expect.substring(0,120);
+        Asst.assertEquals("Publish viewing link::",expect,active);
+        Spoon.screenshot("link_10c");
+        gDevice.pressBack();
+        gDevice.pressBack();
     }
 
+    @Test
+    public void test_public_viewing_link_120char() throws UiObjectNotFoundException, IOException {
+        MeAction.navToLiveConfiguration();
+        clickById(Me.LIVE_CONFIGURATION_LINK);
+        getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
+        String expect = getRandomString(120);
+        shellInputText(expect);
+        clickById(Me.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
 
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        MeAction.navToLiveConfiguration();
+        clickById(Me.LIVE_CONFIGURATION_LINK);
+        String active = getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
+        //expect=expect.substring(0,120);
+        Asst.assertEquals("Publish viewing link::",expect,active);
+        Spoon.screenshot("link_120c");
+        gDevice.pressBack();
+        gDevice.pressBack();
+    }
+
+    @Test
+    public void test_public_viewing_link_500char() throws UiObjectNotFoundException, IOException {
+        MeAction.navToLiveConfiguration();
+        clickById(Me.LIVE_CONFIGURATION_LINK);
+        getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
+        String expect = getRandomString(500);
+        shellInputText(expect);
+        clickById(Me.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
+
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        MeAction.navToLiveConfiguration();
+        clickById(Me.LIVE_CONFIGURATION_LINK);
+        String active = getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
+        expect=expect.substring(0,120);
+        Asst.assertEquals("Publish viewing link::",expect,active);
+        Spoon.screenshot("link_500c");
+        gDevice.pressBack();
+        gDevice.pressBack();
+    }
 }

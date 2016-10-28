@@ -35,7 +35,7 @@ public class Nav extends VP2{
 
     public static void navToFollowers(){
         clickByText("Me");
-        clickById(Me.ID_ME_FOLLOWING);
+        clickById(Me.ID_ME_FOLLOWERS);
         waitTime(2);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_VIDEO_LOADING)),40000);
     }

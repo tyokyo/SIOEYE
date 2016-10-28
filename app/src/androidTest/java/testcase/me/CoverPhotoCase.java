@@ -3,6 +3,7 @@ package testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
 
@@ -27,12 +28,15 @@ public class CoverPhotoCase extends VP2 {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
-    public void testChangeCoverPhotoByCamera(){
+    public void testChangeCoverPhotoByCamera() throws UiObjectNotFoundException {
         clickByText("Me");
         Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickById(Me.CHANGECOVERPHOTO);
         clickByText("Camera");
+        if (getObjectById(Me.PERMISSION_ALLOW).exists()){
+            clickById(Me.PERMISSION_ALLOW);
+        }
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         clickById(Me.ID_CAMERA_SELECT);
         clickByText("Done");

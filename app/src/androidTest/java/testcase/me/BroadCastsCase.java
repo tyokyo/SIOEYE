@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import bean.BroadcastBean;
 import bean.WatcherBean;
@@ -34,7 +35,7 @@ import page.Me;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class BroadCastsCase extends VP2{
-
+    Logger logger = Logger.getLogger(BroadCastsCase.class.getName());
     public WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {
         WatcherBean watcherBean = new WatcherBean();
         UiObject u =  gDevice.findObject(new UiSelector().resourceId(Me.BROADCAST_VIEW_WATCHER_COUNT));
@@ -42,6 +43,7 @@ public class BroadCastsCase extends VP2{
         String comments = u.getChild(new UiSelector().className("android.widget.TextView").index(3)).getText();
         String zan =  u.getChild(new UiSelector().className("android.widget.TextView").index(5)).getText();
         makeToast(zan,3);
+        logger.info("active zan is"+zan);
         watcherBean.setComments(comments);
         watcherBean.setWatch(watcher);
         watcherBean.setZan(zan);
@@ -88,6 +90,7 @@ public class BroadCastsCase extends VP2{
         makeToast(startTime+"|"+endTime,10);
 
     }
+    //播放视频60秒
     @Test
     public void testViewVideo() throws UiObjectNotFoundException, IOException {
         clickByText("Me");
@@ -104,11 +107,12 @@ public class BroadCastsCase extends VP2{
         bsobj.click();
         waitTime(3);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_VIDEO_LOADING)),60000);
-        Assert.assertTrue("video start play in 60 seconds.",!getObjectById(Me.BROADCAST_VIEW_VIDEO_LOADING).exists());
+        Assert.assertTrue("视频加载60秒超时.",!getObjectById(Me.BROADCAST_VIEW_VIDEO_LOADING).exists());
         //click play screen center
         clickById(Me.BROADCAST_VIEW_WATCHER_COUNT,0,100);
 
     }
+    //1:编辑title 2:放弃保存
     @Test
     public void testEditTitleCancel() throws UiObjectNotFoundException, IOException {
         clickByText("Me");
@@ -138,6 +142,7 @@ public class BroadCastsCase extends VP2{
         makeToast(expect_title,3);
         Spoon.screenshot(gDevice,"modify_title_cancel");
     }
+    //title 输入字符长度3
     @Test
     public void testEditTitle3() throws UiObjectNotFoundException, IOException {
         clickByText("Me");
@@ -166,6 +171,7 @@ public class BroadCastsCase extends VP2{
         makeToast(expect_title,3);
         Spoon.screenshot(gDevice,"modify_title_3");
     }
+    //title 输入字符长度70
     @Test
     public void testEditTitle70() throws UiObjectNotFoundException, IOException {
         clickByText("Me");
@@ -194,6 +200,7 @@ public class BroadCastsCase extends VP2{
         makeToast(expect_title,3);
         Spoon.screenshot(gDevice,"modify_title_max");
     }
+    //title 输入字符长度>70
     @Test
     public void testEditTitleMoreThan70() throws UiObjectNotFoundException, IOException {
         clickByText("Me");
@@ -246,7 +253,11 @@ public class BroadCastsCase extends VP2{
         shellInputText(expect_title);
         clickByText("OK");
         waitTime(3);
-        obj.swipe(Direction.LEFT,0.9f);
+
+
+        List<UiObject2> lisCollect_update = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
+        UiObject2 obj_update = lisCollect_update.get(rd);
+        obj_update.swipe(Direction.LEFT,0.9f);
         clickByText("Delete");
         gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_VIDEO_DELETE)),20000);
         clickById(Me.BROADCAST_VIEW_VIDEO_DELETE);
@@ -348,7 +359,7 @@ public class BroadCastsCase extends VP2{
     public void testComments_Length_20() throws UiObjectNotFoundException, IOException {
         clickByText("Me");
         clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),60000);
         getObjectById(Me.BROADCAST_VIEW,0).swipeLeft(2);
 
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
@@ -383,8 +394,9 @@ public class BroadCastsCase extends VP2{
         Spoon.screenshot(gDevice,"add_comments_length_20");
     }
 
+    //验证点赞超过1000的显示是否正确
     @Test
-    public void testZan() throws UiObjectNotFoundException, IOException {
+    public void testZanK() throws UiObjectNotFoundException, IOException {
         clickByText("Me");
         clickByText("Broadcasts");
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
@@ -398,10 +410,11 @@ public class BroadCastsCase extends VP2{
         int rd = random.nextInt(size);
         BroadcastBean bs = getBean(rd);
         String zans = bs.getBroadcast_like();
+        logger.info("current like is"+zans);
         String expectZans;
         double dzan = (Double.parseDouble(zans)+1000)/1000;
         expectZans = String.format("%.1f", dzan)+"K";
-
+        logger.info("expectZans is"+expectZans);
         UiObject2 bsobj = lisCollect.get(rd);
         makeToast("click index:"+rd,(float) 5);
         bsobj.click();
@@ -410,13 +423,14 @@ public class BroadCastsCase extends VP2{
         int x = zan.getBounds().centerX();
         int y = zan.getBounds().centerY();
 
-        for (int i =0;i<10;i++){
-            gDevice.click(x,y);
-            //makeToast("ZAN+"+i, (float) 0.2);
+        for (int i =0;i<1000;i++){
+            //gDevice.click(x,y);
+            clickById(Me.BROADCAST_VIEW_ZAN);
+            //getUiObjectById(Me.BROADCAST_VIEW_ZAN);
         }
         WatcherBean watcherBean = getWatcher();
         String addZans = watcherBean.getZan();
-        Assert.assertEquals("zan check",expectZans,addZans);
+        Assert.assertEquals("zan 1000+ check",expectZans,addZans);
 
         //listView.swipe(Direction.LEFT, 0.8f, 3000);
         //listView.scroll(Direction.DOWN, 0.8f, 3000);

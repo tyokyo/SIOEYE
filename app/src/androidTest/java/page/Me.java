@@ -24,6 +24,9 @@ public class Me {
     public static final String SAMPLE_CONTENT="com.sioeye.sioeyeapp:id/sample_content";
     public static final String GETNICKNAMECONTENT="com.sioeye.sioeyeapp:id/content_text";
 
+    //permission allow
+    public static final String PERMISSION_ALLOW="com.android.packageinstaller:id/permission_allow_button";
+
     //search locations
     public static final String IS_LOCATING="com.sioeye.sioeyeapp:id/llt_layout";
     public static final String SEARCH_LOCATE="com.sioeye.sioeyeapp:id/search_filter_input";
@@ -145,5 +148,35 @@ public class Me {
 
     //checkbox for select
     public static final String LIVE_CONFIGURATION_PRIVACY_SELECT="com.sioeye.sioeyeapp:id/select_select";
+
+    //help feed back
+    public static final String HELP="com.sioeye.sioeyeapp:id/user_main_feedback";
+
+    public static final String HELP_FEEDBACK="com.sioeye.sioeyeapp:id/feedback";
+    public static final String HELP_FEEDBACK_CONTENT="com.sioeye.sioeyeapp:id/content";
+    public static final String HELP_DONE="com.sioeye.sioeyeapp:id/right";
+
+    public static final String HELP_SERVICE="com.sioeye.sioeyeapp:id/term_service";
+    public static final String HELP_EMULA_CONTENT="com.sioeye.sioeyeapp:id/eula_content";
+
+    public static final String HELP_BACK="com.sioeye.sioeyeapp:id/img_back_logo";
+
+    public static final String HELP_POLICY="com.sioeye.sioeyeapp:id/privacy_policy";
+    public static final String HELP_VERSION_CHECK="com.sioeye.sioeyeapp:id/version_check";
+    public static final String HELP_EMULA="com.sioeye.sioeyeapp:id/eula";
+
+    public static final String HELP_HELP="com.sioeye.sioeyeapp:id/help";
+    public static final String HELP_HELP_NAV_WEB="com.android.chrome:id/url_bar";
+
+
+    public static final String HELP_ABOUT="com.sioeye.sioeyeapp:id/about";
+    public static final String HELP_ABOUT_VERSION="com.sioeye.sioeyeapp:id/version";
+
+
+
+
+
+
+
 
 }
