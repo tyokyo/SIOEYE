@@ -11,7 +11,7 @@ import page.App;
 
 /**
  * Created by admin on 2016/11/2.
- */
+ **/
 public class AccountAction extends VP2{
     /**
      *
@@ -19,16 +19,16 @@ public class AccountAction extends VP2{
      */
     public static boolean judgelogin() throws UiObjectNotFoundException {
         initDevice();
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        clickByText("我");
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        clickByText("Me");
         //判断是否登录
-        if (gDevice.findObject(new UiSelector().text("登录")).exists()) {
+        if (gDevice.findObject(new UiSelector().text("Login")).exists()) {
             System.out.println("you haven't login");
             initDevice();
             return false;
         } else {
             System.out.println("you have logined");
-            clickByText("发现");
+            clickByText("Discover");
             initDevice();
             return true;
         }
@@ -65,22 +65,22 @@ public class AccountAction extends VP2{
      * */
     public static void login(String username, String password) throws UiObjectNotFoundException {
         initDevice();
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        clickByText("我");
-        clickByText("登录");
-        UiObject us = gDevice.findObject(new UiSelector().resourceId("cn.sioeye.sioeyeapp:id/et_input_username"));
-        UiObject ps = gDevice.findObject(new UiSelector().resourceId("cn.sioeye.sioeyeapp:id/et_input_password"));
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        clickByText("Me");
+        clickByText("Login");
+        UiObject us = gDevice.findObject(new UiSelector().resourceId("com.sioeye.sioeyeapp:id/et_input_username"));
+        UiObject ps = gDevice.findObject(new UiSelector().resourceId("com.sioeye.sioeyeapp:id/et_input_password"));
         us.clearTextField();
         us.setText(username);
         ps.setText(password);
-        clickByText("登录");
+        clickByText("Login");
         waitTime(4);
-        if (gDevice.findObject(new UiSelector().text("登录")).exists()) {
+        if (gDevice.findObject(new UiSelector().text("Login")).exists()) {
             System.out.println("log in failed");
             initDevice();
         } else {
             System.out.println("log in succeed");
-            clickByText("发现");
+            clickByText("Discover");
             initDevice();
         }
     }
@@ -92,11 +92,11 @@ public class AccountAction extends VP2{
     public static void logout() throws UiObjectNotFoundException{
         initDevice();
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        clickByText("我");
-        clickByText("设置");
-        clickById("cn.sioeye.sioeyeapp:id/tv_logout");
-        clickById("cn.sioeye.sioeyeapp:id/delete_ok");
-        if(getUiObjectByText("修改密码").exists()){
+        clickByText("Me");
+        clickByText("Settings");
+        clickById("com.sioeye.sioeyeapp:id/tv_logout");
+        clickById("com.sioeye.sioeyeapp:id/delete_ok");
+        if(getUiObjectByText("Change password").exists()){
             System.out.println("Log Out Failed,Please check it");
         }else {
             System.out.println("you have log out successfully");
