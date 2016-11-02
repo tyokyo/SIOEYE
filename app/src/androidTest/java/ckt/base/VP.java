@@ -128,6 +128,7 @@ public class VP {
                 }
             }
         });
+
         logThread.start();
         Logger.getLogger("start logcat").info(logName);
     }

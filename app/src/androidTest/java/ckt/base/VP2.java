@@ -164,6 +164,22 @@ public class VP2 extends  VP{
      *
      * @param ObjectName The target object name
      */
+    public static boolean clickTextContain(String ObjectName) {
+        initDevice();// init UiDevice.
+        try {
+            if (gDevice.findObject(new UiSelector().textContains(ObjectName)).clickAndWaitForNewWindow()) {
+                return true;
+            }
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    /**
+     * You can call this method to find and click a UiObject.
+     *
+     * @param ObjectName The target object name
+     */
     public static boolean clickByText(String ObjectName) {
         initDevice();// init UiDevice.
         try {
@@ -260,6 +276,16 @@ public class VP2 extends  VP{
     /**
      * This method use regular expression to find a ui element
      *
+     * @param textStartsWith
+     * @return  UiObject
+     */
+    public static UiObject getObjectByTextStartsWith(String textStartsWith) throws UiObjectNotFoundException {
+        initDevice();
+        return gDevice.findObject(new UiSelector().textStartsWith(textStartsWith));
+    }
+    /**
+     * This method use regular expression to find a ui element
+     *
      * @param textContains
      * @return  UiObject
      */
@@ -335,7 +361,16 @@ public class VP2 extends  VP{
 
     }
 
-
+    /**
+     * This method can return a UI Element by text.
+     *
+     * @param TragetObject
+     * @return UiObject
+     */
+    public static UiObject getUiObjectByTextContains(String TragetObject) {
+        initDevice();
+        return gDevice.findObject(new UiSelector().textContains(TragetObject));
+    }
     /**
      * This method can return a UI Element by text.
      *
@@ -531,7 +566,19 @@ public class VP2 extends  VP{
         }
         return sb.toString();
     }
-
+    /**
+     * 获得随机特殊符号
+     */
+    public String getRandomSymbol(int length) {
+        String str = "~!@#$%^&*()-+_=./\\':\"";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(21);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
+    }
     /**
      * Scroll to Found a UI Element
      * The default orientation is Horizontal
@@ -687,6 +734,16 @@ public class VP2 extends  VP{
     public static UiObject getObjectById(String ResourceID) {
         initDevice();
         return gDevice.findObject(new UiSelector().resourceId(ResourceID));
+    }
+    /**
+     * Get a UI Element.
+     *
+     * @param ResourceID
+     * @return UiObject
+     */
+    public static UiObject2 getObject2ById(String ResourceID) {
+        initDevice();
+        return gDevice.findObject(By.res(ResourceID));
     }
     /**
      * Get a UI Element.
