@@ -5,6 +5,6 @@ package ckt.tools;
  */
 public class Constant {
     //sio-eye account
-    public static  final  String userNmae ="tyoyko@126.com";
+    public static  final  String userNmae ="tyokyo@126.com";
     public static  final  String passwd   = "123456789";
 }
