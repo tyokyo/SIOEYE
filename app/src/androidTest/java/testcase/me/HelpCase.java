@@ -33,6 +33,7 @@ public class HelpCase extends VP2{
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
+    //Feedback为空
     @Test
     public void testFeedback_Space() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -46,6 +47,7 @@ public class HelpCase extends VP2{
         Asst.assertEquals("Submit success",true,feedback_status);
         Spoon.screenshot("space");
     }
+    //Feedback 输入字符长度100
     @Test
     public void testFeedback_100c() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -59,6 +61,7 @@ public class HelpCase extends VP2{
         boolean feedback_status=getObjectById(Me.HELP_FEEDBACK).exists();
         Asst.assertEquals("Submit success",true,feedback_status);
     }
+    //Feedback 输入字符长度1000
     @Test
     public void testFeedback_1000c() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -73,6 +76,7 @@ public class HelpCase extends VP2{
         boolean feedback_status=getObjectById(Me.HELP_FEEDBACK).exists();
         Asst.assertEquals("Submit success",true,feedback_status);
     }
+    //Feedback 输入字符长度500
     @Test
     public void testFeedback_500c() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -87,6 +91,7 @@ public class HelpCase extends VP2{
         boolean feedback_status=getObjectById(Me.HELP_FEEDBACK).exists();
         Asst.assertEquals("Submit success",true,feedback_status);
     }
+    //TermOfService
     @Test
     public void testTermOfService() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -97,6 +102,7 @@ public class HelpCase extends VP2{
         boolean feedback_status=getObjectById(Me.HELP_SERVICE).exists();
         Asst.assertEquals("back logo success",true,feedback_status);
     }
+    //PrivacyPolicy
     @Test
     public void testPrivacyPolicy() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -107,6 +113,7 @@ public class HelpCase extends VP2{
         boolean feedback_status=getObjectById(Me.HELP_POLICY).exists();
         Asst.assertEquals("back logo success",true,feedback_status);
     }
+    //check for updates
     @Test
     public void testCheckForUpdates() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -117,6 +124,7 @@ public class HelpCase extends VP2{
         boolean feedback_status=getObjectById(Me.HELP_VERSION_CHECK).exists();
         Asst.assertEquals("back logo success",true,feedback_status);
     }
+    //EULA
     @Test
     public void testEULA() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -127,6 +135,7 @@ public class HelpCase extends VP2{
         boolean feedback_status=getObjectById(Me.HELP_EMULA).exists();
         Asst.assertEquals("back logo success",true,feedback_status);
     }
+    //navigate for need help
     @Test
     public void testNeedHelp() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -138,6 +147,7 @@ public class HelpCase extends VP2{
         String webAddress=getObjectById(Me.HELP_HELP_NAV_WEB).getText();
         Asst.assertEquals("back logo success","support.sioeye.com/support/home",webAddress);
     }
+    //back btn for need help domain
     @Test
     public void testNeedHelpBack() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);
@@ -151,6 +161,7 @@ public class HelpCase extends VP2{
         boolean feedback_status=getObjectById(Me.HELP_HELP).exists();
         Asst.assertEquals("back logo success",true,feedback_status);
     }
+    //about page check
     @Test
     public void testAbout() throws UiObjectNotFoundException, IOException {
         clickById(Me.ID_MAIN_TAB_ME);

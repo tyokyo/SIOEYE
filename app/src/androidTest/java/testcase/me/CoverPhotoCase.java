@@ -28,6 +28,7 @@ public class CoverPhotoCase extends VP2 {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
+    //通过相机修改cover photo
     public void testChangeCoverPhotoByCamera() throws UiObjectNotFoundException {
         clickByText("Me");
         Spoon.screenshot(gDevice,"Me");

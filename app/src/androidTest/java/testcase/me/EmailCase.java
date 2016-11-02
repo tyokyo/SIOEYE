@@ -10,6 +10,7 @@ import android.support.test.uiautomator.Until;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,6 +38,7 @@ public class EmailCase extends VP2 {
         String em = u.getChild(new UiSelector().resourceId(Me.ABOUT_ME_CONTENT_TEXT)).getText();
         return  em;
     }
+    //修改不存在的邮件账号
     @Test
     public void testModifyEmailAddress() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -67,6 +69,7 @@ public class EmailCase extends VP2 {
         gDevice.wait(Until.gone(By.res(Me.LOGIN_SIGN_UP)),20000);
         Assert.assertEquals(true,getUiObjectByText("Me").exists());
     }
+    //修改为存在的邮件账号,有提示
     @Test
     public void testModifyEmailAddressAlreadyExist() throws UiObjectNotFoundException, IOException, InterruptedException {
         clickByText("Me");
@@ -79,7 +82,23 @@ public class EmailCase extends VP2 {
         String modifyAddress = "ge.liu@ckt.com";
         getObjectById(Me.SAMPLE_CONTENT).setText(modifyAddress);
         clickByText("Done");
-        Assert.assertTrue("same emali address can not be set",getObjectById(Me.SAMPLE_CONTENT).exists());
+        Asst.assertTrue("same emali address can not be set",getObjectById(Me.SAMPLE_CONTENT).exists());
+        gDevice.pressBack();
+    }
+    //修改不保存
+    @Test
+    public void testModifyEmailAddressThenCancel() throws UiObjectNotFoundException, IOException, InterruptedException {
+        clickByText("Me");
+        String user_id = getObjectById(Me.SIOEYE_USER_ID).getText();
+        Spoon.screenshot(gDevice,"Me");
+        clickById(Me.ID_USER_EDIT);
+        String email = getEmailAddress();
+        clickByText("Email");
+        getObjectById(Me.SAMPLE_CONTENT).clearTextField();
+        String modifyAddress = "ge.liu@ckt.com";
+        getObjectById(Me.SAMPLE_CONTENT).setText(modifyAddress);
+        clickByText("Cancel");
+        Asst.assertTrue("not save",!getObjectById(Me.SAMPLE_CONTENT).exists());
         gDevice.pressBack();
     }
 }

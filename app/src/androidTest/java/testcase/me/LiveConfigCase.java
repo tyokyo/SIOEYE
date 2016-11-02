@@ -34,6 +34,7 @@ public class LiveConfigCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
 
+    //video title set to length 3
     @Test
     public void test_default_video_title_3() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -52,6 +53,7 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
 
     }
+    //set video title to length 69
     @Test
     public void test_default_video_title_69() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -70,6 +72,7 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
 
     }
+    //set video title to length 70
     @Test
     public void test_default_video_title_70() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -88,6 +91,7 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
 
     }
+    //set video title to 100 （bigger than max 70）
     @Test
     public void test_default_video_title_100() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -121,6 +125,7 @@ public class LiveConfigCase extends VP2{
             box.click();
         }
     }
+    //privacy_settings to public
     @Test
     public void test_privacy_settings_public() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
@@ -135,6 +140,7 @@ public class LiveConfigCase extends VP2{
         Asst.assertEquals("set Privacy Setting:Public",true,is_checked);
         Spoon.screenshot("Public","Privacy_Settings_Public");
     }
+    //privacy_settings to private
     @Test
     public void test_privacy_settings_private() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
@@ -149,6 +155,7 @@ public class LiveConfigCase extends VP2{
         Asst.assertEquals("set Privacy Setting:Public",false,is_checked);
         Spoon.screenshot("Public","Privacy_Settings_Private");
     }
+    //simulcast set to length 4
     @Test
     public void test_simulcast_4char() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -167,6 +174,7 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
         gDevice.pressBack();
     }
+    //设置最大字符长度70
     @Test
     public void test_simulcast_70char() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -185,12 +193,13 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
         gDevice.pressBack();
     }
+    //设置超过最大字符数限制
     @Test
     public void test_simulcast_120char() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(Me.LIVE_CONFIGURATION_SLV_VIDEO);
         getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
-        String expect = getRandomString(100);
+        String expect = getRandomString(120);
         shellInputText(expect);
         clickById(Me.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
 
@@ -203,6 +212,7 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
         gDevice.pressBack();
     }
+    //设置超过最大字符数限制
     @Test
     public void test_simulcast_500char() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -221,6 +231,7 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
         gDevice.pressBack();
     }
+    //设置public_viewing_link 10
     @Test
     public void test_public_viewing_link_10char() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -236,11 +247,11 @@ public class LiveConfigCase extends VP2{
         String active = getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
         //expect=expect.substring(0,120);
         Asst.assertEquals("Publish viewing link::",expect,active);
-        Spoon.screenshot("link_10c");
+
         gDevice.pressBack();
         gDevice.pressBack();
     }
-
+    //设置public_viewing_link 120
     @Test
     public void test_public_viewing_link_120char() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -260,7 +271,7 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
         gDevice.pressBack();
     }
-
+    //设置public_viewing_link 超过最大字符数限制
     @Test
     public void test_public_viewing_link_500char() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -275,7 +286,7 @@ public class LiveConfigCase extends VP2{
         clickById(Me.LIVE_CONFIGURATION_LINK);
         String active = getObjectById(Me.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
         expect=expect.substring(0,120);
-        Asst.assertEquals("Publish viewing link::",expect,active);
+        Asst.assertEquals("Publish viewing link:link_500c:",expect,active);
         Spoon.screenshot("link_500c");
         gDevice.pressBack();
         gDevice.pressBack();

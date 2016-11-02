@@ -8,6 +8,7 @@ import android.support.test.uiautomator.UiSelector;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +35,7 @@ public class AboutMeCase extends VP2 {
         String me = u.getChild(new UiSelector().resourceId(Me.ABOUT_ME_CONTENT_TEXT)).getText();
         return  me;
     }
+    //about me input string length 10
     @Test
     public void testEdit10C() throws UiObjectNotFoundException {
         //clickByText("Me");
@@ -54,6 +56,7 @@ public class AboutMeCase extends VP2 {
         Spoon.screenshot(gDevice,input);
         gDevice.pressBack();
     }
+    //修改内容之后到watch搜索对应id号 查看about me 内容是否修改成功
     @Test
     public void testMesSearch() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -77,10 +80,10 @@ public class AboutMeCase extends VP2 {
         getObjectById(Me.SEARCH_BTN_WATCH_FILTER).setText(user_id);
 
         waitTime(5);
-        Assert.assertTrue(input+" save success",getUiObjectByText(input).exists());
+        Asst.assertTrue(input+" save success",getUiObjectByText(input).exists());
 
     }
-
+    //输入最大的字符容量
     @Test
     public void testEdit60C() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -99,6 +102,7 @@ public class AboutMeCase extends VP2 {
         Spoon.screenshot(gDevice,input);
 
     }
+    //超过最大的字符时的处理
     @Test
     public void testEdit61C() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -111,8 +115,6 @@ public class AboutMeCase extends VP2 {
             gDevice.executeShellCommand("input text "+input);
         } catch (IOException e) {
             e.printStackTrace();
-
-
         }
         clickByText("Done");
         gDevice.pressBack();
@@ -123,6 +125,7 @@ public class AboutMeCase extends VP2 {
         }
         Spoon.screenshot(gDevice,input);
     }
+    //输入之后不保存
     @Test
     public void testNotSave() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -141,6 +144,7 @@ public class AboutMeCase extends VP2 {
         }
         Spoon.screenshot(gDevice,input);
     }
+    //删除功能验证
     @Test
     public void testDeleteToNull() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -155,5 +159,28 @@ public class AboutMeCase extends VP2 {
             Assert.fail(expect+" not equal null ");
         }
         Spoon.screenshot(gDevice,"delete_all");
+    }
+    //输入内容为特殊符号时的处理,长度=60
+    @Test
+    public void testEdit61_Symbol() throws UiObjectNotFoundException {
+        clickByText("Me");
+        Spoon.screenshot(gDevice,"Me");
+        clickById(Me.ID_USER_EDIT);
+        clickByText("About Me");
+        getObjectById(Me.ABOUT_ME_CONTENT).clearTextField();
+        String input = getRandomSymbol(100);
+        try {
+            gDevice.executeShellCommand("input text "+input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        clickByText("Done");
+        gDevice.pressBack();
+        String expect = getUiObjectById(Me.ABOUT_ME_DISPLAY).getText();
+        input = input.substring(0,60);
+        if (!expect.equals(input)){
+            Assert.fail(expect+" not equal "+input);
+        }
+        Spoon.screenshot("symbol",input);
     }
 }

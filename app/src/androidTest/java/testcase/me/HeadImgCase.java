@@ -31,6 +31,7 @@ public class HeadImgCase extends VP2 {
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
+    //从相机从拍照编辑head img
     @Test
     public void editHeadImgFromCamera() throws InterruptedException {
         clickByText("Me");

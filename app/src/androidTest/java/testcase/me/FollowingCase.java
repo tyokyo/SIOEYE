@@ -150,7 +150,7 @@ public class FollowingCase extends VP2{
         clickById(Watch.WATCH_USER_AVATAR);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_VIDEO_LOADING)),40000);
         boolean isFind=getUiObjectByText("@"+account_id).exists();
-        Assert.assertTrue("account",isFind);
+        Asst.assertTrue("account",isFind);
         Spoon.screenshot(gDevice,"tyo000");
     }
     //验证-搜索功能(sioeye id)

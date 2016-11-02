@@ -31,6 +31,7 @@ public class FollowerCase extends VP2{
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
+    //搜索Followers用户
     @Test
     public void testSearchFollowers() throws UiObjectNotFoundException, IOException {
         Nav.navToFollowers();
@@ -50,4 +51,5 @@ public class FollowerCase extends VP2{
             Spoon.screenshot("find_user",""+user_name);
         }
     }
+
 }

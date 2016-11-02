@@ -1,5 +1,6 @@
 package testcase.me;
 
+import android.graphics.Point;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
@@ -11,15 +12,21 @@ import android.support.test.uiautomator.Until;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import action.MeAction;
+import action.Nav;
 import ckt.base.VP2;
 import page.App;
 import page.Me;
@@ -30,6 +37,7 @@ import page.Me;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class ActivityCase extends VP2{
+    Logger logger = Logger.getLogger(ActivityCase.class.getName());
     @Before
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
@@ -39,14 +47,19 @@ public class ActivityCase extends VP2{
         clickById(Me.ACTIVITY_INTERESTS);
         waitTime(1);
     }
+
     public void deleteAllMyInterests() throws UiObjectNotFoundException {
-        UiCollection uiCollection = new UiCollection(new UiSelector().className("android.widget.FrameLayout"));
+        while(getObjectById(Me.ACTIVITY_INTERESTS).exists()){
+            clickById(Me.ACTIVITY_INTERESTS);
+            waitTime(1);
+        }
+        /*UiCollection uiCollection = new UiCollection(new UiSelector().className("android.widget.FrameLayout"));
         int count = uiCollection.getChildCount(new UiSelector().resourceId(Me.ACTIVITY_INTERESTS));
         for (int i = 0;i<count;i++)
         {
             clickById(Me.ACTIVITY_INTERESTS);
             waitTime(1);
-        }
+        }*/
     }
     public Set<String> getAllMyInterests() throws UiObjectNotFoundException {
         Set<String> reSet = new HashSet<>();
@@ -83,6 +96,7 @@ public class ActivityCase extends VP2{
         }
         return reSet;
     }
+    //验证添加功能  what are you interested in ?
     @Test
     public void testAddOneActivity() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -93,18 +107,19 @@ public class ActivityCase extends VP2{
         deleteAllMyInterests();
         String added = addInterested(0);
         Set re = getAllMyInterests();
-        Assert.assertTrue("Add My Interests ",re.contains(added));
+        Asst.assertTrue("Add My Interests ",re.contains(added));
         clickByText("Done");
 
         //check
         clickByText("Activity");
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
         Set re2 = getAllMyInterests();
-        Assert.assertTrue("Add My Interests ",re2.size()==1);
-        Assert.assertTrue("Add My Interests ",re2.contains(added));
+        Asst.assertTrue("Add My Interests ",re2.size()==1);
+        Asst.assertTrue("Add My Interests ",re2.contains(added));
         Spoon.screenshot(gDevice,"My_Interests_"+added);
 
     }
+    //验证添加功能 what are you interested in ?
     @Test
     public void testAddAllActivity() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -125,11 +140,12 @@ public class ActivityCase extends VP2{
         it = re2.iterator();
         while (it.hasNext()) {
             String str = it.next();
-            Assert.assertTrue(str+" Added to My Interests ",addSets.contains(str));
+            Asst.assertTrue(str+" Added to My Interests ",addSets.contains(str));
         }
-        Assert.assertTrue(" Added to My Interests ",addSets.size()==re2.size());
+        Asst.assertTrue(" Added to My Interests ",addSets.size()==re2.size());
         Spoon.screenshot(gDevice,"My_Interests_All");
     }
+    //验证取消功能 what are you interested in ?
     @Test
     public void testDelSomeActivity() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -149,10 +165,11 @@ public class ActivityCase extends VP2{
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
         Set re2 = getAllMyInterests();
 
-        Assert.assertTrue(" My Interests "+re2,1==re2.size());
-        Assert.assertTrue(" My Interests "+re2,re2.contains(add));
+        Asst.assertTrue(" My Interests "+re2,1==re2.size());
+        Asst.assertTrue(" My Interests "+re2,re2.contains(add));
         Spoon.screenshot(gDevice,"My_Interests_All");
     }
+    //验证取消所有功能 what are you interested in ?
     @Test
     public void testDelAllActivity() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -169,9 +186,176 @@ public class ActivityCase extends VP2{
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
         Set re2 = getAllMyInterests();
 
-        Assert.assertTrue(" My Interests is null",0==re2.size());
+        Asst.assertTrue(" My Interests is null",0==re2.size());
         Spoon.screenshot(gDevice,"My_Interests_All");
 
     }
+    //My interests
+    //添加-String 长度为10
+    @Test
+    public void test_Add_Input_MyInterests_String_10c() throws IOException, UiObjectNotFoundException {
+        Point p = Nav.getSearchLocation();
+        MeAction.navToActivities();
+        deleteAllMyInterests();
+        Set myInterests_before_add = getAllMyInterests();
+        String input = getRandomString(10);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_ADD);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_USER_INPUT);
+        shellInputText(input);
+        //添加
+        gDevice.click(p.x,p.y);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_DONE);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        MeAction.navToActivities();
 
+        Set myInterests_after_add = getAllMyInterests();
+        UiObject interests_add = getUiObjectByText(input);
+        Asst.assertEquals("add success",true,interests_add.exists());
+        Spoon.screenshot("add_my_interests",input);
+    }
+    //My interests
+    //添加-String 长度为40  MAX=16
+    @Test
+    public void test_Add_Input_MyInterests_String_40c() throws IOException, UiObjectNotFoundException {
+        Point p = Nav.getSearchLocation();
+        MeAction.navToActivities();
+        deleteAllMyInterests();
+        Set myInterests_before_add = getAllMyInterests();
+        String input = getRandomString(40);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_ADD);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_USER_INPUT);
+        shellInputText(input);
+        //添加
+        gDevice.click(p.x,p.y);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_DONE);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        MeAction.navToActivities();
+
+        input=input.substring(0,16);
+        Set myInterests_after_add = getAllMyInterests();
+        UiObject interests_add = getUiObjectByText(input);
+        Asst.assertEquals("add success",true,interests_add.exists());
+        Spoon.screenshot("add_my_interests",input);
+    }
+
+    //My interests
+    //最多可以添加多少个My interests  10个?
+    @Test
+    public void test_Add_Input_MyInterests_10() throws IOException, UiObjectNotFoundException {
+        Point p = Nav.getSearchLocation();
+        MeAction.navToActivities();
+        deleteAllMyInterests();
+        String content="";
+        int total_add = 10;
+        clickById(Me.ACTIVITIES_MY_INTERESTS_ADD);
+        for (int i = 1; i <=total_add ; i++) {
+            String input = getRandomString(3);
+            clickById(Me.ACTIVITIES_MY_INTERESTS_USER_INPUT);
+            shellInputText(input);
+            content=content+input+",";
+            //添加
+            gDevice.click(p.x,p.y);
+            logger.info("DEBUG-"+(i));
+        }
+        clickById(Me.ACTIVITIES_MY_INTERESTS_DONE);
+
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        MeAction.navToActivities();
+        Set myInterests_after_add = getAllMyInterests();
+        Asst.assertEquals("add success",total_add,myInterests_after_add.size());
+        Spoon.screenshot("add_my_interests","add interests "+myInterests_after_add.size());
+    }
+    //添加interests = a,b,c
+    @Test
+    public void test_ErrorSymbol() throws IOException, UiObjectNotFoundException {
+        Point p = Nav.getSearchLocation();
+        MeAction.navToActivities();
+        deleteAllMyInterests();
+        Set myInterests_before_add = getAllMyInterests();
+        String input = "a,b,c";
+        clickById(Me.ACTIVITIES_MY_INTERESTS_ADD);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_USER_INPUT);
+        shellInputText(input);
+        //添加
+        gDevice.click(p.x,p.y);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_DONE);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        MeAction.navToActivities();
+
+        Set myInterests_after_add = getAllMyInterests();
+        Asst.assertEquals("add one interest",1,myInterests_after_add.size());
+        Spoon.screenshot("add_my_interests",input);
+    }
+    //添加interests特殊字符
+    @Test
+    public void test_Symbol() throws IOException, UiObjectNotFoundException {
+        Point p = Nav.getSearchLocation();
+        MeAction.navToActivities();
+        deleteAllMyInterests();
+        Set myInterests_before_add = getAllMyInterests();
+        String input = getRandomSymbol(10);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_ADD);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_USER_INPUT);
+        shellInputText(input);
+        //添加
+        gDevice.click(p.x,p.y);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_DONE);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        MeAction.navToActivities();
+
+        Set myInterests_after_add = getAllMyInterests();
+        Asst.assertEquals("add one interest",1,myInterests_after_add.size());
+        Spoon.screenshot("add_my_interests",input);
+    }
+    //添加interests特殊字符
+    @Test
+    public void test_MyInterests_back() throws IOException, UiObjectNotFoundException {
+        Point p = Nav.getSearchLocation();
+        MeAction.navToActivities();
+        deleteAllMyInterests();
+        Set myInterests_before_add = getAllMyInterests();
+        String input = getRandomSymbol(10);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_ADD);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_USER_INPUT);
+        shellInputText(input);
+        //添加
+        gDevice.click(p.x,p.y);
+        clickById(Me.ACTIVITIES__BACK);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        MeAction.navToActivities();
+
+        Set myInterests_after_add = getAllMyInterests();
+        Asst.assertEquals("add with forgive saving",0,myInterests_after_add.size());
+        Spoon.screenshot("no_interest",input);
+    }
+
+    //添加相同的interests
+    @Test
+    public void test_add_SameInterest() throws IOException, UiObjectNotFoundException {
+        Point p = Nav.getSearchLocation();
+        MeAction.navToActivities();
+        deleteAllMyInterests();
+
+        Set myInterests_before_add = getAllMyInterests();
+
+        String input = getRandomString(10);
+
+        //add a interest
+        clickById(Me.ACTIVITIES_MY_INTERESTS_ADD);
+        clickById(Me.ACTIVITIES_MY_INTERESTS_USER_INPUT);
+        shellInputText(input);
+        //添加
+        gDevice.click(p.x,p.y);
+        Set myInterests_after_add_1 = getAllMyInterests();
+        //add another with the same interest name
+
+        clickById(Me.ACTIVITIES_MY_INTERESTS_USER_INPUT);
+        shellInputText(input);
+        //添加
+        gDevice.click(p.x,p.y);
+
+        Set myInterests_after_add_2 = getAllMyInterests();
+        Asst.assertEquals("add with the same name",myInterests_after_add_1.size(),myInterests_after_add_2.size());
+        Spoon.screenshot("no_interest",input);
+    }
 }

@@ -126,13 +126,15 @@ public class TestDemo extends VP2{
         logStart();
         waitTime(120);
         logStop();*/
-        Spoon.screenshot("tag","Spoon.screenshot",getUiObjectByText("Me"));
+        Logger.getLogger("executeShellCommand").info(gDevice.executeShellCommand("ps | grep logcat "));
+        //Spoon.screenshot("tag","Spoon.screenshot",getUiObjectByText("Me"));
        // clickByText("CKT");
         //clickById(Me.ID_CAMERA_SELECT);
         Spoon.screenshot("tag","绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上");
         //Asst.assertTrue("验证点描述信息",false);
-
-
+        instrument.startPerformanceSnapshot();
+        waitTime(10);
+        instrument.endPerformanceSnapshot();
         //Common.writeToFile("/mnt/sdcard/log/11.txt","test",true);
         //waitTime(5);
         //makeToast("make toast test",10);

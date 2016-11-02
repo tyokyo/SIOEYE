@@ -28,6 +28,7 @@ public class LocationCase extends VP2{
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
+    //搜索位置
     @Test
     public void testSearchLocation() throws UiObjectNotFoundException {
         clickByText("Me");
@@ -41,6 +42,7 @@ public class LocationCase extends VP2{
         getObjectById(Me.SEARCH_LOCATE).setText("new");
         gDevice.pressSearch();
     }
+    //定位位置
     @Test
     public void testLocating() throws UiObjectNotFoundException {
         clickByText("Me");

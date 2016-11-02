@@ -13,6 +13,7 @@ import android.widget.HorizontalScrollView;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -107,7 +108,7 @@ public class BroadCastsCase extends VP2{
         bsobj.click();
         waitTime(3);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_VIDEO_LOADING)),60000);
-        Assert.assertTrue("视频加载60秒超时.",!getObjectById(Me.BROADCAST_VIEW_VIDEO_LOADING).exists());
+        Asst.assertTrue("time out 60 seconds.",!getObjectById(Me.BROADCAST_VIEW_VIDEO_LOADING).exists());
         //click play screen center
         clickById(Me.BROADCAST_VIEW_WATCHER_COUNT,0,100);
 
@@ -138,7 +139,7 @@ public class BroadCastsCase extends VP2{
 
         BroadcastBean bs = getBean(rd);
         String active_title = bs.getBroadcast_title();
-        Assert.assertEquals("modify title cancel",bbe.getBroadcast_title(),active_title);
+        Asst.assertEquals("modify title cancel",bbe.getBroadcast_title(),active_title);
         makeToast(expect_title,3);
         Spoon.screenshot(gDevice,"modify_title_cancel");
     }
@@ -167,7 +168,7 @@ public class BroadCastsCase extends VP2{
 
         BroadcastBean bs = getBean(rd);
         String active_title = bs.getBroadcast_title();
-        Assert.assertEquals("modify title",expect_title,active_title);
+        Asst.assertEquals("modify title",expect_title,active_title);
         makeToast(expect_title,3);
         Spoon.screenshot(gDevice,"modify_title_3");
     }
@@ -196,7 +197,7 @@ public class BroadCastsCase extends VP2{
 
         BroadcastBean bs = getBean(rd);
         String active_title = bs.getBroadcast_title();
-        Assert.assertEquals("modify title",expect_title,active_title);
+        Asst.assertEquals("modify title",expect_title,active_title);
         makeToast(expect_title,3);
         Spoon.screenshot(gDevice,"modify_title_max");
     }
@@ -226,7 +227,7 @@ public class BroadCastsCase extends VP2{
 
         BroadcastBean bs = getBean(rd);
         String active_title = bs.getBroadcast_title();
-        Assert.assertEquals("modify title",expect_title.substring(0,70),active_title);
+        Asst.assertEquals("modify title",expect_title.substring(0,70),active_title);
         makeToast(active_title,3);
         Spoon.screenshot(gDevice,"modify_title_more_than_max");
     }
@@ -264,7 +265,7 @@ public class BroadCastsCase extends VP2{
         getUiObjectById(Me.BROADCASTS_LIST).swipeDown(3);
         waitTime(3);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_STATUS_IMAGE)),60000);
-        Assert.assertTrue("delete",!getUiObjectByText(bbe.getBroadcast_title()).exists());
+        Asst.assertTrue("delete",!getUiObjectByText(bbe.getBroadcast_title()).exists());
     }
     @Test
     public void testPlayVideoViewers() throws UiObjectNotFoundException {
@@ -303,12 +304,12 @@ public class BroadCastsCase extends VP2{
         gDevice.click(x,y);
         gDevice.pressBack();
         //gDevice.wait(Until.findObject(By.text(tiptext)),60000);
-        Assert.assertTrue("comments success",getUiObjectByText(tiptext).exists());
+        Asst.assertTrue("comments success",getUiObjectByText(tiptext).exists());
 
         WatcherBean watcherBean2 = getWatcher();
         String comments2 = watcherBean2.getComments();
         int tip2=Integer.parseInt(comments2);
-        Assert.assertEquals(tip1+1,tip2);
+        Asst.assertEquals(tip1+1,tip2);
         Spoon.screenshot(gDevice,"add_comments_length_120");
 
     }
@@ -343,12 +344,12 @@ public class BroadCastsCase extends VP2{
         gDevice.pressBack();
         //gDevice.wait(Until.findObject(By.text(tiptext)),60000);
         tiptext = tiptext.substring(0,120);
-        Assert.assertTrue("comments success",getUiObjectByText(tiptext).exists());
+        Asst.assertTrue("comments success",getUiObjectByText(tiptext).exists());
 
         WatcherBean watcherBean2 = getWatcher();
         String comments2 = watcherBean2.getComments();
         int tip2=Integer.parseInt(comments2);
-        Assert.assertEquals(tip1+1,tip2);
+        Asst.assertEquals(tip1+1,tip2);
         Spoon.screenshot(gDevice,"add_comments_length_130");
 
     }
@@ -385,12 +386,12 @@ public class BroadCastsCase extends VP2{
         gDevice.click(x,y);
         gDevice.pressBack();
         //gDevice.wait(Until.findObject(By.text(tiptext)),60000);
-        Assert.assertTrue("comments success",getUiObjectByText(tiptext).exists());
+        Asst.assertTrue("comments success",getUiObjectByText(tiptext).exists());
 
         WatcherBean watcherBean2 = getWatcher();
         String comments2 = watcherBean2.getComments();
         int tip2=Integer.parseInt(comments2);
-        Assert.assertEquals(tip1+1,tip2);
+        Asst.assertEquals(tip1+1,tip2);
         Spoon.screenshot(gDevice,"add_comments_length_20");
     }
 
@@ -423,14 +424,14 @@ public class BroadCastsCase extends VP2{
         int x = zan.getBounds().centerX();
         int y = zan.getBounds().centerY();
 
-        for (int i =0;i<1000;i++){
+        for (int i =0;i<10;i++){
             //gDevice.click(x,y);
             clickById(Me.BROADCAST_VIEW_ZAN);
             //getUiObjectById(Me.BROADCAST_VIEW_ZAN);
         }
         WatcherBean watcherBean = getWatcher();
         String addZans = watcherBean.getZan();
-        Assert.assertEquals("zan 1000+ check",expectZans,addZans);
+        Asst.assertEquals("zan 1000+ check",expectZans,addZans);
 
         //listView.swipe(Direction.LEFT, 0.8f, 3000);
         //listView.scroll(Direction.DOWN, 0.8f, 3000);
