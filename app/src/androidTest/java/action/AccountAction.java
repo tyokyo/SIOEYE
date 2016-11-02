@@ -37,7 +37,7 @@ public class AccountAction extends VP2{
     /**
      *产生length个随机数（数字和字母),用于随机搜索关键字
      */
-    public String getStringRandom(int length) {
+    public  static String getStringRandom(int length) {
 
         String val = "";
         Random random = new Random();
