@@ -57,7 +57,7 @@ public final class Spoon extends VP2{
 
     /** Holds a set of directories that have been cleared for this test */
     private static Set<String> clearedOutputDirectories = new HashSet<String>();
-
+    private static final Logger logger=Logger.getLogger(Spoon.class.getName());
     /**
      * Take a screenshot with the specified tag.
      *
@@ -319,11 +319,12 @@ public final class Spoon extends VP2{
                             testMethodName);
             String screenshotName = System.currentTimeMillis() + NAME_SEPARATOR + tag + EXTENSION;
             File screenshotFile = new File(screenshotDirectory, screenshotName);
-            Logger.getLogger("").info(screenshotFile.getAbsolutePath());
+            Logger.getLogger("screenshot").info(screenshotFile.getAbsolutePath());
             uiDevice.takeScreenshot(screenshotFile);
             Log.d(TAG, "Captured screenshot '" + tag + "'.");
             return screenshotFile;
         } catch (Exception e) {
+            logger.info("Unable to capture screenshot."+e.toString());
             throw new RuntimeException("Unable to capture screenshot.", e);
         }
     }
@@ -339,14 +340,15 @@ public final class Spoon extends VP2{
                             testMethodName);
             String screenshotName = System.currentTimeMillis() + NAME_SEPARATOR + tag + EXTENSION;
             File screenshotFile = new File(screenshotDirectory, screenshotName);
-            Logger.getLogger("").info(screenshotFile.getAbsolutePath());
+            logger.info(screenshotFile.getAbsolutePath());
             gDevice.takeScreenshot(screenshotFile);
             Bitmap bitmap= BitmapFactory.decodeFile(screenshotFile.getAbsolutePath());
             Bitmap drawBitmap= VP3.drawTextBitmap(bitmap, drawText);
             VP3.saveBitMapToSdcard(drawBitmap, screenshotFile.getAbsolutePath());
-            Log.d(TAG, "Captured screenshot '" + tag + "'.");
+            logger.info("Captured screenshot '" + tag + "'.");
             return screenshotFile;
         } catch (Exception e) {
+            logger.info("Unable to capture screenshot."+e.toString());
             throw new RuntimeException("Unable to capture screenshot.", e);
         }
     }
@@ -367,9 +369,10 @@ public final class Spoon extends VP2{
             Bitmap bitmap= BitmapFactory.decodeFile(screenshotFile.getAbsolutePath());
             Bitmap drawBitmap= VP3.drawTextRectBitmap(bitmap, drawText,rect);
             VP3.saveBitMapToSdcard(drawBitmap, screenshotFile.getAbsolutePath());
-            Log.d(TAG, "Captured screenshot '" + tag + "'.");
+            logger.info("Captured screenshot '" + tag + "'.");
             return screenshotFile;
         } catch (Exception e) {
+            logger.info("Unable to capture screenshot."+e.toString());
             throw new RuntimeException("Unable to capture screenshot.", e);
         }
     }
@@ -391,9 +394,10 @@ public final class Spoon extends VP2{
             Bitmap bitmap= BitmapFactory.decodeFile(screenshotFile.getAbsolutePath());
             Bitmap drawBitmap= VP3.drawTextRectBitmap(bitmap, drawText,rect);
             VP3.saveBitMapToSdcard(drawBitmap, screenshotFile.getAbsolutePath());
-            Log.d(TAG, "Captured screenshot '" + tag + "'.");
+            logger.info("Captured screenshot '" + tag + "'.");
             return screenshotFile;
         } catch (Exception e) {
+            logger.info("Unable to capture screenshot."+e.toString());
             throw new RuntimeException("Unable to capture screenshot.", e);
         }
     }
