@@ -56,11 +56,6 @@ public class Me {
     public static final String EMAIL_ID="com.sioeye.sioeyeapp:id/email";
     public static final String CONTENT_TEXT="com.sioeye.sioeyeapp:id/content_text";
 
-
-    //Settings
-    public static final String LOG_OUT="com.sioeye.sioeyeapp:id/tv_logout";
-
-
     public static final String INPUT_USERNAME="com.sioeye.sioeyeapp:id/et_input_username";
     public static final String INPUT_PASSWORD="com.sioeye.sioeyeapp:id/et_input_password";
     public static final String LOGIN_SIGN_UP="com.sioeye.sioeyeapp:id/login_signup";
@@ -138,6 +133,9 @@ public class Me {
     public static final String LIVE_CONFIGURATION_LINK="com.sioeye.sioeyeapp:id/link";
     public static final String LIVE_CONFIGURATION_SLV_SHARE_CONTENT="com.sioeye.sioeyeapp:id/share_content";
 
+    //Settings
+    public static final String SETTINGS_USER_MAIN="com.sioeye.sioeyeapp:id/user_main_settings";
+
     //done
     public static final String LIVE_CONFIGURATION_DONE_TITLE="com.sioeye.sioeyeapp:id/right";
     public static final String LIVE_CONFIGURATION_DONE_PRIVACY="com.sioeye.sioeyeapp:id/done";
@@ -172,11 +170,30 @@ public class Me {
     public static final String HELP_ABOUT="com.sioeye.sioeyeapp:id/about";
     public static final String HELP_ABOUT_VERSION="com.sioeye.sioeyeapp:id/version";
 
+    //Settings
+    public static final String LOG_OUT="com.sioeye.sioeyeapp:id/tv_logout";
+    public static final String LOG_OUT_CANCEL="com.sioeye.sioeyeapp:id/delete_cancel";
+    public static final String LOG_OUT_OK="com.sioeye.sioeyeapp:id/delete_ok";
 
+    //Login in account select
+    public static final String LOG_IN_GOOGLE="com.sioeye.sioeyeapp:id/login_google";
+    public static final String LOG_IN_FACEBOOK="com.sioeye.sioeyeapp:id/login_facebook";
+    public static final String LOG_IN_TWITTER="com.sioeye.sioeyeapp:id/login_twitter";
+    //Sign Up
+    //Login
+    //notifications
+    public static final String NOTIFICATIONS="com.sioeye.sioeyeapp:id/user_main_message";
+    //user head
+    public static final String NOTIFICATIONS_USER_HEAD="com.sioeye.sioeyeapp:id/user_head_img";
+    public static final String NOTIFICATIONS_USER_FOLLOW="com.sioeye.sioeyeapp:id/follew_img";
 
-
-
-
-
-
+    //My Interests
+    public static final String ACTIVITIES_MY_INTERESTS_ADD="com.sioeye.sioeyeapp:id/add_tag_view";
+    public static final String ACTIVITIES_MY_INTERESTS_DISPLAY="com.sioeye.sioeyeapp:id/display_text";
+    public static final String ACTIVITIES_MY_INTERESTS_USER_INPUT="com.sioeye.sioeyeapp:id/user_input_interest";
+    //My Interests->done
+    public static final String ACTIVITIES_MY_INTERESTS_DONE="com.sioeye.sioeyeapp:id/right";
+    public static final String ACTIVITIES_CONTENT="com.sioeye.sioeyeapp:id/content_text";
+    //My Interests->back
+    public static final String ACTIVITIES__BACK="com.sioeye.sioeyeapp:id/img_back_logo";
 }
