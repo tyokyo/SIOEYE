@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
+import ckt.base.VP;
 import ckt.base.VP2;
 import ckt.tools.Common;
 import page.App;
@@ -112,7 +113,7 @@ public class TestDemo extends VP2{
 
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
     }
     @Test
     @LargeTest
@@ -126,15 +127,13 @@ public class TestDemo extends VP2{
         logStart();
         waitTime(120);
         logStop();*/
-        Logger.getLogger("executeShellCommand").info(gDevice.executeShellCommand("ps | grep logcat "));
-        //Spoon.screenshot("tag","Spoon.screenshot",getUiObjectByText("Me"));
+        Spoon.screenshot("tag","Spoon.screenshot",getUiObjectByText("我"));
        // clickByText("CKT");
         //clickById(Me.ID_CAMERA_SELECT);
         Spoon.screenshot("tag","绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上绘制文字到图片上");
         //Asst.assertTrue("验证点描述信息",false);
-        instrument.startPerformanceSnapshot();
-        waitTime(10);
-        instrument.endPerformanceSnapshot();
+
+        initDevice();
         //Common.writeToFile("/mnt/sdcard/log/11.txt","test",true);
         //waitTime(5);
         //makeToast("make toast test",10);
