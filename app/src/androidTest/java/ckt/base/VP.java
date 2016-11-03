@@ -53,14 +53,11 @@ public class VP {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
-    public static void doNotAskPermission() throws UiObjectNotFoundException, InterruptedException {
-        for (int i = 0;i<3;i++){
-            UiObject uiObject = gDevice.findObject(new UiSelector().resourceId(App.PERMISSION_ALLOW));
-            if (uiObject.exists()){
-                logger.info("click allow-permission setting");
-                uiObject.clickAndWaitForNewWindow();
-            }
-            Thread.sleep(3);
+    public static void doNotAskPermission() throws UiObjectNotFoundException {
+        UiObject uiObject = gDevice.findObject(new UiSelector().resourceId("cn.sioeye.sioeyeapp"));
+        if (uiObject.exists()){
+            logger.info("click allow-permission setting");
+            uiObject.clickAndWaitForNewWindow();
         }
     }
     public static void initDevice(){
@@ -72,11 +69,7 @@ public class VP {
             gDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         }
         try {
-            try {
-                doNotAskPermission();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            doNotAskPermission();
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }
@@ -128,7 +121,6 @@ public class VP {
                 }
             }
         });
-
         logThread.start();
         Logger.getLogger("start logcat").info(logName);
     }
