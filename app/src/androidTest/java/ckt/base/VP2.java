@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Rect;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.RemoteException;
@@ -861,5 +862,8 @@ public class VP2 extends  VP{
      */
     public static void waitUntilGone(String resourceID,int timeout){
         gDevice.wait(Until.findObject(By.res(resourceID)),timeout);
+    }
+    public static void clickRect(Rect rect){
+        gDevice.click(rect.centerX(),rect.centerY());
     }
 }
