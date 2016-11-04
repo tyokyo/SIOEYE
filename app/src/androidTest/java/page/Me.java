@@ -205,4 +205,8 @@ public class Me {
     public static final String NAV_EDIT_SIOEYE_ID="com.sioeye.sioeyeapp:id/sioeye_id";
     public static final String NAV_EDIT_ABOUT_ME="com.sioeye.sioeyeapp:id/about";
 
+    //Privacy broadcasts are invisible
+    public static final String BROADCAST_INVISIBLE="com.sioeye.sioeyeapp:id/text_profile_list_live";
+    //edit nick name done
+    public static final String NICKNAME_DONE="com.sioeye.sioeyeapp:id/right";
 }
