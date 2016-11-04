@@ -9,6 +9,7 @@ import com.squareup.spoon.Spoon;
 import java.util.Random;
 
 import ckt.base.VP2;
+import ckt.tools.Constant;
 import usa.page.Account;
 import usa.page.App;
 import usa.page.Me;
@@ -157,5 +158,17 @@ public class AccountAction extends VP2{
         clickById(Me.ID_MAIN_TAB_ME);
         clickByText("Sign Up");
         clickByText("Use Your Email Address");
+    }
+    //判断是否登录成功
+    public static void inLogin() throws UiObjectNotFoundException {
+        boolean login = true;
+        clickById(Me.ID_MAIN_TAB_ME);
+        if (text_exists("Login")){
+            clickByText("Login");
+            getObjectById(Account.LOGIN_ET_INPUT_USERNAME).setText(Constant.userName);
+            getObjectById(Account.LOGIN_ET_INPUT_PASSWORD).setText(Constant.passwd);
+            clickById(Account.LOGIN_ET_SIGN_UP_BTN);
+            waitUntilFind(Me.ID_MAIN_TAB_ME,20);
+        }
     }
 }
