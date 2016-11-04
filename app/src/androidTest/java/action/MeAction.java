@@ -1,9 +1,14 @@
 package action;
 
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
+import android.widget.HorizontalScrollView;
 
 import com.squareup.spoon.Spoon;
+
+import java.util.List;
+import java.util.Random;
 
 import ckt.base.VP2;
 import page.Me;
@@ -45,5 +50,17 @@ public class MeAction extends VP2{
         Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_ME_BROADCAST);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+    }
+    //随机获取一个broadcasts对象
+    public static UiObject2 getRandomBroadcasts(){
+        UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
+        waitTime(5);
+        //List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
+        List<UiObject2> lisCollect = gDevice.findObjects(By.res(Me.BROADCAST_CONTENT));
+        int size = lisCollect.size();
+        Random random = new Random();
+        int rd = random.nextInt(size);
+        UiObject2 broadcast = lisCollect.get(rd);
+        return  broadcast;
     }
 }
