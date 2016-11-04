@@ -207,17 +207,28 @@ public class FollowingCase extends VP2{
     @Test
     public void testViewVideoFromFollowing() throws UiObjectNotFoundException, IOException {
         Nav.navToFollowing();
+        //随机选择一个Follow用户
         FollowingBean f_bean = FollowingAction.randomFollowingUser();
         logger.info(f_bean.toString());
         f_bean.click();
+        waitUntilFind(Me.USER_FOLLOW_LIST,60);
         gDevice.wait(Until.findObject(By.res(Me.USER_FOLLOW_LIST)),60000);
-        getUiObjectById(Me.USER_FOLLOW_LIST).swipeUp(100);
-        getUiObjectById(Me.USER_FOLLOW_LIST).swipeUp(100);
-        //播放一个视频
-        getUiObjectById(Me.USER_FOLLOW_LIST).getChild(new UiSelector().className("android.widget.ImageView")).clickAndWaitForNewWindow();
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_VIDEO_LOADING)),60000);
-        waitTime(20);
-        gDevice.pressBack();
+        if (getObjectById(Me.BROADCAST_INVISIBLE).exists()){
+            Spoon.screenshot("invisible");
+            Asst.fail("Privacy broadcasts are invisible");
+        }else {
+            getUiObjectById(Me.USER_FOLLOW_LIST).swipeUp(100);
+            getUiObjectById(Me.USER_FOLLOW_LIST).swipeUp(100);
+            int videos =getObject2ById(Me.USER_FOLLOW_LIST).findObjects(By.clazz("android.widget.ImageView")).size();
+            //播放一个视频
+            if (videos>=1){
+                getObject2ById(Me.USER_FOLLOW_LIST).findObject(By.clazz("android.widget.ImageView")).click();
+                gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+                waitTime(20);
+                Spoon.screenshot("play_video","play 20s");
+                gDevice.pressBack();
+            }
+        }
     }
 }
 
