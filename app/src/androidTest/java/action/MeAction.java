@@ -2,6 +2,7 @@ package action;
 
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject2;
+import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
 import android.widget.HorizontalScrollView;
 
@@ -62,5 +63,16 @@ public class MeAction extends VP2{
         int rd = random.nextInt(size);
         UiObject2 broadcast = lisCollect.get(rd);
         return  broadcast;
+    }
+    //wait 加载完成 此时点赞图标变为绿色
+    public  static void waitBroadcastLoading() throws UiObjectNotFoundException {
+        waitUntilFind(Me.BROADCAST_VIEW_ZAN,10);
+        for (int i = 0; i <10 ; i++) {
+            if (getObjectById(Me.BROADCAST_VIEW_ZAN).isEnabled()){
+                break;
+            }else{
+                waitTime(2);
+            }
+        }
     }
 }
