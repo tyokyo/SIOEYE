@@ -18,9 +18,9 @@ import java.util.logging.Logger;
 import bean.FollowingBean;
 import bean.UserBean;
 import ckt.base.VP2;
-import page.App;
-import page.Me;
-import page.Watch;
+import cn.page.App;
+import cn.page.Me;
+import cn.page.Watch;
 
 /**
  * Created by elon on 2016/10/27.

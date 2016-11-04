@@ -123,6 +123,7 @@ public class AccountAction extends VP2{
     }
     //登录账号
     public static void logInAccount(String username,String password) throws UiObjectNotFoundException {
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         clickById(Me.ID_MAIN_TAB_ME);
         clickByText("Login");
         getObjectById(Account.LOGIN_ET_INPUT_USERNAME).setText(username);
@@ -135,9 +136,14 @@ public class AccountAction extends VP2{
         clickById(Me.ID_MAIN_TAB_ME);
         clickByText("Login");
     }
-    //进入Sign Up界面
-    public static void navToSignUp() throws UiObjectNotFoundException {
+    //进入Sign Up界面-mobile
+    public static void navToSignUp_ByMobile() throws UiObjectNotFoundException {
         clickById(Me.ID_MAIN_TAB_ME);
         clickByText("Sign Up");
+    }
+    //进入Sign Up界面-mobile
+    public static void navToSignUp_ByEmail() throws UiObjectNotFoundException {
+        clickById(Me.ID_MAIN_TAB_ME);
+        clickByText("Use Your Email Address");
     }
 }

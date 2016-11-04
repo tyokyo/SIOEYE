@@ -52,7 +52,7 @@ public class LogOutCase extends VP2 {
         clickByText("Login");
         //input username
         getObjectById(Me.INPUT_USERNAME).clearTextField();
-        getObjectById(Me.INPUT_USERNAME).setText(Constant.userNmae);
+        getObjectById(Me.INPUT_USERNAME).setText(Constant.userName);
         //input password
         getObjectById(Me.INPUT_PASSWORD).clearTextField();
         getObjectById(Me.INPUT_PASSWORD).setText(Constant.passwd);

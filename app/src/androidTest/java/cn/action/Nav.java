@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Random;
 
 import ckt.base.VP2;
-import page.App;
-import page.Me;
-import page.Watch;
+import cn.page.App;
+import cn.page.Me;
+import cn.page.Watch;
 
 /**
  * Created by elon on 2016/10/20.

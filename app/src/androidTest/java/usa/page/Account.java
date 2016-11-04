@@ -21,8 +21,14 @@ public class Account {
 
     //sign up by mobile step
     public static String SIGN_UP_TEL_ET_INPUT_PHONE = "com.sioeye.sioeyeapp:id/et_input_phone";
-
-
-
+    //error tip for sign up
+    public static String SIGN_UP_ERROR_TIP = "com.sioeye.sioeyeapp:id/tv_error_tip";
+    //continue
+    public static String SIGN_UP_CONTINUE = "com.sioeye.sioeyeapp:id/rl_continue";
+    public static String SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT = "com.sioeye.sioeyeapp:id/et_input_email";
+    public static String SIGN_UP_ACCOUNT_PASSWORD_INPUT = "com.sioeye.sioeyeapp:id/et_input_password";
+    public static String SIGN_UP_ACCOUNT_SIOEYE_ID = "com.sioeye.sioeyeapp:id/et_input_sioeyeid";
+    public static String SIGN_UP_ACCOUNT_NICK_NAME = "com.sioeye.sioeyeapp:id/et_input_name";
+    public static String SIGN_UP_ACCOUNT_DEFAULT_SELECT = "com.sioeye.sioeyeapp:id/tv_select_count";
 
 }
