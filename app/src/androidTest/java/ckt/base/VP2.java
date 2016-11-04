@@ -878,7 +878,21 @@ public class VP2 extends  VP{
      *set text for input
      * @param ResourceID id
      */
-    public static String getText(String ResourceID) throws UiObjectNotFoundException {
+    public static String getTex(String ResourceID) throws UiObjectNotFoundException {
         return  getObjectById(ResourceID).getText();
+    }
+    /**
+     *set text for input
+     * @param ResourceID id
+     */
+    public static boolean id_exists(String ResourceID) throws UiObjectNotFoundException {
+        return  getObjectById(ResourceID).exists();
+    }
+    /**
+     *set text for input
+     * @param text id
+     */
+    public static boolean text_exists(String text) throws UiObjectNotFoundException {
+        return  getUiObjectByText(text).exists();
     }
 }
