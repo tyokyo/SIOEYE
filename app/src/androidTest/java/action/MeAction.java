@@ -29,4 +29,9 @@ public class MeAction extends VP2{
         clickByText("Activity");
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
     }
+    public static void navToUserEdit(){
+        clickById(Me.ID_MAIN_TAB_ME);
+        Spoon.screenshot(gDevice,"Me");
+        clickById(Me.ID_USER_EDIT);
+    }
 }
