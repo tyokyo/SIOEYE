@@ -170,11 +170,6 @@ public class Me {
     public static final String HELP_ABOUT="com.sioeye.sioeyeapp:id/about";
     public static final String HELP_ABOUT_VERSION="com.sioeye.sioeyeapp:id/version";
 
-    //Settings
-    public static final String LOG_OUT="com.sioeye.sioeyeapp:id/tv_logout";
-    public static final String LOG_OUT_CANCEL="com.sioeye.sioeyeapp:id/delete_cancel";
-    public static final String LOG_OUT_OK="com.sioeye.sioeyeapp:id/delete_ok";
-
     //Login in account select
     public static final String LOG_IN_GOOGLE="com.sioeye.sioeyeapp:id/login_google";
     public static final String LOG_IN_FACEBOOK="com.sioeye.sioeyeapp:id/login_facebook";
