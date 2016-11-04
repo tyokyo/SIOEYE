@@ -21,26 +21,26 @@ import usa.page.Watch;
  */
 public class Nav extends VP2{
     public static void navToFollowing(){
-        clickByText("Me");
+        clickById(Me.ID_MAIN_TAB_ME);
         clickById(Me.ID_ME_FOLLOWING);
         waitTime(2);
         gDevice.wait(Until.gone(By.res(Me.LOADING_FOLLOWERS)),40000);
     }
     public static void navToBrodCasts(){
-        clickByText("Me");
+        clickById(Me.ID_MAIN_TAB_ME);
         clickById(Me.ID_ME_BROADCAST);
         waitTime(2);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),40000);
     }
 
     public static void navToFollowers(){
-        clickByText("Me");
+        clickById(Me.ID_MAIN_TAB_ME);
         clickById(Me.ID_ME_FOLLOWERS);
         waitTime(2);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW_VIDEO_LOADING)),40000);
     }
     public static void navToWatchSearch(){
-        clickByText("Watch");
+        clickById(Watch.WATCH_NAVIGATOR);
         clickById(Watch.WATCH_SEARCH_BTN);
         waitTime(2);
         gDevice.wait(Until.findObject(By.res(Watch.WATCH_SEARCH_TRENDING_TITLE)),40000);
