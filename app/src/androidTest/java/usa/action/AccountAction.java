@@ -4,6 +4,8 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 
+import com.squareup.spoon.Spoon;
+
 import java.util.Random;
 
 import ckt.base.VP2;
@@ -121,6 +123,8 @@ public class AccountAction extends VP2{
             clickById(Account.LOG_OUT_OK);
             //wait logout
             waitTime(2);
+            waitUntilGone(Account.ACCOUNT_LOGOUT,30);
+            Spoon.screenshot("log_out");
         }
     }
     //登录账号

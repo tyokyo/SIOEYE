@@ -32,5 +32,6 @@ public class Account {
     public static String SIGN_UP_ACCOUNT_DEFAULT_SELECT = "com.sioeye.sioeyeapp:id/tv_select_count";
     //pop dialog
     public static String SIGN_UP_ACCOUNT_TV_CONTENT = "com.sioeye.sioeyeapp:id/tv_content";
-
+    //logout loading
+    public static final String ACCOUNT_LOGOUT="com.sioeye.sioeyeapp:id/llt_layout";
 }
