@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import action.MeAction;
 import bean.BroadcastBean;
 import bean.WatcherBean;
 import ckt.base.VP2;
@@ -94,9 +95,7 @@ public class BroadCastsCase extends VP2{
     //播放视频60秒
     @Test
     public void testViewVideo() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
 
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
         waitTime(5);
@@ -116,9 +115,7 @@ public class BroadCastsCase extends VP2{
     //1:编辑title 2:放弃保存
     @Test
     public void testEditTitleCancel() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
         waitTime(5);
         List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
@@ -146,9 +143,7 @@ public class BroadCastsCase extends VP2{
     //title 输入字符长度3
     @Test
     public void testEditTitle3() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
         waitTime(5);
         List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
@@ -175,9 +170,7 @@ public class BroadCastsCase extends VP2{
     //title 输入字符长度70
     @Test
     public void testEditTitle70() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
         waitTime(5);
         List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
@@ -204,9 +197,7 @@ public class BroadCastsCase extends VP2{
     //title 输入字符长度>70
     @Test
     public void testEditTitleMoreThan70() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
         waitTime(5);
         List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
@@ -233,9 +224,7 @@ public class BroadCastsCase extends VP2{
     }
     @Test
     public void testDeleteBroadcastsVideo() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
         waitTime(5);
         List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
@@ -269,17 +258,13 @@ public class BroadCastsCase extends VP2{
     }
     @Test
     public void testPlayVideoViewers() throws UiObjectNotFoundException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
         getUiObjectById(Me.BROADCASTS_LIST).swipeDown(3);
 
     }
     @Test
     public void testComments_Length_120() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
 
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
         waitTime(5);
@@ -315,9 +300,7 @@ public class BroadCastsCase extends VP2{
     }
     @Test
     public void testComments_Length_130() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
         getObjectById(Me.BROADCAST_VIEW,0).swipeLeft(2);
 
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
@@ -353,14 +336,9 @@ public class BroadCastsCase extends VP2{
         Spoon.screenshot(gDevice,"add_comments_length_130");
 
     }
-
-
-
     @Test
     public void testComments_Length_20() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),60000);
+        MeAction.navToBroadcasts();
         getObjectById(Me.BROADCAST_VIEW,0).swipeLeft(2);
 
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
@@ -398,9 +376,7 @@ public class BroadCastsCase extends VP2{
     //验证点赞超过1000的显示是否正确
     @Test
     public void testZanK() throws UiObjectNotFoundException, IOException {
-        clickByText("Me");
-        clickByText("Broadcasts");
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        MeAction.navToBroadcasts();
         getObjectById(Me.BROADCAST_VIEW,0).swipeLeft(2);
 
         UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
