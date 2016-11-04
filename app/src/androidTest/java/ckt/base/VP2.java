@@ -33,7 +33,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import ckt.tools.VideoNode;
-import page.App;
+import usa.page.App;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 
@@ -865,5 +865,13 @@ public class VP2 extends  VP{
     }
     public static void clickRect(Rect rect){
         gDevice.click(rect.centerX(),rect.centerY());
+    }
+    /**
+     *set text for input
+     * @param ResourceID id
+     * @param text timeout for wait
+     */
+    public static void setText(String ResourceID,String text) throws UiObjectNotFoundException {
+        getObjectById(ResourceID).setText(text);
     }
 }
