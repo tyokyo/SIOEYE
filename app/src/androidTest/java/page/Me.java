@@ -196,4 +196,13 @@ public class Me {
     public static final String ACTIVITIES_CONTENT="com.sioeye.sioeyeapp:id/content_text";
     //My Interests->back
     public static final String ACTIVITIES__BACK="com.sioeye.sioeyeapp:id/img_back_logo";
+
+    //user edit
+    public static final String NAV_EDIT_NICKNAME="com.sioeye.sioeyeapp:id/nickname";
+    public static final String NAV_EDIT_EMAIL="com.sioeye.sioeyeapp:id/email";
+    public static final String NAV_EDIT_LOCATION="com.sioeye.sioeyeapp:id/location";
+    public static final String NAV_EDIT_ACTIVITY="com.sioeye.sioeyeapp:id/interest";
+    public static final String NAV_EDIT_SIOEYE_ID="com.sioeye.sioeyeapp:id/sioeye_id";
+    public static final String NAV_EDIT_ABOUT_ME="com.sioeye.sioeyeapp:id/about";
+
 }
