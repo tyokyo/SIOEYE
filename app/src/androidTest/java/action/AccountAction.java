@@ -7,7 +7,9 @@ import android.support.test.uiautomator.UiSelector;
 import java.util.Random;
 
 import ckt.base.VP2;
+import page.Account;
 import page.App;
+import page.Me;
 
 /**
  * Created by admin on 2016/11/2.
@@ -103,4 +105,21 @@ public class AccountAction extends VP2{
         }
         initDevice();
     }
+    //注销账号
+    /*如果当前处于登录状态，注销账号
+    如果当前已处于注销状态，退出
+    * */
+    public static  void logOutAccount(){
+        clickById(Me.ID_MAIN_TAB_ME);
+        clickById(Me.SETTINGS_USER_MAIN);
+        if (getUiObjectByText("Login").exists()){
+
+        }else{
+            clickById(Account.LOG_OUT);
+            clickById(Account.LOG_OUT_OK);
+            //wait logout
+
+        }
+    }
+
 }
