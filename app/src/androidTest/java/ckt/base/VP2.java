@@ -817,7 +817,7 @@ public class VP2 extends  VP{
     public static String base = "abcdefghijklmnopqrstuvwxyz0123456789";
     private static final String[] email_suffix="@gmail.com,@yahoo.com,@msn.com,@hotmail.com,@aol.com,@ask.com,@live.com,@qq.com,@0355.net,@163.com,@163.net,@263.net,@3721.net,@yeah.net,@googlemail.com,@126.com,@sina.com,@sohu.com,@yahoo.com.cn".split(",");
 
-    public static int getNum(int start,int end) {
+    private static int getNum(int start, int end) {
         return (int)(Math.random()*(end-start+1)+start);
     }
     /**
@@ -873,5 +873,12 @@ public class VP2 extends  VP{
      */
     public static void setText(String ResourceID,String text) throws UiObjectNotFoundException {
         getObjectById(ResourceID).setText(text);
+    }
+    /**
+     *set text for input
+     * @param ResourceID id
+     */
+    public static String getText(String ResourceID) throws UiObjectNotFoundException {
+        return  getObjectById(ResourceID).getText();
     }
 }
