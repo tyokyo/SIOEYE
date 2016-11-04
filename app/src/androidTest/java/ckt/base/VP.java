@@ -31,7 +31,6 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import ckt.tools.Common;
-import page.App;
 
 import static android.support.v4.app.ActivityCompat.requestPermissions;
 
