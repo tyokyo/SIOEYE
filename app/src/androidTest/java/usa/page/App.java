@@ -5,7 +5,7 @@ package usa.page;
  */
 public class App {
     public static String SIOEYE_PACKAGE_NAME_USA="com.sioeye.sioeyeapp";
-    public static String SIOEYE_PACKAGE_NAME_EN="cn.sioeye.sioeyeapp";
+    public static String SIOEYE_PACKAGE_NAME_CN="cn.sioeye.sioeyeapp";
     public static String LAUNCH_SIOEYE="com.sioeye.sioeyeapp/.main.SplashActivity";
 
     //permission allow dialog
