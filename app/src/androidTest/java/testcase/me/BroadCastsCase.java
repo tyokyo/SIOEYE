@@ -1,5 +1,6 @@
 package testcase.me;
 
+import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
@@ -338,38 +339,35 @@ public class BroadCastsCase extends VP2{
     }
     @Test
     public void testComments_Length_20() throws UiObjectNotFoundException, IOException {
+        //进入broadcasts
         MeAction.navToBroadcasts();
-        getObjectById(Me.BROADCAST_VIEW,0).swipeLeft(2);
+        //随机获取一个直播视频
+        MeAction.getRandomBroadcasts().click();
+        //等待加载完成-点赞图标变为绿色  可以进行点赞动作
+        MeAction.waitBroadcastLoading();
 
-        UiObject2 listView = gDevice.findObject(By.res(Me.BROADCAST_VIEW));
-        waitTime(5);
-        List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
-        int size = lisCollect.size();
-        Random random = new Random();
-        int rd = random.nextInt(size);
-        UiObject2 bsobj = lisCollect.get(rd);
-        bsobj.click();
-        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_TIPTEXT)),20000);
-        UiObject zan = getUiObjectById(Me.BROADCAST_VIEW_ZAN);
-        int x = zan.getBounds().centerX();
-        int y = zan.getBounds().centerY();
-
+        //获取点赞图标的rect
+        UiObject zanRect = getUiObjectById(Me.BROADCAST_VIEW_ZAN);
+        Rect rect =zanRect.getBounds();
+        //当前的评论数
         WatcherBean watcherBean1 = getWatcher();
-        String comments1 = watcherBean1.getComments();
-        String tiptext = getRandomString(20);
-        int tip1=Integer.parseInt(comments1);
+        String comments_before = watcherBean1.getComments();
+        String input_comments = getRandomString(20);
+        int comments_count_before=Integer.parseInt(comments_before);
+        //输入评论内容
         clickById(Me.BROADCAST_VIEW_TIPTEXT);
-        shellInputText(tiptext);
-        //getUiObjectById(Me.BROADCAST_VIEW_TIPTEXT).setText(tiptext);
-        gDevice.click(x,y);
+        shellInputText(input_comments);
+        //点击评论
+        clickRect(rect);
         gDevice.pressBack();
-        //gDevice.wait(Until.findObject(By.text(tiptext)),60000);
-        Asst.assertTrue("comments success",getUiObjectByText(tiptext).exists());
+        Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
 
-        WatcherBean watcherBean2 = getWatcher();
-        String comments2 = watcherBean2.getComments();
-        int tip2=Integer.parseInt(comments2);
-        Asst.assertEquals(tip1+1,tip2);
+        //验证评论数+1
+        WatcherBean watcherBean_after = getWatcher();
+        String after_comments = watcherBean_after.getComments();
+        int comments_count=Integer.parseInt(after_comments);
+        Asst.assertEquals(comments_count_before+1,comments_count);
+
         Spoon.screenshot(gDevice,"add_comments_length_20");
     }
 
