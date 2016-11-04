@@ -1,41 +1,27 @@
-package testcase.me;
+package testcase.usa.me;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.v4.app.ActivityCompat;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.util.Log;
 
-import com.sioeye.MainActivity;
 import com.squareup.spoon.Spoon;
 
-import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
-import ckt.base.VP;
 import ckt.base.VP2;
-import ckt.tools.Common;
 import page.App;
-import page.Me;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
 
 /**
  * Created by elon on 2016/10/14.

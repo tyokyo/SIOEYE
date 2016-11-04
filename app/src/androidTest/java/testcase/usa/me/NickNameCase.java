@@ -1,4 +1,4 @@
-package testcase.me;
+package testcase.usa.me;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 
 import action.MeAction;
-import action.Nav;
 import ckt.base.VP2;
 import page.App;
 import page.Me;

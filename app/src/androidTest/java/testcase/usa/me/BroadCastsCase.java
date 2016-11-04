@@ -1,4 +1,4 @@
-package testcase.me;
+package testcase.usa.me;
 
 import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
@@ -15,7 +15,6 @@ import android.widget.HorizontalScrollView;
 import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

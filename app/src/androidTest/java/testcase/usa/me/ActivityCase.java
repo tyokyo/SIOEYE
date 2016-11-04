@@ -1,4 +1,4 @@
-package testcase.me;
+package testcase.usa.me;
 
 import android.graphics.Point;
 import android.support.test.filters.SdkSuppress;
@@ -13,13 +13,11 @@ import android.support.test.uiautomator.Until;
 import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;

@@ -1,8 +1,9 @@
-package testcase.me;
+package testcase.usa.me;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+
 import com.squareup.spoon.Spoon;
 
 import org.junit.Before;

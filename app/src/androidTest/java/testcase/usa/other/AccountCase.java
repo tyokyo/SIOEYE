@@ -1,4 +1,4 @@
-package testcase.other;
+package testcase.usa.other;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;

@@ -1,4 +1,4 @@
-package testcase.me;
+package testcase.usa.me;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import action.Nav;
 import ckt.base.VP2;
 import ckt.tools.Constant;
 import page.App;

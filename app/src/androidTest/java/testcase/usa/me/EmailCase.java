@@ -1,4 +1,4 @@
-package testcase.me;
+package testcase.usa.me;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 
 import ckt.base.VP2;
+import page.Account;
 import page.App;
 import page.Me;
 
@@ -57,7 +58,7 @@ public class EmailCase extends VP2 {
         //log out
         gDevice.pressBack();
         clickByText("Settings");
-        clickById(Me.LOG_OUT);
+        clickById(Account.LOG_OUT);
         clickByText("OK");
         gDevice.wait(Until.gone(By.res(Me.ID_IMAGE_CHANGE)),20000);
         //login with new email address
