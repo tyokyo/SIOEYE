@@ -23,9 +23,9 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import action.MeAction;
-import action.Nav;
 import ckt.base.VP2;
+import usa.action.MeAction;
+import usa.action.Nav;
 import usa.page.App;
 import usa.page.Me;
 

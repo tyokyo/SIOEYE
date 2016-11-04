@@ -14,8 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import action.MeAction;
-import action.Nav;
+import usa.action.MeAction;
+import usa.action.Nav;
 import ckt.base.VP2;
 import usa.page.App;
 import usa.page.Me;

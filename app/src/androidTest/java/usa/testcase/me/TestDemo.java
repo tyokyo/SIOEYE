@@ -99,7 +99,7 @@ public class TestDemo extends VP2{
 
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
     @LargeTest

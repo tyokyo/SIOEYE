@@ -14,8 +14,11 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
-import action.FollowingAction;
-import action.Nav;
+import usa.action.FollowingAction;
+import usa.action.MeAction;
+import usa.action.Nav;
+import usa.page.App;
+import usa.page.Me;
 import ckt.base.VP2;
 import usa.page.App;
 import usa.page.Me;
