@@ -23,8 +23,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import action.MeAction;
-import action.Nav;
+import cn.action.MeAction;
+import cn.action.Nav;
 import ckt.base.VP2;
 import usa.page.App;
 import usa.page.Me;

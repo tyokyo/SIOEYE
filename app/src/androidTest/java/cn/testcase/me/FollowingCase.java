@@ -18,8 +18,8 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import action.FollowingAction;
-import action.Nav;
+import cn.action.FollowingAction;
+import cn.action.Nav;
 import bean.FollowingBean;
 import ckt.base.VP2;
 import usa.page.App;

@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
-import action.MeAction;
+import cn.action.MeAction;
 import ckt.base.VP2;
 import usa.page.App;
 import usa.page.Me;

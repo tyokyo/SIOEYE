@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 
 import ckt.base.VP2;
 import ckt.tools.Constant;
+import cn.page.Account;
 import usa.page.App;
 import usa.page.Me;
 
@@ -33,9 +34,9 @@ public class LogOutCase extends VP2 {
     public void testLogOut_Cancel(){
         clickById(Me.ID_MAIN_TAB_ME);
         clickById(Me.SETTINGS_USER_MAIN);
-        clickById(Me.LOG_OUT);
-        clickById(Me.LOG_OUT_CANCEL);
-        boolean active = getObjectById(Me.LOG_OUT).exists();
+        clickById(Account.LOG_OUT);
+        clickById(Account.LOG_OUT_CANCEL);
+        boolean active = getObjectById(Account.LOG_OUT).exists();
         Asst.assertEquals("logout cancel",true,active);
     }
     //注销Log out
@@ -44,14 +45,14 @@ public class LogOutCase extends VP2 {
         //log out
         clickById(Me.ID_MAIN_TAB_ME);
         clickById(Me.SETTINGS_USER_MAIN);
-        clickById(Me.LOG_OUT);
-        clickById(Me.LOG_OUT_OK);
+        clickById(Account.LOG_OUT);
+        clickById(Account.LOG_OUT_OK);
         //log in
         clickById(Me.ID_MAIN_TAB_ME);
         clickByText("Login");
         //input username
         getObjectById(Me.INPUT_USERNAME).clearTextField();
-        getObjectById(Me.INPUT_USERNAME).setText(Constant.userNmae);
+        getObjectById(Me.INPUT_USERNAME).setText(Constant.userName);
         //input password
         getObjectById(Me.INPUT_PASSWORD).clearTextField();
         getObjectById(Me.INPUT_PASSWORD).setText(Constant.passwd);

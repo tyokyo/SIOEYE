@@ -21,7 +21,7 @@ import usa.page.App;
 public class demo extends VP2{
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
     public void testD1() throws UiObjectNotFoundException {

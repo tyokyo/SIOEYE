@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import action.MeAction;
+import cn.action.MeAction;
 import bean.BroadcastBean;
 import bean.WatcherBean;
 import ckt.base.VP2;
