@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
+import action.MeAction;
 import ckt.base.VP2;
 import page.App;
 import page.Me;
@@ -59,7 +60,7 @@ public class AboutMeCase extends VP2 {
     //修改内容之后到watch搜索对应id号 查看about me 内容是否修改成功
     @Test
     public void testMesSearch() throws UiObjectNotFoundException {
-        clickByText("Me");
+        clickById(Me.ID_MAIN_TAB_ME);
         String user_id = getObjectById(Me.SIOEYE_USER_ID).getText();
         Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
@@ -86,9 +87,7 @@ public class AboutMeCase extends VP2 {
     //输入最大的字符容量
     @Test
     public void testEdit60C() throws UiObjectNotFoundException {
-        clickByText("Me");
-        Spoon.screenshot(gDevice,"Me");
-        clickById(Me.ID_USER_EDIT);
+        MeAction.navToUserEdit();
         clickByText("About Me");
         getObjectById(Me.ABOUT_ME_CONTENT).clearTextField();
         String input = getRandomString(60);
@@ -105,9 +104,7 @@ public class AboutMeCase extends VP2 {
     //超过最大的字符时的处理
     @Test
     public void testEdit61C() throws UiObjectNotFoundException {
-        clickByText("Me");
-        Spoon.screenshot(gDevice,"Me");
-        clickById(Me.ID_USER_EDIT);
+        MeAction.navToUserEdit();
         clickByText("About Me");
         getObjectById(Me.ABOUT_ME_CONTENT).clearTextField();
         String input = getRandomString(100);
@@ -147,9 +144,7 @@ public class AboutMeCase extends VP2 {
     //删除功能验证
     @Test
     public void testDeleteToNull() throws UiObjectNotFoundException {
-        clickByText("Me");
-        Spoon.screenshot(gDevice,"Me");
-        clickById(Me.ID_USER_EDIT);
+        MeAction.navToUserEdit();
         clickByText("About Me");
         getObjectById(Me.ABOUT_ME_CONTENT).clearTextField();
         clickByText("Done");
