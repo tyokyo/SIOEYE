@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
+import action.MeAction;
+import action.Nav;
 import ckt.base.VP2;
 import page.App;
 import page.Me;
@@ -23,34 +25,27 @@ import page.Me;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class NickNameCase  extends VP2 {
-
     @Before
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
     public void testChangeNickNameLessThan4Character() throws UiObjectNotFoundException {
-        clickByText("Me");
-        Spoon.screenshot(gDevice,"Me");
-        clickById(Me.ID_USER_EDIT);
-        clickByText("Nick Name");
+        MeAction.navToNickName();
         getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         getObjectById(Me.SAMPLE_CONTENT).setText(getRandomString(3));
-        clickByText("Done");
+        clickById(Me.NICKNAME_DONE);
         getUiObjectByText("Done");
         getUiObjectByText("Done");
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
     public void testChangeNickNameMoreThan4Character() throws UiObjectNotFoundException {
-        clickByText("Me");
-        Spoon.screenshot(gDevice,"Me");
-        clickById(Me.ID_USER_EDIT);
-        clickByText("Nick Name");
+        MeAction.navToNickName();
         getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         String nickname = getRandomString(4);
         getObjectById(Me.SAMPLE_CONTENT).setText(nickname);
-        clickByText("Done");
+        clickById(Me.NICKNAME_DONE);
         waitTime(3);
         String currentNick = getObjectById(Me.GETNICKNAMECONTENT).getText();
         if (!nickname.equals(currentNick)){
@@ -60,10 +55,7 @@ public class NickNameCase  extends VP2 {
     }
     @Test
     public void testChangeNickNameMaxCharacter() throws UiObjectNotFoundException {
-        clickByText("Me");
-        Spoon.screenshot(gDevice,"Me");
-        clickById(Me.ID_USER_EDIT);
-        clickByText("Nick Name");
+        MeAction.navToNickName();
         getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         String nickname = getRandomString(60);
         try {
@@ -71,7 +63,7 @@ public class NickNameCase  extends VP2 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        clickByText("Done");
+        clickById(Me.NICKNAME_DONE);
         waitTime(3);
         String currentNick = getObjectById(Me.GETNICKNAMECONTENT).getText();
 
@@ -82,13 +74,12 @@ public class NickNameCase  extends VP2 {
     }
     @Test
     public void testChangeNickNameNotSave() throws UiObjectNotFoundException {
-        clickByText("Me");
+        clickById(Me.ID_MAIN_TAB_ME);
         Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
-
         String nicknameBefore = getObjectById(Me.GETNICKNAMECONTENT).getText();
+        clickById(Me.NAV_EDIT_NICKNAME);
 
-        clickByText("Nick Name");
         getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         String nickname = getRandomString(20);
         try {
