@@ -66,12 +66,14 @@ public class MeAction extends VP2{
     }
     //wait 加载完成 此时点赞图标变为绿色
     public  static void waitBroadcastLoading() throws UiObjectNotFoundException {
+        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_TIPTEXT)),20000);
         waitUntilFind(Me.BROADCAST_VIEW_ZAN,10);
-        for (int i = 0; i <10 ; i++) {
-            if (getObjectById(Me.BROADCAST_VIEW_ZAN).isEnabled()){
+        for (int i = 0; i <20 ; i++) {
+            if (getObjectById(Me.BROADCAST_VIEW_ZAN).isEnabled()==true&&
+                    getObjectById(Me.BROADCAST_VIEW_TIPTEXT).isEnabled()==true){
                 break;
             }else{
-                waitTime(2);
+                waitTime(4);
             }
         }
     }
