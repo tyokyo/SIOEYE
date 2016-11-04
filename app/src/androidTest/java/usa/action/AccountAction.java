@@ -110,40 +110,48 @@ public class AccountAction extends VP2{
     如果当前已处于注销状态，退出
     * */
     public static  void logOutAccount(){
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         clickById(Me.ID_MAIN_TAB_ME);
-        clickById(Me.SETTINGS_USER_MAIN);
+        waitTime(2);
         if (getUiObjectByText("Login").exists()){
 
         }else{
+            clickById(Me.SETTINGS_USER_MAIN);
             clickById(Account.LOG_OUT);
             clickById(Account.LOG_OUT_OK);
             //wait logout
-
+            waitTime(2);
         }
     }
     //登录账号
     public static void logInAccount(String username,String password) throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         clickById(Me.ID_MAIN_TAB_ME);
-        clickByText("Login");
-        getObjectById(Account.LOGIN_ET_INPUT_USERNAME).setText(username);
-        getObjectById(Account.LOGIN_ET_INPUT_PASSWORD).setText(password);
-        clickById(Account.LOGIN_ET_SIGN_UP_BTN);
-        waitUntilFind(Me.ID_MAIN_TAB_ME,20);
+        if (text_exists("Login")){
+            clickByText("Login");
+            getObjectById(Account.LOGIN_ET_INPUT_USERNAME).setText(username);
+            getObjectById(Account.LOGIN_ET_INPUT_PASSWORD).setText(password);
+            clickById(Account.LOGIN_ET_SIGN_UP_BTN);
+            waitUntilFind(Me.ID_MAIN_TAB_ME,20);
+        }
     }
     //进入登录界面
     public static void navToLogin() throws UiObjectNotFoundException {
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         clickById(Me.ID_MAIN_TAB_ME);
         clickByText("Login");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByMobile() throws UiObjectNotFoundException {
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         clickById(Me.ID_MAIN_TAB_ME);
         clickByText("Sign Up");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByEmail() throws UiObjectNotFoundException {
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         clickById(Me.ID_MAIN_TAB_ME);
+        clickByText("Sign Up");
         clickByText("Use Your Email Address");
     }
 }

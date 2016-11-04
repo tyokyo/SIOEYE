@@ -30,5 +30,7 @@ public class Account {
     public static String SIGN_UP_ACCOUNT_SIOEYE_ID = "com.sioeye.sioeyeapp:id/et_input_sioeyeid";
     public static String SIGN_UP_ACCOUNT_NICK_NAME = "com.sioeye.sioeyeapp:id/et_input_name";
     public static String SIGN_UP_ACCOUNT_DEFAULT_SELECT = "com.sioeye.sioeyeapp:id/tv_select_count";
+    //pop dialog
+    public static String SIGN_UP_ACCOUNT_TV_CONTENT = "com.sioeye.sioeyeapp:id/tv_content";
 
 }
