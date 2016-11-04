@@ -13,4 +13,16 @@ public class Account {
     public static String login_id_input = "com.hicam:id/login_id_input";
     public static String login_password_input = "com.hicam:id/login_password_input";
     public static String login_btn_login = "com.hicam:id/login_btn_login";
+
+    //login
+    public static String LOGIN_ET_INPUT_USERNAME = "com.sioeye.sioeyeapp:id/et_input_username";
+    public static String LOGIN_ET_INPUT_PASSWORD = "com.sioeye.sioeyeapp:id/et_input_password";
+    public static String LOGIN_ET_SIGN_UP_BTN = "com.sioeye.sioeyeapp:id/login_signup";
+
+    //sign up by mobile step
+    public static String SIGN_UP_TEL_ET_INPUT_PHONE = "com.sioeye.sioeyeapp:id/et_input_phone";
+
+
+
+
 }

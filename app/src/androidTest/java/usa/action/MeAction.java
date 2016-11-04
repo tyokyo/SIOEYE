@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Random;
 
 import ckt.base.VP2;
-import page.Me;
+import usa.page.Me;
+
 
 /**
  * Created by elon on 2016/10/27.

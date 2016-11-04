@@ -204,4 +204,5 @@ public class Me {
     public static final String BROADCAST_INVISIBLE="com.sioeye.sioeyeapp:id/text_profile_list_live";
     //edit nick name done
     public static final String NICKNAME_DONE="com.sioeye.sioeyeapp:id/right";
+
 }

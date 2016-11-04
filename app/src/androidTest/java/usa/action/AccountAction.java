@@ -7,9 +7,9 @@ import android.support.test.uiautomator.UiSelector;
 import java.util.Random;
 
 import ckt.base.VP2;
-import page.Account;
-import page.App;
-import page.Me;
+import usa.page.Account;
+import usa.page.App;
+import usa.page.Me;
 
 /**
  * Created by admin on 2016/11/2.
@@ -93,7 +93,7 @@ public class AccountAction extends VP2{
      * */
     public static void logout() throws UiObjectNotFoundException{
         initDevice();
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         clickByText("Me");
         clickByText("Settings");
         clickById("com.sioeye.sioeyeapp:id/tv_logout");
@@ -121,5 +121,23 @@ public class AccountAction extends VP2{
 
         }
     }
-
+    //登录账号
+    public static void logInAccount(String username,String password) throws UiObjectNotFoundException {
+        clickById(Me.ID_MAIN_TAB_ME);
+        clickByText("Login");
+        getObjectById(Account.LOGIN_ET_INPUT_USERNAME).setText(username);
+        getObjectById(Account.LOGIN_ET_INPUT_PASSWORD).setText(password);
+        clickById(Account.LOGIN_ET_SIGN_UP_BTN);
+        waitUntilFind(Me.ID_MAIN_TAB_ME,20);
+    }
+    //进入登录界面
+    public static void navToLogin() throws UiObjectNotFoundException {
+        clickById(Me.ID_MAIN_TAB_ME);
+        clickByText("Login");
+    }
+    //进入Sign Up界面
+    public static void navToSignUp() throws UiObjectNotFoundException {
+        clickById(Me.ID_MAIN_TAB_ME);
+        clickByText("Sign Up");
+    }
 }
