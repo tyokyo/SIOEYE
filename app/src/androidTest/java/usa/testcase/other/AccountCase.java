@@ -171,6 +171,67 @@ public class AccountCase extends VP2{
         AccountAction.logInAccount(Constant.userName,Constant.passwd);
     }
     /*
+    重复Email注册
+    注册失败
+    * */
+    @Test
+    public void test_register_with_repeat_eye_id() throws UiObjectNotFoundException {
+        //注销登录
+        AccountAction.logOutAccount();
+        //进入手机注册界面
+        AccountAction.navToSignUp_ByEmail();
+        String email_address=getRandomEmail(3,8);
+        //输入有效邮件地址
+        setText(Account.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT,email_address);
+        waitUntilFind(Account.SIGN_UP_CONTINUE,10);
+        clickById(Account.SIGN_UP_CONTINUE);
+        //输入密码
+        setText(Account.SIGN_UP_ACCOUNT_PASSWORD_INPUT,"123456789");
+        clickById(Account.SIGN_UP_CONTINUE);
+        //id
+        String eye_id=getRandomString(4);
+        setText(Account.SIGN_UP_ACCOUNT_SIOEYE_ID,eye_id);
+        clickById(Account.SIGN_UP_CONTINUE);
+        //nick name
+        String nick_name=getRandomString(4);
+        setText(Account.SIGN_UP_ACCOUNT_NICK_NAME,nick_name);
+        clickById(Account.SIGN_UP_CONTINUE);
+        //tv select default
+        clickById(Account.SIGN_UP_ACCOUNT_DEFAULT_SELECT);
+
+        //check for user info
+        MeAction.navToUserEdit();
+        String active_nickName=getObject2ById(Me.NAV_EDIT_NICKNAME).findObject(By.res(Me.EDIT_CONTENT_TEXT)).getText();
+        String active_email=getObject2ById(Me.NAV_EDIT_EMAIL).findObject(By.res(Me.EDIT_CONTENT_TEXT)).getText();
+        String active_eye_id=getObject2ById(Me.NAV_EDIT_SIOEYE_ID).findObject(By.res(Me.EDIT_CONTENT_TEXT)).getText();
+        Asst.assertEquals("nick name",nick_name,active_nickName);
+        Asst.assertEquals("email",email_address,active_email);
+        Asst.assertEquals("id",eye_id,active_eye_id);
+
+        //-----------------repeat to register with same sioeye id-------------------
+        //注销登录
+        AccountAction.logOutAccount();
+        //进入手机注册界面
+        AccountAction.navToSignUp_ByEmail();
+        email_address=getRandomEmail(3,8);
+        //输入有效邮件地址
+        setText(Account.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT,email_address);
+        waitUntilFind(Account.SIGN_UP_CONTINUE,10);
+        clickById(Account.SIGN_UP_CONTINUE);
+        //输入密码
+        setText(Account.SIGN_UP_ACCOUNT_PASSWORD_INPUT,"123456789");
+        clickById(Account.SIGN_UP_CONTINUE);
+        //repeat id
+        setText(Account.SIGN_UP_ACCOUNT_SIOEYE_ID,eye_id);
+        waitUntilFind(Account.SIGN_UP_ERROR_TIP,10);
+        //check
+        String pop_message="The sioeye id already registered";
+        Spoon.screenshot("id_repeat",pop_message);
+        Asst.assertEquals(pop_message,pop_message,getTex(Account.SIGN_UP_ERROR_TIP));
+        //登录系统
+        AccountAction.logInAccount(Constant.userName,Constant.passwd);
+    }
+    /*
     Email注册
     "1、输入无效邮件地址
     * */
@@ -190,6 +251,29 @@ public class AccountCase extends VP2{
 
         //注销登录
         AccountAction.logOutAccount();
+        //登录系统
+        AccountAction.logInAccount(Constant.userName,Constant.passwd);
+    }
+    /*登录	1、输入正确的手机号码/Email、密码登录	成功登录*/
+    @Test
+    public void test_logInAccount_email() throws UiObjectNotFoundException {
+        //注销登录
+        AccountAction.logOutAccount();
+        //登录系统
+        AccountAction.logInAccount(Constant.userName,Constant.passwd);
+        Asst.assertEquals("login success",true,id_exists(Me.SIOEYE_USER_ID));
+        Spoon.screenshot("login_success");
+    }
+    /*登录	1、输入正确的手机号码/Email、密码登录	成功登录*/
+    @Test
+    public void test_logInAccount_error_email_password() throws UiObjectNotFoundException {
+        //注销登录
+        AccountAction.logOutAccount();
+        //登录系统
+        AccountAction.logInAccount(Constant.userName,Constant.error_passwd);
+        Asst.assertEquals("login fail",false,id_exists(Me.SIOEYE_USER_ID));
+        Spoon.screenshot("login_fail");
+        //登录系统
         AccountAction.logInAccount(Constant.userName,Constant.passwd);
     }
 }
