@@ -34,8 +34,8 @@ public class NickNameCase  extends VP2 {
         getObjectById(Me.SAMPLE_CONTENT).clearTextField();
         getObjectById(Me.SAMPLE_CONTENT).setText(getRandomString(3));
         clickById(Me.NICKNAME_DONE);
-        getUiObjectByText("Done");
-        getUiObjectByText("Done");
+        clickById(Me.NICKNAME_DONE);
+        clickById(Me.NICKNAME_DONE);
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
