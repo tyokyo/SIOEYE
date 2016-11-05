@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import ckt.tools.Common;
+import ckt.tools.Constant;
 
 import static android.support.v4.app.ActivityCompat.requestPermissions;
 
@@ -53,7 +54,8 @@ public class VP {
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
     public static void doNotAskPermission() throws UiObjectNotFoundException {
-        UiObject uiObject = gDevice.findObject(new UiSelector().resourceId("cn.sioeye.sioeyeapp"));
+        //pkg com.google.android.packageinstaller
+        UiObject uiObject = gDevice.findObject(new UiSelector().resourceId(Constant.PERMISSION_ALLOW));
         if (uiObject.exists()){
             logger.info("click allow-permission setting");
             uiObject.clickAndWaitForNewWindow();
