@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ckt.base.VP2;
+import usa.action.MeAction;
 import usa.page.App;
 import usa.page.Me;
 
@@ -25,7 +26,7 @@ import usa.page.Me;
 public class LocationCase extends VP2{
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     //搜索位置
     @Test
@@ -44,10 +45,7 @@ public class LocationCase extends VP2{
     //定位位置
     @Test
     public void testLocating() throws UiObjectNotFoundException {
-        clickByText("Me");
-        Spoon.screenshot(gDevice,"Me");
-        clickById(Me.ID_USER_EDIT);
-        clickByText("Location");
+        MeAction.navToLocation();
         waitTime(2);
         if (getObjectById(Me.IS_LOCATING).exists()){
             gDevice.pressBack();

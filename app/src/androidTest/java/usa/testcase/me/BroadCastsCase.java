@@ -69,7 +69,7 @@ public class BroadCastsCase extends VP2{
     }
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     public void getPlayTime() throws UiObjectNotFoundException, IOException {
         String startTime="";

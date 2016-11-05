@@ -31,7 +31,7 @@ import usa.page.Me;
 public class FollowerCase extends VP2{
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     //搜索Followers用户
     @Test

@@ -32,7 +32,7 @@ public class EmailCase extends VP2 {
     String result="";
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     public String getEmailAddress() throws UiObjectNotFoundException {
         UiObject u =  gDevice.findObject(new UiSelector().resourceId(Me.EMAIL_ID));

@@ -27,7 +27,7 @@ import usa.page.Me;
 public class LogOutCase extends VP2 {
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     //注销Log out时->取消注销
     @Test

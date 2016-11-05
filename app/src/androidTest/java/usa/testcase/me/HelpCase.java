@@ -29,7 +29,7 @@ public class HelpCase extends VP2{
     Logger logger = Logger.getLogger(HelpCase.class.getName());
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     //Feedback为空
     @Test
