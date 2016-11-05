@@ -29,7 +29,7 @@ import usa.page.Me;
 public class AccountCase extends VP2{
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     /*
     * "电话号码
@@ -40,6 +40,7 @@ public class AccountCase extends VP2{
     public void test_register_with_error_mobile_number() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
+
         //进入手机注册界面
         AccountAction.navToSignUp_ByMobile();
         //输入手机号码

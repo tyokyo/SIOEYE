@@ -29,7 +29,7 @@ public class HeadImgCase extends VP2 {
     private Logger logger =  Logger.getLogger(HeadImgCase.this.getClass().getName());
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     //从相机从拍照编辑head img
     @Test

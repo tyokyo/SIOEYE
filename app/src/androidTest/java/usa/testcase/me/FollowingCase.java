@@ -39,8 +39,7 @@ public class FollowingCase extends VP2{
     //private Point p;
     @Before
     public  void setup() throws UiObjectNotFoundException, IOException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
-
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     //验证-删除一个关注的用户
     @Test

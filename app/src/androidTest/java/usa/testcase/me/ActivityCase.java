@@ -38,7 +38,7 @@ public class ActivityCase extends VP2{
     Logger logger = Logger.getLogger(ActivityCase.class.getName());
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
 
     public void deleteMyInterests(){
@@ -51,6 +51,7 @@ public class ActivityCase extends VP2{
             clickById(Me.ACTIVITY_INTERESTS);
             waitTime(1);
         }
+        Spoon.screenshot("delete_all_My_interests");
         /*UiCollection uiCollection = new UiCollection(new UiSelector().className("android.widget.FrameLayout"));
         int count = uiCollection.getChildCount(new UiSelector().resourceId(Me.ACTIVITY_INTERESTS));
         for (int i = 0;i<count;i++)
@@ -311,17 +312,20 @@ public class ActivityCase extends VP2{
         Point p = Nav.getSearchLocation();
         MeAction.navToActivities();
         deleteAllMyInterests();
+        clickById(Me.ACTIVITIES_MY_INTERESTS_DONE);
+
+        clickById(Me.NAV_EDIT_ACTIVITY);
         Set myInterests_before_add = getAllMyInterests();
         String input = getRandomSymbol(10);
         clickById(Me.ACTIVITIES_MY_INTERESTS_ADD);
         clickById(Me.ACTIVITIES_MY_INTERESTS_USER_INPUT);
         shellInputText(input);
         //添加
-        gDevice.click(p.x,p.y);
+        clickByPoint(p);
         clickById(Me.ACTIVITIES__BACK);
+
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         MeAction.navToActivities();
-
         Set myInterests_after_add = getAllMyInterests();
         Asst.assertEquals("add with forgive saving",0,myInterests_after_add.size());
         Spoon.screenshot("no_interest",input);
