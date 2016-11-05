@@ -6,6 +6,7 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +27,7 @@ import usa.page.Me;
 public class NickNameCase  extends VP2 {
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
     public void testChangeNickNameLessThan4Character() throws UiObjectNotFoundException {
@@ -67,7 +68,7 @@ public class NickNameCase  extends VP2 {
         String currentNick = getObjectById(Me.GETNICKNAMECONTENT).getText();
 
         if (currentNick.length()!=30){
-            Assert.fail("max length is 30");
+            Asst.fail("max length is 30");
         }
         Spoon.screenshot(gDevice,"change_nick_name");
     }

@@ -22,35 +22,43 @@ public class MeAction extends VP2{
         clickById(Me.ID_MAIN_TAB_ME);
         clickById(Me.LIVE_CONFIGURATION);
         waitTime(2);
+        Spoon.screenshot("navToLiveConfiguration");
     }
     public static void navToNotifications(){
         clickById(Me.ID_MAIN_TAB_ME);
         clickById(Me.NOTIFICATIONS);
         gDevice.wait(Until.gone(By.res(Me.LOADING_FOLLOWERS)),40000);
+        Spoon.screenshot("navToNotifications");
     }
     public static void navToActivities(){
         clickById(Me.ID_MAIN_TAB_ME);
-        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickById(Me.NAV_EDIT_ACTIVITY);
         gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),20000);
+        Spoon.screenshot("navToActivities");
     }
     public static void navToUserEdit(){
         clickById(Me.ID_MAIN_TAB_ME);
-        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
+        Spoon.screenshot("navToUserEdit");
     }
     public static void navToNickName(){
         clickById(Me.ID_MAIN_TAB_ME);
-        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_USER_EDIT);
         clickById(Me.NAV_EDIT_NICKNAME);
+        Spoon.screenshot("navToNickName");
     }
     public static void navToBroadcasts(){
         clickById(Me.ID_MAIN_TAB_ME);
-        Spoon.screenshot(gDevice,"Me");
         clickById(Me.ID_ME_BROADCAST);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
+        Spoon.screenshot("navToBroadcasts");
+    }
+    public static void navToLocation(){
+        clickById(Me.ID_MAIN_TAB_ME);
+        clickById(Me.ID_USER_EDIT);
+        clickById(Me.NAV_EDIT_LOCATION);
+        Spoon.screenshot("navToLocation");
     }
     //随机获取一个broadcasts对象
     public static UiObject2 getRandomBroadcasts(){

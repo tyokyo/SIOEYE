@@ -25,7 +25,7 @@ import usa.page.Me;
 public class CoverPhotoCase extends VP2 {
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
     //通过相机修改cover photo

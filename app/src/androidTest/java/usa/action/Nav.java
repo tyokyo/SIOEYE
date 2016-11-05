@@ -7,6 +7,8 @@ import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
 
+import com.squareup.spoon.Spoon;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -52,14 +54,16 @@ public class Nav extends VP2{
     public static Point getSearchLocation() throws UiObjectNotFoundException, IOException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         Point p = new Point();
-        clickByText("Me");
-        clickByText("Broadcasts");
+        Nav.navToBrodCasts();
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
         gDevice.wait(Until.findObject(By.res(Me.BROADCASTS_LIST)),20000);
         gDevice.wait(Until.findObject(By.res(Me.BROADCAST_CONTENT)),20000);
         waitTime(5);
         List<UiObject2> lisCollect = gDevice.findObjects(By.res(Me.BROADCAST_CONTENT));
         int size = lisCollect.size();
+        if (size==0){
+            Spoon.screenshot("No_broadcasts");
+        }
         Random random = new Random();
         int rd = random.nextInt(size);
         UiObject2 obj = lisCollect.get(rd);

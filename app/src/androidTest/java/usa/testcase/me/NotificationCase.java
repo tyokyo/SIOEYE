@@ -31,7 +31,7 @@ public class NotificationCase extends VP2 {
     public int followed;
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
 
     @Test

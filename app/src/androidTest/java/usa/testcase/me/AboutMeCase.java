@@ -27,7 +27,7 @@ import usa.page.Me;
 public class AboutMeCase extends VP2 {
     @Before
     public  void setup(){
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
     }
     public String getAboutMe() throws UiObjectNotFoundException {
         UiObject u =  gDevice.findObject(new UiSelector().resourceId(Me.ABOUT_ME_ID));
