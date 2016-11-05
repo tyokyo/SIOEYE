@@ -36,6 +36,12 @@ public class Watch {
     public static final String WATCH_WAIT_SEARCH_LOADING="com.sioeye.sioeyeapp:id/anim_view";
     //搜索无结果
     public static final String WATCH_SEARCH_NORESULT="com.sioeye.sioeyeapp:id/text_data_load_fail";
+    //点击搜索到的结果
+    public static final String WATCH_SEARCH_RESULT="com.sioeye.sioeyeapp:id/user_avatar";
+    //搜索到的用户头像
+    public static final String WATCH_SEARCH_RESULT_USER_AVATAR="com.sioeye.sioeyeapp:id/user_avatar";
+
+
 
 
 
