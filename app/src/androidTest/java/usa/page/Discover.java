@@ -1,6 +1,4 @@
-
-package usa.testcase.discover;
-
+package usa.page;
 import android.graphics.Point;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -30,7 +28,13 @@ import usa.page.Me;
  * Created by caibing.yin on 2016/11/05.
  */
 public class Discover {
-    ////navigate to  Discover
-    public static final String ID_MAIN_TAB_Discover = "com.sioeye.sioeyeapp:id/main_tab_discover";
+    //navigate to  Discover
+    public static final String ID_MAIN_TAB_DISCOVER = "com.sioeye.sioeyeapp:id/main_tab_discover";
+
+    //navigate to ad_splash
+    public static final String ID_MAIN_TAB_AD_SPALSH = "com.sioeye.sioeyeapp:id/discover_ad_splash_pager";
+    //recommend_list
+    public static final String ID_MAIN_TAB_RECOMMAND_LIST = "com.sioeye.sioeyeapp:id/recommend_list";
+
 
 }

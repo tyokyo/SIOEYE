@@ -33,6 +33,7 @@ public class Nav extends VP2{
         clickById(Me.ID_ME_BROADCAST);
         waitTime(2);
         gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),40000);
+        Spoon.screenshot("broadcasts");
     }
 
     public static void navToFollowers(){
@@ -53,29 +54,17 @@ public class Nav extends VP2{
      */
     public static Point getSearchLocation() throws UiObjectNotFoundException, IOException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
-        Point p = new Point();
+        Point point = new Point();
         Nav.navToBrodCasts();
-        gDevice.wait(Until.gone(By.res(Me.BROADCAST_VIEW)),20000);
-        gDevice.wait(Until.findObject(By.res(Me.BROADCASTS_LIST)),20000);
-        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_CONTENT)),20000);
-        waitTime(5);
-        List<UiObject2> lisCollect = gDevice.findObjects(By.res(Me.BROADCAST_CONTENT));
-        int size = lisCollect.size();
-        if (size==0){
-            Spoon.screenshot("No_broadcasts");
-        }
-        Random random = new Random();
-        int rd = random.nextInt(size);
-        UiObject2 obj = lisCollect.get(rd);
-        obj.click();
-        gDevice.wait(Until.findObject(By.res(Me.BROADCAST_VIEW_TIPTEXT)),20000);
+        MeAction.getRandomBroadcasts().click();
+        MeAction.waitBroadcastLoading();
         UiObject zan = getUiObjectById(Me.BROADCAST_VIEW_ZAN);
         int x = zan.getBounds().centerX();
         int y = zan.getBounds().centerY();
-        p.set(x,y);
-        makeToast(p.x+"|"+p.y,3);
+        point.set(x,y);
+        makeToast(point.x+"|"+point.y,3);
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
-        return  p;
+        return  point;
     }
 
 }
