@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
@@ -33,6 +34,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import ckt.tools.VideoNode;
+import usa.action.AccountAction;
 import usa.page.App;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -553,7 +555,15 @@ public class VP2 extends  VP{
         initDevice();
         gDevice.click(x, y);
     }
-
+    /**
+     * This method  wil click a point on screen.
+     *
+     * @param point
+     */
+    public static void clickByPoint(Point point) {
+        initDevice();
+        gDevice.click(point.x, point.y);
+    }
     /**
      * 获得随机字符
      */
@@ -702,6 +712,35 @@ public class VP2 extends  VP{
         context.startActivity(intent);
         // Wait for the app to appear
         gDevice.wait(Until.hasObject(By.pkg(BASIC_PACKAGE_NAME).depth(0)), LAUNCH_TIMEOUT);
+    }
+    /**
+     * You can use the method to open a new app by activity.
+     * if you want test open one app, please DO NOT use this method.
+     *
+     * @param BASIC_PACKAGE_NAME The package Name
+     */
+    public static void openAppByPackageNameInLogin(String BASIC_PACKAGE_NAME){
+        initDevice();
+        //Start form the home screen.
+        gDevice.pressHome();
+        //Wait for launcher
+        final String launcherPackage = getLauncherPackageName();
+        Asst.assertThat(launcherPackage, notNullValue());
+        gDevice.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), 5000);
+
+        //Launch the blueprint app
+        Context context = InstrumentationRegistry.getContext();
+        final Intent intent = context.getPackageManager().getLaunchIntentForPackage(BASIC_PACKAGE_NAME);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);//Clear out any previous instances.
+        context.startActivity(intent);
+        // Wait for the app to appear
+        gDevice.wait(Until.hasObject(By.pkg(BASIC_PACKAGE_NAME).depth(0)), LAUNCH_TIMEOUT);
+        //确保处于登录状态
+        try {
+            AccountAction.inLogin();
+        }catch (UiObjectNotFoundException e){
+            e.printStackTrace();
+        }
     }
     public static void killAppByPackage(String packageName) {
         initDevice();

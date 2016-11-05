@@ -30,6 +30,6 @@ public class Watch {
     public static final String WATCH_USER_MINI_FOLLOW="com.sioeye.sioeyeapp:id/profile_mini_follow";
     //用户姓名
     public static final String WATCH_USER_MINI_NAME="com.sioeye.sioeyeapp:id/profile_mini_name";
-
-
+    //搜索按钮
+    public static final String WATCH_INPUT_SEARCH="com.sioeye.sioeyeapp:id/search_filter_input";
 }
