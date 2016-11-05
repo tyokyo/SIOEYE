@@ -9,6 +9,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
-public class ToDiscover {
+public class DiscoverCase {
 
 }
