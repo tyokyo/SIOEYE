@@ -32,4 +32,11 @@ public class Watch {
     public static final String WATCH_USER_MINI_NAME="com.sioeye.sioeyeapp:id/profile_mini_name";
     //搜索按钮
     public static final String WATCH_INPUT_SEARCH="com.sioeye.sioeyeapp:id/search_filter_input";
+    //等待搜索完成
+    public static final String WATCH_WAIT_SEARCH_LOADING="com.sioeye.sioeyeapp:id/anim_view";
+    //搜索无结果
+    public static final String WATCH_SEARCH_NORESULT="com.sioeye.sioeyeapp:id/text_data_load_fail";
+
+
+
 }
