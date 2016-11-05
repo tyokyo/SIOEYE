@@ -2,25 +2,18 @@ package usa.action;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-
 import org.junit.Before;
 import org.junit.runner.RunWith;
-
 import java.util.logging.Logger;
-
 import ckt.base.VP2;
 import usa.page.App;
+import usa.page.Discover;
 import usa.testcase.me.ActivityCase;
-import  usa.page.Discover;
 /**
  * Created by admin on 2016/11/5.
  */
 
 public class DiscoverAction extends VP2 {
-    public static void navToDiscover(){
-
-    }
-
     /**
      * Created by caibing,yin on 2016/11/5.
      */
@@ -32,37 +25,24 @@ public class DiscoverAction extends VP2 {
         public  void setup(){
             openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         }
-
-        public void NavtoDiscover(){
+        public void navToDiscover(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
             waitTime(1);
-
-
         }
-        public void NavtoSearch(){
+        public void navToSearch(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-
-        public void NavtoSearch(){
+        public void navToAd(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-        public void Navtoad_splash(){
+        public void navToRecommendList(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-        public void Navtorecommend_list(){
+        public void scrollAdSplash(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-        public void Scrollad_splash(){
+        public void scrollRecommendList(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-        public void Scrollrecommend_list(){
-            clickById(Discover.ID_MAIN_TAB_DISCOVER);
-        }
-        public void ClickVideo(){
-            clickById(Discover.ID_MAIN_TAB_DISCOVER);
-
-        }
-
-
     }
 }
