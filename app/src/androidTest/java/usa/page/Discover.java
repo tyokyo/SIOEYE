@@ -35,6 +35,8 @@ public class Discover {
     public static final String ID_MAIN_TAB_AD_SPALSH = "com.sioeye.sioeyeapp:id/discover_ad_splash_pager";
     //recommend_list
     public static final String ID_MAIN_TAB_RECOMMAND_LIST = "com.sioeye.sioeyeapp:id/recommend_list";
-
-
+    //search
+    public static final String ID_SEARCH_FILTER_INPUT = "com.sioeye.sioeyeapp:id/search_filter_input";
+    //Activity of Discover
+    public static final String ID_DISCOVER_MAIN_CONTENT="com.sioeye.sioeyeapp:id/discover_swipe_view";
 }
