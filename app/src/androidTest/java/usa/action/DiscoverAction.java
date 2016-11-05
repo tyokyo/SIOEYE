@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import ckt.base.VP2;
 import usa.page.App;
 import usa.testcase.me.ActivityCase;
-
+import  usa.page.Discover;
 /**
  * Created by admin on 2016/11/5.
  */
@@ -34,32 +34,33 @@ public class DiscoverAction extends VP2 {
         }
 
         public void NavtoDiscover(){
-            clickById(com.sioeye.sioeyeapp:id/main_tab_discover);
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
             waitTime(1);
 
 
         }
         public void NavtoSearch(){
-            clickById(com.sioeye.sioeyeapp:id/main_tab_discover);
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
 
         public void NavtoSearch(){
-            clickById(com.sioeye.sioeyeapp:id/main_tab_discover);
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
         public void Navtoad_splash(){
-            clickById(com.sioeye.sioeyeapp:id/main_tab_discover);
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
         public void Navtorecommend_list(){
-            clickById(com.sioeye.sioeyeapp:id/main_tab_discover);
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
         public void Scrollad_splash(){
-            clickById(com.sioeye.sioeyeapp:id/main_tab_discover);
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
         public void Scrollrecommend_list(){
-            clickById(com.sioeye.sioeyeapp:id/main_tab_discover);
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
         public void ClickVideo(){
-            clickById(com.sioeye.sioeyeapp:id/main_tab_discover);
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+
         }
 
 
