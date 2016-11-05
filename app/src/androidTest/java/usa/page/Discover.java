@@ -30,6 +30,7 @@ import usa.page.Me;
  * Created by caibing.yin on 2016/11/05.
  */
 public class Discover {
-    //id
+    ////navigate to  Discover
+    public static final String ID_MAIN_TAB_Discover = "com.sioeye.sioeyeapp:id/main_tab_discover";
 
 }
