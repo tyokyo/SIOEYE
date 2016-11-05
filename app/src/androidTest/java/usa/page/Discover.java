@@ -30,13 +30,12 @@ import usa.page.Me;
 public class Discover {
     //navigate to  Discover
     public static final String ID_MAIN_TAB_DISCOVER = "com.sioeye.sioeyeapp:id/main_tab_discover";
-
     //navigate to ad_splash
     public static final String ID_MAIN_TAB_AD_SPALSH = "com.sioeye.sioeyeapp:id/discover_ad_splash_pager";
     //recommend_list
     public static final String ID_MAIN_TAB_RECOMMAND_LIST = "com.sioeye.sioeyeapp:id/recommend_list";
-    //search
-    public static final String ID_SEARCH_FILTER_INPUT = "com.sioeye.sioeyeapp:id/search_filter_input";
-    //Activity of Discover
-    public static final String ID_DISCOVER_MAIN_CONTENT="com.sioeye.sioeyeapp:id/discover_swipe_view";
+    public static final String ID_MAIN_TAB_PROFILE_MINI_HOME ="com.sioeye.sioeyeapp:id/profile_mini_home";
+    public static final String ID_MAIN_TAB_PROFILE_MINI_NAME ="com.sioeye.sioeyeapp:id/profile_mini_name";
+    public static final String ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER ="com.sioeye.sioeyeapp:id/profile_mini_num_follower";
+    public static final String ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW ="com.sioeye.sioeyeapp:id/profile_mini_follow";
 }
