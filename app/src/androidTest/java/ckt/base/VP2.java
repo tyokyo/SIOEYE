@@ -44,7 +44,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
  */
 public class VP2 extends  VP{
     private static final int LAUNCH_TIMEOUT = 10000;
-    private static Logger logger = Logger.getLogger(VP.class.getName());
+    public static Logger logger = Logger.getLogger(VP.class.getName());
     /**
      * 获取视频文件信息
      * @param videoPath

@@ -3,13 +3,10 @@ package usa.action;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
-import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
-import android.util.Log;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.squareup.spoon.Spoon;
 
@@ -17,8 +14,11 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 import ckt.base.VP2;
+import cn.page.Me;
+import cn.page.Watch;
 import usa.page.App;
 import usa.page.Discover;
 import usa.testcase.me.ActivityCase;
@@ -27,55 +27,36 @@ import usa.testcase.me.ActivityCase;
  */
 
 public class DiscoverAction extends VP2 {
-    Logger logger = Logger.getLogger(ActivityCase.class.getName());
-    public void navToDiscover(){
-        clickById(Discover.ID_MAIN_TAB_DISCOVER);
-        waitTime(1);
-        logger.info("navToDiscover");
-    }
-    //
-    public static void navToSearch(){
-        clickById(Discover.ID_MAIN_TAB_DISCOVER);
-        click_search_btn();
-    }
-    //
-    private static void click_search_btn(){
-        List<UiObject2> frameLayout_lists =gDevice.findObjects(By.clazz(FrameLayout.class));
-        for (UiObject2 frameLayout:frameLayout_lists) {
-            boolean sio_eye = frameLayout.hasObject(By.res("com.sioeye.sioeyeapp:id/title"));
-            if (sio_eye){
-                UiObject2 search_btn=frameLayout.findObject(By.clazz(ImageView.class));
-                search_btn.click();
-                break;
+
+        public void navToSearch(){
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+        }
+        public void navToAd(){
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            clickById(Discover.ID_MAIN_TAB_AD_SPALSH);
+
+        }
+        //index=0-3
+        public static String navToRecommendList(int index,int click_time){
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            //into discover
+            List<UiObject2> linearLayout_avatars =getObject2ById(Discover.ID_MAIN_TAB_RECOMMAND_LIST).findObjects(By.clazz(LinearLayout.class));
+            UiObject2 linearLayout = linearLayout_avatars.get(index);
+            //get RecommendList
+            String trend_name=linearLayout.findObject(By.clazz(TextView.class)).getText();
+            //get RecommendList name
+            for (int i = 0;i<click_time;i++) {
+                linearLayout.click();
             }
+            waitUntilFind(Discover.ID_MAIN_TAB_PROFILE_MINI_HOME,30);
+            Spoon.screenshot("navToRecommendList");
+            return trend_name;
         }
-    }
-    public void navToAd() throws UiObjectNotFoundException {
-        clickById(Discover.ID_MAIN_TAB_DISCOVER);
-        scrollAndGetUIObject("WHO TO FOLLOW");
-        clickById(Discover.ID_MAIN_TAB_AD_SPALSH);
-    }
-    public void navToRecommendList(){
-        clickById(Discover.ID_MAIN_TAB_DISCOVER);
-
-    }
-    public void scrollAdSplash(){
-        clickById(Discover.ID_MAIN_TAB_DISCOVER);
-
-    }
-    public void scrollRecommendList(){
-        clickById(Discover.ID_MAIN_TAB_DISCOVER);
-    }
-    public boolean isExistedDiscover() throws UiObjectNotFoundException {
-        clickById(Discover.ID_MAIN_TAB_DISCOVER);
-        Boolean Results = scrollAndGetUIObject("WHO TO FOLLOW").getText().equals("WHO TO FOLLOW");
-        if (Results) {
-            Spoon.screenshot("Discover", "Click DiscoverCase");
-            Log.d("passed", "click Discover was passed");
-            return true;
-        } else {
-            Log.d("failed", "click 'Discover' to Discover failed!");
-            return false;
+        public void scrollAdSplash(){
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-    }
+        public void scrollRecommendList(){
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+        }
 }
+
