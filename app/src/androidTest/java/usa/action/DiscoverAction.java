@@ -28,7 +28,7 @@ import usa.testcase.me.ActivityCase;
 
 public class DiscoverAction extends VP2 {
 
-        public void navToSearch(){
+        public static void navToSearch(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
         public void navToAd(){
