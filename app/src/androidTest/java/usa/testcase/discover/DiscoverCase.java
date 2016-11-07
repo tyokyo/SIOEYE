@@ -16,7 +16,10 @@ import java.io.IOException;
 import ckt.base.VP2;
 import usa.action.DiscoverAction;
 import usa.page.App;
+import usa.page.Device;
 import usa.page.Discover;
+import usa.page.Me;
+import usa.page.Watch;
 
 /**
  * Created by caibing.yin on 2016/11/5.
@@ -55,5 +58,21 @@ public class DiscoverCase extends VP2 {
         getObjectById(Discover.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
         waitTime(2);
     }
+    @Test
+    /**
+     *
+     4.来回频繁切换主界面
+     Result：观察APP响应情况， APP迅速响应对应操作
+     */
+    public void testSwipe() throws UiObjectNotFoundException{
+        clickById(Discover.ID_MAIN_TAB_DISCOVER);
+        clickById(Discover.ID_MAIN_TAB_WATCH);
+        clickById(Me.ID_MAIN_TAB_ME);
+        clickById(Discover.ID_MAIN_TAB_DECICE);
+        clickById(Discover.ID_MAIN_TAB_DISCOVER);
+        clickById(Discover.ID_MAIN_TAB_WATCH);
+        clickById(Me.ID_MAIN_TAB_ME);
+        clickById(Discover.ID_MAIN_TAB_DECICE);
 
+    }
 }
