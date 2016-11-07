@@ -40,7 +40,7 @@ public class FollowingAction extends VP2{
     public static void user_add_from_following_following() throws UiObjectNotFoundException, IOException {
         Nav.navToFollowing();
         add_sioEyeMedia();
-        Nav.navToFollowing();
+        Nav.navToFollowers();
         scrollAndGetUIObject("SioeyeMedia").clickAndWaitForNewWindow();
     }
 

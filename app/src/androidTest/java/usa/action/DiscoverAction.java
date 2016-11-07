@@ -1,37 +1,27 @@
 package usa.action;
 
-import android.support.test.filters.SdkSuppress;
-import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
-import android.widget.ImageView;
+import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.squareup.spoon.Spoon;
-
-import org.junit.Before;
-import org.junit.runner.RunWith;
-
 import java.util.List;
-import java.util.Objects;
-import java.util.logging.Logger;
 import ckt.base.VP2;
-import cn.page.Me;
-import cn.page.Watch;
-import usa.page.App;
 import usa.page.Discover;
-import usa.testcase.me.ActivityCase;
 /**
- * Created by admin on 2016/11/5.
+ * Created by caibing.yin on 2016/11/5.
  */
 
 public class DiscoverAction extends VP2 {
 
         public static void navToSearch(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
+
         }
-        public void navToAd(){
+        public static void navToAd(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
             clickById(Discover.ID_MAIN_TAB_AD_SPALSH);
 
@@ -52,10 +42,18 @@ public class DiscoverAction extends VP2 {
             Spoon.screenshot("navToRecommendList");
             return trend_name;
         }
-        public void scrollAdSplash(){
+
+        //取得Discover页面中RecommendList中头像对应的的昵称
+        public static String getnickname() throws UiObjectNotFoundException {
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            UiObject Recommand_list = getObjectById(Discover.ID_MAIN_TAB_RECOMMAND_LIST);
+            String nickname = Recommand_list.getChild(new UiSelector().index(0)).getText();
+            return nickname;
+    }
+        public static void scrollAdSplash(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-        public void scrollRecommendList(){
+        public static void scrollRecommendList(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
 }
