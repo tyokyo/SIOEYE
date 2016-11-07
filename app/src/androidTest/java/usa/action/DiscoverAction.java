@@ -48,7 +48,7 @@ public class DiscoverAction extends VP2 {
             for (int i = 0;i<click_time;i++) {
                 linearLayout.click();
             }
-            waitUntilFind(Discover.ID_MAIN_TAB_PROFILE_MINI_HOME,60);
+            waitUntilFind(Discover.ID_MAIN_TAB_PROFILE_MINI_HOME,30);
             Spoon.screenshot("navToRecommendList");
             return trend_name;
         }
