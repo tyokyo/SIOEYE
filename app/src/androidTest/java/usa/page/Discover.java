@@ -28,6 +28,11 @@ import usa.page.Me;
  * Created by caibing.yin on 2016/11/05.
  */
 public class Discover {
+    //search
+    public static final String ID_SEARCH_FILTER_INPUT = "com.sioeye.sioeyeapp:id/search_filter_input";
+    //Activity of Discover
+    public static final String ID_DISCOVER_MAIN_CONTENT="com.sioeye.sioeyeapp:id/discover_swipe_view";
+
     //navigate to  Discover
     public static final String ID_MAIN_TAB_DISCOVER = "com.sioeye.sioeyeapp:id/main_tab_discover";
     //navigate to ad_splash
