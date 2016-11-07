@@ -13,12 +13,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ckt.base.VP2;
-import ckt.tools.Constant;
 import usa.action.AccountAction;
 import usa.action.MeAction;
-import usa.action.Nav;
 import usa.page.Account;
 import usa.page.App;
+import usa.page.Constant;
 import usa.page.Me;
 
 /**
