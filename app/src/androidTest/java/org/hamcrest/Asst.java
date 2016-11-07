@@ -13,9 +13,11 @@ import org.junit.internal.InexactComparisonCriteria;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
-import ckt.tools.Constant;
 
 public class Asst extends VP2{
+    //permission allow dialog
+    public static String PERMISSION_ALLOW="com.android.packageinstaller:id/permission_allow_button";
+
     private static Logger logger = Logger.getLogger(Asst.class.getName());
     protected Asst() {
     }
@@ -66,7 +68,7 @@ public class Asst extends VP2{
                 Spoon.screenshot("fail",message==null?"message is null":message);
             }
             //permission dialog
-            UiObject uiObject = gDevice.findObject(new UiSelector().resourceId(Constant.PERMISSION_ALLOW));
+            UiObject uiObject = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
             if (uiObject.exists()){
                 logger.info("click allow-permission setting");
                 uiObject.clickAndWaitForNewWindow();
