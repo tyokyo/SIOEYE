@@ -38,4 +38,5 @@ public class Discover {
     public static final String ID_MAIN_TAB_PROFILE_MINI_NAME ="com.sioeye.sioeyeapp:id/profile_mini_name";
     public static final String ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER ="com.sioeye.sioeyeapp:id/profile_mini_num_follower";
     public static final String ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW ="com.sioeye.sioeyeapp:id/profile_mini_follow";
+
 }
