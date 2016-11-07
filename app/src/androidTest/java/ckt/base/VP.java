@@ -1,20 +1,14 @@
 package ckt.base;
 
-import android.Manifest;
 import android.app.Instrumentation;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
-import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
-import android.support.v4.app.ActivityCompat;
 
 import com.sioeye.MainActivity;
 import com.squareup.spoon.Spoon;
@@ -23,7 +17,6 @@ import org.junit.Rule;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,9 +24,6 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import ckt.tools.Common;
-import ckt.tools.Constant;
-
-import static android.support.v4.app.ActivityCompat.requestPermissions;
 
 /**
  * Created by admin on 2016/9/6.
@@ -47,6 +37,9 @@ public class VP {
     public static String logAbsPath;
     public static String logName;
     private static Thread logThread;
+    //permission allow dialog
+    public static String PERMISSION_ALLOW="com.android.packageinstaller:id/permission_allow_button";
+
     /**
      * You can get a UiDevice Instance if you call this method.
      */
@@ -55,7 +48,7 @@ public class VP {
             MainActivity.class);
     public static void doNotAskPermission() throws UiObjectNotFoundException {
         //pkg com.google.android.packageinstaller
-        UiObject uiObject = gDevice.findObject(new UiSelector().resourceId(Constant.PERMISSION_ALLOW));
+        UiObject uiObject = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
         if (uiObject.exists()){
             logger.info("click allow-permission setting");
             uiObject.clickAndWaitForNewWindow();
