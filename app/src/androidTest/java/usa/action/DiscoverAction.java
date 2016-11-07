@@ -21,7 +21,7 @@ public class DiscoverAction extends VP2 {
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
 
         }
-        public void navToAd(){
+        public static void navToAd(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
             clickById(Discover.ID_MAIN_TAB_AD_SPALSH);
 
@@ -44,16 +44,16 @@ public class DiscoverAction extends VP2 {
         }
 
         //取得Discover页面中RecommendList中头像对应的的昵称
-        public String getnickname() throws UiObjectNotFoundException {
+        public static String getnickname() throws UiObjectNotFoundException {
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
             UiObject Recommand_list = getObjectById(Discover.ID_MAIN_TAB_RECOMMAND_LIST);
             String nickname = Recommand_list.getChild(new UiSelector().index(0)).getText();
             return nickname;
     }
-        public void scrollAdSplash(){
+        public static void scrollAdSplash(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-        public void scrollRecommendList(){
+        public static void scrollRecommendList(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
 }
