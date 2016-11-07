@@ -9,9 +9,9 @@ import com.squareup.spoon.Spoon;
 import java.util.Random;
 
 import ckt.base.VP2;
-import ckt.tools.Constant;
 import usa.page.Account;
 import usa.page.App;
+import usa.page.Constant;
 import usa.page.Me;
 
 /**
