@@ -24,7 +24,7 @@ import usa.page.Me;
  * Created by elon on 2016/11/4.
  */
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 18)
+@SdkSuppress(minSdkVersion = 16)
 public class AccountCase extends VP2{
     @Before
     public  void setup(){
