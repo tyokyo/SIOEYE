@@ -14,8 +14,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ckt.base.VP2;
-import ckt.tools.Constant;
 import cn.page.Account;
+import cn.page.Constant;
 import usa.page.App;
 import usa.page.Me;
 
