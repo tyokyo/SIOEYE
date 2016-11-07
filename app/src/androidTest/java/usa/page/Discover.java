@@ -30,7 +30,10 @@ import usa.page.Me;
 public class Discover {
     //navigate to  Discover
     public static final String ID_MAIN_TAB_DISCOVER = "com.sioeye.sioeyeapp:id/main_tab_discover";
-
+    //navigate to  Device
+    public static final String ID_MAIN_TAB_DECICE = "com.sioeye.sioeyeapp:id/main_tab_device";
+    //navigate to  Watch
+    public static final String ID_MAIN_TAB_WATCH="com.sioeye.sioeyeapp:id/main_tab_live ";
     //navigate to ad_splash
     public static final String ID_MAIN_TAB_AD_SPALSH = "com.sioeye.sioeyeapp:id/discover_ad_splash_pager";
     //recommend_list
@@ -39,4 +42,7 @@ public class Discover {
     public static final String ID_SEARCH_FILTER_INPUT = "com.sioeye.sioeyeapp:id/search_filter_input";
     //Activity of Discover
     public static final String ID_DISCOVER_MAIN_CONTENT="com.sioeye.sioeyeapp:id/discover_swipe_view";
+
+
+
 }
