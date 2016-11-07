@@ -27,7 +27,7 @@ import usa.page.App;
  * Created by elon on 2016/10/14.
  */
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 18)
+@SdkSuppress(minSdkVersion = 16)
 public class TestDemo extends VP2{
     public String takeBugReport(String crashType, String currentTime)
             throws IOException {

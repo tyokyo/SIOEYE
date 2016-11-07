@@ -25,7 +25,7 @@ import usa.page.Watch;
  * Created by elon on 2016/10/31.
  */
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 18)
+@SdkSuppress(minSdkVersion = 16)
 public class NotificationCase extends VP2 {
     public String username;
     public int followed;

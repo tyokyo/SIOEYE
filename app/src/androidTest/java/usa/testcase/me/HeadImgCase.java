@@ -23,7 +23,7 @@ import usa.page.Me;
  * Created by elon on 2016/10/11.
  */
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 18)
+@SdkSuppress(minSdkVersion = 16)
 public class HeadImgCase extends VP2 {
 
     private Logger logger =  Logger.getLogger(HeadImgCase.this.getClass().getName());

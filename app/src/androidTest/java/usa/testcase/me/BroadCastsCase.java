@@ -38,7 +38,7 @@ import usa.page.Me;
  * Created by elon on 2016/10/13.
  */
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 18)
+@SdkSuppress(minSdkVersion = 16)
 public class BroadCastsCase extends VP2{
     Logger logger = Logger.getLogger(BroadCastsCase.class.getName());
     public WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {

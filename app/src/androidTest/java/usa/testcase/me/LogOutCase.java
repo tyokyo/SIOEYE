@@ -23,7 +23,7 @@ import usa.page.Me;
  * Created by elon on 2016/10/28.
  */
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 18)
+@SdkSuppress(minSdkVersion = 16)
 public class LogOutCase extends VP2 {
     @Before
     public  void setup(){

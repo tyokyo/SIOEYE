@@ -24,7 +24,7 @@ import usa.page.Me;
  * Created by elon on 2016/10/28.
  */
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 18)
+@SdkSuppress(minSdkVersion = 16)
 public class HelpCase extends VP2{
     Logger logger = Logger.getLogger(HelpCase.class.getName());
     @Before

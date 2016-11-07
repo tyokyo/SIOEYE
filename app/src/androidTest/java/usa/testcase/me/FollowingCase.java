@@ -33,7 +33,7 @@ import usa.page.Watch;
  * Created by elon on 2016/10/18.
  */
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 18)
+@SdkSuppress(minSdkVersion = 16)
 public class FollowingCase extends VP2{
     private Logger logger =Logger.getLogger(FollowingCase.this.getClass().getName());
     //private Point p;
