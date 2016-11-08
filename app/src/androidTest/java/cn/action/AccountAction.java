@@ -4,11 +4,13 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 
+import com.squareup.spoon.Spoon;
+
 import java.util.Random;
 import ckt.base.VP2;
-import cn.page.Account;
+import cn.page.AccountPage;
 import cn.page.App;
-import cn.page.Me;
+import cn.page.Constant;
 
 
 /**
@@ -110,16 +112,29 @@ public class AccountAction extends VP2{
     如果当前已处于注销状态，退出
     * */
     public static  void logOutAccount(){
-        clickById(Me.ID_MAIN_TAB_ME);
-        clickById(Me.SETTINGS_USER_MAIN);
+        clickById(MePage.ID_MAIN_TAB_ME);
+        clickById(MePage.SETTINGS_USER_MAIN);
         if (getUiObjectByText("Login").exists()){
 
         }else{
-            clickById(Account.LOG_OUT);
-            clickById(Account.LOG_OUT_OK);
+            clickById(AccountPage.LOG_OUT);
+            clickById(AccountPage.LOG_OUT_OK);
             //wait logout
 
         }
+    }
+    //判断是否登录成功
+    public static void inLogin() throws UiObjectNotFoundException {
+        boolean login = true;
+        clickById(MePage.ID_MAIN_TAB_ME);
+        if (text_exists("Login")){
+            clickByText("Login");
+            getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(Constant.userName);
+            getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(Constant.passwd);
+            clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
+            waitUntilFind(MePage.ID_MAIN_TAB_ME,20);
+        }
+        Spoon.screenshot("inLogin");
     }
 
 }

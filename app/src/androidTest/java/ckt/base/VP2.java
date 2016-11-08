@@ -34,7 +34,6 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import ckt.tools.VideoNode;
-import usa.action.AccountAction;
 import usa.page.App;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -735,12 +734,6 @@ public class VP2 extends  VP{
         context.startActivity(intent);
         // Wait for the app to appear
         gDevice.wait(Until.hasObject(By.pkg(BASIC_PACKAGE_NAME).depth(0)), LAUNCH_TIMEOUT);
-        //确保处于登录状态
-        try {
-            AccountAction.inLogin();
-        }catch (UiObjectNotFoundException e){
-            e.printStackTrace();
-        }
     }
     public static void killAppByPackage(String packageName) {
         initDevice();
