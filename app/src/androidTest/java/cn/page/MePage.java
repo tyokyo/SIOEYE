@@ -4,8 +4,15 @@ package cn.page;
  * Created by elon on 2016/10/11.
  */
 public class MePage {
-    //navigate to Me
+    //navigate to 我
     public static final String ID_MAIN_TAB_ME="cn.sioeye.sioeyeapp:id/main_tab_me";
+    //navigate to 发现
+    public static final String ID_MAIN_TAB_DISCOVER="cn.sioeye.sioeyeapp:id/main_tab_discover";
+    //navigate to 关注
+    public static final String ID_MAIN_TAB_LIVE="cn.sioeye.sioeyeapp:id/main_tab_live";
+    //navigate to 相机
+    public static final String ID_MAIN_TAB_DEVICE="cn.sioeye.sioeyeapp:id/main_tab_device";
+
     //following
     public static final String ID_ME_FOLLOWING="cn.sioeye.sioeyeapp:id/llt_following";
     public static final String ID_ME_TYPE_FOLLOWING="cn.sioeye.sioeyeapp:id/profile_type_following";
@@ -204,6 +211,6 @@ public class MePage {
     //Privacy broadcasts are invisible
     public static final String BROADCAST_INVISIBLE="cn.sioeye.sioeyeapp:id/text_profile_list_live";
     //edit nick name done
-    public static final String NICKNAME_DONE="cn.sioeye.sioeyeapp:id/right";
+    public static final String USER_EDIT_DONE="cn.sioeye.sioeyeapp:id/right";
     public static final String EDIT_CONTENT_TEXT="cn.sioeye.sioeyeapp:id/content_text";
 }
