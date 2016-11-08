@@ -19,8 +19,9 @@ import bean.FollowingBean;
 import bean.UserBean;
 import ckt.base.VP2;
 import cn.page.App;
+import cn.page.MePage;
 import cn.page.WatchPage;
-import usa.action.*;
+import cn.action.*;
 
 /**
  * Created by elon on 2016/10/27.
@@ -40,7 +41,7 @@ public class FollowingAction extends VP2{
     public static void user_add_from_following_following() throws UiObjectNotFoundException, IOException {
         MeAction.navToFollowing();
         add_sioEyeMedia();
-        Nav.navToFollowing();
+        MeAction.navToFollowing();
         scrollAndGetUIObject("SioeyeMedia").clickAndWaitForNewWindow();
     }
 
@@ -95,7 +96,7 @@ public class FollowingAction extends VP2{
      */
     public static void searchFollowingUser(String sioEyeId) throws IOException, UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
-        Point p = Nav.getSearchLocation();
+        Point p = MeAction.getSearchLocation();
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
 
         clickByText("Watch");

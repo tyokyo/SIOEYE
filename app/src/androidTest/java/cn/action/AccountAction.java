@@ -3,15 +3,13 @@ package cn.action;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
-
 import com.squareup.spoon.Spoon;
-
 import java.util.Random;
 import ckt.base.VP2;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
-
+import cn.page.MePage;
 
 /**
  * Created by admin on 2016/11/2.
@@ -96,10 +94,10 @@ public class AccountAction extends VP2{
     public static void logout() throws UiObjectNotFoundException{
         initDevice();
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        clickByText("Me");
+        clickById(MePage.ID_MAIN_TAB_ME);
         clickByText("Settings");
-        clickById("com.sioeye.sioeyeapp:id/tv_logout");
-        clickById("com.sioeye.sioeyeapp:id/delete_ok");
+        clickById("cn.sioeye.sioeyeapp:id/tv_logout");
+        clickById("cn.sioeye.sioeyeapp:id/delete_ok");
         if(getUiObjectByText("Change password").exists()){
             System.out.println("Log Out Failed,Please check it");
         }else {

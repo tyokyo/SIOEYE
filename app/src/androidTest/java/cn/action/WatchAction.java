@@ -4,6 +4,7 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Until;
 
 import ckt.base.VP2;
+import cn.page.MePage;
 import cn.page.WatchPage;
 
 /**
@@ -12,7 +13,7 @@ import cn.page.WatchPage;
 public class WatchAction extends VP2{
 
     public static void navToWatchSearch(){
-        clickByText("Watch");
+        clickById(MePage.ID_MAIN_TAB_LIVE);
         clickById(WatchPage.WATCH_SEARCH_BTN);
         waitTime(2);
         gDevice.wait(Until.findObject(By.res(WatchPage.WATCH_SEARCH_TRENDING_TITLE)),40000);
