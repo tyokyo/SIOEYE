@@ -927,4 +927,11 @@ public class VP2 extends  VP{
     public static boolean text_exists(String text) throws UiObjectNotFoundException {
         return  getUiObjectByText(text).exists();
     }
+    /**
+     *get rectangle for object
+     * @param ResourceID id
+     */
+    public static Rect getRect(String ResourceID) throws UiObjectNotFoundException {
+        return  getObjectById(ResourceID).getBounds();
+    }
 }
