@@ -35,7 +35,7 @@ public class MeAction extends VP2{
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.ID_ME_FOLLOWING);
         gDevice.wait(Until.gone(By.res(MePage.LOADING_FOLLOWERS)),40000);
-        Spoon.screenshot("navToFollow");
+        Spoon.screenshot("navToFollowing");
     }
     //Go to 粉丝
     public static void navToFans(){
@@ -132,18 +132,6 @@ public class MeAction extends VP2{
         Spoon.screenshot(gDevice,"Me");
         clickById(MePage.ID_USER_EDIT);
     }
-    //随机获取一个broadcasts对象
-    public static UiObject2 getRandomBroadcasts(){
-        UiObject2 listView = gDevice.findObject(By.res(MePage.BROADCAST_VIEW));
-        waitTime(5);
-        //List<UiObject2> lisCollect = gDevice.findObjects(By.clazz(HorizontalScrollView.class));
-        List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_CONTENT));
-        int size = lisCollect.size();
-        Random random = new Random();
-        int rd = random.nextInt(size);
-        UiObject2 broadcast = lisCollect.get(rd);
-        return  broadcast;
-    }
     /*获取用户信息
     0-昵称
     1-性别
@@ -166,8 +154,9 @@ public class MeAction extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         Point point = new Point();
         navToBroadcasts();
-        MeAction.getRandomBroadcasts().click();
-        MeAction.waitBroadcastLoading();
+        int index=BroadcastAction.getRandomBroadcastsIndex();
+        BroadcastAction.getRandomBroadcasts(index).click();
+        BroadcastAction.waitBroadcastLoading();
         UiObject zan = getUiObjectById(MePage.BROADCAST_VIEW_ZAN);
         int x = zan.getBounds().centerX();
         int y = zan.getBounds().centerY();
@@ -175,19 +164,6 @@ public class MeAction extends VP2{
         makeToast(point.x+"|"+point.y,3);
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         return  point;
-    }
-    //wait 加载完成 此时点赞图标变为绿色
-    public  static void waitBroadcastLoading() throws UiObjectNotFoundException {
-        gDevice.wait(Until.findObject(By.res(MePage.BROADCAST_VIEW_TIPTEXT)),20000);
-        waitUntilFind(MePage.BROADCAST_VIEW_ZAN,10);
-        for (int i = 0; i <20 ; i++) {
-            if (getObjectById(MePage.BROADCAST_VIEW_ZAN).isEnabled()==true&&
-                    getObjectById(MePage.BROADCAST_VIEW_TIPTEXT).isEnabled()==true){
-                break;
-            }else{
-                waitTime(4);
-            }
-        }
     }
     //个性签名内容
     public static String getAboutMe() throws UiObjectNotFoundException {

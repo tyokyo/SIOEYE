@@ -76,10 +76,20 @@ public class MePage {
     public static final String BROADCAST_TIME="cn.sioeye.sioeyeapp:id/broadcast_time";
     public static final String BROADCAST_LIKE="cn.sioeye.sioeyeapp:id/broadcast_like";
     public static final String BROADCAST_CONTENT="cn.sioeye.sioeyeapp:id/llt_broadcast_content";
+    //编辑视频标题
+    public static final String BROADCAST_EDIT_TITLE="cn.sioeye.sioeyeapp:id/edit_broadcasts_title";
+    //删除视频
+    public static final String BROADCAST_DELETE="cn.sioeye.sioeyeapp:id/delete_broadcasts";
+    public static final String BROADCAST_EDIT_CANCEL="cn.sioeye.sioeyeapp:id/edit_cancel";
+    public static final String BROADCAST_EDIT_OK="cn.sioeye.sioeyeapp:id/edit_ok";
+    public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/delete_ok";
 
 
     public static final String BROADCAST_VIEW_TIPTEXT="cn.sioeye.sioeyeapp:id/tipText";
     public static final String BROADCAST_VIEW_ZAN="cn.sioeye.sioeyeapp:id/watch_player_portrait_like";
+    //键盘弹出时的点赞图标
+    public static final String BROADCAST_VIEW_ZAN_FLOAT_LIKE="cn.sioeye.sioeyeapp:id/float_like";
+
     public static final String BROADCAST_VIEW_SHARE="cn.sioeye.sioeyeapp:id/iv_share";
 
     public static final String BROADCAST_VIEW_MESSAGE_TEXT="cn.sioeye.sioeyeapp:id/message_text";
@@ -213,4 +223,10 @@ public class MePage {
     //edit nick name done
     public static final String USER_EDIT_DONE="cn.sioeye.sioeyeapp:id/right";
     public static final String EDIT_CONTENT_TEXT="cn.sioeye.sioeyeapp:id/content_text";
+
+    //fans
+    public static final String FANS_VIEW_LIST="cn.sioeye.sioeyeapp:id/recycleview_followes";
+    //pop up dialog -OK btn
+    public static final String ID_TV_OK="cn.sioeye.sioeyeapp:id/tv_ok";
+
 }
