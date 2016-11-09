@@ -30,6 +30,15 @@ public class FollowingBean extends VP2{
     private String name;
     private String followers;
 
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    private String info;
     public String getVideos() {
         return videos;
     }
@@ -64,9 +73,10 @@ public class FollowingBean extends VP2{
     @Override
     public String toString() {
         return "FollowingBean{" +
-                "avatar=" + avatar.getText() +
+                "avatar=" + avatar +
                 ", name='" + name + '\'' +
                 ", followers='" + followers + '\'' +
+                ", info='" + info + '\'' +
                 ", videos='" + videos + '\'' +
                 ", index_linearLayout=" + index_linearLayout +
                 '}';

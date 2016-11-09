@@ -47,4 +47,13 @@ public class BroadcastBean {
     private String broadcast_time;
     private String broadcast_like;
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    private int    index;
 }
