@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import usa.action.DiscoverAction;
@@ -23,6 +24,7 @@ import usa.page.Device;
 import usa.page.Discover;
 import usa.page.Me;
 import usa.page.Watch;
+import usa.testcase.me.ActivityCase;
 
 /**
  * Created by caibing.yin on 2016/11/5.
@@ -30,6 +32,7 @@ import usa.page.Watch;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class DiscoverCase extends VP2 {
+    Logger logger = Logger.getLogger(ActivityCase.class.getName());
     @Before
     public  void setup(){
         openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_USA);
