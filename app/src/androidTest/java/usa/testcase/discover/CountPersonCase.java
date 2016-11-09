@@ -2,15 +2,24 @@ package usa.testcase.discover;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
+import android.widget.RelativeLayout;
+
+import com.squareup.spoon.Spoon;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import java.util.logging.Logger;
 import ckt.base.VP;
 import ckt.base.VP2;
+import usa.action.DiscoverAction;
 import usa.page.App;
 import usa.page.Discover;
+import usa.testcase.me.ActivityCase;
 
 /**
  * Created by caibing.yin on 2016/11/7.
@@ -18,6 +27,7 @@ import usa.page.Discover;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class CountPersonCase extends VP2 {
+    Logger logger = Logger.getLogger(ActivityCase.class.getName());
     @Before
     public void setup() {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
@@ -29,10 +39,15 @@ public class CountPersonCase extends VP2 {
      *  Result：与给出的UI符合(不做判断，先写如何得到观看人数)
      */
     @Test
-    public void testCountPerson(){
+    public void testCountPerson() throws UiObjectNotFoundException {
         clickById(Discover.ID_MAIN_TAB_DISCOVER);
         waitTime(2);
-      // gDevice Relativelayout = getUiObjectByText("android.widget.RelativeLayout").;
+        UiObject relativeLayout = new UiObject(new UiSelector().childSelector(new UiSelector().className("android.widget.RelativeLayout").index(1)));
+        Spoon.screenshot("CountPerson","找到观看人数",relativeLayout);
+        //int Expect_number = DiscoverAction.
+
+
+
     }
 
     /**
