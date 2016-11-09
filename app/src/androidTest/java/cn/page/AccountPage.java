@@ -34,4 +34,9 @@ public class AccountPage {
     public static String SIGN_UP_ACCOUNT_TV_CONTENT = "cn.sioeye.sioeyeapp:id/tv_content";
     //logout loading
     public static final String ACCOUNT_LOGOUT="cn.sioeye.sioeyeapp:id/llt_layout";
+    //login
+    public static final String ACCOUNT_WEIBO="cn.sioeye.sioeyeapp:id/login_weibo";
+    public static final String ACCOUNT_WEIXIN="cn.sioeye.sioeyeapp:id/login_wechat";
+    public static final String ACCOUNT_QQ="cn.sioeye.sioeyeapp:id/login_qq";
+
 }
