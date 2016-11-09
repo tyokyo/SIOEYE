@@ -124,11 +124,20 @@ public class AccountAction extends VP2{
     //判断是否登录成功
     public static void inLogin() throws UiObjectNotFoundException {
         boolean login = true;
+        if(id_exists(MePage.ID_TV_OK)){
+            clickById(MePage.ID_TV_OK);
+            waitHasObject(MePage.ID_MAIN_TAB_ME,10000);
+        }
         clickById(MePage.ID_MAIN_TAB_ME);
-        if (text_exists("Login")){
-            clickByText("Login");
+        if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
+            clickByText("登录");
+            //input username
+            getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).click();
             getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(Constant.userName);
+            //input  password
+            getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).click();
             getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(Constant.passwd);
+            //login
             clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
             waitUntilFind(MePage.ID_MAIN_TAB_ME,20);
         }
