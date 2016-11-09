@@ -1,5 +1,5 @@
 package usa.action;
-
+import java.lang.
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
@@ -56,6 +56,13 @@ public class DiscoverAction extends VP2 {
         }
         public static void scrollRecommendList(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
+        }
+
+        //取得UIObject中的数字
+        private static int getCountPerson(UiObject UIO) throws UiObjectNotFoundException {
+            String Number = UIO.getChild(new UiSelector().index(0)).getText();
+            int CountPerson = Integer.getInteger(Number);
+            return CountPerson;
         }
 }
 
