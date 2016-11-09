@@ -1,5 +1,5 @@
 package usa.action;
-import java.lang.
+
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
@@ -8,9 +8,12 @@ import android.support.test.uiautomator.UiSelector;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.squareup.spoon.Spoon;
+import org.junit.Assert;
 import java.util.List;
 import ckt.base.VP2;
 import usa.page.Discover;
+import usa.page.Me;
+
 /**
  * Created by caibing.yin on 2016/11/5.
  */
@@ -50,19 +53,32 @@ public class DiscoverAction extends VP2 {
             UiObject Recommand_list = getObjectById(Discover.ID_MAIN_TAB_RECOMMAND_LIST);
             String nickname = Recommand_list.getChild(new UiSelector().index(0)).getText();
             return nickname;
-    }
+        }
         public static void scrollAdSplash(){
+
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
         public static void scrollRecommendList(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-
-        //取得UIObject中的数字
-        private static int getCountPerson(UiObject UIO) throws UiObjectNotFoundException {
-            String Number = UIO.getChild(new UiSelector().index(0)).getText();
-            int CountPerson = Integer.getInteger(Number);
-            return CountPerson;
+        public static void checkAddFriendsInMyFollowing(String target_nick_name) throws UiObjectNotFoundException {
+            clickById(Discover.ID_MAIN_TAB_ME);
+            clickById(Me.ID_ME_FOLLOWING);
+            waitUntilFind(Me.FOLLOWERING_VIEW,6000);
+            UiObject expectObj=scrollAndGetUIObject(target_nick_name);
+            if (expectObj!=null){
+                if (!expectObj.exists()){
+                    Spoon.screenshot("swip_to_find",target_nick_name+"Failed");
+                    Assert.fail("AddFriendsRecommand"+target_nick_name+"Failed");
+                }
+            }else{
+                Assert.fail("出现异常nick name获取为空");
+            }
+        }
+        private static int getPersonNumber(UiObject UIO) throws UiObjectNotFoundException {
+            String CountPerson = UIO.getChild(new UiSelector().index(0)).getText();
+            int PersonNumber = Integer.getInteger(CountPerson);
+            return  PersonNumber;
         }
 }
 
