@@ -47,5 +47,7 @@ public class Discover {
     public static final String ID_MAIN_TAB_DECICE = "com.sioeye.sioeyeapp:id/main_tab_device";
     //navigate to  Watch
     public static final String ID_MAIN_TAB_WATCH="com.sioeye.sioeyeapp:id/main_tab_live ";
+    //navigate to ME
+    public static final String ID_MAIN_TAB_ME="com.sioeye.sioeyeapp:id/table_me";
 
 }
