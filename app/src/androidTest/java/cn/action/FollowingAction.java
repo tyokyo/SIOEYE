@@ -5,12 +5,17 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.spoon.Spoon;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -19,31 +24,34 @@ import bean.FollowingBean;
 import bean.UserBean;
 import ckt.base.VP2;
 import cn.page.App;
+import cn.page.MePage;
 import cn.page.WatchPage;
-import usa.action.*;
+import cn.action.*;
 
 /**
  * Created by elon on 2016/10/27.
  */
 public class FollowingAction extends VP2{
     public static Logger logger =Logger.getLogger("FollowingAction");
-    public static void add_sioEyeMedia() throws UiObjectNotFoundException, IOException {
-        boolean follow = isUserHasFollowing("SioeyeMedia");
-        if (!follow){
-            openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
-        }
-        searchFollowingUser("med000");
-        clickById(WatchPage.WATCH_SEARCH_USER_FOLLOW);
-        waitTime(3);
-        gDevice.pressBack();
+    //选择一个视频 播放视频
+    public static void clickBroadcast() throws UiObjectNotFoundException {
+        UiObject2 list =getObject2ById(MePage.USER_FOLLOW_LIST);
+        List<UiObject2> videos=list.findObjects(By.clazz(RelativeLayout.class));
+        int size = videos.size();
+        Random random = new Random();
+        int select = random.nextInt(size);
+        videos.get(select).click();
     }
-    public static void user_add_from_following_following() throws UiObjectNotFoundException, IOException {
-        MeAction.navToFollowing();
-        add_sioEyeMedia();
-        Nav.navToFollowing();
-        scrollAndGetUIObject("SioeyeMedia").clickAndWaitForNewWindow();
+    //选择一个用户 查看用户
+    public static void clickRandomFollower(FollowingBean followingBean) throws UiObjectNotFoundException {
+        scrollAndGetUIObject(followingBean.getName()).clickAndWaitForNewWindow();
     }
-
+    //关注数目
+    public static int getFollowingSize(){
+        List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.FOLLOWERING_AVATAR));
+        int size = lisCollect.size();
+        return  size;
+    }
     public static UserBean getUserInfo() throws UiObjectNotFoundException {
         UserBean userBean = new UserBean();
         String name = getUiObjectById(MePage.FOLLOWERING_USERNAME).getText();
@@ -63,55 +71,59 @@ public class FollowingAction extends VP2{
     //随机选择一个Following 对象
     public static FollowingBean randomFollowingUser() throws IOException, UiObjectNotFoundException {
         FollowingBean followingBean = new FollowingBean();
-        List<UiObject2> list = gDevice.findObjects(By.res(MePage.FOLLOWERING_AVATAR));
-        int avatar =list.size();
-        logger.info("Following size is :"+avatar);
+        waitUntilFind(MePage.FOLLOWERING_VIEW,30000);
+        UiObject2 follow_view = getObject2ById(MePage.FOLLOWERING_VIEW);
+        List<UiObject2> LinearLayoutList = follow_view.findObjects(By.clazz(LinearLayout.class));
+        List<UiObject2> LinearLayoutList_filter=new ArrayList<>();
+        int size=0;
+        for (UiObject2 linear:LinearLayoutList){
+            if (linear.hasObject(By.res(MePage.FOLLOWERING_AVATAR))){
+                size=size+1;
+                LinearLayoutList_filter.add(linear);
+            }
+        }
         Random r = new Random();
-        int int_r =r.nextInt(avatar);
-        UiObject2 r_UiObject2 =list.get(int_r);
-        UiObject2 p_UiObject2 = r_UiObject2.getParent();
-        List<UiObject2> list_text=p_UiObject2.findObjects(By.clazz(TextView.class));
-        String name = list_text.get(0).getText();
-        String followers=list_text.get(1).getText();
-        String videos=list_text.get(2).getText();
-        followingBean.setAvatar(r_UiObject2);
+        int int_r =r.nextInt(size);
+        logger.info("size:"+size);
+        UiObject2 linearLayout_UiObject2 =LinearLayoutList_filter.get(int_r);
+        List<UiObject2> textViews =linearLayout_UiObject2.findObjects(By.clazz(TextView.class));
+        String followers_videos=textViews.get(1).getText();
+        String name=textViews.get(0).getText();
         followingBean.setName(name);
-        followingBean.setFollowers(followers);
-        followingBean.setVideos(videos);
+        followingBean.setAvatar(linearLayout_UiObject2);
+        followingBean.setInfo(followers_videos);
         followingBean.setIndex_linearLayout(int_r);
         return  followingBean;
     }
-    public static boolean isUserHasFollowing(String f_name) throws UiObjectNotFoundException {
-        boolean af = false;
-        UiObject find = scrollAndGetUIObject(f_name);
-        if (find!=null){
-            af =scrollAndGetUIObject(f_name).exists();
+    //随机选择一个fans对象
+    public static FollowingBean randomFansUser() throws IOException, UiObjectNotFoundException {
+        FollowingBean followingBean = new FollowingBean();
+        waitUntilFind(MePage.FANS_VIEW_LIST,30000);
+        UiObject2 follow_view = getObject2ById(MePage.FANS_VIEW_LIST);
+        List<UiObject2> LinearLayoutList = follow_view.findObjects(By.clazz(LinearLayout.class));
+        List<UiObject2> LinearLayoutList_filter=new ArrayList<>();
+        int size=0;
+        for (UiObject2 linear:LinearLayoutList){
+            if (linear.hasObject(By.res(MePage.FOLLOWERING_AVATAR))){
+                size=size+1;
+                LinearLayoutList_filter.add(linear);
+            }
         }
-        return  af;
+        Random r = new Random();
+        int int_r =r.nextInt(size);
+        logger.info("size:"+size);
+        UiObject2 linearLayout_UiObject2 =LinearLayoutList_filter.get(int_r);
+        List<UiObject2> textViews =linearLayout_UiObject2.findObjects(By.clazz(TextView.class));
+        String followers_videos=textViews.get(1).getText();
+        String name=textViews.get(0).getText();
+        followingBean.setName(name);
+        followingBean.setAvatar(linearLayout_UiObject2);
+        followingBean.setInfo(followers_videos);
+        followingBean.setIndex_linearLayout(int_r);
+        return  followingBean;
     }
-    /**
-     *搜索指定sioeye id 的用户
-     * @param sioEyeId
-     */
-    public static void searchFollowingUser(String sioEyeId) throws IOException, UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
-        Point p = Nav.getSearchLocation();
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
-
-        clickByText("Watch");
-        clickById(WatchPage.WATCH_SEARCH_BTN);
-        gDevice.wait(Until.findObject(By.res(WatchPage.WATCH_SEARCH_TRENDING_TITLE)),40000);
-        if (!getUiObjectById(WatchPage.WATCH_SEARCH_TRENDING_LIST).exists()){
-            clickById(WatchPage.WATCH_SEARCH_FILTER_INPUT);
-            waitTime(2);
-            gDevice.click(p.x,p.y);
-            gDevice.wait(Until.findObject(By.res(WatchPage.WATCH_SEARCH_TRENDING_TITLE)),40000);
-        }
-        Spoon.screenshot(gDevice,"trending_list");
-        clickById(WatchPage.WATCH_SEARCH_FILTER_INPUT);
-        shellInputText(sioEyeId);
-        gDevice.click(p.x,p.y);
-        gDevice.wait(Until.gone(By.res(WatchPage.WATCH_SEARCH_DATA_LOADING)),60000);
-        Spoon.screenshot(gDevice,"search_list_"+sioEyeId);
+    public static int hasBroadcasts(){
+        int following_broadcast=getObject2ById(MePage.USER_FOLLOW_LIST).findObjects(By.clazz(RelativeLayout.class)).size();
+        return following_broadcast;
     }
 }
