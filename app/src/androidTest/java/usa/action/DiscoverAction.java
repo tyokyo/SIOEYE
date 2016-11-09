@@ -29,6 +29,7 @@ public class DiscoverAction extends VP2 {
         //index=0-3
         public static String navToRecommendList(int index,int click_time){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            waitUntilFind(Discover.ID_MAIN_TAB_RECOMMAND_LIST,30000);
             //into discover
             List<UiObject2> linearLayout_avatars =getObject2ById(Discover.ID_MAIN_TAB_RECOMMAND_LIST).findObjects(By.clazz(LinearLayout.class));
             UiObject2 linearLayout = linearLayout_avatars.get(index);
