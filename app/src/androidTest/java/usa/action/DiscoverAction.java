@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
 import org.junit.Assert;
 
 import java.util.List;
@@ -49,7 +50,6 @@ public class DiscoverAction extends VP2 {
             Spoon.screenshot("navToRecommendList");
             return trend_name;
         }
-
         //取得Discover页面中RecommendList中头像对应的的昵称
         public static String getnickname() throws UiObjectNotFoundException {
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
@@ -61,8 +61,9 @@ public class DiscoverAction extends VP2 {
 
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-        public static void scrollRecommendList(){
+        public static void scrollRecommandList() throws UiObjectNotFoundException {
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            getObjectById(Discover.ID_MAIN_TAB_RECOMMAND_LIST).swipeLeft(2);
         }
         public static void checkAddFriendsInMyFollowing(String target_nick_name) throws UiObjectNotFoundException {
             clickById(Discover.ID_MAIN_TAB_ME);
@@ -78,5 +79,20 @@ public class DiscoverAction extends VP2 {
                 Assert.fail("出现异常nick name获取为空");
             }
         }
+    public static void checkMiniProfileNumFollowerAddOneAfterFollow() throws UiObjectNotFoundException{
+        int NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
+        int expect_NumFollower=NumFollower+1;
+        //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
+        clickById(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
+        //关注操作
+        waitTime(1);
+        int active_NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
+        //关注后该目标用户的Follower的数量，
+        Spoon.screenshot("testAddFriendsRecommend0");
+        Asst.assertEquals("添加推荐用户为好友后，该用户followers没有加1",expect_NumFollower,active_NumFollower);
+        //断言该用户followers有没有+1
+        clickByClass("android.widget.ImageView",2);
+        //关闭弹出框
+    }
 }
 
