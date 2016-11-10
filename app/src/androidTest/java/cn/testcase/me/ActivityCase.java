@@ -60,8 +60,9 @@ public class ActivityCase extends VP2{
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //check
         clickById(MePage.NAV_EDIT_ACTIVITY);
-        waitUntilFind(MePage.IS_LOCATING,3000);
-        waitUntilGone(MePage.IS_LOCATING,30000);
+        //waitUntilGone(MePage.IS_LOCATING,30000);
+        //等待加载完成
+        waitUntilFind(MePage.ACTIVITY_INTERESTS,30000);
         //获取我的爱好列表
         Set re2 = ActivityAction.getAllMyInterests();
         //验证
@@ -83,8 +84,10 @@ public class ActivityCase extends VP2{
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //check
         clickById(MePage.NAV_EDIT_ACTIVITY);
-        waitUntilFind(MePage.IS_LOCATING,3000);
-        waitUntilGone(MePage.IS_LOCATING,30000);
+        //waitUntilGone(MePage.IS_LOCATING,30000);
+        //等待加载完成
+        waitUntilFind(MePage.ACTIVITY_INTERESTS,30000);
+
         //获取当前已经添加的爱好
         Set<String> re2 = ActivityAction.getAllMyInterests();
         //验证
@@ -115,7 +118,9 @@ public class ActivityCase extends VP2{
         //check
         clickById(MePage.NAV_EDIT_ACTIVITY);
         waitTime(2);
-        waitUntilGone(MePage.IS_LOCATING,30);
+        //waitUntilGone(MePage.IS_LOCATING,30000);
+        //等待加载完成
+        waitUntilFind(MePage.ACTIVITY_INTERESTS,30000);
         //获取爱好内容列表
         Set activeSet = ActivityAction.getAllMyInterests();
         //验证
@@ -134,8 +139,9 @@ public class ActivityCase extends VP2{
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //check
         clickById(MePage.NAV_EDIT_ACTIVITY);
-        waitUntilFind(MePage.IS_LOCATING,3000);
-        waitUntilGone(MePage.IS_LOCATING,30000);
+        //waitUntilGone(MePage.IS_LOCATING,30000);
+        //等待加载完成
+        waitUntilFind(MePage.ACTIVITY_INTERESTS,30000);
         //后去已经添加的爱好列表
         Set activeSet = ActivityAction.getAllMyInterests();
         //check
@@ -148,7 +154,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_Add_Input_MyInterests_String_10c() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         //go to activities
         MeAction.navToActivities();
         //删除所有的interests
@@ -178,7 +184,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_Add_Input_MyInterests_String_40c() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         //go to activities
         MeAction.navToActivities();
         //delete all interest
@@ -207,7 +213,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_Add_Input_MyInterests_10() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         MeAction.navToActivities();
         //delete all
         ActivityAction.deleteAllMyInterests();
@@ -237,7 +243,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_ErrorSymbol() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point p = MeAction.getSearchLocation();
+        Point p = MeAction.getPointToDoComment();
         //go to activities
         MeAction.navToActivities();
         ActivityAction.deleteAllMyInterests();
@@ -260,7 +266,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_Symbol() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         MeAction.navToActivities();
         ActivityAction.deleteAllMyInterests();
         Set myInterests_before_add = ActivityAction.getAllMyInterests();
@@ -283,7 +289,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_MyInterests_back() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point p = MeAction.getSearchLocation();
+        Point p = MeAction.getPointToDoComment();
         MeAction.navToActivities();
         ActivityAction.deleteAllMyInterests();
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
@@ -309,7 +315,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_add_SameInterest() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         MeAction.navToActivities();
         //delete all interests
         ActivityAction.deleteAllMyInterests();

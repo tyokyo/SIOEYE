@@ -112,7 +112,7 @@ public class AboutMeCase extends VP2 {
         clickById(MePage.USER_EDIT_DONE);
         gDevice.pressBack();
         //验证个性签名
-        String expect = MeAction.getUserEditInfo(6);
+        String expect = MeAction.getAboutMe();
         input = input.substring(0,60);
         Assert.assertEquals("change success",expect,input);
         Spoon.screenshot(gDevice,input);

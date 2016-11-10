@@ -34,13 +34,19 @@ import cn.action.*;
 public class FollowingAction extends VP2{
     public static Logger logger =Logger.getLogger("FollowingAction");
     //选择一个视频 播放视频
-    public static void clickBroadcast() throws UiObjectNotFoundException {
+    public static void clickFollowingBroadcast() throws UiObjectNotFoundException {
         UiObject2 list =getObject2ById(MePage.USER_FOLLOW_LIST);
-        List<UiObject2> videos=list.findObjects(By.clazz(RelativeLayout.class));
-        int size = videos.size();
+        List<UiObject2> frameLayoutList=list.findObjects(By.clazz(FrameLayout.class));
+        List<UiObject2> videoList=new ArrayList<>();
+        for (UiObject2 frameLayout:frameLayoutList){
+            if (frameLayout.findObjects(By.clazz(RelativeLayout.class)).size()==2){
+                videoList.add(frameLayout);
+            }
+        }
+        int size = videoList.size();
         Random random = new Random();
-        int select = random.nextInt(size);
-        videos.get(select).click();
+        int index = random.nextInt(size);
+        videoList.get(index).click();
     }
     //选择一个用户 查看用户
     public static void clickRandomFollower(FollowingBean followingBean) throws UiObjectNotFoundException {

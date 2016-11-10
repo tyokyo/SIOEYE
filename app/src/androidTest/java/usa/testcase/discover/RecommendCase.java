@@ -3,9 +3,11 @@ package usa.testcase.discover;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,42 +42,41 @@ public class RecommendCase extends VP2 {
     }
 
     @Test
-    public void testSingleClickRecommendList0() throws UiObjectNotFoundException {
+    public void testSingleClickRecommandList0() throws UiObjectNotFoundException {
         //Sginle Check Recommend list 0单击推荐列表第一个人，检查弹出框PROFILE_MINI_HOME是否正确
         String expect_name=DiscoverAction.navToRecommendList(0,1);
-        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（0-1）
+        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
         String active_name=getObjectById(Discover.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
         Spoon.screenshot("testSingleClickRecommendList0");
-        Asst.assertEquals("Result",expect_name,active_name);
+        Asst.assertEquals("点击的推荐用户名与弹出信息框是否一致",expect_name,active_name);
         clickByClass("android.widget.ImageView",2);
         //关闭弹出框
         }
     @Test
-    public void testDoubleClickRecommend0() throws UiObjectNotFoundException {
+    public void testDoubleClickRecommand0() throws UiObjectNotFoundException {
         //double Check Recommend list 0双击推荐列表第二个人，检查是否正确弹出框PROFILE_MINI_HOME是否正确
-        String expect_name=DiscoverAction.navToRecommendList(1,1);
-        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（0-1）
+        String expect_name=DiscoverAction.navToRecommendList(1,2);
+        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
         String active_name=getObjectById(Discover.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
         Spoon.screenshot("testDoubleClickRecommend0");
-        Asst.assertEquals("Result",expect_name,active_name);
+        Asst.assertEquals("点击的推荐用户名与弹出信息框是否一致",expect_name,active_name);
         clickByClass("android.widget.ImageView",2);
         //关闭弹出框
     }
     @Test
-    public void testAddFriendsRecommend0() throws UiObjectNotFoundException{
-        //将第一个推荐用户加为好友，检查该用户followers有没有增加
-        DiscoverAction.navToRecommendList(0,0);
-        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（0-1）
-        int expect_NumPollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER)+1);
-        clickById(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
-        int active_NumPollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
-        Spoon.screenshot("testAddFriendsRecommend0");
-        Asst.assertEquals("Result",expect_NumPollower,active_NumPollower);
-        clickByClass("android.widget.ImageView",2);
-        //关闭弹出框
-
-
-
-
+    //将第一个推荐用户加为好友，检查该用户followers有没有增加;检查自己好友列表有没有增加该好友
+    public void testAddFriendsRecommand0() throws UiObjectNotFoundException{
+        String expect_name=DiscoverAction.navToRecommendList(1,1);
+        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
+        DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
+        DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
+    }
+    @Test
+    //滑动
+    public void testSwipRecommandAanADD1() throws UiObjectNotFoundException{
+        DiscoverAction.scrollRecommandList();
+        String expect_name=DiscoverAction.navToRecommendList(1,1);
+        DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
+        DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
     }
 }

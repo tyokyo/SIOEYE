@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import bean.InfoBean;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.MePage;
@@ -22,6 +23,17 @@ import cn.page.MePage;
  * Created by elon on 2016/10/27.
  */
 public class MeAction extends VP2{
+    //编辑界面所有用户的信息
+    public static InfoBean getEditUserInfo() throws UiObjectNotFoundException {
+        InfoBean infoBean=new InfoBean();
+        infoBean.setNick_name(getNkName());
+        infoBean.setSex(getSex());
+        infoBean.setEmail(getEmailAddress());
+        infoBean.setLocation(getLocation());
+        infoBean.setId(getSioEyeID());
+        infoBean.setAbout_me(getAboutMe());
+        return  infoBean;
+    }
     //Go to 直播
     public static void navToBroadcasts(){
         clickById(MePage.ID_MAIN_TAB_ME);
@@ -77,80 +89,90 @@ public class MeAction extends VP2{
         Spoon.screenshot("navToFeedback");
     }
     //编辑 -> 昵称
-    public static void navToNickName(){
+    public static InfoBean navToNickName() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.ID_USER_EDIT);
+        InfoBean infoBean=getEditUserInfo();
+        logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_NICKNAME);
         Spoon.screenshot("navToNickName");
+        return infoBean;
     }
-    //编辑 -> 昵称
-    public static void navToSex(){
+    //编辑 -> 性别
+    public static InfoBean navToSex() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.ID_USER_EDIT);
+        InfoBean infoBean=getEditUserInfo();
+        logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_SEX);
         Spoon.screenshot("navToSex");
+        return infoBean;
     }
     //编辑 -> 邮箱
-    public static void navToEmail(){
+    public static InfoBean navToEmail() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.ID_USER_EDIT);
+        InfoBean infoBean=getEditUserInfo();
+        logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_EMAIL);
         Spoon.screenshot("navToEmail");
+        return infoBean;
     }
     //编辑 -> 地址
-    public static void navToLocation(){
+    public static InfoBean navToLocation() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.ID_USER_EDIT);
+        InfoBean infoBean=getEditUserInfo();
+        logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_LOCATION);
         Spoon.screenshot("navToLocation");
+        return infoBean;
     }
     //编辑 -> 爱好
-    public static void navToActivities(){
+    public static InfoBean navToActivities() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.ID_USER_EDIT);
+        InfoBean infoBean=getEditUserInfo();
+        logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_ACTIVITY);
         gDevice.wait(Until.gone(By.res(MePage.IS_LOCATING)),20000);
         Spoon.screenshot("navToActivities");
+        return infoBean;
     }
     //编辑 -> Sio Eye ID
-    public static void navToSioEyeId(){
+    public static InfoBean navToSioEyeId() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.ID_USER_EDIT);
+        InfoBean infoBean=getEditUserInfo();
+        logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_SIOEYE_ID);
         Spoon.screenshot("navToSioEyeId");
+        return infoBean;
     }
-    //编辑 -> Sio Eye ID
-    public static void navToAboutMe(){
+    //编辑 -> 个性签名
+    public static InfoBean navToAboutMe() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.ID_USER_EDIT);
+        InfoBean infoBean=getEditUserInfo();
+        logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_ABOUT_ME);
         Spoon.screenshot("navToAboutMe");
+        return infoBean;
     }
     //Go to 编辑
-    public static void navToUserEdit(){
+    public static InfoBean navToUserEdit() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         Spoon.screenshot(gDevice,"Me");
         clickById(MePage.ID_USER_EDIT);
-    }
-    /*获取用户信息
-    0-昵称
-    1-性别
-    2-邮箱
-    3-地址
-    4-爱好
-    5-sio eye id
-    6-个性签名
-    * */
-    public static String getUserEditInfo(int index){
-        String userInfo = getObjectsById(MePage.ABOUT_ME_CONTENT_TEXT).get(index).getText();
-        logger.info(userInfo);
-        return  userInfo;
+        InfoBean infoBean=getEditUserInfo();
+        logger.info(infoBean.toString());
+        return infoBean;
     }
     /**
      *获取点赞图标的X Y,作为键盘输入的确定按钮
      * @param
      */
-    public static Point getSearchLocation() throws UiObjectNotFoundException, IOException {
+    public static Point getPointToDoComment() throws UiObjectNotFoundException, IOException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         Point point = new Point();
         navToBroadcasts();
@@ -165,12 +187,49 @@ public class MeAction extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         return  point;
     }
-    //个性签名内容
-    public static String getAboutMe() throws UiObjectNotFoundException {
-        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.ABOUT_ME_ID));
+    //获取nickname
+    public static String getNkName() throws UiObjectNotFoundException {
+        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.NAV_EDIT_NICKNAME));
         String me = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
         return  me;
     }
+    //获取性别
+    public static String getSex() throws UiObjectNotFoundException {
+        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.NAV_EDIT_SEX));
+        String me = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
+        return  me;
+    }
+    //邮件
+    public static String getEmailAddress() throws UiObjectNotFoundException {
+        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.NAV_EDIT_EMAIL));
+        String em = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
+        return  em;
+    }
+    //地址
+    public static String getLocation() throws UiObjectNotFoundException {
+        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.NAV_EDIT_LOCATION));
+        String em = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
+        return  em;
+    }
+    //爱好
+    public static String getActivities() throws UiObjectNotFoundException {
+        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.NAV_EDIT_ACTIVITY));
+        String em = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
+        return  em;
+    }
+    //SIO EYE ID
+    public static String getSioEyeID() throws UiObjectNotFoundException {
+        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.NAV_EDIT_SIOEYE_ID));
+        String em = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
+        return  em;
+    }
+    //个性签名内容
+    public static String getAboutMe() throws UiObjectNotFoundException {
+        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.NAV_EDIT_ABOUT_ME));
+        String me = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
+        return  me;
+    }
+
     /*
     获取子对象内容MePage.ABOUT_ME_CONTENT_TEXT
     父对象id-MePage.ABOUT_ME_ID

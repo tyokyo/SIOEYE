@@ -1,5 +1,6 @@
 package cn.testcase.me;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -134,13 +135,15 @@ public class BroadCastsCase extends VP2{
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
             String input_title=getRandomString(70);
-            clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
-            shellInputText(input_title);
-            gDevice.pressBack();
+            //clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            clearText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            setText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,input_title);
             //确认
             clickById(MePage.BROADCAST_EDIT_OK);
             //wait time
             waitTime(5);
+            waitUntilFind(MePage.BROADCAST_TITLE,10000);
+            Spoon.screenshot("modify_title_complete");
             //check
             BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
             String active_title = activeBean.getBroadcast_title();
@@ -214,7 +217,7 @@ public class BroadCastsCase extends VP2{
     //验证-评论，允许的最大字符数
     @Test
     public void testBroadcastsComments_Length_120() throws UiObjectNotFoundException, IOException {
-        Point point=MeAction.getSearchLocation();
+        Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
@@ -247,7 +250,7 @@ public class BroadCastsCase extends VP2{
     //验证-评论 超过最大的字符限制
     @Test
     public void testBroadcastsComments_Length_130() throws UiObjectNotFoundException, IOException {
-        Point point=MeAction.getSearchLocation();
+        Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
@@ -280,7 +283,7 @@ public class BroadCastsCase extends VP2{
     }
     @Test
     public void testBroadcastsComments_Length_20() throws UiObjectNotFoundException, IOException {
-        Point point=MeAction.getSearchLocation();
+        Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
@@ -309,8 +312,86 @@ public class BroadCastsCase extends VP2{
             Spoon.screenshot("testComments_Length_20"+input_comments);
         }
     }
+    //进入视频回放界面-直接点赞
+    // 验证点赞数+1
     @Test
-    public void testBroadcastsZanK() throws UiObjectNotFoundException, IOException {
-
+    public void testBroadcastsZanKAdd() throws UiObjectNotFoundException, IOException {
+        //进入broadcasts
+        MeAction.navToBroadcasts();
+        int broadcast_size=BroadcastAction.getBroadcastsSize();
+        //是否存在可以回放的视频
+        if (broadcast_size>=1){
+            //随机选择一个视频
+            int index=BroadcastAction.getRandomBroadcastsIndex();
+            BroadcastAction.getRandomBroadcasts(index).click();
+            //等待视频加载完成
+            BroadcastAction.waitBroadcastLoading();
+            gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+            //获取当前的点赞数目
+            WatcherBean bean_before_zan = BroadcastAction.getWatcher();
+            String zan_before = bean_before_zan.getZan();
+            boolean K=false;
+            int zan_before_int = 0;
+            if (zan_before.contains("K")){
+                K=true;
+            }else{
+                zan_before_int=Integer.parseInt(zan_before);
+            }
+            //进行点赞操作
+            clickById(MePage.BROADCAST_VIEW_ZAN);
+            //获取点赞操作之后的点赞数目
+            WatcherBean bean_after_zan = BroadcastAction.getWatcher();
+            String zan_after = bean_after_zan.getZan();
+            int zan_after_int= Integer.parseInt(zan_after);
+            //验证点赞数+1
+            if (K){
+                Asst.assertEquals("check zan +1",zan_before,zan_after);
+            }else{
+                Asst.assertEquals("check zan +1",zan_before_int+1,zan_after_int);
+            }
+            //截取屏幕
+            Spoon.screenshot("testBroadcastsZanKAdd");
+        }
+    }
+    //进入视频回放界面-弹出的输入框中点赞
+    // 验证点赞数+1
+    @Test
+    public void testBroadcastsZanKAddByPopup() throws UiObjectNotFoundException, IOException {
+        MeAction.navToBroadcasts();
+        int broadcast_size=BroadcastAction.getBroadcastsSize();
+        if (broadcast_size>=1){
+            int index=BroadcastAction.getRandomBroadcastsIndex();
+            BroadcastAction.getRandomBroadcasts(index).click();
+            BroadcastAction.waitBroadcastLoading();
+            gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+            //获取当前的点赞数目
+            WatcherBean bean_before_zan = BroadcastAction.getWatcher();
+            String zan_before = bean_before_zan.getZan();
+            boolean K=false;
+            int zan_before_int = 0;
+            if (zan_before.contains("K")){
+                K=true;
+            }else{
+                zan_before_int=Integer.parseInt(zan_before);
+            }
+            //弹出评论输入框-点赞
+            clickById(MePage.BROADCAST_VIEW_TIPTEXT);
+            waitTime(2);
+            //进行点赞操作
+            clickById(MePage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
+            gDevice.pressBack();
+            //获取点赞操作之后的点赞数目
+            WatcherBean bean_after_zan = BroadcastAction.getWatcher();
+            String zan_after = bean_after_zan.getZan();
+            int zan_after_int= Integer.parseInt(zan_after);
+            //验证点赞数+1
+            if (K){
+                Asst.assertEquals("check zan +1",zan_before,zan_after);
+            }else{
+                Asst.assertEquals("check zan +1",zan_before_int+1,zan_after_int);
+            }
+            //截取屏幕
+            Spoon.screenshot("testBroadcastsZanKAdd");
+        }
     }
 }

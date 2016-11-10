@@ -39,6 +39,8 @@ public class VP {
     private static Thread logThread;
     //permission allow dialog
     public static String PERMISSION_ALLOW="com.android.packageinstaller:id/permission_allow_button";
+    //pop up dialog
+    public static String ID_MESSAGE="android:id/message";
 
     /**
      * You can get a UiDevice Instance if you call this method.
@@ -47,11 +49,16 @@ public class VP {
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
     public static void doNotAskPermission() throws UiObjectNotFoundException {
-        //pkg com.google.android.packageinstaller
-        UiObject uiObject = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
-        if (uiObject.exists()){
+        //权限请求确认-pkg com.google.android.packageinstaller
+        UiObject uiObject_permission = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
+        if (uiObject_permission.exists()){
             logger.info("click allow-permission setting");
-            uiObject.clickAndWaitForNewWindow();
+            uiObject_permission.clickAndWaitForNewWindow();
+        }
+        //异常弹出框-click-OK
+        UiObject uiObject_popup = gDevice.findObject(new UiSelector().resourceId(ID_MESSAGE));
+        if (uiObject_popup.exists()){
+            gDevice.findObject(new UiSelector().resourceId("android:id/button1")).clickAndWaitForNewWindow();
         }
     }
     public static void initDevice(){

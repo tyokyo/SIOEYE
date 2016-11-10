@@ -4,13 +4,18 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.squareup.spoon.Spoon;
+import org.hamcrest.Asst;
+import org.junit.Assert;
 import java.util.List;
 import ckt.base.VP2;
 import usa.page.Discover;
+import usa.page.Me;
+
 /**
  * Created by caibing.yin on 2016/11/5.
  */
@@ -43,19 +48,56 @@ public class DiscoverAction extends VP2 {
             Spoon.screenshot("navToRecommendList");
             return trend_name;
         }
-
         //取得Discover页面中RecommendList中头像对应的的昵称
         public static String getnickname() throws UiObjectNotFoundException {
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
             UiObject Recommand_list = getObjectById(Discover.ID_MAIN_TAB_RECOMMAND_LIST);
             String nickname = Recommand_list.getChild(new UiSelector().index(0)).getText();
             return nickname;
-    }
+        }
         public static void scrollAdSplash(){
+
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
         }
-        public static void scrollRecommendList(){
+        public static void scrollRecommandList() throws UiObjectNotFoundException {
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            getObjectById(Discover.ID_MAIN_TAB_RECOMMAND_LIST).swipeLeft(2);
+            //向左滑动2步
+        }
+        public static void checkAddFriendsInMyFollowing(String target_nick_name) throws UiObjectNotFoundException {
+            clickById(Discover.ID_MAIN_TAB_ME);
+            clickById(Me.ID_ME_FOLLOWING);
+            waitUntilFind(Me.FOLLOWERING_VIEW,6000);
+            UiObject expectObj=scrollAndGetUIObject(target_nick_name);
+            if (expectObj!=null){
+                if (!expectObj.exists()){
+                    Spoon.screenshot("swip_to_find",target_nick_name+"Failed");
+                    Assert.fail("AddFriendsRecommand"+target_nick_name+"Failed");
+                }
+            }else{
+                Assert.fail("出现异常nick name获取为空");
+            }
+        }
+    public static void checkMiniProfileNumFollowerAddOneAfterFollow() throws UiObjectNotFoundException{
+        int NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
+        int expect_NumFollower=NumFollower+1;
+        //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
+        clickById(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
+        //关注操作
+        waitTime(1);
+        int active_NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
+        //关注后该目标用户的Follower的数量，
+        Spoon.screenshot("testAddFriendsRecommend0");
+        Asst.assertEquals("添加推荐用户为好友后，该用户followers没有加1",expect_NumFollower,active_NumFollower);
+        //断言该用户followers有没有+1
+        clickByClass("android.widget.ImageView",2);
+        //关闭弹出框
+    }
+        //得到UIO对象里面的数字
+        private static int getPersonNumber(UiObject UIO) throws UiObjectNotFoundException {
+            String CountPerson = UIO.getChild(new UiSelector().index(0)).getText();
+            int PersonNumber = Integer.getInteger(CountPerson);
+            return  PersonNumber;
         }
 }
 
