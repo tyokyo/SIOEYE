@@ -150,7 +150,7 @@ public class MeAction extends VP2{
      *获取点赞图标的X Y,作为键盘输入的确定按钮
      * @param
      */
-    public static Point getSearchLocation() throws UiObjectNotFoundException, IOException {
+    public static Point getPointToDoComment() throws UiObjectNotFoundException, IOException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         Point point = new Point();
         navToBroadcasts();
