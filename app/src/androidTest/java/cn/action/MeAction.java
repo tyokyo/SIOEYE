@@ -76,7 +76,7 @@ public class MeAction extends VP2{
         gDevice.wait(Until.gone(By.res(MePage.IS_LOCATING)),20000);
         Spoon.screenshot("navToNotifications");
     }
-    //Go to 消息
+    //Go to 设置
     public static void navToSettings(){
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.SETTINGS_USER_MAIN);

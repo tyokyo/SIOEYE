@@ -8,7 +8,6 @@ import android.support.test.uiautomator.Until;
 import com.squareup.spoon.Spoon;
 import java.util.Random;
 import java.util.logging.Logger;
-
 import ckt.base.VP2;
 import cn.page.AccountPage;
 import cn.page.App;
@@ -49,6 +48,24 @@ public class AccountAction extends VP2{
         clickById(MePage.ID_MAIN_TAB_ME);
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             clickByText("登录");
+            /*
+            如果手机sdcard存在config.properties
+            并且内容为
+            user_name    =***********
+            user_password=***********
+            第一优先级采用这个账号登录app
+            如果没有配置:
+            采用cn.page.Constant.java 文件中的Constant.userName Constant.passwd 登录app
+            * */
+            String useName=Constant.getUserName();
+            String password=Constant.getPassword();
+            if (useName!=null&&password!=null){
+                logger.info(String.format("use config.properties userName:%s password:%s to login app",useName,password));
+            }else{
+                useName=Constant.userName;
+                password=Constant.passwd;
+                logger.info(String.format("use local userName:%s password:%s to login app",Constant.userName,Constant.passwd));
+            }
             //input username
             //getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).click();
             getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(Constant.userName);
@@ -58,6 +75,8 @@ public class AccountAction extends VP2{
             //login
             clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
             waitUntilFind(MePage.ID_MAIN_TAB_ME,20);
+        }else{
+            logger.info("处于登录状态，不需要重新登录账号");
         }
         Spoon.screenshot("inLogin");
     }
