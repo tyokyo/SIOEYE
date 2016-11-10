@@ -49,4 +49,6 @@ public class Discover {
     public static final String ID_MAIN_TAB_WATCH="com.sioeye.sioeyeapp:id/main_tab_live ";
     public static final String ID_WATCHER_COUNT = "com.sioeye.sioeyeapp:id/watch_player_portrait_watcher_count";
     public static final String ID_MAIN_TAB_ME = "com.sioeye.sioeyeapp:id/table_me";
+    //下拉刷新小人
+    public static final String ID_Reloading_gif ="com.sioeye.sioeyeapp:id/status_image";
 }
