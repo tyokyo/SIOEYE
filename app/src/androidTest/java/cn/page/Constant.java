@@ -37,4 +37,16 @@ public class Constant {
         String userName=Property.getValueByKey(config,"user_password");
         return userName;
     }
+    //nick name for search
+    public static String CORRECT_NICK_NAME = "tyokyo";
+    //nick name for search
+    public static String WRONG_NICK_NAME = "QWEJHI";
+    //nick name for eye id
+    public static String CORRECT_SIO_EYE_ID = "tyo000";
+    //nick name for eye id
+    public static String WRONG_SIO_EYE_ID = "QWEJHI";
+    //nick name for email
+    public static String CORRECT_EMAIL = "123qq@163.com";
+    //nick name for email
+    public static String WRONG_EMAIL = "123pp@178.com";
 }
