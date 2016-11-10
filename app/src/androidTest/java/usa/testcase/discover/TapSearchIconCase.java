@@ -43,9 +43,10 @@ public class TapSearchIconCase extends VP2{
     //双击search图标进入搜索
     public void  TapSearchIconTwice() throws UiObjectNotFoundException, IOException {
         DiscoverAction.navToSearch();
+        waitTime(1);
         DiscoverAction.navToSearch();
         waitTime(1);
-        if (!getObjectById("com.sioeye.sioeyeapp:id/search_filter_input").exists()) {
+        if (!getObjectById(Discover.ID_SEARCH_FILTER_INPUT).exists()) {
             Spoon.screenshot("tapsearchtwicefail", "点击两次进入搜索界面");
             Assert.fail("跳转失败");
         }
