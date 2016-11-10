@@ -28,7 +28,7 @@ public class reloadingAtDiscover extends VP2 {
     }
     @Test
     public  void reloadingAtDiscover() throws UiObjectNotFoundException {
-        getObjectById(Discover.ID_DISCOVER_MAIN_CONTENT).swipeDown(1);
+        getObjectById(Discover.ID_DISCOVER_MAIN_CONTENT).swipeDown(12);
         if (!getObjectById(Discover.ID_Reloading_gif).exists()){
             Spoon.screenshot("reloadingatdiscoverfail","在discover界面下拉刷新失败");
             Assert.fail("刷新失败");
