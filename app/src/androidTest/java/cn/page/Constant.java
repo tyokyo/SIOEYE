@@ -28,12 +28,12 @@ public class Constant {
     public static  final  String sioeye_id = "qqc123456";
 
     public static String getUserName(){
-        String config= Environment.getExternalStorageDirectory()+ File.separator+"config.1properties";
+        String config= Environment.getExternalStorageDirectory()+ File.separator+"config.properties";
         String userName=Property.getValueByKey(config,"user_name");
         return userName;
     }
     public static String getPassword(){
-        String config= Environment.getExternalStorageDirectory()+ File.separator+"config.1properties";
+        String config= Environment.getExternalStorageDirectory()+ File.separator+"config.properties";
         String userName=Property.getValueByKey(config,"user_password");
         return userName;
     }
