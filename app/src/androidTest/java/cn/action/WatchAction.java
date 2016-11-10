@@ -21,7 +21,7 @@ public class WatchAction extends VP2{
      */
     public static void searchFollowingUser(String sioEyeId) throws IOException, UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
-        Point p = MeAction.getSearchLocation();
+        Point p = MeAction.getPointToDoComment();
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
 
         clickByText("Watch");
