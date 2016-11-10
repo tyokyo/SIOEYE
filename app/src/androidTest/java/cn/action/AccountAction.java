@@ -7,16 +7,18 @@ import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import com.squareup.spoon.Spoon;
 import java.util.Random;
+import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
 import cn.page.MePage;
-
 /**
  * Created by admin on 2016/11/2.
  **/
 public class AccountAction extends VP2{
+    private static Logger logger=Logger.getLogger(AccountAction.class.getName());
     //注销账号
     /*如果当前处于登录状态，注销账号
     如果当前已处于注销状态，退出
@@ -27,10 +29,12 @@ public class AccountAction extends VP2{
         clickById(MePage.SETTINGS_USER_MAIN);
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             //当前账号已经处于logout状态
+            logger.info("当前账号已经处于logout状态");
         }else{
             clickById(AccountPage.LOG_OUT);
             clickById(AccountPage.LOG_OUT_OK);
             //wait logout
+            logger.info("登录成功");
         }
     }
     //判断是否处于登录状态
