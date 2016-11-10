@@ -1,5 +1,6 @@
 package cn.testcase.me;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -134,13 +135,15 @@ public class BroadCastsCase extends VP2{
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
             String input_title=getRandomString(70);
-            clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
-            shellInputText(input_title);
-            gDevice.pressBack();
+            //clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            clearText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            setText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,input_title);
             //确认
             clickById(MePage.BROADCAST_EDIT_OK);
             //wait time
             waitTime(5);
+            waitUntilFind(MePage.BROADCAST_TITLE,10000);
+            Spoon.screenshot("modify_title_complete");
             //check
             BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
             String active_title = activeBean.getBroadcast_title();
