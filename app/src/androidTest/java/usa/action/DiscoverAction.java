@@ -12,7 +12,6 @@ import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
 import org.junit.Assert;
-
 import java.util.List;
 import ckt.base.VP2;
 import usa.page.Discover;
@@ -95,5 +94,11 @@ public class DiscoverAction extends VP2 {
         clickByClass("android.widget.ImageView",2);
         //关闭弹出框
     }
+        //得到UIO对象里面的数字
+        private static int getPersonNumber(UiObject UIO) throws UiObjectNotFoundException {
+            String CountPerson = UIO.getChild(new UiSelector().index(0)).getText();
+            int PersonNumber = Integer.getInteger(CountPerson);
+            return  PersonNumber;
+        }
 }
 
