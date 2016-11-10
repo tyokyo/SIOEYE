@@ -64,6 +64,7 @@ public class DiscoverAction extends VP2 {
         public static void scrollRecommandList() throws UiObjectNotFoundException {
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
             getObjectById(Discover.ID_MAIN_TAB_RECOMMAND_LIST).swipeLeft(2);
+            //向左滑动2步
         }
         public static void checkAddFriendsInMyFollowing(String target_nick_name) throws UiObjectNotFoundException {
             clickById(Discover.ID_MAIN_TAB_ME);
