@@ -34,7 +34,9 @@ public class AccountAction extends VP2{
             clickById(AccountPage.LOG_OUT);
             clickById(AccountPage.LOG_OUT_OK);
             //wait logout
-            logger.info("登录成功");
+            waitUntilFind(MePage.ID_MAIN_TAB_ME,60000);
+            logger.info("LogOut success");
+            Spoon.screenshot("logOut");
         }
     }
     //判断是否处于登录状态
