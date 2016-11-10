@@ -15,6 +15,7 @@ import java.util.Random;
 
 import ckt.base.VP2;
 import usa.page.App;
+import usa.page.Device;
 import usa.page.Me;
 import usa.page.Watch;
 
@@ -66,5 +67,19 @@ public class Nav extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
         return  point;
     }
-
+    //进入watch tab
+    public static void navToWatch(){
+        clickById(Watch.WATCH_NAVIGATOR);
+    }
+    //进入Me tab
+    public static void navToMe(){
+        clickById(Me.ID_MAIN_TAB_ME);
+    }
+    //进入device tab
+    public static void navToDevice(){
+        clickById(Device.ID_device_Tab);
+    }
+    public static void navToBrodcasts() {
+        clickById(Me.ID_ME_BROADCAST);
+    }
 }
