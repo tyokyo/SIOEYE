@@ -28,12 +28,19 @@ public class SwitchTab extends VP2 {
     @Test
     public void SwitchTab(){
         Nav.navToDevice();
+        waitTime(1);
         Nav.navToBrodcasts();
+        waitTime(1);
         Nav.navToMe();
+        waitTime(1);
         Nav.navToWatch();
+        waitTime(1);
         Nav.navToDevice();
+        waitTime(1);
         Nav.navToMe();
+        waitTime(1);
         Nav.navToBrodcasts();
+        waitTime(1);
         if (!getObjectById(Discover.ID_MAIN_TAB_AD_SPALSH).exists()){
             Spoon.screenshot("switchtabfail","切换tab失败");
             Assert.fail("切换tab失败");
