@@ -76,6 +76,7 @@ public class BroadcastAction extends VP2{
             }
         }
     }
+    //视频回放页面的播放数-点赞数-评论数
     public static WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {
         WatcherBean watcherBean = new WatcherBean();
         UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.BROADCAST_VIEW_WATCHER_COUNT));
