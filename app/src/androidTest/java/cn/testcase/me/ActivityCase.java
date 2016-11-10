@@ -60,8 +60,9 @@ public class ActivityCase extends VP2{
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //check
         clickById(MePage.NAV_EDIT_ACTIVITY);
-        waitUntilFind(MePage.IS_LOCATING,3000);
-        waitUntilGone(MePage.IS_LOCATING,30000);
+        //waitUntilGone(MePage.IS_LOCATING,30000);
+        //等待加载完成
+        waitUntilFind(MePage.ACTIVITY_INTERESTS,30000);
         //获取我的爱好列表
         Set re2 = ActivityAction.getAllMyInterests();
         //验证
@@ -83,8 +84,10 @@ public class ActivityCase extends VP2{
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //check
         clickById(MePage.NAV_EDIT_ACTIVITY);
-        waitUntilFind(MePage.IS_LOCATING,3000);
-        waitUntilGone(MePage.IS_LOCATING,30000);
+        //waitUntilGone(MePage.IS_LOCATING,30000);
+        //等待加载完成
+        waitUntilFind(MePage.ACTIVITY_INTERESTS,30000);
+
         //获取当前已经添加的爱好
         Set<String> re2 = ActivityAction.getAllMyInterests();
         //验证
@@ -115,7 +118,9 @@ public class ActivityCase extends VP2{
         //check
         clickById(MePage.NAV_EDIT_ACTIVITY);
         waitTime(2);
-        waitUntilGone(MePage.IS_LOCATING,30);
+        //waitUntilGone(MePage.IS_LOCATING,30000);
+        //等待加载完成
+        waitUntilFind(MePage.ACTIVITY_INTERESTS,30000);
         //获取爱好内容列表
         Set activeSet = ActivityAction.getAllMyInterests();
         //验证
@@ -134,8 +139,9 @@ public class ActivityCase extends VP2{
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //check
         clickById(MePage.NAV_EDIT_ACTIVITY);
-        waitUntilFind(MePage.IS_LOCATING,3000);
-        waitUntilGone(MePage.IS_LOCATING,30000);
+        //waitUntilGone(MePage.IS_LOCATING,30000);
+        //等待加载完成
+        waitUntilFind(MePage.ACTIVITY_INTERESTS,30000);
         //后去已经添加的爱好列表
         Set activeSet = ActivityAction.getAllMyInterests();
         //check
