@@ -934,4 +934,10 @@ public class VP2 extends  VP{
     public static Rect getRect(String ResourceID) throws UiObjectNotFoundException {
         return  getObjectById(ResourceID).getBounds();
     }
+    /**
+     *clear text in the textField
+     */
+    public static void clearText(String ResourceID) throws UiObjectNotFoundException {
+        getObjectById(ResourceID).clearTextField();
+    }
 }
