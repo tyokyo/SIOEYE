@@ -154,7 +154,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_Add_Input_MyInterests_String_10c() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         //go to activities
         MeAction.navToActivities();
         //删除所有的interests
@@ -184,7 +184,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_Add_Input_MyInterests_String_40c() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         //go to activities
         MeAction.navToActivities();
         //delete all interest
@@ -213,7 +213,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_Add_Input_MyInterests_10() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         MeAction.navToActivities();
         //delete all
         ActivityAction.deleteAllMyInterests();
@@ -243,7 +243,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_ErrorSymbol() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point p = MeAction.getSearchLocation();
+        Point p = MeAction.getPointToDoComment();
         //go to activities
         MeAction.navToActivities();
         ActivityAction.deleteAllMyInterests();
@@ -266,7 +266,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_Symbol() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         MeAction.navToActivities();
         ActivityAction.deleteAllMyInterests();
         Set myInterests_before_add = ActivityAction.getAllMyInterests();
@@ -289,7 +289,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_MyInterests_back() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point p = MeAction.getSearchLocation();
+        Point p = MeAction.getPointToDoComment();
         MeAction.navToActivities();
         ActivityAction.deleteAllMyInterests();
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
@@ -315,7 +315,7 @@ public class ActivityCase extends VP2{
     @Test
     public void test_add_SameInterest() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
-        Point point = MeAction.getSearchLocation();
+        Point point = MeAction.getPointToDoComment();
         MeAction.navToActivities();
         //delete all interests
         ActivityAction.deleteAllMyInterests();
