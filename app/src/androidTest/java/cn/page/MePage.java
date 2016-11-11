@@ -155,7 +155,7 @@ public class MePage {
 
     //done
     public static final String LIVE_CONFIGURATION_DONE_TITLE="cn.sioeye.sioeyeapp:id/right";
-    public static final String LIVE_CONFIGURATION_DONE_PRIVACY="cn.sioeye.sioeyeapp:id/done";
+    public static final String LIVE_CONFIGURATION_DONE_PRIVACY="cn.sioeye.sioeyeapp:id/right";
     public static final String LIVE_CONFIGURATION_DONE_SLV_VIDEO="cn.sioeye.sioeyeapp:id/right";
 
     //privacy settings
@@ -228,5 +228,13 @@ public class MePage {
     public static final String FANS_VIEW_LIST="cn.sioeye.sioeyeapp:id/recycleview_followes";
     //pop up dialog -OK btn
     public static final String ID_TV_OK="cn.sioeye.sioeyeapp:id/tv_ok";
+    //谁可以看我的直播-直播选中按钮
+    //部分可见
+    public static final String WHO_CAN_VIEW_MY_BROADCAST_PARAITION="cn.sioeye.sioeyeapp:id/iv_paraition";
+    //公开
+    public static final String WHO_CAN_VIEW_MY_BROADCAST_PUBLIC="cn.sioeye.sioeyeapp:id/iv_public";
+    //秘密
+    public static final String WHO_CAN_VIEW_MY_BROADCAST_PRIVATE="cn.sioeye.sioeyeapp:id/iv_privacy";
+
 
 }
