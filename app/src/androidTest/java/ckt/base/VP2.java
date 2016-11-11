@@ -940,4 +940,11 @@ public class VP2 extends  VP{
     public static void clearText(String ResourceID) throws UiObjectNotFoundException {
         getObjectById(ResourceID).clearTextField();
     }
+    /**
+     *get objects list
+     * @param ResourceID id
+     */
+    public static List<UiObject2> findObjects(String ResourceID){
+        return  gDevice.findObjects(By.res(ResourceID));
+    }
 }
