@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import ckt.base.VP2;
+import cn.action.AccountAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
@@ -23,8 +24,9 @@ import cn.page.MePage;
 @SdkSuppress(minSdkVersion = 16)
 public class LogOutCase extends VP2 {
     @Before
-    public  void setup(){
+    public  void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        AccountAction.inLogin();
     }
     //注销Log out时->取消注销
     @Test
@@ -34,7 +36,8 @@ public class LogOutCase extends VP2 {
         clickById(AccountPage.LOG_OUT);
         clickById(AccountPage.LOG_OUT_CANCEL);
         boolean active = getObjectById(AccountPage.LOG_OUT).exists();
-        Asst.assertEquals("logout cancel",true,active);
+        Asst.assertEquals("testLogOut_Cancel",true,active);
+        Spoon.screenshot("testLogOut_Cancel");
     }
     //注销Log out
     @Test
@@ -57,6 +60,6 @@ public class LogOutCase extends VP2 {
         gDevice.wait(Until.findObject(By.res(MePage.ID_MAIN_TAB_ME)),10000);
         boolean active = getObjectById(MePage.ID_MAIN_TAB_ME).exists();
         Asst.assertEquals("Login success",true,active);
-        Spoon.screenshot("Login_success");
+        Spoon.screenshot("testLogOut_OK");
     }
 }

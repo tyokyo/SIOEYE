@@ -163,7 +163,7 @@ public class AccountCase extends VP2{
         setText(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT,email_address);
         waitUntilFind(AccountPage.SIGN_UP_ACCOUNT_TV_CONTENT,10);
         //check
-        String pop_message="邮箱已经被注册";
+        String pop_message="邮箱已被注册";
         Asst.assertEquals(pop_message,pop_message,getTex(AccountPage.SIGN_UP_ACCOUNT_TV_CONTENT));
 
         AccountAction.logInAccount(Constant.userName,Constant.passwd);
@@ -244,7 +244,7 @@ public class AccountCase extends VP2{
         setText(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT,email_address);
         waitUntilFind(AccountPage.SIGN_UP_ERROR_TIP,10);
 
-        String error_pop="无效的邮件地址";
+        String error_pop="无效邮件地址";
         Asst.assertEquals(error_pop,error_pop,getTex(AccountPage.SIGN_UP_ERROR_TIP));
 
         //注销登录

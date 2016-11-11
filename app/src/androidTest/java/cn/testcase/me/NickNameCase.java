@@ -31,8 +31,8 @@ public class NickNameCase extends VP2 {
     @Test
     public void testChangeNickNameLessThan4Character() throws UiObjectNotFoundException {
         MeAction.navToNickName();
-        getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
-        getObjectById(MePage.SAMPLE_CONTENT).setText(getRandomString(3));
+        clearText(MePage.SAMPLE_CONTENT);
+        setText(MePage.SAMPLE_CONTENT,getRandomString(3));
         clickById(MePage.USER_EDIT_DONE);
         clickById(MePage.USER_EDIT_DONE);
         clickById(MePage.USER_EDIT_DONE);
@@ -41,55 +41,44 @@ public class NickNameCase extends VP2 {
     @Test
     public void testChangeNickNameMoreThan4Character() throws UiObjectNotFoundException {
         MeAction.navToNickName();
-        getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
+        clearText(MePage.SAMPLE_CONTENT);
         String nickname = getRandomString(4);
-        getObjectById(MePage.SAMPLE_CONTENT).setText(nickname);
+        setText(MePage.SAMPLE_CONTENT,nickname);
         clickById(MePage.USER_EDIT_DONE);
         waitTime(3);
-        String currentNick = getObjectById(MePage.GETNICKNAMECONTENT).getText();
+        String currentNick =getTex(MePage.GETNICKNAMECONTENT);
         if (!nickname.equals(currentNick)){
             Assert.fail("nick name change failed");
         }
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
-    public void testChangeNickNameMaxCharacter() throws UiObjectNotFoundException {
+    public void testChangeNickNameMaxCharacter() throws UiObjectNotFoundException, IOException {
         MeAction.navToNickName();
-        getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
+        clearText(MePage.SAMPLE_CONTENT);
         String nickname = getRandomString(60);
-        try {
-            gDevice.executeShellCommand("input text "+nickname);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        shellInputText(nickname);
         clickById(MePage.USER_EDIT_DONE);
         waitTime(3);
-        String currentNick = getObjectById(MePage.GETNICKNAMECONTENT).getText();
-
+        String currentNick = getTex(MePage.GETNICKNAMECONTENT);
         if (currentNick.length()!=30){
             Asst.fail("max length is 30");
         }
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
-    public void testChangeNickNameNotSave() throws UiObjectNotFoundException {
+    public void testChangeNickNameNotSave() throws UiObjectNotFoundException, IOException {
         clickById(MePage.ID_MAIN_TAB_ME);
         Spoon.screenshot(gDevice,"Me");
         clickById(MePage.ID_USER_EDIT);
-        String nicknameBefore = getObjectById(MePage.GETNICKNAMECONTENT).getText();
+        String nicknameBefore = getTex(MePage.GETNICKNAMECONTENT);
         clickById(MePage.NAV_EDIT_NICKNAME);
-
-        getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
+        clearText(MePage.SAMPLE_CONTENT);
         String nickname = getRandomString(20);
-        try {
-            gDevice.executeShellCommand("input text "+nickname);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        shellInputText(nickname);
         gDevice.pressBack();
         waitTime(3);
-        String currentNick = getObjectById(MePage.GETNICKNAMECONTENT).getText();
-
+        String currentNick = getTex(MePage.GETNICKNAMECONTENT);
         if (!nicknameBefore.equals(currentNick)){
             Assert.fail("change nick but not save it");
         }

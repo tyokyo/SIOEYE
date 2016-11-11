@@ -45,8 +45,8 @@ public class LocationCase extends VP2{
         if (getObjectById(Me.IS_LOCATING).exists()){
             gDevice.pressBack();
         }
-        if (getUiObjectByText("locating").exists()){
-            clickByText("locating");
+        if (getUiObjectByText("定位中").exists()){
+            clickByText("定位中");
             waitTime(2);
             gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),60000);
             Asst.assertTrue("locating time out in 60 seconds",!getObjectById(Me.IS_LOCATING).exists());

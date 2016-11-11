@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.List;
 import ckt.base.VP2;
+import cn.action.AccountAction;
 import cn.action.MeAction;
 import cn.page.App;
 import cn.page.MePage;
@@ -24,11 +25,12 @@ import cn.page.MePage;
 @SdkSuppress(minSdkVersion = 16)
 public class LiveConfigCase extends VP2{
     @Before
-    public  void setup(){
+    public  void setup() throws UiObjectNotFoundException {
         openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_EN);
+        AccountAction.inLogin();
     }
 
-    //video title set to length 3
+    //直播标题内容设置-长度-3
     @Test
     public void test_default_video_title_3() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -47,7 +49,7 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
 
     }
-    //set video title to length 69
+    //直播标题内容设置-长度-69
     @Test
     public void test_default_video_title_69() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -66,13 +68,13 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
 
     }
-    //set video title to length 70
+    //直播标题内容设置-长度-120
     @Test
-    public void test_default_video_title_70() throws UiObjectNotFoundException, IOException {
+    public void test_default_video_title_120() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
-        String expect = getRandomString(70);
+        String expect = getRandomString(120);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
@@ -85,13 +87,13 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
 
     }
-    //set video title to 100 （bigger than max 70）
+    //直播标题内容设置-长度->170(最多允许设置120)
     @Test
-    public void test_default_video_title_100() throws UiObjectNotFoundException, IOException {
+    public void test_default_video_title_170() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
-        String expect = getRandomString(100);
+        String expect = getRandomString(170);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
@@ -99,7 +101,8 @@ public class LiveConfigCase extends VP2{
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
-        expect=expect.substring(0,70);
+        logger.info("length:"+active.length());
+        expect=expect.substring(0,120);
         Asst.assertEquals("修改video title",expect,active);
         gDevice.pressBack();
         gDevice.pressBack();
@@ -116,9 +119,10 @@ public class LiveConfigCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
-        boolean is_checked=getObjectById(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT).isChecked();
-        Asst.assertEquals("set Privacy Setting:Public",true,is_checked);
-        Spoon.screenshot("Public","Privacy_Settings_Public");
+
+        String permission=MeAction.getPermissionToView();
+        Asst.assertEquals("set Privacy Setting:Public","public",permission);
+        Spoon.screenshot("Public","Permission_Public");
     }
     //privacy_settings to private
     @Test
@@ -131,144 +135,23 @@ public class LiveConfigCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
-        boolean is_checked=getObjectById(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT).isChecked();
-        Asst.assertEquals("set Privacy Setting:Public",false,is_checked);
+        String permission=MeAction.getPermissionToView();
+        Asst.assertEquals("set Privacy Setting:Public","private",permission);
         Spoon.screenshot("Public","Privacy_Settings_Private");
     }
-    //simulcast set to length 4
     @Test
-    public void test_simulcast_4char() throws UiObjectNotFoundException, IOException {
+    public void test_privacy_settings_personal() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_SLV_VIDEO);
-        getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
-        String expect = getRandomString(4);
-        shellInputText(expect);
-        clickById(MePage.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
+        clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
+        MeAction.setToPersonal();
+
+        clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
 
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_SLV_VIDEO);
-        String active = getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
-        //expect=expect.substring(0,70);
-        Asst.assertEquals("SLV:",expect,active);
-        gDevice.pressBack();
-        gDevice.pressBack();
-    }
-    //设置最大字符长度70
-    @Test
-    public void test_simulcast_70char() throws UiObjectNotFoundException, IOException {
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_SLV_VIDEO);
-        getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
-        String expect = getRandomString(70);
-        shellInputText(expect);
-        clickById(MePage.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
-
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_SLV_VIDEO);
-        String active = getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
-        //expect=expect.substring(0,70);
-        Asst.assertEquals("SLV:",expect,active);
-        gDevice.pressBack();
-        gDevice.pressBack();
-    }
-    //设置超过最大字符数限制
-    @Test
-    public void test_simulcast_120char() throws UiObjectNotFoundException, IOException {
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_SLV_VIDEO);
-        getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
-        String expect = getRandomString(120);
-        shellInputText(expect);
-        clickById(MePage.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
-
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_SLV_VIDEO);
-        String active = getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
-        //expect=expect.substring(0,70);
-        Asst.assertEquals("SLV:",expect,active);
-        gDevice.pressBack();
-        gDevice.pressBack();
-    }
-    //设置超过最大字符数限制
-    @Test
-    public void test_simulcast_500char() throws UiObjectNotFoundException, IOException {
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_SLV_VIDEO);
-        getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
-        String expect = getRandomString(500);
-        shellInputText(expect);
-        clickById(MePage.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
-
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_SLV_VIDEO);
-        String active = getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
-        expect=expect.substring(0,120);
-        Asst.assertEquals("SLV:",expect,active);
-        gDevice.pressBack();
-        gDevice.pressBack();
-    }
-    //设置public_viewing_link 10
-    @Test
-    public void test_public_viewing_link_10char() throws UiObjectNotFoundException, IOException {
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_LINK);
-        getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
-        String expect = getRandomString(10);
-        shellInputText(expect);
-        clickById(MePage.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
-
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_LINK);
-        String active = getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
-        //expect=expect.substring(0,120);
-        Asst.assertEquals("Publish viewing link::",expect,active);
-
-        gDevice.pressBack();
-        gDevice.pressBack();
-    }
-    //设置public_viewing_link 120
-    @Test
-    public void test_public_viewing_link_120char() throws UiObjectNotFoundException, IOException {
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_LINK);
-        getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
-        String expect = getRandomString(120);
-        shellInputText(expect);
-        clickById(MePage.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
-
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_LINK);
-        String active = getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
-        //expect=expect.substring(0,120);
-        Asst.assertEquals("Publish viewing link::",expect,active);
-        Spoon.screenshot("link_120c");
-        gDevice.pressBack();
-        gDevice.pressBack();
-    }
-    //设置public_viewing_link 超过最大字符数限制
-    @Test
-    public void test_public_viewing_link_500char() throws UiObjectNotFoundException, IOException {
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_LINK);
-        getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).clearTextField();
-        String expect = getRandomString(500);
-        shellInputText(expect);
-        clickById(MePage.LIVE_CONFIGURATION_DONE_SLV_VIDEO);
-
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
-        MeAction.navToLiveConfiguration();
-        clickById(MePage.LIVE_CONFIGURATION_LINK);
-        String active = getObjectById(MePage.LIVE_CONFIGURATION_SLV_SHARE_CONTENT).getText();
-        expect=expect.substring(0,120);
-        Asst.assertEquals("Publish viewing link:link_500c:",expect,active);
-        Spoon.screenshot("link_500c");
-        gDevice.pressBack();
-        gDevice.pressBack();
+        clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
+        String permission=MeAction.getPermissionToView();
+        Asst.assertEquals("set Privacy Setting:Public","private",permission);
+        Spoon.screenshot("Public","Privacy_Settings_Private");
     }
 }

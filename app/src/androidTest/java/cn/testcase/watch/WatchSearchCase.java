@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import ckt.base.VP2;
+import cn.action.AccountAction;
 import cn.action.MeAction;
 import cn.action.WatchAction;
 import cn.page.App;
@@ -22,8 +23,9 @@ import cn.page.WatchPage;
 @SdkSuppress(minSdkVersion = 18)
 public class WatchSearchCase extends VP2 {
     @Before
-    public void setup() {
+    public void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        AccountAction.inLogin();
     }
 
     /*验证搜索功能

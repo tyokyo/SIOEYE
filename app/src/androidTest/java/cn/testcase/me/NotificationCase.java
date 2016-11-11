@@ -36,7 +36,7 @@ public class NotificationCase extends VP2 {
     public void testNotificationAD() throws UiObjectNotFoundException {
         MeAction.navToNotifications();
         waitTime(3);
-        int f_users = gDevice.findObjects(By.res(Me.NOTIFICATIONS_USER_FOLLOW)).size();
+        int f_users = findObjects(Me.NOTIFICATIONS_USER_FOLLOW).size();
         if (f_users>=1) {
             Rect rect = getObjectById(Me.NOTIFICATIONS_USER_FOLLOW).getBounds();
             int width = gDevice.getDisplayWidth();
@@ -49,12 +49,11 @@ public class NotificationCase extends VP2 {
             Spoon.screenshot("delete_all_who_followed_me_"+username);
             gDevice.pressBack();
             MeAction.navToFans();
-            followed = gDevice.findObjects(By.res(Me.USER_FOLLOW)).size();
+            followed = findObjects(Me.USER_FOLLOW).size();
 
             Asst.assertEquals("delete_followed_user",f_users-1,followed);
             Spoon.screenshot("delete_all_who_followed_me_"+username);
             gDevice.pressBack();
-
             /*//+Follow
             MeAction.navToNotifications();
             Rect rect1 = getUiObjectByTextContains(username).getBounds();
