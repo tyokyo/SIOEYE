@@ -246,4 +246,20 @@ public class MeAction extends VP2{
         String me = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
         return  me;
     }
+    //谁可以看我的直播-设置为public
+    public static void setToPublic() throws UiObjectNotFoundException {
+        List<UiObject2> cbx = gDevice.findObjects(By.res(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT));
+        boolean is_checked=getObjectById(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT).isChecked();
+        if (!is_checked){
+            clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT);
+        }
+    }
+    //谁可以看我的直播-设置为private
+    public static void setToPrivate() throws UiObjectNotFoundException {
+        setToPublic();
+        List<UiObject2> cbx = gDevice.findObjects(By.res(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT));
+        for (UiObject2 box:cbx) {
+            box.click();
+        }
+    }
 }
