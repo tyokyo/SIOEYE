@@ -105,26 +105,12 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
 
     }
-    public void setToPublic() throws UiObjectNotFoundException {
-        List<UiObject2> cbx = gDevice.findObjects(By.res(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT));
-        boolean is_checked=getObjectById(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT).isChecked();
-        if (!is_checked){
-            clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT);
-        }
-    }
-    public void setToPrivate() throws UiObjectNotFoundException {
-        setToPublic();
-        List<UiObject2> cbx = gDevice.findObjects(By.res(MePage.LIVE_CONFIGURATION_PRIVACY_SELECT));
-        for (UiObject2 box:cbx) {
-            box.click();
-        }
-    }
     //privacy_settings to public
     @Test
     public void test_privacy_settings_public() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
-        setToPublic();
+        MeAction.setToPublic();
         clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
 
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
@@ -139,7 +125,7 @@ public class LiveConfigCase extends VP2{
     public void test_privacy_settings_private() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
-        setToPrivate();
+        MeAction.setToPrivate();
         clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
 
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
