@@ -34,4 +34,6 @@ public class Account {
     public static String SIGN_UP_ACCOUNT_TV_CONTENT = "com.sioeye.sioeyeapp:id/tv_content";
     //logout loading
     public static final String ACCOUNT_LOGOUT="com.sioeye.sioeyeapp:id/llt_layout";
+    //绿色的登录按钮
+    public static final String ACCOUNT_LOGIN="com.sioeye.sioeyeapp:id/rl_root";
 }
