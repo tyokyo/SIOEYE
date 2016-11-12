@@ -26,6 +26,7 @@ public class SwitchTab extends VP2 {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
+    //快速切换tab
     public void SwitchTab(){
         Nav.navToDevice();
         waitTime(1);
