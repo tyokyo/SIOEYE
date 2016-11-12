@@ -94,7 +94,7 @@ public class DiscoverAction extends VP2 {
         //关闭弹出框
     }
         //得到UIO对象里面的数字
-        private static int getPersonNumber(UiObject UIO) throws UiObjectNotFoundException {
+        public static int getPersonNumber(UiObject UIO) throws UiObjectNotFoundException {
             String CountPerson = UIO.getChild(new UiSelector().index(0)).getText();
             int PersonNumber = Integer.getInteger(CountPerson);
             return  PersonNumber;
