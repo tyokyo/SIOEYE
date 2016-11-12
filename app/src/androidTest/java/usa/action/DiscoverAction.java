@@ -84,7 +84,7 @@ public class DiscoverAction extends VP2 {
         //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
         clickById(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
         //关注操作
-        waitTime(1);
+        waitTime(3);
         int active_NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
         //关注后该目标用户的Follower的数量，
         Spoon.screenshot("testAddFriendsRecommend0");
