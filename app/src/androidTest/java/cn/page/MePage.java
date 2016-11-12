@@ -145,6 +145,7 @@ public class MePage {
     //进入live configuration 界面
     public static final String LIVE_CONFIGURATION="cn.sioeye.sioeyeapp:id/user_main_live_configuation";
     public static final String LIVE_CONFIGURATION_VIDEO_TITLE="cn.sioeye.sioeyeapp:id/video_title";
+    //谁可以看我的直播
     public static final String LIVE_CONFIGURATION_PRIVACY_SETTINGS="cn.sioeye.sioeyeapp:id/privacy_settings";
     public static final String LIVE_CONFIGURATION_SLV_VIDEO="cn.sioeye.sioeyeapp:id/slv_video";
     public static final String LIVE_CONFIGURATION_LINK="cn.sioeye.sioeyeapp:id/link";
@@ -157,7 +158,8 @@ public class MePage {
     public static final String LIVE_CONFIGURATION_DONE_TITLE="cn.sioeye.sioeyeapp:id/right";
     public static final String LIVE_CONFIGURATION_DONE_PRIVACY="cn.sioeye.sioeyeapp:id/right";
     public static final String LIVE_CONFIGURATION_DONE_SLV_VIDEO="cn.sioeye.sioeyeapp:id/right";
-
+    public static final String PRIVACY_PERSONAL_DONE="cn.sioeye.sioeyeapp:id/done";
+    public static final String PRIVACY_PERSONAL_RIGHT="cn.sioeye.sioeyeapp:id/right";
     //privacy settings
     public static final String LIVE_CONFIGURATION_PRIVACY_SETTINGS_SELECT_PEOPLE="cn.sioeye.sioeyeapp:id/llt_select_people";
 
@@ -235,6 +237,11 @@ public class MePage {
     public static final String WHO_CAN_VIEW_MY_BROADCAST_PUBLIC="cn.sioeye.sioeyeapp:id/iv_public";
     //秘密
     public static final String WHO_CAN_VIEW_MY_BROADCAST_PRIVATE="cn.sioeye.sioeyeapp:id/iv_privacy";
+    //选择的用户的头像
+    public static final String SHOW_USERING="cn.sioeye.sioeyeapp:id/show_userimg";
+    public static final String SELECT_PEOPLE="cn.sioeye.sioeyeapp:id/llt_select_people";
+    public static final String SELECT_PEOPLE_LIST_Vertical="cn.sioeye.sioeyeapp:id/vertical_recycleview";
+    public static final String SELECT_PEOPLE_LIST_Horizontal="cn.sioeye.sioeyeapp:id/horizontal_recycleview";
 
 
 }

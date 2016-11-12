@@ -140,8 +140,13 @@ public class HelpCase extends VP2{
         gDevice.wait(Until.findObject(By.res(MePage.HELP_HELP_NAV_WEB)),20000);
         Spoon.screenshot("HELP_HELP");
         waitTime(3);
-        String webAddress=getObjectById(MePage.HELP_HELP_NAV_WEB).getText();
-        Asst.assertEquals("back logo success","support.sioeye.com/support/home",webAddress);
+        if(id_exists("android:id/button1")){
+            clickById("android:id/button1");
+        }
+        waitTime(3);
+        //String webAddress=getObjectById(MePage.HELP_HELP_NAV_WEB).getText();
+        Spoon.screenshot("Support_sioEye");
+        Asst.assertEquals("back logo success",true,text_exists("Support - Sioeye 喜爱直播"));
     }
     //back btn for need help domain
     @Test

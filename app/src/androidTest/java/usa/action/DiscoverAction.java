@@ -86,10 +86,10 @@ public class DiscoverAction extends VP2 {
         //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
         clickById(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
         //关注操作
-        waitTime(1);
+        waitTime(3);
         int active_NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
         //关注后该目标用户的Follower的数量，
-        Spoon.screenshot("testAddFriendsRecommend0");
+        Spoon.screenshot("testAddFriendsRecommend0","该用户followers没有加1");
         Asst.assertEquals("添加推荐用户为好友后，该用户followers没有加1",expect_NumFollower,active_NumFollower);
         //断言该用户followers有没有+1
         clickByClass("android.widget.ImageView",2);

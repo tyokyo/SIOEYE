@@ -20,6 +20,8 @@ public class Constant {
 
     //permission allow dialog
     public static String PERMISSION_ALLOW="com.android.packageinstaller:id/permission_allow_button";
+    //email-address-qiang.zhang
+    public static  final  String tyokyo_qq_email ="896409120@qq.com";
 
     //qiuxiaian
     public static  final  String sioEye_id ="991128845";

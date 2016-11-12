@@ -10,7 +10,6 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
-
 import com.squareup.spoon.Spoon;
 import org.hamcrest.Asst;
 import org.junit.Assert;
@@ -94,22 +93,19 @@ public class EmailCase extends VP2 {
         InfoBean infoBean=MeAction.navToEmail();
         clearText(MePage.SAMPLE_CONTENT);
         String email=infoBean.getEmail();
-        String modifyAddress = Constant.qq_mail_address;
+        String modifyAddress = Constant.tyokyo_qq_email;
         setText(MePage.SAMPLE_CONTENT,modifyAddress);
-        clickById(MePage.USER_EDIT_DONE);
+        gDevice.pressBack();
         String afterModify=MeAction.getEmailAddress();
-        Assert.assertEquals("email address modify success",afterModify,modifyAddress);
+        Assert.assertEquals("email address modify success",afterModify,email);
+
         //退出登录
         AccountAction.logOutAccount();
         //登录,使用新的邮件地址登录App
-        AccountAction.logInAccount(modifyAddress, Constant.passwd);
+        AccountAction.logInAccount(Constant.getUserName(), Constant.getPassword());
         //验证登录结果
         Assert.assertEquals("login success",true,id_exists(MePage.ID_MAIN_TAB_ME));
         //Now 修改邮箱账号为默认账号
-        MeAction.navToEmail();
-        setText(MePage.SAMPLE_CONTENT,email);
-        clickById(MePage.USER_EDIT_DONE);
-        Assert.assertEquals("login success",true,text_exists(email));
-        Spoon.screenshot("chang_to_default",email);
+        Spoon.screenshot("login",email);
     }
 }
