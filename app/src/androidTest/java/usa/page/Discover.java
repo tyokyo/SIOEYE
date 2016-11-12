@@ -51,4 +51,6 @@ public class Discover {
     public static final String ID_MAIN_TAB_ME = "com.sioeye.sioeyeapp:id/table_me";
     //下拉刷新小人
     public static final String ID_Reloading_gif ="com.sioeye.sioeyeapp:id/status_image";
+
+    public static final String ID_SWIPE_TARGET =  "com.sioeye.sioeyeapp:id/swipe_target";
 }
