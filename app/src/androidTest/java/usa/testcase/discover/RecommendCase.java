@@ -1,8 +1,11 @@
 package usa.testcase.discover;
 
+import android.graphics.Rect;
+import android.os.RemoteException;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
@@ -22,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import usa.action.DiscoverAction;
@@ -29,6 +33,7 @@ import usa.action.MeAction;
 import usa.page.App;
 import usa.page.Discover;
 import usa.page.Me;
+import usa.testcase.me.ActivityCase;
 
 /**
  * Created by user on 2016/11/05   .
@@ -36,6 +41,7 @@ import usa.page.Me;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class RecommendCase extends VP2 {
+    Logger logger = Logger.getLogger(RecommendCase.class.getName());
     @Before
     public void setup() {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
@@ -154,5 +160,21 @@ public class RecommendCase extends VP2 {
             Spoon.screenshot("recommand_list","推荐列表不应该有被Follwed");
             Assert.fail("刷新后的推荐列表中被follow的用户没有消失");
         }
+    }
+    @Test
+    /*
+    关闭推荐列表
+    点击推荐列表右上角关闭按钮
+    检查推荐列表是否存在
+     */
+    public void testCloseRecommandList() throws UiObjectNotFoundException{
+        clickById(Discover.ID_MAIN_TAB_DISCOVER);
+        waitTime(3);
+        List<UiObject2> imageView=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(android.widget.ImageView.class));
+        logger.info(imageView.size()+"");
+        imageView.get(9).click();
+
+        //Rect closeRectIcon =closeIcon.getVisibleBounds();
+        //clickRect(closeRectIcon);
     }
 }
