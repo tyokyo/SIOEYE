@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.io.IOException;
 import ckt.base.VP2;
+import usa.action.DiscoverAction;
 import usa.page.App;
 import usa.page.Discover;
 
@@ -29,26 +30,25 @@ public class TapSearchIconCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
     @Test
+    //单击search按钮进入搜索
     public void TapSearchIconOnce() throws IOException, UiObjectNotFoundException {
-        gDevice.findObject(new UiSelector().className("android.widget.ImageView")).clickAndWaitForNewWindow();
+        DiscoverAction.navToSearch();
         waitTime(1);
         if (!getObjectById(Discover.ID_SEARCH_FILTER_INPUT).exists()){
-            makeToast("跳转失败",5);
-            Spoon.screenshot("tap_search_once_fail","进入搜索界面");
+            Spoon.screenshot("tap_search_once_fail","点击一次进入搜索界面");
             Assert.fail("跳转失败");
         }
     }
     @Test
+    //双击search图标进入搜索
     public void  TapSearchIconTwice() throws UiObjectNotFoundException, IOException {
-        gDevice.findObject(new UiSelector().className("android.widget.ImageView"));
+        DiscoverAction.navToSearch();
         waitTime(1);
-        gDevice.findObject(new UiSelector().className("android.widget.ImageView"));
+        DiscoverAction.navToSearch();
         waitTime(1);
-        if (!getObjectById("com.sioeye.sioeyeapp:id/search_filter_input").exists()){
+        if (!getObjectById(Discover.ID_SEARCH_FILTER_INPUT).exists()) {
+            Spoon.screenshot("tapsearchtwicefail", "点击两次进入搜索界面");
             Assert.fail("跳转失败");
-            makeToast("跳转失败",5);
-            Spoon.screenshot("tapsearchtwicefail");
         }
-        makeToast("成功",3);
     }
 }

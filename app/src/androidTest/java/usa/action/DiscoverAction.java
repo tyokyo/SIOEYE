@@ -6,6 +6,7 @@ import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.squareup.spoon.Spoon;
@@ -24,7 +25,8 @@ public class DiscoverAction extends VP2 {
 
         public static void navToSearch(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
-
+            waitTime(3);
+            gDevice.findObject(By.res("com.sioeye.sioeyeapp:id/title")).getParent().findObject(By.clazz(ImageView.class)).click();
         }
         public static void navToAd(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
