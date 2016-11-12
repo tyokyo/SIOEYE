@@ -136,22 +136,38 @@ public class LiveConfigCase extends VP2{
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
         String permission=MeAction.getPermissionToView();
-        Asst.assertEquals("set Privacy Setting:Public","private",permission);
-        Spoon.screenshot("Public","Privacy_Settings_Private");
+        Asst.assertEquals("set Privacy Setting:private","private",permission);
+        Spoon.screenshot("private","Privacy_Settings_Private");
     }
     @Test
     public void test_privacy_settings_personal() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
+        //谁可以看我的直播
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
+        //设置为部分可见
         MeAction.setToPersonal();
-
-        clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
+        //没有选择用户
+        if (!id_exists(MePage.SELECT_PEOPLE_LIST_Horizontal)){
+            logger.info("Not select user");
+            getObject2ById(MePage.SELECT_PEOPLE_LIST_Vertical).findObjects(By.res(MePage.SELECT_PEOPLE)).get(0).click();
+        }else{
+            logger.info("select user");
+        }
+        clickById(MePage.PRIVACY_PERSONAL_DONE);
+        clickById(MePage.PRIVACY_PERSONAL_RIGHT);
 
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         MeAction.navToLiveConfiguration();
+        //谁可以看我的直播
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
+        /*//设置为部分可见
+        MeAction.setToPersonal();
+        clickById(MePage.PRIVACY_PERSONAL_DONE);
+        clickById(MePage.PRIVACY_PERSONAL_RIGHT);*/
         String permission=MeAction.getPermissionToView();
-        Asst.assertEquals("set Privacy Setting:Public","private",permission);
-        Spoon.screenshot("Public","Privacy_Settings_Private");
+        Asst.assertEquals("set Privacy Setting:Public","personal",permission);
+        Spoon.screenshot("personal");
+        MeAction.setToPersonal();
+        Spoon.screenshot("personal");
     }
 }
