@@ -108,16 +108,20 @@ public class BroadCastsCase extends VP2{
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
             String input_title=getRandomString(3);
-            getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).setText(input_title);
-            //取消
+            //clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            clearText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            setText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,input_title);
+            //确认
             clickById(MePage.BROADCAST_EDIT_OK);
             //wait time
             waitTime(5);
+            waitUntilFind(MePage.BROADCAST_TITLE,10000);
+            Spoon.screenshot("modify_title_complete");
             //check
             BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
             String active_title = activeBean.getBroadcast_title();
             Asst.assertEquals("modify title",input_title,active_title);
-            Spoon.screenshot("modify_title",input_title);
+            Spoon.screenshot("testEditTitle3",input_title);
         }
     }
     //title 输入字符长度70
