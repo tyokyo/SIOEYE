@@ -17,12 +17,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.Logger;
-
 import bean.InfoBean;
 import ckt.base.VP2;
 import ckt.tools.Property;
