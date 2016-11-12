@@ -133,9 +133,7 @@ public class RecommendCase extends VP2 {
                     Assert.fail("刷新后的推荐列表前三位与刷新前一致，请检查图片");
                 }
             }
-
         }
-
     }
     @Test
     /**case 7 Follow一个推荐列表好友后，刷新discover，
