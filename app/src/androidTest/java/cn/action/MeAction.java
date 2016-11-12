@@ -7,6 +7,7 @@ import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
+import android.widget.TextView;
 
 import com.squareup.spoon.Spoon;
 
@@ -23,6 +24,23 @@ import cn.page.MePage;
  * Created by elon on 2016/10/27.
  */
 public class MeAction extends VP2{
+    //谁可以看我的直播-获取选取的设置内容
+    public static String getPermissionToView() throws UiObjectNotFoundException {
+        String permission = "";
+        boolean status_public =id_exists(MePage.WHO_CAN_VIEW_MY_BROADCAST_PUBLIC);
+        boolean status_private =id_exists(MePage.WHO_CAN_VIEW_MY_BROADCAST_PRIVATE);
+        boolean status_personal =id_exists(MePage.WHO_CAN_VIEW_MY_BROADCAST_PARAITION);
+        if (status_public==true&&status_private==false&&status_personal==true){
+            permission="public";
+        }
+        if (status_public==false&&status_private==true&&status_personal==true){
+            permission="private";
+        }
+        if (status_public==false&&status_private==false&&status_personal==true){
+            permission="personal";
+        }
+        return  permission;
+    }
     //编辑界面所有用户的信息
     public static InfoBean getEditUserInfo() throws UiObjectNotFoundException {
         InfoBean infoBean=new InfoBean();
@@ -246,4 +264,17 @@ public class MeAction extends VP2{
         String me = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
         return  me;
     }
+    //谁可以看我的直播-设置为 公开public
+    public static void setToPublic() throws UiObjectNotFoundException {
+        clickByText("公开");
+    }
+    //谁可以看我的直播-设置为 秘密private
+    public static void setToPrivate() throws UiObjectNotFoundException {
+        clickByText("私密");
+    }
+    //谁可以看我的直播-设置为 秘密private
+    public static void setToPersonal() throws UiObjectNotFoundException {
+        clickByText("部分可见");
+    }
+
 }
