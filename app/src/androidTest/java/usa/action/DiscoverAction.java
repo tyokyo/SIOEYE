@@ -95,6 +95,7 @@ public class DiscoverAction extends VP2 {
         clickByClass("android.widget.ImageView",2);
         //关闭弹出框
     }
+
     /**
      * 得到观看人数
      * */
