@@ -39,7 +39,7 @@ public class DiscoverCase extends VP2 {
     }
     @Test
    /**
-    * 1、单击搜索图标
+    * case1、单击搜索图标
     * */
     public void testOneClickSearch() throws IOException {
         DiscoverAction.navToSearch();
@@ -52,7 +52,7 @@ public class DiscoverCase extends VP2 {
     }
     @Test
     /**
-     * 2、双击搜索图标
+     * case2、双击搜索图标
      */
     public void testDoubleClickSearch() throws IOException {
         DiscoverAction.navToSearch();
@@ -66,7 +66,7 @@ public class DiscoverCase extends VP2 {
     }
     @Test
     /**
-     *3、下拉刷新、在discover界面手指从上往下滑动
+     *case3、下拉刷新、在discover界面手指从上往下滑动
      * 思路：通过判断刷新前后的Recommand_list的头像昵称是否相同来判定是否刷新，因为刷新后，
      * 第一个头像的昵称是不一样的
      */
@@ -91,7 +91,7 @@ public class DiscoverCase extends VP2 {
     @Test
     /**
      *
-     *4.来回频繁切换主界面
+     *case4.来回频繁切换主界面
      *Result：观察APP响应情况， APP迅速响应对应操作
      */
     public void testSwipe() {
