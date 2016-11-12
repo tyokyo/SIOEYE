@@ -44,9 +44,8 @@ public class CountPersonCase extends VP2 {
         waitTime(2);
         UiObject relativeLayout = new UiObject(new UiSelector().childSelector(new UiSelector().className("android.widget.RelativeLayout").index(1)));
         Spoon.screenshot("CountPerson","找到观看人数",relativeLayout);
-        //int Expect_number = DiscoverAction.
-
-
+        int expect_number = DiscoverAction.getPersonNumber(relativeLayout);
+        clickByClass("android.view.View");
 
     }
 
