@@ -95,9 +95,7 @@ public class DiscoverAction extends VP2 {
         clickByClass("android.widget.ImageView",2);
         //关闭弹出框
     }
-    /**
-     * 得到观看人数
-     * */
+     //得到观看人数
     public static int getPersonNumber() throws UiObjectNotFoundException {
         clickById(Discover.ID_MAIN_TAB_DISCOVER);
         waitTime(10);
