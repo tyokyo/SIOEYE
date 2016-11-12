@@ -20,7 +20,7 @@ import usa.page.Discover;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
-public class SwitchTab extends VP2 {
+public class SwitchTabCase extends VP2 {
     @Before
     public  void setup(){
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
