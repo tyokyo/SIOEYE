@@ -242,6 +242,6 @@ public class MePage {
     public static final String SELECT_PEOPLE="cn.sioeye.sioeyeapp:id/llt_select_people";
     public static final String SELECT_PEOPLE_LIST_Vertical="cn.sioeye.sioeyeapp:id/vertical_recycleview";
     public static final String SELECT_PEOPLE_LIST_Horizontal="cn.sioeye.sioeyeapp:id/horizontal_recycleview";
-
-
+    //粉丝滑动列表
+    public static final String FANS_SWIPE_LAYOUT="cn.sioeye.sioeyeapp:id/swipeLayout";
 }
