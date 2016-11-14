@@ -35,6 +35,7 @@ public class FollowingAction extends VP2{
     public static Logger logger =Logger.getLogger("FollowingAction");
     //选择一个视频 播放视频
     public static void clickFollowingBroadcast() throws UiObjectNotFoundException {
+        waitUntilFind(MePage.USER_FOLLOW_LIST,10000);
         UiObject2 list =getObject2ById(MePage.USER_FOLLOW_LIST);
         List<UiObject2> frameLayoutList=list.findObjects(By.clazz(FrameLayout.class));
         List<UiObject2> videoList=new ArrayList<>();
