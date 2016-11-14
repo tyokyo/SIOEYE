@@ -220,7 +220,7 @@ public class BroadCastsCase extends VP2{
     }
     //验证-评论，允许的最大字符数
     @Test
-    public void testBroadcastsComments_Length_120() throws UiObjectNotFoundException, IOException {
+    public void testComments120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -253,7 +253,7 @@ public class BroadCastsCase extends VP2{
     }
     //验证-评论 超过最大的字符限制
     @Test
-    public void testBroadcastsComments_Length_130() throws UiObjectNotFoundException, IOException {
+    public void testComments130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -286,7 +286,7 @@ public class BroadCastsCase extends VP2{
         }
     }
     @Test
-    public void testBroadcastsComments_Length_20() throws UiObjectNotFoundException, IOException {
+    public void testComments20c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
