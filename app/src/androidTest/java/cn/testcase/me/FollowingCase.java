@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
@@ -292,6 +293,47 @@ public class FollowingCase extends VP2 {
         }else{
             logger.info("no_user");
             Spoon.screenshot("no_user","没有关注的用户");
+        }
+    }
+    /****
+     上下滑动直播列表
+     选择一个视频观看
+     * */
+    @Test
+    public void testSwipeToViewVideo() throws UiObjectNotFoundException, IOException {
+        MeAction.navToFollowing();
+        int following_size= FollowingAction.getFollowingSize();
+        if (following_size>=1){
+            //获取随机的一个用户信息
+            FollowingBean followingBean =FollowingAction.randomFollowingUser();
+            logger.info(followingBean.toString());
+            int index=followingBean.getIndex_linearLayout();
+            //选择一个用户
+            FollowingAction.clickRandomFollower(followingBean);
+            //随机播放一个视频
+            int broadcast_size=FollowingAction.hasBroadcasts();
+            if (broadcast_size>=1){
+                for (int i = 0; i <10 ; i++) {
+                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.UP,0.5f);
+                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.DOWN,0.4f);
+                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.UP,0.3f);
+                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.DOWN,0.4f);
+                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.UP,0.2f);
+                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.DOWN,0.4f);
+                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.DOWN,0.4f);
+                }
+                FollowingAction.clickFollowingBroadcast();
+                BroadcastAction.waitBroadcastLoading();
+                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);
+                //play video
+                waitTime(20);
+                Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+                Spoon.screenshot("play_video");
+                gDevice.pressBack();
+                Spoon.screenshot("play_20_seconds");
+            }else {
+                Spoon.screenshot("no_video");
+            }
         }
     }
 }

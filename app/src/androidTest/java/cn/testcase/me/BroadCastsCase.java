@@ -398,4 +398,33 @@ public class BroadCastsCase extends VP2{
             Spoon.screenshot("testBroadcastsZanKAdd");
         }
     }
+    /****
+    上下滑动直播列表
+     选择一个视频观看
+    * */
+    @Test
+    public void testSwipeToViewVideo() throws UiObjectNotFoundException {
+        MeAction.navToBroadcasts();
+        int broadcast_size=BroadcastAction.getBroadcastsSize();
+        if (broadcast_size>=1){
+            for (int i = 0; i <10 ; i++) {
+                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.UP,0.5f);
+                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.DOWN,0.4f);
+                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.UP,0.3f);
+                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.DOWN,0.4f);
+                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.UP,0.2f);
+                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.DOWN,0.4f);
+                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.DOWN,0.4f);
+            }
+            int index=BroadcastAction.getRandomBroadcastsIndex();
+            BroadcastAction.getRandomBroadcasts(index).click();
+            BroadcastAction.waitBroadcastLoading();
+            gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+            Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+            //click play screen center
+            clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+            Spoon.screenshot("play_video");
+            gDevice.pressBack();
+        }
+    }
 }

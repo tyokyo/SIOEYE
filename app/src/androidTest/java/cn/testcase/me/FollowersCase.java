@@ -5,16 +5,14 @@ import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
-
 import com.squareup.spoon.Spoon;
-
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -336,6 +334,54 @@ public class FollowersCase extends VP2 {
                 }
                 //截取屏幕
                 Spoon.screenshot("testBroadcastsZanKAdd");
+            }else{
+                logger.info("no_video");
+                Spoon.screenshot("no_video","没有视频");
+            }
+        }else{
+            logger.info("no_user");
+            Spoon.screenshot("no_user","没有关注的用户");
+        }
+    }
+    /****
+     上下滑动直播列表
+     选择一个视频观看
+     * */
+    @Test
+    public void testSwipeToViewVideo() throws UiObjectNotFoundException, IOException {
+        //进入粉丝界面
+        MeAction.navToFans();
+        //获取粉丝数
+        int following_size= FollowingAction.getFollowingSize();
+        if (following_size>=1){
+            //滑动选择粉丝
+            for (int i = 0; i <10 ; i++) {
+                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.UP,0.5f);
+                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.DOWN,0.4f);
+                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.UP,0.3f);
+                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.DOWN,0.4f);
+                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.UP,0.2f);
+                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.DOWN,0.4f);
+                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.DOWN,0.4f);
+            }
+            waitTime(3);
+            FollowingBean followingBean =FollowingAction.randomFansUser();
+            int index=followingBean.getIndex_linearLayout();
+            //随机选择一个fans
+            FollowingAction.clickRandomFollower(followingBean);
+            //进入直播列表 获取回放视频数目
+            int brd_size= BroadcastAction.getFansBroadcastsSize();
+            if (brd_size>=1){
+                //随机播放一个视频
+                FollowingAction.clickFollowingBroadcast();
+                //等待视频加载完成
+                BroadcastAction.waitBroadcastLoading();
+                waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
+                Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+                //click play screen center
+                clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+                Spoon.screenshot("play_video");
+                gDevice.pressBack();
             }else{
                 logger.info("no_video");
                 Spoon.screenshot("no_video","没有视频");
