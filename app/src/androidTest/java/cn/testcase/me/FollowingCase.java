@@ -313,15 +313,8 @@ public class FollowingCase extends VP2 {
             //随机播放一个视频
             int broadcast_size=FollowingAction.hasBroadcasts();
             if (broadcast_size>=1){
-                for (int i = 0; i <10 ; i++) {
-                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.UP,0.5f);
-                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.DOWN,0.4f);
-                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.UP,0.3f);
-                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.DOWN,0.4f);
-                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.UP,0.2f);
-                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.DOWN,0.4f);
-                    getObject2ById(MePage.USER_FOLLOW_LIST).swipe(Direction.DOWN,0.4f);
-                }
+                //滑动操作
+                MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,10);
                 FollowingAction.clickFollowingBroadcast();
                 BroadcastAction.waitBroadcastLoading();
                 waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);

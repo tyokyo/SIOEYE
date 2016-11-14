@@ -407,15 +407,7 @@ public class BroadCastsCase extends VP2{
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
-            for (int i = 0; i <10 ; i++) {
-                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.UP,0.5f);
-                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.DOWN,0.4f);
-                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.UP,0.3f);
-                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.DOWN,0.4f);
-                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.UP,0.2f);
-                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.DOWN,0.4f);
-                getObject2ById(MePage.BROADCASTS_LIST).swipe(Direction.DOWN,0.4f);
-            }
+            MeAction.swipeUpDown(MePage.BROADCASTS_LIST,10);
             int index=BroadcastAction.getRandomBroadcastsIndex();
             BroadcastAction.getRandomBroadcasts(index).click();
             BroadcastAction.waitBroadcastLoading();

@@ -355,15 +355,7 @@ public class FollowersCase extends VP2 {
         int following_size= FollowingAction.getFollowingSize();
         if (following_size>=1){
             //滑动选择粉丝
-            for (int i = 0; i <10 ; i++) {
-                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.UP,0.5f);
-                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.DOWN,0.4f);
-                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.UP,0.3f);
-                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.DOWN,0.4f);
-                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.UP,0.2f);
-                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.DOWN,0.4f);
-                getObject2ById(MePage.FANS_SWIPE_LAYOUT).swipe(Direction.DOWN,0.4f);
-            }
+            MeAction.swipeUpDown(MePage.FANS_SWIPE_LAYOUT,10);
             waitTime(3);
             FollowingBean followingBean =FollowingAction.randomFansUser();
             int index=followingBean.getIndex_linearLayout();
