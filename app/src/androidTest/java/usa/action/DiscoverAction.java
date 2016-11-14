@@ -95,11 +95,12 @@ public class DiscoverAction extends VP2 {
         clickByClass("android.widget.ImageView",2);
         //关闭弹出框
     }
-        //得到UIO对象里面的数字
-        public static int getPersonNumber(UiObject UIO) throws UiObjectNotFoundException {
-            String CountPerson = UIO.getChild(new UiSelector().index(0)).getText();
-            int PersonNumber = Integer.getInteger(CountPerson);
-            return  PersonNumber;
-        }
+     //得到观看人数
+    public static int getPersonNumber() throws UiObjectNotFoundException {
+        clickById(Discover.ID_MAIN_TAB_DISCOVER);
+        waitTime(10);
+        List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
+        return Integer.parseInt(textViews.get(9).getText());
+    }
 }
 

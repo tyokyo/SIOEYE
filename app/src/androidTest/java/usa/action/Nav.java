@@ -16,6 +16,7 @@ import java.util.Random;
 import ckt.base.VP2;
 import usa.page.App;
 import usa.page.Device;
+import usa.page.Discover;
 import usa.page.Me;
 import usa.page.Watch;
 
@@ -80,6 +81,6 @@ public class Nav extends VP2{
         clickById(Device.ID_device_Tab);
     }
     public static void navToBrodcasts() {
-        clickById(Me.ID_ME_BROADCAST);
+        clickById(Discover.ID_MAIN_TAB_DISCOVER);
     }
 }
