@@ -2,6 +2,7 @@ package cn.action;
 
 import android.graphics.Point;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -24,6 +25,16 @@ import cn.page.MePage;
  * Created by elon on 2016/10/27.
  */
 public class MeAction extends VP2{
+    public static void swipeUpDown(String ResourceID,int times) throws UiObjectNotFoundException {
+        if (id_exists(ResourceID)){
+            for (int i = 0;i <times;i++) {
+                getObject2ById(ResourceID).swipe(Direction.UP,0.5f);
+                getObject2ById(ResourceID).swipe(Direction.DOWN,0.5f);
+            }
+        }else {
+            logger.info(ResourceID +" can not be found");
+        }
+    }
     //谁可以看我的直播-获取选取的设置内容
     public static String getPermissionToView() throws UiObjectNotFoundException {
         String permission = "";
