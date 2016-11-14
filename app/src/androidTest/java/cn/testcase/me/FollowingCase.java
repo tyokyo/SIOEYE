@@ -70,7 +70,7 @@ public class FollowingCase extends VP2 {
     }
     //验证-评论，允许的最大字符数
     @Test
-    public void testFollowingComments_Length_120() throws UiObjectNotFoundException, IOException {
+    public void testFollowingComments120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -103,7 +103,7 @@ public class FollowingCase extends VP2 {
     }
     //验证-评论 超过最大的字符限制
     @Test
-    public void testFollowingComments_Length_130() throws UiObjectNotFoundException, IOException {
+    public void testFollowingComments130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -137,7 +137,7 @@ public class FollowingCase extends VP2 {
     }
     //评论-关注的好友中的直播视频
     @Test
-    public void testFollowingComments_Length_20() throws UiObjectNotFoundException, IOException {
+    public void testFollowingComments20c() throws UiObjectNotFoundException, IOException {
         //进入关注
         MeAction.navToFollowing();
         int following_size= FollowingAction.getFollowingSize();
