@@ -78,7 +78,7 @@ public class FollowersCase extends VP2 {
     }
     //验证-评论 超过最大限制的字符长度120
     @Test
-    public void testFollowersComments_Length_130() throws UiObjectNotFoundException, IOException {
+    public void testFollowersComments130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
         MeAction.navToFans();
@@ -129,7 +129,7 @@ public class FollowersCase extends VP2 {
     }
     //评论-关注的好友中的直播视频
     @Test
-    public void testFollowersComments_Length_120() throws UiObjectNotFoundException, IOException {
+    public void testFollowersComments120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
         MeAction.navToFans();
@@ -180,7 +180,7 @@ public class FollowersCase extends VP2 {
     }
     //评论-关注的好友中的直播视频
     @Test
-    public void testFollowersComments_Length_20() throws UiObjectNotFoundException, IOException {
+    public void testFollowersComments20c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
         MeAction.navToFans();
