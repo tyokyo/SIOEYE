@@ -14,7 +14,7 @@ import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
 import cn.page.App;
-import usa.page.Me;
+import cn.page.MePage;
 
 /**
  * Created by elon on 2016/10/11.
@@ -31,26 +31,38 @@ public class LocationCase extends VP2{
     @Test
     public void testSearchLocation() throws UiObjectNotFoundException {
         MeAction.navToLocation();
-        if (getObjectById(Me.IS_LOCATING).exists()){
+        if (getObjectById(MePage.IS_LOCATING).exists()){
             gDevice.pressBack();
         }
-        getObjectById(Me.SEARCH_LOCATE).setText("new");
-        gDevice.pressSearch();
+        waitUntilFind(MePage.ID_HEAD_IMAGE,60000);
+        if (id_exists(MePage.IS_LOCATING)){
+            Asst.fail("can not locate in 120s");
+        }
+        if (MeAction.getLocation()!=null){
+
+        }else{
+            Asst.fail("can not locate");
+        }
+        /*getObjectById(Me.SEARCH_LOCATE).setText("new");
+        gDevice.pressSearch();*/
     }
     //定位位置
     @Test
     public void testLocating() throws UiObjectNotFoundException {
         MeAction.navToLocation();
-        waitTime(2);
-        if (getObjectById(Me.IS_LOCATING).exists()){
-            gDevice.pressBack();
-        }
+        waitUntilFind(MePage.ID_HEAD_IMAGE,60000);
         if (getUiObjectByText("定位中").exists()){
             clickByText("定位中");
             waitTime(2);
-            gDevice.wait(Until.gone(By.res(Me.IS_LOCATING)),60000);
-            Asst.assertTrue("locating time out in 60 seconds",!getObjectById(Me.IS_LOCATING).exists());
-            Spoon.screenshot(gDevice,"locate_result");
+            waitUntilGone(MePage.IS_LOCATING,120000);
+            Asst.assertTrue("locating time out in 120 seconds",!getObjectById(MePage.IS_LOCATING).exists());
+            Spoon.screenshot("locate_result");
+        }
+        String locate_result=MeAction.getLocation();
+        if (locate_result!=null){
+
+        }else{
+            Asst.fail("can not locate");
         }
     }
 }
