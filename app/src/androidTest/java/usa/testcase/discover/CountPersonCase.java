@@ -27,6 +27,7 @@ import usa.page.Discover;
 import usa.testcase.me.ActivityCase;
 
 import static usa.action.DiscoverAction.getPersonNumber;
+import static usa.action.DiscoverAction.getZanNumber;
 
 /**
  * Created by caibing.yin on 2016/11/7.
@@ -48,13 +49,9 @@ public class CountPersonCase extends VP2 {
     @Test
     public void testCountPerson() throws UiObjectNotFoundException {
         String ClickBeforeNumber =getPersonNumber();
-        UiObject2 u1=gDevice.findObject(By.res("com.sioeye.sioeyeapp:id/swipe_target"));
-        List<UiObject2> views=u1.findObjects(By.clazz(android.view.View.class));
-        UiObject2 u3=views.get(5);
+        DiscoverAction.navtoVideo();
         logger.info("点击观看前的人数是"+ClickBeforeNumber+"人");
         Spoon.screenshot(gDevice,ClickBeforeNumber);
-        u3.click();
-        waitTime(10);
         gDevice.pressBack();
         waitTime(8);
         String ClickAfterNumber =getPersonNumber();
@@ -64,7 +61,57 @@ public class CountPersonCase extends VP2 {
         if(!Result){
             Spoon.screenshot(gDevice,"CountPersonCase_was_fail");
             logger.info("点击观看前后人数不一致");
-            Assert.fail("CountPersonCase_was_fail");
+            Assert.fail("testCountPerson_was_fail");
         }
+    }
+    /**
+     * case12:
+     *多次点赞后，点赞数统计
+     *1.对同一视频用不同账户进行点赞后，返回视频封面检查点赞总数
+     *  Result：点赞数目增加与操作的点赞次数对应
+     *备注：用不同账户暂无法实现，暂时只能用本账户的点赞；
+     * */
+    @Test
+    public void testCountZanPerson() throws UiObjectNotFoundException{
+        String ZanBeforeNumber =getZanNumber();
+        logger.info("赞前人数是"+ZanBeforeNumber+"人");
+        Spoon.screenshot(gDevice,ZanBeforeNumber);
+        DiscoverAction.navtoVideo();
+        for(int times=0;times<5;times++){
+            clickById(Discover.ID_Share_Icon);
+            waitTime(2);
+        }
+        waitTime(10);
+        gDevice.pressBack();
+        waitTime(8);
+        String ZanAfterNumber =getPersonNumber();
+        logger.info("赞后人数"+ZanAfterNumber+"人");
+        Spoon.screenshot(gDevice,ZanAfterNumber);
+        Boolean Result = (Integer.parseInt(ZanAfterNumber)==(Integer.parseInt(ZanBeforeNumber))+5);
+        if(!Result){
+            Spoon.screenshot(gDevice,"testCountZanPerson_was_fail");
+            logger.info("点击前赞的人数不一致");
+            //Assert.fail("Zan_CountPersonCase_was_fail");
+        }
+    }
+    /**
+     * case13:
+     *取消点赞后，点赞数统计
+     *1.进入视频播放界面对已经点赞的视频取消点赞后返回视频封面刷新后检查点赞数
+     *  Result：点赞数数目下降，下降数目与取消的点赞次数保持一致
+     * */
+    @Test
+    public void testCancleZan(){
+
+    }
+    /**case14:
+     *位置信息显示
+     *1.检查位置信息显示字体颜色尺寸长度位置
+     *   Result：与给出的UI设计保持一致
+     *备注：只能检查是否有位置信息
+     */
+    @Test
+    public void hasLocationService(){
+
     }
 }
