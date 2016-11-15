@@ -99,11 +99,11 @@ public class DiscoverAction extends VP2 {
         //关闭弹出框
     }
      //得到观看人数
-    public static int getPersonNumber() throws UiObjectNotFoundException {
+    public static String getPersonNumber() throws UiObjectNotFoundException {
         clickById(Discover.ID_MAIN_TAB_DISCOVER);
         waitTime(10);
         List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
-        return Integer.parseInt(textViews.get(9).getText());
+        return textViews.get(9).getText();
     }
     public static void deleteNewFollowing (String target_nick_name) throws UiObjectNotFoundException {
         clickById(Discover.ID_MAIN_TAB_ME);
