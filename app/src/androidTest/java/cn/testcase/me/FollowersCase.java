@@ -62,7 +62,6 @@ public class FollowersCase extends VP2 {
                 waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
                 Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
                 //click play screen center
-                clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
                 Spoon.screenshot("play_video");
                 gDevice.pressBack();
             }else{
