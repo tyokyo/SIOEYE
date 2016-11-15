@@ -35,8 +35,10 @@ public class BroadcastAction extends VP2{
     }
     //直播-直播数目
     public static int getBroadcastsSize(){
+        waitHasObject(MePage.BROADCAST_CONTENT,50000);
         List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_CONTENT));
         int size = lisCollect.size();
+        logger.info("getBroadcastsSize:"+size);
         return  size;
     }
     //fans-直播数目
@@ -51,10 +53,11 @@ public class BroadcastAction extends VP2{
         UiObject2 listView = gDevice.findObject(By.res(MePage.BROADCAST_VIEW));
         List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_CONTENT));
         int size = lisCollect.size();
+        logger.info("getRandomBroadcastsIndex-size:"+size);
         Random random = new Random();
         int rd = random.nextInt(size);
         logger.info("getRandomBroadcastsIndex:"+rd);
-        return  rd;
+        return  rd-1;
     }
     //随机获取一个broadcasts对象
     public static UiObject2 getRandomBroadcasts(int index){

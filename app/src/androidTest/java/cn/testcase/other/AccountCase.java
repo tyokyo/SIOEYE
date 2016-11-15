@@ -244,7 +244,7 @@ public class AccountCase extends VP2{
         setText(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT,email_address);
         waitUntilFind(AccountPage.SIGN_UP_ERROR_TIP,10);
 
-        String error_pop="无效邮件地址";
+        String error_pop="无效邮箱地址";
         Asst.assertEquals(error_pop,error_pop,getTex(AccountPage.SIGN_UP_ERROR_TIP));
 
         //注销登录
