@@ -25,6 +25,27 @@ import cn.page.MePage;
  * Created by elon on 2016/10/27.
  */
 public class MeAction extends VP2{
+    public static void clickBroadcast() throws UiObjectNotFoundException {
+        if (id_exists(MePage.ID_ME_BROADCAST)){
+            clickById(MePage.ID_ME_BROADCAST);
+        }else{
+            clickByText("直播");
+        }
+    }
+    public static void clickFollowing() throws UiObjectNotFoundException {
+        if (id_exists(MePage.ID_ME_FOLLOWING)){
+            clickById(MePage.ID_ME_FOLLOWING);
+        }else{
+            clickByText("关注");
+        }
+    }
+    public static void clickFollowers() throws UiObjectNotFoundException {
+        if (id_exists(MePage.ID_ME_FOLLOWERS)){
+            clickById(MePage.ID_ME_FOLLOWERS);
+        }else{
+            clickByText("粉丝");
+        }
+    }
     public static void swipeUpDown(String ResourceID,int times) throws UiObjectNotFoundException {
         if (id_exists(ResourceID)){
             for (int i = 0;i <times;i++) {
@@ -64,24 +85,24 @@ public class MeAction extends VP2{
         return  infoBean;
     }
     //Go to 直播
-    public static void navToBroadcasts(){
+    public static void navToBroadcasts() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.ID_ME_BROADCAST);
+        clickBroadcast();
         waitTime(2);
         gDevice.wait(Until.findObject(By.res(MePage.BROADCAST_VIEW)),40000);
         Spoon.screenshot("navToBroadcasts");
     }
     //Go to 关注
-    public static void navToFollowing(){
+    public static void navToFollowing() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.ID_ME_FOLLOWING);
+        clickFollowing();
         gDevice.wait(Until.gone(By.res(MePage.LOADING_FOLLOWERS)),40000);
         Spoon.screenshot("navToFollowing");
     }
     //Go to 粉丝
-    public static void navToFans(){
+    public static void navToFans() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.ID_ME_FOLLOWERS);
+        clickFollowers();
         gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),40000);
         Spoon.screenshot("navToFans");
     }
