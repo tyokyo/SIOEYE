@@ -5,10 +5,12 @@ import android.content.Context;
 import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
+import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
+import android.support.test.uiautomator.Until;
 
 import com.sioeye.MainActivity;
 import com.squareup.spoon.Spoon;
@@ -49,16 +51,24 @@ public class VP {
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
     public static void doNotAskPermission() throws UiObjectNotFoundException {
-        //权限请求确认-pkg com.google.android.packageinstaller
-        UiObject uiObject_permission = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
-        if (uiObject_permission.exists()){
-            logger.info("click allow-permission setting");
-            uiObject_permission.clickAndWaitForNewWindow();
-        }
-        //异常弹出框-click-OK
-        UiObject uiObject_popup = gDevice.findObject(new UiSelector().resourceId(ID_MESSAGE));
-        if (uiObject_popup.exists()){
-            gDevice.findObject(new UiSelector().resourceId("android:id/button1")).clickAndWaitForNewWindow();
+        for (int i = 0; i <10 ; i++) {
+            boolean pkg=gDevice.findObject(new UiSelector().packageName("com.sioeye")).exists();
+            if (pkg){
+                logger.info("com.sioeye launch success");
+                break;
+            }else{
+                //权限请求确认-pkg com.google.android.packageinstaller
+                UiObject uiObject_permission = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
+                if (uiObject_permission.exists()){
+                    logger.info("click allow-permission setting");
+                    uiObject_permission.clickAndWaitForNewWindow();
+                }
+                //异常弹出框-click-OK
+                UiObject uiObject_popup = gDevice.findObject(new UiSelector().resourceId(ID_MESSAGE));
+                if (uiObject_popup.exists()){
+                    gDevice.findObject(new UiSelector().resourceId("android:id/button1")).clickAndWaitForNewWindow();
+                }
+            }
         }
     }
     public static void initDevice(){
