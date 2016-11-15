@@ -47,7 +47,7 @@ public class CountPersonCase extends VP2 {
      *  Result：每次进入播放视频界面后退出视频封面界面，历史观看人数加1
      * */
     @Test
-    public void testCountPerson() throws UiObjectNotFoundException {
+    public void testCountWatchPerson() throws UiObjectNotFoundException {
         String ClickBeforeNumber =getPersonNumber();
         DiscoverAction.navtoVideo();
         logger.info("点击观看前的人数是"+ClickBeforeNumber+"人");
@@ -101,7 +101,22 @@ public class CountPersonCase extends VP2 {
      *  Result：点赞数数目下降，下降数目与取消的点赞次数保持一致
      * */
     @Test
-    public void testCancleZan(){
+    public void testCancleZan() throws UiObjectNotFoundException {
+        String ZanBeforeNumber =getZanNumber();
+        logger.info("赞前人数是"+ZanBeforeNumber+"人");
+        Spoon.screenshot(gDevice,ZanBeforeNumber);
+        DiscoverAction.navtoVideo();
+        for(int times=0;times<5;times++){
+            clickById(Discover.ID_Share_Icon);
+            waitTime(2);
+        }
+        waitTime(10);
+        gDevice.pressBack();
+        waitTime(8);
+        String ZanAfterNumber =getPersonNumber();
+        logger.info("赞后人数"+ZanAfterNumber+"人");
+        Spoon.screenshot(gDevice,ZanAfterNumber);
+        DiscoverAction.navtoVideo();
 
     }
     /**case14:
