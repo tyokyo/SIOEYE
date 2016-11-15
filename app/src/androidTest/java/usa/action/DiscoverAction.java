@@ -23,10 +23,13 @@ import usa.page.Me;
 
 public class DiscoverAction extends VP2 {
 
+        public static void clickSearchBtn(){
+            gDevice.findObject(By.res("com.sioeye.sioeyeapp:id/title")).getParent().findObject(By.clazz(ImageView.class)).click();
+        }
         public static void navToSearch(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
             waitTime(3);
-            gDevice.findObject(By.res("com.sioeye.sioeyeapp:id/title")).getParent().findObject(By.clazz(ImageView.class)).click();
+            clickSearchBtn();
         }
         public static void navToAd(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
@@ -101,6 +104,15 @@ public class DiscoverAction extends VP2 {
         waitTime(10);
         List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
         return Integer.parseInt(textViews.get(9).getText());
+    }
+    public static void deleteNewFollowing (String target_nick_name) throws UiObjectNotFoundException {
+        clickById(Discover.ID_MAIN_TAB_ME);
+        clickById(Me.ID_ME_FOLLOWING);
+        waitUntilFind(Me.FOLLOWERING_VIEW,6000);
+        UiObject targetObj=scrollAndGetUIObject(target_nick_name);
+        clickByText(target_nick_name);
+        clickById(Me.FOLLOWERING_DELETE);
+        Spoon.screenshot("deleteNewFollowing","删除新加好友");
     }
 }
 
