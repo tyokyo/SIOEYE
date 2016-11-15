@@ -711,6 +711,16 @@ public class VP2 extends  VP{
         context.startActivity(intent);
         // Wait for the app to appear
         gDevice.wait(Until.hasObject(By.pkg(BASIC_PACKAGE_NAME).depth(0)), LAUNCH_TIMEOUT);
+        //cn.sioeye.sioeyeapp:id/txt_cancel
+        //cn.sioeye.sioeyeapp:id/txt_ok
+        UiObject update_ok=gDevice.findObject(new UiSelector().resourceId("cn.sioeye.sioeyeapp:id/txt_cancel"));
+        if (update_ok.exists()){
+            try {
+                update_ok.clickAndWaitForNewWindow();
+            }catch (UiObjectNotFoundException e){
+                e.printStackTrace();
+            }
+        }
     }
     /**
      * You can use the method to open a new app by activity.
