@@ -81,23 +81,29 @@ public class RecommendCase extends VP2 {
     /**case3添加推荐列表第一个为好友
      * 检查该用户followers有没有增加;
      * 检查自己好友列表有没有增加该好友
+     * 最后取消关注新添加的好友
      */
     public void testAddFriendsRecommand0() throws UiObjectNotFoundException{
         String expect_name=DiscoverAction.navToRecommendList(1,1);
         //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
         DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
         DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
+        gDevice.pressBack();
+        DiscoverAction.deleteNewFollowing(expect_name);
     }
     @Test
     /**case4 滑动推荐列表后关注第二个推荐用户
      * 检查该用户followers有没有增加;
      *  并到Me关注好友去寻找是否添加成功
+     *  最后取消关注该好友
      */
     public void testSwipRecommandAanADD1() throws UiObjectNotFoundException{
         DiscoverAction.scrollRecommandList();
         String expect_name=DiscoverAction.navToRecommendList(1,1);
         DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
         DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
+        gDevice.pressBack();
+        DiscoverAction.deleteNewFollowing(expect_name);
     }
     @Test
     /**case5 检查nick name长度是否≤30
@@ -132,7 +138,7 @@ public class RecommendCase extends VP2 {
         clickByClass("android.widget.ImageView",2);
         String recommand_list_3rd_nickname_new=DiscoverAction.navToRecommendList(2,1);
         clickByClass("android.widget.ImageView",2);
-        Spoon.screenshot("original_recommand_list","刷新后推荐列表");
+        Spoon.screenshot("new_recommand_list","刷新后推荐列表");
         if (recommand_list_first_nickname_original.equals(recommand_list_first_nickname_new)){
             if (recommand_list_second_nickname_original.equals(recommand_list_second_nickname_new)){
                 if (recommand_list_3rd_nickname_original.equals(recommand_list_3rd_nickname_new)){
@@ -144,6 +150,7 @@ public class RecommendCase extends VP2 {
     @Test
     /**case 7 Follow一个推荐列表好友后，刷新discover，
      * 检查该好友是否从discover消失
+     * 最后取消关注该好友
      */
     public void testFolledwRecommandThenRefresh() throws UiObjectNotFoundException{
         String expect_name=DiscoverAction.navToRecommendList(1,1);
@@ -160,6 +167,8 @@ public class RecommendCase extends VP2 {
             Spoon.screenshot("recommand_list","推荐列表不应该有被Follwed");
             Assert.fail("刷新后的推荐列表中被follow的用户没有消失");
         }
+        gDevice.pressBack();
+        DiscoverAction.deleteNewFollowing(expect_name);
     }
     @Test
     /*
@@ -169,11 +178,15 @@ public class RecommendCase extends VP2 {
      */
     public void testCloseRecommandList() throws UiObjectNotFoundException{
         clickById(Discover.ID_MAIN_TAB_DISCOVER);
-        waitTime(3);
+        waitUntilFind(Discover.ID_MAIN_TAB_RECOMMAND_LIST,6000);
         List<UiObject2> imageView=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(android.widget.ImageView.class));
         logger.info(imageView.size()+"");
         imageView.get(9).click();
-
+        waitTime(1);
+        if(getObjectById(Discover.ID_MAIN_TAB_RECOMMAND_LIST).exists()){
+            Spoon.screenshot("CloseRecommandList_Failed","关闭推荐列表失败");
+            Assert.fail("关闭推荐列表失败");
+        }
         //Rect closeRectIcon =closeIcon.getVisibleBounds();
         //clickRect(closeRectIcon);
     }
