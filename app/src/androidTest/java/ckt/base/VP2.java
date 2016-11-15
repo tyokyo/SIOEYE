@@ -28,6 +28,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -903,7 +907,7 @@ public class VP2 extends  VP{
      * @param timeout timeout for wait
      */
     public static void waitUntilGone(String resourceID,int timeout){
-        gDevice.wait(Until.findObject(By.res(resourceID)),timeout);
+        gDevice.wait(Until.gone(By.res(resourceID)),timeout);
     }
     public static void clickRect(Rect rect){
         gDevice.click(rect.centerX(),rect.centerY());
@@ -956,5 +960,26 @@ public class VP2 extends  VP{
      */
     public static List<UiObject2> findObjects(String ResourceID){
         return  gDevice.findObjects(By.res(ResourceID));
+    }
+    /**给定日期字符串
+     *  * @param recordTime   00:01:20
+     * @return int
+     */
+    public static int dateInSeconds(String recordTime) throws ParseException {
+        int seconds = 0;
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = null;
+        try {
+            date = format.parse(recordTime);
+            cal.setTime(date);
+            int hour=cal.get(Calendar.HOUR);//小时
+            int minute=cal.get(Calendar.MINUTE);//分
+            int second=cal.get(Calendar.SECOND);//秒
+            seconds = hour*60*60+minute*60+second;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return seconds;
     }
 }

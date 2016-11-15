@@ -50,14 +50,15 @@ public class BroadcastAction extends VP2{
     }
     //随机获取一个broadcasts对象的index
     public static int getRandomBroadcastsIndex(){
+        waitHasObject(MePage.BROADCAST_VIEW,10000);
         UiObject2 listView = gDevice.findObject(By.res(MePage.BROADCAST_VIEW));
         List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_CONTENT));
         int size = lisCollect.size();
         logger.info("getRandomBroadcastsIndex-size:"+size);
         Random random = new Random();
         int rd = random.nextInt(size);
-        logger.info("getRandomBroadcastsIndex:"+rd);
-        return  rd-1;
+        logger.info("size-"+size+"random:"+rd);
+        return  rd==0?rd:rd-1;
     }
     //随机获取一个broadcasts对象
     public static UiObject2 getRandomBroadcasts(int index){
@@ -74,6 +75,7 @@ public class BroadcastAction extends VP2{
             if (getObjectById(MePage.BROADCAST_VIEW_ZAN).isEnabled()==true&&
                     getObjectById(MePage.BROADCAST_VIEW_TIPTEXT).isEnabled()==true&&
                     getUiObjectByText("说点什么吧").exists()){
+                logger.info("聊天室连接成功-说点什么吧");
                 break;
             } else{
                 waitTime(4);

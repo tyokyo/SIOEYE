@@ -123,8 +123,7 @@ public class WatchSearchCase extends VP2 {
         //输入搜索内容
         setText(WatchPage.WATCH_INPUT_SEARCH, search_content);
         //等待搜索完成
-        waitUntilFind(WatchPage.WATCH_WAIT_SEARCH_LOADING, 20);
-        waitUntilGone(WatchPage.WATCH_WAIT_SEARCH_LOADING, 60);
+        waitUntilGone(WatchPage.WATCH_WAIT_SEARCH_LOADING, 60000);
         //验证搜索结果
         Spoon.screenshot("search_Email_result_1");
         waitUntilFind(WatchPage.WATCH_SEARCH_RESULT_USER_AVATAR,10);
@@ -134,7 +133,7 @@ public class WatchSearchCase extends VP2 {
             clickById(WatchPage.WATCH_SEARCH_RESULT);
             Spoon.screenshot("search_Email_result_2", search_content);
             //验证搜到的信息
-            boolean active_result = getUiObjectByTextContains("@panpan").exists();
+            boolean active_result = getUiObjectByTextContains(Constant.CORRECT_EMAIL_SIOEYE_ID).exists();
             Asst.assertEquals("search_result", true, active_result);
         } else if (avatars > 1) {
             Asst.fail("expect search result is 1,but active result is " + avatars);

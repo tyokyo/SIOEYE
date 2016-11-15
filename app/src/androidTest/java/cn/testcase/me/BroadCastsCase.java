@@ -56,12 +56,13 @@ public class BroadCastsCase extends VP2{
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
             int index=BroadcastAction.getRandomBroadcastsIndex();
+            logger.info("Index-"+index);
             BroadcastAction.getRandomBroadcasts(index).click();
             BroadcastAction.waitBroadcastLoading();
             gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
             //click play screen center
-            clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+            //clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
             Spoon.screenshot("play_video");
         }
     }
