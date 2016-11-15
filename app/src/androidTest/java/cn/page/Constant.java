@@ -23,6 +23,10 @@ public class Constant {
     //email-address-qiang.zhang
     public static  final  String tyokyo_qq_email ="896409120@qq.com";
 
+    //watch search account email->sio eye id
+    public static String CORRECT_EMAIL = "123qq@163.com";
+    public static String CORRECT_EMAIL_SIOEYE_ID="@qwe123";
+
     //qiuxiaian
     public static  final  String sioEye_id ="991128845";
     public static  final  String qq_mail_address ="991128845@qq.com";
@@ -47,8 +51,7 @@ public class Constant {
     public static String CORRECT_SIO_EYE_ID = "tyo000";
     //nick name for eye id
     public static String WRONG_SIO_EYE_ID = "QWEJHI";
-    //nick name for email
-    public static String CORRECT_EMAIL = "123qq@163.com";
-    //nick name for email
+
+    //search account with wrong email address
     public static String WRONG_EMAIL = "123pp@178.com";
 }
