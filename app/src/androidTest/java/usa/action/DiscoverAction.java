@@ -83,36 +83,53 @@ public class DiscoverAction extends VP2 {
                 Assert.fail("出现异常nick name获取为空");
             }
         }
-    public static void checkMiniProfileNumFollowerAddOneAfterFollow() throws UiObjectNotFoundException{
-        int NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
-        int expect_NumFollower=NumFollower+1;
-        //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
-        clickById(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
-        //关注操作
-        waitTime(3);
-        int active_NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
-        //关注后该目标用户的Follower的数量，
-        Spoon.screenshot("testAddFriendsRecommend0","该用户followers没有加1");
-        Asst.assertEquals("添加推荐用户为好友后，该用户followers没有加1",expect_NumFollower,active_NumFollower);
-        //断言该用户followers有没有+1
-        clickByClass("android.widget.ImageView",2);
-        //关闭弹出框
-    }
-     //得到观看人数
-    public static String getPersonNumber() throws UiObjectNotFoundException {
-        clickById(Discover.ID_MAIN_TAB_DISCOVER);
-        waitTime(10);
-        List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
-        return textViews.get(9).getText();
-    }
-    public static void deleteNewFollowing (String target_nick_name) throws UiObjectNotFoundException {
-        clickById(Discover.ID_MAIN_TAB_ME);
-        clickById(Me.ID_ME_FOLLOWING);
-        waitUntilFind(Me.FOLLOWERING_VIEW,6000);
-        UiObject targetObj=scrollAndGetUIObject(target_nick_name);
-        clickByText(target_nick_name);
-        clickById(Me.FOLLOWERING_DELETE);
-        Spoon.screenshot("deleteNewFollowing","删除新加好友");
-    }
+        public static void checkMiniProfileNumFollowerAddOneAfterFollow() throws UiObjectNotFoundException{
+            int NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
+            int expect_NumFollower=NumFollower+1;
+            //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
+            clickById(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
+            //关注操作
+            waitTime(3);
+            int active_NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
+            //关注后该目标用户的Follower的数量，
+            Spoon.screenshot("testAddFriendsRecommend0","该用户followers没有加1");
+            Asst.assertEquals("添加推荐用户为好友后，该用户followers没有加1",expect_NumFollower,active_NumFollower);
+            //断言该用户followers有没有+1
+            clickByClass("android.widget.ImageView",2);
+            //关闭弹出框
+        }
+         //得到观看人数
+        public static String getPersonNumber() throws UiObjectNotFoundException {
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            waitTime(10);
+            List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
+            return textViews.get(9).getText();
+        }
+        //得到点赞人数
+        public static String getZanNumber() throws UiObjectNotFoundException {
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            waitTime(10);
+            List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
+            return textViews.get(9).getText();
+        }
+        public static void deleteNewFollowing (String target_nick_name) throws UiObjectNotFoundException {
+            clickById(Discover.ID_MAIN_TAB_ME);
+            clickById(Me.ID_ME_FOLLOWING);
+            waitUntilFind(Me.FOLLOWERING_VIEW,6000);
+            UiObject targetObj=scrollAndGetUIObject(target_nick_name);
+            clickByText(target_nick_name);
+            clickById(Me.FOLLOWERING_DELETE);
+            Spoon.screenshot("deleteNewFollowing","删除新加好友");
+        }
+        //点击Discover界面的视频观看
+        public static void navtoVideo(){
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            waitTime(2);
+            UiObject2 u1=gDevice.findObject(By.res("com.sioeye.sioeyeapp:id/swipe_target"));
+            List<UiObject2> views=u1.findObjects(By.clazz(android.view.View.class));
+            UiObject2 u3=views.get(5);
+            u3.click();
+            waitTime(30);
+        }
 }
 
