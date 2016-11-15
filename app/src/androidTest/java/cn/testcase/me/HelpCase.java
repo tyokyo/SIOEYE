@@ -84,6 +84,7 @@ public class HelpCase extends VP2{
         logger.info("input char:"+getObjectById(MePage.HELP_FEEDBACK_CONTENT).getText().length());
         Spoon.screenshot("500c");
         clickById(MePage.HELP_DONE);
+        waitHasObject(MePage.HELP_FEEDBACK,10000);
         boolean feedback_status=getObjectById(MePage.HELP_FEEDBACK).exists();
         Asst.assertEquals("Submit success",true,feedback_status);
     }
