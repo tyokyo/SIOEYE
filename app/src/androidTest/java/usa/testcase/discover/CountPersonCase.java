@@ -40,12 +40,8 @@ public class CountPersonCase extends VP2 {
      */
     @Test
     public void testCountPerson() throws UiObjectNotFoundException {
-        clickById(Discover.ID_MAIN_TAB_DISCOVER);
-        waitTime(2);
-        UiObject relativeLayout = new UiObject(new UiSelector().childSelector(new UiSelector().className("android.widget.RelativeLayout").index(1)));
-        Spoon.screenshot("CountPerson","找到观看人数",relativeLayout);
-        int expect_number = DiscoverAction.getPersonNumber(relativeLayout);
-        clickByClass("android.view.View");
+
+
 
     }
 
