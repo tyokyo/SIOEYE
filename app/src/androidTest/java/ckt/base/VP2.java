@@ -903,7 +903,7 @@ public class VP2 extends  VP{
      * @param timeout timeout for wait
      */
     public static void waitUntilGone(String resourceID,int timeout){
-        gDevice.wait(Until.findObject(By.res(resourceID)),timeout);
+        gDevice.wait(Until.gone(By.res(resourceID)),timeout);
     }
     public static void clickRect(Rect rect){
         gDevice.click(rect.centerX(),rect.centerY());
