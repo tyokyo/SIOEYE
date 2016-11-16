@@ -21,6 +21,7 @@ import bean.WatcherBean;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
+import cn.action.FollowersAction;
 import cn.action.FollowingAction;
 import cn.action.MeAction;
 import cn.page.App;
@@ -29,6 +30,11 @@ import cn.page.MePage;
 /**
  * Created by elon on 2016/11/9.
  */
+/*粉丝
+播放视频
+评论
+点赞
+* */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class FollowersCase extends VP2 {
@@ -59,7 +65,7 @@ public class FollowersCase extends VP2 {
                 FollowingAction.clickFollowingBroadcast();
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
+                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
                 Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
                 //click play screen center
                 Spoon.screenshot("play_video");
@@ -94,7 +100,7 @@ public class FollowersCase extends VP2 {
                 FollowingAction.clickFollowingBroadcast();
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
+                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
                 //当前的评论数
                 WatcherBean watcherBean1 = BroadcastAction.getWatcher();
                 String comments_before = watcherBean1.getComments();
@@ -108,7 +114,7 @@ public class FollowersCase extends VP2 {
                 gDevice.pressBack();
                 waitTime(2);
                 input_comments=input_comments.substring(0,120);
-                Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+                Asst.assertTrue("comments success",getObjectByTextContains(input_comments).exists());
                 //验证评论数+1
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
@@ -145,7 +151,7 @@ public class FollowersCase extends VP2 {
                 FollowingAction.clickFollowingBroadcast();
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
+                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
                 //当前的评论数
                 WatcherBean watcherBean1 = BroadcastAction.getWatcher();
                 String comments_before = watcherBean1.getComments();
@@ -158,7 +164,7 @@ public class FollowersCase extends VP2 {
                 clickByPoint(point);
                 gDevice.pressBack();
                 waitTime(2);
-                Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+                Asst.assertTrue("comments success",getObjectByTextContains(input_comments).exists());
                 //验证评论数+1
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
@@ -196,7 +202,7 @@ public class FollowersCase extends VP2 {
                 FollowingAction.clickFollowingBroadcast();
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
+                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
                 //当前的评论数
                 WatcherBean watcherBean1 = BroadcastAction.getWatcher();
                 String comments_before = watcherBean1.getComments();
@@ -209,7 +215,7 @@ public class FollowersCase extends VP2 {
                 clickByPoint(point);
                 gDevice.pressBack();
                 waitTime(2);
-                Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+                Asst.assertTrue("comments success",getObjectByTextContains(input_comments).exists());
                 //验证评论数+1
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
@@ -248,7 +254,7 @@ public class FollowersCase extends VP2 {
                 FollowingAction.clickFollowingBroadcast();
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
+                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
                 //获取当前的点赞数目
                 WatcherBean bean_before_zan = BroadcastAction.getWatcher();
                 String zan_before = bean_before_zan.getZan();
@@ -304,7 +310,7 @@ public class FollowersCase extends VP2 {
                 FollowingAction.clickFollowingBroadcast();
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
+                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
                 //获取当前的点赞数目
                 WatcherBean bean_before_zan = BroadcastAction.getWatcher();
                 String zan_before = bean_before_zan.getZan();
@@ -367,10 +373,8 @@ public class FollowersCase extends VP2 {
                 FollowingAction.clickFollowingBroadcast();
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
+                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,30000);
                 Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
-                //click play screen center
-                clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
                 Spoon.screenshot("play_video");
                 gDevice.pressBack();
             }else{
