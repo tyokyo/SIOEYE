@@ -31,7 +31,8 @@ public class AccountAction extends VP2{
         }else{
             clickById(MePage.SETTINGS_USER_MAIN);
             clickByText("账号与安全");
-            clickById(AccountPage.LOG_OUT);
+            //clickById(AccountPage.LOG_OUT);
+            clickByText("退出登录");
             clickById(AccountPage.LOG_OUT_OK);
             //wait logout
             waitUntilFind(MePage.ID_MAIN_TAB_ME,60000);
