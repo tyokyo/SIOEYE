@@ -62,7 +62,7 @@ public class SexCase extends VP2 {
     }
     @Test
     public void testSecret() throws UiObjectNotFoundException {
-//修改性别为-female
+        //修改性别为-female
         MeAction.navToSex();
         clickById(MePage.SETTINGS_SEX_SECRET);
         //验证
