@@ -9,10 +9,12 @@ import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import java.util.logging.Logger;
 import bean.InfoBean;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
+import cn.action.SettingAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
@@ -24,6 +26,7 @@ import cn.page.MePage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class AccountCase extends VP2{
+    private Logger logger = Logger.getLogger(AccountCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
@@ -106,9 +109,13 @@ public class AccountCase extends VP2{
 
         //check for user info
         InfoBean infoBean =MeAction.navToUserEdit();
+        MeAction.getAccountPrivacyInfo(infoBean);
+        logger.info(infoBean.toString());
+
         String active_nickName=infoBean.getNick_name();
         String active_email=infoBean.getEmail();
         String active_eye_id=infoBean.getId();
+
         Asst.assertEquals("nick name",nick_name,active_nickName);
         Asst.assertEquals("email",email_address,active_email);
         Asst.assertEquals("id",eye_id,active_eye_id);
@@ -148,6 +155,9 @@ public class AccountCase extends VP2{
 
         //check for user info
         InfoBean infoBean =MeAction.navToUserEdit();
+        MeAction.getAccountPrivacyInfo(infoBean);
+        logger.info(infoBean.toString());
+
         String active_nickName=infoBean.getNick_name();
         String active_email=infoBean.getEmail();
         String active_eye_id=infoBean.getId(); Asst.assertEquals("nick name",nick_name,active_nickName);
@@ -198,6 +208,9 @@ public class AccountCase extends VP2{
 
         //check for user info
         InfoBean infoBean =MeAction.navToUserEdit();
+        MeAction.getAccountPrivacyInfo(infoBean);
+        logger.info(infoBean.toString());
+
         String active_nickName=infoBean.getNick_name();
         String active_email=infoBean.getEmail();
         String active_eye_id=infoBean.getId();
