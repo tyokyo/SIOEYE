@@ -131,5 +131,12 @@ public class DiscoverAction extends VP2 {
             u3.click();
             waitTime(30);
         }
+        //获得位置信息
+        public static String getLocationInfo(){
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            waitTime(10);
+            List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
+            return textViews.get(11).getText();
+        }
 }
 
