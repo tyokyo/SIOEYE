@@ -9,7 +9,6 @@ import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import bean.InfoBean;
 import ckt.base.VP2;
 import cn.action.AccountAction;
@@ -36,7 +35,7 @@ public class AccountCase extends VP2{
 "	提示电话号码不正确
     * */
     @Test
-    public void test_register_with_error_mobile_number() throws UiObjectNotFoundException {
+    public void testRegErrorMobileNumber() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -57,7 +56,7 @@ public class AccountCase extends VP2{
 "	提示电话号码正确
    * */
     @Test
-    public void test_register_with_mobile_number() throws UiObjectNotFoundException {
+    public void testRegMobileNumber() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -81,7 +80,7 @@ public class AccountCase extends VP2{
     4、创建用户名"	注册成功
     * */
     @Test
-    public void test_register_with_email() throws UiObjectNotFoundException {
+    public void testRegEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -123,7 +122,7 @@ public class AccountCase extends VP2{
     注册失败
     * */
     @Test
-    public void test_register_with_repeat_email() throws UiObjectNotFoundException {
+    public void testRegRepeatEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -173,7 +172,7 @@ public class AccountCase extends VP2{
     注册失败
     * */
     @Test
-    public void test_register_with_repeat_eye_id() throws UiObjectNotFoundException {
+    public void testRegRepeatEyeID() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -234,7 +233,7 @@ public class AccountCase extends VP2{
     "1、输入无效邮件地址
     * */
     @Test
-    public void test_register_with_error_email() throws UiObjectNotFoundException {
+    public void testRegErrorEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -264,7 +263,7 @@ public class AccountCase extends VP2{
     }
     /*登录	1、输入正确的手机号码/Email、密码登录	成功登录*/
     @Test
-    public void test_logInAccount_error_email_password() throws UiObjectNotFoundException {
+    public void testLogInErrorEmailPwd() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //登录系统
