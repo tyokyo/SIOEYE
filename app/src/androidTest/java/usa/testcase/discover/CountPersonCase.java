@@ -15,6 +15,7 @@ import usa.page.App;
 import usa.page.Discover;
 import usa.testcase.me.ActivityCase;
 
+import static usa.action.DiscoverAction.getLocationInfo;
 import static usa.action.DiscoverAction.getPersonNumber;
 import static usa.action.DiscoverAction.getZanNumber;
 
@@ -91,7 +92,12 @@ public class CountPersonCase extends VP2 {
      *备注：只能检查是否有位置信息
      */
     @Test
-    public void hasLocationService(){
-
+    public void testHasLocationService(){
+        String LocationInfo =getLocationInfo();
+        logger.info(LocationInfo);
+        if(LocationInfo==null){
+            Spoon.screenshot(gDevice,"No_LocationInfo;");
+            logger.info("testHasLocationServiceCase_fail");
+        }
     }
 }
