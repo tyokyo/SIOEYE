@@ -26,6 +26,15 @@ import cn.page.MePage;
  * Created by elon on 2016/10/27.
  */
 public class MeAction extends VP2{
+    public static void getAccountPrivacyInfo(InfoBean infoBean){
+        //启动被测App
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        SettingAction.navToAccountAndPrivacy();
+        String email=getUiObject2ByText("邮箱地址").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
+        infoBean.setEmail(email);
+        String eyeId=getUiObject2ByText("Sioeye ID").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
+        infoBean.setId(eyeId);
+    }
     public static void clickBroadcast() throws UiObjectNotFoundException {
         if (id_exists(MePage.ID_ME_BROADCAST)){
             clickById(MePage.ID_ME_BROADCAST);
