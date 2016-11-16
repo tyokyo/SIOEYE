@@ -5,17 +5,13 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
-
 import com.squareup.spoon.Spoon;
-
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import java.io.IOException;
 import java.util.logging.Logger;
-
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.SettingAction;
