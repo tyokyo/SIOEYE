@@ -110,7 +110,7 @@ public class LiveConfigCase extends VP2{
     }
     //privacy_settings to public
     @Test
-    public void test_privacy_settings_public() throws UiObjectNotFoundException {
+    public void testSetPublic() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
         MeAction.setToPublic();
@@ -126,7 +126,7 @@ public class LiveConfigCase extends VP2{
     }
     //privacy_settings to private
     @Test
-    public void test_privacy_settings_private() throws UiObjectNotFoundException {
+    public void testSetPrivate() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
         MeAction.setToPrivate();
@@ -140,7 +140,7 @@ public class LiveConfigCase extends VP2{
         Spoon.screenshot("private","Privacy_Settings_Private");
     }
     @Test
-    public void test_privacy_settings_personal() throws UiObjectNotFoundException {
+    public void testSetPersonal() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         //谁可以看我的直播
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
