@@ -2,24 +2,13 @@ package usa.testcase.discover;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
-import android.widget.RelativeLayout;
-
 import com.squareup.spoon.Spoon;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.List;
 import java.util.logging.Logger;
-import ckt.base.VP;
 import ckt.base.VP2;
 import usa.action.DiscoverAction;
 import usa.page.App;
@@ -59,9 +48,9 @@ public class CountPersonCase extends VP2 {
         Spoon.screenshot(gDevice,ClickAfterNumber);
         Boolean Result = (Integer.parseInt(ClickAfterNumber)==(Integer.parseInt(ClickBeforeNumber))+1);
         if(!Result){
-            Spoon.screenshot(gDevice,"CountPersonCase_was_fail");
+            Spoon.screenshot(gDevice,"testCountWatchPersonCase_was_fail");
             logger.info("点击观看前后人数不一致");
-            Assert.fail("testCountPerson_was_fail");
+            Assert.fail("testCountWatchPersonCase_was_fail");
         }
     }
     /**
@@ -78,13 +67,13 @@ public class CountPersonCase extends VP2 {
         Spoon.screenshot(gDevice,ZanBeforeNumber);
         DiscoverAction.navtoVideo();
         for(int times=0;times<5;times++){
-            clickById(Discover.ID_Share_Icon);
+            clickById(Discover.ID_Zan_Icon);
             waitTime(2);
         }
         waitTime(10);
         gDevice.pressBack();
         waitTime(8);
-        String ZanAfterNumber =getPersonNumber();
+        String ZanAfterNumber =getZanNumber();
         logger.info("赞后人数"+ZanAfterNumber+"人");
         Spoon.screenshot(gDevice,ZanAfterNumber);
         Boolean Result = (Integer.parseInt(ZanAfterNumber)==(Integer.parseInt(ZanBeforeNumber))+5);
@@ -94,31 +83,7 @@ public class CountPersonCase extends VP2 {
             //Assert.fail("Zan_CountPersonCase_was_fail");
         }
     }
-    /**
-     * case13:
-     *取消点赞后，点赞数统计
-     *1.进入视频播放界面对已经点赞的视频取消点赞后返回视频封面刷新后检查点赞数
-     *  Result：点赞数数目下降，下降数目与取消的点赞次数保持一致
-     * */
-    @Test
-    public void testCancleZan() throws UiObjectNotFoundException {
-        String ZanBeforeNumber =getZanNumber();
-        logger.info("赞前人数是"+ZanBeforeNumber+"人");
-        Spoon.screenshot(gDevice,ZanBeforeNumber);
-        DiscoverAction.navtoVideo();
-        for(int times=0;times<5;times++){
-            clickById(Discover.ID_Share_Icon);
-            waitTime(2);
-        }
-        waitTime(10);
-        gDevice.pressBack();
-        waitTime(8);
-        String ZanAfterNumber =getPersonNumber();
-        logger.info("赞后人数"+ZanAfterNumber+"人");
-        Spoon.screenshot(gDevice,ZanAfterNumber);
-        DiscoverAction.navtoVideo();
 
-    }
     /**case14:
      *位置信息显示
      *1.检查位置信息显示字体颜色尺寸长度位置
