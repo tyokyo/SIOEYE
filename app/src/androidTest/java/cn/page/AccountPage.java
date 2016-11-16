@@ -6,8 +6,8 @@ package cn.page;
 public class AccountPage {
     //Settings
     public static final String LOG_OUT="cn.sioeye.sioeyeapp:id/tv_logout";
-    public static final String LOG_OUT_CANCEL="cn.sioeye.sioeyeapp:id/delete_cancel";
-    public static final String LOG_OUT_OK="cn.sioeye.sioeyeapp:id/delete_ok";
+    public static final String LOG_OUT_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
+    public static final String LOG_OUT_OK="cn.sioeye.sioeyeapp:id/tv_ok";
 
     public static String logout_btn = "com.hicam:id/logout_btn";
     public static String login_id_input = "com.hicam:id/login_id_input";
