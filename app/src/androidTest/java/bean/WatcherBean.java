@@ -34,4 +34,12 @@ public class WatcherBean {
     private String zan;
     private String watch;
 
+    @Override
+    public String toString() {
+        return "WatcherBean{" +
+                "comments='" + comments + '\'' +
+                ", zan='" + zan + '\'' +
+                ", watch='" + watch + '\'' +
+                '}';
+    }
 }

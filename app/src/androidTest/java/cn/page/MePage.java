@@ -248,6 +248,8 @@ public class MePage {
     public static final String VIDEO_WATCH_NUMBER="cn.sioeye.sioeyeapp:id/tv_watch_number";
     public static final String VIDEO_CHAT_NUMBER="cn.sioeye.sioeyeapp:id/tv_chat_number";
     public static final String VIDEO_LIKE_NUMBER="cn.sioeye.sioeyeapp:id/tv_like_number";
+    //导播控制
+    public static final String SETTINGS_CB_DIRECTOR="cn.sioeye.sioeyeapp:id/cb_director";
 
 
 }

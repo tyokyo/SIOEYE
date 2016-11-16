@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 import bean.InfoBean;
+import ckt.base.VP;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.MePage;
@@ -175,6 +176,9 @@ public class MeAction extends VP2{
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_LOCATION);
+        if (id_exists(VP.PERMISSION_ALLOW)){
+            clickById(VP.PERMISSION_ALLOW);
+        }
         Spoon.screenshot("navToLocation");
         return infoBean;
     }

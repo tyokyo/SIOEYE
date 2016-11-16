@@ -32,7 +32,7 @@ public class LiveConfigCase extends VP2{
 
     //直播标题内容设置-长度-3
     @Test
-    public void test_default_video_title_3() throws UiObjectNotFoundException, IOException {
+    public void testTitle3c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
@@ -51,7 +51,7 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度-69
     @Test
-    public void test_default_video_title_69() throws UiObjectNotFoundException, IOException {
+    public void testTitle69c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
@@ -70,7 +70,7 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度-120
     @Test
-    public void test_default_video_title_120() throws UiObjectNotFoundException, IOException {
+    public void testTitle120c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
@@ -89,7 +89,7 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度->170(最多允许设置120)
     @Test
-    public void test_default_video_title_170() throws UiObjectNotFoundException, IOException {
+    public void testTitle170c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();

@@ -29,7 +29,7 @@ public class NickNameCase extends VP2 {
         AccountAction.inLogin();
     }
     @Test
-    public void testChangeNickNameLessThan4Character() throws UiObjectNotFoundException {
+    public void testChangeNmc4() throws UiObjectNotFoundException {
         MeAction.navToNickName();
         clearText(MePage.SAMPLE_CONTENT);
         setText(MePage.SAMPLE_CONTENT,getRandomString(3));
@@ -39,7 +39,7 @@ public class NickNameCase extends VP2 {
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
-    public void testChangeNickNameMoreThan4Character() throws UiObjectNotFoundException {
+    public void testChangeMoreThanC4() throws UiObjectNotFoundException {
         MeAction.navToNickName();
         clearText(MePage.SAMPLE_CONTENT);
         String nickname = getRandomString(4);
@@ -53,7 +53,7 @@ public class NickNameCase extends VP2 {
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
-    public void testChangeNickNameMaxCharacter() throws UiObjectNotFoundException, IOException {
+    public void testChangeNnMaxC() throws UiObjectNotFoundException, IOException {
         MeAction.navToNickName();
         clearText(MePage.SAMPLE_CONTENT);
         String nickname = getRandomString(60);
@@ -67,7 +67,7 @@ public class NickNameCase extends VP2 {
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
-    public void testChangeNickNameNotSave() throws UiObjectNotFoundException, IOException {
+    public void testChangeNnNotSave() throws UiObjectNotFoundException, IOException {
         clickById(MePage.ID_MAIN_TAB_ME);
         Spoon.screenshot(gDevice,"Me");
         clickById(MePage.ID_USER_EDIT);
