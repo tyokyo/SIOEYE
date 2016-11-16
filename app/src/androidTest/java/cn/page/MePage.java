@@ -80,10 +80,10 @@ public class MePage {
     public static final String BROADCAST_EDIT_TITLE="cn.sioeye.sioeyeapp:id/edit_broadcasts_title";
     //删除视频
     public static final String BROADCAST_DELETE="cn.sioeye.sioeyeapp:id/delete_broadcasts";
-    public static final String BROADCAST_EDIT_CANCEL="cn.sioeye.sioeyeapp:id/edit_cancel";
-    public static final String BROADCAST_EDIT_OK="cn.sioeye.sioeyeapp:id/edit_ok";
-    public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/delete_ok";
-
+    public static final String BROADCAST_EDIT_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
+    public static final String BROADCAST_EDIT_OK="cn.sioeye.sioeyeapp:id/tv_ok";
+    public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/tv_ok";
+    public static final String BROADCAST_EDIT_DELETE_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
 
     public static final String BROADCAST_VIEW_TIPTEXT="cn.sioeye.sioeyeapp:id/tipText";
     public static final String BROADCAST_VIEW_ZAN="cn.sioeye.sioeyeapp:id/watch_player_portrait_like";
@@ -244,4 +244,10 @@ public class MePage {
     public static final String SELECT_PEOPLE_LIST_Horizontal="cn.sioeye.sioeyeapp:id/horizontal_recycleview";
     //粉丝滑动列表
     public static final String FANS_SWIPE_LAYOUT="cn.sioeye.sioeyeapp:id/swipeLayout";
+    //视频信息
+    public static final String VIDEO_WATCH_NUMBER="cn.sioeye.sioeyeapp:id/tv_watch_number";
+    public static final String VIDEO_CHAT_NUMBER="cn.sioeye.sioeyeapp:id/tv_chat_number";
+    public static final String VIDEO_LIKE_NUMBER="cn.sioeye.sioeyeapp:id/tv_like_number";
+
+
 }
