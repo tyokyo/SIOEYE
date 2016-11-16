@@ -10,11 +10,16 @@ import ckt.tools.Property;
  * Created by elon on 2016/10/28.
  */
 public class Constant {
-    //sio-eye account
+    //Each-user-need: Mobile number account
+    public static  final  String mobile_number ="13547946743";
+    public static  final  String mobile_password ="123456789";
+    public static  final  String mobile_sio_id ="tyo6743";
+
+    //Each-user-need:  sio-eye account
     public static  final  String userName ="tyokyo@126.com";
     public static  final  String passwd   = "123456789";
 
-    //sio-eye error account
+    //Each-user-need:  account
     public static  final  String error_userName ="tyokyo@126.com";
     public static  final  String error_passwd   = "0123456789";
 
