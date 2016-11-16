@@ -25,6 +25,7 @@ import cn.page.WatchPage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*个性签名基本功能验证*/
 public class AboutMeCase extends VP2 {
     @Before
     public  void setup() throws UiObjectNotFoundException {

@@ -41,6 +41,13 @@ import cn.page.MePage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*
+直播-基本功能验证
+* 回放直播视频
+* 回放评论
+* 回放点赞
+* 编辑直播视频标题
+* */
 public class BroadCastsCase extends VP2{
     Logger logger = Logger.getLogger(BroadCastsCase.class.getName());
     @Before
