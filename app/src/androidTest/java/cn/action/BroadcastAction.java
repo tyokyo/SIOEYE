@@ -85,16 +85,18 @@ public class BroadcastAction extends VP2{
     }
     //视频回放页面的播放数-点赞数-评论数
     public static WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {
+        FollowersAction.clickToAnchor();
         WatcherBean watcherBean = new WatcherBean();
         UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.BROADCAST_VIEW_WATCHER_COUNT));
-        String watcher = u.getChild(new UiSelector().className("android.widget.TextView").index(1)).getText();
-        String comments = u.getChild(new UiSelector().className("android.widget.TextView").index(3)).getText();
-        String zan =  u.getChild(new UiSelector().className("android.widget.TextView").index(5)).getText();
+        String watcher = getObject2ById(MePage.VIDEO_WATCH_NUMBER).getText();
+        String comments = getObject2ById(MePage.VIDEO_LIKE_NUMBER).getText();
+        String zan = getObject2ById(MePage.VIDEO_CHAT_NUMBER).getText();
         makeToast(zan,3);
-        logger.info("active zan is"+zan);
         watcherBean.setComments(comments);
         watcherBean.setWatch(watcher);
         watcherBean.setZan(zan);
+        FollowersAction.clickToChat();
+        logger.info(watcherBean.toString());
         return  watcherBean;
     }
     public static BroadcastBean getChinaBean(int index) throws UiObjectNotFoundException {

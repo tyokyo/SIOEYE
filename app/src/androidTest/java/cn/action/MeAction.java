@@ -78,9 +78,9 @@ public class MeAction extends VP2{
         InfoBean infoBean=new InfoBean();
         infoBean.setNick_name(getNkName());
         infoBean.setSex(getSex());
-        infoBean.setEmail(getEmailAddress());
+        //infoBean.setEmail(getEmailAddress());
         infoBean.setLocation(getLocation());
-        infoBean.setId(getSioEyeID());
+        //infoBean.setId(getSioEyeID());
         infoBean.setAbout_me(getAboutMe());
         return  infoBean;
     }
