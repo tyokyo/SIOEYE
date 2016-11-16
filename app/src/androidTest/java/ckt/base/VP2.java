@@ -381,6 +381,16 @@ public class VP2 extends  VP{
      * This method can return a UI Element by text.
      *
      * @param TragetObject
+     * @return UiObject2
+     */
+    public static UiObject2 getUiObject2ByText(String TragetObject) {
+        initDevice();
+        return gDevice.findObject(By.text(TragetObject));
+    }
+    /**
+     * This method can return a UI Element by text.
+     *
+     * @param TragetObject
      * @return UiObject
      */
     public static UiObject getUiObjectByText(String TragetObject) {
