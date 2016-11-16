@@ -53,4 +53,6 @@ public class Discover {
     public static final String ID_Reloading_gif ="com.sioeye.sioeyeapp:id/status_image";
     public static final String ID_SWIPE_TARGET =  "com.sioeye.sioeyeapp:id/swipe_target";
     public static final String ID_Swipe_target ="com.sioeye.sioeyeapp:id/swipe_target";
+    //点赞图标
+    public static final String ID_Zan_Icon = "com.sioeye.sioeyeapp:id/watch_player_portrait_like";
 }
