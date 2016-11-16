@@ -3,16 +3,12 @@ package cn.testcase.setting;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-
 import com.squareup.spoon.Spoon;
-
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import java.util.logging.Logger;
-
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
