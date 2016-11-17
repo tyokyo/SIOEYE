@@ -173,6 +173,7 @@ public class FollowingCase extends VP2 {
                 //input_comments=input_comments.substring(0,120);
                 Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
                 //验证评论数+1
+                gDevice.pressBack();
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
                 int comments_count=Integer.parseInt(after_comments);
