@@ -66,6 +66,7 @@ public class VP {
                 //异常弹出框-click-OK
                 UiObject uiObject_popup = gDevice.findObject(new UiSelector().resourceId(ID_MESSAGE));
                 if (uiObject_popup.exists()){
+                    logger.info("doNotAskPermission-click android:id/button1");
                     gDevice.findObject(new UiSelector().resourceId("android:id/button1")).clickAndWaitForNewWindow();
                 }
             }
