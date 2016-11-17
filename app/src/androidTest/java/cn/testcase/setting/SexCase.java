@@ -66,7 +66,7 @@ public class SexCase extends VP2 {
         MeAction.navToSex();
         gDevice.pressBack();
         String sex =MeAction.getSex();
-        Asst.assertEquals("change to secret","秘密",sex);
+        Asst.assertEquals("change to secret","保密",sex);
         gDevice.pressBack();
         Spoon.screenshot("secret");
     }
