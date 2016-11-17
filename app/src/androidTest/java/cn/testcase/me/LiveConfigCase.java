@@ -51,11 +51,11 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度-69
     @Test
-    public void testTitle69c() throws UiObjectNotFoundException, IOException {
+    public void testTitle40c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
-        String expect = getRandomString(69);
+        String expect = getRandomString(40);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
@@ -70,11 +70,11 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度-120
     @Test
-    public void testTitle120c() throws UiObjectNotFoundException, IOException {
+    public void testTitle50c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
-        String expect = getRandomString(120);
+        String expect = getRandomString(50);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
@@ -87,7 +87,7 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
 
     }
-    //直播标题内容设置-长度->170(最多允许设置120)
+    //直播标题内容设置-长度->170(最多允许设置70)
     @Test
     public void testTitle170c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
@@ -102,7 +102,7 @@ public class LiveConfigCase extends VP2{
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
         logger.info("length:"+active.length());
-        expect=expect.substring(0,120);
+        expect=expect.substring(0,70);
         Asst.assertEquals("修改video title",expect,active);
         gDevice.pressBack();
         gDevice.pressBack();
