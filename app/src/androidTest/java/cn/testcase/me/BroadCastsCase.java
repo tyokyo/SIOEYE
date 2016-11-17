@@ -150,6 +150,7 @@ public class BroadCastsCase extends VP2{
             //clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             clearText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             setText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,input_title);
+            Spoon.screenshot("modify_title",input_title);
             //确认
             clickById(MePage.BROADCAST_EDIT_OK);
             //wait time
