@@ -132,9 +132,9 @@ public class BroadCastsCase extends VP2{
             Spoon.screenshot("testEditTitle3",input_title);
         }
     }
-    //title 输入字符长度70
+    //title 输入字符长度35
     @Test
-    public void testEditTitle70() throws UiObjectNotFoundException, IOException {
+    public void testEditTitle35() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
@@ -146,10 +146,13 @@ public class BroadCastsCase extends VP2{
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
-            String input_title=getRandomString(70);
+            String input_title=getRandomString(35);
             //clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             clearText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
-            setText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,input_title);
+            //setText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,input_title);
+            clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            shellInputText(input_title);
+            gDevice.pressBack();
             Spoon.screenshot("modify_title",input_title);
             //确认
             clickById(MePage.BROADCAST_EDIT_OK);
@@ -160,13 +163,14 @@ public class BroadCastsCase extends VP2{
             //check
             BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
             String active_title = activeBean.getBroadcast_title();
+            logger.info(active_title.length()+"");
             Asst.assertEquals("modify title",input_title,active_title);
             Spoon.screenshot("modify_title",input_title);
         }
     }
-    //title 输入字符长度>70
+    //title 输入字符长度>35
     @Test
-    public void testEditTitleMoreThan70() throws UiObjectNotFoundException, IOException {
+    public void testEditTitleMoreThan35() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
@@ -189,7 +193,7 @@ public class BroadCastsCase extends VP2{
             //check
             BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
             String active_title = activeBean.getBroadcast_title();
-            input_title=input_title.substring(0,70);
+            input_title=input_title.substring(0,35);
             Asst.assertEquals("modify title",input_title,active_title);
             Spoon.screenshot("modify_title",input_title);
         }
@@ -229,7 +233,7 @@ public class BroadCastsCase extends VP2{
     }
     //验证-评论，允许的最大字符数
     @Test
-    public void testComments120c() throws UiObjectNotFoundException, IOException {
+    public void testCmts120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -262,7 +266,7 @@ public class BroadCastsCase extends VP2{
     }
     //验证-评论 超过最大的字符限制
     @Test
-    public void testComments130c() throws UiObjectNotFoundException, IOException {
+    public void testCmts130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -295,7 +299,7 @@ public class BroadCastsCase extends VP2{
         }
     }
     @Test
-    public void testComments20c() throws UiObjectNotFoundException, IOException {
+    public void testCmts20c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -328,7 +332,7 @@ public class BroadCastsCase extends VP2{
     //进入视频回放界面-直接点赞
     // 验证点赞数+1
     @Test
-    public void testBroadcastsZanKAdd() throws UiObjectNotFoundException, IOException {
+    public void testZanKAdd() throws UiObjectNotFoundException, IOException {
         //进入broadcasts
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -369,7 +373,7 @@ public class BroadCastsCase extends VP2{
     //进入视频回放界面-弹出的输入框中点赞
     // 验证点赞数+1
     @Test
-    public void testBroadcastsZanKAddByPopup() throws UiObjectNotFoundException, IOException {
+    public void tesZanKAddByPopup() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
@@ -422,8 +426,6 @@ public class BroadCastsCase extends VP2{
             BroadcastAction.waitBroadcastLoading();
             gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
-            //click play screen center
-            clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
             Spoon.screenshot("play_video");
             gDevice.pressBack();
         }
