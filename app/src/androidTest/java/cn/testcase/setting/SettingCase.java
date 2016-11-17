@@ -40,6 +40,37 @@ public class SettingCase extends VP2 {
         Asst.assertEquals("back logo success",true,feedback_status);
         gDevice.pressBack();
     }
+    /**
+     * 导播控制测试
+     *测试开关导播
+     * @author elon
+     */
+    @Test
+    public void testEnable() throws UiObjectNotFoundException {
+        SettingAction.navToSetting();
+        boolean isChecked=getObject2ById(MePage.SETTINGS_CB_DIRECTOR).isChecked();
+        logger.info(""+isChecked);
+        if (isChecked==false){
+            clickById(MePage.SETTINGS_CB_DIRECTOR);
+            waitTime(2);
+            String active=getTex(MePage.SETTINGS_CB_DIRECTOR_TEXT);
+            String expect="关闭后，正在直播的视频将会继续导播，下次直播则为普通直播模式";
+            Asst.assertEquals("打开直播",expect,active);
+        }
+    }
+    @Test
+    public void testDisAble() throws UiObjectNotFoundException {
+        SettingAction.navToSetting();
+        boolean isChecked=getObject2ById(MePage.SETTINGS_CB_DIRECTOR).isChecked();
+        logger.info(""+isChecked);
+        if (isChecked==true){
+            clickById(MePage.SETTINGS_CB_DIRECTOR);
+            waitTime(2);
+            String active=getTex(MePage.SETTINGS_CB_DIRECTOR_TEXT);
+            String expect="打开后，在多机位直播时，你可以控制给观众看哪一个机位。";
+            Asst.assertEquals("关闭直播",expect,active);
+        }
+    }
     @Test
     public void testAboutSioEye() throws UiObjectNotFoundException, IOException {
         SettingAction.navToAboutSioEye();
