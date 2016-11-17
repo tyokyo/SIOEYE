@@ -36,22 +36,22 @@ public class HelpCenterCase extends VP2 {
         SettingAction.navToHP_TermService();
         Spoon.screenshot("TermOfService");
         clickById(MePage.HELP_BACK);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
-        Asst.assertEquals("back logo success",true,feedback_status);
+        boolean status=getObjectById(MePage.HELP_SERVICE).exists();
+        Asst.assertEquals("back logo success",true,status);
     }
     //PrivacyPolicy
     @Test
     public void testPrivacyPolicy() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_Privacy();
         clickById(MePage.HELP_BACK);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
-        Asst.assertEquals("back logo success",true,feedback_status);
+        boolean status=getObjectById(MePage.HELP_POLICY).exists();
+        Asst.assertEquals("back logo success",true,status);
     }
     @Test
     public void testEULA() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_UserProtocol();
         clickById(MePage.HELP_BACK);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
+        boolean feedback_status=getObjectById(MePage.HELP_EMULA).exists();
         Asst.assertEquals("back logo success",true,feedback_status);
     }
     @Test
@@ -81,7 +81,7 @@ public class HelpCenterCase extends VP2 {
         //String webAddress=getObjectById(MePage.HELP_HELP_NAV_WEB).getText();
         Spoon.screenshot("Support_sioEye");
         gDevice.pressBack();
-        boolean feedback_status=getObjectById(MePage.HELP_HELP).exists();
-        Asst.assertEquals("back logo success",true,feedback_status);
+        boolean status=getObjectById(MePage.HELP_HELP).exists();
+        Asst.assertEquals("back logo success",true,status);
     }
 }
