@@ -250,6 +250,7 @@ public class MePage {
     public static final String VIDEO_LIKE_NUMBER="cn.sioeye.sioeyeapp:id/tv_like_number";
     //导播控制
     public static final String SETTINGS_CB_DIRECTOR="cn.sioeye.sioeyeapp:id/cb_director";
+    public static final String SETTINGS_CB_DIRECTOR_TEXT="cn.sioeye.sioeyeapp:id/tv_director_txt";
     //sex
     public static final String SETTINGS_SEX_MALE="cn.sioeye.sioeyeapp:id/rlt_male";
     public static final String SETTINGS_SEX_FEMALE="cn.sioeye.sioeyeapp:id/rlt_female";
