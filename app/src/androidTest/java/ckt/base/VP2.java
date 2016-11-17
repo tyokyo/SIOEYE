@@ -650,8 +650,6 @@ public class VP2 extends  VP{
             return null;
         }
     }
-
-
     /**
      * Get the prop info form the command
      *
@@ -710,6 +708,7 @@ public class VP2 extends  VP{
      */
     public static void openAppByPackageName(String BASIC_PACKAGE_NAME)
     {
+        logger.info("openAppByPackageName-"+BASIC_PACKAGE_NAME);
         initDevice();
         //Start form the home screen.
         gDevice.pressHome();
