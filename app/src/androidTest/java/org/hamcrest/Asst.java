@@ -41,6 +41,7 @@ public class Asst extends VP2{
 
     public static void fail(String message){
         //Spoon.screenshot(gDevice,"fail","message is null");
+        logger.info("Now-Fail-Message");
         try {
             String ANR="";
             if (getObjectById("android:id/message").exists()){
@@ -51,7 +52,7 @@ public class Asst extends VP2{
                 message="Exception_Crash->"+message;
                 message=ANR+"-"+message;
 
-                Spoon.screenshot("fail",message==null?"message is null":message);
+                Spoon.screenshot("Crash",message==null?"message is null":message);
                 logger.info("Exception_Crash");
                 Spoon.screenshot("Exception_Crash");
                 clickByText("OK");
