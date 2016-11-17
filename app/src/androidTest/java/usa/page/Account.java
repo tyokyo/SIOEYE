@@ -36,4 +36,5 @@ public class Account {
     public static final String ACCOUNT_LOGOUT="com.sioeye.sioeyeapp:id/llt_layout";
     //绿色的登录按钮
     public static final String ACCOUNT_LOGIN="com.sioeye.sioeyeapp:id/rl_root";
+    public static final String ACCOUNT_INPUT_PHONE ="com.sioeye.sioeyeapp:id/et_input_phone";
 }
