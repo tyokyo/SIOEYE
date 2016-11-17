@@ -36,6 +36,11 @@ import cn.page.MePage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*发现
+播放视频
+滑动视频
+验证推荐列表
+* */
 public class DiscoverCase extends VP2 {
     Logger logger = Logger.getLogger(DiscoverCase.class.getName());
     @Before

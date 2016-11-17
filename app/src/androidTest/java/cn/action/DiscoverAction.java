@@ -83,8 +83,7 @@ public class DiscoverAction extends VP2 {
 
     }
     public static void checkAddFriendsInMyFollowing(String target_nick_name) throws UiObjectNotFoundException {
-        clickById(DiscoverPage.ID_MAIN_TAB_ME);
-        clickById(MePage.ID_ME_FOLLOWING);
+        MeAction.navToFollowing();
         waitUntilFind(MePage.FOLLOWERING_VIEW,6000);
         UiObject expectObj=scrollAndGetUIObject(target_nick_name);
         if (expectObj!=null){

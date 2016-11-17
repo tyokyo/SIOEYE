@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  * @since API Level 16
  */
 public class UiObjectNotFoundException extends Exception {
-
+    Logger logger = Logger.getLogger(UiObjectNotFoundException.class.getName());
     private static final long serialVersionUID = 1L;
 
     /**
@@ -36,9 +36,9 @@ public class UiObjectNotFoundException extends Exception {
      **/
     public UiObjectNotFoundException(String msg) {
         super(msg);
+        logger.info("UiObjectNotFoundException->"+msg);
         Asst.fail("UiObjectNotFoundException:"+msg);
         //Spoon.screenshot("UiObjectNotFoundException",msg);
-        Logger.getLogger("UiObjectNotFoundException").info(msg);
     }
 
     /**
@@ -46,9 +46,9 @@ public class UiObjectNotFoundException extends Exception {
      **/
     public UiObjectNotFoundException(String detailMessage, Throwable throwable) {
         super(detailMessage, throwable);
+        logger.info("UiObjectNotFoundException->"+detailMessage+throwable.toString());
         Asst.fail("UiObjectNotFoundException:"+detailMessage+throwable.toString());
         //Spoon.screenshot("throwable"+System.currentTimeMillis());
-        Logger.getLogger("throwable").info("detailMessage"+detailMessage);
     }
 
     /**
@@ -56,9 +56,9 @@ public class UiObjectNotFoundException extends Exception {
      **/
     public UiObjectNotFoundException(Throwable throwable) {
         super(throwable);
+        logger.info("UiObjectNotFoundException->"+throwable.toString());
         Asst.fail("UiObjectNotFoundException:"+throwable.toString());
         //Spoon.screenshot("UiObjectNotFoundException",throwable.toString());
-        Logger.getLogger("UiObjectNotFoundException").info("qqqqqqqqqqqqqqqqqqqqqq3");
     }
 
 }

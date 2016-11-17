@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 import bean.InfoBean;
+import ckt.base.VP;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.MePage;
@@ -25,6 +26,15 @@ import cn.page.MePage;
  * Created by elon on 2016/10/27.
  */
 public class MeAction extends VP2{
+    public static void getAccountPrivacyInfo(InfoBean infoBean){
+        //启动被测App
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        SettingAction.navToAccountAndPrivacy();
+        String email=getUiObject2ByText("邮箱地址").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
+        infoBean.setEmail(email);
+        String eyeId=getUiObject2ByText("Sioeye ID").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
+        infoBean.setId(eyeId);
+    }
     public static void clickBroadcast() throws UiObjectNotFoundException {
         if (id_exists(MePage.ID_ME_BROADCAST)){
             clickById(MePage.ID_ME_BROADCAST);
@@ -78,9 +88,9 @@ public class MeAction extends VP2{
         InfoBean infoBean=new InfoBean();
         infoBean.setNick_name(getNkName());
         infoBean.setSex(getSex());
-        infoBean.setEmail(getEmailAddress());
+        //infoBean.setEmail(getEmailAddress());
         infoBean.setLocation(getLocation());
-        infoBean.setId(getSioEyeID());
+        //infoBean.setId(getSioEyeID());
         infoBean.setAbout_me(getAboutMe());
         return  infoBean;
     }
@@ -175,6 +185,9 @@ public class MeAction extends VP2{
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_LOCATION);
+        if (id_exists(VP.PERMISSION_ALLOW)){
+            clickById(VP.PERMISSION_ALLOW);
+        }
         Spoon.screenshot("navToLocation");
         return infoBean;
     }

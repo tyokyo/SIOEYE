@@ -36,6 +36,11 @@ import cn.page.MePage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*编辑-爱好-基本功能验证
+* 添加爱好
+* 删除爱好
+* 修改爱好
+* */
 public class ActivityCase extends VP2{
     Logger logger = Logger.getLogger(ActivityCase.class.getName());
     @Before
@@ -43,7 +48,10 @@ public class ActivityCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
         AccountAction.inLogin();
     }
-    //验证添加功能  what are you interested in ?
+    /*验证添加功能
+    选择一个爱好
+    添加一个爱好
+    * */
     @Test
     public void testAddOneActivity() throws UiObjectNotFoundException {
         //进入爱好界面
@@ -71,7 +79,9 @@ public class ActivityCase extends VP2{
         Spoon.screenshot("add_my_Interests",added);
 
     }
-    //验证添加功能 what are you interested in ? 添加所有推荐的爱好
+    /*
+    验证添加功能
+    添加所有推荐的爱好*/
     @Test
     public void testAddAllActivity() throws UiObjectNotFoundException {
         //进入爱好界面

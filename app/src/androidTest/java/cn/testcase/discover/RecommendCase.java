@@ -152,7 +152,7 @@ public class RecommendCase extends VP2 {
         DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
         gDevice.pressBack();
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
-        Spoon.screenshot("recommend_list","推荐列表中有一个被Floowed");
+        Spoon.screenshot("recommend_list","推荐列表中有一个被Followed");
         getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
         waitTime(2);
         String new_name=DiscoverAction.navToRecommendList(1,1);

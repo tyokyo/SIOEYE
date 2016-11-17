@@ -381,6 +381,16 @@ public class VP2 extends  VP{
      * This method can return a UI Element by text.
      *
      * @param TragetObject
+     * @return UiObject2
+     */
+    public static UiObject2 getUiObject2ByText(String TragetObject) {
+        initDevice();
+        return gDevice.findObject(By.text(TragetObject));
+    }
+    /**
+     * This method can return a UI Element by text.
+     *
+     * @param TragetObject
      * @return UiObject
      */
     public static UiObject getUiObjectByText(String TragetObject) {
@@ -640,8 +650,6 @@ public class VP2 extends  VP{
             return null;
         }
     }
-
-
     /**
      * Get the prop info form the command
      *
@@ -700,6 +708,7 @@ public class VP2 extends  VP{
      */
     public static void openAppByPackageName(String BASIC_PACKAGE_NAME)
     {
+        logger.info("openAppByPackageName-"+BASIC_PACKAGE_NAME);
         initDevice();
         //Start form the home screen.
         gDevice.pressHome();

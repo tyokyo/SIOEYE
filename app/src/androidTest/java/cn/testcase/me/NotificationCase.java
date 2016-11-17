@@ -36,7 +36,7 @@ public class NotificationCase extends VP2 {
     public void testNotificationAD() throws UiObjectNotFoundException {
         MeAction.navToNotifications();
         waitTime(3);
-        int f_users = findObjects(Me.NOTIFICATIONS_USER_FOLLOW).size();
+        int f_users = findObjects(Me.NOTIFICATIONS_USER_HEAD).size();
         if (f_users>=1) {
             Rect rect = getObjectById(Me.NOTIFICATIONS_USER_FOLLOW).getBounds();
             int width = gDevice.getDisplayWidth();

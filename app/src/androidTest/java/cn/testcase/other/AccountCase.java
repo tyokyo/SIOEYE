@@ -9,11 +9,12 @@ import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
+import java.util.logging.Logger;
 import bean.InfoBean;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
+import cn.action.SettingAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
@@ -25,6 +26,7 @@ import cn.page.MePage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class AccountCase extends VP2{
+    private Logger logger = Logger.getLogger(AccountCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
@@ -36,7 +38,7 @@ public class AccountCase extends VP2{
 "	提示电话号码不正确
     * */
     @Test
-    public void test_register_with_error_mobile_number() throws UiObjectNotFoundException {
+    public void testRegErrorMobileNumber() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -57,7 +59,7 @@ public class AccountCase extends VP2{
 "	提示电话号码正确
    * */
     @Test
-    public void test_register_with_mobile_number() throws UiObjectNotFoundException {
+    public void testRegMobileNumber() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -81,7 +83,7 @@ public class AccountCase extends VP2{
     4、创建用户名"	注册成功
     * */
     @Test
-    public void test_register_with_email() throws UiObjectNotFoundException {
+    public void testRegEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -107,9 +109,13 @@ public class AccountCase extends VP2{
 
         //check for user info
         InfoBean infoBean =MeAction.navToUserEdit();
+        MeAction.getAccountPrivacyInfo(infoBean);
+        logger.info(infoBean.toString());
+
         String active_nickName=infoBean.getNick_name();
         String active_email=infoBean.getEmail();
         String active_eye_id=infoBean.getId();
+
         Asst.assertEquals("nick name",nick_name,active_nickName);
         Asst.assertEquals("email",email_address,active_email);
         Asst.assertEquals("id",eye_id,active_eye_id);
@@ -123,7 +129,7 @@ public class AccountCase extends VP2{
     注册失败
     * */
     @Test
-    public void test_register_with_repeat_email() throws UiObjectNotFoundException {
+    public void testRegRepeatEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -149,6 +155,9 @@ public class AccountCase extends VP2{
 
         //check for user info
         InfoBean infoBean =MeAction.navToUserEdit();
+        MeAction.getAccountPrivacyInfo(infoBean);
+        logger.info(infoBean.toString());
+
         String active_nickName=infoBean.getNick_name();
         String active_email=infoBean.getEmail();
         String active_eye_id=infoBean.getId(); Asst.assertEquals("nick name",nick_name,active_nickName);
@@ -173,7 +182,7 @@ public class AccountCase extends VP2{
     注册失败
     * */
     @Test
-    public void test_register_with_repeat_eye_id() throws UiObjectNotFoundException {
+    public void testRegRepeatEyeID() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -199,6 +208,9 @@ public class AccountCase extends VP2{
 
         //check for user info
         InfoBean infoBean =MeAction.navToUserEdit();
+        MeAction.getAccountPrivacyInfo(infoBean);
+        logger.info(infoBean.toString());
+
         String active_nickName=infoBean.getNick_name();
         String active_email=infoBean.getEmail();
         String active_eye_id=infoBean.getId();
@@ -234,7 +246,7 @@ public class AccountCase extends VP2{
     "1、输入无效邮件地址
     * */
     @Test
-    public void test_register_with_error_email() throws UiObjectNotFoundException {
+    public void testRegErrorEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //进入手机注册界面
@@ -264,7 +276,7 @@ public class AccountCase extends VP2{
     }
     /*登录	1、输入正确的手机号码/Email、密码登录	成功登录*/
     @Test
-    public void test_logInAccount_error_email_password() throws UiObjectNotFoundException {
+    public void testLogInErrorEmailPwd() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
         //登录系统

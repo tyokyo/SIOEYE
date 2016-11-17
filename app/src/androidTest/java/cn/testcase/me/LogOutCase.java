@@ -33,7 +33,9 @@ public class LogOutCase extends VP2 {
     public void testLogOut_Cancel(){
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.SETTINGS_USER_MAIN);
-        clickById(AccountPage.LOG_OUT);
+        clickByText("账号与安全");
+        //clickById(AccountPage.LOG_OUT);
+        clickByText("退出登录");
         clickById(AccountPage.LOG_OUT_CANCEL);
         boolean active = getObjectById(AccountPage.LOG_OUT).exists();
         Asst.assertEquals("testLogOut_Cancel",true,active);
@@ -45,7 +47,9 @@ public class LogOutCase extends VP2 {
         //log out
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.SETTINGS_USER_MAIN);
-        clickById(AccountPage.LOG_OUT);
+        clickByText("账号与安全");
+        //clickById(AccountPage.LOG_OUT);
+        clickByText("退出登录");
         clickById(AccountPage.LOG_OUT_OK);
         //log in
         clickById(MePage.ID_MAIN_TAB_ME);

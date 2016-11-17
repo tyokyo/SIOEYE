@@ -32,7 +32,7 @@ public class LiveConfigCase extends VP2{
 
     //直播标题内容设置-长度-3
     @Test
-    public void test_default_video_title_3() throws UiObjectNotFoundException, IOException {
+    public void testTitle3c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
@@ -51,11 +51,11 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度-69
     @Test
-    public void test_default_video_title_69() throws UiObjectNotFoundException, IOException {
+    public void testTitle40c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
-        String expect = getRandomString(69);
+        String expect = getRandomString(40);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
@@ -70,11 +70,11 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度-120
     @Test
-    public void test_default_video_title_120() throws UiObjectNotFoundException, IOException {
+    public void testTitle50c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
-        String expect = getRandomString(120);
+        String expect = getRandomString(50);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
@@ -87,9 +87,9 @@ public class LiveConfigCase extends VP2{
         gDevice.pressBack();
 
     }
-    //直播标题内容设置-长度->170(最多允许设置120)
+    //直播标题内容设置-长度->170(最多允许设置70)
     @Test
-    public void test_default_video_title_170() throws UiObjectNotFoundException, IOException {
+    public void testTitle170c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
@@ -102,7 +102,7 @@ public class LiveConfigCase extends VP2{
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
         logger.info("length:"+active.length());
-        expect=expect.substring(0,120);
+        expect=expect.substring(0,70);
         Asst.assertEquals("修改video title",expect,active);
         gDevice.pressBack();
         gDevice.pressBack();
@@ -110,7 +110,7 @@ public class LiveConfigCase extends VP2{
     }
     //privacy_settings to public
     @Test
-    public void test_privacy_settings_public() throws UiObjectNotFoundException {
+    public void testSetPublic() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
         MeAction.setToPublic();
@@ -126,7 +126,7 @@ public class LiveConfigCase extends VP2{
     }
     //privacy_settings to private
     @Test
-    public void test_privacy_settings_private() throws UiObjectNotFoundException {
+    public void testSetPrivate() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
         MeAction.setToPrivate();
@@ -140,7 +140,7 @@ public class LiveConfigCase extends VP2{
         Spoon.screenshot("private","Privacy_Settings_Private");
     }
     @Test
-    public void test_privacy_settings_personal() throws UiObjectNotFoundException {
+    public void testSetPersonal() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         //谁可以看我的直播
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);

@@ -32,6 +32,8 @@ import cn.page.MePage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*关注 播放视频 评论 点赞
+* */
 public class FollowingCase extends VP2 {
     Logger logger = Logger.getLogger(BroadCastsCase.class.getName());
     @Before
@@ -92,7 +94,7 @@ public class FollowingCase extends VP2 {
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
-            Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
@@ -126,7 +128,7 @@ public class FollowingCase extends VP2 {
             gDevice.pressBack();
             waitTime(2);
             input_comments=input_comments.substring(0,120);
-            Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
@@ -169,8 +171,9 @@ public class FollowingCase extends VP2 {
                 clickRect(rect);
                 waitTime(2);
                 //input_comments=input_comments.substring(0,120);
-                Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+                Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
                 //验证评论数+1
+                gDevice.pressBack();
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
                 int comments_count=Integer.parseInt(after_comments);
