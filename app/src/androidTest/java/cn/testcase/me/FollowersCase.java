@@ -81,7 +81,7 @@ public class FollowersCase extends VP2 {
     }
     //验证-评论 超过最大限制的字符长度120
     @Test
-    public void testFollowersComments130c() throws UiObjectNotFoundException, IOException {
+    public void testComments130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
         MeAction.navToFans();
@@ -132,7 +132,7 @@ public class FollowersCase extends VP2 {
     }
     //评论-关注的好友中的直播视频
     @Test
-    public void testFollowersComments120c() throws UiObjectNotFoundException, IOException {
+    public void testComments120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
         MeAction.navToFans();
@@ -183,7 +183,7 @@ public class FollowersCase extends VP2 {
     }
     //评论-关注的好友中的直播视频
     @Test
-    public void testFollowersComments20c() throws UiObjectNotFoundException, IOException {
+    public void testComments20c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
         MeAction.navToFans();
@@ -235,7 +235,7 @@ public class FollowersCase extends VP2 {
     //进入视频回放界面-直接点赞
     // 验证点赞数+1
     @Test
-    public void testFollowersZanKAdd() throws UiObjectNotFoundException, IOException {
+    public void testZanKAdd() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
         MeAction.navToFans();
@@ -291,7 +291,7 @@ public class FollowersCase extends VP2 {
     //进入视频回放界面-弹出的输入框中点赞
     // 验证点赞数+1
     @Test
-    public void testFollowersZanKAddByPopup() throws UiObjectNotFoundException, IOException {
+    public void testZanKAddByPopup() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
         MeAction.navToFans();
