@@ -52,7 +52,7 @@ public class BroadCastsCase extends VP2{
     Logger logger = Logger.getLogger(BroadCastsCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //确保App 处于登录状态
         AccountAction.inLogin();
     }

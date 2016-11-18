@@ -29,7 +29,7 @@ public class NotificationCase extends VP2 {
     public int followed;
     @Before
     public  void setup() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
     }
     @Test

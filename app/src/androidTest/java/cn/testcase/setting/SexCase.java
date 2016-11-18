@@ -25,7 +25,7 @@ public class SexCase extends VP2 {
     Logger logger = Logger.getLogger(SexCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
     }
     @Test
@@ -34,7 +34,7 @@ public class SexCase extends VP2 {
         MeAction.navToSex();
         clickById(MePage.SETTINGS_SEX_MALE);
         //验证
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToSex();
         gDevice.pressBack();
         String sex =MeAction.getSex();
@@ -48,7 +48,7 @@ public class SexCase extends VP2 {
         MeAction.navToSex();
         clickById(MePage.SETTINGS_SEX_FEMALE);
         //验证
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToSex();
         gDevice.pressBack();
         String sex =MeAction.getSex();
@@ -62,7 +62,7 @@ public class SexCase extends VP2 {
         MeAction.navToSex();
         clickById(MePage.SETTINGS_SEX_SECRET);
         //验证
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToSex();
         gDevice.pressBack();
         String sex =MeAction.getSex();

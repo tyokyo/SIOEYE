@@ -30,7 +30,7 @@ public class RecommendCase extends VP2 {
     Logger logger = Logger.getLogger(RecommendCase.class.getName());
     @Before
     public void setup() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
     }
 
@@ -41,14 +41,14 @@ public class RecommendCase extends VP2 {
      */
     public void testSingleClickRecommendList0() throws UiObjectNotFoundException {
         //Single Check Recommend list 0单击推荐列表第一个人，检查弹出框PROFILE_MINI_HOME是否正确
-        String expect_name= DiscoverAction.navToRecommendList(0,1);
+        String expect_name = DiscoverAction.navToRecommendList(0, 1);
         //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
-        String active_name=getObjectById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
+        String active_name = getObjectById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
         Spoon.screenshot("testSingleClickRecommendList0");
-        Asst.assertEquals("点击的推荐用户名与弹出信息框是否一致",expect_name,active_name);
-        clickByClass("android.widget.ImageView",2);
+        Asst.assertEquals("点击的推荐用户名与弹出信息框是否一致", expect_name, active_name);
+        clickByClass("android.widget.ImageView", 2);
         //关闭弹出框
-        }
+    }
     @Test
     /**case2 双击推荐列表头像
      * 唤出对应对象的个人资料页面；

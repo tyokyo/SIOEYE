@@ -29,7 +29,7 @@ public class AccountCase extends VP2{
     private Logger logger = Logger.getLogger(AccountCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
     }
     /*

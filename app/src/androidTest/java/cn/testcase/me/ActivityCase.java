@@ -45,7 +45,7 @@ public class ActivityCase extends VP2{
     Logger logger = Logger.getLogger(ActivityCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
     }
     /*验证添加功能
@@ -181,7 +181,7 @@ public class ActivityCase extends VP2{
         //提交
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //重新open app 验证是否添加成功
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //go to 爱好
         MeAction.navToActivities();
         Set myInterests_after_add = ActivityAction.getAllMyInterests();
@@ -208,7 +208,7 @@ public class ActivityCase extends VP2{
         //添加
         clickByPoint(point);
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         //最多只能接受16个字符的长度的输入
         input=input.substring(0,16);
@@ -243,7 +243,7 @@ public class ActivityCase extends VP2{
         //确认
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //验证增加的爱好
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         Set myInterests_after_add = ActivityAction.getAllMyInterests();
         Asst.assertEquals("add success",total_add,myInterests_after_add.size());
@@ -265,7 +265,7 @@ public class ActivityCase extends VP2{
         //添加
         gDevice.click(p.x,p.y);
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         //获取爱好内容
         Set myInterests_after_add =ActivityAction.getAllMyInterests();
@@ -288,7 +288,7 @@ public class ActivityCase extends VP2{
         //添加
         clickByPoint(point);
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         //验证点
         Set myInterests_after_add = ActivityAction.getAllMyInterests();
@@ -314,7 +314,7 @@ public class ActivityCase extends VP2{
         clickByPoint(p);
         clickById(MePage.ACTIVITIES__BACK);
         //check
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         Set myInterests_after_add = ActivityAction.getAllMyInterests();
         Asst.assertEquals("add with forgive saving",0,myInterests_after_add.size());

@@ -26,7 +26,7 @@ import cn.page.MePage;
 public class LiveConfigCase extends VP2{
     @Before
     public  void setup() throws UiObjectNotFoundException {
-        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageNameInLogin(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
     }
 
@@ -40,7 +40,7 @@ public class LiveConfigCase extends VP2{
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
@@ -59,7 +59,7 @@ public class LiveConfigCase extends VP2{
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
@@ -78,7 +78,7 @@ public class LiveConfigCase extends VP2{
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
@@ -97,7 +97,7 @@ public class LiveConfigCase extends VP2{
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
@@ -116,7 +116,7 @@ public class LiveConfigCase extends VP2{
         MeAction.setToPublic();
         clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
 
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
 
@@ -132,7 +132,7 @@ public class LiveConfigCase extends VP2{
         MeAction.setToPrivate();
         clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
 
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
         String permission=MeAction.getPermissionToView();
@@ -156,7 +156,7 @@ public class LiveConfigCase extends VP2{
         clickById(MePage.PRIVACY_PERSONAL_DONE);
         clickById(MePage.PRIVACY_PERSONAL_RIGHT);
 
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         //谁可以看我的直播
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);

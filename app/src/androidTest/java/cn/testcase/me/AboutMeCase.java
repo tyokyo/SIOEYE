@@ -30,7 +30,7 @@ public class AboutMeCase extends VP2 {
     @Before
     public  void setup() throws UiObjectNotFoundException {
         //启动被测App
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //确保App处于登录状态
         AccountAction.inLogin();
     }
