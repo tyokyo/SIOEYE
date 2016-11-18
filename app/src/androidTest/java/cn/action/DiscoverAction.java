@@ -2,6 +2,7 @@ package cn.action;
 
 import android.graphics.Rect;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.StaleObjectException;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -14,7 +15,6 @@ import org.hamcrest.Asst;
 import org.junit.Assert;
 import java.util.List;
 import java.util.logging.Logger;
-
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.DiscoverPage;
@@ -26,6 +26,23 @@ import cn.page.MePage;
 
 public class DiscoverAction extends VP2 {
     private static Logger logger=Logger.getLogger(DiscoverAction.class.getName());
+
+    //得到点赞人数
+    public static int getZanNumber() {
+        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        UiObject2 swip = getObject2ById(DiscoverPage.ID_Swipe_target);
+        waitTime(5);
+        List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
+        logger.info(linearLayouts.size() + "");
+        int like = 0;
+        for (UiObject2 linearLayout : linearLayouts) {
+            List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
+            if (textViews.size() == 3) {
+                like= Integer.parseInt(textViews.get(1).getText());
+            }
+        }
+        return like;
+    }
     public static void navToSearch(){
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         waitTime(3);
@@ -113,12 +130,52 @@ public class DiscoverAction extends VP2 {
         //关闭弹出框
         return sioEye_id;
     }
-     //得到观看人数
-    public static int getPersonNumber() throws UiObjectNotFoundException {
+    //得到观看人数
+    public static int getPersonNumber() {
+        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
+        waitTime(5);
+        List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
+        logger.info(linearLayouts.size() + "");
+        int person =0;
+        for (UiObject2 linearLayout : linearLayouts) {
+            List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
+            if (textViews.size() == 3) {
+                person= Integer.parseInt(textViews.get(0).getText());
+            }
+        }
+        return person;
+    }
+    //获得位置信息
+    public static String getLocationInfo(){
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         waitTime(10);
         List<UiObject2> textViews=getObject2ById(DiscoverPage.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
-        return Integer.parseInt(textViews.get(9).getText());
+        return textViews.get(11).getText();
+    }
+    //点击Discover界面的视频观看
+    public static void navToPlayVideo(){
+        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
+        waitTime(5);
+        List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
+        logger.info(linearLayouts.size() + "");
+        int person =0;
+        for (UiObject2 linearLayout : linearLayouts) {
+            try {
+                List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
+                if (textViews.size() == 3) {
+                    person= Integer.parseInt(textViews.get(0).getText());
+                    //点击视频进行播放
+                    textViews.get(0).getParent().getParent().getParent().click();
+                    waitTime(3);
+                    //等待视频加载完成
+                    //BroadcastAction.waitBroadcastLoading();
+                }
+            } catch (StaleObjectException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
