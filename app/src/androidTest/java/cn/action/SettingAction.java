@@ -38,6 +38,12 @@ public class SettingAction extends VP2 {
         clickByText("帮助中心");
         Spoon.screenshot("HelpCenter");
     }
+    //设置
+    public static void navToSetting(){
+        clickById(MePage.ID_MAIN_TAB_ME);
+        clickById(MePage.SETTINGS_USER_MAIN);
+        Spoon.screenshot("HelpCenter");
+    }
     //关于SioEye
     public static void navToAboutSioEye(){
         clickById(MePage.ID_MAIN_TAB_ME);
