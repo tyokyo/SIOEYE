@@ -260,7 +260,7 @@ public class BroadCastsCase extends VP2{
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
             Asst.assertEquals(comments_count_before+1,comments_count);
-            Spoon.screenshot("testComments_Length_120"+input_comments);
+            Spoon.screenshot("testComments_Length_120",input_comments);
             gDevice.pressBack();
         }
     }
@@ -294,7 +294,7 @@ public class BroadCastsCase extends VP2{
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
             Asst.assertEquals(comments_count_before+1,comments_count);
-            Spoon.screenshot("testComments_Length_130"+input_comments);
+            Spoon.screenshot("testComments_Length_130",input_comments);
             gDevice.pressBack();
         }
     }
@@ -326,7 +326,7 @@ public class BroadCastsCase extends VP2{
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
             Asst.assertEquals(comments_count_before+1,comments_count);
-            Spoon.screenshot("testComments_Length_20"+input_comments);
+            Spoon.screenshot("testComments_Length_20",input_comments);
         }
     }
     //进入视频回放界面-直接点赞
