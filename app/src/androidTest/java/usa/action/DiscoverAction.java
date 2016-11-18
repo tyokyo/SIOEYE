@@ -99,18 +99,36 @@ public class DiscoverAction extends VP2 {
             //关闭弹出框
         }
          //得到观看人数
-        public static String getPersonNumber() throws UiObjectNotFoundException {
-            clickById(Discover.ID_MAIN_TAB_DISCOVER);
-            waitTime(10);
-            List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
-            return textViews.get(9).getText();
-        }
+         public String getPersonNumber() {
+             clickById(Discover.ID_MAIN_TAB_DISCOVER);
+             UiObject2 swip = getObject2ById(Discover.ID_Swipe_target);
+             waitTime(5);
+             List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
+             logger.info(linearLayouts.size() + "");
+             String temp ="100";
+             for (UiObject2 linearLayout : linearLayouts) {
+                 List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
+                 if (textViews.size() == 3) {
+                     return textViews.get(0).getText();
+                 }
+             }
+             return temp;
+         }
         //得到点赞人数
-        public static String getZanNumber() throws UiObjectNotFoundException {
+        public String getZanNumber() {
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
-            waitTime(10);
-            List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
-            return textViews.get(10).getText();
+            UiObject2 swip = getObject2ById(Discover.ID_Swipe_target);
+            waitTime(5);
+            List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
+            logger.info(linearLayouts.size() + "");
+            String temp ="100";
+            for (UiObject2 linearLayout : linearLayouts) {
+                List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
+                if (textViews.size() == 3) {
+                    return textViews.get(1).getText();
+                }
+            }
+            return temp;
         }
         public static void deleteNewFollowing (String target_nick_name) throws UiObjectNotFoundException {
             clickById(Discover.ID_MAIN_TAB_ME);

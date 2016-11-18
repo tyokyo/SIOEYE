@@ -27,7 +27,7 @@ import static usa.action.AccountAction.navToSignUp_ByEmail;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class RegisterCase extends VP2 {
-    Logger logger = Logger.getLogger(Demo.class.getName());
+    Logger logger = Logger.getLogger(RegisterCase.class.getName());
     @Before
     public void setup() {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
