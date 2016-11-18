@@ -171,4 +171,10 @@ public class AccountAction extends VP2{
             waitUntilFind(Me.ID_MAIN_TAB_ME,20);
         }
     }
+    //仅仅一个登陆的动作
+    public static void justLogIn(String username,String password) throws UiObjectNotFoundException {
+        getObjectById(Account.LOGIN_ET_INPUT_USERNAME).setText(username);
+        getObjectById(Account.LOGIN_ET_INPUT_PASSWORD).setText(password);
+        clickById(Account.LOGIN_ET_SIGN_UP_BTN);
+    }
 }
