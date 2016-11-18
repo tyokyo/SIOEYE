@@ -39,6 +39,7 @@ public class DiscoverAction extends VP2 {
             List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
             if (textViews.size() == 3) {
                 like= Integer.parseInt(textViews.get(1).getText());
+                break;
             }
         }
         return like;
@@ -142,6 +143,7 @@ public class DiscoverAction extends VP2 {
             List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
             if (textViews.size() == 3) {
                 person= Integer.parseInt(textViews.get(0).getText());
+                break;
             }
         }
         return person;
@@ -169,6 +171,7 @@ public class DiscoverAction extends VP2 {
                     //点击视频进行播放
                     textViews.get(0).getParent().getParent().getParent().click();
                     waitTime(3);
+                    break;
                     //等待视频加载完成
                     //BroadcastAction.waitBroadcastLoading();
                 }
