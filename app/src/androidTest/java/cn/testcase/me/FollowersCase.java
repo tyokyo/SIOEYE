@@ -120,7 +120,7 @@ public class FollowersCase extends VP2 {
                 String after_comments = watcherBean_after.getComments();
                 int comments_count=Integer.parseInt(after_comments);
                 Asst.assertEquals(comments_count_before+1,comments_count);
-                Spoon.screenshot("testComments_Length_130"+input_comments);
+                Spoon.screenshot("testComments_Length_130",input_comments);
             }else{
                 logger.info("no_video");
                 Spoon.screenshot("no_video","没有视频");
@@ -170,7 +170,7 @@ public class FollowersCase extends VP2 {
                 String after_comments = watcherBean_after.getComments();
                 int comments_count=Integer.parseInt(after_comments);
                 Asst.assertEquals(comments_count_before+1,comments_count);
-                Spoon.screenshot("testComments_Length_130"+input_comments);
+                Spoon.screenshot("testComments_Length_130",input_comments);
                 gDevice.pressBack();
             }else{
                 logger.info("no_video");
@@ -221,7 +221,7 @@ public class FollowersCase extends VP2 {
                 String after_comments = watcherBean_after.getComments();
                 int comments_count=Integer.parseInt(after_comments);
                 Asst.assertEquals(comments_count_before+1,comments_count);
-                Spoon.screenshot("testComments_Length_130"+input_comments);
+                Spoon.screenshot("testComments_Length_130",input_comments);
                 gDevice.pressBack();
             }else{
                 logger.info("no_video");
