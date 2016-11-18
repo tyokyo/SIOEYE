@@ -31,26 +31,21 @@ public class LocationCase extends VP2{
     @Test
     public void testSearchLocation() throws UiObjectNotFoundException {
         MeAction.navToLocation();
-        if (getObjectById(MePage.IS_LOCATING).exists()){
-            gDevice.pressBack();
-        }
-        waitUntilFind(MePage.ID_HEAD_IMAGE,60000);
-        if (id_exists(MePage.IS_LOCATING)){
-            Asst.fail("can not locate in 120s");
-        }
-        if (MeAction.getLocation()!=null){
-
-        }else{
+        waitUntilGone(MePage.IS_LOCATING,60000);
+        setText(MePage.SEARCH_LOCATE,"yibin");
+        clickById(MePage.LOCATION_NAME);
+        waitUntilGone(MePage.IS_LOCATING,120000);
+        Spoon.screenshot("locate_result");
+        String locate_result=getTex(MePage.LOCATION_NAME);
+        if ("定位中".equals(locate_result)){
             Asst.fail("can not locate");
         }
-        /*getObjectById(Me.SEARCH_LOCATE).setText("new");
-        gDevice.pressSearch();*/
     }
     //定位位置
     @Test
     public void testLocating() throws UiObjectNotFoundException {
         MeAction.navToLocation();
-        waitUntilFind(MePage.ID_HEAD_IMAGE,60000);
+        waitUntilGone(MePage.IS_LOCATING,60000);
         if (getUiObjectByText("定位中").exists()){
             clickByText("定位中");
             waitTime(2);
@@ -58,10 +53,8 @@ public class LocationCase extends VP2{
             Asst.assertTrue("locating time out in 120 seconds",!getObjectById(MePage.IS_LOCATING).exists());
             Spoon.screenshot("locate_result");
         }
-        String locate_result=MeAction.getLocation();
-        if (locate_result!=null){
-
-        }else{
+        String locate_result=getTex(MePage.LOCATION_NAME);
+        if ("定位中".equals(locate_result)){
             Asst.fail("can not locate");
         }
     }
