@@ -39,4 +39,7 @@ public class AccountPage {
     public static final String ACCOUNT_WEIXIN="cn.sioeye.sioeyeapp:id/login_wechat";
     public static final String ACCOUNT_QQ="cn.sioeye.sioeyeapp:id/login_qq";
 
+    //输入的密码是否可见按钮
+    public static final String ACCOUNT_PASSWORD_SHOW_BTN="cn.sioeye.sioeyeapp:id/show_password_btn";
+
 }
