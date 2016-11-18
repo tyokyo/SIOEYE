@@ -40,7 +40,10 @@ public class AccountAction extends VP2{
             Spoon.screenshot("logOut");
         }
     }
-    //判断是否处于登录状态
+    /*
+    * 判断是否处于登录状态,
+    * 未登录，将会登录账号
+    * */
     public static void inLogin() throws UiObjectNotFoundException {
         boolean login = true;
         if(id_exists(MePage.ID_TV_OK)){
@@ -112,5 +115,28 @@ public class AccountAction extends VP2{
         clickById(MePage.ID_MAIN_TAB_ME);
         clickByText("注册");
         clickByText("邮箱注册");
+    }
+    //仅仅一个登陆的动作
+    public static void justLogIn(String username,String password) throws UiObjectNotFoundException {
+        getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(username);
+        getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);
+        clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
+    }
+    /**
+     *
+     *启动app,判断是否登录,已经登录返回TRUE，并返回到初始化设备状态
+     */
+    public static boolean isLogin() throws UiObjectNotFoundException {
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        clickById(MePage.ID_MAIN_TAB_ME);
+        //判断是否登录
+        if (gDevice.findObject(new UiSelector().text("Login")).exists()) {
+            System.out.println("you haven't login");
+            return false;
+        } else {
+            System.out.println("you have logined");
+            clickById(MePage.ID_MAIN_TAB_DISCOVER);
+            return true;
+        }
     }
 }
