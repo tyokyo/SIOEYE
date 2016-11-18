@@ -4,7 +4,6 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -99,7 +98,7 @@ public class DiscoverAction extends VP2 {
             //关闭弹出框
         }
          //得到观看人数
-         public String getPersonNumber() {
+         public static  String getPersonNumber() {
              clickById(Discover.ID_MAIN_TAB_DISCOVER);
              UiObject2 swip = getObject2ById(Discover.ID_Swipe_target);
              waitTime(5);
@@ -115,7 +114,7 @@ public class DiscoverAction extends VP2 {
              return temp;
          }
         //得到点赞人数
-        public String getZanNumber() {
+        public static  String getZanNumber() {
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
             UiObject2 swip = getObject2ById(Discover.ID_Swipe_target);
             waitTime(5);
