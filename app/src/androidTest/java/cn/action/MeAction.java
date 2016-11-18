@@ -28,7 +28,7 @@ import cn.page.MePage;
 public class MeAction extends VP2{
     public static void getAccountPrivacyInfo(InfoBean infoBean){
         //启动被测App
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         SettingAction.navToAccountAndPrivacy();
         String email=getUiObject2ByText("邮箱地址").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
         infoBean.setEmail(email);
@@ -236,7 +236,7 @@ public class MeAction extends VP2{
      * @param
      */
     public static Point getPointToDoComment() throws UiObjectNotFoundException, IOException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         Point point = new Point();
         navToBroadcasts();
         int index=BroadcastAction.getRandomBroadcastsIndex();
@@ -247,7 +247,7 @@ public class MeAction extends VP2{
         int y = zan.getBounds().centerY();
         point.set(x,y);
         makeToast(point.x+"|"+point.y,3);
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         return  point;
     }
     //获取nickname

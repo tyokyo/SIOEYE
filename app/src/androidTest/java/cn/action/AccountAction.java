@@ -23,7 +23,7 @@ public class AccountAction extends VP2{
     如果当前已处于注销状态，退出
     * */
     public static  void logOutAccount() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         clickById(MePage.ID_MAIN_TAB_ME);
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             //当前账号已经处于logout状态
@@ -87,7 +87,7 @@ public class AccountAction extends VP2{
     }
     //登录账号
     public static void logInAccount(String username,String password) throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         clickById(MePage.ID_MAIN_TAB_ME);
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             clickByText("登录");
@@ -99,19 +99,19 @@ public class AccountAction extends VP2{
     }
     //进入登录界面
     public static void navToLogin() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         clickById(MePage.ID_MAIN_TAB_ME);
         clickByText("登录");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByMobile() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         clickById(MePage.ID_MAIN_TAB_ME);
         clickByText("注册");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByEmail() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         clickById(MePage.ID_MAIN_TAB_ME);
         clickByText("注册");
         clickByText("邮箱注册");
@@ -127,7 +127,7 @@ public class AccountAction extends VP2{
      *启动app,判断是否登录,已经登录返回TRUE，并返回到初始化设备状态
      */
     public static boolean isLogin() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         clickById(MePage.ID_MAIN_TAB_ME);
         //判断是否登录
         if (gDevice.findObject(new UiSelector().text("Login")).exists()) {
