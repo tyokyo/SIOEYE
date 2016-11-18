@@ -30,14 +30,14 @@ public class LogOutCase extends VP2 {
     }
     //注销Log out时->取消注销
     @Test
-    public void testLogOut_Cancel(){
+    public void testLogOut_Cancel() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         clickById(MePage.SETTINGS_USER_MAIN);
         clickByText("账号与安全");
         //clickById(AccountPage.LOG_OUT);
         clickByText("退出登录");
         clickById(AccountPage.LOG_OUT_CANCEL);
-        boolean active = getObjectById(AccountPage.LOG_OUT).exists();
+        boolean active = text_exists("退出登录");
         Asst.assertEquals("testLogOut_Cancel",true,active);
         Spoon.screenshot("testLogOut_Cancel");
     }
