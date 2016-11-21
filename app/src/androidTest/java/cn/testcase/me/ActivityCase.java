@@ -338,6 +338,7 @@ public class ActivityCase extends VP2{
         shellInputText(input);
         //添加
         clickByPoint(point);
+        waitTime(3);
         //get interetsts content
         Set myInterests_after_add_1 = ActivityAction.getAllMyInterests();
         //add another with the same interest name
@@ -346,6 +347,7 @@ public class ActivityCase extends VP2{
         //添加
         clickByPoint(point);
         //check
+        waitTime(3);
         Set myInterests_after_add_2 = ActivityAction.getAllMyInterests();
         Asst.assertEquals("add with the same name",myInterests_after_add_1.size(),myInterests_after_add_2.size());
         Spoon.screenshot("no_interest",input);
