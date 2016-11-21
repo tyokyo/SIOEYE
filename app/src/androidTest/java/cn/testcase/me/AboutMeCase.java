@@ -25,7 +25,9 @@ import cn.page.WatchPage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
-/*个性签名基本功能验证*/
+/*
+*个性签名基本功能验证
+* 允许输入的最大字符为60个英文字符或者30个汉字*/
 public class AboutMeCase extends VP2 {
     @Before
     public  void setup() throws UiObjectNotFoundException {

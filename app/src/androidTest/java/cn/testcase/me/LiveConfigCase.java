@@ -23,6 +23,9 @@ import cn.page.MePage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*直播默认标题
+*30个汉字或者70个字符
+ *  */
 public class LiveConfigCase extends VP2{
     @Before
     public  void setup() throws UiObjectNotFoundException {

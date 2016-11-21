@@ -22,6 +22,9 @@ import cn.page.MePage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*
+* 昵称
+* 4-40个字符*/
 public class NickNameCase extends VP2 {
     @Before
     public  void setup() throws UiObjectNotFoundException {
