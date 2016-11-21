@@ -47,7 +47,8 @@ public class Asst extends VP2{
             if (getObjectById("android:id/message").exists()){
                 ANR=getObjectById("android:id/message").getText();
             }
-            if (getObjectByTextContains("Unfortunately").exists()) {
+            if (getObjectByTextContains("Unfortunately").exists()
+                    ||getObjectByTextContains("停止运行").exists()) {
                 //Exception_Crash
                 message="Exception_Crash->"+message;
                 message=ANR+"-"+message;
@@ -57,7 +58,9 @@ public class Asst extends VP2{
                 Spoon.screenshot("Exception_Crash");
                 clickByText("OK");
 
-            }else if(getObjectByTextContains("isn't responding").exists()){
+            }else if(getObjectByTextContains("isn't responding").exists()
+                    ||getObjectByTextContains("无响应").exists()
+                    ){
                 //Exception_ANR
                 message="Exception_ANR->"+message;
                 message=ANR+"-"+message;
