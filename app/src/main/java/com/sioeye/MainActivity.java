@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
         startActivityForResult(intent, 0);*/
 
-        //启动Toast监控服务
+        /*//启动Toast监控服务
         Intent toastIntent = new Intent(MainActivity.this,ToastInfo.class);
-        startService(toastIntent);
+        startService(toastIntent);*/
 
         //版本大于6.0的情况
         if (Build.VERSION.SDK_INT >= 23) {
