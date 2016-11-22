@@ -386,6 +386,16 @@ public class VP2 extends  VP{
     /**
      * This method can return a UI Element by text.
      *
+     * @param regex
+     * @return UiObject
+     */
+    public static UiObject getUiObjectByTextMatches(String regex) {
+        initDevice();
+        return gDevice.findObject(new UiSelector().textMatches(regex));
+    }
+    /**
+     * This method can return a UI Element by text.
+     *
      * @param TragetObject
      * @return UiObject2
      */
@@ -810,6 +820,16 @@ public class VP2 extends  VP{
     /**
      * Get a UI Element.
      *
+     * @param classObj
+     * @return UiObject
+     */
+    public static UiObject2 getObject2ByClass(Class classObj) {
+        initDevice();
+        return gDevice.findObject(By.clazz(classObj));
+    }
+    /**
+     * Get a UI Element.
+     *
      * @param ResourceID
      * @return UiObject
      */
@@ -924,6 +944,14 @@ public class VP2 extends  VP{
     public static void waitUntilGone(String resourceID,int timeout){
         gDevice.wait(Until.gone(By.res(resourceID)),timeout);
     }
+    /**
+     * Get the Launcher Package Name.
+     * @param regex String
+     * @param timeout timeout for wait
+     */
+    public static void waitUntilRegexGone(String regex,int timeout){
+        gDevice.wait(Until.gone(By.text(regex)),timeout);
+    }
     public static void clickRect(Rect rect){
         gDevice.click(rect.centerX(),rect.centerY());
     }
@@ -955,6 +983,13 @@ public class VP2 extends  VP{
      */
     public static boolean text_exists(String text) throws UiObjectNotFoundException {
         return  getUiObjectByText(text).exists();
+    }
+    /**
+     * @param regex
+     */
+    public static boolean text_exists_match(String regex) throws UiObjectNotFoundException {
+        initDevice();
+        return gDevice.findObject(new UiSelector().textMatches(regex)).exists();
     }
     /**
      *get rectangle for object
