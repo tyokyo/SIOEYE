@@ -43,7 +43,7 @@
         </receiver>
     </application>
     <service
-        android:name="com.sioeye.ToastInfo"
+        android:name=".ToastInfo"
         android:enabled="true"
         android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
         <intent-filter>
