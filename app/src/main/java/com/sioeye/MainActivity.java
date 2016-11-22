@@ -38,7 +38,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //启动Toast服务
+        /*//开启辅助功能
+        Intent intent = new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
+        startActivityForResult(intent, 0);*/
+
+        //启动Toast监控服务
         Intent toastIntent = new Intent(MainActivity.this,ToastInfo.class);
         startService(toastIntent);
 
