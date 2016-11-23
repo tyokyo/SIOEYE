@@ -49,11 +49,6 @@ public class VP2 extends  VP{
     private static final int LAUNCH_TIMEOUT = 10000;
     public static Logger logger = Logger.getLogger(VP.class.getName());
 
-    private static String getRunningActivityName(){
-        ActivityManager activityManager=(ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-        String runningActivity=activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
-        return runningActivity;
-    }
     /**
      * 获取视频文件信息
      * @param videoPath
@@ -144,32 +139,6 @@ public class VP2 extends  VP{
         String command = "am broadcast -a com.sioeye.log.action -e TAG false";
         logger.info(command);
         gDevice.executeShellCommand(command);
-    }
-    public static void playVideo(String path) throws IOException, InterruptedException {
-        //Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getPath()+"/Video/VID_20160909030920_30fps.mp4");
-        File videoFile = new File(path);
-        if (videoFile.exists()){
-            Uri uri = Uri.parse(path);
-            //调用系统自带的播放器
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            logger.info("play video-"+path);
-            intent.setDataAndType(uri, "video/mp4");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-            for (int i=0;i<30;i++){
-                String currentPackageName= gDevice.getCurrentPackageName();
-                if (App.SIOEYE_PACKAGE_NAME_USA.equals(currentPackageName)){
-                    logger.info("Gallery Launch Success");
-                    break;
-                }else{
-                    Thread.sleep(2000);
-                }
-            }
-        }
-        else{
-            logger.info(path + " not exists");
-        }
-
     }
     /**
      * You can call this method to find and click a UiObject.
