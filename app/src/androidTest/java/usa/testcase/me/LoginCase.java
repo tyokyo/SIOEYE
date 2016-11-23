@@ -10,34 +10,10 @@ import ckt.base.VP2;
 import usa.action.AccountAction;
 import usa.page.Account;
 import usa.page.App;
-
-import android.graphics.Rect;
-import android.os.RemoteException;
-import android.support.test.filters.SdkSuppress;
-
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Direction;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiScrollable;
-import android.support.test.uiautomator.UiSelector;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import com.squareup.spoon.Spoon;
-import org.hamcrest.Asst;
 import org.junit.Assert;
-import org.junit.runner.RunWith;
-import java.io.IOException;
-import java.util.List;
-import usa.action.DiscoverAction;
-import usa.action.MeAction;
-import usa.page.Constant;
-import usa.page.Discover;
-import usa.page.Me;
-import usa.testcase.me.ActivityCase;
+
 
 /**
  * Created by user on 2016/11/05   .
@@ -222,6 +198,7 @@ public class LoginCase extends VP2 {
             password = AccountAction.getPassword(1);
             if (!password.equals("error")&&password.length()>0&&password!=null){
                 logger.info(password);
+                AccountAction.navToLogin();
                 AccountAction.justLogIn(usename, password);
                 AccountAction.judgeLoginAction();
             }
