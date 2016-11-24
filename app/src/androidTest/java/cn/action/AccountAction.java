@@ -73,10 +73,10 @@ public class AccountAction extends VP2{
             }
             //input username
             //getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).click();
-            getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(Constant.userName);
+            getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(useName);
             //input  password
             //getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).click();
-            getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(Constant.passwd);
+            getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);
             //login
             clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
             waitUntilFind(MePage.ID_MAIN_TAB_ME,20);
