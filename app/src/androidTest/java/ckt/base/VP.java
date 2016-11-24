@@ -59,11 +59,6 @@ public class VP {
                 if (uiObject_permission.exists()) {
                     logger.info("["+t+"]"+"click allow-permission setting");
                     uiObject_permission.clickAndWaitForNewWindow();
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }
                 /*//异常弹出框-click-OK
                 UiObject uiObject_popup = gDevice.findObject(new UiSelector().resourceId(ID_MESSAGE));
