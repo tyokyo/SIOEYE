@@ -34,7 +34,7 @@ public class DiscoverAction extends VP2 {
 
     //得到点赞人数
     public static int getZanNumber() {
-        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        //clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         UiObject2 swip = getObject2ById(DiscoverPage.ID_Swipe_target);
         waitTime(5);
         List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
@@ -173,7 +173,7 @@ public class DiscoverAction extends VP2 {
     }
 
     //点击Discover界面的视频观看
-    public static void navToPlayVideo() {
+    public static int navToPlayVideo() {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         int person = 0;
         UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
@@ -181,11 +181,17 @@ public class DiscoverAction extends VP2 {
         waitTime(5);
         List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
         logger.info(linearLayouts.size() + "");
+        int zanBeforeNumber=0;
         for (UiObject2 linearLayout : linearLayouts) {
             try {
                 List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
                 if (textViews.size() == 3) {
                     person = Integer.parseInt(textViews.get(0).getText());
+                    //获取点赞数
+                    zanBeforeNumber =DiscoverAction.getZanNumber();
+                    logger.info("赞前人数是"+zanBeforeNumber+"人");
+                    Spoon.screenshot("before_zan",""+zanBeforeNumber);
+
                     //点击视频进行播放
                     textViews.get(0).getParent().getParent().getParent().click();
                     waitTime(3);
@@ -197,6 +203,7 @@ public class DiscoverAction extends VP2 {
                 e.printStackTrace();
             }
         }
+        return zanBeforeNumber;
     }
 }
 
