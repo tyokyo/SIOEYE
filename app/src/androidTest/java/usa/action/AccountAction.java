@@ -1,14 +1,20 @@
 package usa.action;
 
+import android.os.Environment;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 
 import com.squareup.spoon.Spoon;
 
+import org.junit.Assert;
+
+import java.io.File;
 import java.util.Random;
+import java.util.zip.Deflater;
 
 import ckt.base.VP2;
+import ckt.tools.Property;
 import usa.page.Account;
 import usa.page.App;
 import usa.page.Constant;
@@ -19,8 +25,7 @@ import usa.page.Me;
  **/
 public class AccountAction extends VP2{
     /**
-     *
-     *启动app,判断是否登录,已经登录返回TRUE，并返回到初始化设备状态
+     * 启动app,判断是否登录,已经登录返回TRUE，并返回到初始化设备状态
      */
     public static boolean judgelogin() throws UiObjectNotFoundException {
         initDevice();
@@ -64,10 +69,8 @@ public class AccountAction extends VP2{
     }
 
     /**
-     *login and back to desktop
-     *
-     *
-     * */
+     * login and back to desktop
+     */
     public static void login(String username, String password) throws UiObjectNotFoundException {
         initDevice();
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
@@ -174,7 +177,68 @@ public class AccountAction extends VP2{
     //仅仅一个登陆的动作
     public static void justLogIn(String username,String password) throws UiObjectNotFoundException {
         getObjectById(Account.LOGIN_ET_INPUT_USERNAME).setText(username);
+        waitTime(1);
+        Spoon.screenshot("inputusername", "输入账号");
         getObjectById(Account.LOGIN_ET_INPUT_PASSWORD).setText(password);
+        waitTime(1);
+        Spoon.screenshot("inputpassword", "输入密码");
         clickById(Account.LOGIN_ET_SIGN_UP_BTN);
+    }
+    public static String getUserName(int options){
+        String returnstring=null;
+        String config= Environment.getExternalStorageDirectory()+ File.separator+"config.properties";
+        switch (options){
+            case 1:{
+                logger.info("switch_case1");
+                String userName= Property.getValueByKey(config,"user_name");
+                returnstring =userName;}
+                break;
+            case 2:{
+                String phoneNumber= Property.getValueByKey(config,"phone_number");
+                returnstring =phoneNumber;}
+                break;
+            case 3:{
+                String sioeyeID= Property.getValueByKey(config,"sioeye_id");
+                returnstring =sioeyeID;}
+                break;
+            default:logger.info("getUserName方法传参错误，1代表邮箱名、2代表电话号码、3代表sioeyeID");
+                returnstring="error";
+                break;
+            }
+        return returnstring;
+    }
+    public static String getPassword(int options) {
+        String returnstring=null;
+        String config = Environment.getExternalStorageDirectory() + File.separator + "config.properties";
+        switch (options) {
+            case 1: {
+                String password = Property.getValueByKey(config, "user_password");
+                returnstring = password;
+            }
+            break;
+            case 2: {
+                String phonepassword = Property.getValueByKey(config, "phone_password");
+                returnstring = phonepassword;
+            }
+            break;
+            case 3: {
+                String sioeyepassword = Property.getValueByKey(config, "sioeye_password");
+                returnstring = sioeyepassword;
+            }
+            break;
+            default:
+                logger.info("getPassword方法传参错误，1代表邮箱密码、2代表电话号码密码、3代表sioeyeID密码");
+                returnstring = "error";
+                break;
+        }
+        return returnstring;
+    }
+    public static void judgeLoginAction() throws UiObjectNotFoundException{
+        if (getUiObjectByText("Login").exists()) {
+            Spoon.screenshot("LoginFaied", "登陆失败");
+            Assert.fail("登陆失败");
+        } else {
+                logger.info("登陆成功");
+        }
     }
 }

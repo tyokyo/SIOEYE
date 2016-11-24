@@ -10,34 +10,10 @@ import ckt.base.VP2;
 import usa.action.AccountAction;
 import usa.page.Account;
 import usa.page.App;
-
-import android.graphics.Rect;
-import android.os.RemoteException;
-import android.support.test.filters.SdkSuppress;
-
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Direction;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiScrollable;
-import android.support.test.uiautomator.UiSelector;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import com.squareup.spoon.Spoon;
-import org.hamcrest.Asst;
 import org.junit.Assert;
-import org.junit.runner.RunWith;
-import java.io.IOException;
-import java.util.List;
-import usa.action.DiscoverAction;
-import usa.action.MeAction;
-import usa.page.Constant;
-import usa.page.Discover;
-import usa.page.Me;
-import usa.testcase.me.ActivityCase;
+
 
 /**
  * Created by user on 2016/11/05   .
@@ -46,7 +22,6 @@ import usa.testcase.me.ActivityCase;
 @SdkSuppress(minSdkVersion = 18)
 public class LoginCase extends VP2 {
     Logger logger = Logger.getLogger(LoginCase.class.getName());
-
     @Before
     public void setup() {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);}
@@ -112,10 +87,6 @@ public class LoginCase extends VP2 {
         if (!getUiObjectByText("Login").exists()) {
             Assert.fail("无账号点击登陆后页面变化");
         }
-        AccountAction.justLogIn("eye@163.com","eye132");
-        waitTime(5);
-        if (!getObjectById(Me.ID_MAIN_TAB_ME).exists()){
-            Assert.fail("登陆失败");}
     }
     @Test
     /*
@@ -176,11 +147,152 @@ public class LoginCase extends VP2 {
     3.输入超过120个字符的账号和密码
     4.
      */
-    public void testlongUseNameAndPassword() throws UiObjectNotFoundException{
+    public void testLongUseNameAndPassword() throws UiObjectNotFoundException{
         if (AccountAction.judgelogin()) {AccountAction.logout();}
         AccountAction.navToLogin();
-        
+        clearText(Account.LOGIN_ET_INPUT_USERNAME);
+        clearText(Account.LOGIN_ET_INPUT_PASSWORD);
+        String usename120=AccountAction.getRandomEmail(110,111);
+        logger.info(usename120);
+        String password120=AccountAction.getStringRandom(120);
+        logger.info(usename120);
+        AccountAction.justLogIn(usename120,password120);
+        if (!getUiObjectByText("Login").exists()) {
+            Assert.fail("错误账号点击登陆后页面变化");}
     }
+    @Test
+    /*
+    case 6:账号密码超过120个字符
+    1.尝试账号输入130个字符（实际是无法输入进去的）
+    2.尝试密码输入130个字符（实际是无法输入进去的）
+    3.点击登录
+    4.check无页面异常
+     */
+    public void testSupLongUseNameAndPassword() throws UiObjectNotFoundException{
+        if (AccountAction.judgelogin()) {AccountAction.logout();}
+        AccountAction.navToLogin();
+        clearText(Account.LOGIN_ET_INPUT_USERNAME);
+        clearText(Account.LOGIN_ET_INPUT_PASSWORD);
+        String usename130=AccountAction.getRandomEmail(120,130);
+        String password130=AccountAction.getStringRandom(130);
+        AccountAction.justLogIn(usename130,password130);
+        if (!getUiObjectByText("Login").exists()) {
+            Assert.fail("错误账号点击登陆后页面变化");}
+    }
+    @Test
+    /*
+    case 7:使用邮箱登陆
+    使用邮箱账户登录
+    需要提前将邮箱账号及密码保存在根目录下config.properties文件中,对应user_name，user_password
+    即：    user_name=XXXX@xxx.com
+            user_password=xxxx
+    检查是否登录成功
+     */
+    public void testEmailLogin() throws UiObjectNotFoundException{
+        if (AccountAction.judgelogin()) {AccountAction.logout();}
+        String usename=null;
+        String password=null;
+        usename=AccountAction.getUserName(1);
+        if (!usename.equals("error")&&usename.length()>0&&usename!=null) {
+            logger.info(usename);
+            password = AccountAction.getPassword(1);
+            if (!password.equals("error")&&password.length()>0&&password!=null){
+                logger.info(password);
+                AccountAction.navToLogin();
+                AccountAction.justLogIn(usename, password);
+                AccountAction.judgeLoginAction();
+            }
+            else
+            {Assert.fail("本地配置文件中未找到user_password，或者getPassword方法传参非1-3，请检查");}
+        }
+        else
+            {Assert.fail("本地配置文件中未找到user_name，或者getUserName方法传参非1-3，请检查");}
+    }
+    @Test
+    /*
+    case 8 :sioeye id 登陆
+    sioeye id 登陆
+    需要提前将sioeye id及密码保存在根目录下config.properties文件中,对应sioeye_id，sioeye_password
+    即：    sioeye_id=xxxxx
+            sioeye_password=xxxxx
+    检查是否登录成功
+     */
+    public void testSioeyeIDLogin() throws UiObjectNotFoundException{
+        if (AccountAction.judgelogin()) {AccountAction.logout();}
+        String usename=null;
+        String password=null;
+        usename=AccountAction.getUserName(3);
+        if (!usename.equals("error")&&usename.length()>0&&usename!=null) {
+            logger.info(usename);
+            password = AccountAction.getPassword(3);
+            if (!password.equals("error")&&password.length()>0&&password!=null){
+                logger.info(password);
+                AccountAction.navToLogin();
+                AccountAction.justLogIn(usename, password);
+                AccountAction.judgeLoginAction();
+            }
+            else
+            {Assert.fail("本地配置文件中未找到sioeye_password，或者getPassword方法传参非1-3，请检查");}
+        }
+        else
+            {Assert.fail("本地配置文件中未找到sioeye_id，或者getUserName方法传参非1-3，请检查");}
+    }
+    @Test
+    /*
+    case 9:电话号码登陆
+    使用电话号码登录
+    需要提前将电话号码及密码保存在根目录下config.properties文件中,对应phone_number，phone_password
+    即：    phone_number=xxxxx
+            phone_password=xxxxx
+    检查是否登录成功
+     */
+    public void testPhoneNumberLogin() throws UiObjectNotFoundException{
+        if (AccountAction.judgelogin()) {AccountAction.logout();}
+        String usename=null;
+        String password=null;
+        usename=AccountAction.getUserName(2);
+        if (!usename.equals("error")&&usename.length()>0&&usename!=null) {
+            logger.info(usename);
+            password = AccountAction.getPassword(2);
+            if (!password.equals("error")&&password.length()>0&&password!=null){
+                logger.info(password);
+                AccountAction.navToLogin();
+                AccountAction.justLogIn(usename, password);
+                AccountAction.judgeLoginAction();
+            }
+            else
+            {Assert.fail("本地配置文件中未找phone_password，或者getPassword方法传参非1-3，请检查");}
+        }
+        else
+        {Assert.fail("本地配置文件未找到phone_number，或者getUserName方法传参非1-3，请检查");}
+    }
+//    @Test
+//    /*
+//    case 10 Facebook三方登陆
+//    Facebook三方登陆
+//    检查是否登录成功
+//     */
+//    public void testFacebookLogin() throws UiObjectNotFoundException{
+//
+//    }
+//    @Test
+//    /*
+//    case 11 Twitter三方登陆
+//    Twitter三方登陆
+//    检查是否登录成功
+//     */
+//    public void testTwitterLogin() throws UiObjectNotFoundException{
+//
+//    }
+//    @Test
+//    /*
+//    case 12 Googgle三方登陆
+//    Googgle三方登陆
+//    检查是否登录成功
+//     */
+//    public void testGooggleLogin() throws UiObjectNotFoundException{
+//
+//    }
 }
 
 
