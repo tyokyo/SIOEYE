@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.DiscoverAction;
+import cn.action.MainAction;
+import cn.action.MeAction;
 import cn.page.App;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
@@ -67,10 +69,9 @@ public class CountPersonCase extends VP2 {
      * */
     @Test
     public void testCountZanPerson() throws UiObjectNotFoundException{
-        int zanBeforeNumber =DiscoverAction.getZanNumber();
-        logger.info("赞前人数是"+zanBeforeNumber+"人");
-        Spoon.screenshot("before_zan",""+zanBeforeNumber);
-        DiscoverAction.navToPlayVideo();
+        MainAction.navToDiscover();
+        int zanBeforeNumber=DiscoverAction.navToPlayVideo();
+        waitUntilFind(MePage.BROADCAST_VIEW_ZAN,120000);
         for(int times=0;times<5;times++){
             clickById(MePage.BROADCAST_VIEW_ZAN);
             waitTime(2);
@@ -78,6 +79,7 @@ public class CountPersonCase extends VP2 {
         waitTime(3);
         gDevice.pressBack();
         waitTime(3);
+        MainAction.navToDiscover();
         int zanAfterNumber =DiscoverAction.getZanNumber();
         logger.info("赞后人数"+zanAfterNumber+"人");
         Spoon.screenshot("after_zan",""+zanBeforeNumber);
