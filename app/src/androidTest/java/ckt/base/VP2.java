@@ -1,18 +1,14 @@
 package ckt.base;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.media.MediaMetadataRetriever;
-import android.net.Uri;
 import android.os.RemoteException;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Configurator;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -24,7 +20,6 @@ import android.util.Log;
 import org.hamcrest.Asst;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,12 +27,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import ckt.tools.VideoNode;
 import usa.page.App;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -48,43 +41,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 public class VP2 extends  VP{
     private static final int LAUNCH_TIMEOUT = 10000;
     public static Logger logger = Logger.getLogger(VP.class.getName());
-
-    /**
-     * 获取视频文件信息
-     * @param videoPath
-     *
-     */
-    public VideoNode VideoInfo(String videoPath){
-        VideoNode vd = new VideoNode();
-        logger.info(videoPath);
-        MediaMetadataRetriever retr = new MediaMetadataRetriever();
-        retr.setDataSource(videoPath);
-        String duration = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-        vd.setDuration(Integer.parseInt(duration));
-        logger.info("-VIDEO_DURATION-"+Integer.parseInt(duration)/1000+"s");
-        String height = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);
-        vd.setHeight(Integer.parseInt(height));
-        logger.info("-VIDEO_HEIGHT-"+height);
-        String width = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);
-        vd.setWidth(Integer.parseInt(width));
-        logger.info("-VIDEO_WIDTH-"+width);
-        return vd;
-    }
-    /**
-     * 返回文件差集
-     * tSet1-tSet2
-     * @param tSet1 tSet2
-     *
-     */
-    public HashSet<String> result(HashSet<String> tSet1, HashSet<String> tSet2){
-        HashSet<String> result = new HashSet<String>();
-        result.addAll(tSet1);
-        result.removeAll(tSet2);
-        logger.info("Old Folder List:"+tSet2);
-        logger.info("New FolderList:"+tSet1);
-        logger.info("The File added:"+result);
-        return result;
-    }
     /**
      * 等待时间设置
      *
@@ -98,16 +54,6 @@ public class VP2 extends  VP{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-    /**
-     * 配置timeout时间
-     * @param time Integer
-     */
-    public void configTimeout(int time){
-        Configurator confg = Configurator.getInstance();
-        long timeout = confg.getWaitForSelectorTimeout();
-        //获取Selector timeout
-        confg.setWaitForSelectorTimeout(timeout+time);
     }
     public static void shellInputText(String text) throws IOException {
         initDevice();
