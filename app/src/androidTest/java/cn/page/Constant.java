@@ -3,6 +3,7 @@ package cn.page;
 import android.os.Environment;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 import ckt.tools.Property;
 
@@ -10,6 +11,7 @@ import ckt.tools.Property;
  * Created by elon on 2016/10/28.
  */
 public class Constant {
+    private static Logger logger=Logger.getLogger(Constant.class.getName());
     //Each-user-need: Mobile number account
     public static  final  String mobile_number ="13547946743";
     public static  final  String mobile_password ="123456789";
@@ -40,13 +42,18 @@ public class Constant {
 
     public static String getUserName(){
         String config= Environment.getExternalStorageDirectory()+ File.separator+"config.properties";
+        logger.info(config);
+        logger.info(userName);
         String userName=Property.getValueByKey(config,"user_name");
+        logger.info("userName:"+userName);
         return userName;
     }
     public static String getPassword(){
         String config= Environment.getExternalStorageDirectory()+ File.separator+"config.properties";
-        String userName=Property.getValueByKey(config,"user_password");
-        return userName;
+        String user_password=Property.getValueByKey(config,"user_password");
+        logger.info(config);
+        logger.info("user_password:"+user_password);
+        return user_password;
     }
     //nick name for search
     public static String CORRECT_NICK_NAME = "tyokyo";
