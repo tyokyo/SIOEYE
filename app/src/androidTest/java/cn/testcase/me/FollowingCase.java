@@ -275,7 +275,7 @@ public class FollowingCase extends VP2 {
                 clickById(MePage.BROADCAST_VIEW_TIPTEXT);
                 waitTime(2);
                 //进行点赞操作
-                clickById(MePage.BROADCAST_VIEW_ZAN);
+                clickById(MePage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
                 gDevice.pressBack();
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();
