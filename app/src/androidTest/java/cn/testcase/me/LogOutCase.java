@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import ckt.base.VP2;
 import cn.action.AccountAction;
+import cn.action.MeAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
@@ -31,8 +32,7 @@ public class LogOutCase extends VP2 {
     //注销Log out时->取消注销
     @Test
     public void testLogOut_Cancel() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.SETTINGS_USER_MAIN);
+        MeAction.navToSettings();
         clickByText("账号与安全");
         //clickById(AccountPage.LOG_OUT);
         clickByText("退出登录");
@@ -45,8 +45,7 @@ public class LogOutCase extends VP2 {
     @Test
     public void testLogOut_OK() throws UiObjectNotFoundException {
         //log out
-        clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.SETTINGS_USER_MAIN);
+        MeAction.navToSettings();
         clickByText("账号与安全");
         //clickById(AccountPage.LOG_OUT);
         clickByText("退出登录");
