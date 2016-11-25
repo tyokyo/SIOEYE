@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 import java.util.logging.Logger;
+import bean.VideoBean;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.DiscoverAction;
@@ -45,19 +46,26 @@ public class CountPersonCase extends VP2 {
      * */
     @Test
     public void testCountWatchPerson() throws UiObjectNotFoundException {
-        int clickBeforeNumber = DiscoverAction.getPersonNumber();
-        DiscoverAction.navToPlayVideo();
-        logger.info("点击观看前的人数是"+clickBeforeNumber+"人");
+        MainAction.navToDiscover();
+        DiscoverAction.scrollVideoList();
+        VideoBean before_playback=DiscoverAction.playBackVideo(true);
+        logger.info(before_playback.toString());
+        int clickBeforeNumber =before_playback.getLike();
+        logger.info("点击观看前"+before_playback.toString());
         Spoon.screenshot("person",""+clickBeforeNumber);
         gDevice.pressBack();
         waitTime(5);
-        int clickAfterNumber =DiscoverAction.getPersonNumber();
-        logger.info("点击观看后的人数"+clickAfterNumber+"人");
+        VideoBean after_playback=DiscoverAction.playBackVideo(false);
+        logger.info("点击观看后"+after_playback.toString());
+        logger.info(after_playback.toString());
+        int clickAfterNumber =after_playback.getLike();
+
         Spoon.screenshot("person",""+clickAfterNumber);
         if((clickBeforeNumber+1)!=clickAfterNumber){
             String error=clickBeforeNumber+"-点击观看后的人数-"+clickAfterNumber;
             logger.info(error);
             Spoon.screenshot("fail",error);
+            Asst.fail(clickBeforeNumber+"|"+clickAfterNumber);
         }
     }
     /**
@@ -70,24 +78,32 @@ public class CountPersonCase extends VP2 {
     @Test
     public void testCountZanPerson() throws UiObjectNotFoundException{
         MainAction.navToDiscover();
-        int zanBeforeNumber=DiscoverAction.navToPlayVideo();
-        waitUntilFind(MePage.BROADCAST_VIEW_ZAN,120000);
+        DiscoverAction.scrollVideoList();
+        VideoBean before_playback=DiscoverAction.playBackVideo(true);
+        logger.info(before_playback.toString());
+        int clickBeforeZan =before_playback.getZan();
+        logger.info("点击Zan前"+before_playback.toString());
+        Spoon.screenshot("Zan",""+clickBeforeZan);
+
+        //now zan operation
         for(int times=0;times<5;times++){
             clickById(MePage.BROADCAST_VIEW_ZAN);
             waitTime(2);
         }
-        waitTime(3);
         gDevice.pressBack();
-        waitTime(3);
-        MainAction.navToDiscover();
-        int zanAfterNumber =DiscoverAction.getZanNumber();
-        logger.info("赞后人数"+zanAfterNumber+"人");
-        Spoon.screenshot("after_zan",""+zanBeforeNumber);
-        if((zanBeforeNumber+5)!=zanAfterNumber){
-            String error=zanBeforeNumber+"-点击5次前赞后-"+zanAfterNumber;
+        waitTime(2);
+
+        VideoBean after_playback=DiscoverAction.playBackVideo(false);
+        logger.info("点击Zan后"+after_playback.toString());
+        int clickAfterZan =after_playback.getZan();
+
+        logger.info("5赞后人数"+clickAfterZan+"人");
+        Spoon.screenshot("after_zan",""+clickAfterZan);
+        if((clickBeforeZan+5)!=clickAfterZan){
+            String error=clickBeforeZan+"-点击5次前赞后-"+clickAfterZan;
             logger.info(error);
             Spoon.screenshot("fail",error);
-            Assert.fail("Zan_CountPersonCase_was_fail");
+            Assert.fail(clickBeforeZan+"|"+clickAfterZan);
         }
     }
     /**case14:
