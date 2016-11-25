@@ -29,7 +29,8 @@ public class AccountAction extends VP2{
             //当前账号已经处于logout状态
             logger.info("当前账号已经处于logout状态");
         }else{
-            clickById(MePage.SETTINGS_USER_MAIN);
+            //clickById(MePage.SETTINGS_USER_MAIN);
+            clickByText("设置");
             clickByText("账号与安全");
             //clickById(AccountPage.LOG_OUT);
             clickByText("退出登录");
