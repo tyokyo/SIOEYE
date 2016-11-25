@@ -120,26 +120,30 @@ public class MeAction extends VP2{
     //Go to 直播配置
     public static void navToLiveConfiguration(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.LIVE_CONFIGURATION);
+        //clickById(MePage.LIVE_CONFIGURATION);
+        clickByText("直播配置");
         Spoon.screenshot("navToLiveConfiguration");
     }
     //Go to 我的二维码
     public static void navToQrCode(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.LIVE_CONFIGURATION);
+        //clickById(MePage.LIVE_CONFIGURATION);
+        clickByText("我的二维码");
         Spoon.screenshot("navToQrCode");
     }
     //Go to 消息
     public static void navToNotifications(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.NOTIFICATIONS);
+        //clickById(MePage.NOTIFICATIONS);
+        clickByText("消息");
         gDevice.wait(Until.gone(By.res(MePage.IS_LOCATING)),20000);
         Spoon.screenshot("navToNotifications");
     }
     //Go to 设置
     public static void navToSettings(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.SETTINGS_USER_MAIN);
+        //clickById(MePage.SETTINGS_USER_MAIN);
+        clickByText("设置");
         Spoon.screenshot("navToSettings");
     }
     //Go to 帮助中心
