@@ -1,9 +1,11 @@
 package iris4G.testcase;
 
 import org.hamcrest.Asst;
+import org.junit.Before;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import iris4G.action.CameraAction;
@@ -18,7 +20,11 @@ import iris4G.page.Iris4GPage;
  */
 /*所有视频质量*视频角度*延时的组合*/
 public class LapseCase extends VP2 {
-
+    Logger logger = Logger.getLogger(LapseCase.class.getName());
+    @Before
+    public void setup() throws Exception {
+        Iris4GAction.initIris4G();
+    }
     private void Lapse(String quality,String lapse_time,int angleIndex) throws Exception {
         boolean result = true;
         //String quality = Iris4GPage.video_quality[0];

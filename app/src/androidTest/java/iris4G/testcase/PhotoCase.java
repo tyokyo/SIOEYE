@@ -1,9 +1,11 @@
 package iris4G.testcase;
 
 import org.hamcrest.Asst;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashSet;
+import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import iris4G.action.CameraAction;
@@ -16,10 +18,12 @@ import iris4G.page.Iris4GPage;
  * 所有照片质量[4M169|3M43|2M169]
  */
 public class PhotoCase extends VP2{
-    /*testPhoto4M169()
-testPhoto3M43()
-testPhoto2M169()*/
-    private static void  Photo(String imageSize,double expectWH) throws Exception {
+    Logger logger = Logger.getLogger(PhotoCase.class.getName());
+    @Before
+    public void setup() throws Exception {
+        Iris4GAction.initIris4G();
+    }
+    private void  Photo(String imageSize,double expectWH) throws Exception {
         //CameraAction.configImageSize("4M(16:9)");
         CameraAction.configImageSize(imageSize);
         HashSet<String> beforeTakePhotoList = Iris4GAction.FileList("/sdcard/Photo");

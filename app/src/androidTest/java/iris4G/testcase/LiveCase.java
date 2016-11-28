@@ -4,12 +4,14 @@ import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.hamcrest.Asst;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import iris4G.action.CameraAction;
@@ -26,6 +28,11 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class LiveCase extends VP2{
+    Logger logger = Logger.getLogger(LiveCase.class.getName());
+    @Before
+    public void setup() throws Exception {
+        Iris4GAction.initIris4G();
+    }
     private void Live(String quality,String angle) throws Exception {
         //String quality = Iris4GPage.video_quality[0];
         //String angle =Iris4GPage.video_Angle[0];

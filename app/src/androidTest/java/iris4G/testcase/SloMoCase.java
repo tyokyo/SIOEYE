@@ -1,10 +1,12 @@
 package iris4G.testcase;
 
 import org.hamcrest.Asst;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import iris4G.action.CameraAction;
@@ -20,6 +22,11 @@ import iris4G.page.Iris4GPage;
  */
 
 public class SloMoCase extends VP2 {
+    Logger logger = Logger.getLogger(SloMoCase.class.getName());
+    @Before
+    public void setup() throws Exception {
+        Iris4GAction.initIris4G();
+    }
     private void sloMo(String angle) throws Exception {
         boolean result = true;
         //String angle = Iris4GPage.video_Angle[0];
