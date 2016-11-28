@@ -7,6 +7,7 @@ import android.support.test.uiautomator.StaleObjectException;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -102,6 +103,21 @@ public class DiscoverAction extends VP2 {
         getObjectById(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST).swipeLeft(2);
         //向左滑动2步
     }
+    //滑动RecommendList查找
+    public static boolean scrollRedToFind(String text){
+        UiScrollable listScrollable = new UiScrollable(new UiSelector().
+                resourceId(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST).scrollable(true));
+        listScrollable.setAsHorizontalList();
+        boolean status=false;
+        try {
+            if (listScrollable.scrollTextIntoView(text)) {
+                status= true;
+            }
+        } catch (UiObjectNotFoundException e) {
+            status=  false;
+        }
+        return status;
+    }
 
     public static void deleteFollowing(String userName) throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
@@ -111,7 +127,7 @@ public class DiscoverAction extends VP2 {
         clickByText(userName);
         clickById(DiscoverPage.ID_PROFILE_DELETE_FOLLOW);
         gDevice.pressBack();
-
+        logger.info("deleteFollowing-"+userName);
     }
 
     public static void checkAddFriendsInMyFollowing(String target_nick_name) throws UiObjectNotFoundException {
