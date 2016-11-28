@@ -1,6 +1,7 @@
 package iris4G.testcase;
 
 import org.hamcrest.Asst;
+import org.junit.Test;
 
 import java.io.File;
 import java.util.HashSet;
@@ -13,18 +14,15 @@ import iris4G.action.VideoNode;
 import iris4G.page.Iris4GPage;
 
 /**
- * @Author
+ * @Author elon
  * @Description
  *
  */
 /*慢速录像*视频角度*/
 public class SloMoCase extends VP2 {
-    /*testSloMoSuperWide()
-testSloMoWide()
-testSloMoMedium()*/
-    public void testSloMoSuperWide() throws Exception {
+    private void sloMo(String angle) throws Exception {
         boolean result = true;
-        String angle = Iris4GPage.video_Angle[0];
+        //String angle = Iris4GPage.video_Angle[0];
         Iris4GAction.startCamera();
         CameraAction.configVideoAngle(angle);
         CameraAction.navConfig(Iris4GPage.nav_menu[4]);
@@ -76,5 +74,17 @@ testSloMoMedium()*/
         if (!result) {
             Asst.fail("check-fail");
         }
+    }
+    @Test
+    public void testSloMoSuperWide() throws Exception {
+        sloMo(Iris4GPage.video_Angle[0]);
+    }
+    @Test
+    public void testSloMoWide() throws Exception {
+        sloMo(Iris4GPage.video_Angle[1]);
+    }
+    @Test
+    public void testSloMoMedium() throws Exception {
+        sloMo(Iris4GPage.video_Angle[2]);
     }
 }
