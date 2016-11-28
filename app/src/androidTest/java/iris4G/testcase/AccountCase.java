@@ -26,7 +26,6 @@ import iris4G.page.Iris4GPage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
-/*登录账号*/
 public class AccountCase extends VP2{
     Logger logger = Logger.getLogger(AccountCase.class.getName());
     @Before

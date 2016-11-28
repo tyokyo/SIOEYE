@@ -21,9 +21,9 @@ import iris4G.page.Iris4GPage;
 /**
  * @Author elon
  * @Description
+ * 连拍测试10|20|30 * 4M(16:9)|3M(4:3)|2M(16:9)
  */
 @RunWith(AndroidJUnit4.class)
-/*连拍测试*/
 @SdkSuppress(minSdkVersion = 16)
 public class BurstCase extends VP2{
     Logger logger = Logger.getLogger(BurstCase.class.getName());
@@ -50,14 +50,14 @@ public class BurstCase extends VP2{
         }else {
             logger.info(String.format("expect图片总数：%s张-Success",expect_picture_burst_size));
             for (String photoPath : resultHashSet) {
-                double hw = Iris4GAction.getPicHeightWidth(photoPath);
-                if (hw==expectWH) {
+                double activeWH = Iris4GAction.getPicHeightWidth(photoPath);
+                if (activeWH==expectWH) {
                     logger.info(photoPath+" -图片比列验证成功");
                 }else {
                     logger.info(photoPath+" -图片比列验证失败");
                     logger.info("expect is "+expectWH);
-                    logger.info("active is "+hw);
-                    String message=String.format("failed");
+                    logger.info("active is "+activeWH);
+                    String message=String.format("expect is %s.but active is %s",expectWH,activeWH);
                     Asst.fail();
                 }
             }
@@ -75,13 +75,32 @@ public class BurstCase extends VP2{
     public void testBurst20P4M169() throws Exception {
         Burst(Iris4GPage.imsge_size[0],Iris4GPage.burst[1],16/9);
     }
-    /*
-
-    testBurst30P4M169()
-    testBurst10P3M43()
-    testBurst20P3M43()
-    testBurst30P3M43()
-    testBurst10P2M169()
-    testBurst20P2M169()
-    testBurst30P2M169()*/
+    @Test
+    public void testBurst30P4M169() throws Exception {
+        Burst(Iris4GPage.imsge_size[0],Iris4GPage.burst[2],16/9);
+    }
+    @Test
+    public void testBurst10P3M43() throws Exception {
+        Burst(Iris4GPage.imsge_size[1],Iris4GPage.burst[0],4/3);
+    }
+    @Test
+    public void testBurst20P3M43() throws Exception {
+        Burst(Iris4GPage.imsge_size[1],Iris4GPage.burst[1],4/3);
+    }
+    @Test
+    public void testBurst30P3M43() throws Exception {
+        Burst(Iris4GPage.imsge_size[1],Iris4GPage.burst[2],4/3);
+    }
+    @Test
+    public void testBurst10P2M169() throws Exception {
+        Burst(Iris4GPage.imsge_size[2],Iris4GPage.burst[0],16/9);
+    }
+    @Test
+    public void testBurst20P2M169() throws Exception {
+        Burst(Iris4GPage.imsge_size[2],Iris4GPage.burst[1],16/9);
+    }
+    @Test
+    public void testBurst30P2M169() throws Exception {
+        Burst(Iris4GPage.imsge_size[2],Iris4GPage.burst[2],16/9);
+    }
 }
