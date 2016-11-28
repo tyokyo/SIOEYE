@@ -75,13 +75,32 @@ public class BurstCase extends VP2{
     public void testBurst20P4M169() throws Exception {
         Burst(Iris4GPage.imsge_size[0],Iris4GPage.burst[1],16/9);
     }
-    /*
-
-    testBurst30P4M169()
-    testBurst10P3M43()
-    testBurst20P3M43()
-    testBurst30P3M43()
-    testBurst10P2M169()
-    testBurst20P2M169()
-    testBurst30P2M169()*/
+    @Test
+    public void testBurst30P4M169() throws Exception {
+        Burst(Iris4GPage.imsge_size[0],Iris4GPage.burst[2],16/9);
+    }
+    @Test
+    public void testBurst10P3M43() throws Exception {
+        Burst(Iris4GPage.imsge_size[1],Iris4GPage.burst[0],4/3);
+    }
+    @Test
+    public void testBurst20P3M43() throws Exception {
+        Burst(Iris4GPage.imsge_size[1],Iris4GPage.burst[1],4/3);
+    }
+    @Test
+    public void testBurst30P3M43() throws Exception {
+        Burst(Iris4GPage.imsge_size[1],Iris4GPage.burst[2],4/3);
+    }
+    @Test
+    public void testBurst10P2M169() throws Exception {
+        Burst(Iris4GPage.imsge_size[2],Iris4GPage.burst[0],16/9);
+    }
+    @Test
+    public void testBurst20P2M169() throws Exception {
+        Burst(Iris4GPage.imsge_size[2],Iris4GPage.burst[1],16/9);
+    }
+    @Test
+    public void testBurst30P2M169() throws Exception {
+        Burst(Iris4GPage.imsge_size[2],Iris4GPage.burst[2],16/9);
+    }
 }
