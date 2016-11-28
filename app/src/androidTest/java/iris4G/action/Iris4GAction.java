@@ -360,7 +360,6 @@ public class Iris4GAction extends VP2 {
     public static void initIris4G() throws Exception {
         try {
             initDevice();
-            initDevice();
             deleteVideo();
             deletePhoto();
             startCamera();
