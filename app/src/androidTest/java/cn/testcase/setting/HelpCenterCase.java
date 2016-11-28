@@ -47,6 +47,7 @@ public class HelpCenterCase extends VP2 {
         boolean status=getObjectById(MePage.HELP_POLICY).exists();
         Asst.assertEquals("back logo success",true,status);
     }
+    //最终用户协议
     @Test
     public void testEULA() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_UserProtocol();
