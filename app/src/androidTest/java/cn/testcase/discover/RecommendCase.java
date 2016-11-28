@@ -70,6 +70,7 @@ public class RecommendCase extends VP2 {
      * 检查自己好友列表有没有增加该好友
      */
     public void testAddDelFriendsRed() throws UiObjectNotFoundException{
+        DiscoverAction.scrollRecommendList();
         String expect_name=DiscoverAction.navToRecommendList(1,1);
         //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
         DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
@@ -146,6 +147,7 @@ public class RecommendCase extends VP2 {
      * 检查该好友是否从discover消失
      */
     public void testFollowThenRefresh() throws UiObjectNotFoundException{
+        DiscoverAction.scrollRecommendList();
         String expect_name=DiscoverAction.navToRecommendList(1,1);
         //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
         DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
@@ -158,7 +160,7 @@ public class RecommendCase extends VP2 {
         String new_name=DiscoverAction.navToRecommendList(1,1);
         if (expect_name.equals(new_name)){
             Spoon.screenshot("recommend_list","推荐列表不应该有被Follwed");
-            Assert.fail("刷新后的推荐列表中被follow的用户没有消失");
+            Asst.fail("刷新后的推荐列表中被follow的用户没有消失");
         }
         //取消关注
         DiscoverAction.deleteFollowing(expect_name);
