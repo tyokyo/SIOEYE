@@ -5,6 +5,8 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
 
+import com.squareup.spoon.Spoon;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,6 +31,7 @@ public class CameraAction extends VP2 {
             if (compoundButton == true && textView == true) {
                 clickBtn = relateLayout.findObject(By.clazz(android.widget.CompoundButton.class));
                 clickBtn.click();
+                Spoon.screenshot("openCompoundButton",textViewName);
                 break;
             }
         }
@@ -45,6 +48,7 @@ public class CameraAction extends VP2 {
                 logger.info("Connection fail, please try again");
             }
         }
+        Spoon.screenshot("checkLiveStatus");
     }
 
     /**
@@ -89,6 +93,7 @@ public class CameraAction extends VP2 {
         waitUntilFind(Iris4GPage.recording_time_id, 60000);
         String time = getTex(Iris4GPage.recording_time_id);
         logger.info("recording_time:" + time);
+        Spoon.screenshot("recording_time");
         return time;
     }
 
@@ -98,6 +103,7 @@ public class CameraAction extends VP2 {
     public static UiObject currentQuality() throws Exception {
         UiObject qualityObject = getObjectById(Iris4GPage.currentvideoquliaty);
         logger.info("Current Video Quality :" + qualityObject.getText());
+        Spoon.screenshot("currentQuality");
         return qualityObject;
     }
 
@@ -149,6 +155,7 @@ public class CameraAction extends VP2 {
         int mo1secs = dateInSeconds(mo1);
         int mo22secs = dateInSeconds(mo2);
         logger.info(mo1secs + "-" + mo22secs);
+        Spoon.screenshot("checkMoValue",""+mo);
         if (mo22secs / mo1secs == mo) {
             logger.info("Slo-Mo验证结果-PASS  " + mo1secs + "-" + mo22secs);
             return true;
@@ -169,6 +176,7 @@ public class CameraAction extends VP2 {
         Iris4GAction.ScrollViewByText(timeLapse);
         clickByText(timeLapse);
         logger.info("Time Lapse设置为 :" + getUiObjectByText(timeLapse).getText());
+        Spoon.screenshot("configTimeLapse",timeLapse);
         gDevice.pressBack();
     }
 
@@ -179,6 +187,7 @@ public class CameraAction extends VP2 {
         Iris4GAction.ScrollViewByText(timeLapse);
         clickByText(timeLapse);
         logger.info("Time Lapse设置为 :" + getUiObjectByText(timeLapse).getText());
+        Spoon.screenshot("configTimeLapse",timeLapse);
         gDevice.pressBack();
     }
 
@@ -198,6 +207,7 @@ public class CameraAction extends VP2 {
         Iris4GAction.ScrollViewByText(quality);
         clickByText(quality);
         logger.info("Video Quality设置为 :" + getUiObjectByText(quality).getText());
+        Spoon.screenshot("configVideoQuality",quality);
         gDevice.pressBack();
     }
 
@@ -225,6 +235,7 @@ public class CameraAction extends VP2 {
         Iris4GAction.ScrollViewByText(quality);
         clickByText(quality);
         logger.info("Video Quality设置为 :" + getUiObjectByText(quality).getText());
+        Spoon.screenshot("configVideoQuality",quality);
         gDevice.pressBack();
     }
 
@@ -238,6 +249,7 @@ public class CameraAction extends VP2 {
         clickByText("Burst Rate");
         clickByText(burst);
         logger.info("Burst Rate设置为 :" + burst);
+        Spoon.screenshot("configBurst",burst);
         gDevice.pressBack();
     }
 
@@ -252,6 +264,7 @@ public class CameraAction extends VP2 {
         clickByText("Video Angle");
         clickByText(angle);
         logger.info("Video Angle设置为 :" + angle);
+        Spoon.screenshot("configVideoAngle",angle);
         gDevice.pressBack();
     }
 
@@ -262,6 +275,7 @@ public class CameraAction extends VP2 {
         clickByText("Video Angle");
         clickByText(angle);
         logger.info("Video Angle设置为 :" + angle);
+        Spoon.screenshot("configVideoAngle",angle);
         gDevice.pressBack();
     }
 
@@ -273,6 +287,7 @@ public class CameraAction extends VP2 {
         //common.clickViewByText(angle);
         clickByClass("android.widget.RelativeLayout", angle);
         logger.info("Video Angle设置为 :" + angle);
+        Spoon.screenshot("configVideoAngle",angle+"");
         gDevice.pressBack();
     }
 
@@ -289,6 +304,7 @@ public class CameraAction extends VP2 {
         Iris4GAction.ScrollViewByText(size);
         clickByText(size);
         logger.info("Image Size设置为 :" + size);
+        Spoon.screenshot("configImageSize",size);
         gDevice.pressBack();
     }
 
@@ -305,5 +321,7 @@ public class CameraAction extends VP2 {
         gDevice.pressMenu();
         Iris4GAction.ScrollViewByText(text);
         clickByText(text);
+        waitTime(1);
+        Spoon.screenshot("navConfig",text);
     }
 }

@@ -2,6 +2,8 @@ package iris4G.action;
 
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
+import com.squareup.spoon.Spoon;
+
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
 
@@ -51,6 +53,7 @@ public class AccountAction extends VP2 {
                 waitTime(1);
             }
         }
+        Spoon.screenshot("Login");
         return isSuccess;
     }
 }
