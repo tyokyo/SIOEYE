@@ -11,9 +11,6 @@ import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
-
-import org.apache.commons.io.FileUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,7 +19,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.logging.Logger;
-
 import ckt.base.VP2;
 
 /**
@@ -35,23 +31,6 @@ public class Iris4GAction extends VP2 {
     private static String NotFindObject = "[Not Find Object]: ";
     private static Logger logger = Logger.getLogger(Iris4GAction.class.getName());
 
-    /**
-     * 遍历 "system/etc/vold.fstab” 文件，获取全部的Android的挂载点信息
-     *
-     * @return
-     */
-    private static ArrayList<String> getDevMountList() throws IOException {
-        String[] toSearch = FileUtils.readFileToString(new File("/etc/vold.fstab")).split(" ");
-        ArrayList<String> out = new ArrayList<String>();
-        for (int i = 0; i < toSearch.length; i++) {
-            if (toSearch[i].contains("dev_mount")) {
-                if (new File(toSearch[i + 2]).exists()) {
-                    out.add(toSearch[i + 2]);
-                }
-            }
-        }
-        return out;
-    }
     public static void cameraKey() {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         logger.info("Launch-Camera-Key");
