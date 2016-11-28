@@ -50,14 +50,14 @@ public class BurstCase extends VP2{
         }else {
             logger.info(String.format("expect图片总数：%s张-Success",expect_picture_burst_size));
             for (String photoPath : resultHashSet) {
-                double hw = Iris4GAction.getPicHeightWidth(photoPath);
-                if (hw==expectWH) {
+                double activeWH = Iris4GAction.getPicHeightWidth(photoPath);
+                if (activeWH==expectWH) {
                     logger.info(photoPath+" -图片比列验证成功");
                 }else {
                     logger.info(photoPath+" -图片比列验证失败");
                     logger.info("expect is "+expectWH);
-                    logger.info("active is "+hw);
-                    String message=String.format("failed");
+                    logger.info("active is "+activeWH);
+                    String message=String.format("expect is %s.but active is %s",expectWH,activeWH);
                     Asst.fail();
                 }
             }
