@@ -16,9 +16,9 @@ import iris4G.page.Iris4GPage;
 /**
  * @Author elon
  * @Description
- *
+ * 慢速录像*视频角度
  */
-/*慢速录像*视频角度*/
+
 public class SloMoCase extends VP2 {
     private void sloMo(String angle) throws Exception {
         boolean result = true;

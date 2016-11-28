@@ -13,8 +13,8 @@ import iris4G.page.Iris4GPage;
 /**
  * @Author elon
  * @Description
+ * 所有照片质量[4M169|3M43|2M169]
  */
-/*所有照片质量[4M169|3M43|2M169]*/
 public class PhotoCase extends VP2{
     /*testPhoto4M169()
 testPhoto3M43()

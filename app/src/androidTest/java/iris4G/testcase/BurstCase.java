@@ -21,9 +21,9 @@ import iris4G.page.Iris4GPage;
 /**
  * @Author elon
  * @Description
+ * 连拍测试10|20|30 * 4M(16:9)|3M(4:3)|2M(16:9)
  */
 @RunWith(AndroidJUnit4.class)
-/*连拍测试*/
 @SdkSuppress(minSdkVersion = 16)
 public class BurstCase extends VP2{
     Logger logger = Logger.getLogger(BurstCase.class.getName());

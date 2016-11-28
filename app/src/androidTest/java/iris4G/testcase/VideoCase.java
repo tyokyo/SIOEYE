@@ -2,10 +2,8 @@ package iris4G.testcase;
 
 import org.hamcrest.Asst;
 import org.junit.Test;
-
 import java.io.File;
 import java.util.HashSet;
-
 import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.FileManagerAction;
@@ -14,9 +12,9 @@ import iris4G.page.Iris4GPage;
 
 /**
  * @Author elon
- * @Description
+ * @Description 所有视频质量[72030|72060|108030] * Video Angle
  */
-/*所有视频质量[72030|72060|108030] * Video Angle*/
+
 public class VideoCase extends VP2{
     private void Video(String quality,String angle) throws Exception {
         //String quality = Iris4GPage.video_quality[0];

@@ -21,10 +21,10 @@ import iris4G.page.Iris4GPage;
 /**
  * @Author elon
  * @Description
+ * 所有视频质量[72030|72060|108030]*视频角度[Super Wide|Wide|Medium]
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
-/*所有视频质量[72030|72060|108030]*视频角度[Super Wide|Wide|Medium]*/
 public class LiveCase extends VP2{
     private void Live(String quality,String angle) throws Exception {
         //String quality = Iris4GPage.video_quality[0];
