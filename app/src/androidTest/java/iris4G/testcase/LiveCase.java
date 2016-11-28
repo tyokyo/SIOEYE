@@ -19,19 +19,13 @@ import iris4G.action.VideoNode;
 import iris4G.page.Iris4GPage;
 
 /**
- * @Author
+ * @Author elon
  * @Description
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
-/*所有视频质量*视频角度*/
+/*所有视频质量[72030|72060|108030]*视频角度[Super Wide|Wide|Medium]*/
 public class LiveCase extends VP2{
-    /*testL48030fpsSuperWide()
-testL48060fpsSuperWide()
-testL480120fpsSuperWide()
-testL72030fpsSuperWide()
-testL72060fpsSuperWide()
-testL108030fpsSuperWide()*/
     private void Live(String quality,String angle) throws Exception {
         //String quality = Iris4GPage.video_quality[0];
         //String angle =Iris4GPage.video_Angle[0];
@@ -71,12 +65,40 @@ testL108030fpsSuperWide()*/
             Asst.fail("video not exist");
         }
     }
-    public void testL48030fpsSuperWide() throws Exception {
+    @Test
+    public void testL72030fpsSuperWide() throws Exception {
         Live(Iris4GPage.video_quality[0],Iris4GPage.video_Angle[0]);
     }
     @Test
-    public void testA() throws IOException {
-        initDevice();
-        gDevice.executeShellCommand("am start -n cn.sioeye.sioeyeapp/com.sioeye.sioeyeapp.main.SplashActivity");
+    public void testL72060fpsSuperWide() throws Exception {
+        Live(Iris4GPage.video_quality[1],Iris4GPage.video_Angle[0]);
+    }
+    @Test
+    public void testL108030fpsSuperWide() throws Exception {
+        Live(Iris4GPage.video_quality[2],Iris4GPage.video_Angle[0]);
+    }
+    @Test
+    public void testL72030fpsWide() throws Exception {
+        Live(Iris4GPage.video_quality[0],Iris4GPage.video_Angle[1]);
+    }
+    @Test
+    public void testL72060fpsWide() throws Exception {
+        Live(Iris4GPage.video_quality[1],Iris4GPage.video_Angle[1]);
+    }
+    @Test
+    public void testL108030fpsWide() throws Exception {
+        Live(Iris4GPage.video_quality[2],Iris4GPage.video_Angle[1]);
+    }
+    @Test
+    public void testL72030fpsMedium() throws Exception {
+        Live(Iris4GPage.video_quality[0],Iris4GPage.video_Angle[2]);
+    }
+    @Test
+    public void testL72060fpsMedium() throws Exception {
+        Live(Iris4GPage.video_quality[1],Iris4GPage.video_Angle[2]);
+    }
+    @Test
+    public void testL108030fpsMedium() throws Exception {
+        Live(Iris4GPage.video_quality[2],Iris4GPage.video_Angle[2]);
     }
 }
