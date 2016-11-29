@@ -60,4 +60,7 @@ public class Iris4GPage {
     //camera gallery
     public static String apps_customize_pane_content = "com.android.launcher3:id/apps_customize_pane_content";
 
+    //file manager scroll to find video
+    public static String fileManager_list_view = "com.mediatek.filemanager:id/list_view";
+
 }
