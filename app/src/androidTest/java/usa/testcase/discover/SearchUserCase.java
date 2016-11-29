@@ -72,7 +72,7 @@ public class SearchUserCase extends VP2 {
     }
     //准确搜索不存在的数据包括(Username、video、e-mail)
     @Test
-    public void test_NoUser() throws UiObjectNotFoundException, IOException {
+    public void test_NoData() throws UiObjectNotFoundException, IOException {
         DiscoverAction.navToSearch();
         waitTime(1);
       //String search_content = WatchAction.WRONG_NICK_NAME;
@@ -90,7 +90,7 @@ public class SearchUserCase extends VP2 {
     //准确搜索username，关注，该用户出现在好友列表中
     //search界面的关注
     @Test
-    public void test_FollowUser() throws UiObjectNotFoundException, IOException {
+    public void test_Follow() throws UiObjectNotFoundException, IOException {
         if (!AccountAction.judgelogin()){
             AccountAction.login("1234554321@qq.com","1234554321");
         }
@@ -159,7 +159,7 @@ public class SearchUserCase extends VP2 {
     }
     //准确搜索存在的用户的Nick Name = Beanbryant
     @Test
-    public void test_FullUser() throws UiObjectNotFoundException, IOException {
+    public void test_FullNickName() throws UiObjectNotFoundException, IOException {
         DiscoverAction.navToSearch();
         waitTime(3);
         String full_Nickname = "Beanbryant";
@@ -226,7 +226,6 @@ public class SearchUserCase extends VP2 {
             Spoon.screenshot(test_email,expect_nickname);
         }
     }
-    //搜索
     //搜索匹配sioeyeID的用户
     //usa online test nickname:Beanbryant   sioeyeid:bryantBean
     //usa offline test nickname:Beanbryant   sioeyeid:bryantBean
@@ -261,7 +260,7 @@ public class SearchUserCase extends VP2 {
         if (getUiObjectByText("@"+exact_SioeyeID) == null){
             Assert.fail("search sioeyeid failed");
             Spoon.screenshot("sioeyeid"+exact_SioeyeID);
-            makeToast(exact_SioeyeID+"sioeyeid");
+            makeToast(exact_SioeyeID+"sioeyeid",4);
         }
 
     }
@@ -285,7 +284,7 @@ public class SearchUserCase extends VP2 {
     }
    //不输入任何东西点击搜索
     @Test
-    public void test_NoInput_Search() throws UiObjectNotFoundException, IOException {
+    public void test_NoInputSearch() throws UiObjectNotFoundException, IOException {
         if (!AccountAction.judgelogin()){
             AccountAction.login("1234554321@qq.com","1234554321");
         }
@@ -308,6 +307,5 @@ public class SearchUserCase extends VP2 {
             makeToast("刷新失败",8);
             Spoon.screenshot("after_nickname"+after_nickname);
         }
-
     }
 }
