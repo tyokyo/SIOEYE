@@ -377,7 +377,7 @@ public class Iris4GAction extends VP2 {
         } catch (UiObjectNotFoundException e) {
             // TODO Auto-generated catch block
             logger.info(NotFindScrollFindObject + text);
-            throw new Exception("ScrollFindObject" + text);
+            throw new UiObjectNotFoundException("ScrollNotFindObject-" + text);
         }
         return getUiObjectByText(text);
     }
@@ -396,10 +396,26 @@ public class Iris4GAction extends VP2 {
         } catch (UiObjectNotFoundException e) {
             // TODO Auto-generated catch block
             logger.info(NotFindScrollFindObject + text);
-            throw new Exception("ScrollFindObject" + text);
+            throw new UiObjectNotFoundException("ScrollNotFindObject-" + text);
         }
     }
-
+    /**
+     * 强查找可翻滚控件，存在返回控件对象，不存在抛异常，当前测试停止
+     *
+     * @throws Exception
+     */
+    public static void ScrollViewByText(String resourceID,String text) throws Exception {
+        UiScrollable listScrollable = new UiScrollable(new UiSelector().resourceId(resourceID).scrollable(true));
+        try {
+            if (listScrollable.scrollTextIntoView(text)) {
+                logger.info(FindScrollFindObject + text);
+            }
+        } catch (UiObjectNotFoundException e) {
+            // TODO Auto-generated catch block
+            logger.info(NotFindScrollFindObject + text);
+            throw new UiObjectNotFoundException("ScrollFindObject" + text);
+        }
+    }
     /**
      * 强查找可翻滚控件，存在返回控件对象，不存在抛异常，当前测试停止
      *
