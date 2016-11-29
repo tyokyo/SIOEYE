@@ -2,6 +2,7 @@ package iris4G.testcase;
 
 import org.hamcrest.Asst;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.util.HashSet;
@@ -85,127 +86,163 @@ public class LapseCase extends VP2 {
     }
 
     /* 720@30FPS  -2s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap2s72030SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[0],0);
     }
+    @Test
     public void testTLap2s72030Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[0],1);
     }
+    @Test
     public void testTLap2s72030Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[0],2);
     }
+    @Test
     /* 720@30FPS  -3s - All Angle[SuperWide Wide Medium]*/
     public void testTLap3s72030SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[1],0);
     }
+    @Test
     public void testTLap3s72030Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[1],1);
     }
+    @Test
     public void testTLap3s72030Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[1],2);
     }
 
     /* 720@30FPS  -5s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap5s72030SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[2],0);
     }
+    @Test
     public void testTLap5s72030Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[2],1);
     }
+    @Test
     public void testTLap5s72030Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[2],2);
     }
     /* 720@30FPS  -10s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap10s72030SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[3],0);
     }
+    @Test
     public void testTLap10s72030Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[3],1);
     }
+    @Test
     public void testTLap10s72030Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[3],2);
     }
 
     /* 720@60FPS  -2s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap2s72060SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[0],0);
     }
+    @Test
     public void testTLap2s72060Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[0],1);
     }
+    @Test
     public void testTLap2s72060Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[0],2);
     }
     /* 720@60FPS  -3s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap3s72060SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[1],0);
     }
+    @Test
     public void testTLap3s72060Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[1],1);
     }
+    @Test
     public void testTLap3s72060Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[1],2);
     }
 
     /* 720@60FPS  -5s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap5s72060SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[2],0);
     }
+    @Test
     public void testTLap5s72060Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[2],1);
     }
+    @Test
     public void testTLap5s72060Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[2],2);
     }
     /* 720@60FPS  -10s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap10s72060SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[3],0);
     }
+    @Test
     public void testTLap10s72060Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[3],1);
     }
+    @Test
     public void testTLap10s72060Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[3],2);
     }
 
     /* 1080@30FPS  -2s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap2s108030SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[0],0);
     }
+    @Test
     public void testTLap2s108030Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[0],1);
     }
+    @Test
     public void testTLap2s108030Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[0],2);
     }
     /* 1080@30FPS  -3s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap3s108030SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[1],0);
     }
+    @Test
     public void testTLap3s108030Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[1],1);
     }
+    @Test
     public void testTLap3s108030Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[1],2);
     }
 
     /* 1080@30FPS  -5s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap5s108030SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[2],0);
     }
+    @Test
     public void testTLap5s108030Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[2],1);
     }
+    @Test
     public void testTLap5s108030Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[2],2);
     }
     /* 1080@30FPS  -10s - All Angle[SuperWide Wide Medium]*/
+    @Test
     public void testTLap10s108030SuperWide() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[3],0);
     }
+    @Test
     public void testTLap10s108030Wide() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[3],1);
     }
+    @Test
     public void testTLap10s108030Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[3],2);
     }
