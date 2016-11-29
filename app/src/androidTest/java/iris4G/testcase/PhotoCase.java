@@ -1,8 +1,12 @@
 package iris4G.testcase;
 
+import android.support.test.filters.SdkSuppress;
+import android.support.test.runner.AndroidJUnit4;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.HashSet;
 import java.util.logging.Logger;
@@ -17,6 +21,8 @@ import iris4G.page.Iris4GPage;
  * @Description
  * 所有照片质量[4M169|3M43|2M169]
  */
+@RunWith(AndroidJUnit4.class)
+@SdkSuppress(minSdkVersion = 16)
 public class PhotoCase extends VP2{
     Logger logger = Logger.getLogger(PhotoCase.class.getName());
     @Before

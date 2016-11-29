@@ -1,8 +1,13 @@
 package iris4G.testcase;
 
+import android.support.test.filters.SdkSuppress;
+import android.support.test.runner.AndroidJUnit4;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import java.io.File;
 import java.util.HashSet;
 import java.util.logging.Logger;
@@ -17,7 +22,8 @@ import iris4G.page.Iris4GPage;
  * @Author elon
  * @Description 所有视频质量[72030|72060|108030] * Video Angle
  */
-
+@RunWith(AndroidJUnit4.class)
+@SdkSuppress(minSdkVersion = 16)
 public class VideoCase extends VP2{
     Logger logger = Logger.getLogger(VideoCase.class.getName());
     @Before

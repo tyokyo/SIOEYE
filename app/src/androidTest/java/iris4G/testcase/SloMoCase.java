@@ -1,8 +1,12 @@
 package iris4G.testcase;
 
+import android.support.test.filters.SdkSuppress;
+import android.support.test.runner.AndroidJUnit4;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.util.HashSet;
@@ -19,7 +23,8 @@ import iris4G.page.Iris4GPage;
  * @Author elon
  * @Description 慢速录像*视频角度
  */
-
+@RunWith(AndroidJUnit4.class)
+@SdkSuppress(minSdkVersion = 16)
 public class SloMoCase extends VP2 {
     Logger logger = Logger.getLogger(SloMoCase.class.getName());
 
