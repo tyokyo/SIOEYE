@@ -25,8 +25,8 @@ import iris4G.page.Iris4GPage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
-public class Video_Slo_Mo_PowerKey2 extends VP2{
-    private static Logger logger = Logger.getLogger(Video_Slo_Mo_PowerKey2.class.getName());
+public class Video_Slo_Mo_PowerKey extends VP2{
+    private static Logger logger = Logger.getLogger(Video_Slo_Mo_PowerKey.class.getName());
 
     @Before
     public void setup() throws Exception {
