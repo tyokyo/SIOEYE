@@ -7,6 +7,7 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 
+import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -102,6 +103,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
                     logger.info("expect is:"+"["+expect_lapse_lapsetime+"]");
                     logger.info("active is:"+"["+active_lapse_lapsetime+"]");
                     logger.info("testlapse_lapsetime_ReturnToLapseCaseCase_fail");
+                    Asst.fail();
                     break;
                 }else {
                     if (!expect_lapse_angle.equals(active_lapse_angle)){
@@ -109,6 +111,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
                         logger.info("expect is:"+"["+expect_lapse_angle+"]");
                         logger.info("active is:"+"["+active_lapse_angle+"]");
                         logger.info("testlapse_angle_ReturnToLapseCase_fail");
+                        Asst.fail();
                         break;
                     }else {
                         if (!expect_lapse_quality.equals(active_lapse_quality)){
@@ -116,6 +119,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
                             logger.info("expect is:"+"["+expect_lapse_quality+"]");
                             logger.info("active is:"+"["+active_lapse_quality+"]");
                             logger.info("testlapse_quality_ReturnToLapseCase_fail");
+                            Asst.fail();
                             break;
                         }
                     }

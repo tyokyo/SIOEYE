@@ -7,6 +7,8 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiSelector;
 import android.view.KeyEvent;
 
+import org.hamcrest.Asst;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,6 +63,7 @@ public class BurstDownUpToAuto extends VP2{
         }else{
             flag1 = 0;
             logger.info("flag1 failed = "+flag1);
+            Asst.fail();
         }
 
         //Down To Auto
@@ -83,11 +86,13 @@ public class BurstDownUpToAuto extends VP2{
         }else{
             flag2 = 0;
             logger.info("flag2 failed = " +flag2);
+            Asst.fail();
         }
         if (flag1 == 1 && flag2 == 1){
             logger.info("testBurstDownUpToAuto_pass");
         }else{
             logger.info("testBurstDownUpToAuto_fail");
+            Asst.fail();
         }
     }
 }
