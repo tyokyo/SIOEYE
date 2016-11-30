@@ -52,7 +52,7 @@ public class VP {
             MainActivity.class);
 
     public static void doNotAskPermission() throws UiObjectNotFoundException {
-        for (int t = 1; t < 5; t++) {
+        for (int t = 1; t < 3; t++) {
             if ("com.android.packageinstaller".equals(gDevice.getCurrentPackageName())) {
                 //权限请求确认-pkg com.google.android.packageinstaller
                 UiObject uiObject_permission = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
@@ -67,10 +67,10 @@ public class VP {
                     gDevice.findObject(new UiSelector().resourceId("android:id/button1")).clickAndWaitForNewWindow();
                 }*/
             }
-            if ("com.sioeye".equals(gDevice.getCurrentPackageName())) {
+           /* if ("com.sioeye".equals(gDevice.getCurrentPackageName())) {
                 logger.info("["+t+"]"+"com.sioeye launch success");
                 break;
-            }
+            }*/
         }
     }
 

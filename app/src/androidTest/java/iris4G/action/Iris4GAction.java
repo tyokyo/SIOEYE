@@ -200,8 +200,8 @@ public class Iris4GAction extends VP2 {
      * 启动CAMERA
      */
     public static void startCamera() throws Exception {
-        gDevice.pressHome();
-        gDevice.pressHome();
+        //gDevice.pressHome();
+        //gDevice.pressHome();
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.hicam/.application.HiCam");
         gDevice.wait(Until.findObject(By.pkg("com.hicam")),40000);

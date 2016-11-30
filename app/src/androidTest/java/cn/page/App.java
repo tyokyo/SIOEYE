@@ -9,5 +9,6 @@ public class App {
     //CN 中国版
     public static String SIOEYE_PACKAGE_NAME_CN="cn.sioeye.sioeyeapp";
     public static String LAUNCH_SIOEYE="cn.sioeye.sioeyeapp/.main.SplashActivity";
+    public static String HICAM="com.hicam";
 
 }
