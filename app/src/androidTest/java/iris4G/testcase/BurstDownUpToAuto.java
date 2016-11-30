@@ -55,7 +55,6 @@ public class BurstDownUpToAuto extends VP2{
         UiObject gx = ui.getChild(new UiSelector().className("android.widget.ImageView"));
         String text = uo.getText();
         if (ui.exists() && uo.exists() && "Auto".equals(text) && gx.exists()){
-            //common.passcase();
             //使相机回到初始状态Up
             flag1 = 1;
             logger.info("flag1 pass = "+flag1);

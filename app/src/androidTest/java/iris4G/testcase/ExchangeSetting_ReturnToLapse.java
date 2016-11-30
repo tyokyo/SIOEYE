@@ -58,7 +58,6 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
     }
     public boolean isExistVideoQuality(String vquality){
         boolean isexist =false;
-
         return isexist;
     }
     @Test

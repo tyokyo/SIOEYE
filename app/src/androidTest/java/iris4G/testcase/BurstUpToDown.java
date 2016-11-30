@@ -62,5 +62,4 @@ public class BurstUpToDown extends VP2{
         }
         logger.info( "*****End to run testBurstUpToDownCase*****");
     }
-
 }

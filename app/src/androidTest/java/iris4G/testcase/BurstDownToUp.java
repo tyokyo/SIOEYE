@@ -60,6 +60,5 @@ public class BurstDownToUp extends VP2 {
             logger.info("testDownToUpCase_fail");
             Asst.fail();
         }
-
     }
 }
