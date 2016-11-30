@@ -7,6 +7,7 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiSelector;
 import android.view.KeyEvent;
 
+import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,8 +58,8 @@ public class BurstUpToDown extends VP2{
             clickByText("Up");
         }else{
             logger.info("testBurstUpToDownCase_fail");
+            Asst.fail();
         }
         logger.info( "*****End to run testBurstUpToDownCase*****");
     }
-
 }
