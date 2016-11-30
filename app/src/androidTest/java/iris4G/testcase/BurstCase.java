@@ -58,7 +58,7 @@ public class BurstCase extends VP2{
                     logger.info("expect is "+expectWH);
                     logger.info("active is "+activeWH);
                     String message=String.format("expect is %s.but active is %s",expectWH,activeWH);
-                    Asst.fail();
+                    Asst.fail(message);
                 }
             }
         }
