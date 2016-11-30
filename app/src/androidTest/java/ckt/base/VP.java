@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import ckt.tools.Common;
+import ckt.tools.Watcher;
 
 /**
  * Created by admin on 2016/9/6.
@@ -73,7 +74,11 @@ public class VP {
             }*/
         }
     }
-
+    public static void registerWatcher(){
+        //gDevice.removeWatcher("Android_Permission_Watcher");
+        gDevice.registerWatcher("Android_Permission_Watcher", Watcher.watcherPermission());
+        gDevice.runWatchers();
+    }
     public static void initDevice() {
         if (instrument == null) {
             instrument = InstrumentationRegistry.getInstrumentation();
@@ -82,6 +87,7 @@ public class VP {
         if (gDevice == null) {
             gDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         }
+        //registerWatcher();
         try {
             doNotAskPermission();
         } catch (UiObjectNotFoundException e) {
