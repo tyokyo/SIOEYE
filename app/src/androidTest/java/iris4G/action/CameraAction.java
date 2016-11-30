@@ -139,8 +139,8 @@ public class CameraAction extends VP2 {
         String lapse2 = getTex(Iris4GPage.lapsetime2);
         int lapse1secs = dateInSeconds(lapse1);
         int lapse2secs = dateInSeconds(lapse2);
-        logger.info(lapse1secs + "-" + lapse2secs);
-        if (lapse1secs / lapse2secs == lap) {
+        logger.info(lapse1secs + "-" + lapse2secs+"-"+lap);
+        if (lapse1secs / lapse2secs/ lap ==1) {
             logger.info("Time Lapse验证结果-PASS  " + lapse1secs + "-" + lapse2secs);
             return true;
         } else {
