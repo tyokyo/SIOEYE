@@ -51,11 +51,11 @@ public class BurstDownToUp extends VP2 {
         UiObject gx = ui.getChild(new UiSelector().className("android.widget.ImageView"));
         String text = uo.getText();
         if (ui.exists() && uo.exists() && "Up".equals(text) && gx.exists()){
-            logger.fine("pass");
+            logger.info("testDownToUpCase_pass");
             //使相机回到初始状态Up
             clickByText("Up");
         }else{
-            logger.info("fail");
+            logger.info("testDownToUpCase_fail");
         }
 
     }

@@ -322,7 +322,7 @@ public class CameraAction extends VP2 {
         waitTime(1);
         Iris4GAction.ScrollViewByText(text);
         clickByText(text);
-        waitTime(1);
-        Spoon.screenshot("navConfig",text);
+        waitTime(2);
+        //Spoon.screenshot("navConfig",text);
     }
 }
