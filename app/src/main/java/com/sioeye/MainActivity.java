@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.CAMERA,
                     Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.RECORD_AUDIO};
             //验证是否许可权限
             for (String str : permissions) {
