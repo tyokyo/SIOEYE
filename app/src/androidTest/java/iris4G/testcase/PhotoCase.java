@@ -42,9 +42,9 @@ public class PhotoCase extends VP2{
             double activeWH = Iris4GAction.getPicHeightWidth(photoPath);
             //double expectWH= 16/9;
             if (activeWH==expectWH) {
-                logger.info(photoPath+" -拍照成功");
+                logger.info(photoPath+" -take picture success");
             }else {
-                logger.info(photoPath+" -拍照失败");
+                logger.info(photoPath+" -take picture fail");
                 Asst.fail("Photo-Width error");
             }
         }else {

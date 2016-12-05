@@ -41,15 +41,15 @@ public class Video_Slo_Mo_PowerKey extends VP2{
         if (gDevice.isScreenOn() == false &&
                 text_exists_match("com.hicam:id/recording_time2")== true)
         {
-            logger.info("灭屏成功");
+            logger.info("screen 0ff success");
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
             waitTime(3);
             if(gDevice.isScreenOn() == true &&
                     clickById("com.hicam:id/recording_time2")== true)
             {
-                System.out.println("灭屏成功");
+                logger.info("screen 0ff success");
                 Iris4GAction.cameraKey();
-                logger.info("成功点亮");
+                logger.info("screen on");
             }
             else {
                 Spoon.screenshot("isScreenOn","isScreenOn=true");

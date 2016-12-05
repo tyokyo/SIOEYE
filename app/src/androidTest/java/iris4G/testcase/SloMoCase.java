@@ -66,12 +66,12 @@ public class SloMoCase extends VP2 {
                     logger.info("video info check success-" + videoPath);
                     FileManagerAction.playVideoByFileManager(videoName);
                     if (text_exists_match("^Can't play this video.*")) {
-                        logger.info(videoName + " 播放失败" + "-Can't play this video");
+                        logger.info(videoName + " play fail " + "-Can't play this video");
                         clickById("android:id/button1");
                         Asst.fail("Can't play this video");
                         throw new Exception("FindObject" + "Can't play this video");
                     } else {
-                        logger.info(videoName + " 播放成功");
+                        logger.info(videoName + " play success");
                         result = true;
                     }
                 } else {

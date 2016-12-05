@@ -41,7 +41,7 @@ public class VideoOverTwoMinutes extends VP2 {
     public void testVideoOverTwoMinutes() throws Exception {
         if(!gDevice.isScreenOn()){
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            logger.info("点击POWER使屏幕点亮");
+            logger.info("make screen on");
         }
         initDevice();
         Iris4GAction.startCamera();
@@ -64,16 +64,16 @@ public class VideoOverTwoMinutes extends VP2 {
             FileManagerAction.playVideoByFileManager(videoName);
 
             if (text_exists_match("^Can't play this video.*")) {
-                logger.info(videoName+" 播放失败" + "-Can't play this video");
+                logger.info(videoName+" play fail " + "-Can't play this video");
                 clickById("android:id/button1");
                 Asst.fail("Can't play this video");
             }
             else if(videoNode.getDuration()<(WaitTime-2)){
-                logger.info("期望录制的视频时长"+WaitTime);
-                logger.info("实际录成的视频时长"+videoNode.getDuration());
-                Asst.fail("视频时长-Error");
+                logger.info("expect video duration "+WaitTime);
+                logger.info("active video duration"+videoNode.getDuration());
+                Asst.fail("total video duration-Error");
             }else {
-                logger.info(videoName+" 播放成功");
+                logger.info(videoName+" play success");
             }
         }else {
             Asst.fail("Video-Count=1;Error");

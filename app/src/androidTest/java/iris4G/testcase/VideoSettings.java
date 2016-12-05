@@ -32,7 +32,7 @@ public class VideoSettings extends VP2{
         int flag2 = 0;
         if (!gDevice.isScreenOn()) {
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            logger.info("点击POWER使屏幕点亮");
+            logger.info("make screen on");
         }
         initDevice();
         Iris4GAction.startCamera();

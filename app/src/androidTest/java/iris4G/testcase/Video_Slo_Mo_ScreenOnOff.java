@@ -35,8 +35,6 @@ public class Video_Slo_Mo_ScreenOnOff extends VP2 {
         initDevice();
         Iris4GAction.startCamera();
         CameraAction.navConfig(Iris4GPage.nav_menu[4]);
-        logger.info("*****慢速录像选择");
-
         Iris4GAction.cameraKey();
         waitTime(3);
         for(int i= 1;i<11;i++){

@@ -39,29 +39,29 @@ public class VideoClickPower extends VP2{
     public void testVideoClickPower() throws Exception {
         if(!gDevice.isScreenOn()){
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            logger.info("点击POWER使屏幕点亮");
+            logger.info("make screen on");
         }
         initDevice();
         Iris4GAction.startCamera();
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
-        logger.info("亮屏录制"+WaitTime+"秒");
+        logger.info("record when screen is on "+WaitTime+" seconds");
         Iris4GAction.cameraKey();
 
         CameraAction.cameraRecordTime();
         waitTime(WaitTime);
 
-        logger.info("灭屏录制"+WaitTime+"秒");
+        logger.info("record when screen is off "+WaitTime+" seconds");
         gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
         waitTime(WaitTime);
 
-        logger.info("再次亮屏录制"+WaitTime+"秒");
+        logger.info("record when screen is on "+WaitTime+" seconds");
         gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
         waitTime(WaitTime);
 
         CameraAction.cameraRecordTime();
         Iris4GAction.cameraKey();
 
-        logger.info("总共录制"+3*WaitTime+"秒");
+        logger.info("total record "+3*WaitTime+" seconds");
         waitTime(3);
         HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
         HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
@@ -74,11 +74,11 @@ public class VideoClickPower extends VP2{
             FileManagerAction.playVideoByFileManager(videoName);
 
             if (text_exists_match("^Can't play this video.*")) {
-                logger.info(videoName+" 播放失败" + "-Can't play this video");
+                logger.info(videoName+" play fail " + "-Can't play this video");
                 clickById("android:id/button1");
                 Asst.fail("Can't play this video");
             }else {
-                logger.info(videoName+" 播放成功");
+                logger.info(videoName+" play success ");
             }
         }else {
             Asst.fail("Video-Count=1:Error");
