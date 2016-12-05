@@ -2,8 +2,10 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiCollection;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 
@@ -12,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
@@ -36,7 +39,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
         Iris4GAction.initIris4G();
     }
 
-    public String getRightValue(String text) throws UiObjectNotFoundException {
+    /*public String getRightValue(String text) throws UiObjectNotFoundException {
         String value="";
         UiCollection videos = new UiCollection(
                 new UiSelector().className("android.widget.ScrollView"));
@@ -51,6 +54,22 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
                 if (sObject.getText().equals(text)) {
                     UiObject dataObj = uiObject.getChild(new UiSelector().className("android.widget.TextView").index(1));
                     value=dataObj.getText();
+                }
+            }
+        }
+        return value;
+    }*/
+    public String getRightValue(String text) throws UiObjectNotFoundException {
+        String value="";
+        UiObject2 scrollView = getObject2ByClass(android.widget.ScrollView.class);
+        List<UiObject2> relativeLayouts=scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        for (UiObject2 relativeLayout:relativeLayouts) {
+            List<UiObject2> texts = relativeLayout.findObjects(By.clazz(android.widget.TextView.class));
+            if (texts.size()==2){
+                String key = texts.get(0).getText();
+                if (text.equals(key)){
+                    value = texts.get(1).getText();
+                    break;
                 }
             }
         }
@@ -101,7 +120,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
                     logger.info(String.format("expect|active-[%s | %s]",
                             expect_lapse_lapsetime,active_lapse_lapsetime));
                     logger.info("testlapse_lapsetime_ReturnToLapseCaseCase_fail");
-                    Asst.fail();
+                    Asst.fail(String.format("%s|%s",expect_lapse_lapsetime,active_lapse_lapsetime));
                     break;
                 }else {
                     if (!expect_lapse_angle.equals(active_lapse_angle)){
