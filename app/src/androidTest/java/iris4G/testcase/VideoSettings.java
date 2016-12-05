@@ -19,6 +19,13 @@ import iris4G.page.Iris4GPage;
 
 /**
  * @Author yun.yang
+ * /*
+ * a.普通录像模式
+ * 1.修改视频质量为720@60FPS
+ * 2.修改视角为Super Wide
+ * 3.修改上下颠倒为auto
+ * 4.切换到延时录像模式后再切换为普通录像
+ * b.所有设置项都修改成功，更改的设置项都没有改变
  * @Description
  */
 @RunWith(AndroidJUnit4.class)
@@ -29,15 +36,19 @@ public class VideoSettings extends VP2{
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
+    private String replaceFps(String quality){
+        return quality.replace("FPS","");
+    }
     @Test
     public void test() throws Exception {
-        String quality = Iris4GPage.video_quality[4];
+        String quality = Iris4GPage.video_quality[2];
         String angle = Iris4GPage.video_Angle[1];
-        int flag1 = 0;
-        int flag2 = 0;
+        String lapse_time = Iris4GPage.lapse_time[0];
 
+        CameraAction.configTimeLapse(lapse_time);
         CameraAction.configVideoQuality(quality);
         CameraAction.configVideoAngle(angle);
+
         //将Up改为Auto
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Up/Down/Auto");
@@ -45,25 +56,16 @@ public class VideoSettings extends VP2{
         gDevice.pressBack();
         //切换到延时录像再切换到普通录像
         CameraAction.navConfig(Iris4GPage.nav_menu[5]);
-        if (text_exists("3s")) {
+        if (text_exists(lapse_time)) {
             //通过检查当前页面是否有3s存在，若存在，则正确，并记录flag1=1即true
-            flag1 = 1;
         } else {
-            flag1 = 0;
             Asst.fail("SLO_MO record fail");
         }
         CameraAction.navConfig(Iris4GPage.nav_menu[1]);
-        if (text_exists("720@60FPS")) {
-            flag2 = 1;
-        } else {
-            flag2 = 0;
-            Asst.fail("normal record fail");
-        }
-        logger.info("flag2=" + flag2);
-        if (flag1 == 1 && flag2 == 1) {
+        if (text_exists(replaceFps(quality))) {
 
         } else {
-            Asst.fail("====");
+            Asst.fail("normal record fail");
         }
     }
 }
