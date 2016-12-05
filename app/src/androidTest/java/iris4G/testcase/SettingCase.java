@@ -28,6 +28,7 @@ public class SettingCase extends VP2 {
         gDevice.pressHome();
         gDevice.pressMenu();
 
+        Iris4GAction.startSettings();
         gDevice.waitForWindowUpdate("com.android.settings", 5000);
         clickByText("Device");
         Iris4GAction.ScrollViewByText("Display");
