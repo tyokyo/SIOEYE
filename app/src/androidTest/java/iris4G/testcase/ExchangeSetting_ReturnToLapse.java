@@ -66,7 +66,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
         CameraAction.navConfig(Iris4GPage.nav_menu[5]);
 
         for(int i=1;i<20;i++){
-            logger.info("第"+i+"次循环开始");
+            logger.info("iteration-"+i);
             int lapsesize = lapse_time.length;
             int anglesize = video_Angle.length;
             int qualitysize = video_quality.length;
@@ -98,15 +98,14 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
                 logger.info("lapsetime|"+expect_lapse_lapsetime+"|"+active_lapse_lapsetime);
 
                 if (!expect_lapse_lapsetime.equals(active_lapse_lapsetime)){
-                    logger.info("Time Lapse和之前设置的不一样，不通过");
-                    logger.info("expect is:"+"["+expect_lapse_lapsetime+"]");
-                    logger.info("active is:"+"["+active_lapse_lapsetime+"]");
+                    logger.info(String.format("expect|active-[%s | %s]",
+                            expect_lapse_lapsetime,active_lapse_lapsetime));
                     logger.info("testlapse_lapsetime_ReturnToLapseCaseCase_fail");
                     Asst.fail();
                     break;
                 }else {
                     if (!expect_lapse_angle.equals(active_lapse_angle)){
-                        logger.info("Video Angle和之前设置的不一样，不通过");
+                        logger.info("Video Angle error");
                         logger.info("expect is:"+"["+expect_lapse_angle+"]");
                         logger.info("active is:"+"["+active_lapse_angle+"]");
                         logger.info("testlapse_angle_ReturnToLapseCase_fail");
@@ -114,7 +113,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
                         break;
                     }else {
                         if (!expect_lapse_quality.equals(active_lapse_quality)){
-                            logger.info("Video Quality和之前设置的不一样，不通过");
+                            logger.info("Video Quality error");
                             logger.info("expect is:"+"["+expect_lapse_quality+"]");
                             logger.info("active is:"+"["+active_lapse_quality+"]");
                             logger.info("testlapse_quality_ReturnToLapseCase_fail");
@@ -123,7 +122,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2{
                         }
                     }
                 }
-                logger.info("第"+i+"次循环结束");
+                logger.info("end to iteration- "+i);
             }
             //no exception
             logger.info("testExchangeSetting_ReturnToLapseCase_PASS");
