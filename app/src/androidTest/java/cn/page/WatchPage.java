@@ -35,7 +35,7 @@ public class WatchPage {
     //等待搜索完成
     public static final String WATCH_WAIT_SEARCH_LOADING="cn.sioeye.sioeyeapp:id/anim_view";
     //搜索无结果
-    public static final String WATCH_SEARCH_NORESULT="cn.sioeye.sioeyeapp:id/view_status";
+    public static final String WATCH_SEARCH_NORESULT="cn.sioeye.sioeyeapp:id/status_image";
     //搜索到的用户头像
     public static final String WATCH_SEARCH_RESULT_USER_AVATAR="cn.sioeye.sioeyeapp:id/user_avatar";
     //点击搜索到的结果
