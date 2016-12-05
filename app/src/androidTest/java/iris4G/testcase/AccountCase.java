@@ -47,9 +47,9 @@ public class AccountCase extends VP2{
         AccountAction.loginAccount("tyokyo@126.com", "123456789");
         boolean login = AccountAction.isLoginSuccess();
         if (login) {
-            logger.info(" 账号登陆成功");
+            logger.info("account login success");
         }else {
-            logger.info(" 账号登陆失败");
+            logger.info("account login fail");
         }
     }
 }
