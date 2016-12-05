@@ -3,6 +3,8 @@ package iris4G.testcase;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,5 +49,6 @@ public class Video_Slo_Mo_20m extends VP2{
             Iris4GAction.cameraKey();
             Asst.fail("close failed or save video failed");
         }
+        Spoon.screenshot("max_record","Maximum length os SLO-MO has been reached");
     }
 }
