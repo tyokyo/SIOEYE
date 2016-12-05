@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.view.KeyEvent;
 
 import org.hamcrest.Asst;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,18 +25,17 @@ import iris4G.page.Iris4GPage;
 @SdkSuppress(minSdkVersion = 16)
 public class VideoSettings extends VP2{
     private static Logger logger = Logger.getLogger(VideoSettings.class.getName());
+    @Before
+    public void setup() throws Exception {
+        Iris4GAction.initIris4G();
+    }
     @Test
     public void test() throws Exception {
         String quality = Iris4GPage.video_quality[4];
         String angle = Iris4GPage.video_Angle[1];
         int flag1 = 0;
         int flag2 = 0;
-        if (!gDevice.isScreenOn()) {
-            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            logger.info("make screen on");
-        }
-        initDevice();
-        Iris4GAction.startCamera();
+
         CameraAction.configVideoQuality(quality);
         CameraAction.configVideoAngle(angle);
         //将Up改为Auto
