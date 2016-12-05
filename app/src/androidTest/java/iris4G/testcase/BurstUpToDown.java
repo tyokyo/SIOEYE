@@ -36,7 +36,7 @@ public class BurstUpToDown extends VP2{
     public void testBurstUpToDown() throws Exception{
         if(!gDevice.isScreenOn()){
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            logger.info("点击POWER使屏幕点亮");
+            logger.info("make screen on");
         }
         logger.info( "*****Start to run testBurstUpToDownCase*****");
         CameraAction.navConfig(Iris4GPage.nav_menu[3]);
