@@ -34,7 +34,7 @@ public class BurstDownToUp extends VP2 {
 
         if(!gDevice.isScreenOn()){
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            logger.info("点击POWER使屏幕点亮");
+            logger.info("make screen on");
         }
         Iris4GAction.initDevice();
         Iris4GAction.startCamera();
