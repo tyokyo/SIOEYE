@@ -3,6 +3,7 @@ package iris4G.action;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
+import android.os.RemoteException;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Configurator;
 import android.support.test.uiautomator.UiObject;
@@ -176,10 +177,10 @@ public class Iris4GAction extends VP2 {
                     "am force-stop com.hicam");
             waitTime(5);
             String name = gDevice.getCurrentPackageName();
-            logger.info("当前package:" + name);
-            logger.info("关闭Camera-Success");
+            logger.info("current package:" + name);
+            logger.info("stop Camera-Success");
         } catch (IOException e) {
-            logger.info("关闭Camera-Fail");
+            logger.info("stop Camera-Fail");
         }
     }
 
@@ -208,7 +209,21 @@ public class Iris4GAction extends VP2 {
         String pkg = gDevice.getCurrentPackageName();
         logger.info("current-package:"+pkg);
     }
-
+    /**
+     * 关闭CAMERA
+     */
+    public static void stopSettings() {
+        try {
+            gDevice.executeShellCommand(
+                    "am force-stop com.android.settings");
+            waitTime(5);
+            String name = gDevice.getCurrentPackageName();
+            logger.info("current package:" + name);
+            logger.info("stop Success");
+        } catch (IOException e) {
+            logger.info("stop settings-Fail");
+        }
+    }
     /**
      * 启动Settings
      */
@@ -243,10 +258,10 @@ public class Iris4GAction extends VP2 {
             gDevice.executeShellCommand("am force-stop com.hicam.gallery");
             waitTime(5);
             String name = gDevice.getCurrentPackageName();
-            logger.info("当前package:" + name);
-            logger.info("关闭Gallery-Success");
+            logger.info("current package:" + name);
+            logger.info("stop Gallery-Success");
         } catch (IOException e) {
-            logger.info("关闭Gallery-Fail");
+            logger.info("stop Gallery-Fail");
         }
     }
 
@@ -356,10 +371,17 @@ public class Iris4GAction extends VP2 {
         //获取Selector timeout
         confg.setWaitForSelectorTimeout(timeout + time);
     }
-
+    public static void makeScreenOn() throws RemoteException {
+        initDevice();
+        if (!gDevice.isScreenOn()) {
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
+            logger.info("make screen on");
+        }
+    }
     public static void initIris4G() throws Exception {
         try {
             initDevice();
+            makeScreenOn();
             stopCamera();
             stopFileManager();
             stopGallery();
