@@ -17,15 +17,19 @@ public class Watcher extends VP2{
     public static UiWatcher watcherPermission(){
         UiWatcher watcher = new UiWatcher() {
             @Override
-            public boolean checkForCondition() throws UiObjectNotFoundException {
+            public boolean checkForCondition() {
                 // TODO Auto-generated method stub
                 //logger.info("start to run watcherPermission");
                 if ("com.android.packageinstaller".equals(gDevice.getCurrentPackageName())) {
                     logger.info("watcherPermission matched");
                     //权限请求确认-pkg com.google.android.packageinstaller
-                    if (id_exists(PERMISSION_ALLOW)) {
-                        clickById(PERMISSION_ALLOW);
-                        logger.info("click Allow permission");
+                    try {
+                        if (id_exists(PERMISSION_ALLOW)) {
+                            clickById(PERMISSION_ALLOW);
+                            logger.info("click Allow permission");
+                        }
+                    } catch (UiObjectNotFoundException e) {
+                        e.printStackTrace();
                     }
                     return true;
                 }
