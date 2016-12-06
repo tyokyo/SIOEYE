@@ -55,11 +55,11 @@ public class VideoCase extends VP2{
             FileManagerAction.playVideoByFileManager(videoName);
 
             if (text_exists_match("^Can't play this video.*")) {
-                logger.info(videoName+" 播放失败" + "-Can't play this video");
+                logger.info(videoName+" play fail " + "-Can't play this video");
                 clickById("android:id/button1");
                 Asst.fail("Can't play this video");
             }else {
-                logger.info(videoName+" 播放成功");
+                logger.info(videoName+" play success");
             }
         }else {
             Asst.fail("expect only one video in folder");

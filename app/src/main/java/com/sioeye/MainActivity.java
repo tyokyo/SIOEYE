@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
-
+    Logger logger = Logger.getLogger(MainActivity.class.getName());
     private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1;
 
    /* private void requestMultiplePermissions() {
@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
        if (requestCode == 101) {
            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                // Permission Granted
-               Logger.getLogger("MainActivity").info("Allow");
+               logger.info("Allow");
            } else {
                // Permission Denied
-               Logger.getLogger("MainActivity").info("Denied");
+               logger.info("Denied");
            }
        }
    }
@@ -53,14 +53,13 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.CAMERA,
                     Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.RECORD_AUDIO};
             //验证是否许可权限
             for (String str : permissions) {
                 if (this.checkSelfPermission(str) != PackageManager.PERMISSION_GRANTED) {
                     //申请权限
-                    Logger.getLogger("申请权限").info(str);
-                    this.requestPermissions(permissions, REQUEST_CODE_CONTACT);
+                    logger.info(str);
+                    //this.requestPermissions(permissions, REQUEST_CODE_CONTACT);
                     return;
                 }
             }

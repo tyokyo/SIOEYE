@@ -25,9 +25,8 @@ public class SettingCase extends VP2 {
     }
     @Test
     public void test() throws Exception {
-        gDevice.pressHome();
-        gDevice.pressMenu();
 
+        Iris4GAction.startSettings();
         gDevice.waitForWindowUpdate("com.android.settings", 5000);
         clickByText("Device");
         Iris4GAction.ScrollViewByText("Display");
@@ -55,5 +54,6 @@ public class SettingCase extends VP2 {
         if (text_exists("Connect")) {
             clickByText("Connect");
         }
+        Iris4GAction.stopSettings();
     }
 }

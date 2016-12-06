@@ -54,9 +54,6 @@ public class testReview_Screen_on_off extends VP2{
         waitTime(60);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
         waitTime(2);
-
-        System.out.println("验证程序包名："+gDevice.getCurrentPackageName());
-
         if(gDevice.isScreenOn()){
             System.out.println("testReview_Screen_onoff case was passed");
         }else {

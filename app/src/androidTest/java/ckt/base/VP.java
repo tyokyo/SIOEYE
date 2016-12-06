@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import ckt.tools.Common;
+import ckt.tools.Watcher;
 
 /**
  * Created by admin on 2016/9/6.
@@ -52,7 +53,7 @@ public class VP {
             MainActivity.class);
 
     public static void doNotAskPermission() throws UiObjectNotFoundException {
-        for (int t = 1; t < 5; t++) {
+        for (int t = 1; t < 3; t++) {
             if ("com.android.packageinstaller".equals(gDevice.getCurrentPackageName())) {
                 //权限请求确认-pkg com.google.android.packageinstaller
                 UiObject uiObject_permission = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
@@ -67,13 +68,17 @@ public class VP {
                     gDevice.findObject(new UiSelector().resourceId("android:id/button1")).clickAndWaitForNewWindow();
                 }*/
             }
-            if ("com.sioeye".equals(gDevice.getCurrentPackageName())) {
+           /* if ("com.sioeye".equals(gDevice.getCurrentPackageName())) {
                 logger.info("["+t+"]"+"com.sioeye launch success");
                 break;
-            }
+            }*/
         }
     }
-
+    public static void registerWatcher(){
+        //gDevice.removeWatcher("Android_Permission_Watcher");
+        gDevice.registerWatcher("Android_Permission_Watcher", Watcher.watcherPermission());
+        gDevice.runWatchers();
+    }
     public static void initDevice() {
         if (instrument == null) {
             instrument = InstrumentationRegistry.getInstrumentation();
@@ -82,6 +87,7 @@ public class VP {
         if (gDevice == null) {
             gDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         }
+        //registerWatcher();
         try {
             doNotAskPermission();
         } catch (UiObjectNotFoundException e) {

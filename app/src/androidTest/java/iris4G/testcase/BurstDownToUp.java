@@ -10,6 +10,8 @@ import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
+
+import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +34,7 @@ public class BurstDownToUp extends VP2 {
 
         if(!gDevice.isScreenOn()){
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            logger.info("点击POWER使屏幕点亮");
+            logger.info("make screen on");
         }
         Iris4GAction.initDevice();
         Iris4GAction.startCamera();
@@ -56,7 +58,7 @@ public class BurstDownToUp extends VP2 {
             clickByText("Up");
         }else{
             logger.info("testDownToUpCase_fail");
+            Asst.fail();
         }
-
     }
 }

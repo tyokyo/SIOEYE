@@ -45,20 +45,20 @@ public class BurstCase extends VP2{
         getObject2ById(Iris4GPage.camera_setting_shortcut_id);
         int active_picture_count = resultHashSet.size();
         if (active_picture_count!=expect_picture_burst_size) {
-            logger.info(String.format("expect图片总数：%s张-实际图片数量为：%s",
+            logger.info(String.format("expect total picture：%s-but active is：%s",
                     expect_picture_burst_size,active_picture_count));
         }else {
-            logger.info(String.format("expect图片总数：%s张-Success",expect_picture_burst_size));
+            logger.info(String.format("expect total picture：%s-Success",expect_picture_burst_size));
             for (String photoPath : resultHashSet) {
                 double activeWH = Iris4GAction.getPicHeightWidth(photoPath);
                 if (activeWH==expectWH) {
-                    logger.info(photoPath+" -图片比列验证成功");
+                    logger.info(photoPath+" -picture width height is right");
                 }else {
-                    logger.info(photoPath+" -图片比列验证失败");
+                    logger.info(photoPath+" -width height error");
                     logger.info("expect is "+expectWH);
                     logger.info("active is "+activeWH);
                     String message=String.format("expect is %s.but active is %s",expectWH,activeWH);
-                    Asst.fail();
+                    Asst.fail(message);
                 }
             }
         }

@@ -27,8 +27,7 @@ public class SleepTimeSetting extends VP2{
     }
     @Test
     public void test() throws Exception {
-        gDevice.pressHome();
-        gDevice.pressMenu();
+        Iris4GAction.startSettings();
 
         gDevice.waitForWindowUpdate("com.android.settings", 5000);
         clickByText("Device");
@@ -57,5 +56,7 @@ public class SleepTimeSetting extends VP2{
         if (text_exists("Connect")) {
             clearText("Connect");
         }
+
+        Iris4GAction.stopSettings();
     }
 }

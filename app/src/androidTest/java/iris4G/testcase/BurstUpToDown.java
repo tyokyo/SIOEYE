@@ -7,6 +7,7 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiSelector;
 import android.view.KeyEvent;
 
+import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +36,7 @@ public class BurstUpToDown extends VP2{
     public void testBurstUpToDown() throws Exception{
         if(!gDevice.isScreenOn()){
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            logger.info("点击POWER使屏幕点亮");
+            logger.info("make screen on");
         }
         logger.info( "*****Start to run testBurstUpToDownCase*****");
         CameraAction.navConfig(Iris4GPage.nav_menu[3]);
@@ -57,8 +58,8 @@ public class BurstUpToDown extends VP2{
             clickByText("Up");
         }else{
             logger.info("testBurstUpToDownCase_fail");
+            Asst.fail();
         }
         logger.info( "*****End to run testBurstUpToDownCase*****");
     }
-
 }

@@ -32,7 +32,7 @@ public class LiveUpDown extends VP2 {
     public void test() throws Exception {
         if(!gDevice.isScreenOn()){
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            logger.info("点击POWER使屏幕点亮");
+            logger.info("make screen on");
         }
         CameraAction.cameraLive();
         int jd1 = gDevice.getDisplayRotation();
@@ -43,23 +43,24 @@ public class LiveUpDown extends VP2 {
             clickByText("Down");
             int jd2 = gDevice.getDisplayRotation();
             if(jd2 == 3){
-                logger.info("Up设置为Down成功");
+                //Up设置为Down成功
+                logger.info("Up-Down");
                 //更改某些不能够初始化的操纵后,应该还原，以便用例继续执行，以下是还原刚才的步骤
                 clickByText("Up/Down/Auto");
                 clickByText("Up");
                 int jd3 = gDevice.getDisplayRotation();
                 if(jd3 == 1){
-                    logger.info("操纵还原成功且用例执行成功");
+                    logger.info("re-set success");
                 }else{
-                    logger.info("操纵还原失败");
+                    logger.info("re-set fail");
                 }
             }else{
-                logger.info("Up设置为Down失败");
-                Asst.fail("Up设置为Down失败");
+                logger.info("Up-Down fail");
+                Asst.fail("Up-Down fail");
             }
         }else{
-            logger.info("初始条件不为Up");
-            Asst.fail("初始条件不为Up");
+            //初始条件不为Up
+            Asst.fail("initialize value is not Up");
         }
     }
 }

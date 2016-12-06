@@ -9,7 +9,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
@@ -52,14 +54,27 @@ public class LapseCase extends VP2 {
         CameraAction.cameraRecordTime();
         waitTime(5);
         boolean lapStatus = true;
-        for (int i = 0; i < 20; i++) {
+        ArrayList<Boolean> results = new ArrayList<>();
+        int total = 20;
+        for (int i = 0; i < total; i++) {
             lapStatus = CameraAction.checkLapseValue((int_Lapse));
+            results.add(lapStatus);
             waitTime(2);
         }
         CameraAction.cameraRecordTime();
         Iris4GAction.cameraKey();
         waitTime(3);
-        if (lapStatus) {
+        int countPass=0;
+        int countFail=0;
+        for (boolean status:results) {
+            if (status==true){
+                countPass=countPass+1;
+            }else {
+                countFail=countFail+1;
+            }
+        }
+        logger.info(String.format("%s|%s",countPass,total));
+        if (countPass/(double)total>0.9) {
             HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
             HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
             if (resultHashSet.size() == 1) {
@@ -72,11 +87,11 @@ public class LapseCase extends VP2 {
                     logger.info("video info check success-" + videoPath);
                     FileManagerAction.playVideoByFileManager(videoName);
                     if (text_exists_match("^Can't play this video.*")) {
-                        logger.info(videoName + " 播放失败" + "-Can't play this video");
+                        logger.info(videoName + " play fail" + "-Can't play this video");
                         clickById("android:id/button1");
                         Asst.fail("Can't play this video");
                     } else {
-                        logger.info(videoName + " 播放成功");
+                        logger.info(videoName + " play success");
                         result = true;
                     }
                 } else {

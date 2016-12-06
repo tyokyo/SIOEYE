@@ -257,6 +257,11 @@ public class BroadCastsCase extends VP2{
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
+            if (text_exists_match("底部有新消息")){
+                clickByText("底部有新消息");
+                waitTime(2);
+            }
+
             Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
@@ -291,6 +296,11 @@ public class BroadCastsCase extends VP2{
             gDevice.pressBack();
             waitTime(2);
             input_comments=input_comments.substring(0,120);
+            if (text_exists_match("底部有新消息")){
+                clickByText("底部有新消息");
+                waitTime(2);
+            }
+
             Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
