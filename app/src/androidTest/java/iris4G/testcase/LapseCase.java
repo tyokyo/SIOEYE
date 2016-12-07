@@ -74,7 +74,8 @@ public class LapseCase extends VP2 {
             }
         }
         logger.info(String.format("%s|%s",countPass,total));
-        if (countPass/(double)total>0.9) {
+        double ret =countPass/(double)total;
+        if (ret>0.9) {
             HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
             HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
             if (resultHashSet.size() == 1) {
@@ -102,7 +103,7 @@ public class LapseCase extends VP2 {
                 Asst.fail("video file error");
             }
         } else {
-            Asst.fail("checkLapseValue");
+            Asst.fail("checkLapseValue:"+ret);
         }
     }
 
