@@ -2,6 +2,9 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.KeyEvent;
+
+import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
 import org.junit.Before;
@@ -102,5 +105,68 @@ public class SloMoCase extends VP2 {
     @Test
     public void testSloMoMedium() throws Exception {
         sloMo(Iris4GPage.video_Angle[2]);
+    }
+    //* 20min慢速录制自动停止
+    @Test
+    public void testVideoSloMo20m() throws Exception {
+        String navMenu = Iris4GPage.nav_menu[4];
+        CameraAction.navConfig(navMenu);
+        HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
+        Iris4GAction.cameraKey();
+        logger.info("wait 20min");
+        waitTime(1201);
+        HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
+        HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
+        boolean lx1= id_exists("com.hicam:id/recording_time2");
+        if (lx1 == true || resultHashSet.size() != 1)
+        {
+            logger.info("close failed or save video failed");
+            Iris4GAction.cameraKey();
+            Asst.fail("close failed or save video failed");
+        }
+        Spoon.screenshot("max_record","Maximum length os SLO-MO has been reached");
+    }
+    @Test
+    public void testVideoSloMoPowerKey() throws Exception {
+        Iris4GAction.startCamera();
+        CameraAction.navConfig(Iris4GPage.nav_menu[4]);
+        Iris4GAction.cameraKey();
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
+        if (gDevice.isScreenOn() == false &&
+                id_exists("com.hicam:id/recording_time2")== true)
+        {
+            logger.info("screen 0ff success");
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
+            waitTime(3);
+            if(gDevice.isScreenOn() == true &&
+                    id_exists("com.hicam:id/recording_time2")== true)
+            {
+                logger.info("screen 0ff success");
+                Iris4GAction.cameraKey();
+                logger.info("screen on");
+            }
+            else {
+                Spoon.screenshot("isScreenOn","isScreenOn=true");
+                Asst.fail("expect screen=true,but is false");
+            }
+        }
+        else {
+            Spoon.screenshot("isScreenOn","isScreenOn=false");
+            Asst.fail("expect screen=false,but is true");
+        }
+    }
+    @Test
+    public void  testSloMoScreenOnOff() throws Exception {
+        gDevice.wakeUp();
+        initDevice();
+        Iris4GAction.startCamera();
+        CameraAction.navConfig(Iris4GPage.nav_menu[4]);
+        Iris4GAction.cameraKey();
+        waitTime(3);
+        for(int i= 1;i<11;i++){
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
+            waitTime(3);
+        }
+        Iris4GAction.cameraKey();
     }
 }
