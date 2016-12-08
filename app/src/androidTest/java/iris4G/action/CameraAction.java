@@ -7,6 +7,8 @@ import android.support.test.uiautomator.Until;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -206,9 +208,11 @@ public class CameraAction extends VP2 {
         clickByText("Video Quality");
         Iris4GAction.ScrollViewByText(quality);
         clickByText(quality);
-        logger.info("Video Quality set to :" + getUiObjectByText(quality).getText());
-        Spoon.screenshot("configVideoQuality",quality);
+        waitTime(1);
         gDevice.pressBack();
+        Spoon.screenshot("configVideoQuality",quality);
+        //更改成功，取景界面左上角显示修改后的视频质量
+        Asst.assertEquals(quality+" set success",true,text_exists_contain(CameraAction.replaceFps(quality)));
     }
 
     //给定的视频参数是否支持
@@ -249,8 +253,10 @@ public class CameraAction extends VP2 {
         clickByText("Burst Rate");
         clickByText(burst);
         logger.info("Burst Rate set to :" + burst);
-        Spoon.screenshot("configBurst",burst);
         gDevice.pressBack();
+        waitTime(1);
+        Spoon.screenshot("configBurst",burst);
+        Asst.assertEquals(burst,true,text_exists_contain(burst));
     }
 
     /**
@@ -265,6 +271,7 @@ public class CameraAction extends VP2 {
         clickByText(angle);
         logger.info("Video Angle set to :" + angle);
         Spoon.screenshot("configVideoAngle",angle);
+        Asst.assertEquals(angle,true,text_exists_contain(angle));
         gDevice.pressBack();
     }
 
@@ -304,8 +311,12 @@ public class CameraAction extends VP2 {
         Iris4GAction.ScrollViewByText(size);
         clickByText(size);
         logger.info("Image Size set to :" + size);
-        Spoon.screenshot("configImageSize",size);
         gDevice.pressBack();
+        waitTime(1);
+        String screen_size = size.substring(0,2);
+        //更改成功，相机左上角显示?M
+        Spoon.screenshot("configImageSize",size);
+        Asst.assertEquals(size,true,text_exists_contain(screen_size));
     }
 
     /**
@@ -325,4 +336,9 @@ public class CameraAction extends VP2 {
         waitTime(2);
         //Spoon.screenshot("navConfig",text);
     }
+    //720@60FPS - return 720@60
+    public static String replaceFps(String quality){
+        return quality.replace("FPS","");
+    }
+
 }
