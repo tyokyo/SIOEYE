@@ -64,6 +64,7 @@ public class Iris4GPage {
     public static String fileManager_list_view = "com.mediatek.filemanager:id/list_view";
 
     public static String camera_mode_label = "com.hicam:id/camera_mode_label";
+    public static String camera_mode_label_live = "com.hicam:id/camera_mode";
     public static String info = "com.hicam:id/info";
 
 }

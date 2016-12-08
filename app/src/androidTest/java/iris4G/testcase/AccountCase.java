@@ -15,9 +15,11 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.logging.Logger;
 import ckt.base.VP2;
+import cn.page.Constant;
 import iris4G.action.AccountAction;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
+import iris4G.action.SettingAction;
 import iris4G.page.Iris4GPage;
 
 /**
@@ -35,21 +37,16 @@ public class AccountCase extends VP2{
     @Test
     public void testLogin() throws Exception {
         gDevice.pressHome();
+        //清除app数据  包括登录的账号
         Iris4GAction.pmClear();
+        //启动 camera
         Iris4GAction.startCamera();
 
-        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
-        CameraAction.cameraSetting();
-        Iris4GAction.ScrollViewByText("Live&Save");
-        CameraAction.openCompoundButton("Live&Save");
-        Iris4GAction.ScrollViewByText("Account");
-        clickByText("Account");
-        AccountAction.loginAccount("tyokyo@126.com", "123456789");
-        boolean login = AccountAction.isLoginSuccess();
-        if (login) {
-            logger.info("account login success");
-        }else {
-            logger.info("account login fail");
-        }
+        String useName= Constant.getUserName();
+        String password=Constant.getPassword();
+        //登录账号
+        AccountAction.loginAccount(useName,password);
+        //打开live&save 开关
+        SettingAction.clickLiveAndSave();
     }
 }

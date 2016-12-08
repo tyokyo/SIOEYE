@@ -9,10 +9,12 @@ import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import ckt.base.VP2;
@@ -211,8 +213,6 @@ public class CameraAction extends VP2 {
         waitTime(1);
         gDevice.pressBack();
         Spoon.screenshot("configVideoQuality",quality);
-        //更改成功，取景界面左上角显示修改后的视频质量
-        Asst.assertEquals(quality+" set success",true,text_exists_contain(CameraAction.replaceFps(quality)));
     }
 
     //给定的视频参数是否支持
@@ -256,7 +256,6 @@ public class CameraAction extends VP2 {
         gDevice.pressBack();
         waitTime(1);
         Spoon.screenshot("configBurst",burst);
-        Asst.assertEquals(burst,true,text_exists_contain(burst));
     }
 
     /**
@@ -271,7 +270,6 @@ public class CameraAction extends VP2 {
         clickByText(angle);
         logger.info("Video Angle set to :" + angle);
         Spoon.screenshot("configVideoAngle",angle);
-        Asst.assertEquals(angle,true,text_exists_contain(angle));
         gDevice.pressBack();
     }
 
@@ -313,10 +311,7 @@ public class CameraAction extends VP2 {
         logger.info("Image Size set to :" + size);
         gDevice.pressBack();
         waitTime(1);
-        String screen_size = size.substring(0,2);
-        //更改成功，相机左上角显示?M
         Spoon.screenshot("configImageSize",size);
-        Asst.assertEquals(size,true,text_exists_contain(screen_size));
     }
 
     /**
@@ -340,5 +335,27 @@ public class CameraAction extends VP2 {
     public static String replaceFps(String quality){
         return quality.replace("FPS","");
     }
+    //打开文件管理器-播放视频
+    public static void openPlayVideo(HashSet<String> beforeTakeVideoList) throws Exception {
+        HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
+        HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
 
+        if (resultHashSet.size()==1) {
+            String videoPath = resultHashSet.iterator().next();
+            logger.info("new file:"+videoPath);
+            String videoName = new File(videoPath).getName();
+            Iris4GAction.VideoInfo(videoPath);
+            FileManagerAction.playVideoByFileManager(videoName);
+
+            if (text_exists_match("^Can't play this video.*")) {
+                logger.info(videoName+" play fail " + "-Can't play this video");
+                clickById("android:id/button1");
+                Asst.fail("Can't play this video");
+            }else {
+                logger.info(videoName+" play success");
+            }
+        }else {
+            Asst.fail("expect only one video in folder");
+        }
+    }
 }
