@@ -21,6 +21,10 @@ import iris4G.page.Iris4GPage;
 /**
  * @Author elon
  * @Description 所有视频质量[72030|72060|108030] * Video Angle
+ * 1.更改视频质量参数为480@120FPS
+   2.录制设置过参数的普通录像视频
+   1.可以成功设置为对应的参数
+   2.可以成功录制
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
