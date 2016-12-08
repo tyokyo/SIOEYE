@@ -43,6 +43,9 @@ public class SloMoCase extends VP2 {
         CameraAction.configVideoAngle(angle);
         CameraAction.navConfig(Iris4GPage.nav_menu[4]);
 
+        //验证视频质量显示
+        Asst.assertEquals("480@120FPS","480@120",getTex(Iris4GPage.info).trim());
+
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         Iris4GAction.cameraKey();
         waitTime(10);

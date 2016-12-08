@@ -37,6 +37,10 @@ public class VideoCase extends VP2{
         CameraAction.configVideoAngle(angle);
         CameraAction.cameraVideo();
 
+        //更改成功，取景界面左上角显示修改后的视频质量
+        String screen_display=CameraAction.replaceFps(quality);
+        Asst.assertEquals(quality+screen_display,getTex(Iris4GPage.info));
+
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         Iris4GAction.cameraKey();
         CameraAction.cameraRecordTime();
@@ -44,26 +48,7 @@ public class VideoCase extends VP2{
         CameraAction.cameraRecordTime();
         Iris4GAction.cameraKey();
         waitTime(5);
-        HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
-        HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
-
-        if (resultHashSet.size()==1) {
-            String videoPath = resultHashSet.iterator().next();
-            logger.info("new file:"+videoPath);
-            String videoName = new File(videoPath).getName();
-            Iris4GAction.VideoInfo(videoPath);
-            FileManagerAction.playVideoByFileManager(videoName);
-
-            if (text_exists_match("^Can't play this video.*")) {
-                logger.info(videoName+" play fail " + "-Can't play this video");
-                clickById("android:id/button1");
-                Asst.fail("Can't play this video");
-            }else {
-                logger.info(videoName+" play success");
-            }
-        }else {
-            Asst.fail("expect only one video in folder");
-        }
+        CameraAction.openPlayVideo(beforeTakeVideoList);
     }
     @Test
     public void testV72030fpsSuperWide() throws Exception {

@@ -36,9 +36,6 @@ public class VideoSettings extends VP2{
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
-    private String replaceFps(String quality){
-        return quality.replace("FPS","");
-    }
     @Test
     public void test() throws Exception {
         String quality = Iris4GPage.video_quality[2];
@@ -62,7 +59,7 @@ public class VideoSettings extends VP2{
             Asst.fail("SLO_MO record fail");
         }
         CameraAction.navConfig(Iris4GPage.nav_menu[1]);
-        if (text_exists(replaceFps(quality))) {
+        if (text_exists(CameraAction.replaceFps(quality))) {
 
         } else {
             Asst.fail("normal record fail");

@@ -23,8 +23,8 @@ import iris4G.page.Iris4GPage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
-public class PhotoCase extends VP2{
-    Logger logger = Logger.getLogger(PhotoCase.class.getName());
+public class CaptureCase extends VP2{
+    Logger logger = Logger.getLogger(CaptureCase.class.getName());
     @Before
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
@@ -32,6 +32,11 @@ public class PhotoCase extends VP2{
     private void  Photo(String imageSize,double expectWH) throws Exception {
         //CameraAction.configImageSize("4M(16:9)");
         CameraAction.configImageSize(imageSize);
+
+        String screen_size = imageSize.substring(0,2);
+        //更改成功，相机左上角显示?M
+        Asst.assertEquals(imageSize,screen_size,getTex(Iris4GPage.info).trim());
+
         HashSet<String> beforeTakePhotoList = Iris4GAction.FileList("/sdcard/Photo");
         Iris4GAction.cameraKey();
         waitTime(3);

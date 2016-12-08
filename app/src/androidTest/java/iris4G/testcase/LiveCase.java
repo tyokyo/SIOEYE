@@ -39,6 +39,10 @@ public class LiveCase extends VP2{
         CameraAction.configVideoQuality(quality);
         CameraAction.configVideoAngle(angle);
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+
+        //验证设置的显示
+        Asst.assertEquals("Live",true,id_exists(Iris4GPage.camera_mode_label));
+
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         Iris4GAction.cameraKey();
         CameraAction.cameraRecordTime();

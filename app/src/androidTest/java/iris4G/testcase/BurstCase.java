@@ -36,6 +36,12 @@ public class BurstCase extends VP2{
         CameraAction.configImageSize(imageSize);
         //"10P",
         CameraAction.configBurst(burstSetting);
+
+        //更改成功，相机左上角显示4M
+        Asst.assertEquals(imageSize,imageSize.substring(0,2),getTex(Iris4GPage.info).trim());
+        //更改成功，相机左上角显示10P/20P/30P
+        Asst.assertEquals(burstSetting,burstSetting,getTex(Iris4GPage.camera_mode_label).trim());
+
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/Photo");
         Iris4GAction.cameraKey();
         waitTime(10);

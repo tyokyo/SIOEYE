@@ -48,6 +48,10 @@ public class LapseCase extends VP2 {
         CameraAction.configVideoAngle(angleIndex);
         //CameraAction.configTimeLapse(Iris4GPage.lapse_time[0]);
         CameraAction.configTimeLapse(lapse_time);
+
+        //更改成功，相机左上角显示2s/5s/10s
+        Asst.assertEquals(lapse_time,lapse_time,getTex(Iris4GPage.camera_mode_label).trim());
+
         int int_Lapse=Integer.parseInt(lapse_time.replace("s",""));
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         Iris4GAction.cameraKey();
