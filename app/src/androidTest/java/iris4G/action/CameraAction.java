@@ -216,6 +216,21 @@ public class CameraAction extends VP2 {
         gDevice.pressBack();
         Spoon.screenshot("configVideoQuality",quality);
     }
+    public static void checkVideoQuality(String navConfig,String quality) throws Exception {
+        CameraAction.navConfig(navConfig);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Video Quality");
+        String active_quality = Iris4GAction.getRightValue("Video Quality");
+        Spoon.screenshot("currentVideoQuality",quality);
+        Asst.assertEquals("VideoQuality",quality,active_quality);
+        clickByText("Video Quality");
+        if (!hasObjectSelected(quality)){
+            Asst.fail(quality+" not selected");
+        }
+        gDevice.pressBack();
+        gDevice.pressBack();
+
+    }
 
     //给定的视频参数是否支持
     public static boolean isExistVideoQuality(String quality) throws Exception {
@@ -298,8 +313,9 @@ public class CameraAction extends VP2 {
         gDevice.pressBack();
     }
 
-    public static void configVideoAngle(int index, String angle) throws Exception {
-        CameraAction.navConfig(Iris4GPage.nav_menu[index]);
+    public static void configVideoAngle(String navConfig,int index, String angle) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[index]);
+        CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Video Angle");
         clickByText("Video Angle");
@@ -328,9 +344,9 @@ public class CameraAction extends VP2 {
      * "3M(4:3)",
      * "2M(16:9)"};
      */
-    public static void configImageSize(String block,String size) throws Exception {
+    public static void configImageSize(String navConfig,String size) throws Exception {
         //CameraAction.navConfig(Iris4GPage.nav_menu[2]);
-        CameraAction.navConfig(block);
+        CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
         clickByText("Image Size");
         Iris4GAction.ScrollViewByText(size);
@@ -338,6 +354,21 @@ public class CameraAction extends VP2 {
         logger.info("Image Size set to :" + size);
         Spoon.screenshot("configImageSize",size);
         waitTime(1);
+        gDevice.pressBack();
+    }
+    public static void checkImageSize(String navConfig,String size) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[2]);
+        CameraAction.navConfig(navConfig);
+        CameraAction.cameraSetting();
+        clickByText("Image Size");
+        String active_size = Iris4GAction.getRightValue("Image Size");
+        Spoon.screenshot("currentVideoAngle",size);
+        Asst.assertEquals("VideoAngle",size,active_size);
+        clickByText("Image Size");
+        if (!hasObjectSelected(size)){
+            Asst.fail(size+" not selected");
+        }
+        gDevice.pressBack();
         gDevice.pressBack();
     }
 
