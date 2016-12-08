@@ -12,6 +12,9 @@ import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
+
+import com.squareup.spoon.Spoon;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.logging.Logger;
 import ckt.base.VP2;
+import iris4G.page.Iris4GPage;
 
 /**
  * Created by elon on 2016/11/21.
@@ -457,5 +461,13 @@ public class Iris4GAction extends VP2 {
             logger.info(NotFindScrollFindObject + text);
         }
         return isFind;
+    }
+    public static void clickLiveAndSave() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Live&Save");
+        CameraAction.openCompoundButton("Live&Save");
+        Spoon.screenshot("live_save","liveSave");
+        gDevice.pressBack();
     }
 }

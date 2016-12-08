@@ -9,8 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.logging.Logger;
 
@@ -18,10 +16,7 @@ import ckt.base.VP2;
 import cn.page.Constant;
 import iris4G.action.AccountAction;
 import iris4G.action.CameraAction;
-import iris4G.action.FileManagerAction;
 import iris4G.action.Iris4GAction;
-import iris4G.action.SettingAction;
-import iris4G.action.VideoNode;
 import iris4G.page.Iris4GPage;
 
 /**
