@@ -2,6 +2,7 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.KeyEvent;
 
 import org.hamcrest.Asst;
 import org.junit.Before;
@@ -267,6 +268,62 @@ public class LapseCase extends VP2 {
     @Test
     public void testTLap10s108030Medium() throws Exception {
         Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[3],2);
+    }
+    @Test
+    public void testOnOffScreen() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[5]);
+        HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
+        Iris4GAction.cameraKey();
+        waitTime(1);
+        for (int i = 0; i <= 19; i++){
+            waitTime(1);
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);//按电源键20次
+        }
+        waitTime(10);
+        Iris4GAction.cameraKey();
+        waitTime(3);
+        HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
+        HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
+        if (resultHashSet.size() == 1) {
+            String videoPath = resultHashSet.iterator().next();
+            logger.info("new file:" + videoPath);
+            String videoName = new File(videoPath).getName();
+            VideoNode activeNode = Iris4GAction.VideoInfo(videoPath);
+            FileManagerAction.playVideoByFileManager(videoName);
+            if (activeNode.getDuration() <30) {
+                Asst.fail("max duration is 30 seconds");
+            }else {
+                logger.info("this_case_is_pass");
+            }
+        } else {
+            Asst.fail("Lapse_Video_Not_Exist");
+        }
+        gDevice.pressBack();
+    }
+
+    @Test
+    public void testLapseOver2m() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[5]);
+        waitTime(5);
+
+        HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
+        Iris4GAction.cameraKey();
+        waitTime(128);
+        Iris4GAction.cameraKey();
+        waitTime(2);
+        HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
+        HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
+
+        if (resultHashSet.size()==1) {
+            String videopath = resultHashSet.iterator().next();
+            logger.info("new file:"+videopath);
+            VideoNode videoNode = Iris4GAction.VideoInfo(videopath);
+            if(videoNode.getDuration()<120){
+                Asst.fail("max duration is 120 seconds");
+            }
+        }else {
+            Asst.fail("Video-Count=1:Error");
+        }
     }
     /*
 testTLap2s72030AllAngle()
