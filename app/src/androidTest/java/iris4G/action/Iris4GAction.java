@@ -7,6 +7,7 @@ import android.os.RemoteException;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Configurator;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Logger;
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
@@ -469,5 +471,22 @@ public class Iris4GAction extends VP2 {
         CameraAction.openCompoundButton("Live&Save");
         Spoon.screenshot("live_save","liveSave");
         gDevice.pressBack();
+    }
+    //如Video quality -  右边的值
+    public static String getRightValue(String text) throws UiObjectNotFoundException {
+        String value="";
+        UiObject2 scrollView = getObject2ByClass(android.widget.ScrollView.class);
+        List<UiObject2> relativeLayouts=scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        for (UiObject2 relativeLayout:relativeLayouts) {
+            List<UiObject2> texts = relativeLayout.findObjects(By.clazz(android.widget.TextView.class));
+            if (texts.size()==2){
+                String key = texts.get(0).getText();
+                if (text.equals(key)){
+                    value = texts.get(1).getText();
+                    break;
+                }
+            }
+        }
+        return value;
     }
 }

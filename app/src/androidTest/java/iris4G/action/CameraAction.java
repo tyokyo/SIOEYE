@@ -272,6 +272,26 @@ public class CameraAction extends VP2 {
         Spoon.screenshot("configVideoAngle",angle);
         gDevice.pressBack();
     }
+    //某一个选项处于选中状态-  如 视频角度 - Wide
+    public static boolean hasObjectSelected(String text) throws Exception {
+        Iris4GAction.ScrollViewByText(text);
+        UiObject2 textObject = getUiObject2ByText(text);
+        return textObject.getParent().hasObject(By.clazz(android.widget.ImageView.class));
+    }
+    public static void checkVideoAngle(String angle) throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Video Angle");
+        String active_angle = Iris4GAction.getRightValue("Video Angle");
+        Spoon.screenshot("currentVideoAngle",angle);
+        Asst.assertEquals("VideoAngle",angle,active_angle);
+        clickByText("Video Angle");
+        if (!hasObjectSelected(angle)){
+            Asst.fail(angle+" not selected");
+        }
+        gDevice.pressBack();
+        gDevice.pressBack();
+    }
 
     public static void configVideoAngle(int index, String angle) throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[index]);
