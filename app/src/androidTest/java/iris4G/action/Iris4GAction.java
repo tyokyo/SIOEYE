@@ -45,10 +45,10 @@ public class Iris4GAction extends VP2 {
                     "am force-stop com.mediatek.filemanager");
             waitTime(5);
             String name = gDevice.getCurrentPackageName();
-            logger.info("当前package:" + name);
-            logger.info("关闭filemanager-Success");
+            logger.info("current package:" + name);
+            logger.info("stop filemanager-Success");
         } catch (IOException e) {
-            logger.info("关闭filemanager-Fail");
+            logger.info("stop filemanager-Fail");
         }
     }
 
