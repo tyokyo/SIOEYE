@@ -42,7 +42,8 @@ public class Iris4GPage {
     public static String[] imsge_size ={
             "4M(16:9)",
             "3M(4:3)",
-            "2M(16:9)"};
+            "2M(16:9)",
+            "8M((4:3))"};
     public static String[] nav_menu ={
             "Live Stream",
             "Video",

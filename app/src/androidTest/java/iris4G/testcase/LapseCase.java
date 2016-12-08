@@ -33,6 +33,7 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class LapseCase extends VP2 {
+    private String navConfig_Lapse=Iris4GPage.nav_menu[5];
     Logger logger = Logger.getLogger(LapseCase.class.getName());
     @Before
     public void setup() throws Exception {
@@ -47,10 +48,10 @@ public class LapseCase extends VP2 {
         String angle = Iris4GPage.video_Angle[angleIndex];
         logger.info("start to test angle-" + angle);
         Iris4GAction.initIris4G();
-        CameraAction.configVideoQuality(quality);
-        CameraAction.configVideoAngle(angleIndex);
+        CameraAction.configVideoQuality(navConfig_Lapse,quality);
+        CameraAction.configVideoAngle(navConfig_Lapse,angleIndex);
         //CameraAction.configTimeLapse(Iris4GPage.lapse_time[0]);
-        CameraAction.configTimeLapse(lapse_time);
+        CameraAction.configTimeLapse(navConfig_Lapse,lapse_time);
 
         //更改成功，相机左上角显示2s/5s/10s
         Asst.assertEquals(lapse_time,lapse_time,getTex(Iris4GPage.camera_mode_label).trim());

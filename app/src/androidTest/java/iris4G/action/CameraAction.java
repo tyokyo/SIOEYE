@@ -173,8 +173,9 @@ public class CameraAction extends VP2 {
      * TimeLapse设置
      * "2 3 5 10";
      */
-    public static void configTimeLapse(String timeLapse) throws Exception {
-        CameraAction.navConfig(Iris4GPage.nav_menu[5]);
+    public static void configTimeLapse(String navConfig,String timeLapse) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[5]);
+        CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
         clickByText("Time Lapse");
         Iris4GAction.ScrollViewByText(timeLapse);
@@ -204,8 +205,9 @@ public class CameraAction extends VP2 {
      * "720@60FPS",
      * "1080@30FPS"};
      */
-    public static void configVideoQuality(String quality) throws Exception {
-        CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+    public static void configVideoQuality(String navConfig,String quality) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+        CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
         clickByText("Video Quality");
         Iris4GAction.ScrollViewByText(quality);
@@ -247,23 +249,25 @@ public class CameraAction extends VP2 {
      * 连拍数设置
      * "10P","20P","30P;
      */
-    public static void configBurst(String burst) throws Exception {
-        CameraAction.navConfig(Iris4GPage.nav_menu[3]);
+    public static void configBurst(String navConfig,String burst) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[3]);
+        CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
         clickByText("Burst Rate");
         clickByText(burst);
         logger.info("Burst Rate set to :" + burst);
-        gDevice.pressBack();
-        waitTime(1);
         Spoon.screenshot("configBurst",burst);
+        waitTime(1);
+        gDevice.pressBack();
     }
 
     /**
      * Angle设置
      * {"Super Wide","Wide","Medium"};
      */
-    public static void configVideoAngle(String angle) throws Exception {
-        CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+    public static void configVideoAngle(String navConfig,String angle) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+        CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Video Angle");
         clickByText("Video Angle");
@@ -278,8 +282,9 @@ public class CameraAction extends VP2 {
         UiObject2 textObject = getUiObject2ByText(text);
         return textObject.getParent().hasObject(By.clazz(android.widget.ImageView.class));
     }
-    public static void checkVideoAngle(String angle) throws Exception {
-        CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+    public static void checkVideoAngle(String navConfig,String angle) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+        CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Video Angle");
         String active_angle = Iris4GAction.getRightValue("Video Angle");
@@ -304,7 +309,8 @@ public class CameraAction extends VP2 {
         gDevice.pressBack();
     }
 
-    public static void configVideoAngle(int angle) throws Exception {
+    public static void configVideoAngle(String navConfig,int angle) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
         CameraAction.navConfig(Iris4GPage.nav_menu[1]);
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Video Angle");
@@ -322,16 +328,17 @@ public class CameraAction extends VP2 {
      * "3M(4:3)",
      * "2M(16:9)"};
      */
-    public static void configImageSize(String size) throws Exception {
-        CameraAction.navConfig(Iris4GPage.nav_menu[2]);
+    public static void configImageSize(String block,String size) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[2]);
+        CameraAction.navConfig(block);
         CameraAction.cameraSetting();
         clickByText("Image Size");
         Iris4GAction.ScrollViewByText(size);
         clickByText(size);
         logger.info("Image Size set to :" + size);
-        gDevice.pressBack();
-        waitTime(1);
         Spoon.screenshot("configImageSize",size);
+        waitTime(1);
+        gDevice.pressBack();
     }
 
     /**

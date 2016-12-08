@@ -24,6 +24,7 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class CaptureCase extends VP2{
+    private String navConfig_Capture=Iris4GPage.nav_menu[2];
     Logger logger = Logger.getLogger(CaptureCase.class.getName());
     @Before
     public void setup() throws Exception {
@@ -31,7 +32,7 @@ public class CaptureCase extends VP2{
     }
     private void  Photo(String imageSize,double expectWH) throws Exception {
         //CameraAction.configImageSize("4M(16:9)");
-        CameraAction.configImageSize(imageSize);
+        CameraAction.configImageSize(navConfig_Capture,imageSize);
 
         String screen_size = imageSize.substring(0,2);
         //更改成功，相机左上角显示?M

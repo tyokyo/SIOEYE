@@ -29,6 +29,7 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class VideoCase extends VP2{
+    private String navConfig_Video=Iris4GPage.nav_menu[1];
     Logger logger = Logger.getLogger(VideoCase.class.getName());
     @Before
     public void setup() throws Exception {
@@ -37,8 +38,8 @@ public class VideoCase extends VP2{
     private void Video(String quality,String angle) throws Exception {
         //String quality = Iris4GPage.video_quality[0];
         //String angle =Iris4GPage.video_Angle[0];
-        CameraAction.configVideoQuality(quality);
-        CameraAction.configVideoAngle(angle);
+        CameraAction.configVideoQuality(navConfig_Video,quality);
+        CameraAction.configVideoAngle(navConfig_Video,angle);
         CameraAction.cameraVideo();
 
         //更改成功，取景界面左上角显示修改后的视频质量

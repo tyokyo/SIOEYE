@@ -26,16 +26,17 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class BurstCase extends VP2{
-    Logger logger = Logger.getLogger(BurstCase.class.getName());
+    private String navConfig_Burst=Iris4GPage.nav_menu[3];
+    private static Logger logger = Logger.getLogger(BurstCase.class.getName());
     @Before
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
     private void Burst(String imageSize,String burstSetting,double expectWH) throws Exception {
         //"4M(16:9)",
-        CameraAction.configImageSize(imageSize);
+        CameraAction.configImageSize(navConfig_Burst,imageSize);
         //"10P",
-        CameraAction.configBurst(burstSetting);
+        CameraAction.configBurst(navConfig_Burst,burstSetting);
 
         //更改成功，相机左上角显示4M
         Asst.assertEquals(imageSize,imageSize.substring(0,2),getTex(Iris4GPage.info).trim());
@@ -69,8 +70,8 @@ public class BurstCase extends VP2{
             }
         }
     }
-    /* burst  - " "4M(16:9)","3M(4:3)","2M(16:9)";
-       image  -   "480@30FPS","480@60FPS","480@120FPS",
+    /* burst  - " "4M(16:9)","3M(4:3)","2M(16:9),"8M(16:9)";
+       video quality  -   "480@30FPS","480@60FPS","480@120FPS",
                   "720@30FPS","720@60FPS","1080@30FPS";
         * */
     @Test

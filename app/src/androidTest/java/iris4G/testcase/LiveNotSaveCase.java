@@ -30,6 +30,7 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class LiveNotSaveCase extends VP2 {
+    private String navConfig_LiveStream=Iris4GPage.nav_menu[0];
     private static Logger logger = Logger.getLogger(LiveNotSaveCase.class.getName());
 
     @BeforeClass
@@ -53,9 +54,9 @@ public class LiveNotSaveCase extends VP2 {
     private void Live(String quality, String angle) throws Exception {
         //String quality = Iris4GPage.video_quality[0];
         //String angle =Iris4GPage.video_Angle[0];
-        CameraAction.configVideoQuality(quality);
-        CameraAction.configVideoAngle(angle);
-        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.configVideoQuality(navConfig_LiveStream,quality);
+        CameraAction.configVideoAngle(navConfig_LiveStream,angle);
+        CameraAction.navConfig(navConfig_LiveStream);
         waitTime(2);
         //验证设置的显示,当前处于直播模式，左顶部显示直播图标
         Asst.assertEquals("Live", true, id_exists(Iris4GPage.camera_mode_label_live));

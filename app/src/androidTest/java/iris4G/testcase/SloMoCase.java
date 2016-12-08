@@ -30,6 +30,7 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class SloMoCase extends VP2 {
+    private String navConfig_Slo_Mo=Iris4GPage.nav_menu[4];
     Logger logger = Logger.getLogger(SloMoCase.class.getName());
 
     @Before
@@ -41,8 +42,8 @@ public class SloMoCase extends VP2 {
         boolean result = true;
         //String angle = Iris4GPage.video_Angle[0];
         Iris4GAction.startCamera();
-        CameraAction.configVideoAngle(angle);
-        CameraAction.navConfig(Iris4GPage.nav_menu[4]);
+        CameraAction.configVideoAngle(navConfig_Slo_Mo,angle);
+        CameraAction.navConfig(navConfig_Slo_Mo);
 
         //验证视频质量显示
         Asst.assertEquals("480@120FPS","480@120",getTex(Iris4GPage.info).trim());

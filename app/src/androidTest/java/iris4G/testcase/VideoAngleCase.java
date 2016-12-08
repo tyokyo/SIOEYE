@@ -25,30 +25,37 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class VideoAngleCase extends VP2{
+    private String navConfig_LiveStream=Iris4GPage.nav_menu[0];
+    private String navConfig_Video=Iris4GPage.nav_menu[1];
+    private String navConfig_Capture=Iris4GPage.nav_menu[2];
+    private String navConfig_Burst=Iris4GPage.nav_menu[3];
+    private String navConfig_Slo_Mo=Iris4GPage.nav_menu[4];
+    private String navConfig_Lapse=Iris4GPage.nav_menu[5];
+
     Logger logger = Logger.getLogger(LiveUpDown.class.getName());
     @Before
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
     @Test
-    public void testSuperWide() throws Exception {
-        CameraAction.configVideoAngle(Iris4GPage.video_Angle[0]);
+    public void testLiveStreamSuperWide() throws Exception {
+        CameraAction.configVideoAngle(navConfig_LiveStream,Iris4GPage.video_Angle[0]);
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
-        CameraAction.checkVideoAngle(Iris4GPage.video_Angle[0]);
+        CameraAction.checkVideoAngle(navConfig_LiveStream,Iris4GPage.video_Angle[0]);
     }
     @Test
-    public void testWide() throws Exception {
-        CameraAction.configVideoAngle(Iris4GPage.video_Angle[1]);
+    public void testLiveStreamWide() throws Exception {
+        CameraAction.configVideoAngle(navConfig_LiveStream,Iris4GPage.video_Angle[1]);
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
-        CameraAction.checkVideoAngle(Iris4GPage.video_Angle[1]);
+        CameraAction.checkVideoAngle(navConfig_LiveStream,Iris4GPage.video_Angle[1]);
     }
     @Test
-    public void testSuperMedium() throws Exception {
-        CameraAction.configVideoAngle(Iris4GPage.video_Angle[2]);
+    public void testLiveStreamSuperMedium() throws Exception {
+        CameraAction.configVideoAngle(navConfig_LiveStream,Iris4GPage.video_Angle[2]);
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
-        CameraAction.checkVideoAngle(Iris4GPage.video_Angle[2]);
+        CameraAction.checkVideoAngle(navConfig_LiveStream,Iris4GPage.video_Angle[2]);
     }
 }
