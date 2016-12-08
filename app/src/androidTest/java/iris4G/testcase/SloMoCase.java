@@ -24,7 +24,8 @@ import iris4G.page.Iris4GPage;
 
 /**
  * @Author elon
- * @Description 慢速录像*视频角度
+ * @Description
+ * 慢速录像*视频角度
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)

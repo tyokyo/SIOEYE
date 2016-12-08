@@ -25,10 +25,9 @@ import iris4G.page.Iris4GPage;
 /**
  * @Author elon
  * @Description
- * "1.更改视频质量参数为480@120FPS
-    2.录制设置过参数的延时录像视频"
-   "1.可以成功设置为对应的参数
-    2.可以成功录制"
+   时间间隔设置为2S/5s/10s
+   开始延时录像
+   录像过程中原始视频2S对应输出视频的1S
  */
 /*所有视频质量*视频角度*延时的组合*/
 @RunWith(AndroidJUnit4.class)
