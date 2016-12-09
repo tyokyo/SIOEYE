@@ -13,6 +13,7 @@ import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 /**
  * @Author elon
@@ -28,13 +29,6 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class ImageSizeCase extends VP2{
-    private String navConfig_LiveStream=Iris4GPage.nav_menu[0];
-    private String navConfig_Video=Iris4GPage.nav_menu[1];
-    private String navConfig_Capture=Iris4GPage.nav_menu[2];
-    private String navConfig_Burst=Iris4GPage.nav_menu[3];
-    private String navConfig_Slo_Mo=Iris4GPage.nav_menu[4];
-    private String navConfig_Lapse=Iris4GPage.nav_menu[5];
-
     Logger logger = Logger.getLogger(ImageSizeCase.class.getName());
     @Before
     public void setup() throws Exception {
@@ -43,114 +37,114 @@ public class ImageSizeCase extends VP2{
     @Test
     public void testCapture4M() throws Exception {
         //Capture - 修改ImageSize 4M
-        CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[0]);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize4M);
         //Lapse - 修改ImageSize 3M
-        CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[1]);
+        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize3M);
         //切换到Burst
-        CameraAction.navConfig(navConfig_Burst);
+        CameraAction.navConfig(NavPage.navConfig_Burst);
         //切换到Lapse
-        CameraAction.navConfig(navConfig_Lapse);
+        CameraAction.navConfig(NavPage.navConfig_Lapse);
         //切换到Capture
-        CameraAction.navConfig(navConfig_Capture);
+        CameraAction.navConfig(NavPage.navConfig_Capture);
         //切换到LiveStream
-        CameraAction.navConfig(navConfig_LiveStream);
+        CameraAction.navConfig(NavPage.navConfig_LiveStream);
         //切换到Slo_Mo
-        CameraAction.navConfig(navConfig_Slo_Mo);
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
         //切换到Video
-        CameraAction.navConfig(navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Video);
 
         //重启camera
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
 
         //验证Capture - 修改ImageSize 4M
-        CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[0]);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize4M);
         //验证Lapse - 修改ImageSize 3M
-        CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[1]);
+        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize3M);
     }
     @Test
     public void testCapture3M() throws Exception {
         //Capture - 修改ImageSize 3M
-        CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[1]);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize3M);
         //Lapse - 修改ImageSize 4M
-        CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[2]);
+        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
         //切换到Burst
-        CameraAction.navConfig(navConfig_Burst);
+        CameraAction.navConfig(NavPage.navConfig_Burst);
         //切换到Lapse
-        CameraAction.navConfig(navConfig_Lapse);
+        CameraAction.navConfig(NavPage.navConfig_Lapse);
         //切换到Capture
-        CameraAction.navConfig(navConfig_Capture);
+        CameraAction.navConfig(NavPage.navConfig_Capture);
         //切换到LiveStream
-        CameraAction.navConfig(navConfig_LiveStream);
+        CameraAction.navConfig(NavPage.navConfig_LiveStream);
         //切换到Slo_Mo
-        CameraAction.navConfig(navConfig_Slo_Mo);
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
         //切换到Video
-        CameraAction.navConfig(navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Video);
 
         //重启camera
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
 
         //验证Capture - 修改ImageSize 3M
-        CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[1]);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize3M);
         //验证Lapse - 修改ImageSize 4M
-        CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[2]);
+        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
     }
     @Test
     public void testCapture2M() throws Exception {
         //Capture - 修改ImageSize 2M
-        CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[2]);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize2M);
         //Lapse - 修改ImageSize 8M
-        CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[3]);
+        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize8M);
         //切换到Burst
-        CameraAction.navConfig(navConfig_Burst);
+        CameraAction.navConfig(NavPage.navConfig_Burst);
         //切换到Lapse
-        CameraAction.navConfig(navConfig_Lapse);
+        CameraAction.navConfig(NavPage.navConfig_Lapse);
         //切换到Capture
-        CameraAction.navConfig(navConfig_Capture);
+        CameraAction.navConfig(NavPage.navConfig_Capture);
         //切换到LiveStream
-        CameraAction.navConfig(navConfig_LiveStream);
+        CameraAction.navConfig(NavPage.navConfig_LiveStream);
         //切换到Slo_Mo
-        CameraAction.navConfig(navConfig_Slo_Mo);
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
         //切换到Video
-        CameraAction.navConfig(navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Video);
 
         //重启camera
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
 
         //验证Capture - 修改ImageSize 2M
-        CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[2]);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize2M);
         //验证Lapse - 修改ImageSize 8M
-        CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[3]);
+        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize8M);
     }
 
     @Test
     public void testCapture8M() throws Exception {
         //Capture - 修改ImageSize 8M
-        CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[3]);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize8M);
         //Lapse - 修改ImageSize 4M
-        CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[0]);
+        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
         //切换到Burst
-        CameraAction.navConfig(navConfig_Burst);
+        CameraAction.navConfig(NavPage.navConfig_Burst);
         //切换到Lapse
-        CameraAction.navConfig(navConfig_Lapse);
+        CameraAction.navConfig(NavPage.navConfig_Lapse);
         //切换到Capture
-        CameraAction.navConfig(navConfig_Capture);
+        CameraAction.navConfig(NavPage.navConfig_Capture);
         //切换到LiveStream
-        CameraAction.navConfig(navConfig_LiveStream);
+        CameraAction.navConfig(NavPage.navConfig_LiveStream);
         //切换到Slo_Mo
-        CameraAction.navConfig(navConfig_Slo_Mo);
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
         //切换到Video
-        CameraAction.navConfig(navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Video);
 
         //重启camera
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
 
         //验证Capture - 修改ImageSize 8M
-        CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[3]);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize8M);
         //验证Lapse - 修改ImageSize 4M
-        CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[0]);
+        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
     }
 }
