@@ -70,9 +70,9 @@ public class ImageSizeCase extends VP2{
     }
     @Test
     public void testCapture3M() throws Exception {
-        //Capture - 修改ImageSize 4M
+        //Capture - 修改ImageSize 3M
         CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[1]);
-        //Lapse - 修改ImageSize 3M
+        //Lapse - 修改ImageSize 4M
         CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[2]);
         //切换到Burst
         CameraAction.navConfig(navConfig_Burst);
@@ -91,16 +91,16 @@ public class ImageSizeCase extends VP2{
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
 
-        //验证Capture - 修改ImageSize 4M
+        //验证Capture - 修改ImageSize 3M
         CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[1]);
-        //验证Lapse - 修改ImageSize 3M
+        //验证Lapse - 修改ImageSize 4M
         CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[2]);
     }
     @Test
     public void testCapture2M() throws Exception {
-        //Capture - 修改ImageSize 4M
+        //Capture - 修改ImageSize 2M
         CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[2]);
-        //Lapse - 修改ImageSize 3M
+        //Lapse - 修改ImageSize 8M
         CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[3]);
         //切换到Burst
         CameraAction.navConfig(navConfig_Burst);
@@ -119,17 +119,17 @@ public class ImageSizeCase extends VP2{
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
 
-        //验证Capture - 修改ImageSize 4M
+        //验证Capture - 修改ImageSize 2M
         CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[2]);
-        //验证Lapse - 修改ImageSize 3M
+        //验证Lapse - 修改ImageSize 8M
         CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[3]);
     }
 
     @Test
     public void testCapture8M() throws Exception {
-        //Capture - 修改ImageSize 4M
+        //Capture - 修改ImageSize 8M
         CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[3]);
-        //Lapse - 修改ImageSize 3M
+        //Lapse - 修改ImageSize 4M
         CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[0]);
         //切换到Burst
         CameraAction.navConfig(navConfig_Burst);
@@ -148,9 +148,9 @@ public class ImageSizeCase extends VP2{
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
 
-        //验证Capture - 修改ImageSize 4M
+        //验证Capture - 修改ImageSize 8M
         CameraAction.configImageSize(navConfig_Capture,Iris4GPage.imsge_size[3]);
-        //验证Lapse - 修改ImageSize 3M
+        //验证Lapse - 修改ImageSize 4M
         CameraAction.configImageSize(navConfig_Burst,Iris4GPage.imsge_size[0]);
     }
 }
