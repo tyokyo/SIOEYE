@@ -177,6 +177,7 @@ public class CameraAction extends VP2 {
         //CameraAction.navConfig(Iris4GPage.nav_menu[5]);
         CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Time Lapse");
         clickByText("Time Lapse");
         Iris4GAction.ScrollViewByText(timeLapse);
         clickByText(timeLapse);
@@ -184,7 +185,22 @@ public class CameraAction extends VP2 {
         Spoon.screenshot("configTimeLapse",timeLapse);
         gDevice.pressBack();
     }
-
+    public static void checkTimeLapse(String navConfig,String timeLapse) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[5]);
+        CameraAction.navConfig(navConfig);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Time Lapse");
+        String active_timeLapse = Iris4GAction.getRightValue("Time Lapse");
+        Spoon.screenshot("currentTimeLapse",active_timeLapse);
+        Asst.assertEquals("TimeLapse",timeLapse,active_timeLapse);
+        clickByText("Time Lapse");
+        Iris4GAction.ScrollViewByText(timeLapse);
+        //是否处于选中状态
+        if (!hasObjectSelected(timeLapse)){
+            Asst.fail(timeLapse+" not selected");
+        }
+        gDevice.pressBack();
+    }
     public static void configTimeLapse(int index, String timeLapse) throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[index]);
         CameraAction.cameraSetting();
@@ -224,12 +240,11 @@ public class CameraAction extends VP2 {
         Spoon.screenshot("currentVideoQuality",quality);
         Asst.assertEquals("VideoQuality",quality,active_quality);
         clickByText("Video Quality");
+        //是否处于选中状态
         if (!hasObjectSelected(quality)){
             Asst.fail(quality+" not selected");
         }
         gDevice.pressBack();
-        gDevice.pressBack();
-
     }
 
     //给定的视频参数是否支持
@@ -360,15 +375,15 @@ public class CameraAction extends VP2 {
         //CameraAction.navConfig(Iris4GPage.nav_menu[2]);
         CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
-        clickByText("Image Size");
+
         String active_size = Iris4GAction.getRightValue("Image Size");
         Spoon.screenshot("currentVideoAngle",size);
-        Asst.assertEquals("VideoAngle",size,active_size);
+        Asst.assertEquals("Image Size",size,active_size);
+
         clickByText("Image Size");
         if (!hasObjectSelected(size)){
             Asst.fail(size+" not selected");
         }
-        gDevice.pressBack();
         gDevice.pressBack();
     }
 
