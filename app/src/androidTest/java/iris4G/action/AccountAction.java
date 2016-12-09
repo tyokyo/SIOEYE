@@ -5,6 +5,7 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import com.squareup.spoon.Spoon;
 
 import ckt.base.VP2;
+import cn.page.Constant;
 import iris4G.page.Iris4GPage;
 
 public class AccountAction extends VP2 {
@@ -35,11 +36,31 @@ public class AccountAction extends VP2 {
     public static void login_btn_login() throws Exception {
         clickById(Iris4GPage.login_btn_login);
     }
-
+    public static void logOut() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Account");
+        clickByText("Account");
+        if (id_exists(Iris4GPage.logout_btn)){
+            logout_btn();
+        }
+        gDevice.pressBack();
+    }
     public static void loginAccount(String username, String password) throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Account");
+        clickByText("Account");
         login_id_input(username);
         login_password_input(password);
         login_btn_login();
+        boolean login = AccountAction.isLoginSuccess();
+        if (login) {
+            logger.info("account login success");
+        }else {
+            logger.info("account login fail");
+        }
+        gDevice.pressBack();
     }
 
     public static boolean isLoginSuccess() throws UiObjectNotFoundException {
