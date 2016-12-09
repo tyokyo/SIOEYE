@@ -368,7 +368,6 @@ public class CameraAction extends VP2 {
         clickByText(size);
         logger.info("Image Size set to :" + size);
         Spoon.screenshot("configImageSize",size);
-        waitTime(1);
         gDevice.pressBack();
     }
     public static void checkImageSize(String navConfig,String size) throws Exception {
@@ -377,7 +376,7 @@ public class CameraAction extends VP2 {
         CameraAction.cameraSetting();
 
         String active_size = Iris4GAction.getRightValue("Image Size");
-        Spoon.screenshot("currentVideoAngle",size);
+        Spoon.screenshot("checkVideoAngle",size);
         Asst.assertEquals("Image Size",size,active_size);
 
         clickByText("Image Size");
@@ -401,7 +400,7 @@ public class CameraAction extends VP2 {
         waitTime(1);
         Iris4GAction.ScrollViewByText(text);
         clickByText(text);
-        waitTime(2);
+        //waitTime(2);
         //Spoon.screenshot("navConfig",text);
     }
     //720@60FPS - return 720@60
