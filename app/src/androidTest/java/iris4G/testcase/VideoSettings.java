@@ -16,6 +16,7 @@ import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 /**
  * @Author yun.yang
@@ -23,12 +24,6 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class VideoSettings extends VP2{
-    private String navConfig_LiveStream=Iris4GPage.nav_menu[0];
-    private String navConfig_Video=Iris4GPage.nav_menu[1];
-    private String navConfig_Capture=Iris4GPage.nav_menu[2];
-    private String navConfig_Burst=Iris4GPage.nav_menu[3];
-    private String navConfig_Slo_Mo=Iris4GPage.nav_menu[4];
-    private String navConfig_Lapse=Iris4GPage.nav_menu[5];
     private static Logger logger = Logger.getLogger(VideoSettings.class.getName());
     @Before
     public void setup() throws Exception {
@@ -44,37 +39,37 @@ public class VideoSettings extends VP2{
     @Test
     public void testValueSettings() throws Exception {
         //video_quality 720@60FPS
-        String quality = Iris4GPage.video_quality[2];
+        String quality = NavPage.quality720_60;
         //video_Angle Wide
-        String angle = Iris4GPage.video_Angle[1];
+        String angle = NavPage.angleWide;
         //lapse_time 2s
-        String lapse_time = Iris4GPage.lapse_time[0];
+        String lapse_time = NavPage.lapseTime_2s;
         //imsge_size 4M(16:9)
-        String image_size = Iris4GPage.imsge_size[0];
+        String image_size = NavPage.imageSize4M;
 
         //capture设置为4M(16:9)
-        CameraAction.configImageSize(navConfig_Capture,image_size);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,image_size);
         //延时设置为2s
-        CameraAction.configTimeLapse(navConfig_Lapse,lapse_time);
+        CameraAction.configTimeLapse(NavPage.navConfig_Lapse,lapse_time);
         //视频质量设置为720@60FPS
-        CameraAction.configVideoQuality(navConfig_Video,quality);
+        CameraAction.configVideoQuality(NavPage.navConfig_Video,quality);
         //视频角度设置Wide
-        CameraAction.configVideoAngle(navConfig_Video,angle);
+        CameraAction.configVideoAngle(NavPage.navConfig_Video,angle);
 
         //切换到延时录像再切换到普通录像
-        CameraAction.navConfig(navConfig_LiveStream);
-        CameraAction.navConfig(navConfig_Video);
-        CameraAction.navConfig(navConfig_Burst);
-        CameraAction.navConfig(navConfig_Capture);
-        CameraAction.navConfig(navConfig_Slo_Mo);
+        CameraAction.navConfig(NavPage.navConfig_LiveStream);
+        CameraAction.navConfig(NavPage.navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Burst);
+        CameraAction.navConfig(NavPage.navConfig_Capture);
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
 
         //验证参数设置-capture
-        CameraAction.checkImageSize(navConfig_Capture,image_size);
+        CameraAction.checkImageSize(NavPage.navConfig_Capture,image_size);
         //验证参数设置-video quality
-        CameraAction.checkVideoQuality(navConfig_Video,quality);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Video,quality);
         //验证参数设置-video angle
-        CameraAction.checkVideoAngle(navConfig_Video,angle);
+        CameraAction.checkVideoAngle(NavPage.navConfig_Video,angle);
         //验证参数设置-lapse
-        CameraAction.checkTimeLapse(navConfig_Lapse,lapse_time);
+        CameraAction.checkTimeLapse(NavPage.navConfig_Lapse,lapse_time);
     }
 }
