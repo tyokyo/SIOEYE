@@ -225,5 +225,40 @@ public class VideoAngleCase extends VP2{
         Iris4GAction.startCamera();
         CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleMedium);
     }
-
+    @Test
+    public void testSetVideoAngleSuperWide() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.angleSuperWide);
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        Iris4GAction.cameraKey();
+        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.angleSuperWide);
+    }
+    @Test
+    public void testSetVideoAngleWide() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        Iris4GAction.cameraKey();
+        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
+    }
+    @Test
+    public void testSetVideoAngleMedium() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.angleMedium);
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        Iris4GAction.cameraKey();
+        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.angleMedium);
+    }
+    @Test
+    public void testChangeOtherSettingReturnToVideo() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
+        CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
+        CameraAction.cameraSetting();
+        //Change Auto
+        CameraAction.navConfig(NavPage.navConfig_Lapse);
+        CameraAction.navConfig(NavPage.navConfig_Video);
+        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
+        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
+    }
 }
+
