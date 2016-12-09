@@ -31,6 +31,7 @@ import iris4G.page.Iris4GPage;
 @SdkSuppress(minSdkVersion = 16)
 public class LiveNotSaveCase extends VP2 {
     private String navConfig_LiveStream=Iris4GPage.nav_menu[0];
+    private String navConfig_Video=Iris4GPage.nav_menu[1];
     private static Logger logger = Logger.getLogger(LiveNotSaveCase.class.getName());
 
     @BeforeClass
@@ -54,7 +55,7 @@ public class LiveNotSaveCase extends VP2 {
     private void Live(String quality, String angle) throws Exception {
         //String quality = Iris4GPage.video_quality[0];
         //String angle =Iris4GPage.video_Angle[0];
-        CameraAction.configVideoQuality(navConfig_LiveStream,quality);
+        CameraAction.configVideoQuality(navConfig_Video,quality);
         CameraAction.configVideoAngle(navConfig_LiveStream,angle);
         CameraAction.navConfig(navConfig_LiveStream);
         waitTime(2);
