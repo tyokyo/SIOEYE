@@ -2,17 +2,21 @@ package usa.testcase.me;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiObjectNotFoundException;
+
+import com.squareup.spoon.Spoon;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import usa.action.AccountAction;
 import usa.page.Account;
 import usa.page.App;
-import android.support.test.uiautomator.UiObjectNotFoundException;
-import com.squareup.spoon.Spoon;
-import org.junit.Assert;
 
 
 /**
@@ -173,9 +177,9 @@ public class LoginCase extends VP2 {
         AccountAction.navToLogin();
         clearText(Account.LOGIN_ET_INPUT_USERNAME);
         clearText(Account.LOGIN_ET_INPUT_PASSWORD);
-        String usename130=AccountAction.getRandomEmail(120,130);
+        String useName130=AccountAction.getRandomEmail(120,130);
         String password130=AccountAction.getStringRandom(130);
-        AccountAction.justLogIn(usename130,password130);
+        AccountAction.justLogIn(useName130,password130);
         if (!getUiObjectByText("Login").exists()) {
             Assert.fail("错误账号点击登陆后页面变化");}
     }
