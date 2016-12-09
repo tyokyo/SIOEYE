@@ -44,7 +44,7 @@ public class VideoCase extends VP2{
 
         //更改成功，取景界面左上角显示修改后的视频质量
         String screen_display=CameraAction.replaceFps(quality);
-        Asst.assertEquals(quality+screen_display,getTex(Iris4GPage.info));
+        Asst.assertEquals(quality,screen_display,getTex(Iris4GPage.info));
 
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         Iris4GAction.cameraKey();
