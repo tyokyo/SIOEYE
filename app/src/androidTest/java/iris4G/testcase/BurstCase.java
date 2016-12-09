@@ -17,6 +17,7 @@ import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 /**
  * @Author elon
@@ -26,7 +27,6 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class BurstCase extends VP2{
-    private String navConfig_Burst=Iris4GPage.nav_menu[3];
     private static Logger logger = Logger.getLogger(BurstCase.class.getName());
     @Before
     public void setup() throws Exception {
@@ -34,9 +34,9 @@ public class BurstCase extends VP2{
     }
     private void Burst(String imageSize,String burstSetting,double expectWH) throws Exception {
         //"4M(16:9)",
-        CameraAction.configImageSize(navConfig_Burst,imageSize);
+        CameraAction.configImageSize(NavPage.navConfig_Burst,imageSize);
         //"10P",
-        CameraAction.configBurst(navConfig_Burst,burstSetting);
+        CameraAction.configBurst(NavPage.navConfig_Burst,burstSetting);
 
         //更改成功，相机左上角显示4M
         Asst.assertEquals(imageSize,imageSize.substring(0,2),getTex(Iris4GPage.info).trim());
@@ -76,38 +76,51 @@ public class BurstCase extends VP2{
         * */
     @Test
     public void testBurst10P4M169() throws Exception {
-        Burst(Iris4GPage.imsge_size[0],Iris4GPage.burst[0],16/9);
+        Burst(NavPage.imageSize4M,NavPage.burst_10P,16/9);
     }
     @Test
     public void testBurst20P4M169() throws Exception {
-        Burst(Iris4GPage.imsge_size[0],Iris4GPage.burst[1],16/9);
+        Burst(NavPage.imageSize4M,NavPage.burst_20P,16/9);
     }
     @Test
     public void testBurst30P4M169() throws Exception {
-        Burst(Iris4GPage.imsge_size[0],Iris4GPage.burst[2],16/9);
+        Burst(NavPage.imageSize4M,NavPage.burst_30P,16/9);
     }
     @Test
     public void testBurst10P3M43() throws Exception {
-        Burst(Iris4GPage.imsge_size[1],Iris4GPage.burst[0],4/3);
+        Burst(NavPage.imageSize3M,NavPage.burst_10P,4/3);
     }
     @Test
     public void testBurst20P3M43() throws Exception {
-        Burst(Iris4GPage.imsge_size[1],Iris4GPage.burst[1],4/3);
+        Burst(NavPage.imageSize3M,NavPage.burst_20P,4/3);
     }
     @Test
     public void testBurst30P3M43() throws Exception {
-        Burst(Iris4GPage.imsge_size[1],Iris4GPage.burst[2],4/3);
+        Burst(NavPage.imageSize3M,NavPage.burst_30P,4/3);
     }
     @Test
     public void testBurst10P2M169() throws Exception {
-        Burst(Iris4GPage.imsge_size[2],Iris4GPage.burst[0],16/9);
+        Burst(NavPage.imageSize2M,NavPage.burst_10P,16/9);
     }
     @Test
     public void testBurst20P2M169() throws Exception {
-        Burst(Iris4GPage.imsge_size[2],Iris4GPage.burst[1],16/9);
+        Burst(NavPage.imageSize2M,NavPage.burst_20P,16/9);
     }
     @Test
     public void testBurst30P2M169() throws Exception {
-        Burst(Iris4GPage.imsge_size[2],Iris4GPage.burst[2],16/9);
+        Burst(NavPage.imageSize2M,NavPage.burst_30P,16/9);
     }
+    @Test
+    public void testBurst10P8M43() throws Exception {
+        Burst(NavPage.imageSize8M,NavPage.burst_10P,4/3);
+    }
+    @Test
+    public void testBurst20P8M43() throws Exception {
+        Burst(NavPage.imageSize8M,NavPage.burst_20P,4/3);
+    }
+    @Test
+    public void testBurst30P8M43() throws Exception {
+        Burst(NavPage.imageSize8M,NavPage.burst_30P,4/3);
+    }
+
 }

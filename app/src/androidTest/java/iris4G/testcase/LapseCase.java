@@ -21,6 +21,7 @@ import iris4G.action.FileManagerAction;
 import iris4G.action.Iris4GAction;
 import iris4G.action.VideoNode;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 /**
  * @Author elon
@@ -33,25 +34,22 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class LapseCase extends VP2 {
-    private String navConfig_Lapse=Iris4GPage.nav_menu[5];
     Logger logger = Logger.getLogger(LapseCase.class.getName());
     @Before
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
-    private void Lapse(String quality,String lapse_time,int angleIndex) throws Exception {
+    private void Lapse(String quality,String lapse_time,String angle) throws Exception {
         boolean result = true;
         //String quality = Iris4GPage.video_quality[0];
         //int angleSize = Iris4GPage.video_Angle.length;
         //for (int t = 0; t < angleSize; t++) {
-
-        String angle = Iris4GPage.video_Angle[angleIndex];
         logger.info("start to test angle-" + angle);
         Iris4GAction.initIris4G();
-        CameraAction.configVideoQuality(navConfig_Lapse,quality);
-        CameraAction.configVideoAngle(navConfig_Lapse,angleIndex);
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,quality);
+        CameraAction.configVideoAngle(NavPage.navConfig_Lapse,angle);
         //CameraAction.configTimeLapse(Iris4GPage.lapse_time[0]);
-        CameraAction.configTimeLapse(navConfig_Lapse,lapse_time);
+        CameraAction.configTimeLapse(NavPage.navConfig_Lapse,lapse_time);
 
         //更改成功，相机左上角显示2s/5s/10s
         Asst.assertEquals(lapse_time,lapse_time,getTex(Iris4GPage.camera_mode_label).trim());
@@ -119,163 +117,163 @@ public class LapseCase extends VP2 {
     /* 720@30FPS  -2s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap2s72030SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[0],0);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_2s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap2s72030Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[0],1);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_2s,NavPage.angleWide);
     }
     @Test
     public void testTLap2s72030Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[0],2);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_2s,NavPage.angleMedium);
     }
     @Test
     /* 720@30FPS  -3s - All Angle[SuperWide Wide Medium]*/
     public void testTLap3s72030SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[1],0);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_3s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap3s72030Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[1],1);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_3s,NavPage.angleWide);
     }
     @Test
     public void testTLap3s72030Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[1],2);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_3s,NavPage.angleMedium);
     }
 
     /* 720@30FPS  -5s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap5s72030SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[2],0);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_5s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap5s72030Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[2],1);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_5s,NavPage.angleWide);
     }
     @Test
     public void testTLap5s72030Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[2],2);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_5s,NavPage.angleMedium);
     }
     /* 720@30FPS  -10s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap10s72030SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[3],0);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_10s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap10s72030Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[3],1);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_10s,NavPage.angleWide);
     }
     @Test
     public void testTLap10s72030Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[0],Iris4GPage.lapse_time[3],2);
+        Lapse(NavPage.quality720_30,NavPage.lapseTime_10s,NavPage.angleMedium);
     }
 
     /* 720@60FPS  -2s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap2s72060SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[0],0);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_2s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap2s72060Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[0],1);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_2s,NavPage.angleWide);
     }
     @Test
     public void testTLap2s72060Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[0],2);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_2s,NavPage.angleMedium);
     }
     /* 720@60FPS  -3s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap3s72060SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[1],0);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_3s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap3s72060Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[1],1);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_3s,NavPage.angleWide);
     }
     @Test
     public void testTLap3s72060Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[1],2);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_3s,NavPage.angleMedium);
     }
 
     /* 720@60FPS  -5s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap5s72060SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[2],0);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_5s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap5s72060Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[2],1);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_5s,NavPage.angleWide);
     }
     @Test
     public void testTLap5s72060Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[2],2);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_5s,NavPage.angleMedium);
     }
     /* 720@60FPS  -10s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap10s72060SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[3],0);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_10s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap10s72060Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[3],1);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_10s,NavPage.angleWide);
     }
     @Test
     public void testTLap10s72060Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[1],Iris4GPage.lapse_time[3],2);
+        Lapse(NavPage.quality720_60,NavPage.lapseTime_10s,NavPage.angleMedium);
     }
 
     /* 1080@30FPS  -2s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap2s108030SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[0],0);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_2s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap2s108030Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[0],1);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_2s,NavPage.angleWide);
     }
     @Test
     public void testTLap2s108030Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[0],2);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_2s,NavPage.angleMedium);
     }
     /* 1080@30FPS  -3s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap3s108030SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[1],0);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_3s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap3s108030Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[1],1);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_3s,NavPage.angleWide);
     }
     @Test
     public void testTLap3s108030Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[1],2);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_3s,NavPage.angleMedium);
     }
 
     /* 1080@30FPS  -5s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap5s108030SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[2],0);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_5s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap5s108030Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[2],1);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_5s,NavPage.angleWide);
     }
     @Test
     public void testTLap5s108030Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[2],2);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_5s,NavPage.angleWide);
     }
     /* 1080@30FPS  -10s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap10s108030SuperWide() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[3],0);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_10s,NavPage.angleSuperWide);
     }
     @Test
     public void testTLap10s108030Wide() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[3],1);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_10s,NavPage.angleWide);
     }
     @Test
     public void testTLap10s108030Medium() throws Exception {
-        Lapse(Iris4GPage.video_quality[2],Iris4GPage.lapse_time[3],2);
+        Lapse(NavPage.quality1080_30,NavPage.lapseTime_10s,NavPage.angleMedium);
     }
     @Test
     public void testOnOffScreen() throws Exception {

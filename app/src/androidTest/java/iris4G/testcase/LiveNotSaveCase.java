@@ -18,6 +18,7 @@ import iris4G.action.AccountAction;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 /**
  * @Author elon
@@ -30,8 +31,6 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class LiveNotSaveCase extends VP2 {
-    private String navConfig_LiveStream=Iris4GPage.nav_menu[0];
-    private String navConfig_Video=Iris4GPage.nav_menu[1];
     private static Logger logger = Logger.getLogger(LiveNotSaveCase.class.getName());
 
     @BeforeClass
@@ -55,9 +54,9 @@ public class LiveNotSaveCase extends VP2 {
     private void Live(String quality, String angle) throws Exception {
         //String quality = Iris4GPage.video_quality[0];
         //String angle =Iris4GPage.video_Angle[0];
-        CameraAction.configVideoQuality(navConfig_Video,quality);
-        CameraAction.configVideoAngle(navConfig_LiveStream,angle);
-        CameraAction.navConfig(navConfig_LiveStream);
+        CameraAction.configVideoQuality(NavPage.navConfig_Video,quality);
+        CameraAction.configVideoAngle(NavPage.navConfig_LiveStream,angle);
+        CameraAction.navConfig(NavPage.navConfig_LiveStream);
         waitTime(2);
         //验证设置的显示,当前处于直播模式，左顶部显示直播图标
         Asst.assertEquals("Live", true, id_exists(Iris4GPage.camera_mode_label_live));
@@ -81,46 +80,46 @@ public class LiveNotSaveCase extends VP2 {
 
     @Test
     public void testL72030fpsSuperWide() throws Exception {
-        Live(Iris4GPage.video_quality[0], Iris4GPage.video_Angle[0]);
+        Live(NavPage.quality720_30, NavPage.angleSuperWide);
     }
 
     @Test
     public void testL72060fpsSuperWide() throws Exception {
-        Live(Iris4GPage.video_quality[1], Iris4GPage.video_Angle[0]);
+        Live(NavPage.quality720_60, NavPage.angleSuperWide);
     }
 
     @Test
     public void testL108030fpsSuperWide() throws Exception {
-        Live(Iris4GPage.video_quality[2], Iris4GPage.video_Angle[0]);
+        Live(NavPage.quality1080_30, NavPage.angleSuperWide);
     }
 
     @Test
     public void testL72030fpsWide() throws Exception {
-        Live(Iris4GPage.video_quality[0], Iris4GPage.video_Angle[1]);
+        Live(NavPage.quality720_30, NavPage.angleWide);
     }
 
     @Test
     public void testL72060fpsWide() throws Exception {
-        Live(Iris4GPage.video_quality[1], Iris4GPage.video_Angle[1]);
+        Live(NavPage.quality720_60, NavPage.angleWide);
     }
 
     @Test
     public void testL108030fpsWide() throws Exception {
-        Live(Iris4GPage.video_quality[2], Iris4GPage.video_Angle[1]);
+        Live(NavPage.quality1080_30, NavPage.angleWide);
     }
 
     @Test
     public void testL72030fpsMedium() throws Exception {
-        Live(Iris4GPage.video_quality[0], Iris4GPage.video_Angle[2]);
+        Live(NavPage.quality720_30, NavPage.angleMedium);
     }
 
     @Test
     public void testL72060fpsMedium() throws Exception {
-        Live(Iris4GPage.video_quality[1], Iris4GPage.video_Angle[2]);
+        Live(NavPage.quality720_60, NavPage.angleMedium);
     }
 
     @Test
     public void testL108030fpsMedium() throws Exception {
-        Live(Iris4GPage.video_quality[2], Iris4GPage.video_Angle[2]);
+        Live(NavPage.quality1080_30, NavPage.angleMedium);
     }
 }

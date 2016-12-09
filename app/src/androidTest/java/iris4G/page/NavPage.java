@@ -24,4 +24,13 @@ public class NavPage{
     public static final String imageSize2M        =Iris4GPage.imsge_size[2];
     public static final String imageSize8M        =Iris4GPage.imsge_size[3];
 
+    public static final String lapseTime_2s       =Iris4GPage.lapse_time[0];
+    public static final String lapseTime_3s       =Iris4GPage.lapse_time[1];
+    public static final String lapseTime_5s       =Iris4GPage.lapse_time[2];
+    public static final String lapseTime_10s      =Iris4GPage.lapse_time[3];
+
+    public static final String burst_10P          =Iris4GPage.burst[0];
+    public static final String burst_20P          =Iris4GPage.burst[1];
+    public static final String burst_30P          =Iris4GPage.burst[2];
+
 }

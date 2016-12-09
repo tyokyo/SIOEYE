@@ -15,6 +15,7 @@ import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 /**
  * @Author elon
@@ -24,7 +25,6 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class CaptureCase extends VP2{
-    private String navConfig_Capture=Iris4GPage.nav_menu[2];
     Logger logger = Logger.getLogger(CaptureCase.class.getName());
     @Before
     public void setup() throws Exception {
@@ -32,7 +32,7 @@ public class CaptureCase extends VP2{
     }
     private void  Photo(String imageSize,double expectWH) throws Exception {
         //CameraAction.configImageSize("4M(16:9)");
-        CameraAction.configImageSize(navConfig_Capture,imageSize);
+        CameraAction.configImageSize(NavPage.navConfig_Capture,imageSize);
 
         String screen_size = imageSize.substring(0,2);
         //更改成功，相机左上角显示?M
@@ -59,15 +59,19 @@ public class CaptureCase extends VP2{
     }
     @Test
     public void testPhoto4M169() throws Exception {
-        Photo(Iris4GPage.imsge_size[0],16/9);
+        Photo(NavPage.imageSize4M,16/9);
     }
     @Test
     public void testPhoto3M43() throws Exception {
-        Photo(Iris4GPage.imsge_size[1],4/3);
+        Photo(NavPage.imageSize3M,4/3);
+    }
+    @Test
+    public void testPhoto2M169() throws Exception {
+        Photo(NavPage.imageSize2M,16/9);
     }
 
     @Test
-    public void testPhoto2M169() throws Exception {
-        Photo(Iris4GPage.imsge_size[2],16/9);
+    public void testPhoto8M169() throws Exception {
+        Photo(NavPage.imageSize8M,4/3);
     }
 }

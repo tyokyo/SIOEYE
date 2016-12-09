@@ -21,6 +21,7 @@ import iris4G.action.FileManagerAction;
 import iris4G.action.Iris4GAction;
 import iris4G.action.VideoNode;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 /**
  * @Author elon
@@ -30,7 +31,6 @@ import iris4G.page.Iris4GPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class SloMoCase extends VP2 {
-    private String navConfig_Slo_Mo=Iris4GPage.nav_menu[4];
     Logger logger = Logger.getLogger(SloMoCase.class.getName());
 
     @Before
@@ -42,8 +42,8 @@ public class SloMoCase extends VP2 {
         boolean result = true;
         //String angle = Iris4GPage.video_Angle[0];
         Iris4GAction.startCamera();
-        CameraAction.configVideoAngle(navConfig_Slo_Mo,angle);
-        CameraAction.navConfig(navConfig_Slo_Mo);
+        CameraAction.configVideoAngle(NavPage.navConfig_Slo_Mo,angle);
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
 
         //验证视频质量显示
         Asst.assertEquals("480@120FPS","480@120",getTex(Iris4GPage.info).trim());
@@ -99,17 +99,17 @@ public class SloMoCase extends VP2 {
 
     @Test
     public void testSloMoSuperWide() throws Exception {
-        sloMo(Iris4GPage.video_Angle[0]);
+        sloMo(NavPage.angleSuperWide);
     }
 
     @Test
     public void testSloMoWide() throws Exception {
-        sloMo(Iris4GPage.video_Angle[1]);
+        sloMo(NavPage.angleWide);
     }
 
     @Test
     public void testSloMoMedium() throws Exception {
-        sloMo(Iris4GPage.video_Angle[2]);
+        sloMo(NavPage.angleMedium);
     }
     //* 20min慢速录制自动停止
     @Test
