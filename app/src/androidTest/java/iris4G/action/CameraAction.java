@@ -4,6 +4,7 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
+import android.support.v4.widget.AutoScrollHelper;
 
 import com.squareup.spoon.Spoon;
 
@@ -40,7 +41,16 @@ public class CameraAction extends VP2 {
             }
         }
     }
+    /**
+     * 点击自动翻转按钮
+     */
 
+    public static void openAutoButton(String navPage) throws Exception {
+        CameraAction.navConfig(navPage);
+        CameraAction.cameraSetting();
+        Iris4GAction.scrollAndGetUIObject("Auto");
+        openCompoundButton("Auto");
+    }
     //是否成功开启直播
     public static void checkLiveStatus(int retryTimes) {
         for (int i = 0; i < retryTimes; i++) {
