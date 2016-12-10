@@ -251,14 +251,17 @@ public class VideoAngleCase extends VP2{
     }
     @Test
     public void testChangeOtherSettingReturnToVideo() throws Exception {
-        CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
+        //CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
+        logger.info("1");
         CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
+        logger.info("2");
         CameraAction.cameraSetting();
-        //Change Auto
+        CameraAction.openAutoButton(NavPage.navConfig_Video);
         CameraAction.navConfig(NavPage.navConfig_Lapse);
         CameraAction.navConfig(NavPage.navConfig_Video);
         CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
         CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
+        //检查自动翻转是否打开
     }
 }
 
