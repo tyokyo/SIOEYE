@@ -56,9 +56,10 @@ public class VideoQualityCase extends VP2{
         //重启camera
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
-        //验证LiveStream 的视频角度
-        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.quality720_30);
-        CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.quality720_60);
+        //验证Video视频质量 720@30FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality720_30);
+        //验证Lapse视频质量 720@60FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_60);
     }
     @Test
     public void test720_60() throws Exception {
@@ -83,9 +84,10 @@ public class VideoQualityCase extends VP2{
         //重启camera
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
-        //验证LiveStream 的视频角度
-        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
-        CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.quality1080_30);
+        //验证Lapse视频质量 720@60FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
+        //验证Lapse视频质量 1080@30FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality1080_30);
     }
     @Test
     public void test1080_30() throws Exception {
@@ -110,8 +112,9 @@ public class VideoQualityCase extends VP2{
         //重启camera
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
-        //验证LiveStream 的视频角度
-        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.quality1080_30);
-        CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.quality720_30);
+        //验证Lapse视频质量 1080@30FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality1080_30);
+        //验证Lapse视频质量 720@30FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_30);
     }
 }
