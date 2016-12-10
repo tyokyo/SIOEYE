@@ -360,7 +360,7 @@ public class LapseCase extends VP2 {
     public void testChangeOtherSettingReturnToLapse() throws Exception {
         CameraAction.configVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
         CameraAction.cameraSetting();
-        //Change Auto
+        CameraAction.openCompoundButton("Auto");
         CameraAction.navConfig(NavPage.navConfig_Video);
         CameraAction.navConfig(NavPage.navConfig_Lapse);
         CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
