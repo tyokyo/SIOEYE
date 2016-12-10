@@ -74,4 +74,11 @@ public class CaptureCase extends VP2{
     public void testPhoto8M169() throws Exception {
         Photo(NavPage.imageSize8M,4/3);
     }
+    @Test
+    public void testSwitchOver() throws Exception {
+        Photo(NavPage.imageSize4M,16/9);
+        Photo(NavPage.imageSize3M,4/3);
+        Photo(NavPage.imageSize2M,16/9);
+        Photo(NavPage.imageSize8M,4/3);
+    }
 }
