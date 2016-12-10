@@ -91,4 +91,5 @@ public class VideoCase extends VP2{
     public void testV108030fpsMedium() throws Exception {
         Video(NavPage.quality1080_30,NavPage.angleMedium);
     }
+
 }
