@@ -14,6 +14,7 @@ import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
 import iris4G.page.NavPage;
+import usa.action.Nav;
 
 /**
  * @Author elon
@@ -249,19 +250,7 @@ public class VideoAngleCase extends VP2{
         Iris4GAction.cameraKey();
         CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.angleMedium);
     }
-    @Test
-    public void testChangeOtherSettingReturnToVideo() throws Exception {
-        //CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
-        logger.info("1");
-        CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
-        logger.info("2");
-        CameraAction.cameraSetting();
-        CameraAction.openAutoButton(NavPage.navConfig_Video);
-        CameraAction.navConfig(NavPage.navConfig_Lapse);
-        CameraAction.navConfig(NavPage.navConfig_Video);
-        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
-        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
-        //检查自动翻转是否打开
-    }
+
+
 }
 
