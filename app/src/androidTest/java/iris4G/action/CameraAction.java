@@ -44,7 +44,7 @@ public class CameraAction extends VP2 {
      * 点击自动翻转按钮
      */
 
-    public static void openAutoButton(String navPage) throws Exception {
+    public static void configAutoButton(String navPage) throws Exception {
         CameraAction.navConfig(navPage);
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Auto");

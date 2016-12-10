@@ -357,13 +357,17 @@ public class LapseCase extends VP2 {
         CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleMedium);
     }
     @Test
-    public void testChangeOtherSettingReturnToLapse() throws Exception {
+    public void testChangeSettingReturnToLapse() throws Exception {
         CameraAction.configVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
-        CameraAction.cameraSetting();
-        CameraAction.openCompoundButton("Auto");
+       // CameraAction.cameraSetting();
+        CameraAction.configTimeLapse(NavPage.navConfig_Lapse,NavPage.lapseTime_2s);
+        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
+        CameraAction.configAutoButton(NavPage.navConfig_Video);
         CameraAction.navConfig(NavPage.navConfig_Video);
         CameraAction.navConfig(NavPage.navConfig_Lapse);
+        CameraAction.checkLapseValue(2);
         CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
     }
     /*
 testTLap2s72030AllAngle()
