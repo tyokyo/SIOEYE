@@ -73,4 +73,5 @@ public class SettingAction extends VP2 {
         clickById(MePage.HELP_HELP);
         Spoon.screenshot("HELP_HELP");
     }
+
 }
