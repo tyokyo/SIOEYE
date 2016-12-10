@@ -174,4 +174,37 @@ public class SloMoCase extends VP2 {
         }
         Iris4GAction.cameraKey();
     }
+    @Test
+    public void testSetSloMoSuperWide() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Slo_Mo, NavPage.angleSuperWide);
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        Iris4GAction.cameraKey();
+        CameraAction.checkVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleSuperWide);
+    }
+    @Test
+    public void testSetSloMoWide() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Slo_Mo, NavPage.angleWide);
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        Iris4GAction.cameraKey();
+        CameraAction.checkVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleWide);
+    }
+    @Test
+    public void testSetSloMoMedium() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleMedium);
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        Iris4GAction.cameraKey();
+        CameraAction.checkVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleMedium);
+    }
+    @Test
+    public void testChangeOtherSettingReturnToSloMo() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleWide);
+        CameraAction.cameraSetting();
+        //Change Auto
+        CameraAction.navConfig(NavPage.navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
+        CameraAction.checkVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleWide);
+    }
 }

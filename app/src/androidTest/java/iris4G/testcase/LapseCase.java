@@ -331,6 +331,40 @@ public class LapseCase extends VP2 {
             Asst.fail("Video-Count=1:Error");
         }
     }
+
+    @Test
+    public void testSetLapseSuperWide() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Lapse, NavPage.angleSuperWide);
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        Iris4GAction.cameraKey();
+        CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleSuperWide);
+    }
+    @Test
+    public void testSetLapseWide() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        Iris4GAction.cameraKey();
+        CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
+    }
+    @Test
+    public void testSetLapseMedium() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Lapse,NavPage.angleMedium);
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        Iris4GAction.cameraKey();
+        CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleMedium);
+    }
+    @Test
+    public void testChangeOtherSettingReturnToLapse() throws Exception {
+        CameraAction.configVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
+        CameraAction.cameraSetting();
+        //Change Auto
+        CameraAction.navConfig(NavPage.navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Lapse);
+        CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
+    }
     /*
 testTLap2s72030AllAngle()
 testTLap2s72060AllAngle()
