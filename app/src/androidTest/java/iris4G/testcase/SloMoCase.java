@@ -202,9 +202,10 @@ public class SloMoCase extends VP2 {
     public void testChangeOtherSettingReturnToSloMo() throws Exception {
         CameraAction.configVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleWide);
         CameraAction.cameraSetting();
-        //Change Auto
+        CameraAction.openCompoundButton("Auto");
         CameraAction.navConfig(NavPage.navConfig_Video);
         CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
         CameraAction.checkVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleWide);
+        //检查自动翻转是否打开
     }
 }
