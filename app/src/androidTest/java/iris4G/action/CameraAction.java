@@ -47,6 +47,7 @@ public class CameraAction extends VP2 {
 
     public static void openAutoButton(String navPage) throws Exception {
         CameraAction.navConfig(navPage);
+        CameraAction.cameraSetting();
         Iris4GAction.scrollAndGetUIObject("Auto");
         openCompoundButton("Auto");
     }
