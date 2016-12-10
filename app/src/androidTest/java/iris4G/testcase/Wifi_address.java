@@ -39,5 +39,6 @@ public class Wifi_address extends VP2{
         } catch (UiObjectNotFoundException e) {
 
         }
+
     }
 }
