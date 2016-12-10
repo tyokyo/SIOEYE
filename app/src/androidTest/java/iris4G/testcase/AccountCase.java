@@ -5,7 +5,6 @@ import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -25,11 +24,6 @@ import iris4G.action.Iris4GAction;
 @SdkSuppress(minSdkVersion = 16)
 public class AccountCase extends VP2{
     Logger logger = Logger.getLogger(AccountCase.class.getName());
-    @BeforeClass
-    public void beforeLogout() throws Exception {
-        //判断当前是否为登陆状态，是则logout
-        if (AccountAction.isLogin()) {AccountAction.logOut();}
-    }
 
     @Before
     public void setup() throws Exception {
@@ -58,15 +52,22 @@ public class AccountCase extends VP2{
     请提前将config.properties保存在本地根目录；格式：sioeye_id=xxx；sioeyeId_password=xxx
     检查是否成功登陆；并发起一个直播
      */
-    public void testSioEyeIDLogin() throws Exception{
+    public void testLoginBySioEyeID() throws Exception{
+        if (AccountAction.isLogin()) {AccountAction.logOut();}
         String sioEyeID = Constant.getUserName("sioeye_id");
         String sioEyeIdPassword = Constant.getPassword("sioeye_password");
         CameraAction.navToAccount();
         AccountAction.loginAccount(sioEyeID,sioEyeIdPassword);
-        waitTime(2);
+        waitTime(3);
         if (!AccountAction.isLogin()) {
             Assert.fail("登陆失败");}
         else {
+            Iris4GAction.cameraKey();
+            CameraAction.checkLiveStatus(1);
+            if (!CameraAction.checkLiveSuccess()){
+                Assert.fail("live failed");
+            }
+            CameraAction.cameraRecordTime();
             Iris4GAction.cameraKey();
         }
     }
@@ -77,7 +78,7 @@ public class AccountCase extends VP2{
     请提前将config.properties保存在本地根目录；格式：phone_number=xxx；phone_password=xxx
     检查是否成功登陆；并发起一个直播
      */
-    public void testPhoneNumberLogin() throws Exception{
+    public void testLoginByPhoneNumber() throws Exception{
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName = Constant.getUserName("phone_number");
         String password = Constant.getPassword("phone_password");
@@ -88,6 +89,12 @@ public class AccountCase extends VP2{
             Assert.fail("登陆失败");}
         else {
             Iris4GAction.cameraKey();
+            CameraAction.checkLiveStatus(1);
+            if (!CameraAction.checkLiveSuccess()){
+                Assert.fail("live failed");
+            }
+            CameraAction.cameraRecordTime();
+            Iris4GAction.cameraKey();
         }
     }
     @Test
@@ -97,7 +104,7 @@ public class AccountCase extends VP2{
     请提前将config.properties保存在本地根目录；格式：email=xxxxx@xx.xx；email_password=xxx
     检查是否成功登陆；并发起一个直播
      */
-    public void testEmailLogin() throws Exception {
+    public void testLoginByEmail() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName = Constant.getUserName("email");
         String password = Constant.getPassword("email_password");
@@ -108,6 +115,12 @@ public class AccountCase extends VP2{
             Assert.fail("Login Failed");}
         else {
             Iris4GAction.cameraKey();
+            CameraAction.checkLiveStatus(1);
+            if (!CameraAction.checkLiveSuccess()){
+                Assert.fail("live failed");
+            }
+            CameraAction.cameraRecordTime();
+            Iris4GAction.cameraKey();
         }
     }
     /*
@@ -116,7 +129,7 @@ public class AccountCase extends VP2{
     密码通过随机字符串产生
     检查是否登录成功
     */
-    public void testErrorEmailAndPasswordLogin() throws Exception {
+    public void testLoginByErrorEmailAndPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName="apd897iii@ouq7.com";
         String userPassword=Constant.randomStringGenerator();
@@ -133,7 +146,7 @@ public class AccountCase extends VP2{
     密码为随机字符
     检查是否登录成功
     */
-    public void testErrorPasswordLogin() throws Exception {
+    public void testLoginByErrorPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName=Constant.getUserName("email");
         String userPassword=Constant.randomStringGenerator();
@@ -150,7 +163,7 @@ public class AccountCase extends VP2{
     密码为读取本地config.properties文件中email
     检查是否登录成功
     */
-    public void testErrorEmailAndRightPasswordLogin() throws Exception {
+    public void testLoginByErrorEmailAndRightPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName="9if4567fjjjSFGsi@lcccl.cn";
         String userPassword=Constant.getPassword("email_password");
@@ -167,7 +180,7 @@ public class AccountCase extends VP2{
     密码随机字符串
     检查是否登录成功
     */
-    public void testErrorPhoneAndPasswordLogin() throws Exception {
+    public void testLoginByErrorPhoneAndPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName="13200009000";
         String userPassword=Constant.randomStringGenerator();
@@ -184,7 +197,7 @@ public class AccountCase extends VP2{
     密码随机字符串
     检查是否登录成功
     */
-    public void testErrorPhoneNumberAndRightPasswordLogin() throws Exception {
+    public void testLoginByErrorPhoneNumberAndRightPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName=Constant.getUserName("phone_number");
         String userPassword=Constant.randomStringGenerator();

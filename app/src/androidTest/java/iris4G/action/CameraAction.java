@@ -4,7 +4,6 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
-import android.support.v4.widget.AutoScrollHelper;
 
 import com.squareup.spoon.Spoon;
 
@@ -63,6 +62,21 @@ public class CameraAction extends VP2 {
             }
         }
         Spoon.screenshot("checkLiveStatus");
+    }
+    public static boolean checkLiveSuccess() {
+        gDevice.wait(Until.gone(By.textStartsWith("Initializing Live Stream")), 60000);
+        waitTime(3);
+        UiObject recordingTimeId=getObjectById(Iris4GPage.recording_time_id);
+        if (!recordingTimeId.exists()) {
+            logger.info("Live Failed");
+            Spoon.screenshot("Live_Failed");
+            return false;
+            }
+        else {
+            logger.info("Live succeed");
+            Spoon.screenshot("Live_succeed");
+            return true;
+        }
     }
 
     /**
