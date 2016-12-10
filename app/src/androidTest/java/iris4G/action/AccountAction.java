@@ -1,11 +1,11 @@
 package iris4G.action;
 
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
 
 import com.squareup.spoon.Spoon;
 
 import ckt.base.VP2;
-import cn.page.Constant;
 import iris4G.page.Iris4GPage;
 
 public class AccountAction extends VP2 {
@@ -76,5 +76,20 @@ public class AccountAction extends VP2 {
         }
         Spoon.screenshot("Login");
         return isSuccess;
+    }
+    /*
+    isLogin()该方法为判断当前是否是登陆，返回boolean，true为已经登陆
+     */
+    public static boolean isLogin() throws Exception {
+        CameraAction.navToAccount();
+        if (gDevice.findObject(new UiSelector().resourceId(Iris4GPage.login_btn_login)).exists()) {
+            System.out.println("not login");
+            gDevice.pressBack();
+            return false;
+        } else {
+            System.out.println("Already login");
+            gDevice.pressBack();
+            return true;
+        }
     }
 }
