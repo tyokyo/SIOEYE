@@ -33,7 +33,7 @@ public class Wifi_address extends VP2{
         clickByText("Internal storage");
         UiScrollable listScrollable = new UiScrollable(new UiSelector().resourceId("com.mediatek.filemanager:id/list_view").scrollable(true));
         try {
-            if (listScrollable.scrollTextIntoView("Video")) {
+            if (listScrollable.scrollTextIntoView("Videssso")) {
 
             }
         } catch (UiObjectNotFoundException e) {
