@@ -48,7 +48,7 @@ public class CameraAction extends VP2 {
     public static void openAutoButton(String navPage) throws Exception {
         CameraAction.navConfig(navPage);
         CameraAction.cameraSetting();
-        Iris4GAction.scrollAndGetUIObject("Auto");
+        Iris4GAction.ScrollViewByText("Auto");
         openCompoundButton("Auto");
     }
     //是否成功开启直播
