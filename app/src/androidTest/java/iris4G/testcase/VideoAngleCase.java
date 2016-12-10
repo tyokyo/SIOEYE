@@ -251,7 +251,7 @@ public class VideoAngleCase extends VP2{
     }
     @Test
     public void testChangeOtherSettingReturnToVideo() throws Exception {
-        //CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
+        CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.quality720_60);
         logger.info("1");
         CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
         logger.info("2");
