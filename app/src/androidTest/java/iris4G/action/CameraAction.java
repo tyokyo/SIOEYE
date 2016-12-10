@@ -430,4 +430,10 @@ public class CameraAction extends VP2 {
             Asst.fail("expect only one video in folder");
         }
     }
+    public static void navToAccount() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Account");
+        clickByText("Account");
+    }
 }
