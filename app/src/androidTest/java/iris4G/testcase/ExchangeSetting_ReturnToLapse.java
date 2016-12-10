@@ -25,12 +25,12 @@ import static iris4G.page.Iris4GPage.video_quality;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class ExchangeSetting_ReturnToLapse extends VP2{
-//    private String navConfig_LiveStream=Iris4GPage.nav_menu[0];
-//    private String navConfig_Video=Iris4GPage.nav_menu[1];
-//    private String navConfig_Capture=Iris4GPage.nav_menu[2];
-//    private String navConfig_Burst=Iris4GPage.nav_menu[3];
-//    private String navConfig_Slo_Mo=Iris4GPage.nav_menu[4];
-//    private String navConfig_Lapse=Iris4GPage.nav_menu[5];
+    private String navConfig_LiveStream=Iris4GPage.nav_menu[0];
+    private String navConfig_Video=Iris4GPage.nav_menu[1];
+    private String navConfig_Capture=Iris4GPage.nav_menu[2];
+    private String navConfig_Burst=Iris4GPage.nav_menu[3];
+    private String navConfig_Slo_Mo=Iris4GPage.nav_menu[4];
+    private String navConfig_Lapse=Iris4GPage.nav_menu[5];
 
     Logger logger = Logger.getLogger(ExchangeSetting_ReturnToLapse.class.getName());
     @Before
