@@ -17,7 +17,7 @@ import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 
 /**
- * @Author elon
+ * @Author yyun2016
  * @Description 机身账号登录
  */
 @RunWith(AndroidJUnit4.class)
@@ -44,7 +44,7 @@ public class AccountCase extends VP2{
         AccountAction.loginAccount(sioEyeID,sioEyeIdPassword);
         waitTime(3);
         if (!AccountAction.isLogin()) {
-            Assert.fail("登陆失败");}
+            Assert.fail("Login Failed");}
         else {
             Iris4GAction.cameraKey();
             CameraAction.checkLiveStatus(1);
@@ -70,7 +70,7 @@ public class AccountCase extends VP2{
         AccountAction.loginAccount(userName,password);
         waitTime(2);
         if (!AccountAction.isLogin()) {
-            Assert.fail("登陆失败");}
+            Assert.fail("Login Failed");}
         else {
             Iris4GAction.cameraKey();
             CameraAction.checkLiveStatus(1);
@@ -117,7 +117,7 @@ public class AccountCase extends VP2{
     public void testLoginByErrorEmailAndPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName="apd897iii@ouq7.com";
-        String userPassword=Constant.randomStringGenerator();
+        String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
         waitTime(3);
@@ -135,7 +135,7 @@ public class AccountCase extends VP2{
     public void testLoginByErrorPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName=Constant.getUserName("email");
-        String userPassword=Constant.randomStringGenerator();
+        String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
         waitTime(3);
@@ -171,7 +171,7 @@ public class AccountCase extends VP2{
     public void testLoginByErrorPhoneAndPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName="13200009000";
-        String userPassword=Constant.randomStringGenerator();
+        String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
         waitTime(3);
@@ -189,7 +189,7 @@ public class AccountCase extends VP2{
     public void testLoginByErrorPhoneNumberAndRightPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName=Constant.getUserName("phone_number");
-        String userPassword=Constant.randomStringGenerator();
+        String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
         waitTime(3);
