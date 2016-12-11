@@ -73,7 +73,7 @@ public class Constant {
         String userName=Property.getValueByKey(config,nameType);
         logger.info("userName:"+userName);
         if (userName.length()< 4){
-        Assert.fail("账号名字长度小于4，请检查config.properties文件账号是否配置正确");
+        Assert.fail("userName.length<4,Please check the Config.properties configuration");
         }
         return userName;
     }
@@ -84,12 +84,15 @@ public class Constant {
         logger.info(config);
         logger.info("userPassword:" + userPassword);
         if (userPassword.length()<1||userPassword==null){
-            Assert.fail("密码为空，请检查config.properties文件密码是否配置正确");
+            Assert.fail("Password is null,Please check the Config.properties configuration");
         }
         return userPassword;
     }
-    public static  String randomStringGenerator(){
-        int count=(int)(1+Math.random()*(18-1+1));
+    /*
+    String randomStringGenerator(int length)产生随机字符串，int length定义了该字符串最大可能长度
+     */
+    public static  String randomStringGenerator(int length){
+        int count=(int)(1+Math.random()*(length-1+1));
         char[] alphaArray = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
                 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
                 'w', 'x', 'y', 'z','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
