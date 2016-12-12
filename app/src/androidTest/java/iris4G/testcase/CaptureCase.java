@@ -97,4 +97,5 @@ public class CaptureCase extends VP2{
         waitTime(2);
         clickByText(NavPage.imageSize2M);
     }
+
 }
