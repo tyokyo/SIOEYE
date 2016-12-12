@@ -17,7 +17,7 @@ import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 
 /**
- * @Author elon
+ * @Author yyun2016
  * @Description 机身账号登录
  */
 @RunWith(AndroidJUnit4.class)
@@ -29,22 +29,6 @@ public class AccountCase extends VP2{
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
-//    @Test
-//    public void testLogin() throws Exception {
-        //清除app数据  包括登录的账号
-//        Iris4GAction.pmClear();
-        //启动 camera
-//        Iris4GAction.startCamera();
-
-//        String useName= Constant.getUserName();
-//        String password=Constant.getPassword();
-        //登录账号
-//        AccountAction.loginAccount(useName,password);
-        //打开live&save 开关
-//        Iris4GAction.clickLiveAndSave();
-
-
-//    }
     @Test
     /*
     case 1 ：使用SioeyeID登录
@@ -60,7 +44,7 @@ public class AccountCase extends VP2{
         AccountAction.loginAccount(sioEyeID,sioEyeIdPassword);
         waitTime(3);
         if (!AccountAction.isLogin()) {
-            Assert.fail("登陆失败");}
+            Assert.fail("Login Failed");}
         else {
             Iris4GAction.cameraKey();
             CameraAction.checkLiveStatus(1);
@@ -86,7 +70,7 @@ public class AccountCase extends VP2{
         AccountAction.loginAccount(userName,password);
         waitTime(2);
         if (!AccountAction.isLogin()) {
-            Assert.fail("登陆失败");}
+            Assert.fail("Login Failed");}
         else {
             Iris4GAction.cameraKey();
             CameraAction.checkLiveStatus(1);
@@ -123,6 +107,7 @@ public class AccountCase extends VP2{
             Iris4GAction.cameraKey();
         }
     }
+    @Test
     /*
     case4 ：错误的邮箱账号和密码登陆
     邮箱为无效邮箱
@@ -132,7 +117,7 @@ public class AccountCase extends VP2{
     public void testLoginByErrorEmailAndPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName="apd897iii@ouq7.com";
-        String userPassword=Constant.randomStringGenerator();
+        String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
         waitTime(3);
@@ -140,6 +125,7 @@ public class AccountCase extends VP2{
             Assert.fail("Error Email And Password success");
         }
     }
+    @Test
     /*
     case5 ：错误的邮箱和正确的错误的密码登陆
     邮箱读取本地config.properties文件中email
@@ -149,7 +135,7 @@ public class AccountCase extends VP2{
     public void testLoginByErrorPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName=Constant.getUserName("email");
-        String userPassword=Constant.randomStringGenerator();
+        String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
         waitTime(3);
@@ -157,6 +143,7 @@ public class AccountCase extends VP2{
             Assert.fail("Error Password Login success");
         }
     }
+    @Test
     /*
     case6：正确的邮箱和错误的密码登陆
     邮箱为错误邮箱
@@ -174,6 +161,7 @@ public class AccountCase extends VP2{
             Assert.fail("Error Email And Right Password Login success");
         }
     }
+    @Test
     /*
     case7 ：错误的电话号码和错误的密码登陆
     电话号码为错误电话
@@ -183,7 +171,7 @@ public class AccountCase extends VP2{
     public void testLoginByErrorPhoneAndPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName="13200009000";
-        String userPassword=Constant.randomStringGenerator();
+        String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
         waitTime(3);
@@ -191,6 +179,7 @@ public class AccountCase extends VP2{
             Assert.fail("Error User Name Login success");
         }
     }
+    @Test
     /*
     case8 ：正确的电话号码和错误的密码登陆
     电话号码为错误电话
@@ -200,7 +189,7 @@ public class AccountCase extends VP2{
     public void testLoginByErrorPhoneNumberAndRightPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName=Constant.getUserName("phone_number");
-        String userPassword=Constant.randomStringGenerator();
+        String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
         waitTime(3);
