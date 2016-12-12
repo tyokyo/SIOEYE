@@ -42,7 +42,8 @@ public class Iris4GPage {
     public static String[] imsge_size ={
             "4M(16:9)",
             "3M(4:3)",
-            "2M(16:9)"};
+            "2M(16:9)",
+            "8M(4:3)"};
     public static String[] nav_menu ={
             "Live Stream",
             "Video",
@@ -62,5 +63,11 @@ public class Iris4GPage {
 
     //file manager scroll to find video
     public static String fileManager_list_view = "com.mediatek.filemanager:id/list_view";
+
+    public static String camera_mode_label = "com.hicam:id/camera_mode_label";
+    public static String camera_mode_label_live = "com.hicam:id/camera_mode";
+    public static String info = "com.hicam:id/info";
+
+    public static String mode_setting_view = "com.hicam:id/mode_setting_view";
 
 }

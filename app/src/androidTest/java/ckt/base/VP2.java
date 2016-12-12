@@ -907,6 +907,13 @@ public class VP2 extends  VP{
         return gDevice.findObject(new UiSelector().textMatches(regex)).exists();
     }
     /**
+     * @param text_contain
+     */
+    public static boolean text_exists_contain(String text_contain) throws UiObjectNotFoundException {
+        initDevice();
+        return gDevice.findObject(new UiSelector().textContains(text_contain)).exists();
+    }
+    /**
      *get rectangle for object
      * @param ResourceID id
      */

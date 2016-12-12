@@ -7,11 +7,15 @@ import android.os.RemoteException;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Configurator;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
+
+import com.squareup.spoon.Spoon;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,8 +23,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Logger;
 import ckt.base.VP2;
+import iris4G.page.Iris4GPage;
 
 /**
  * Created by elon on 2016/11/21.
@@ -36,6 +42,10 @@ public class Iris4GAction extends VP2 {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         logger.info("Launch-Camera-Key");
     }
+    public static void powerKey(){
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
+        logger.info("Launch-Power-Key");
+    }
     /**
      * 关闭文件管理器
      */
@@ -45,10 +55,10 @@ public class Iris4GAction extends VP2 {
                     "am force-stop com.mediatek.filemanager");
             waitTime(5);
             String name = gDevice.getCurrentPackageName();
-            logger.info("当前package:" + name);
-            logger.info("关闭filemanager-Success");
+            logger.info("current package:" + name);
+            logger.info("stop filemanager-Success");
         } catch (IOException e) {
-            logger.info("关闭filemanager-Fail");
+            logger.info("stop filemanager-Fail");
         }
     }
 
@@ -457,5 +467,30 @@ public class Iris4GAction extends VP2 {
             logger.info(NotFindScrollFindObject + text);
         }
         return isFind;
+    }
+    public static void clickLiveAndSave() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Live&Save");
+        CameraAction.openCompoundButton("Live&Save");
+        Spoon.screenshot("live_save","liveSave");
+        gDevice.pressBack();
+    }
+    //如Video quality -  右边的值
+    public static String getRightValue(String text) throws UiObjectNotFoundException {
+        String value="";
+        UiObject2 scrollView = getObject2ByClass(android.widget.ScrollView.class);
+        List<UiObject2> relativeLayouts=scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        for (UiObject2 relativeLayout:relativeLayouts) {
+            List<UiObject2> texts = relativeLayout.findObjects(By.clazz(android.widget.TextView.class));
+            if (texts.size()==2){
+                String key = texts.get(0).getText();
+                if (text.equals(key)){
+                    value = texts.get(1).getText();
+                    break;
+                }
+            }
+        }
+        return value;
     }
 }

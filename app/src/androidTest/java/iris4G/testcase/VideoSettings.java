@@ -16,17 +16,10 @@ import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 /**
  * @Author yun.yang
- * /*
- * a.普通录像模式
- * 1.修改视频质量为720@60FPS
- * 2.修改视角为Super Wide
- * 3.修改上下颠倒为auto
- * 4.切换到延时录像模式后再切换为普通录像
- * b.所有设置项都修改成功，更改的设置项都没有改变
- * @Description
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
@@ -36,36 +29,47 @@ public class VideoSettings extends VP2{
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
-    private String replaceFps(String quality){
-        return quality.replace("FPS","");
-    }
+    /*1：Capture  - capture设置为4M(16:9)
+    * 2：Lapse -延时设置为2s
+    * 2：Video -视频质量设置为720@60FPS
+    * 4：Video -视频角度设置Wide
+    * 5：各种模式之间切换
+    * 6：验证设置的参数
+    * */
     @Test
-    public void test() throws Exception {
-        String quality = Iris4GPage.video_quality[2];
-        String angle = Iris4GPage.video_Angle[1];
-        String lapse_time = Iris4GPage.lapse_time[0];
+    public void testValueSettings() throws Exception {
+        //video_quality 720@60FPS
+        String quality = NavPage.quality720_60;
+        //video_Angle Wide
+        String angle = NavPage.angleWide;
+        //lapse_time 2s
+        String lapse_time = NavPage.lapseTime_2s;
+        //imsge_size 4M(16:9)
+        String image_size = NavPage.imageSize4M;
 
-        CameraAction.configTimeLapse(lapse_time);
-        CameraAction.configVideoQuality(quality);
-        CameraAction.configVideoAngle(angle);
+        //capture设置为4M(16:9)
+        CameraAction.configImageSize(NavPage.navConfig_Capture,image_size);
+        //延时设置为2s
+        CameraAction.configTimeLapse(NavPage.navConfig_Lapse,lapse_time);
+        //视频质量设置为720@60FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Video,quality);
+        //视频角度设置Wide
+        CameraAction.configVideoAngle(NavPage.navConfig_Video,angle);
 
-        //将Up改为Auto
-        CameraAction.cameraSetting();
-        Iris4GAction.ScrollViewByText("Up/Down/Auto");
-        clickByText("Auto");
-        gDevice.pressBack();
         //切换到延时录像再切换到普通录像
-        CameraAction.navConfig(Iris4GPage.nav_menu[5]);
-        if (text_exists(lapse_time)) {
-            //通过检查当前页面是否有3s存在，若存在，则正确，并记录flag1=1即true
-        } else {
-            Asst.fail("SLO_MO record fail");
-        }
-        CameraAction.navConfig(Iris4GPage.nav_menu[1]);
-        if (text_exists(replaceFps(quality))) {
+        CameraAction.navConfig(NavPage.navConfig_LiveStream);
+        CameraAction.navConfig(NavPage.navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Burst);
+        CameraAction.navConfig(NavPage.navConfig_Capture);
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
 
-        } else {
-            Asst.fail("normal record fail");
-        }
+        //验证参数设置-capture
+        CameraAction.checkImageSize(NavPage.navConfig_Capture,image_size);
+        //验证参数设置-video quality
+        CameraAction.checkVideoQuality(NavPage.navConfig_Video,quality);
+        //验证参数设置-video angle
+        CameraAction.checkVideoAngle(NavPage.navConfig_Video,angle);
+        //验证参数设置-lapse
+        CameraAction.checkTimeLapse(NavPage.navConfig_Lapse,lapse_time);
     }
 }

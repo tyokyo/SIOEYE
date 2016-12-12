@@ -19,6 +19,7 @@ import static usa.action.DiscoverAction.getLocationInfo;
 import static usa.action.DiscoverAction.getPersonNumber;
 import static usa.action.DiscoverAction.getZanNumber;
 
+
 /**
  * Created by caibing.yin on 2016/11/7.
  */
@@ -38,7 +39,7 @@ public class CountPersonCase extends VP2 {
      * */
     @Test
     public void testCountWatchPerson() throws UiObjectNotFoundException {
-        String ClickBeforeNumber =getPersonNumber();
+        String ClickBeforeNumber =DiscoverAction.getPersonNumber();
         DiscoverAction.navtoVideo();
         logger.info("点击观看前的人数是"+ClickBeforeNumber+"人");
         Spoon.screenshot(gDevice,ClickBeforeNumber);
@@ -100,4 +101,7 @@ public class CountPersonCase extends VP2 {
             logger.info("testHasLocationServiceCase_fail");
         }
     }
+
+
+
 }

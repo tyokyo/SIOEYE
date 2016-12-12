@@ -1,6 +1,7 @@
 package iris4G.action;
 
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
 
 import com.squareup.spoon.Spoon;
 
@@ -35,11 +36,31 @@ public class AccountAction extends VP2 {
     public static void login_btn_login() throws Exception {
         clickById(Iris4GPage.login_btn_login);
     }
-
+    public static void logOut() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Account");
+        clickByText("Account");
+        if (id_exists(Iris4GPage.logout_btn)){
+            logout_btn();
+        }
+        gDevice.pressBack();
+    }
     public static void loginAccount(String username, String password) throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Account");
+        clickByText("Account");
         login_id_input(username);
         login_password_input(password);
         login_btn_login();
+        boolean login = AccountAction.isLoginSuccess();
+        if (login) {
+            logger.info("account login success");
+        }else {
+            logger.info("account login fail");
+        }
+        gDevice.pressBack();
     }
 
     public static boolean isLoginSuccess() throws UiObjectNotFoundException {
@@ -55,5 +76,20 @@ public class AccountAction extends VP2 {
         }
         Spoon.screenshot("Login");
         return isSuccess;
+    }
+    /*
+    isLogin()该方法为判断当前是否是登陆，返回boolean，true为已经登陆
+     */
+    public static boolean isLogin() throws Exception {
+        CameraAction.navToAccount();
+        if (gDevice.findObject(new UiSelector().resourceId(Iris4GPage.login_btn_login)).exists()) {
+            System.out.println("not login");
+            gDevice.pressBack();
+            return false;
+        } else {
+            System.out.println("Already login");
+            gDevice.pressBack();
+            return true;
+        }
     }
 }
