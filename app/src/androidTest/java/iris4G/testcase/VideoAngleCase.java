@@ -250,7 +250,24 @@ public class VideoAngleCase extends VP2{
         Iris4GAction.cameraKey();
         CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.angleMedium);
     }
-
+    /**
+     * 1.修改视频质量为720@60FPS
+     *2.修改视角为Wide
+     *3.修改上下颠倒为auto
+     *4.切换到延时录像模式后再切换为普通录像
+     * result：所有设置项都修改成功，更改的设置项都没有改变
+     * */
+    @Test
+    public void testChangeOtherSettingReturnToVideo() throws Exception {
+        CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
+        CameraAction.configVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
+        CameraAction.configAutoButton(NavPage.navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Lapse);
+        CameraAction.navConfig(NavPage.navConfig_Video);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
+        CameraAction.checkVideoAngle(NavPage.navConfig_Video,NavPage.angleWide);
+        //检查自动翻转是否打开
+    }
 
 }
 
