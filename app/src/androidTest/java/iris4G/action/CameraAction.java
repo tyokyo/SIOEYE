@@ -460,4 +460,10 @@ public class CameraAction extends VP2 {
         Iris4GAction.ScrollViewByText("Account");
         clickByText("Account");
     }
+    public static void navToLocation() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Live&Location");
+        clickByText("Live&Location");
+    }
 }
