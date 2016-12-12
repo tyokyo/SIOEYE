@@ -362,8 +362,7 @@ public class LapseCase extends VP2 {
      *3.修改视角为Wide
      *4.修改上下颠倒为auto
      *5.切换到普通录像模式后再切换为延时录像
-     *
-     * Result:所有设置项都修改成功，更改的设置项都没有改变
+     *  Result:所有设置项都修改成功，更改的设置项都没有改变
      *  */
     @Test
     public void testChangeSettingReturnToLapse() throws Exception {
@@ -373,7 +372,7 @@ public class LapseCase extends VP2 {
         CameraAction.configAutoButton(NavPage.navConfig_Video);
         CameraAction.navConfig(NavPage.navConfig_Video);
         CameraAction.navConfig(NavPage.navConfig_Lapse);
-        //检查是否为2秒
+        CameraAction.checkLapseTime(NavPage.navConfig_Lapse,"2s");
         CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
         CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
     }
