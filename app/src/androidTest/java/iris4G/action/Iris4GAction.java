@@ -42,6 +42,10 @@ public class Iris4GAction extends VP2 {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         logger.info("Launch-Camera-Key");
     }
+    public static void powerKey(){
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
+        logger.info("Launch-Power-Key");
+    }
     /**
      * 关闭文件管理器
      */
