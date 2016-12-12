@@ -38,7 +38,7 @@ public class Demo extends VP2 {
     public void testCountPerson() throws UiObjectNotFoundException {
         clickById(Discover.ID_MAIN_TAB_DISCOVER);
         waitTime(2);
-/////
+////////di.ke
     }
 
 
