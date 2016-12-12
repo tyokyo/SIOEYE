@@ -321,9 +321,9 @@ public class LapseCase extends VP2 {
         HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
 
         if (resultHashSet.size()==1) {
-            String videopath = resultHashSet.iterator().next();
-            logger.info("new file:"+videopath);
-            VideoNode videoNode = Iris4GAction.VideoInfo(videopath);
+            String videoPath = resultHashSet.iterator().next();
+            logger.info("new file:"+videoPath);
+            VideoNode videoNode = Iris4GAction.VideoInfo(videoPath);
             if(videoNode.getDuration()<120){
                 Asst.fail("max duration is 120 seconds");
             }
@@ -356,16 +356,24 @@ public class LapseCase extends VP2 {
         Iris4GAction.cameraKey();
         CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleMedium);
     }
+    /**
+     * 1.修改延时时间间隔为2s
+     * 2.修改视频质量为720@60FPS
+     *3.修改视角为Wide
+     *4.修改上下颠倒为auto
+     *5.切换到普通录像模式后再切换为延时录像
+     *
+     * Result:所有设置项都修改成功，更改的设置项都没有改变
+     *  */
     @Test
     public void testChangeSettingReturnToLapse() throws Exception {
         CameraAction.configVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
-       // CameraAction.cameraSetting();
         CameraAction.configTimeLapse(NavPage.navConfig_Lapse,NavPage.lapseTime_2s);
         CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
         CameraAction.configAutoButton(NavPage.navConfig_Video);
         CameraAction.navConfig(NavPage.navConfig_Video);
         CameraAction.navConfig(NavPage.navConfig_Lapse);
-        CameraAction.checkLapseValue(2);
+        //检查是否为2秒
         CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
         CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
     }
