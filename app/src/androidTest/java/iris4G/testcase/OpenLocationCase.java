@@ -32,14 +32,14 @@ public class OpenLocationCase extends VP2{
     /**打开直播Location功能*/
     @Test
     public void Test() throws Exception {
-        CameraAction.navToLocation();
+     //   CameraAction.navToLocation();
         CameraAction.openCompoundButton("Live&Location");
         //PS：需要添加location开关状态验证方法
     }
     /*开启location后，进行直播*/
     @Test
     public void TestLiveAndLocation() throws Exception {
-        CameraAction.navToLocation();
+      //  CameraAction.navToLocation();
         CameraAction.openCompoundButton("Live&Location");
         if (AccountAction.isLogin()){
             Iris4GAction.cameraKey();
