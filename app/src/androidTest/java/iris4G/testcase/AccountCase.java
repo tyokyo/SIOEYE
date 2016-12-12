@@ -3,6 +3,7 @@ package iris4G.testcase;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,18 @@ import iris4G.action.Iris4GAction;
 @SdkSuppress(minSdkVersion = 16)
 public class AccountCase extends VP2{
     Logger logger = Logger.getLogger(AccountCase.class.getName());
+    @AfterClass
+    public static void loginAccountWithDefault() throws Exception {
+        initDevice();
+        //清除app数据  包括登录的账号
+        Iris4GAction.pmClear();
+        //启动 camera
+        Iris4GAction.startCamera();
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        //登录账号
+        AccountAction.loginAccount(useName, password);
+    }
 
     @Before
     public void setup() throws Exception {

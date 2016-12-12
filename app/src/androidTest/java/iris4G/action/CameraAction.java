@@ -351,6 +351,21 @@ public class CameraAction extends VP2 {
         gDevice.pressBack();
         gDevice.pressBack();
     }
+    public static void checkLapseTime(String navConfig,String Time) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+        CameraAction.navConfig(navConfig);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Video Angle");
+        String active_angle = Iris4GAction.getRightValue("Time Lapse");
+        Spoon.screenshot("currentTimeLapse",Time);
+        Asst.assertEquals("TimeLapse",Time,active_angle);
+        clickByText("Time Lapse");
+        if (!hasObjectSelected(Time)){
+            Asst.fail(Time+" not selected");
+        }
+        gDevice.pressBack();
+        gDevice.pressBack();
+    }
 
     public static void configVideoAngle(String navConfig,int index, String angle) throws Exception {
         //CameraAction.navConfig(Iris4GPage.nav_menu[index]);
