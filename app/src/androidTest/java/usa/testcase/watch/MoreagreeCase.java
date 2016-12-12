@@ -48,8 +48,10 @@ public class MoreagreeCase extends VP2 {
         logger.info("初始点赞数" + zannum_a);
         int i;
         for (i = 0; i < WatchAction.zan_number1; i++) {
-            clickById("com.sioeye.sioeyeapp:id/watch_player_portrait_like");
+//            clickById("com.sioeye.sioeyeapp:id/watch_player_portrait_like");
+            clickByPonit(1000,1711);
         }
+        waitTime(1);
         int zannum_b = WatchAction.zan();
         int zannum = zannum_b - zannum_a;
         logger.info(WatchAction.zan_number1 + "赞后人数增加" + zannum + "人");
@@ -78,6 +80,7 @@ public class MoreagreeCase extends VP2 {
             waitTime(1);
             clickById("com.sioeye.sioeyeapp:id/float_like");
         }
+        waitTime(1);
         int zannum_b = WatchAction.zan();
         int zannum = zannum_b - zannum_a;
         logger.info(WatchAction.zan_number2 + "赞后人数增加" + zannum + "人");
