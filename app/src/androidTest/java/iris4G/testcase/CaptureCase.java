@@ -100,5 +100,4 @@ public class CaptureCase extends VP2{
         clickByText(NavPage.imageSize2M);
         Spoon.screenshot("testSetSizeToPower_pass");
     }
-
 }
