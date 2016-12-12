@@ -198,6 +198,12 @@ public class SloMoCase extends VP2 {
         Iris4GAction.cameraKey();
         CameraAction.checkVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleMedium);
     }
+    /**
+     *1.修改视角为Wide
+     2.修改上下颠倒为auto
+     3.切换到普通录像模式后再切换为慢速摄影
+     *Result:所有设置项都修改成功，更改的设置项都没有改变
+     * */
     @Test
     public void testChangeOtherSettingReturnToSloMo() throws Exception {
         CameraAction.configVideoAngle(NavPage.navConfig_Slo_Mo,NavPage.angleWide);
