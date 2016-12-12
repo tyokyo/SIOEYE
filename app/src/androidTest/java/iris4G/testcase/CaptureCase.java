@@ -81,4 +81,20 @@ public class CaptureCase extends VP2{
         Photo(NavPage.imageSize2M,16/9);
         Photo(NavPage.imageSize8M,4/3);
     }
+    /**
+     * 设置照片尺寸过程中按电源键
+     * 第一次熄屏，第二次按仍然停留在照片尺寸切换界面
+     * */
+    @Test
+    public void testSetSizeToPower() throws Exception {
+        CameraAction.navConfig(NavPage.navConfig_Capture);
+        CameraAction.cameraSetting();
+        Iris4GAction.clickByText("Image Size");
+        Iris4GAction.ScrollViewByText(NavPage.imageSize2M);
+        Iris4GAction.powerKey();
+        waitTime(2);
+        Iris4GAction.powerKey();
+        waitTime(2);
+        clickByText(NavPage.imageSize2M);
+    }
 }
