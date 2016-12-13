@@ -107,7 +107,7 @@ public class CaptureCase extends VP2{
      */
     public void testPressPowerKeyInCaptureMode() throws Exception {
         CameraAction.navConfig("Capture");
-        for (int i=0;i<9;i++){
+        for (int i=0;i<10;i++){
             waitTime(1);
             Iris4GAction.powerKey();
         }
