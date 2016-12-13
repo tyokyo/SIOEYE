@@ -100,4 +100,16 @@ public class CaptureCase extends VP2{
         clickByText(NavPage.imageSize2M);
         Spoon.screenshot("testSetSizeToPower_pass");
     }
+    @Test
+    /**
+     * 在拍照预览界面亮灭屏5次后；拍摄一张8M的照片
+     */
+    public void testPressPowerKeyInCaptureMode() throws Exception {
+        CameraAction.navConfig("Capture");
+        for (int i=0;i<9;i++){
+            waitTime(1);
+            gDevice.pressKeyCode(26);
+        }
+        Photo(NavPage.imageSize8M,4/3);
+    }
 }
