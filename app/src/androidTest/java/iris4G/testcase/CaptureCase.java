@@ -2,6 +2,7 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiObject2;
 
 import com.squareup.spoon.Spoon;
 
@@ -98,6 +99,7 @@ public class CaptureCase extends VP2{
         Iris4GAction.powerKey();
         waitTime(2);
         clickByText(NavPage.imageSize2M);
+        Asst.fail("testSetSizeToPower");
         Spoon.screenshot("testSetSizeToPower_pass");
     }
     @Test
