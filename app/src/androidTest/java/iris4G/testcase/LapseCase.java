@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
@@ -57,7 +56,11 @@ public class LapseCase extends VP2 {
         int int_Lapse=Integer.parseInt(lapse_time.replace("s",""));
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         Iris4GAction.cameraKey();
-        waitTime(10);
+        waitTime(3);
+        for (int i=0;i<20;i++){
+            waitTime(1);
+            Iris4GAction.powerKey();
+        }
         CameraAction.cameraRecordTime();
         waitTime(5);
         boolean lapStatus = true;
@@ -305,31 +308,6 @@ public class LapseCase extends VP2 {
             Asst.fail("Lapse_Video_Not_Exist");
         }
         gDevice.pressBack();
-    }
-
-    @Test
-    public void testLapseOver2m() throws Exception {
-        CameraAction.navConfig(Iris4GPage.nav_menu[5]);
-        waitTime(5);
-
-        HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
-        Iris4GAction.cameraKey();
-        waitTime(128);
-        Iris4GAction.cameraKey();
-        waitTime(2);
-        HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
-        HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
-
-        if (resultHashSet.size()==1) {
-            String videoPath = resultHashSet.iterator().next();
-            logger.info("new file:"+videoPath);
-            VideoNode videoNode = Iris4GAction.VideoInfo(videoPath);
-            if(videoNode.getDuration()<120){
-                Asst.fail("max duration is 120 seconds");
-            }
-        }else {
-            Asst.fail("Video-Count=1:Error");
-        }
     }
 
     @Test
