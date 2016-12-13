@@ -2,7 +2,6 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.UiObject2;
 
 import com.squareup.spoon.Spoon;
 
@@ -110,7 +109,7 @@ public class CaptureCase extends VP2{
         CameraAction.navConfig("Capture");
         for (int i=0;i<9;i++){
             waitTime(1);
-            gDevice.pressKeyCode(26);
+            Iris4GAction.powerKey();
         }
         Photo(NavPage.imageSize8M,4/3);
     }
