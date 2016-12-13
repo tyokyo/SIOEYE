@@ -2,7 +2,7 @@ package cn.page;
 
 import android.os.Environment;
 
-import org.junit.Assert;
+import junit.framework.Assert;
 
 import java.io.File;
 import java.util.Random;
@@ -106,5 +106,43 @@ public class Constant {
         logger.info("randomString:"+ randomSequence);
         return randomSequence;
     }
+    public static String randomPhoneNumber() {
+        String phoneNumber="";
+        char[]alphaNumber={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        String[]alphaTelTitle={"130","131","132","133","134","135","136","137","138","139", "150",
+                "151","152","153","155","156","157","158","159","180","181","183","186","187","188","189","170"};
+        String phoneTitle= alphaTelTitle[new Random().nextInt(alphaTelTitle.length)];
+        phoneNumber=phoneNumber+phoneTitle;
+        for(int i=0;i<8;i++){
+            Character ranNumber=Character.valueOf(alphaNumber[new Random().nextInt(alphaNumber.length)]);
+            phoneNumber=phoneNumber+ranNumber.toString();
+        }
+        System.out.println(phoneNumber);
+        return phoneNumber;
+    }
+    public static String randomEmail(int length) {
+        int count=(int)(5+Math.random()*(length-5));
+        int count1=(int)(2+Math.random()*(count-4));
+        int count2=(int)(2+Math.random()*(count-count1-2));
+        String randomEmail="";
+        char[]alphaChar={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
+                'p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G',
+                'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y',
+                'Z','0','1','2','3','4','5','6','7','8','9'};
+        for(int i=1;i<count1;i++){
+            Character ranChar=Character.valueOf(alphaChar[new Random().nextInt(alphaChar.length)]);
+            randomEmail=randomEmail+ranChar.toString();}
+        randomEmail=randomEmail+"@";
+        for(int a=count1;a<count2+count1-1;a++){
+            Character ranChar=Character.valueOf(alphaChar[new Random().nextInt(alphaChar.length)]);
+            randomEmail=randomEmail+ranChar.toString();}
+        randomEmail=randomEmail+".";
+        for(int i=count2+count1;i<=count-1;i++){
+            Character ranChar=Character.valueOf(alphaChar[new Random().nextInt(alphaChar.length)]);
+            randomEmail=randomEmail+ranChar.toString();}
+        System.out.println(randomEmail);
+        return randomEmail;
+    }
+
 
 }

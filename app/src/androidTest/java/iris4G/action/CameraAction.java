@@ -355,7 +355,7 @@ public class CameraAction extends VP2 {
         //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
         CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
-        Iris4GAction.ScrollViewByText("Video Angle");
+        Iris4GAction.ScrollViewByText("Time Lapse");
         String active_angle = Iris4GAction.getRightValue("Time Lapse");
         Spoon.screenshot("currentTimeLapse",Time);
         Asst.assertEquals("TimeLapse",Time,active_angle);

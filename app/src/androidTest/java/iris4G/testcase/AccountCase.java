@@ -129,7 +129,7 @@ public class AccountCase extends VP2{
     */
     public void testLoginByErrorEmailAndPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
-        String userName="apd897iii@ouq7.com";
+        String userName=Constant.randomEmail(20);
         String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
@@ -140,7 +140,7 @@ public class AccountCase extends VP2{
     }
     @Test
     /*
-    case5 ：错误的邮箱和正确的错误的密码登陆
+    case5 ：正确的邮箱和错误的密码登陆
     邮箱读取本地config.properties文件中email
     密码为随机字符
     检查是否登录成功
@@ -158,14 +158,14 @@ public class AccountCase extends VP2{
     }
     @Test
     /*
-    case6：正确的邮箱和错误的密码登陆
+    case6：错误的邮箱和正确的密码登陆
     邮箱为错误邮箱
     密码为读取本地config.properties文件中email
     检查是否登录成功
     */
     public void testLoginByErrorEmailAndRightPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
-        String userName="9if4567fjjjSFGsi@lcccl.cn";
+        String userName=Constant.randomEmail(20);
         String userPassword=Constant.getPassword("email_password");
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
@@ -183,7 +183,7 @@ public class AccountCase extends VP2{
     */
     public void testLoginByErrorPhoneAndPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
-        String userName="13200009000";
+        String userName=Constant.randomPhoneNumber();
         String userPassword=Constant.randomStringGenerator(20);
         CameraAction.navToAccount();
         AccountAction.loginAccount(userName,userPassword);
@@ -199,7 +199,7 @@ public class AccountCase extends VP2{
     密码随机字符串
     检查是否登录成功
     */
-    public void testLoginByErrorPhoneNumberAndRightPassword() throws Exception {
+    public void testLoginByRightPhoneNumberAndErrorPassword() throws Exception {
         if (AccountAction.isLogin()) {AccountAction.logOut();}
         String userName=Constant.getUserName("phone_number");
         String userPassword=Constant.randomStringGenerator(20);
