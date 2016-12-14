@@ -278,6 +278,7 @@ public class LapseCase extends VP2 {
     public void testTLap10s108030Medium() throws Exception {
         Lapse(NavPage.quality1080_30,NavPage.lapseTime_10s,NavPage.angleMedium);
     }
+    //多次亮灭屏操作
     @Test
     public void testOnOffScreen() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[5]);
