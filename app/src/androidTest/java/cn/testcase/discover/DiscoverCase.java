@@ -44,6 +44,7 @@ import cn.page.MePage;
 public class DiscoverCase extends VP2 {
     Logger logger = Logger.getLogger(DiscoverCase.class.getName());
     @Before
+
     public  void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
