@@ -2,7 +2,8 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-
+import android.support.test.uiautomator.UiObject;
+import org.hamcrest.Asst;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,6 +17,7 @@ import cn.page.Constant;
 import iris4G.action.AccountAction;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
+import iris4G.page.Iris4GPage;
 
 /**
  * @Author yyun2016
@@ -210,5 +212,35 @@ public class AccountCase extends VP2{
             Assert.fail("Error Phone Number And Right Password Login success");
         }
     }
-
-}
+    @Test
+    /**
+     *  Case 9:在手动登录界面，按电源键灭屏及亮屏后再登录，按快门键发起直播
+     *  能够正常登录且能发起直播
+     */
+    public void testloginByPowerOnOff() throws Exception {
+        UiObject inputObject = getObjectById(Iris4GPage.login_id_input);
+        UiObject passwordObject = getObjectById(Iris4GPage.login_password_input);
+        String username= Constant.getUserName("email");
+        String password= Constant.getPassword("email_password");
+        //check Account 是否已登录
+        if(AccountAction.isLogin()) {
+            CameraAction.cameraSetting();
+            Iris4GAction.ScrollViewByText("Account");
+            clickByText("Account");
+            clickById(Iris4GPage.logout_btn);
+        }
+            CameraAction.navToAccount();
+            inputObject.setText(username);
+            passwordObject.setText(password);
+            Iris4GAction.powerKey();
+            waitTime(5);
+            Iris4GAction.powerKey();
+            AccountAction.login_btn_login();
+            Asst.assertEquals("login succeed",true,AccountAction.isLogin());
+            waitTime(3);
+            Iris4GAction.cameraKey();
+            Asst.assertEquals("Live succeed",true,CameraAction.checkLiveSuccess());
+            waitTime(20);
+            Iris4GAction.cameraKey();
+        }
+    }
