@@ -131,6 +131,7 @@ public class SloMoCase extends VP2 {
         }
         Spoon.screenshot("max_record","Maximum length os SLO-MO has been reached");
     }
+    //亮灭屏操作
     @Test
     public void testVideoSloMoPowerKey() throws Exception {
         Iris4GAction.startCamera();
@@ -160,6 +161,7 @@ public class SloMoCase extends VP2 {
             Asst.fail("expect screen=false,but is true");
         }
     }
+    //多次亮灭屏操作
     @Test
     public void  testSloMoScreenOnOff() throws Exception {
         gDevice.wakeUp();
