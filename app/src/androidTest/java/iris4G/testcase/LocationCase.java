@@ -28,6 +28,11 @@ import usa.page.Account;
 @SdkSuppress(minSdkVersion = 16)
 
 public class LocationCase extends VP2{
+    @BeforeClass
+    public static void initConfig(){
+        initDevice();
+        Iris4GAction.pmClear();
+    }
     @AfterClass
     public static void clearConfig(){
         initDevice();
@@ -35,8 +40,6 @@ public class LocationCase extends VP2{
     }
     @Before
     public void setup() throws Exception {
-        initDevice();
-        Iris4GAction.pmClear();
         Iris4GAction.initIris4G();
     }
     /**Case 1:
@@ -47,6 +50,7 @@ public class LocationCase extends VP2{
     public void testOpenLocation() throws Exception {
         initDevice();
         Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
         CameraAction.navToLocation();
         for(int i=1;i<=5;i++){
             CameraAction.openCompoundButton("Live&Location");
@@ -70,6 +74,9 @@ public class LocationCase extends VP2{
     @Test
     public void testLiveAndLocation() throws Exception {
         //Loation默认打开，添加Location 开关打开验证方法
+        initDevice();
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
         if (AccountAction.isLogin()){
             Iris4GAction.cameraKey();
         }else {
@@ -93,6 +100,9 @@ public class LocationCase extends VP2{
     @Test
     public void testLiveAndCloseLocation() throws Exception {
         //Loation默认打开，添加Location 关闭状态验证方法
+        initDevice();
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
         CameraAction.navToLocation();
         CameraAction.openCompoundButton("Live&Location");//关闭location开关
         if (AccountAction.isLogin()){
