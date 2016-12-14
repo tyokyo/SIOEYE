@@ -104,7 +104,8 @@ public class LocationCase extends VP2{
         Iris4GAction.pmClear();
         Iris4GAction.startCamera();
         CameraAction.navToLocation();
-        CameraAction.openCompoundButton("Live&Location");//关闭location开关
+        //关闭location开关
+        CameraAction.openCompoundButton("Live&Location");
         if (AccountAction.isLogin()){
             Iris4GAction.cameraKey();
         }else {
