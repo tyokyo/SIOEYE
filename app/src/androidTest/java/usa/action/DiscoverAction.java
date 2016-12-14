@@ -4,8 +4,8 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.squareup.spoon.Spoon;
@@ -22,9 +22,13 @@ import usa.page.Me;
 
 public class DiscoverAction extends VP2 {
 
+        public static void clickSearchBtn(){
+            gDevice.findObject(By.res("com.sioeye.sioeyeapp:id/title")).getParent().findObject(By.clazz(ImageView.class)).click();
+        }
         public static void navToSearch(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
-
+            waitTime(3);
+            clickSearchBtn();
         }
         public static void navToAd(){
             clickById(Discover.ID_MAIN_TAB_DISCOVER);
@@ -78,26 +82,78 @@ public class DiscoverAction extends VP2 {
                 Assert.fail("出现异常nick name获取为空");
             }
         }
-    public static void checkMiniProfileNumFollowerAddOneAfterFollow() throws UiObjectNotFoundException{
-        int NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
-        int expect_NumFollower=NumFollower+1;
-        //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
-        clickById(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
-        //关注操作
-        waitTime(1);
-        int active_NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
-        //关注后该目标用户的Follower的数量，
-        Spoon.screenshot("testAddFriendsRecommend0");
-        Asst.assertEquals("添加推荐用户为好友后，该用户followers没有加1",expect_NumFollower,active_NumFollower);
-        //断言该用户followers有没有+1
-        clickByClass("android.widget.ImageView",2);
-        //关闭弹出框
-    }
-        //得到UIO对象里面的数字
-        private static int getPersonNumber(UiObject UIO) throws UiObjectNotFoundException {
-            String CountPerson = UIO.getChild(new UiSelector().index(0)).getText();
-            int PersonNumber = Integer.getInteger(CountPerson);
-            return  PersonNumber;
+        public static void checkMiniProfileNumFollowerAddOneAfterFollow() throws UiObjectNotFoundException{
+            int NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
+            int expect_NumFollower=NumFollower+1;
+            //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
+            clickById(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
+            //关注操作
+            waitTime(3);
+            int active_NumFollower=Integer.parseInt(getTex(Discover.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
+            //关注后该目标用户的Follower的数量，
+            Spoon.screenshot("testAddFriendsRecommend0","该用户followers没有加1");
+            Asst.assertEquals("添加推荐用户为好友后，该用户followers没有加1",expect_NumFollower,active_NumFollower);
+            //断言该用户followers有没有+1
+            clickByClass("android.widget.ImageView",2);
+            //关闭弹出框
+        }
+         //得到观看人数
+         public static  String getPersonNumber() {
+             clickById(Discover.ID_MAIN_TAB_DISCOVER);
+             UiObject2 swip = getObject2ById(Discover.ID_Swipe_target);
+             waitTime(5);
+             List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
+             logger.info(linearLayouts.size() + "");
+             String temp ="100";
+             for (UiObject2 linearLayout : linearLayouts) {
+                 List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
+                 if (textViews.size() == 3) {
+                     return textViews.get(0).getText();
+                 }
+             }
+             return temp;
+         }
+        //得到点赞人数
+        public static  String getZanNumber() {
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            UiObject2 swip = getObject2ById(Discover.ID_Swipe_target);
+            waitTime(5);
+            List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
+            logger.info(linearLayouts.size() + "");
+            String temp ="100";
+            for (UiObject2 linearLayout : linearLayouts) {
+                List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
+                if (textViews.size() == 3) {
+                    return textViews.get(1).getText();
+                }
+            }
+            return temp;
+        }
+        public static void deleteNewFollowing (String target_nick_name) throws UiObjectNotFoundException {
+            clickById(Discover.ID_MAIN_TAB_ME);
+            clickById(Me.ID_ME_FOLLOWING);
+            waitUntilFind(Me.FOLLOWERING_VIEW,6000);
+            UiObject targetObj=scrollAndGetUIObject(target_nick_name);
+            clickByText(target_nick_name);
+            clickById(Me.FOLLOWERING_DELETE);
+            Spoon.screenshot("deleteNewFollowing","删除新加好友");
+        }
+        //点击Discover界面的视频观看
+        public static void navtoVideo(){
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            waitTime(2);
+            UiObject2 u1=gDevice.findObject(By.res("com.sioeye.sioeyeapp:id/swipe_target"));
+            List<UiObject2> views=u1.findObjects(By.clazz(android.view.View.class));
+            UiObject2 u3=views.get(5);
+            u3.click();
+            waitTime(30);
+        }
+        //获得位置信息
+        public static String getLocationInfo(){
+            clickById(Discover.ID_MAIN_TAB_DISCOVER);
+            waitTime(10);
+            List<UiObject2> textViews=getObject2ById(Discover.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
+            return textViews.get(11).getText();
         }
 }
 

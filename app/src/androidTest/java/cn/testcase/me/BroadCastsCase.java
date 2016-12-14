@@ -41,11 +41,18 @@ import cn.page.MePage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*
+直播-基本功能验证
+* 回放直播视频
+* 回放评论
+* 回放点赞
+* 编辑直播视频标题
+* */
 public class BroadCastsCase extends VP2{
     Logger logger = Logger.getLogger(BroadCastsCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //确保App 处于登录状态
         AccountAction.inLogin();
     }
@@ -56,12 +63,13 @@ public class BroadCastsCase extends VP2{
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
             int index=BroadcastAction.getRandomBroadcastsIndex();
+            logger.info("Index-"+index);
             BroadcastAction.getRandomBroadcasts(index).click();
             BroadcastAction.waitBroadcastLoading();
             gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
             //click play screen center
-            clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+            //clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
             Spoon.screenshot("play_video");
         }
     }
@@ -108,33 +116,6 @@ public class BroadCastsCase extends VP2{
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
             String input_title=getRandomString(3);
-            getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).setText(input_title);
-            //取消
-            clickById(MePage.BROADCAST_EDIT_OK);
-            //wait time
-            waitTime(5);
-            //check
-            BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
-            String active_title = activeBean.getBroadcast_title();
-            Asst.assertEquals("modify title",input_title,active_title);
-            Spoon.screenshot("modify_title",input_title);
-        }
-    }
-    //title 输入字符长度70
-    @Test
-    public void testEditTitle70() throws UiObjectNotFoundException, IOException {
-        MeAction.navToBroadcasts();
-        int broadcast_size=BroadcastAction.getBroadcastsSize();
-        if (broadcast_size>=1){
-            int index=BroadcastAction.getRandomBroadcastsIndex();
-            UiObject2 broadcast=BroadcastAction.getRandomBroadcasts(index);
-            broadcast.swipe(Direction.LEFT,0.9f);
-            clickById(MePage.BROADCAST_EDIT_TITLE);
-            waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
-            String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
-            //修改title
-            getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
-            String input_title=getRandomString(70);
             //clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             clearText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             setText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,input_title);
@@ -148,10 +129,46 @@ public class BroadCastsCase extends VP2{
             BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
             String active_title = activeBean.getBroadcast_title();
             Asst.assertEquals("modify title",input_title,active_title);
+            Spoon.screenshot("testEditTitle3",input_title);
+        }
+    }
+    //title 输入字符长度35
+    @Test
+    public void testEditTitle70() throws UiObjectNotFoundException, IOException {
+        MeAction.navToBroadcasts();
+        int broadcast_size=BroadcastAction.getBroadcastsSize();
+        if (broadcast_size>=1){
+            int index=BroadcastAction.getRandomBroadcastsIndex();
+            UiObject2 broadcast=BroadcastAction.getRandomBroadcasts(index);
+            broadcast.swipe(Direction.LEFT,0.9f);
+            clickById(MePage.BROADCAST_EDIT_TITLE);
+            waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
+            String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            //修改title
+            getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
+            String input_title=getRandomString(35);
+            //clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            clearText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            //setText(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,input_title);
+            clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
+            shellInputText(input_title);
+            gDevice.pressBack();
+            Spoon.screenshot("modify_title",input_title);
+            //确认
+            clickById(MePage.BROADCAST_EDIT_OK);
+            //wait time
+            waitTime(5);
+            waitUntilFind(MePage.BROADCAST_TITLE,10000);
+            Spoon.screenshot("modify_title_complete");
+            //check
+            BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
+            String active_title = activeBean.getBroadcast_title();
+            logger.info(active_title.length()+"");
+            Asst.assertEquals("modify title",input_title,active_title);
             Spoon.screenshot("modify_title",input_title);
         }
     }
-    //title 输入字符长度>70
+    //title 输入字符长度>35
     @Test
     public void testEditTitleMoreThan70() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
@@ -166,6 +183,7 @@ public class BroadCastsCase extends VP2{
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
             String input_title=getRandomString(80);
+            logger.info("input-80:"+input_title);
             clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             shellInputText(input_title);
             gDevice.pressBack();
@@ -177,6 +195,8 @@ public class BroadCastsCase extends VP2{
             BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
             String active_title = activeBean.getBroadcast_title();
             input_title=input_title.substring(0,70);
+            logger.info("expect:"+input_title);
+            logger.info("active:"+active_title);
             Asst.assertEquals("modify title",input_title,active_title);
             Spoon.screenshot("modify_title",input_title);
         }
@@ -216,7 +236,7 @@ public class BroadCastsCase extends VP2{
     }
     //验证-评论，允许的最大字符数
     @Test
-    public void testBroadcastsComments_Length_120() throws UiObjectNotFoundException, IOException {
+    public void testCmts120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -237,19 +257,24 @@ public class BroadCastsCase extends VP2{
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
-            Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+            if (text_exists_match("底部有新消息")){
+                clickByText("底部有新消息");
+                waitTime(2);
+            }
+
+            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
             Asst.assertEquals(comments_count_before+1,comments_count);
-            Spoon.screenshot("testComments_Length_120"+input_comments);
+            Spoon.screenshot("testComments_Length_120",input_comments);
             gDevice.pressBack();
         }
     }
     //验证-评论 超过最大的字符限制
     @Test
-    public void testBroadcastsComments_Length_130() throws UiObjectNotFoundException, IOException {
+    public void testCmts130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -271,18 +296,23 @@ public class BroadCastsCase extends VP2{
             gDevice.pressBack();
             waitTime(2);
             input_comments=input_comments.substring(0,120);
-            Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+            if (text_exists_match("底部有新消息")){
+                clickByText("底部有新消息");
+                waitTime(2);
+            }
+
+            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
             Asst.assertEquals(comments_count_before+1,comments_count);
-            Spoon.screenshot("testComments_Length_130"+input_comments);
+            Spoon.screenshot("testComments_Length_130",input_comments);
             gDevice.pressBack();
         }
     }
     @Test
-    public void testBroadcastsComments_Length_20() throws UiObjectNotFoundException, IOException {
+    public void testCmts20c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -303,19 +333,19 @@ public class BroadCastsCase extends VP2{
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
-            Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
             Asst.assertEquals(comments_count_before+1,comments_count);
-            Spoon.screenshot("testComments_Length_20"+input_comments);
+            Spoon.screenshot("testComments_Length_20",input_comments);
         }
     }
     //进入视频回放界面-直接点赞
     // 验证点赞数+1
     @Test
-    public void testBroadcastsZanKAdd() throws UiObjectNotFoundException, IOException {
+    public void testZanKAdd() throws UiObjectNotFoundException, IOException {
         //进入broadcasts
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -356,7 +386,7 @@ public class BroadCastsCase extends VP2{
     //进入视频回放界面-弹出的输入框中点赞
     // 验证点赞数+1
     @Test
-    public void testBroadcastsZanKAddByPopup() throws UiObjectNotFoundException, IOException {
+    public void tesZanKAddByPopup() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
@@ -392,6 +422,25 @@ public class BroadCastsCase extends VP2{
             }
             //截取屏幕
             Spoon.screenshot("testBroadcastsZanKAdd");
+        }
+    }
+    /****
+    上下滑动直播列表
+     选择一个视频观看
+    * */
+    @Test
+    public void testSwipeToViewVideo() throws UiObjectNotFoundException {
+        MeAction.navToBroadcasts();
+        int broadcast_size=BroadcastAction.getBroadcastsSize();
+        if (broadcast_size>=1){
+            MeAction.swipeUpDown(MePage.BROADCASTS_LIST,10);
+            int index=BroadcastAction.getRandomBroadcastsIndex();
+            BroadcastAction.getRandomBroadcasts(index).click();
+            BroadcastAction.waitBroadcastLoading();
+            gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+            Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+            Spoon.screenshot("play_video");
+            gDevice.pressBack();
         }
     }
 }

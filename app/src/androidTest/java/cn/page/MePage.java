@@ -80,10 +80,10 @@ public class MePage {
     public static final String BROADCAST_EDIT_TITLE="cn.sioeye.sioeyeapp:id/edit_broadcasts_title";
     //删除视频
     public static final String BROADCAST_DELETE="cn.sioeye.sioeyeapp:id/delete_broadcasts";
-    public static final String BROADCAST_EDIT_CANCEL="cn.sioeye.sioeyeapp:id/edit_cancel";
-    public static final String BROADCAST_EDIT_OK="cn.sioeye.sioeyeapp:id/edit_ok";
-    public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/delete_ok";
-
+    public static final String BROADCAST_EDIT_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
+    public static final String BROADCAST_EDIT_OK="cn.sioeye.sioeyeapp:id/tv_ok";
+    public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/tv_ok";
+    public static final String BROADCAST_EDIT_DELETE_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
 
     public static final String BROADCAST_VIEW_TIPTEXT="cn.sioeye.sioeyeapp:id/tipText";
     public static final String BROADCAST_VIEW_ZAN="cn.sioeye.sioeyeapp:id/watch_player_portrait_like";
@@ -145,6 +145,7 @@ public class MePage {
     //进入live configuration 界面
     public static final String LIVE_CONFIGURATION="cn.sioeye.sioeyeapp:id/user_main_live_configuation";
     public static final String LIVE_CONFIGURATION_VIDEO_TITLE="cn.sioeye.sioeyeapp:id/video_title";
+    //谁可以看我的直播
     public static final String LIVE_CONFIGURATION_PRIVACY_SETTINGS="cn.sioeye.sioeyeapp:id/privacy_settings";
     public static final String LIVE_CONFIGURATION_SLV_VIDEO="cn.sioeye.sioeyeapp:id/slv_video";
     public static final String LIVE_CONFIGURATION_LINK="cn.sioeye.sioeyeapp:id/link";
@@ -155,9 +156,10 @@ public class MePage {
 
     //done
     public static final String LIVE_CONFIGURATION_DONE_TITLE="cn.sioeye.sioeyeapp:id/right";
-    public static final String LIVE_CONFIGURATION_DONE_PRIVACY="cn.sioeye.sioeyeapp:id/done";
+    public static final String LIVE_CONFIGURATION_DONE_PRIVACY="cn.sioeye.sioeyeapp:id/right";
     public static final String LIVE_CONFIGURATION_DONE_SLV_VIDEO="cn.sioeye.sioeyeapp:id/right";
-
+    public static final String PRIVACY_PERSONAL_DONE="cn.sioeye.sioeyeapp:id/done";
+    public static final String PRIVACY_PERSONAL_RIGHT="cn.sioeye.sioeyeapp:id/right";
     //privacy settings
     public static final String LIVE_CONFIGURATION_PRIVACY_SETTINGS_SELECT_PEOPLE="cn.sioeye.sioeyeapp:id/llt_select_people";
 
@@ -228,5 +230,32 @@ public class MePage {
     public static final String FANS_VIEW_LIST="cn.sioeye.sioeyeapp:id/recycleview_followes";
     //pop up dialog -OK btn
     public static final String ID_TV_OK="cn.sioeye.sioeyeapp:id/tv_ok";
+    //谁可以看我的直播-直播选中按钮
+    //部分可见
+    public static final String WHO_CAN_VIEW_MY_BROADCAST_PARAITION="cn.sioeye.sioeyeapp:id/iv_paraition";
+    //公开
+    public static final String WHO_CAN_VIEW_MY_BROADCAST_PUBLIC="cn.sioeye.sioeyeapp:id/iv_public";
+    //秘密
+    public static final String WHO_CAN_VIEW_MY_BROADCAST_PRIVATE="cn.sioeye.sioeyeapp:id/iv_privacy";
+    //选择的用户的头像
+    public static final String SHOW_USERING="cn.sioeye.sioeyeapp:id/show_userimg";
+    public static final String SELECT_PEOPLE="cn.sioeye.sioeyeapp:id/llt_select_people";
+    public static final String SELECT_PEOPLE_LIST_Vertical="cn.sioeye.sioeyeapp:id/vertical_recycleview";
+    public static final String SELECT_PEOPLE_LIST_Horizontal="cn.sioeye.sioeyeapp:id/horizontal_recycleview";
+    //粉丝滑动列表
+    public static final String FANS_SWIPE_LAYOUT="cn.sioeye.sioeyeapp:id/swipeLayout";
+    //视频信息
+    public static final String VIDEO_WATCH_NUMBER="cn.sioeye.sioeyeapp:id/tv_watch_number";
+    public static final String VIDEO_CHAT_NUMBER="cn.sioeye.sioeyeapp:id/tv_chat_number";
+    public static final String VIDEO_LIKE_NUMBER="cn.sioeye.sioeyeapp:id/tv_like_number";
+    //导播控制
+    public static final String SETTINGS_CB_DIRECTOR="cn.sioeye.sioeyeapp:id/cb_director";
+    public static final String SETTINGS_CB_DIRECTOR_TEXT="cn.sioeye.sioeyeapp:id/tv_director_txt";
+    //sex
+    public static final String SETTINGS_SEX_MALE="cn.sioeye.sioeyeapp:id/rlt_male";
+    public static final String SETTINGS_SEX_FEMALE="cn.sioeye.sioeyeapp:id/rlt_female";
+    public static final String SETTINGS_SEX_SECRET="cn.sioeye.sioeyeapp:id/rlt_other";
+
+
 
 }

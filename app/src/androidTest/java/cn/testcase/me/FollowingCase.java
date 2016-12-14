@@ -5,20 +5,17 @@ import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
-
 import com.squareup.spoon.Spoon;
-
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import java.io.IOException;
 import java.util.logging.Logger;
-
 import bean.FollowingBean;
 import bean.WatcherBean;
 import ckt.base.VP;
@@ -35,11 +32,13 @@ import cn.page.MePage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*关注 播放视频 评论 点赞
+* */
 public class FollowingCase extends VP2 {
     Logger logger = Logger.getLogger(BroadCastsCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //确保App 处于登录状态
         AccountAction.inLogin();
     }
@@ -74,7 +73,7 @@ public class FollowingCase extends VP2 {
     }
     //验证-评论，允许的最大字符数
     @Test
-    public void testFollowingComments_Length_120() throws UiObjectNotFoundException, IOException {
+    public void testFwCmt120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -95,19 +94,19 @@ public class FollowingCase extends VP2 {
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
-            Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
             Asst.assertEquals(comments_count_before+1,comments_count);
-            Spoon.screenshot("testComments_Length_120"+input_comments);
+            Spoon.screenshot("testComments_Length_120",input_comments);
             gDevice.pressBack();
         }
     }
     //验证-评论 超过最大的字符限制
     @Test
-    public void testFollowingComments_Length_130() throws UiObjectNotFoundException, IOException {
+    public void testFwCmt130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -129,19 +128,19 @@ public class FollowingCase extends VP2 {
             gDevice.pressBack();
             waitTime(2);
             input_comments=input_comments.substring(0,120);
-            Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
             Asst.assertEquals(comments_count_before+1,comments_count);
-            Spoon.screenshot("testComments_Length_130"+input_comments);
+            Spoon.screenshot("testComments_Length_130",input_comments);
             gDevice.pressBack();
         }
     }
     //评论-关注的好友中的直播视频
     @Test
-    public void testFollowingComments_Length_20() throws UiObjectNotFoundException, IOException {
+    public void testFwCmt20c() throws UiObjectNotFoundException, IOException {
         //进入关注
         MeAction.navToFollowing();
         int following_size= FollowingAction.getFollowingSize();
@@ -172,13 +171,14 @@ public class FollowingCase extends VP2 {
                 clickRect(rect);
                 waitTime(2);
                 //input_comments=input_comments.substring(0,120);
-                Asst.assertTrue("comments success",getUiObjectByText(input_comments).exists());
+                Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
                 //验证评论数+1
+                gDevice.pressBack();
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
                 int comments_count=Integer.parseInt(after_comments);
                 Asst.assertEquals(comments_count_before+1,comments_count);
-                Spoon.screenshot("testFollowingComments_Length_20"+input_comments);
+                Spoon.screenshot("testFollowingComments_Length_20",input_comments);
                 gDevice.pressBack();
                 Spoon.screenshot("play_20_seconds");
             }else {
@@ -275,7 +275,7 @@ public class FollowingCase extends VP2 {
                 clickById(MePage.BROADCAST_VIEW_TIPTEXT);
                 waitTime(2);
                 //进行点赞操作
-                clickById(MePage.BROADCAST_VIEW_ZAN);
+                clickById(MePage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
                 gDevice.pressBack();
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();
@@ -296,6 +296,40 @@ public class FollowingCase extends VP2 {
         }else{
             logger.info("no_user");
             Spoon.screenshot("no_user","没有关注的用户");
+        }
+    }
+    /****
+     上下滑动直播列表
+     选择一个视频观看
+     * */
+    @Test
+    public void testSwipeToViewVideo() throws UiObjectNotFoundException, IOException {
+        MeAction.navToFollowing();
+        int following_size= FollowingAction.getFollowingSize();
+        if (following_size>=1){
+            //获取随机的一个用户信息
+            FollowingBean followingBean =FollowingAction.randomFollowingUser();
+            logger.info(followingBean.toString());
+            int index=followingBean.getIndex_linearLayout();
+            //选择一个用户
+            FollowingAction.clickRandomFollower(followingBean);
+            //随机播放一个视频
+            int broadcast_size=FollowingAction.hasBroadcasts();
+            if (broadcast_size>=1){
+                //滑动操作
+                MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,10);
+                FollowingAction.clickFollowingBroadcast();
+                BroadcastAction.waitBroadcastLoading();
+                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);
+                //play video
+                waitTime(20);
+                Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+                Spoon.screenshot("play_video");
+                gDevice.pressBack();
+                Spoon.screenshot("play_20_seconds");
+            }else {
+                Spoon.screenshot("no_video");
+            }
         }
     }
 }

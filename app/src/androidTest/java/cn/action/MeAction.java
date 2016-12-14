@@ -2,11 +2,13 @@ package cn.action;
 
 import android.graphics.Point;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
+import android.widget.TextView;
 
 import com.squareup.spoon.Spoon;
 
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 import bean.InfoBean;
+import ckt.base.VP;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.MePage;
@@ -23,36 +26,93 @@ import cn.page.MePage;
  * Created by elon on 2016/10/27.
  */
 public class MeAction extends VP2{
+    public static void getAccountPrivacyInfo(InfoBean infoBean){
+        //启动被测App
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
+        SettingAction.navToAccountAndPrivacy();
+        String email=getUiObject2ByText("邮箱地址").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
+        infoBean.setEmail(email);
+        String eyeId=getUiObject2ByText("Sioeye ID").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
+        infoBean.setId(eyeId);
+    }
+    public static void clickBroadcast() throws UiObjectNotFoundException {
+        if (id_exists(MePage.ID_ME_BROADCAST)){
+            clickById(MePage.ID_ME_BROADCAST);
+        }else{
+            clickByText("直播");
+        }
+    }
+    public static void clickFollowing() throws UiObjectNotFoundException {
+        if (id_exists(MePage.ID_ME_FOLLOWING)){
+            clickById(MePage.ID_ME_FOLLOWING);
+        }else{
+            clickByText("关注");
+        }
+    }
+    public static void clickFollowers() throws UiObjectNotFoundException {
+        if (id_exists(MePage.ID_ME_FOLLOWERS)){
+            clickById(MePage.ID_ME_FOLLOWERS);
+        }else{
+            clickByText("粉丝");
+        }
+    }
+    public static void swipeUpDown(String ResourceID,int times) throws UiObjectNotFoundException {
+        if (id_exists(ResourceID)){
+            for (int i = 0;i <times;i++) {
+                getObject2ById(ResourceID).swipe(Direction.UP,0.5f);
+                getObject2ById(ResourceID).swipe(Direction.DOWN,0.5f);
+            }
+        }else {
+            logger.info(ResourceID +" can not be found");
+        }
+    }
+    //谁可以看我的直播-获取选取的设置内容
+    public static String getPermissionToView() throws UiObjectNotFoundException {
+        String permission = "";
+        boolean status_public =id_exists(MePage.WHO_CAN_VIEW_MY_BROADCAST_PUBLIC);
+        boolean status_private =id_exists(MePage.WHO_CAN_VIEW_MY_BROADCAST_PRIVATE);
+        boolean status_personal =id_exists(MePage.WHO_CAN_VIEW_MY_BROADCAST_PARAITION);
+        if (status_public==true&&status_private==false&&status_personal==true){
+            permission="public";
+        }
+        if (status_public==false&&status_private==true&&status_personal==true){
+            permission="private";
+        }
+        if (status_public==false&&status_private==false&&status_personal==true){
+            permission="personal";
+        }
+        return  permission;
+    }
     //编辑界面所有用户的信息
     public static InfoBean getEditUserInfo() throws UiObjectNotFoundException {
         InfoBean infoBean=new InfoBean();
         infoBean.setNick_name(getNkName());
         infoBean.setSex(getSex());
-        infoBean.setEmail(getEmailAddress());
+        //infoBean.setEmail(getEmailAddress());
         infoBean.setLocation(getLocation());
-        infoBean.setId(getSioEyeID());
+        //infoBean.setId(getSioEyeID());
         infoBean.setAbout_me(getAboutMe());
         return  infoBean;
     }
     //Go to 直播
-    public static void navToBroadcasts(){
+    public static void navToBroadcasts() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.ID_ME_BROADCAST);
+        clickBroadcast();
         waitTime(2);
         gDevice.wait(Until.findObject(By.res(MePage.BROADCAST_VIEW)),40000);
         Spoon.screenshot("navToBroadcasts");
     }
     //Go to 关注
-    public static void navToFollowing(){
+    public static void navToFollowing() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.ID_ME_FOLLOWING);
+        clickFollowing();
         gDevice.wait(Until.gone(By.res(MePage.LOADING_FOLLOWERS)),40000);
         Spoon.screenshot("navToFollowing");
     }
     //Go to 粉丝
-    public static void navToFans(){
+    public static void navToFans() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.ID_ME_FOLLOWERS);
+        clickFollowers();
         gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),40000);
         Spoon.screenshot("navToFans");
     }
@@ -60,26 +120,30 @@ public class MeAction extends VP2{
     //Go to 直播配置
     public static void navToLiveConfiguration(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.LIVE_CONFIGURATION);
+        //clickById(MePage.LIVE_CONFIGURATION);
+        clickByText("直播配置");
         Spoon.screenshot("navToLiveConfiguration");
     }
     //Go to 我的二维码
     public static void navToQrCode(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.LIVE_CONFIGURATION);
+        //clickById(MePage.LIVE_CONFIGURATION);
+        clickByText("我的二维码");
         Spoon.screenshot("navToQrCode");
     }
     //Go to 消息
     public static void navToNotifications(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.NOTIFICATIONS);
+        //clickById(MePage.NOTIFICATIONS);
+        clickByText("消息");
         gDevice.wait(Until.gone(By.res(MePage.IS_LOCATING)),20000);
         Spoon.screenshot("navToNotifications");
     }
     //Go to 设置
     public static void navToSettings(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.SETTINGS_USER_MAIN);
+        //clickById(MePage.SETTINGS_USER_MAIN);
+        clickByText("设置");
         Spoon.screenshot("navToSettings");
     }
     //Go to 帮助中心
@@ -125,6 +189,9 @@ public class MeAction extends VP2{
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
         clickById(MePage.NAV_EDIT_LOCATION);
+        if (id_exists(VP.PERMISSION_ALLOW)){
+            clickById(VP.PERMISSION_ALLOW);
+        }
         Spoon.screenshot("navToLocation");
         return infoBean;
     }
@@ -173,7 +240,7 @@ public class MeAction extends VP2{
      * @param
      */
     public static Point getPointToDoComment() throws UiObjectNotFoundException, IOException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         Point point = new Point();
         navToBroadcasts();
         int index=BroadcastAction.getRandomBroadcastsIndex();
@@ -184,7 +251,7 @@ public class MeAction extends VP2{
         int y = zan.getBounds().centerY();
         point.set(x,y);
         makeToast(point.x+"|"+point.y,3);
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         return  point;
     }
     //获取nickname
@@ -246,4 +313,17 @@ public class MeAction extends VP2{
         String me = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
         return  me;
     }
+    //谁可以看我的直播-设置为 公开public
+    public static void setToPublic() throws UiObjectNotFoundException {
+        clickByText("公开");
+    }
+    //谁可以看我的直播-设置为 秘密private
+    public static void setToPrivate() throws UiObjectNotFoundException {
+        clickByText("私密");
+    }
+    //谁可以看我的直播-设置为 秘密private
+    public static void setToPersonal() throws UiObjectNotFoundException {
+        clickByText("部分可见");
+    }
+
 }

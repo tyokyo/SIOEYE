@@ -36,14 +36,22 @@ import cn.page.MePage;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
+/*编辑-爱好-基本功能验证
+* 添加爱好
+* 删除爱好
+* 修改爱好
+* */
 public class ActivityCase extends VP2{
     Logger logger = Logger.getLogger(ActivityCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
     }
-    //验证添加功能  what are you interested in ?
+    /*验证添加功能
+    选择一个爱好
+    添加一个爱好
+    * */
     @Test
     public void testAddOneActivity() throws UiObjectNotFoundException {
         //进入爱好界面
@@ -71,7 +79,9 @@ public class ActivityCase extends VP2{
         Spoon.screenshot("add_my_Interests",added);
 
     }
-    //验证添加功能 what are you interested in ? 添加所有推荐的爱好
+    /*
+    验证添加功能
+    添加所有推荐的爱好*/
     @Test
     public void testAddAllActivity() throws UiObjectNotFoundException {
         //进入爱好界面
@@ -171,7 +181,7 @@ public class ActivityCase extends VP2{
         //提交
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //重新open app 验证是否添加成功
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //go to 爱好
         MeAction.navToActivities();
         Set myInterests_after_add = ActivityAction.getAllMyInterests();
@@ -198,7 +208,7 @@ public class ActivityCase extends VP2{
         //添加
         clickByPoint(point);
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         //最多只能接受16个字符的长度的输入
         input=input.substring(0,16);
@@ -233,7 +243,7 @@ public class ActivityCase extends VP2{
         //确认
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
         //验证增加的爱好
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         Set myInterests_after_add = ActivityAction.getAllMyInterests();
         Asst.assertEquals("add success",total_add,myInterests_after_add.size());
@@ -255,7 +265,7 @@ public class ActivityCase extends VP2{
         //添加
         gDevice.click(p.x,p.y);
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         //获取爱好内容
         Set myInterests_after_add =ActivityAction.getAllMyInterests();
@@ -278,7 +288,7 @@ public class ActivityCase extends VP2{
         //添加
         clickByPoint(point);
         clickById(MePage.ACTIVITIES_MY_INTERESTS_DONE);
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         //验证点
         Set myInterests_after_add = ActivityAction.getAllMyInterests();
@@ -304,7 +314,7 @@ public class ActivityCase extends VP2{
         clickByPoint(p);
         clickById(MePage.ACTIVITIES__BACK);
         //check
-        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_EN);
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToActivities();
         Set myInterests_after_add = ActivityAction.getAllMyInterests();
         Asst.assertEquals("add with forgive saving",0,myInterests_after_add.size());
@@ -328,6 +338,7 @@ public class ActivityCase extends VP2{
         shellInputText(input);
         //添加
         clickByPoint(point);
+        waitTime(3);
         //get interetsts content
         Set myInterests_after_add_1 = ActivityAction.getAllMyInterests();
         //add another with the same interest name
@@ -336,6 +347,7 @@ public class ActivityCase extends VP2{
         //添加
         clickByPoint(point);
         //check
+        waitTime(3);
         Set myInterests_after_add_2 = ActivityAction.getAllMyInterests();
         Asst.assertEquals("add with the same name",myInterests_after_add_1.size(),myInterests_after_add_2.size());
         Spoon.screenshot("no_interest",input);

@@ -35,6 +35,7 @@ public class FollowingAction extends VP2{
     public static Logger logger =Logger.getLogger("FollowingAction");
     //选择一个视频 播放视频
     public static void clickFollowingBroadcast() throws UiObjectNotFoundException {
+        waitUntilFind(MePage.USER_FOLLOW_LIST,10000);
         UiObject2 list =getObject2ById(MePage.USER_FOLLOW_LIST);
         List<UiObject2> frameLayoutList=list.findObjects(By.clazz(FrameLayout.class));
         List<UiObject2> videoList=new ArrayList<>();
@@ -51,11 +52,13 @@ public class FollowingAction extends VP2{
     //选择一个用户 查看用户
     public static void clickRandomFollower(FollowingBean followingBean) throws UiObjectNotFoundException {
         scrollAndGetUIObject(followingBean.getName()).clickAndWaitForNewWindow();
+        Spoon.screenshot("clickRandomFollower","Name-"+followingBean.getName());
     }
     //关注数目
     public static int getFollowingSize(){
         List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.FOLLOWERING_AVATAR));
         int size = lisCollect.size();
+        Spoon.screenshot("Following",size+" Following");
         return  size;
     }
     public static UserBean getUserInfo() throws UiObjectNotFoundException {
@@ -128,8 +131,15 @@ public class FollowingAction extends VP2{
         followingBean.setIndex_linearLayout(int_r);
         return  followingBean;
     }
+    //直播列表中是有多少视频
     public static int hasBroadcasts(){
-        int following_broadcast=getObject2ById(MePage.USER_FOLLOW_LIST).findObjects(By.clazz(RelativeLayout.class)).size();
+        int following_broadcast=0;
+        List<UiObject2> relatives=getObject2ById(MePage.USER_FOLLOW_LIST).findObjects(By.clazz(RelativeLayout.class));
+        if (relatives==null){
+            logger.info("no broadcast");
+        }else{
+            following_broadcast=relatives.size();
+        }
         return following_broadcast;
     }
 }

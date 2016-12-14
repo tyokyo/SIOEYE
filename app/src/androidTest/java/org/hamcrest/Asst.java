@@ -41,22 +41,26 @@ public class Asst extends VP2{
 
     public static void fail(String message){
         //Spoon.screenshot(gDevice,"fail","message is null");
+        logger.info("Now-Fail-Message");
         try {
             String ANR="";
             if (getObjectById("android:id/message").exists()){
                 ANR=getObjectById("android:id/message").getText();
             }
-            if (getObjectByTextContains("Unfortunately").exists()) {
+            if (getObjectByTextContains("Unfortunately").exists()
+                    ||getObjectByTextContains("停止运行").exists()) {
                 //Exception_Crash
                 message="Exception_Crash->"+message;
                 message=ANR+"-"+message;
 
-                Spoon.screenshot("fail",message==null?"message is null":message);
+                Spoon.screenshot("Crash",message==null?"message is null":message);
                 logger.info("Exception_Crash");
                 Spoon.screenshot("Exception_Crash");
                 clickByText("OK");
 
-            }else if(getObjectByTextContains("isn't responding").exists()){
+            }else if(getObjectByTextContains("isn't responding").exists()
+                    ||getObjectByTextContains("无响应").exists()
+                    ){
                 //Exception_ANR
                 message="Exception_ANR->"+message;
                 message=ANR+"-"+message;
@@ -88,10 +92,44 @@ public class Asst extends VP2{
         fail(null);
     }
 
-    public static void assertEquals(String message, Object expected, Object actual) {
+    public static void assertEquals(String message, Object expected, Object actual){
         if(!equalsRegardingNull(expected, actual)) {
             if(expected instanceof String && actual instanceof String) {
                 String cleanMessage = message == null?"":message;
+                String ANR="";
+                if (getObjectById("android:id/message").exists()){
+                    try {
+                        ANR=getObjectById("android:id/message").getText();
+                    } catch (UiObjectNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                try {
+                    if (getObjectByTextContains("Unfortunately").exists()) {
+                        //Exception_Crash
+                        message="Exception_Crash->"+message;
+                        message=ANR+"-"+message;
+
+                        Spoon.screenshot("fail",message==null?"message is null":message);
+                        logger.info("Exception_Crash");
+                        Spoon.screenshot("Exception_Crash");
+                        clickByText("OK");
+
+                    }else if(getObjectByTextContains("isn't responding").exists()){
+                        //Exception_ANR
+                        message="Exception_ANR->"+message;
+                        message=ANR+"-"+message;
+                        Spoon.screenshot("fail",message==null?"message is null":message);
+                        logger.info("Exception_ANR");
+                        Spoon.screenshot("Exception_ANR");
+                        clickByText("OK");
+                    }else{
+                        Spoon.screenshot("fail",message==null?"message is null":message);
+                    }
+                } catch (UiObjectNotFoundException e) {
+                    e.printStackTrace();
+                }
+
                 throw new ComparisonFailure(cleanMessage, (String)expected, (String)actual);
             } else {
                 failNotEquals(message, expected, actual);

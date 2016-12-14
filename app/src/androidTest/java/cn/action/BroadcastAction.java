@@ -35,8 +35,10 @@ public class BroadcastAction extends VP2{
     }
     //直播-直播数目
     public static int getBroadcastsSize(){
+        waitHasObject(MePage.BROADCAST_CONTENT,50000);
         List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_CONTENT));
         int size = lisCollect.size();
+        logger.info("getBroadcastsSize:"+size);
         return  size;
     }
     //fans-直播数目
@@ -48,13 +50,15 @@ public class BroadcastAction extends VP2{
     }
     //随机获取一个broadcasts对象的index
     public static int getRandomBroadcastsIndex(){
+        waitHasObject(MePage.BROADCAST_VIEW,10000);
         UiObject2 listView = gDevice.findObject(By.res(MePage.BROADCAST_VIEW));
         List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_CONTENT));
         int size = lisCollect.size();
+        logger.info("getRandomBroadcastsIndex-size:"+size);
         Random random = new Random();
         int rd = random.nextInt(size);
-        logger.info("getRandomBroadcastsIndex:"+rd);
-        return  rd;
+        logger.info("size-"+size+"random:"+rd);
+        return  rd==0?rd:rd-1;
     }
     //随机获取一个broadcasts对象
     public static UiObject2 getRandomBroadcasts(int index){
@@ -71,6 +75,7 @@ public class BroadcastAction extends VP2{
             if (getObjectById(MePage.BROADCAST_VIEW_ZAN).isEnabled()==true&&
                     getObjectById(MePage.BROADCAST_VIEW_TIPTEXT).isEnabled()==true&&
                     getUiObjectByText("说点什么吧").exists()){
+                logger.info("聊天室连接成功-说点什么吧");
                 break;
             } else{
                 waitTime(4);
@@ -80,16 +85,18 @@ public class BroadcastAction extends VP2{
     }
     //视频回放页面的播放数-点赞数-评论数
     public static WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {
+        FollowersAction.clickToAnchor();
         WatcherBean watcherBean = new WatcherBean();
         UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.BROADCAST_VIEW_WATCHER_COUNT));
-        String watcher = u.getChild(new UiSelector().className("android.widget.TextView").index(1)).getText();
-        String comments = u.getChild(new UiSelector().className("android.widget.TextView").index(3)).getText();
-        String zan =  u.getChild(new UiSelector().className("android.widget.TextView").index(5)).getText();
+        String watcher = getObject2ById(MePage.VIDEO_WATCH_NUMBER).getText();
+        String comments = getObject2ById(MePage.VIDEO_LIKE_NUMBER).getText();
+        String zan = getObject2ById(MePage.VIDEO_CHAT_NUMBER).getText();
         makeToast(zan,3);
-        logger.info("active zan is"+zan);
         watcherBean.setComments(comments);
         watcherBean.setWatch(watcher);
         watcherBean.setZan(zan);
+        FollowersAction.clickToChat();
+        logger.info(watcherBean.toString());
         return  watcherBean;
     }
     public static BroadcastBean getChinaBean(int index) throws UiObjectNotFoundException {
