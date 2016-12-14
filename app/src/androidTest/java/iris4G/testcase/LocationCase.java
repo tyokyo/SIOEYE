@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.page.Constant;
 import iris4G.action.AccountAction;
@@ -28,6 +30,7 @@ import usa.page.Account;
 @SdkSuppress(minSdkVersion = 16)
 
 public class LocationCase extends VP2{
+    private static Logger logger = Logger.getLogger(BurstCase.class.getName());
     @BeforeClass
     public static void initConfig(){
         initDevice();
