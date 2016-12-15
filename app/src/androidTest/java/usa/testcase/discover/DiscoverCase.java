@@ -104,5 +104,6 @@ public class DiscoverCase extends VP2 {
         clickById(Me.ID_MAIN_TAB_ME);
         clickById(Discover.ID_MAIN_TAB_DECICE);
     }
+
 }
 
