@@ -7,4 +7,5 @@ public class Other {
 	public static String login_btn_login = "com.hicam:id/login_btn_login";
 	public static String chattextfield = "cn.sioeye.sioeyeapp:id/tipText";
 	public static String weibo_btn = "cn.sioeye.sioeyeapp:id/login_weibo";
+	public static String chattextfield_tanchu = "cn.sioeye.sioeyeapp:id/edit_text";
 }
