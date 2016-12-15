@@ -68,6 +68,10 @@ public class VideoCase extends VP2{
         Video(NavPage.quality1080_30,NavPage.angleSuperWide);
     }
     @Test
+    public void testV480120fpsSuperWide() throws Exception {
+        Video(NavPage.quality480_120,NavPage.angleSuperWide);
+    }
+    @Test
     public void testV72030fpsWide() throws Exception {
         Video(NavPage.quality720_30,NavPage.angleWide);
     }
@@ -80,6 +84,10 @@ public class VideoCase extends VP2{
         Video(NavPage.quality1080_30,NavPage.angleWide);
     }
     @Test
+    public void testV480120fpsWide() throws Exception {
+        Video(NavPage.quality480_120,NavPage.angleWide);
+    }
+    @Test
     public void testV72030fpsMedium() throws Exception {
         Video(NavPage.quality720_30,NavPage.angleMedium);
     }
@@ -90,6 +98,10 @@ public class VideoCase extends VP2{
     @Test
     public void testV108030fpsMedium() throws Exception {
         Video(NavPage.quality1080_30,NavPage.angleMedium);
+    }
+    @Test
+    public void testV480120fpsMedium() throws Exception {
+        Video(NavPage.quality480_120,NavPage.angleMedium);
     }
 
 }
