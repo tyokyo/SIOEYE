@@ -53,7 +53,7 @@ public class VideoCase extends VP2{
         CameraAction.cameraRecordTime();
         Iris4GAction.cameraKey();
         waitTime(5);
-        CameraAction.openPlayVideo(beforeTakeVideoList);
+        CameraAction.openPlayVideoAndCheck(quality,beforeTakeVideoList);
     }
     @Test
     public void testV72030fpsSuperWide() throws Exception {
