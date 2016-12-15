@@ -74,7 +74,9 @@ public class LiveSaveCase extends VP2 {
             logger.info("new file:" + videoPath);
             String videoName = new File(videoPath).getName();
             VideoNode activeNode = Iris4GAction.VideoInfo(videoPath);
-            int height = Integer.parseInt(quality.split("@")[0]);
+            //默认视频质量为1080 30FPS
+            //int height = Integer.parseInt(quality.split("@")[0]);
+            int height = 1080;
             if (Iris4GAction.checkVideoInfo(height, activeNode)) {
                 logger.info("video info check success-" + videoPath);
                 FileManagerAction.playVideoByFileManager(videoName);
@@ -87,6 +89,7 @@ public class LiveSaveCase extends VP2 {
                 }
             } else {
                 logger.info("video info check failed" + videoPath);
+                Asst.fail("video info check failed");
             }
         } else {
             Asst.fail("video not exist");

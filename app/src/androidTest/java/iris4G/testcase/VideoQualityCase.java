@@ -93,8 +93,8 @@ public class VideoQualityCase extends VP2{
     public void test1080_30() throws Exception {
         //Video - 修改视频质量 1080@30FPS
         CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality1080_30);
-        //Lapse - 修改视频质量 720@30FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_30);
+        //Lapse - 修改视频质量 480@120FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_120);
 
         //切换到Burst
         CameraAction.navConfig(NavPage.navConfig_Burst);
@@ -114,6 +114,34 @@ public class VideoQualityCase extends VP2{
         Iris4GAction.startCamera();
         //验证Lapse视频质量 1080@30FPS
         CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality1080_30);
+        //验证Lapse视频质量 480@120FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_120);
+    }
+    @Test
+    public void test480_120() throws Exception {
+        //Video - 修改视频质量 480@120FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality480_120);
+        //Lapse - 修改视频质量 720@30FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_30);
+
+        //切换到Burst
+        CameraAction.navConfig(NavPage.navConfig_Burst);
+        //切换到Lapse
+        CameraAction.navConfig(NavPage.navConfig_Lapse);
+        //切换到Capture
+        CameraAction.navConfig(NavPage.navConfig_Capture);
+        //切换到LiveStream
+        CameraAction.navConfig(NavPage.navConfig_LiveStream);
+        //切换到Slo_Mo
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
+        //切换到Video
+        CameraAction.navConfig(NavPage.navConfig_Video);
+
+        //重启camera
+        Iris4GAction.stopCamera();
+        Iris4GAction.startCamera();
+        //验证Lapse视频质量 480@120FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality480_120);
         //验证Lapse视频质量 720@30FPS
         CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_30);
     }
