@@ -42,6 +42,13 @@ public class MeAction extends VP2{
             clickByText("直播");
         }
     }
+    public static void clickMe() throws UiObjectNotFoundException {
+        if (id_exists(MePage.ID_MAIN_TAB_ME)){
+            clickById(MePage.ID_MAIN_TAB_ME);
+        }else{
+            clickByText("我");
+        }
+    }
     public static void clickFollowing() throws UiObjectNotFoundException {
         if (id_exists(MePage.ID_ME_FOLLOWING)){
             clickById(MePage.ID_ME_FOLLOWING);
@@ -125,36 +132,36 @@ public class MeAction extends VP2{
         Spoon.screenshot("navToLiveConfiguration");
     }
     //Go to 我的二维码
-    public static void navToQrCode(){
-        clickById(MePage.ID_MAIN_TAB_ME);
+    public static void navToQrCode() throws UiObjectNotFoundException {
+        clickMe();
         //clickById(MePage.LIVE_CONFIGURATION);
         clickByText("我的二维码");
         Spoon.screenshot("navToQrCode");
     }
     //Go to 消息
-    public static void navToNotifications(){
-        clickById(MePage.ID_MAIN_TAB_ME);
+    public static void navToNotifications() throws UiObjectNotFoundException {
+        clickMe();
         //clickById(MePage.NOTIFICATIONS);
         clickByText("消息");
         gDevice.wait(Until.gone(By.res(MePage.IS_LOCATING)),20000);
         Spoon.screenshot("navToNotifications");
     }
     //Go to 设置
-    public static void navToSettings(){
-        clickById(MePage.ID_MAIN_TAB_ME);
+    public static void navToSettings() throws UiObjectNotFoundException {
+        clickMe();
         //clickById(MePage.SETTINGS_USER_MAIN);
         clickByText("设置");
         Spoon.screenshot("navToSettings");
     }
     //Go to 帮助中心
-    public static void navToFeedback(){
-        clickById(MePage.ID_MAIN_TAB_ME);
+    public static void navToFeedback() throws UiObjectNotFoundException {
+        clickMe();
         clickById(MePage.SETTINGS_USER_MAIN);
         Spoon.screenshot("navToFeedback");
     }
     //编辑 -> 昵称
     public static InfoBean navToNickName() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -164,7 +171,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 性别
     public static InfoBean navToSex() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -174,7 +181,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 邮箱
     public static InfoBean navToEmail() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -184,7 +191,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 地址
     public static InfoBean navToLocation() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -197,7 +204,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 爱好
     public static InfoBean navToActivities() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -208,7 +215,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> Sio Eye ID
     public static InfoBean navToSioEyeId() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -218,7 +225,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 个性签名
     public static InfoBean navToAboutMe() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -228,7 +235,7 @@ public class MeAction extends VP2{
     }
     //Go to 编辑
     public static InfoBean navToUserEdit() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        clickMe();
         Spoon.screenshot(gDevice,"Me");
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
