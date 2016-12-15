@@ -16,11 +16,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
 
 public class CameraAction extends VP2 {
+    private static Logger logger = Logger.getLogger(CameraAction.class.getName());
     /**
      * Click android.widget.CompoundButton按钮
      * 录像并直播(同类型按钮)右边的按钮
@@ -205,8 +207,8 @@ public class CameraAction extends VP2 {
         clickByText("Time Lapse");
         Iris4GAction.ScrollViewByText(timeLapse);
         clickByText(timeLapse);
-        logger.info("Time Lapse set to :" + getUiObjectByText(timeLapse).getText());
         Spoon.screenshot("configTimeLapse",timeLapse);
+        logger.info(navConfig+" -configTimeLapse - "+timeLapse);
         gDevice.pressBack();
     }
     public static void checkTimeLapse(String navConfig,String timeLapse) throws Exception {
@@ -255,6 +257,7 @@ public class CameraAction extends VP2 {
         waitTime(1);
         gDevice.pressBack();
         Spoon.screenshot("configVideoQuality",quality);
+        logger.info(navConfig+" -configVideoQuality - "+quality);
     }
     public static void checkVideoQuality(String navConfig,String quality) throws Exception {
         CameraAction.navConfig(navConfig);
@@ -328,6 +331,7 @@ public class CameraAction extends VP2 {
         clickByText(angle);
         logger.info("Video Angle set to :" + angle);
         Spoon.screenshot("configVideoAngle",angle);
+        logger.info(navConfig+" -configVideoAngle - "+angle);
         gDevice.pressBack();
     }
     //某一个选项处于选中状态-  如 视频角度 - Wide

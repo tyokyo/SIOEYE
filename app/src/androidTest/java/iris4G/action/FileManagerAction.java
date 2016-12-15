@@ -2,10 +2,13 @@ package iris4G.action;
 
 import com.squareup.spoon.Spoon;
 
+import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
 
 public class FileManagerAction extends VP2 {
+    private static Logger logger = Logger.getLogger(FileManagerAction.class.getName());
     /**
      * Click launcher_application_id按钮
      */
