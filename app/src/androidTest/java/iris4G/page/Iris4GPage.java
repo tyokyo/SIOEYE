@@ -33,12 +33,10 @@ public class Iris4GPage {
             "30P"};
     //delete 480
     public static String[] video_quality ={
-            //"480@30FPS",
-            //"480@60FPS",
-            //"480@120FPS",
             "720@30FPS",
             "720@60FPS",
-            "1080@30FPS"};
+            "1080@30FPS",
+            "480@120FPS"};
     public static String[] imsge_size ={
             "4M(16:9)",
             "3M(4:3)",
