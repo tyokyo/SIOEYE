@@ -447,23 +447,30 @@ public class CameraAction extends VP2 {
         return quality.replace("FPS","");
     }
     //打开文件管理器-播放视频
-    public static void openPlayVideo(HashSet<String> beforeTakeVideoList) throws Exception {
+    public static void openPlayVideoAndCheck(String quality,HashSet<String> beforeTakeVideoList) throws Exception {
         HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
         HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
-
+        //只有一个视频存在于video文件夹中
         if (resultHashSet.size()==1) {
             String videoPath = resultHashSet.iterator().next();
             logger.info("new file:"+videoPath);
             String videoName = new File(videoPath).getName();
-            Iris4GAction.VideoInfo(videoPath);
-            FileManagerAction.playVideoByFileManager(videoName);
-
-            if (text_exists_match("^Can't play this video.*")) {
-                logger.info(videoName+" play fail " + "-Can't play this video");
-                clickById("android:id/button1");
-                Asst.fail("Can't play this video");
-            }else {
-                logger.info(videoName+" play success");
+            VideoNode activeNode=Iris4GAction.VideoInfo(videoPath);
+            //视频质量为quality.split("@")[0]
+            int height = Integer.parseInt(quality.split("@")[0]);
+            //验证视频信息
+            if (Iris4GAction.checkVideoInfo(height, activeNode)) {
+                //播放视频
+                FileManagerAction.playVideoByFileManager(videoName);
+                if (text_exists_match("^Can't play this video.*")) {
+                    logger.info(videoName+" play fail " + "-Can't play this video");
+                    clickById("android:id/button1");
+                    Asst.fail("Can't play this video");
+                }else {
+                    logger.info(videoName+" play success");
+                }
+            }else{
+                Asst.fail("checkVideoInfo-error");
             }
         }else {
             Asst.fail("expect only one video in folder");
