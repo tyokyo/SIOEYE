@@ -2,12 +2,6 @@ package iris4G.action;
 
 
 public class VideoNode {
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return height + "-" + width;
-    }
-
     private int duration;
 
     public int getDuration() {
@@ -36,4 +30,13 @@ public class VideoNode {
 
     private int height;
     private int width;
+
+    @Override
+    public String toString() {
+        return "VideoNode{" +
+                "duration=" + duration +
+                ", height=" + height +
+                ", width=" + width +
+                '}';
+    }
 }
