@@ -37,7 +37,7 @@ public class Iris4GAction extends VP2 {
     private static String NotFindScrollFindObject = "[Scroll Not Find Object]: ";
     private static String NotFindObject = "[Not Find Object]: ";
     private static Logger logger = Logger.getLogger(Iris4GAction.class.getName());
-
+    private static int secondsToWait=2;
     public static void cameraKey() {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         logger.info("Launch-Camera-Key");
@@ -53,7 +53,7 @@ public class Iris4GAction extends VP2 {
         try {
             gDevice.executeShellCommand(
                     "am force-stop com.mediatek.filemanager");
-            waitTime(5);
+            waitTime(secondsToWait);
             String name = gDevice.getCurrentPackageName();
             logger.info("current package:" + name);
             logger.info("stop filemanager-Success");
@@ -189,7 +189,7 @@ public class Iris4GAction extends VP2 {
         try {
             gDevice.executeShellCommand(
                     "am force-stop com.hicam");
-            waitTime(5);
+            waitTime(secondsToWait);
             String name = gDevice.getCurrentPackageName();
             logger.info("current package:" + name);
             logger.info("stop Camera-Success");
@@ -270,7 +270,7 @@ public class Iris4GAction extends VP2 {
     public static void stopGallery() {
         try {
             gDevice.executeShellCommand("am force-stop com.hicam.gallery");
-            waitTime(5);
+            waitTime(secondsToWait);
             String name = gDevice.getCurrentPackageName();
             logger.info("current package:" + name);
             logger.info("stop Gallery-Success");
