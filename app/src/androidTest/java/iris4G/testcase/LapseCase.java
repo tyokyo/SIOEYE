@@ -170,7 +170,45 @@ public class LapseCase extends VP2 {
     public void testTLap10s72030Medium() throws Exception {
         Lapse(NavPage.quality720_30,NavPage.lapseTime_10s,NavPage.angleMedium);
     }
-
+    //480@120 2s - All Angle[SuperWide Wide Medium]*/
+    @Test
+    public void testTLap2s480120SuperWide() throws Exception {
+        Lapse(NavPage.quality480_120,NavPage.lapseTime_2s,NavPage.angleSuperWide);
+    }
+    @Test
+    public void testTLap2s480120Wide() throws Exception {
+        Lapse(NavPage.quality480_120,NavPage.lapseTime_2s,NavPage.angleWide);
+    }
+    @Test
+    public void testTLap2s480120Medium() throws Exception {
+        Lapse(NavPage.quality480_120,NavPage.lapseTime_5s,NavPage.angleMedium);
+    }
+    //720@120 5s - All Angle[SuperWide Wide Medium]*/
+    @Test
+    public void testTLap5s480120SuperWide() throws Exception {
+        Lapse(NavPage.quality480_120,NavPage.lapseTime_5s,NavPage.angleSuperWide);
+    }
+    @Test
+    public void testTLap5s480120Wide() throws Exception {
+        Lapse(NavPage.quality480_120,NavPage.lapseTime_5s,NavPage.angleWide);
+    }
+    @Test
+    public void testTLap5s480120Medium() throws Exception {
+        Lapse(NavPage.quality480_120,NavPage.lapseTime_5s,NavPage.angleMedium);
+    }
+    //720@120 10s - All Angle[SuperWide Wide Medium]*/
+    @Test
+    public void testTLap10s480120SuperWide() throws Exception {
+        Lapse(NavPage.quality480_120,NavPage.lapseTime_10s,NavPage.angleSuperWide);
+    }
+    @Test
+    public void testTLap10s480120Wide() throws Exception {
+        Lapse(NavPage.quality480_120,NavPage.lapseTime_10s,NavPage.angleWide);
+    }
+    @Test
+    public void testTLap10s480120Medium() throws Exception {
+        Lapse(NavPage.quality480_120,NavPage.lapseTime_10s,NavPage.angleMedium);
+    }
     /* 720@60FPS  -2s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap2s72060SuperWide() throws Exception {
@@ -355,20 +393,4 @@ public class LapseCase extends VP2 {
         CameraAction.checkVideoAngle(NavPage.navConfig_Lapse,NavPage.angleWide);
         CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
     }
-    /*
-testTLap2s72030AllAngle()
-testTLap2s72060AllAngle()
-testTLap2s108030AllAngle()
-
-testTLap3s72030AllAngle()
-testTLap3s72060AllAngle()
-testTLap3s108030AllAngle()
-
-testTLap5s72030AllAngle()
-testTLap5s72060AllAngle()
-testTLap5s108030AllAngle()
-
-testTLap10s72030AllAngle()
-testTLap10s72060AllAngle()
-testTLap10s108030AllAngle()*/
 }

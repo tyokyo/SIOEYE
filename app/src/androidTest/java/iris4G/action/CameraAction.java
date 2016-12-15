@@ -16,11 +16,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
 
 public class CameraAction extends VP2 {
+    private static Logger logger = Logger.getLogger(CameraAction.class.getName());
     /**
      * Click android.widget.CompoundButton按钮
      * 录像并直播(同类型按钮)右边的按钮
@@ -205,8 +207,8 @@ public class CameraAction extends VP2 {
         clickByText("Time Lapse");
         Iris4GAction.ScrollViewByText(timeLapse);
         clickByText(timeLapse);
-        logger.info("Time Lapse set to :" + getUiObjectByText(timeLapse).getText());
         Spoon.screenshot("configTimeLapse",timeLapse);
+        logger.info(navConfig+" -configTimeLapse - "+timeLapse);
         gDevice.pressBack();
     }
     public static void checkTimeLapse(String navConfig,String timeLapse) throws Exception {
@@ -255,6 +257,7 @@ public class CameraAction extends VP2 {
         waitTime(1);
         gDevice.pressBack();
         Spoon.screenshot("configVideoQuality",quality);
+        logger.info(navConfig+" -configVideoQuality - "+quality);
     }
     public static void checkVideoQuality(String navConfig,String quality) throws Exception {
         CameraAction.navConfig(navConfig);
@@ -328,6 +331,7 @@ public class CameraAction extends VP2 {
         clickByText(angle);
         logger.info("Video Angle set to :" + angle);
         Spoon.screenshot("configVideoAngle",angle);
+        logger.info(navConfig+" -configVideoAngle - "+angle);
         gDevice.pressBack();
     }
     //某一个选项处于选中状态-  如 视频角度 - Wide
@@ -447,23 +451,30 @@ public class CameraAction extends VP2 {
         return quality.replace("FPS","");
     }
     //打开文件管理器-播放视频
-    public static void openPlayVideo(HashSet<String> beforeTakeVideoList) throws Exception {
+    public static void openPlayVideoAndCheck(String quality,HashSet<String> beforeTakeVideoList) throws Exception {
         HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
         HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
-
+        //只有一个视频存在于video文件夹中
         if (resultHashSet.size()==1) {
             String videoPath = resultHashSet.iterator().next();
             logger.info("new file:"+videoPath);
             String videoName = new File(videoPath).getName();
-            Iris4GAction.VideoInfo(videoPath);
-            FileManagerAction.playVideoByFileManager(videoName);
-
-            if (text_exists_match("^Can't play this video.*")) {
-                logger.info(videoName+" play fail " + "-Can't play this video");
-                clickById("android:id/button1");
-                Asst.fail("Can't play this video");
-            }else {
-                logger.info(videoName+" play success");
+            VideoNode activeNode=Iris4GAction.VideoInfo(videoPath);
+            //视频质量为quality.split("@")[0]
+            int height = Integer.parseInt(quality.split("@")[0]);
+            //验证视频信息
+            if (Iris4GAction.checkVideoInfo(height, activeNode)) {
+                //播放视频
+                FileManagerAction.playVideoByFileManager(videoName);
+                if (text_exists_match("^Can't play this video.*")) {
+                    logger.info(videoName+" play fail " + "-Can't play this video");
+                    clickById("android:id/button1");
+                    Asst.fail("Can't play this video");
+                }else {
+                    logger.info(videoName+" play success");
+                }
+            }else{
+                Asst.fail("checkVideoInfo-error");
             }
         }else {
             Asst.fail("expect only one video in folder");
@@ -479,6 +490,10 @@ public class CameraAction extends VP2 {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Live&Location");
-        clickByText("Live&Location");
+    }
+    public static void navToAltimeter() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Altimeter");
     }
 }

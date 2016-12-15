@@ -24,7 +24,7 @@ public class AccountAction extends VP2{
     * */
     public static  void logOutAccount() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             //当前账号已经处于logout状态
             logger.info("当前账号已经处于logout状态");
@@ -51,7 +51,7 @@ public class AccountAction extends VP2{
             clickById(MePage.ID_TV_OK);
             waitHasObject(MePage.ID_MAIN_TAB_ME,10000);
         }
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             clickByText("登录");
             /*
@@ -89,7 +89,7 @@ public class AccountAction extends VP2{
     //登录账号
     public static void logInAccount(String username,String password) throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             clickByText("登录");
             getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(username);
@@ -101,19 +101,19 @@ public class AccountAction extends VP2{
     //进入登录界面
     public static void navToLogin() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickByText("登录");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByMobile() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickByText("注册");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByEmail() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickByText("注册");
         clickByText("邮箱注册");
     }
@@ -129,7 +129,7 @@ public class AccountAction extends VP2{
      */
     public static boolean isLogin() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         //判断是否登录
         if (gDevice.findObject(new UiSelector().text("Login")).exists()) {
             System.out.println("you haven't login");

@@ -5,10 +5,13 @@ import android.support.test.uiautomator.UiSelector;
 
 import com.squareup.spoon.Spoon;
 
+import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
 
 public class AccountAction extends VP2 {
+    private static Logger logger = Logger.getLogger(AccountAction.class.getName());
     /**
      * Click com.hicam:id/logout_btn按钮
      */
@@ -58,6 +61,7 @@ public class AccountAction extends VP2 {
         if (login) {
             logger.info("account login success");
         }else {
+            Spoon.screenshot("loginFail",username+"|"+password);
             logger.info("account login fail");
         }
         gDevice.pressBack();

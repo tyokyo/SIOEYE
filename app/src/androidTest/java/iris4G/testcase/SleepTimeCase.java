@@ -2,8 +2,7 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiSelector;
+import android.support.test.uiautomator.UiObject2;
 
 
 import org.hamcrest.Asst;
@@ -14,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
@@ -54,7 +54,8 @@ public class SleepTimeCase extends VP2 {
     @Test
     public void Time60s() throws Exception{
         clickByText("60 seconds");
-        checkSleep(60);//由于checkButton方法原因，暂时无法对60s开关状态进行准确验证
+        checkButton(1);
+        checkSleep(60);
     }
     @Test
     public void Time600s() throws Exception{
@@ -66,7 +67,7 @@ public class SleepTimeCase extends VP2 {
     public void TimeNever() throws Exception{
         clickByText("Never");
         checkButton(3);
-        waitTime(600);
+        waitTime(601);
         if (!gDevice.isScreenOn())
         {
             Asst.fail("TimeNever功能失败");
@@ -80,6 +81,10 @@ public class SleepTimeCase extends VP2 {
     @AfterClass
     public static void AfterSleep() throws Exception{
         Iris4GAction.makeScreenOn();
+        Iris4GAction.startSettings();
+        clickByText("Device");
+        clickByText("Display");
+        clickByText("Sleep");
         clickByText("Never");
         VP2.logger.info("重置睡眠时间Never");
     }
@@ -99,12 +104,10 @@ public class SleepTimeCase extends VP2 {
     }
     //SleepTime功能验证
     public void checkButton(int i) throws Exception{
-        UiObject SD1 = new UiObject(new UiSelector().resourceId("android:id/list"));
-        UiObject SD2 = SD1.getChild(new UiSelector().className("android.widget.LinearLayout").index(i));
-        UiObject Button = SD2.getChild(new UiSelector().resourceId("android:id/checkbox"));
-        boolean keyofBT = Button.isChecked();
-        logger.info("开关状态"+keyofBT);
-        if (keyofBT == false)
+        List<UiObject2> Button = findObjects("android:id/checkbox");
+        boolean keyOfBT = Button.get(i).isChecked();
+        logger.info("开关状态"+keyOfBT);
+        if (keyOfBT == false)
         {
             Asst.fail("开关尚未打开");
         }
@@ -114,5 +117,4 @@ public class SleepTimeCase extends VP2 {
         }
     }
     //SleepTime开关验证
-
 }

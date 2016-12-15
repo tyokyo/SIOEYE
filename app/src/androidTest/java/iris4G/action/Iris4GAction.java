@@ -37,7 +37,7 @@ public class Iris4GAction extends VP2 {
     private static String NotFindScrollFindObject = "[Scroll Not Find Object]: ";
     private static String NotFindObject = "[Not Find Object]: ";
     private static Logger logger = Logger.getLogger(Iris4GAction.class.getName());
-
+    private static int secondsToWait=2;
     public static void cameraKey() {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         logger.info("Launch-Camera-Key");
@@ -53,7 +53,7 @@ public class Iris4GAction extends VP2 {
         try {
             gDevice.executeShellCommand(
                     "am force-stop com.mediatek.filemanager");
-            waitTime(5);
+            waitTime(secondsToWait);
             String name = gDevice.getCurrentPackageName();
             logger.info("current package:" + name);
             logger.info("stop filemanager-Success");
@@ -70,6 +70,7 @@ public class Iris4GAction extends VP2 {
         options.inJustDecodeBounds = false;
         Bitmap bmp = BitmapFactory.decodeFile(picPath, options);
         logger.info(bmp.getHeight() + "-" + bmp.getWidth());
+        logger.info("photo quality:"+bmp.getHeight()*bmp.getWidth()/1000);
         double result = bmp.getWidth() / bmp.getHeight();
         return result;
     }
@@ -108,20 +109,23 @@ public class Iris4GAction extends VP2 {
     }
 
     public static boolean checkVideoInfo(int height, VideoNode vd) {
-        boolean result = true;
+        logger.info("1080|1920 720|1280 480|640");
+        boolean result = false;
+        logger.info(vd.toString());
+        logger.info(String.format("checkVideoInfo-expect|active [%d|%d]",height,vd.getHeight()));
         if (height == 1080) {
-            if (vd.getHeight() == height) {
-                result = vd.getWidth() == 1920;
+            if (vd.getHeight() == height && vd.getWidth()==1920) {
+                result=true;
             }
         }
         if (height == 720) {
-            if (vd.getHeight() == height) {
-                result = vd.getWidth() == 1280;
+            if (vd.getHeight() == height && vd.getWidth() == 1280) {
+                result=true;
             }
         }
         if (height == 480) {
-            if (vd.getHeight() == height) {
-                result = vd.getWidth() == 640;
+            if (vd.getHeight() == height && vd.getWidth() == 640) {
+                result=true;
             }
         }
         return result;
@@ -185,7 +189,7 @@ public class Iris4GAction extends VP2 {
         try {
             gDevice.executeShellCommand(
                     "am force-stop com.hicam");
-            waitTime(5);
+            waitTime(secondsToWait);
             String name = gDevice.getCurrentPackageName();
             logger.info("current package:" + name);
             logger.info("stop Camera-Success");
@@ -266,7 +270,7 @@ public class Iris4GAction extends VP2 {
     public static void stopGallery() {
         try {
             gDevice.executeShellCommand("am force-stop com.hicam.gallery");
-            waitTime(5);
+            waitTime(secondsToWait);
             String name = gDevice.getCurrentPackageName();
             logger.info("current package:" + name);
             logger.info("stop Gallery-Success");

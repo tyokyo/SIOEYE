@@ -18,6 +18,7 @@ public class NavPage{
     public static final String quality720_30         =Iris4GPage.video_quality[0];
     public static final String quality720_60         =Iris4GPage.video_quality[1];
     public static final String quality1080_30        =Iris4GPage.video_quality[2];
+    public static final String quality480_120        =Iris4GPage.video_quality[3];
 
     public static final String imageSize4M        =Iris4GPage.imsge_size[0];
     public static final String imageSize3M        =Iris4GPage.imsge_size[1];
