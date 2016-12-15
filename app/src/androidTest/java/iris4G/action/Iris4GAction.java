@@ -70,6 +70,7 @@ public class Iris4GAction extends VP2 {
         options.inJustDecodeBounds = false;
         Bitmap bmp = BitmapFactory.decodeFile(picPath, options);
         logger.info(bmp.getHeight() + "-" + bmp.getWidth());
+        logger.info("photo quality:"+bmp.getHeight()*bmp.getWidth()/1000);
         double result = bmp.getWidth() / bmp.getHeight();
         return result;
     }
