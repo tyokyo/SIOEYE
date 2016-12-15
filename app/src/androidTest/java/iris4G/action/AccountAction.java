@@ -61,6 +61,7 @@ public class AccountAction extends VP2 {
         if (login) {
             logger.info("account login success");
         }else {
+            Spoon.screenshot("loginFail",username+"|"+password);
             logger.info("account login fail");
         }
         gDevice.pressBack();
