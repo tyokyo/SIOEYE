@@ -31,7 +31,6 @@ public class AltimeterCase extends VP2{
     /**Case 1:
      * 步骤：
      * 1.进入相机设置中开启Altimeter，关闭Altimeter5次
-     * 2.检查
      * 2.重新进入相机检查Altimeter开关状态
      * 期望：
      * 1.能够成功开启Altimeter
@@ -82,5 +81,4 @@ public class AltimeterCase extends VP2{
         waitTime(20);
         Iris4GAction.cameraKey();
     }
-
 }
