@@ -52,26 +52,28 @@ public class VP {
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
 
-    public static void doNotAskPermission() throws UiObjectNotFoundException {
-        for (int t = 1; t < 3; t++) {
-            if ("com.android.packageinstaller".equals(gDevice.getCurrentPackageName())) {
-                //权限请求确认-pkg com.google.android.packageinstaller
-                UiObject uiObject_permission = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
-                if (uiObject_permission.exists()) {
-                    logger.info("["+t+"]"+"click allow-permission setting");
-                    uiObject_permission.clickAndWaitForNewWindow();
-                }
+    public static void doAskPermission(boolean isAsk) throws UiObjectNotFoundException {
+        if (isAsk){
+            for (int t = 1; t < 3; t++) {
+                if ("com.android.packageinstaller".equals(gDevice.getCurrentPackageName())) {
+                    //权限请求确认-pkg com.google.android.packageinstaller
+                    UiObject uiObject_permission = gDevice.findObject(new UiSelector().resourceId(PERMISSION_ALLOW));
+                    if (uiObject_permission.exists()) {
+                        logger.info("["+t+"]"+"click allow-permission setting");
+                        uiObject_permission.clickAndWaitForNewWindow();
+                    }
                 /*//异常弹出框-click-OK
                 UiObject uiObject_popup = gDevice.findObject(new UiSelector().resourceId(ID_MESSAGE));
                 if (uiObject_popup.exists()){
                     logger.info("doNotAskPermission-click android:id/button1");
                     gDevice.findObject(new UiSelector().resourceId("android:id/button1")).clickAndWaitForNewWindow();
                 }*/
-            }
+                }
            /* if ("com.sioeye".equals(gDevice.getCurrentPackageName())) {
                 logger.info("["+t+"]"+"com.sioeye launch success");
                 break;
             }*/
+            }
         }
     }
     public static void initDevice() {
@@ -84,7 +86,7 @@ public class VP {
         }
         //registerWatcher();
         try {
-            doNotAskPermission();
+            doAskPermission(false);
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }
