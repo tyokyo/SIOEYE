@@ -3,6 +3,7 @@ package iris4G.testcase;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.view.KeyEvent;
 
 import org.hamcrest.Asst;
@@ -28,27 +29,26 @@ public class CameraPreviewCase extends VP2{
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
-    public static boolean checkUIisExist(){
-        UiObject liveObject = getObjectById(Iris4GPage.camera_live_shortcut_id);
-        UiObject capObject = getObjectById(Iris4GPage.camera_cap_shortcut_id);
-        UiObject videoObject = getObjectById(Iris4GPage.camera_video_shortcut_id);
-        UiObject settingObject = getObjectById(Iris4GPage.camera_setting_shortcut_id);
-        Asst.assertEquals("UIobject is exist",true,liveObject.exists());
-        Asst.assertEquals("UIobject is exist",true,capObject.exists());
-        Asst.assertEquals("UIobject is exist",true,videoObject.exists());
-        Asst.assertEquals("UIobject is exist",true,settingObject.exists());
-        if(liveObject.exists()&&capObject.exists()&&videoObject.exists()&&settingObject.exists()){
+    public static boolean checkUIisExist() throws UiObjectNotFoundException {
+        Asst.assertEquals("UIobject is exist",true,id_exists(Iris4GPage.camera_live_shortcut_id));
+        Asst.assertEquals("UIobject is exist",true,id_exists(Iris4GPage.camera_cap_shortcut_id));
+        Asst.assertEquals("UIobject is exist",true,id_exists(Iris4GPage.camera_video_shortcut_id));
+        Asst.assertEquals("UIobject is exist",true,id_exists(Iris4GPage.camera_setting_shortcut_id));
+
+        if(id_exists(Iris4GPage.camera_live_shortcut_id)&&id_exists(Iris4GPage.camera_cap_shortcut_id)&&id_exists(Iris4GPage.camera_video_shortcut_id)&&id_exists(Iris4GPage.camera_setting_shortcut_id)){
+            Asst.assertEquals("UI is correct",true,id_exists(Iris4GPage.camera_live_shortcut_id));
             VP2.logger.info("UI is correct");
             return true;
         }else {
-            VP2.logger.info("UI is Wrong");
+            Asst.assertEquals("UI is wrong",true,id_exists(Iris4GPage.camera_cap_shortcut_id));
+            VP2.logger.info("UI is wrong");
             return false;
         }
 
     }
     @Test
     /** 预览界面灭屏-亮屏*/
-    public void Test() throws Exception {
+    public void testPreviewByPowerOnOffWhen5s() throws Exception {
         gDevice.pressHome();
         gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
         Iris4GAction.waitTime(5);
@@ -58,7 +58,7 @@ public class CameraPreviewCase extends VP2{
     }
    /** 预览界面灭屏-1min-亮屏,亮屏后无异常*/
     @Test
-    public void Test1()throws Exception{
+    public void testPreviewByPowerOnOffWhen1m()throws Exception{
         gDevice.pressHome();
         gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
         Iris4GAction.waitTime(60);
@@ -67,7 +67,7 @@ public class CameraPreviewCase extends VP2{
     }
     /** 预览界面灭屏-5min-亮屏，亮屏后无异常*/
     @Test
-    public void Test2()throws Exception{
+    public void testPreviewByPowerOnOffWhen5m()throws Exception{
         gDevice.pressHome();
         gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
         Iris4GAction.waitTime(300);
