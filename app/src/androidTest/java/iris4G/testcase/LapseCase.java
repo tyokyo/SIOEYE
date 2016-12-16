@@ -44,7 +44,6 @@ public class LapseCase extends VP2 {
         //int angleSize = Iris4GPage.video_Angle.length;
         //for (int t = 0; t < angleSize; t++) {
         logger.info("start to test angle-" + angle);
-        Iris4GAction.initIris4G();
         CameraAction.configVideoQuality(NavPage.navConfig_Lapse,quality);
         CameraAction.configVideoAngle(NavPage.navConfig_Lapse,angle);
         //CameraAction.configTimeLapse(Iris4GPage.lapse_time[0]);
