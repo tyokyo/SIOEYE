@@ -58,9 +58,9 @@ public class ImageSizeCase extends VP2{
         Iris4GAction.startCamera();
 
         //验证Capture - 修改ImageSize 4M
-        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize4M);
+        CameraAction.checkImageSize(NavPage.navConfig_Capture,NavPage.imageSize4M);
         //验证Lapse - 修改ImageSize 3M
-        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize3M);
+        CameraAction.checkImageSize(NavPage.navConfig_Burst,NavPage.imageSize3M);
     }
     @Test
     public void testCapture3M() throws Exception {
@@ -86,9 +86,9 @@ public class ImageSizeCase extends VP2{
         Iris4GAction.startCamera();
 
         //验证Capture - 修改ImageSize 3M
-        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize3M);
+        CameraAction.checkImageSize(NavPage.navConfig_Capture,NavPage.imageSize3M);
         //验证Lapse - 修改ImageSize 4M
-        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
+        CameraAction.checkImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
     }
     @Test
     public void testCapture2M() throws Exception {
@@ -114,9 +114,9 @@ public class ImageSizeCase extends VP2{
         Iris4GAction.startCamera();
 
         //验证Capture - 修改ImageSize 2M
-        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize2M);
+        CameraAction.checkImageSize(NavPage.navConfig_Capture,NavPage.imageSize2M);
         //验证Lapse - 修改ImageSize 8M
-        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize8M);
+        CameraAction.checkImageSize(NavPage.navConfig_Burst,NavPage.imageSize8M);
     }
 
     @Test
@@ -143,8 +143,8 @@ public class ImageSizeCase extends VP2{
         Iris4GAction.startCamera();
 
         //验证Capture - 修改ImageSize 8M
-        CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize8M);
+        CameraAction.checkImageSize(NavPage.navConfig_Capture,NavPage.imageSize8M);
         //验证Lapse - 修改ImageSize 4M
-        CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
+        CameraAction.checkImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
     }
 }
