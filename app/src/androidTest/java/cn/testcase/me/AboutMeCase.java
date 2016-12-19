@@ -152,8 +152,11 @@ public class AboutMeCase extends VP2 {
         Assert.assertEquals("about me is null",expect,"");
         //验证个人主页上面的个性签名
         gDevice.pressBack();
-        expect = getUiObjectById(MePage.ABOUT_ME_DISPLAY).getText();
-        Assert.assertEquals("change success",expect,"");
+        waitTime(2);
+        if (id_exists(MePage.ABOUT_ME_DISPLAY)){
+            expect = getUiObjectById(MePage.ABOUT_ME_DISPLAY).getText();
+            Assert.assertEquals("change success",expect,"");
+        }
         gDevice.pressBack();
     }
     //输入内容为特殊符号时的处理,长度=60
