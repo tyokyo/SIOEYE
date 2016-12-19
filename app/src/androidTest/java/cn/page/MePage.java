@@ -255,7 +255,6 @@ public class MePage {
     public static final String SETTINGS_SEX_MALE="cn.sioeye.sioeyeapp:id/rlt_male";
     public static final String SETTINGS_SEX_FEMALE="cn.sioeye.sioeyeapp:id/rlt_female";
     public static final String SETTINGS_SEX_SECRET="cn.sioeye.sioeyeapp:id/rlt_other";
-
-
-
+    //底部有新消息
+    public static final String NEW_MESSAGES_DISPLAY="cn.sioeye.sioeyeapp:id/botoom_messages_recyclerView";
 }
