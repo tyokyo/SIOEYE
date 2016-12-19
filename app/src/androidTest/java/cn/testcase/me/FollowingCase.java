@@ -94,6 +94,9 @@ public class FollowingCase extends VP2 {
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
+            //滑动显示最新消息
+            getObject2ById(MePage.NEW_MESSAGES_DISPLAY).swipe(Direction.UP,(float)0.5);
+            waitTime(2);
             Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
@@ -126,6 +129,9 @@ public class FollowingCase extends VP2 {
             //点击评论
             clickByPoint(point);
             gDevice.pressBack();
+            waitTime(2);
+            //滑动显示最新消息
+            getObject2ById(MePage.NEW_MESSAGES_DISPLAY).swipe(Direction.UP,(float)0.5);
             waitTime(2);
             input_comments=input_comments.substring(0,120);
             Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
