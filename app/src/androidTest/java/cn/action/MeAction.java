@@ -15,17 +15,20 @@ import com.squareup.spoon.Spoon;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import bean.InfoBean;
 import ckt.base.VP;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.MePage;
+import cn.testcase.me.BroadCastsCase;
 
 /**
  * Created by elon on 2016/10/27.
  */
 public class MeAction extends VP2{
+    private static Logger logger = Logger.getLogger(MeAction.class.getName());
     public static void getAccountPrivacyInfo(InfoBean infoBean) throws UiObjectNotFoundException {
         //启动被测App
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
@@ -75,12 +78,13 @@ public class MeAction extends VP2{
         if (status_public==true&&status_private==false&&status_personal==true){
             permission="public";
         }
-        if (status_public==false&&status_private==true&&status_personal==true){
-            permission="private";
+        if(status_private==true&&status_personal==true) {
+            permission = "private";
         }
         if (status_public==false&&status_private==false&&status_personal==true){
             permission="personal";
         }
+        logger.info(permission);
         return  permission;
     }
     //编辑界面所有用户的信息
