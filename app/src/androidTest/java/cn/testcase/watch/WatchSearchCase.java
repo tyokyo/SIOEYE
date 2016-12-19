@@ -142,7 +142,7 @@ public class WatchSearchCase extends VP2 {
         }
     }
 
-    //搜索虚假的email
+    //搜索虚假的email地址
     @Test
     public void test_search_email_WRONG() throws UiObjectNotFoundException, InterruptedException {
         //进入Watch
