@@ -57,9 +57,9 @@ public class VideoQualityCase extends VP2{
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
         //验证Video视频质量 720@30FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality720_30);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality720_30);
         //验证Lapse视频质量 720@60FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_60);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_60);
     }
     @Test
     public void test720_60() throws Exception {
@@ -85,9 +85,9 @@ public class VideoQualityCase extends VP2{
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
         //验证Lapse视频质量 720@60FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality720_60);
         //验证Lapse视频质量 1080@30FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality1080_30);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Lapse,NavPage.quality1080_30);
     }
     @Test
     public void test1080_30() throws Exception {
@@ -113,9 +113,9 @@ public class VideoQualityCase extends VP2{
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
         //验证Lapse视频质量 1080@30FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality1080_30);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality1080_30);
         //验证Lapse视频质量 480@120FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_120);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_120);
     }
     @Test
     public void test480_120() throws Exception {
@@ -141,8 +141,8 @@ public class VideoQualityCase extends VP2{
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
         //验证Lapse视频质量 480@120FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality480_120);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality480_120);
         //验证Lapse视频质量 720@30FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_30);
+        CameraAction.checkVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_30);
     }
 }
