@@ -57,8 +57,8 @@ public class ExchangeSetting_ReturnToLapse extends VP2 {
     @Test
     public void testExchangeSetting_ReturnToLapse() throws Exception {
         CameraAction.navConfig(NavPage.navConfig_Lapse);
-        //总共测试10次
-        for (int iteration = 1; iteration <=10; iteration++) {
+        //总共测试3次
+        for (int iteration = 1; iteration <=3; iteration++) {
             String quality=randomVideoQuality();
             String angle=randomVideoAngle();
             String lapse_time=randomLapseSize();
