@@ -26,13 +26,17 @@ import cn.action.AccountAction;
 import cn.action.BroadcastAction;
 import cn.action.DiscoverAction;
 import cn.action.MainAction;
+import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
+import cn.page.Other;
+import iris4G.page.NavPage;
+import usa.action.Nav;
 
 
 /**
- * Created by caibing.yin on 2016/11/5.
+ * Created by Caibing.yin on 2016/11/5.
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
@@ -142,6 +146,25 @@ public class DiscoverCase extends VP2 {
         Asst.assertEquals("加载2分钟",false,id_exists(MePage.BROADCAST_VIEW_VIDEO_LOADING));
         Spoon.screenshot("testViewVideo");
         gDevice.pressBack();
+    }
+    @Test
+    /**
+     * 未登陆点击输入框
+     * 1、未登录状态下在discover界面点击任意视频进入观看
+     * 2、点击输入框
+     * Result:弹出登陆界面
+     * */
+    public void testClickInput () throws UiObjectNotFoundException {
+        AccountAction.logOutAccount();
+        gDevice.pressBack();
+        waitTime(1);
+        MainAction.clickDiscover();
+        waitTime(1);
+        DiscoverAction.navToPlayVideo();
+        waitTime(2);
+        clickByText("说点什么吧");
+        //clickById(Other.chattextfield);
+        Asst.assertFalse("ClickInput",!id_exists(AccountPage.ACCOUNT_WEIXIN));
     }
 }
 
