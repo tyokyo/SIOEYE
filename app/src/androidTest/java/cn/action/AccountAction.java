@@ -25,6 +25,7 @@ public class AccountAction extends VP2{
     public static  void logOutAccount() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
+        waitTime(1);
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             //当前账号已经处于logout状态
             logger.info("当前账号已经处于logout状态");
