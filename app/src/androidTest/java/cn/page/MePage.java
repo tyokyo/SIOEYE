@@ -257,4 +257,6 @@ public class MePage {
     public static final String SETTINGS_SEX_SECRET="cn.sioeye.sioeyeapp:id/rlt_other";
     //底部有新消息
     public static final String NEW_MESSAGES_DISPLAY="cn.sioeye.sioeyeapp:id/botoom_messages_recyclerView";
+    //视频加载失败
+    public static final String LOAD_VIDEO_ERROR="cn.sioeye.sioeyeapp:id/layout_error";
 }
