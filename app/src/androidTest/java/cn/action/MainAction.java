@@ -24,6 +24,7 @@ public class MainAction extends VP2 {
         waitTime(3);
     }
     public static void clickDiscover() throws UiObjectNotFoundException {
+        waitUntilFind(MePage.ID_MAIN_TAB_DISCOVER,10000);
         if (id_exists(MePage.ID_MAIN_TAB_DISCOVER)){
             clickById(MePage.ID_MAIN_TAB_DISCOVER);
         }else{
