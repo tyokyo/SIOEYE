@@ -37,6 +37,7 @@ public class LogOutCase extends VP2 {
         //clickById(AccountPage.LOG_OUT);
         clickByText("退出登录");
         clickById(AccountPage.LOG_OUT_CANCEL);
+        waitTime(2);
         boolean active = text_exists("退出登录");
         Asst.assertEquals("testLogOut_Cancel",true,active);
         Spoon.screenshot("testLogOut_Cancel");
