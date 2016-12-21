@@ -36,6 +36,7 @@ public class HelpCenterCase extends VP2 {
         SettingAction.navToHP_TermService();
         Spoon.screenshot("TermOfService");
         clickById(MePage.HELP_BACK);
+        waitUntilFind(MePage.HELP_SERVICE,10000);
         boolean status=getObjectById(MePage.HELP_SERVICE).exists();
         Asst.assertEquals("back logo success",true,status);
     }
@@ -44,6 +45,7 @@ public class HelpCenterCase extends VP2 {
     public void testPrivacyPolicy() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_Privacy();
         clickById(MePage.HELP_BACK);
+        waitUntilFind(MePage.HELP_POLICY,10000);
         boolean status=getObjectById(MePage.HELP_POLICY).exists();
         Asst.assertEquals("back logo success",true,status);
     }
@@ -52,6 +54,7 @@ public class HelpCenterCase extends VP2 {
     public void testEULA() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_UserProtocol();
         clickById(MePage.HELP_BACK);
+        waitUntilFind(MePage.HELP_EMULA,10000);
         boolean feedback_status=getObjectById(MePage.HELP_EMULA).exists();
         Asst.assertEquals("back logo success",true,feedback_status);
     }

@@ -11,6 +11,9 @@ import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
@@ -25,6 +28,7 @@ import usa.page.Me;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class NotificationCase extends VP2 {
+    private Logger logger = Logger.getLogger(NotificationCase.class.getName());
     public String username;
     public int followed;
     @Before

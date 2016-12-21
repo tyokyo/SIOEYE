@@ -40,7 +40,8 @@ public class LoginCase extends VP2 {
         AccountAction.logOutAccount();
         AccountAction.navToLogin();
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
-        if (getUiObjectByText("邮箱、手机号、sioeye id").exists()){
+        waitTime(2);
+        if (getUiObjectByText("邮箱、手机号、Sioeye ID").exists()){
             logger.info("输入手机号或者邮箱存在");
             if (getUiObjectByText("登录").exists()){
                 logger.info("Login存在");
