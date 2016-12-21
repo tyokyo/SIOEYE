@@ -155,16 +155,18 @@ public class DiscoverCase extends VP2 {
      * Result:弹出登陆界面
      * */
     public void testClickInput () throws UiObjectNotFoundException {
+        //注销账号
         AccountAction.logOutAccount();
-        gDevice.pressBack();
-        waitTime(1);
+        //进入-发现
         MainAction.clickDiscover();
-        waitTime(1);
+        //播放一个视频
         DiscoverAction.navToPlayVideo();
-        waitTime(2);
-        clickByText("说点什么吧");
-        //clickById(Other.chattextfield);用此方法容易报超时
-
+        //等待连接聊天室
+        BroadcastAction.waitBroadcastLoading();
+        //点击评论框
+        clickById(Other.chattextfield);
+        //弹出登陆界面
+        waitUntilFind(AccountPage.ACCOUNT_WEIXIN,5000);
         Asst.assertFalse("ClickInputFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
     }
 }
