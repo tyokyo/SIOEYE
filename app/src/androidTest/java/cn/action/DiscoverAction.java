@@ -198,8 +198,6 @@ public class DiscoverAction extends VP2 {
     }
     //获得位置信息
     public static String getLocationInfo() {
-        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
-        waitTime(10);
         List<UiObject2> textViews = getObject2ById(DiscoverPage.ID_SWIPE_TARGET).findObjects(By.clazz(TextView.class));
         return textViews.get(11).getText();
     }
@@ -209,7 +207,9 @@ public class DiscoverAction extends VP2 {
         swipe_target.swipe(Direction.UP, 0.6f);
         waitTime(5);
     }
-    //回放视频
+    /*回放界面上第一个包含 点赞数 回放数的视频
+     返回对象：VideoBean，like zan 数量 address 信息(如果存在地址信息及返回)
+    */
     public static VideoBean playBackVideo(boolean play) throws UiObjectNotFoundException {
         VideoBean videoBean =new VideoBean();
         int like = 0;
