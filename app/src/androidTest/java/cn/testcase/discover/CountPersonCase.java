@@ -48,6 +48,7 @@ public class CountPersonCase extends VP2 {
     public void testCountWatchPerson() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.scrollVideoList();
+        //1.滑动视频列表 2.播放视频(true)
         VideoBean before_playback=DiscoverAction.playBackVideo(true);
         logger.info(before_playback.toString());
         int clickBeforeNumber =before_playback.getLike();
@@ -79,6 +80,7 @@ public class CountPersonCase extends VP2 {
     public void testCountZanPerson() throws UiObjectNotFoundException{
         MainAction.navToDiscover();
         DiscoverAction.scrollVideoList();
+        //1.滑动视频列表 2.播放视频(true)
         VideoBean before_playback=DiscoverAction.playBackVideo(true);
         logger.info(before_playback.toString());
         int clickBeforeZan =before_playback.getZan();
@@ -113,12 +115,23 @@ public class CountPersonCase extends VP2 {
      *备注：只能检查是否有位置信息
      */
     @Test
-    public void testHasLocationService(){
-        String LocationInfo =DiscoverAction.getLocationInfo();
-        logger.info(LocationInfo);
-        if(LocationInfo==null){
-            Spoon.screenshot(gDevice,"No_LocationInfo;");
-            logger.info("testHasLocationServiceCase_fail");
+    public void testHasLocationService() throws UiObjectNotFoundException {
+        MainAction.navToDiscover();
+        boolean findVideoHasLocation=false;
+        //进行10轮查找
+        for (int i = 0; i <10 ; i++) {
+            //获取当前界面的视频的位置信息
+            VideoBean videoInfo=DiscoverAction.playBackVideo(false);
+            //位置信息不为空
+            if (!"".equals(videoInfo.getAddress())){
+                findVideoHasLocation=true;
+                break;
+            }else {
+                //继续滑动查找
+                DiscoverAction.scrollVideoList();
+            }
         }
+        //验证是否存在位置信息
+        Asst.assertEquals("10轮查找-findLocationInVideo",true,findVideoHasLocation);
     }
 }
