@@ -81,7 +81,7 @@ public class AccountAction extends VP2{
             getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);
             //login
             clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
-            waitUntilFind(MePage.ID_MAIN_TAB_ME,20);
+            waitUntilFind(MePage.ID_MAIN_TAB_ME,10000);
         }else{
             logger.info("处于登录状态，不需要重新登录账号");
         }
