@@ -21,6 +21,7 @@ public class MainAction extends VP2 {
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }
+        waitTime(3);
     }
     public static void clickDiscover() throws UiObjectNotFoundException {
         if (id_exists(MePage.ID_MAIN_TAB_DISCOVER)){

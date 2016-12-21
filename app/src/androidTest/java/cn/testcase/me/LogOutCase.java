@@ -10,6 +10,9 @@ import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
@@ -24,6 +27,7 @@ import cn.page.MePage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class LogOutCase extends VP2 {
+    private Logger logger = Logger.getLogger(LogOutCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
@@ -37,6 +41,7 @@ public class LogOutCase extends VP2 {
         //clickById(AccountPage.LOG_OUT);
         clickByText("退出登录");
         clickById(AccountPage.LOG_OUT_CANCEL);
+        waitTime(2);
         boolean active = text_exists("退出登录");
         Asst.assertEquals("testLogOut_Cancel",true,active);
         Spoon.screenshot("testLogOut_Cancel");
