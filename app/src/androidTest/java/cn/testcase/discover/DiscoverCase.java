@@ -69,8 +69,8 @@ public class DiscoverCase extends VP2 {
     /**
      * case2、双击搜索图标
      */
-    public void testDoubleClickSearch() throws IOException {
-        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+    public void testDoubleClickSearch() throws IOException, UiObjectNotFoundException {
+        MainAction.clickDiscover();
         UiObject2 frameLayout=getObject2ById(DiscoverPage.APP_TITLE).getParent();
         UiObject2 searchObject=frameLayout.findObject(By.clazz(android.widget.ImageView.class));
         Rect searchRect=searchObject.getVisibleBounds();
@@ -78,9 +78,9 @@ public class DiscoverCase extends VP2 {
         clickRect(searchRect);
         clickRect(searchRect);
         waitTime(1);
-        if(!getObjectById(DiscoverPage.ID_SEARCH_FILTER_INPUT).exists()){
-            Spoon.screenshot("Go to SearchActivity Fail","跳转失败");
-            makeToast("跳转失败",5);
+        //验证进入搜索界面
+        if(!id_exists(DiscoverPage.ID_SEARCH_FILTER_INPUT)){
+            Spoon.screenshot("navToSearchPage","跳转失败");
             Assert.fail("跳转失败");
         }
     }
@@ -91,7 +91,7 @@ public class DiscoverCase extends VP2 {
      * 第一个头像的昵称是不一样的
      */
     public void testFlush() throws UiObjectNotFoundException, IOException {
-        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        MainAction.clickDiscover();
         waitTime(2);
         // UiObject Discover
         getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
@@ -167,6 +167,7 @@ public class DiscoverCase extends VP2 {
         clickById(Other.chattextfield);
         //弹出登陆界面
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN,5000);
+        Spoon.screenshot("loginIn_page");
         Asst.assertFalse("ClickInputFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
     }
 }
