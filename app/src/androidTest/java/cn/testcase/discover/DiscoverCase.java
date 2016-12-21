@@ -164,6 +164,7 @@ public class DiscoverCase extends VP2 {
         waitTime(2);
         clickByText("说点什么吧");
         //clickById(Other.chattextfield);用此方法容易报超时
+
         Asst.assertFalse("ClickInputFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
     }
 }
