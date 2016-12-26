@@ -25,6 +25,7 @@ import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
 import cn.action.DiscoverAction;
+import cn.action.FollowersAction;
 import cn.action.MainAction;
 import cn.page.AccountPage;
 import cn.page.App;
@@ -169,6 +170,82 @@ public class DiscoverCase extends VP2 {
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN,5000);
         Spoon.screenshot("loginIn_page");
         Asst.assertFalse("ClickInputFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    /**
+     * 已登录点击输入框
+     *1、已登录状态下在discover界面点击任意视频进入观看，点击输入框
+     * Result：正常弹出输入字符界面
+     * */
+    public void testClickInputSuccess() throws UiObjectNotFoundException, IOException {
+        //账号登录
+        AccountAction.logInAccount("13688169291","123456");
+        //进入发现界面
+        MainAction.clickDiscover();
+        //播放一个视频
+        DiscoverAction.navToPlayVideo();
+        //等待连接聊天室
+        BroadcastAction.waitBroadcastLoading();
+        //点击评论框
+        clickById(Other.chattextfield);
+        //弹出输入框界面
+        waitUntilFind(Other.chattextfield, 2000);
+        Spoon.screenshot("Input_page");
+        Asst.assertFalse("ClickInputSuccess_Fail",!id_exists(Other.chattextfield_tanchu));
+    }
+    @Test
+    /**
+     * 未登陆点击关注主播
+     *1.未登陆状态下，在观看视频界面点击关注主播
+     *Result:弹出登陆界面
+     * */
+    public void testUnLoginFollowAnchor() throws UiObjectNotFoundException {
+        //注销账号
+        AccountAction.logOutAccount();
+        //进入-发现界面
+        MainAction.clickDiscover();
+        //播放一个视频
+        DiscoverAction.navToPlayVideo();
+        //点击主播
+        FollowersAction.clickToAnchor();
+        //点击关注
+        clickByText("关注");
+        //弹出登录界面
+        waitUntilFind(AccountPage.ACCOUNT_WEIXIN,5000);
+        Spoon.screenshot("loginIn_page");
+        Asst.assertFalse("ClickInputFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    /**
+     *
+     *1.已登录状态下，在观看界面点击任意键关注主播
+     *Result:
+     * */
+    public void testLoginFollowAnchor() throws UiObjectNotFoundException {
+        //账号登录
+        AccountAction.logInAccount("13688169291","123456");
+        //进入发现界面
+        MainAction.clickDiscover();
+        //播放一个视频
+        DiscoverAction.navToPlayVideo();
+        //点击主播
+        FollowersAction.clickToAnchor();
+        //判断是否关注
+        if(text_exists("已关注")){
+            //点击已关注
+            clickByText("已关注");
+            //取消关注成功，变为关注
+            waitUntilFindText("关注", 3000);
+            Spoon.screenshot("取消关注成功");
+            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
+        }else {
+            //点击关注
+            clickByText("关注");
+            //关注成功，变为已关注
+            waitUntilFindText("已关注", 3000);
+            Spoon.screenshot("关注成功");
+            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
+        }
     }
 }
 
