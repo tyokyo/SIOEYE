@@ -3,32 +3,46 @@ package cn.testcase.other;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+
 import com.squareup.spoon.Spoon;
+
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
-import cn.page.MePage;
 
 /**
- * Created by user on 2016/11/05   .
+ * Created by yun.yang on 2016/11/05   .
+ * change by yun.yang on 2016/12/25.
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class LoginCase extends VP2 {
     Logger logger = Logger.getLogger(LoginCase.class.getName());
 
+    @AfterClass
+    public static void loginAccountWithDefault() throws Exception {
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
+        initDevice();
+        AccountAction.inLogin();
+    }
+
     @Before
     public void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        AccountAction.inLogin();
+        AccountAction.logOutAccount();
+        AccountAction.navToLogin();
     }
+
     @Test
     /*
     case 1：login界面元素检查
@@ -37,27 +51,25 @@ public class LoginCase extends VP2 {
     3.输入框提示文字“Mobile Number or Email”“Password”其中“Password”无法查看
      */
     public void testCheckLoginInterface() throws UiObjectNotFoundException{
-        AccountAction.logOutAccount();
-        AccountAction.navToLogin();
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
         waitTime(2);
         if (getUiObjectByText("邮箱、手机号、Sioeye ID").exists()){
             logger.info("输入手机号或者邮箱存在");
             if (getUiObjectByText("登录").exists()){
-                logger.info("Login存在");
+                logger.info("Login Exist");
                 if (getUiObjectByText("忘记密码？").exists()){
-                    logger.info("Forgot password存在");
-                        clickByClass("android.widget.ImageView", 0);
-                        //点击返回键；检查返回键功能是否正常
-                        if (getUiObjectByText("登录").exists()) {
-                            logger.info("返回键正常");
-                            clickByText("登录");
-                        } else {
-                            Spoon.screenshot("LoginInterface", "返回键无功能");
-                            Assert.fail("返回键无功能");}
+                    logger.info("Forgot password Exist");
+                    clickByClass("android.widget.ImageView", 0);
+                    //点击返回键；检查返回键功能是否正常
+                    if (getUiObjectByText("登录").exists()) {
+                        logger.info("back icon is ok");
+                        clickByText("登录");
+                    } else {
+                        Spoon.screenshot("LoginInterface", "返回键无功能");
+                        Assert.fail("Back icon can't back");}
                 }
                 else {Spoon.screenshot("LoginInterface","Forgot password不存在");
-                    Assert.fail("Forgot password不存在");}
+                    Assert.fail("Forgot password ");}
             }
             else {Spoon.screenshot("LoginInterface","Login不存在");
                 Assert.fail("Login不存在");}
@@ -69,85 +81,190 @@ public class LoginCase extends VP2 {
     }
     @Test
     /*
-    case 2：只输入账号，或者输入密码；点击login
-    1.有账号 无密码
-    2.无账号无密码
-    3.无账号 有密码
+    case 2：未输入账号和密码；点击login
+    无账号无密码
     无页面变化
      */
-    public void testLoseUseNameOrPassword() throws UiObjectNotFoundException{
-        AccountAction.logOutAccount();
-        AccountAction.navToLogin();
+    public void testLoginByLoseUseNameAndPassword() throws UiObjectNotFoundException {
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
-        AccountAction.justLogIn("yyun@123.com","");
-        if (!getUiObjectByText("登录").exists()){
+        AccountAction.justLogIn("", "");
+        if (!getUiObjectByText("登录").exists()) {
+            Assert.fail("无账号和密码点击登陆后页面变化");
+        }
+    }
+    @Test
+    /*
+    case 3：输入正确的账号，未输入密码；点击login
+    账号通过读取本地config.properties文件中email；
+    无页面变化
+     */
+    public void testLoginByLosePassword() throws UiObjectNotFoundException {
+        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
+        String userName = Constant.getUserName("email");
+        AccountAction.justLogIn(userName, "");
+        if (!getUiObjectByText("登录").exists()) {
             Assert.fail("无密码点击登陆后页面变化");
         }
-        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
-        AccountAction.justLogIn("","");
-        if (!getUiObjectByText("登录").exists()) {
-            Assert.fail("无账号密码点击登陆后页面变化");
-        }
-        AccountAction.justLogIn("","eye1321");
-        if (!getUiObjectByText("登录").exists()) {
-            Assert.fail("无账号点击登陆后页面变化");
-        }
-        AccountAction.justLogIn(Constant.getUserName(),Constant.getPassword());
-        waitTime(5);
-        if (!getObjectById(MePage.ID_MAIN_TAB_ME).exists()){
-            Assert.fail("登陆失败");}
     }
     @Test
     /*
-    case 3：输入错误的账号或者密码后点击登录
-    1.输入错误的密码，点击login
-    2.错误的账号和密码。点击login
+    case 4：未输入账号和正确的密码；点击login
     无页面变化
      */
-    public void testErrorUseNameOrPassword() throws UiObjectNotFoundException{
-        AccountAction.logOutAccount();
-        AccountAction.navToLogin();
+    public void testLoseUseName() throws UiObjectNotFoundException{
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
-        AccountAction.justLogIn("eye@163.com","12012012012012558");
-        waitTime(2);
-        if (!getUiObjectByText("登录").exists()) {
-            Assert.fail("错误密码点击登陆后页面变化");
+        String userPassword = Constant.getUserName("email_password");
+        AccountAction.justLogIn("",userPassword);
+        if (!getUiObjectByText("登录").exists()){
+            Assert.fail("无账号点击登陆后页面变化");
         }
-        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
-        AccountAction.justLogIn("e11111111ye163.com","1212558");
-        waitTime(2);
-        if (!getUiObjectByText("登录").exists()) {
-            Assert.fail("错误账号点击登陆后页面变化");}
     }
     @Test
     /*
-    case 4：密码可见和不可见
+    case 5：密码可见和不可见
     1.在密码不可见情况下输入密码
     2.打开可见并检查
     3.再重新输入密码并检查是否为可见
     4.关闭可见并检查
      */
-    public void testVisibleAndUnVisiblePassword() throws UiObjectNotFoundException {
-        AccountAction.logOutAccount();
-        AccountAction.navToLogin();
+    public void testVisibleAndUnVisibleLoginPassword() throws UiObjectNotFoundException {
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
-        getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText("123abcDEF!@");
+        String userPassword=Constant.randomStringGenerator(20);
+        getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(userPassword);
         clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
-        if (!getUiObjectByText("123abcDEF!@").exists()){
-            Spoon.screenshot("Password_Visible_Fail","开启密码可见失败");
-            Assert.fail("开启密码可见失败");
+        if (!getUiObjectByText(userPassword).exists()){
+            Spoon.screenshot("FailedOpenPasswordVisible","开启密码可见失败");
+            Assert.fail("FailedOpenPasswordVisible");
         }
-        getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText("#*MOpl0oF!@");
-        if (!getUiObjectByText("#*MOpl0oF!@").exists()){
+        userPassword=Constant.randomStringGenerator(22);
+        getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(userPassword);
+        if (!getUiObjectByText(userPassword).exists()){
             Spoon.screenshot("Password_Visible_Fail","开启密码可见后再输入可见失效");
             Assert.fail("开启密码可见后再输入可见失效");
         }
         clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
-        if (getUiObjectByText("#*MOpl0oF!@").exists()){
+        if (getUiObjectByText(userPassword).exists()){
             Spoon.screenshot("Password_Unvisible_Fail","关闭密码可见失败");
-            Assert.fail("关闭密码可见失败");
+            Assert.fail("FailedClosePasswordVisible");
+        }
+    }
+    @Test
+    /*
+    case 6：输入不存在的邮箱账号和密码后点击登录
+    1.输入不存在的账号和密码
+    2.点击login
+    无页面变化
+     */
+    public void testLoginByErrorEmailAndPassword() throws UiObjectNotFoundException{
+        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
+        String userName=Constant.randomEmail(10);
+        String userPassword=Constant.randomStringGenerator(20);
+        AccountAction.justLogIn(userName,userPassword);
+        waitTime(2);
+        if (!getUiObjectByText("登录").exists()) {
+            Assert.fail("输入不存在的邮箱账号和密码点击登陆后页面有变化");}
+    }
+    @Test
+    /*
+    case 7：输入不存在的电话号码账号和密码后点击登录
+    1.输入不存在的账号和密码
+    2.点击login
+    无页面变化
+     */
+    public void tesLoginBytErrorPhoneNumberAndPassword() throws UiObjectNotFoundException{
+        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
+        String userName=Constant.randomPhoneNumber();
+        String userPassword=Constant.randomStringGenerator(20);
+        AccountAction.justLogIn(userName,userPassword);
+        waitTime(2);
+        if (!getUiObjectByText("登录").exists()) {
+            Assert.fail("使用不存在的电话号码账号和密码点击登陆后页面变化");}
+    }
+    @Test
+    /*
+    case 8：输入正确的邮箱账号和错误的密码后点击登录
+    1.输入正确的账号和错误的密码密码
+    2.账号通过读取本地config.properties文件中email；错误密码通过随机字符串产生
+    3.点击login
+    无页面变化
+     */
+    public void testLoginByEmailAndErrorPassword() throws UiObjectNotFoundException {
+        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
+        String userName = Constant.getUserName("email");
+        String userPassword = Constant.randomStringGenerator(20);
+        AccountAction.justLogIn(userName, userPassword);
+        waitTime(2);
+        if (!getUiObjectByText("登录").exists()) {
+            Assert.fail("错误的密码点击登陆后页面变化");
+        }
+    }
+    @Test
+    /*
+    case 9：输入正确的电话号码账号和错误的密码后点击登录
+    1.输入正确的账号和错误的密码密码
+    2.账号通过读取本地config.properties文件中email；错误密码通过随机字符串产生
+    3.点击login
+    无页面变化
+     */
+    public void testLoginByPhoneNumberAndErrorPassword() throws UiObjectNotFoundException {
+        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
+        String userName = Constant.getUserName("phone_number");
+        String userPassword = Constant.randomStringGenerator(20);
+        AccountAction.justLogIn(userName, userPassword);
+        waitTime(2);
+        if (!getUiObjectByText("登录").exists()) {
+            Assert.fail("错误密码点击登陆后页面变化");
+        }
+    }
+    @Test
+    /*
+    case 10：使用email登录
+    读取本地config.properties文件中email和email_password来进行登录
+    请提前将config.properties保存在本地根目录；格式：email=xxxxx@xx.xx；email_password=xxx
+    登录成功
+     */
+    public void testLoginByEmail() throws UiObjectNotFoundException {
+        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
+        String userName = Constant.getUserName("email");
+        String userPassword = Constant.getUserName("email_password");
+        AccountAction.justLogIn(userName,userPassword );
+        waitTime(3);
+        if (getUiObjectByText("登录").exists()) {
+            Assert.fail("LoginFailByEmail");
+        }
+    }
+    @Test
+    /*
+    case 11：使用phone登录
+    读取本地config.properties文件中phone_number和phone_password来进行登录
+    请提前将config.properties保存在本地根目录；格式：phone_number=1xxx；phone_password=xxx
+    登录成功
+     */
+    public void testLoginByPhoneNumber() throws Exception {
+        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
+        String userName = Constant.getUserName("phone_number");
+        String userPassword = Constant.getUserName("phone_password");
+        AccountAction.justLogIn(userName,userPassword );
+        waitTime(3);
+        if (getUiObjectByText("登录").exists()) {
+            Assert.fail("LoginFailByPhoneNumber");
+        }
+    }
+    @Test
+    /*
+    case 12：使用sioEye登录
+    读取本地config.properties文件中phone_number和phone_password来进行登录
+    请提前将config.properties保存在本地根目录；格式：sioeye_id=xxx；sioeye_password=xxx
+    登录成功
+     */
+    public void testLoginBySioEeyID() throws UiObjectNotFoundException {
+        clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
+        String userName = Constant.getUserName("sioeye_id");
+        String userPassword = Constant.getUserName("sioeye_password");
+        AccountAction.justLogIn(userName,userPassword );
+        waitTime(3);
+        if (getUiObjectByText("登录").exists()) {
+            Assert.fail("LoginFailBySioEeyId");
         }
     }
 }
-
-
