@@ -853,6 +853,14 @@ public class VP2 extends  VP{
     }
     /**
      * Get the Launcher Package Name.
+     * @param textString text
+     * @param timeout timeout for wait
+     */
+    public static void waitUntilFindText(String textString,int timeout){
+        gDevice.wait(Until.findObject(By.text(textString)),timeout);
+    }
+    /**
+     * Get the Launcher Package Name.
      * @param resourceID id
      * @param timeout timeout for wait
      */
