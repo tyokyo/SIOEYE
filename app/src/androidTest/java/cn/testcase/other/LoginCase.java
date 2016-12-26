@@ -21,7 +21,7 @@ import cn.page.App;
 import cn.page.Constant;
 
 /**
- * Created by yun.yang on 2016/11/05   .
+ *
  * change by yun.yang on 2016/12/25.
  */
 @RunWith(AndroidJUnit4.class)
