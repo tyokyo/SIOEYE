@@ -8,4 +8,5 @@ public class Other {
 	public static String chattextfield = "cn.sioeye.sioeyeapp:id/tipText";
 	public static String weibo_btn = "cn.sioeye.sioeyeapp:id/login_weibo";
 	public static String chattextfield_tanchu = "cn.sioeye.sioeyeapp:id/edit_text";
+	public static String anchor = "cn.sioeye.sioeyeapp:id/tv_anchor";
 }
