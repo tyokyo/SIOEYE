@@ -217,9 +217,8 @@ public class DiscoverCase extends VP2 {
     }
     @Test
     /**
-     *
      *1.已登录状态下，在观看界面点击任意键关注主播
-     *Result:
+     *Result:能够关注/取关主播
      * */
     public void testLoginFollowAnchor() throws UiObjectNotFoundException {
         //账号登录
@@ -236,16 +235,28 @@ public class DiscoverCase extends VP2 {
             clickByText("已关注");
             //取消关注成功，变为关注
             waitUntilFindText("关注", 3000);
-            Spoon.screenshot("取消关注成功");
+            Spoon.screenshot("DeleteFollowingSuccess");
             Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
         }else {
             //点击关注
             clickByText("关注");
             //关注成功，变为已关注
             waitUntilFindText("已关注", 3000);
-            Spoon.screenshot("关注成功");
+            Spoon.screenshot("FollowingSuccess");
             Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
         }
+    }
+    @Test
+    /**
+     * 单击广告封面
+     *1、点击广告封面
+     *Result:跳转至广告链接，在网络良好的情况下不应卡顿，延迟
+     * */
+    public void testClickAD() throws UiObjectNotFoundException {
+        DiscoverAction.navToAd();
+        waitUntilFind(DiscoverPage.ID_PROFILE_AVATOR,0);
+        Spoon.screenshot("JumpSuccess");
+        Asst.assertFalse("LoginFollowAnchor", !id_exists(DiscoverPage.ID_PROFILE_AVATOR));
     }
 }
 
