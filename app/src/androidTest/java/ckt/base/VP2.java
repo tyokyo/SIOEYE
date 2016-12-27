@@ -362,7 +362,7 @@ public class VP2 extends  VP{
         initDevice();
         gDevice.wait(Until.findObject(By.res(ResourceID)), 10000);
         if (gDevice.findObject(new UiSelector().resourceId(ResourceID)).exists()) {
-            gDevice.wait(Until.findObject(By.res(ResourceID)), 5000).click();
+            gDevice.wait(Until.findObject(By.res(ResourceID)), 500).click();
             return true;
         } else {
             Asst.fail("Time Out,Not found the UI Element："+ResourceID);
