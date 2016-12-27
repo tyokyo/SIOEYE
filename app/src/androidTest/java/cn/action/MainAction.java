@@ -52,6 +52,7 @@ public class MainAction extends VP2 {
     public static void navToMe() throws UiObjectNotFoundException {
         clickMe();
         Spoon.screenshot("navToMe");
+        waitTime(2);
     }
     //Discover
     public static void navToDevice() throws UiObjectNotFoundException {

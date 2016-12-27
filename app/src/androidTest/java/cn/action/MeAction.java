@@ -329,5 +329,11 @@ public class MeAction extends VP2{
     public static void setToPersonal() throws UiObjectNotFoundException {
         clickByText("部分可见");
     }
-
+    //评论区域-滑动更新,显示最新消息
+    public static void displayNewMessages() throws UiObjectNotFoundException {
+        if (id_exists(MePage.NEW_MESSAGES_DISPLAY)){
+            getObject2ById(MePage.NEW_MESSAGES_DISPLAY).swipe(Direction.UP,(float)0.5);
+            waitTime(2);
+        }
+    }
 }
