@@ -95,9 +95,9 @@ public class FollowingCase extends VP2 {
             gDevice.pressBack();
             waitTime(2);
             //滑动显示最新消息
-            getObject2ById(MePage.NEW_MESSAGES_DISPLAY).swipe(Direction.UP,(float)0.5);
+            MeAction.displayNewMessages();
             waitTime(2);
-            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
+            Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
@@ -131,10 +131,10 @@ public class FollowingCase extends VP2 {
             gDevice.pressBack();
             waitTime(2);
             //滑动显示最新消息
-            getObject2ById(MePage.NEW_MESSAGES_DISPLAY).swipe(Direction.UP,(float)0.5);
+            MeAction.displayNewMessages();
             waitTime(2);
             input_comments=input_comments.substring(0,120);
-            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
+            Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
@@ -176,8 +176,10 @@ public class FollowingCase extends VP2 {
                 //点击评论
                 clickRect(rect);
                 waitTime(2);
+                //滑动显示最新消息
+                MeAction.displayNewMessages();
                 //input_comments=input_comments.substring(0,120);
-                Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
+                Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
                 //验证评论数+1
                 gDevice.pressBack();
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();

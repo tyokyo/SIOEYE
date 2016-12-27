@@ -113,11 +113,8 @@ public class FollowersCase extends VP2 {
                 clickByPoint(point);
                 gDevice.pressBack();
                 waitTime(2);
-                if (text_exists_match("底部有新消息")){
-                    clickByText("底部有新消息");
-                    waitTime(2);
-                }
-
+                //滑动显示最新消息
+                MeAction.displayNewMessages();
                 input_comments=input_comments.substring(0,120);
                 Asst.assertTrue("comments success",getObjectByTextContains(input_comments).exists());
                 //验证评论数+1
@@ -169,11 +166,8 @@ public class FollowersCase extends VP2 {
                 clickByPoint(point);
                 gDevice.pressBack();
                 waitTime(2);
-
-                if (text_exists_match("底部有新消息")){
-                    clickByText("底部有新消息");
-                    waitTime(2);
-                }
+                //滑动显示最新消息
+                MeAction.displayNewMessages();
                 Asst.assertTrue("comments success",getObjectByTextContains(input_comments).exists());
                 //验证评论数+1
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
@@ -225,12 +219,8 @@ public class FollowersCase extends VP2 {
                 clickByPoint(point);
                 gDevice.pressBack();
                 waitTime(2);
-
-                if (text_exists_match("底部有新消息")){
-                    clickByText("底部有新消息");
-                    waitTime(2);
-                }
-
+                //滑动显示最新消息
+                MeAction.displayNewMessages();
                 Asst.assertTrue("comments success",getObjectByTextContains(input_comments).exists());
                 //验证评论数+1
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
