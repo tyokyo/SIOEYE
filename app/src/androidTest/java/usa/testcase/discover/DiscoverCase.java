@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
+import iris4G.action.CameraAction;
+import usa.action.AccountAction;
 import usa.action.DiscoverAction;
 import usa.page.App;
 import usa.page.Device;
@@ -94,7 +96,8 @@ public class DiscoverCase extends VP2 {
      *case4.来回频繁切换主界面
      *Result：观察APP响应情况， APP迅速响应对应操作
      */
-    public void testSwipe() {
+    public void testSwipe() throws UiObjectNotFoundException {
+        AccountAction.login("13688169291","123456");
         clickById(Discover.ID_MAIN_TAB_DISCOVER);
         clickById(Discover.ID_MAIN_TAB_WATCH);
         clickById(Me.ID_MAIN_TAB_ME);
@@ -102,7 +105,9 @@ public class DiscoverCase extends VP2 {
         clickById(Discover.ID_MAIN_TAB_DISCOVER);
         clickById(Discover.ID_MAIN_TAB_WATCH);
         clickById(Me.ID_MAIN_TAB_ME);
-        clickById(Discover.ID_MAIN_TAB_DECICE);
+        waitUntilFind(Discover.ID_MAIN_TAB_DECICE,0);
+        Spoon.screenshot("SwipeCase");
+        Assert.fail("RespondSlowly");
     }
 
 }
