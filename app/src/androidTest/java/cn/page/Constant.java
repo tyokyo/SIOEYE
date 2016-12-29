@@ -144,5 +144,23 @@ public class Constant {
         return randomEmail;
     }
 
+    /*
+     *   产生lengh位随机的错误手机号码，其中lengh不能等于11
+     */
+
+    public static String randomErrPhoneNumber(int lengh) {
+        String phoneNumber="";
+        char[]alphaNumber={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        String[]alphaTelTitle={"130","131","132","133","134","135","136","137","138","139", "150",
+                "151","152","153","155","156","157","158","159","180","181","183","186","187","188","189","170"};
+        String phoneTitle= alphaTelTitle[new Random().nextInt(alphaTelTitle.length)];
+        phoneNumber=phoneNumber+phoneTitle;
+        for(int i=0;i<lengh-3;i++){
+            Character ranNumber=Character.valueOf(alphaNumber[new Random().nextInt(alphaNumber.length)]);
+            phoneNumber=phoneNumber+ranNumber.toString();
+        }
+        System.out.println(phoneNumber);
+        return phoneNumber;
+    }
 
 }
