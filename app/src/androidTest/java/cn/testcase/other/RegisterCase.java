@@ -5,6 +5,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import com.squareup.spoon.Spoon;
 import org.hamcrest.Asst;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,8 @@ import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.page.AccountPage;
 import cn.page.App;
+import cn.page.Constant;
+
 /**
  * Created by caibing.yin on 2016/11/16.
  */
@@ -123,5 +126,30 @@ public class RegisterCase extends VP2 {
             Asst.fail("InValidEmailCase_fail");
         }
     }
+
+    /*
+     *  2016/12/29 徐瑞香
+     *   注册时输入12位不合法的电话号码
+     */
+
+    @Test
+    public void err_mobile_reg() throws UiObjectNotFoundException {
+        AccountAction.logOutAccount();
+        //注销账号
+        AccountAction.navToSignUp_ByMobile();
+        //到手机注册界面
+        clickById(AccountPage.SIGN_UP_TEL_ET_INPUT_PHONE);
+        //点击输入手机号码文本框
+        int i=12;
+        setText(AccountPage.SIGN_UP_TEL_ET_INPUT_PHONE, Constant.randomErrPhoneNumber(i));
+        //输入12位不合法的随机手机号码
+        waitTime(2);
+        Assert.assertEquals("注册无效的手机号码",true,getObjectById(AccountPage.SIGN_UP_ERROR_TIP).exists());
+        Spoon.screenshot("Err_mobileNumber_Reg");
+
+
+    }
+
+
 
 }
