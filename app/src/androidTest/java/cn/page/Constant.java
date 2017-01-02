@@ -107,6 +107,21 @@ public class Constant {
         logger.info("randomString:"+ randomSequence);
         return randomSequence;
     }
+    public static  String randomFixedLengthStringGenerator(int length){
+        char[] alphaArray = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+                'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','K',
+                'w', 'x', 'y', 'z','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+                'J','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V','W',
+                'X', 'Y', 'Z','0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                '@', '#', '$','%', '&', '*', ':', ';', '/', '?', '-', '+', '=', };
+        String randomSequence = "";
+        for (int i = 0; i < length; i++) {
+            Character c = Character.valueOf(alphaArray[new Random().nextInt(alphaArray.length)]);
+            randomSequence = randomSequence + c.toString();
+        }
+        logger.info("randomString:"+ randomSequence);
+        return randomSequence;
+    }
     public static String randomPhoneNumber() {
         String phoneNumber="";
         char[]alphaNumber={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
