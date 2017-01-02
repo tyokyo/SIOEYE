@@ -3,14 +3,18 @@ package cn.testcase.other;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.io.IOException;
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.page.AccountPage;
@@ -190,7 +194,7 @@ public class RegisterCase extends VP2 {
  *Email注册,检查创建sioEyeID 4-15位有继续按钮
  *1、输入随机Email进行注册（可见状态输入）
  *2.在密码输入框中输入机字符串
- *3.创建sioEyeID 4位  15位 +4-15中间随机一种
+ *3.创建sioEyeID 4位  15位 +8位
  * Result：有继续按钮
  * */
 @Test
@@ -199,31 +203,59 @@ public void testSioEyeIDInRegisterByEmail() throws UiObjectNotFoundException, IO
     String password = Constant.randomFixedLengthStringGenerator(8);
     AccountAction.inputPassword(password);
     clickById(AccountPage.SIGN_UP_CONTINUE);
-    String sioEye = Constant.randomFixedLengthStringGenerator(3);
+    String sioEye = Constant.randomFixedLengthStringGenerator(4);
     AccountAction.inputSioEyeId(sioEye);
-    if (!getObjectById(AccountPage.SIOEYEID_VERIFIED_BTN).exists()) {
-        Spoon.screenshot("ItCanContinueWith3DigitSioEye");
-        Assert.fail("ItCanContinueWith3DigitSioEye");
+    if (!getObjectByTextStartsWith("继续").exists()) {
+        Spoon.screenshot("CannotContinueWith4DigitSioEye");
+        Assert.fail("CannotContinueWith4DigitSioEye");
     } else {
         clearText(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID);
-        sioEye = Constant.randomFixedLengthStringGenerator(4);
+        sioEye = Constant.randomFixedLengthStringGenerator(8);
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID).setText(sioEye);
         waitTime(2);
         if (!getObjectByTextStartsWith("继续").exists()) {
-            Spoon.screenshot("CantContinueWith4DigitSioEyeID");
-            Assert.fail("CantContinueWith4DigitSioEyeID");
+            Spoon.screenshot("CannotContinueWith8DigitSioEyeID");
+            Assert.fail("CannotContinueWith8DigitSioEyeID");
         } else {
             clearText(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID);
             sioEye = Constant.randomFixedLengthStringGenerator(15);
             getObjectById(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID).setText(sioEye);
             waitTime(2);
-            if (!getObjectById(AccountPage.SIOEYEID_VERIFIED_BTN).exists()) {
-                Spoon.screenshot("ItCanContinueWith3DigitSioEye");
-                Assert.fail("ItCanContinueWith3DigitSioEye");
+            if (!getObjectByTextStartsWith("继续").exists()) {
+                Spoon.screenshot("CannotContinueWith15DigitSioEye");
+                Assert.fail("CannotContinueWith15DigitSioEye");
             }
         }
     }
 }
+    /**By yun.yang 2017.1.2
+    *case9:
+     *Email注册,检查创建sioEyeID 非4-15位有继续按钮
+    *1、输入随机Email进行注册（可见状态输入）
+     *2.在密码输入框中输入机字符串
+    *3.创建sioEyeID 3位  16位
+    * Result：无继续按钮，提示错误
+    * */
+    @Test
+    public void testInvalidSioEyeIDInRegister() throws UiObjectNotFoundException, IOException {
+        AccountAction.navToInputPassword_ByEmailRegister();
+        String password = Constant.randomFixedLengthStringGenerator(8);
+        AccountAction.inputPassword(password);
+        clickById(AccountPage.SIGN_UP_CONTINUE);
+        String sioEye = Constant.randomFixedLengthStringGenerator(3);
+        AccountAction.inputSioEyeId(sioEye);
+        if (!getObjectById(AccountPage.SIOEYEID_VERIFIED_BTN).exists()) {
+            Spoon.screenshot("CanContinueWith3DigitSioEye");
+            Assert.fail("CanContinueWith3DigitSioEye");
+        }else {
+            sioEye = Constant.randomFixedLengthStringGenerator(16);
+            AccountAction.inputSioEyeId(sioEye);
+            if (!getObjectById(AccountPage.SIOEYEID_VERIFIED_BTN).exists()) {
+                Spoon.screenshot("CanContinueWith16DigitSioEye");
+                Assert.fail("CanContinueWith17DigitSioEye");
+            }
+        }
+    }
 
 
 }
