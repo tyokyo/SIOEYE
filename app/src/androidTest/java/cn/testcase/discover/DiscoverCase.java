@@ -236,7 +236,7 @@ public class DiscoverCase extends VP2 {
             clickByText("已关注");
             //取消关注成功，变为关注
             waitUntilFindText("关注", 3000);
-            Spoon.screenshot("取消关注成功");
+            Spoon.screenshot("cancel_follow");
             Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
         }else {
             //点击关注
