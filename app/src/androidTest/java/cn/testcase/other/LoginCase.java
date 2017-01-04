@@ -267,4 +267,35 @@ public class LoginCase extends VP2 {
             Assert.fail("LoginFailBySioEeyId");
         }
     }
+    @Test
+    /*
+    case 13：使用邮箱找回密码
+    1.读取本地config.properties文件中email
+    请提前将config.properties保存在本地根目录
+    结果：提示重置密码链接已经发送到注册邮箱中
+    2.为注册过的邮箱
+    随机产生一个邮箱
+    结果：无“提示重置密码链接已经发送到注册邮箱中”
+     */
+    public void testForgotPasswordByEmail() throws UiObjectNotFoundException {
+        getObjectByTextContains("忘记密码？").click();
+        String email=Constant.randomEmail(26);
+        getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(email);
+        waitTime(1);
+        getObjectById(AccountPage.SIGN_UP_CONTINUE).click();
+        if (getObjectByTextContains("重置密码的链接已经发送到你注册的邮箱").exists()){
+            Spoon.screenshot("invalidEmailCanSentForgotPasswordEmail");
+            Assert.fail("invalidEmailCanSentForgotPasswordEmail");
+        }else {
+            email=Constant.getUserName("email");
+            getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(email);
+            waitTime(1);
+            getObjectById(AccountPage.SIGN_UP_CONTINUE).click();
+            if (!getObjectByTextContains("重置密码的链接已经发送到你注册的邮箱").exists()){
+                Spoon.screenshot("RegisteredEmailCannotSentForgotPasswordEmail");
+                Assert.fail("RegisteredEmailCannotSentForgotPasswordEmail");
+            }
+        }
+
+    }
 }

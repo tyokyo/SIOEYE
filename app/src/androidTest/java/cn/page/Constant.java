@@ -94,12 +94,27 @@ public class Constant {
     public static  String randomStringGenerator(int length){
         int count=(int)(1+Math.random()*(length-1+1));
         char[] alphaArray = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-                'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-                'w', 'x', 'y', 'z','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-                'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-                'W', 'X', 'Y', 'Z','0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+                'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','K',
+                'w', 'x', 'y', 'z','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+                'J','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V','W',
+                'X', 'Y', 'Z','0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                '@', '#', '$','%', '&', '*', ':', ';', '/', '?', '-', '+', '=', };
         String randomSequence = "";
         for (int i = 0; i < count; i++) {
+            Character c = Character.valueOf(alphaArray[new Random().nextInt(alphaArray.length)]);
+            randomSequence = randomSequence + c.toString();
+        }
+        logger.info("randomString:"+ randomSequence);
+        return randomSequence;
+    }
+    public static  String randomFixedLengthStringGenerator(int length){
+        char[] alphaArray = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+                'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','K',
+                'w', 'x', 'y', 'z','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+                'J','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V','W',
+                'X', 'Y', 'Z','0', '1', '2', '3', '4', '5', '6', '7', '8', '9','_'};
+        String randomSequence = "";
+        for (int i = 0; i < length; i++) {
             Character c = Character.valueOf(alphaArray[new Random().nextInt(alphaArray.length)]);
             randomSequence = randomSequence + c.toString();
         }
@@ -121,28 +136,50 @@ public class Constant {
         return phoneNumber;
     }
     public static String randomEmail(int length) {
-        int count=(int)(5+Math.random()*(length-5));
-        int count1=(int)(2+Math.random()*(count-4));
-        int count2=(int)(2+Math.random()*(count-count1-2));
+        int count=(int)(3+Math.random()*(length-3));
+        int count1=(int)(1+Math.random()*(count-3));
         String randomEmail="";
-        char[]alphaChar={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
+        char[]alphaEmail={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
                 'p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G',
                 'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y',
                 'Z','0','1','2','3','4','5','6','7','8','9'};
-        for(int i=1;i<count1;i++){
-            Character ranChar=Character.valueOf(alphaChar[new Random().nextInt(alphaChar.length)]);
-            randomEmail=randomEmail+ranChar.toString();}
+        String[]alphaTLD={".com",".net",".org",".biz",".mobi",".travel",".name",".pro",
+                ".cn",".cc", ".co",".in",".me",".tv",".us",".tk",".net",".gov",".edu",
+                ".mil",".biz",".info",".museum",".travel",".int",".areo",".post",".rec",
+                ".asia",".vip",".top",".au",".ae",".ar",".br",".ca",".ch",".de",".dk",
+                ".es",".eg",".fg",".gr",".hk",".in",".iq",".it",".jp",".mo",".us",".uk"};
+        for(int i=0;i<count1;i++){
+            Character ranChar1=Character.valueOf(alphaEmail[new Random().nextInt(alphaEmail.length)]);
+            randomEmail=randomEmail+ranChar1.toString();}
         randomEmail=randomEmail+"@";
-        for(int a=count1;a<count2+count1-1;a++){
-            Character ranChar=Character.valueOf(alphaChar[new Random().nextInt(alphaChar.length)]);
-            randomEmail=randomEmail+ranChar.toString();}
-        randomEmail=randomEmail+".";
-        for(int i=count2+count1;i<=count-1;i++){
-            Character ranChar=Character.valueOf(alphaChar[new Random().nextInt(alphaChar.length)]);
-            randomEmail=randomEmail+ranChar.toString();}
+        for(int a=0;a<count-count1-1;a++){
+            Character ranChar2=Character.valueOf(alphaEmail[new Random().nextInt(alphaEmail.length)]);
+            randomEmail=randomEmail+ranChar2.toString();
+        }
+        String emailEnding= alphaTLD[new Random().nextInt(alphaTLD.length)];
+        randomEmail=randomEmail+emailEnding.toString();
         System.out.println(randomEmail);
         return randomEmail;
     }
 
+
+    /*
+     *   产生lengh位随机的错误手机号码，其中lengh不能等于11
+     */
+
+    public static String randomErrPhoneNumber(int lengh) {
+        String phoneNumber="";
+        char[]alphaNumber={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        String[]alphaTelTitle={"130","131","132","133","134","135","136","137","138","139", "150",
+                "151","152","153","155","156","157","158","159","180","181","183","186","187","188","189","170"};
+        String phoneTitle= alphaTelTitle[new Random().nextInt(alphaTelTitle.length)];
+        phoneNumber=phoneNumber+phoneTitle;
+        for(int i=0;i<lengh-3;i++){
+            Character ranNumber=Character.valueOf(alphaNumber[new Random().nextInt(alphaNumber.length)]);
+            phoneNumber=phoneNumber+ranNumber.toString();
+        }
+        System.out.println(phoneNumber);
+        return phoneNumber;
+    }
 
 }

@@ -212,9 +212,7 @@ public class DiscoverAction extends VP2 {
     */
     public static VideoBean playBackVideo(boolean play) throws UiObjectNotFoundException {
         VideoBean videoBean =new VideoBean();
-        int like = 0;
-        int zan  = 0;
-        String address="";
+        boolean isFind = false;
         UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
         List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
         logger.info(linearLayouts.size() + "");
@@ -223,14 +221,16 @@ public class DiscoverAction extends VP2 {
             try {
                 textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
                 if (textViews.size() == 3) {
-                    like = Integer.parseInt(textViews.get(0).getText());
-                    zan = Integer.parseInt(textViews.get(1).getText());
-                    address = textViews.get(2).getText();
+                    isFind=true;
+                    logger.info("playBackVideo-size=3");
+                    int like = Integer.parseInt(textViews.get(0).getText());
+                    int zan = Integer.parseInt(textViews.get(1).getText());
+                    String address = textViews.get(2).getText();
                     videoBean.setAddress(address);
                     videoBean.setLike(like);
                     videoBean.setZan(zan);
                     //获取点赞数
-                    logger.info("赞人数是" + zan + "人");
+                    logger.info("playBackVideo-"+videoBean.toString());
                     Spoon.screenshot("zan", "" + zan);
                     //点击视频进行播放
                     if (play){
@@ -241,15 +241,24 @@ public class DiscoverAction extends VP2 {
                     }
                     break;
                 }
+            } catch (StaleObjectException e) {
+                e.printStackTrace();
+            } catch (UiObjectNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        if (!isFind){
+            for (UiObject2 linearLayout : linearLayouts) {
+                textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
                 if (textViews.size() == 2) {
                     if (linearLayout.getChildCount()==2&&linearLayout.getParent().getChildCount()==2){
-                        like = Integer.parseInt(textViews.get(0).getText());
-                        zan = Integer.parseInt(textViews.get(1).getText());
-                        videoBean.setAddress(address);
+                        int like = Integer.parseInt(textViews.get(0).getText());
+                        int zan = Integer.parseInt(textViews.get(1).getText());
+                        videoBean.setAddress("");
                         videoBean.setLike(like);
                         videoBean.setZan(zan);
                         //获取点赞数
-                        logger.info("赞人数是" + zan + "人");
+                        logger.info("playBackVideo-"+videoBean.toString());
                         Spoon.screenshot("zan", "" + zan);
                         //点击视频进行播放
                         if (play){
@@ -261,10 +270,6 @@ public class DiscoverAction extends VP2 {
                         break;
                     }
                 }
-            } catch (StaleObjectException e) {
-                e.printStackTrace();
-            } catch (UiObjectNotFoundException e) {
-                e.printStackTrace();
             }
         }
         return  videoBean;

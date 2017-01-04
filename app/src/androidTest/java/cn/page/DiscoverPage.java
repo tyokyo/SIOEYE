@@ -35,5 +35,5 @@ public class DiscoverPage {
     public static final String  ID_PROFILE_MINI_DEVICES ="cn.sioeye.sioeyeapp:id/profile_mini_device";
     //取消关注
     public static final String  ID_PROFILE_DELETE_FOLLOW ="cn.sioeye.sioeyeapp:id/following";
-
+    public  static final String ID_PROFILE_AVATOR="cn.sioeye.sioeyeapp:id/user_profile_avatar";
 }

@@ -1,3 +1,1 @@
-java -jar spoon-runner-1.6.2-jar-with-dependencies.jar  --title iris4G  --apk ../../app/build/outputs/apk/app-debug.apk --test-apk ../../app/build/outputs/apk/app-debug-androidTest-unaligned.apk --grant-all --e package=iris4G.testcase --debug
-
-
+java -jar spoon-runner-1.7.0-jar-with-dependencies.jar  --title Blink01A-S00B_CKT_L2SM_201_161229  --apk ../../app/build/outputs/apk/app-debug.apk --test-apk ../../app/build/outputs/apk/app-debug-androidTest-unaligned.apk --e package=iris4G.testcase  --grant-all --debug

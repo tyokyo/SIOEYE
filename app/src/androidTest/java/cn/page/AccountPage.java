@@ -41,5 +41,7 @@ public class AccountPage {
 
     //输入的密码是否可见按钮
     public static final String ACCOUNT_PASSWORD_SHOW_BTN="cn.sioeye.sioeyeapp:id/show_password_btn";
+    public static final String TV_PASSWORD_TIP="cn.sioeye.sioeyeapp:id/tv_password_tip";
+    public static final String SIOEYEID_VERIFIED_BTN="cn.sioeye.sioeyeapp:id/sioeyeid_verified_btn";
 
 }
