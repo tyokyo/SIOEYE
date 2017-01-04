@@ -247,8 +247,7 @@ public class DiscoverCase extends VP2 {
             Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
         }
     }
-<<<<<<< Updated upstream
-=======
+
     @Test
     /**
      * 单击广告封面
@@ -291,6 +290,5 @@ public class DiscoverCase extends VP2 {
         Spoon.screenshot("loginIn_page");
         Asst.assertFalse("testUnLoginClickFollowFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
     }
->>>>>>> Stashed changes
 }
 
