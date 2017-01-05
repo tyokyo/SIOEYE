@@ -261,15 +261,13 @@ public class DiscoverCase extends VP2 {
         Asst.assertFalse("LoginFollowAnchor", !id_exists(DiscoverPage.ID_PROFILE_AVATOR));
     }
     @Test
-
-
     /**
      * 广告内容页面点返回上级
      *1、点击广告页面里的返回键
      *Result：迅速响应，返回上一级界面
      * */
     public void testClickADBack(){
-        DiscoverAction.clickADBack();
+        //DiscoverAction.clickADBack();
     }
     @Test
     /**
@@ -289,6 +287,14 @@ public class DiscoverCase extends VP2 {
         waitTime(1);
         Spoon.screenshot("loginIn_page");
         Asst.assertFalse("testUnLoginClickFollowFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    /**
+     *
+     *
+     * */
+    public void test(){
+
     }
 }
 
