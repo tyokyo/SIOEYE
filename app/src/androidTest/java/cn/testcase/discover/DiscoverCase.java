@@ -247,5 +247,54 @@ public class DiscoverCase extends VP2 {
             Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
         }
     }
+
+    @Test
+    /**
+     * 单击广告封面
+     *1、点击广告封面
+     *Result:跳转至广告链接，在网络良好的情况下不应卡顿，延迟
+     * */
+    public void testClickAD() throws UiObjectNotFoundException {
+        DiscoverAction.navToAd();
+        waitUntilFind(DiscoverPage.ID_PROFILE_AVATOR,0);
+        Spoon.screenshot("JumpSuccess");
+        Asst.assertFalse("LoginFollowAnchor", !id_exists(DiscoverPage.ID_PROFILE_AVATOR));
+    }
+    @Test
+    /**
+     * 广告内容页面点返回上级
+     *1、点击广告页面里的返回键
+     *Result：迅速响应，返回上一级界面
+     * */
+    public void testClickADBack(){
+        //DiscoverAction.clickADBack();
+    }
+    @Test
+    /**
+     * 未登录点击follow
+     *1、点击任一推荐对象，点击follow
+     *Result:弹出登陆界面
+     * */
+    public void testUnLoginClickFollow() throws UiObjectNotFoundException {
+        //注销账号
+        AccountAction.logOutAccount();
+        //进入-发现
+        MainAction.clickDiscover();
+        //点击任一推荐对象
+        DiscoverAction.navToRecommendList(1,1);
+        //点击follow
+        clickById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
+        waitTime(1);
+        Spoon.screenshot("loginIn_page");
+        Asst.assertFalse("testUnLoginClickFollowFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    /**
+     *
+     *
+     * */
+    public void test(){
+
+    }
 }
 
