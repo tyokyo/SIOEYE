@@ -2,8 +2,6 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Until;
 
 import com.squareup.spoon.Spoon;
 
@@ -100,6 +98,7 @@ public class CaptureCase extends VP2{
         Iris4GAction.powerKey();
         waitTime(2);
         clickByText(NavPage.imageSize2M);
+        Asst.fail("testSetSizeToPower");
         Spoon.screenshot("testSetSizeToPower_pass");
     }
     @Test
@@ -109,10 +108,10 @@ public class CaptureCase extends VP2{
     public void testPressPowerKeyInCaptureMode() throws Exception {
         CameraAction.navConfig("Capture");
         for (int i=0;i<10;i++){
-            waitTime(4);
+            waitTime(1);
             Iris4GAction.powerKey();
+            waitTime(1);
         }
-        gDevice.wait(Until.findObject(By.pkg("com.hicam")),20000);
         Photo(NavPage.imageSize8M,4/3);
     }
 }
