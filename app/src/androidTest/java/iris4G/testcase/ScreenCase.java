@@ -25,7 +25,7 @@ import iris4G.action.Iris4GAction;
 @RunWith(AndroidJUnit4.class)
 public class ScreenCase extends VP2 {
     public static int WaitTime = 10;
-    Logger logger = Logger.getLogger(LiveUpDown.class.getName());
+    Logger logger = Logger.getLogger(ScreenCase.class.getName());
     @Before
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
