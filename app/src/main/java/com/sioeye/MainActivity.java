@@ -1,14 +1,12 @@
 package com.sioeye;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.logging.Logger;
 
@@ -39,18 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         doNext(requestCode, grantResults);
     }
-
-    private synchronized void startTest() {
-        if ((testRunnerThread != null) && !testRunnerThread.isAlive())
-            testRunnerThread = null;
-        if (testRunnerThread == null) {
-            testRunnerThread = new Thread(new TestRunner(this));
-            testRunnerThread.start();
-        } else {
-            Toast.makeText(this,"Test is still running", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
