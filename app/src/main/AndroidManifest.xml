@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-library android:name="android.test.runner"/>
     <application
         android:windowSoftInputMode="adjustUnspecified|stateHidden"
         android:configChanges="orientation|keyboardHidden"
