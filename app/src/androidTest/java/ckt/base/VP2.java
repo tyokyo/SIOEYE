@@ -1,18 +1,14 @@
 package ckt.base;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.media.MediaMetadataRetriever;
-import android.net.Uri;
 import android.os.RemoteException;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Configurator;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -24,7 +20,6 @@ import android.util.Log;
 import org.hamcrest.Asst;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,12 +27,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import ckt.tools.VideoNode;
 import usa.page.App;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -48,48 +41,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 public class VP2 extends  VP{
     private static final int LAUNCH_TIMEOUT = 10000;
     public static Logger logger = Logger.getLogger(VP.class.getName());
-
-    private static String getRunningActivityName(){
-        ActivityManager activityManager=(ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-        String runningActivity=activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
-        return runningActivity;
-    }
-    /**
-     * 获取视频文件信息
-     * @param videoPath
-     *
-     */
-    public VideoNode VideoInfo(String videoPath){
-        VideoNode vd = new VideoNode();
-        logger.info(videoPath);
-        MediaMetadataRetriever retr = new MediaMetadataRetriever();
-        retr.setDataSource(videoPath);
-        String duration = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-        vd.setDuration(Integer.parseInt(duration));
-        logger.info("-VIDEO_DURATION-"+Integer.parseInt(duration)/1000+"s");
-        String height = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);
-        vd.setHeight(Integer.parseInt(height));
-        logger.info("-VIDEO_HEIGHT-"+height);
-        String width = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);
-        vd.setWidth(Integer.parseInt(width));
-        logger.info("-VIDEO_WIDTH-"+width);
-        return vd;
-    }
-    /**
-     * 返回文件差集
-     * tSet1-tSet2
-     * @param tSet1 tSet2
-     *
-     */
-    public HashSet<String> result(HashSet<String> tSet1, HashSet<String> tSet2){
-        HashSet<String> result = new HashSet<String>();
-        result.addAll(tSet1);
-        result.removeAll(tSet2);
-        logger.info("Old Folder List:"+tSet2);
-        logger.info("New FolderList:"+tSet1);
-        logger.info("The File added:"+result);
-        return result;
-    }
     /**
      * 等待时间设置
      *
@@ -103,16 +54,6 @@ public class VP2 extends  VP{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-    /**
-     * 配置timeout时间
-     * @param time Integer
-     */
-    public void configTimeout(int time){
-        Configurator confg = Configurator.getInstance();
-        long timeout = confg.getWaitForSelectorTimeout();
-        //获取Selector timeout
-        confg.setWaitForSelectorTimeout(timeout+time);
     }
     public static void shellInputText(String text) throws IOException {
         initDevice();
@@ -144,32 +85,6 @@ public class VP2 extends  VP{
         String command = "am broadcast -a com.sioeye.log.action -e TAG false";
         logger.info(command);
         gDevice.executeShellCommand(command);
-    }
-    public static void playVideo(String path) throws IOException, InterruptedException {
-        //Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getPath()+"/Video/VID_20160909030920_30fps.mp4");
-        File videoFile = new File(path);
-        if (videoFile.exists()){
-            Uri uri = Uri.parse(path);
-            //调用系统自带的播放器
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            logger.info("play video-"+path);
-            intent.setDataAndType(uri, "video/mp4");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-            for (int i=0;i<30;i++){
-                String currentPackageName= gDevice.getCurrentPackageName();
-                if (App.SIOEYE_PACKAGE_NAME_USA.equals(currentPackageName)){
-                    logger.info("Gallery Launch Success");
-                    break;
-                }else{
-                    Thread.sleep(2000);
-                }
-            }
-        }
-        else{
-            logger.info(path + " not exists");
-        }
-
     }
     /**
      * You can call this method to find and click a UiObject.
@@ -382,6 +297,16 @@ public class VP2 extends  VP{
     public static UiObject getUiObjectByTextContains(String TragetObject) {
         initDevice();
         return gDevice.findObject(new UiSelector().textContains(TragetObject));
+    }
+    /**
+     * This method can return a UI Element by text.
+     *
+     * @param regex
+     * @return UiObject
+     */
+    public static UiObject getUiObjectByTextMatches(String regex) {
+        initDevice();
+        return gDevice.findObject(new UiSelector().textMatches(regex));
     }
     /**
      * This method can return a UI Element by text.
@@ -810,6 +735,16 @@ public class VP2 extends  VP{
     /**
      * Get a UI Element.
      *
+     * @param classObj
+     * @return UiObject
+     */
+    public static UiObject2 getObject2ByClass(Class classObj) {
+        initDevice();
+        return gDevice.findObject(By.clazz(classObj));
+    }
+    /**
+     * Get a UI Element.
+     *
      * @param ResourceID
      * @return UiObject
      */
@@ -918,11 +853,27 @@ public class VP2 extends  VP{
     }
     /**
      * Get the Launcher Package Name.
+     * @param textString text
+     * @param timeout timeout for wait
+     */
+    public static void waitUntilFindText(String textString,int timeout){
+        gDevice.wait(Until.findObject(By.text(textString)),timeout);
+    }
+    /**
+     * Get the Launcher Package Name.
      * @param resourceID id
      * @param timeout timeout for wait
      */
     public static void waitUntilGone(String resourceID,int timeout){
         gDevice.wait(Until.gone(By.res(resourceID)),timeout);
+    }
+    /**
+     * Get the Launcher Package Name.
+     * @param regex String
+     * @param timeout timeout for wait
+     */
+    public static void waitUntilRegexGone(String regex,int timeout){
+        gDevice.wait(Until.gone(By.text(regex)),timeout);
     }
     public static void clickRect(Rect rect){
         gDevice.click(rect.centerX(),rect.centerY());
@@ -955,6 +906,20 @@ public class VP2 extends  VP{
      */
     public static boolean text_exists(String text) throws UiObjectNotFoundException {
         return  getUiObjectByText(text).exists();
+    }
+    /**
+     * @param regex
+     */
+    public static boolean text_exists_match(String regex) throws UiObjectNotFoundException {
+        initDevice();
+        return gDevice.findObject(new UiSelector().textMatches(regex)).exists();
+    }
+    /**
+     * @param text_contain
+     */
+    public static boolean text_exists_contain(String text_contain) throws UiObjectNotFoundException {
+        initDevice();
+        return gDevice.findObject(new UiSelector().textContains(text_contain)).exists();
     }
     /**
      *get rectangle for object

@@ -59,7 +59,7 @@ public class SettingCase extends VP2 {
         }
     }
     @Test
-    public void testDisAble() throws UiObjectNotFoundException {
+    public void testDisable() throws UiObjectNotFoundException {
         SettingAction.navToSetting();
         boolean isChecked=getObject2ById(MePage.SETTINGS_CB_DIRECTOR).isChecked();
         logger.info(""+isChecked);
@@ -76,6 +76,7 @@ public class SettingCase extends VP2 {
         SettingAction.navToAboutSioEye();
         Spoon.screenshot("HELP_ABOUT");
         clickById(MePage.HELP_BACK);
+        waitUntilFind(MePage.SETTINGS_CB_DIRECTOR,10000);
         boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
         Asst.assertEquals("HELP_ABOUT",true,feedback_status);
         gDevice.pressBack();

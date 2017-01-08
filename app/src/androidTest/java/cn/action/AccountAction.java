@@ -1,12 +1,10 @@
 package cn.action;
 
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
-import android.support.test.uiautomator.Until;
 import com.squareup.spoon.Spoon;
-import java.util.Random;
+import org.junit.Assert;
+import java.io.IOException;
 import java.util.logging.Logger;
 import ckt.base.VP2;
 import cn.page.AccountPage;
@@ -24,12 +22,14 @@ public class AccountAction extends VP2{
     * */
     public static  void logOutAccount() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
+        waitTime(1);
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             //当前账号已经处于logout状态
             logger.info("当前账号已经处于logout状态");
         }else{
-            clickById(MePage.SETTINGS_USER_MAIN);
+            //clickById(MePage.SETTINGS_USER_MAIN);
+            clickByText("设置");
             clickByText("账号与安全");
             //clickById(AccountPage.LOG_OUT);
             clickByText("退出登录");
@@ -50,7 +50,7 @@ public class AccountAction extends VP2{
             clickById(MePage.ID_TV_OK);
             waitHasObject(MePage.ID_MAIN_TAB_ME,10000);
         }
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             clickByText("登录");
             /*
@@ -73,13 +73,13 @@ public class AccountAction extends VP2{
             }
             //input username
             //getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).click();
-            getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(Constant.userName);
+            getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(useName);
             //input  password
             //getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).click();
-            getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(Constant.passwd);
+            getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);
             //login
             clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
-            waitUntilFind(MePage.ID_MAIN_TAB_ME,20);
+            waitUntilFind(MePage.ID_MAIN_TAB_ME,10000);
         }else{
             logger.info("处于登录状态，不需要重新登录账号");
         }
@@ -88,7 +88,7 @@ public class AccountAction extends VP2{
     //登录账号
     public static void logInAccount(String username,String password) throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             clickByText("登录");
             getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(username);
@@ -100,23 +100,87 @@ public class AccountAction extends VP2{
     //进入登录界面
     public static void navToLogin() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickByText("登录");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByMobile() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickByText("注册");
     }
-    //进入Sign Up界面-mobile
+    //进入Sign Up界面-Email
     public static void navToSignUp_ByEmail() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickByText("注册");
         clickByText("邮箱注册");
     }
-    //仅仅一个登陆的动作
+    //进入注册输入密码界面by Email
+    public static void navToInputPassword_ByEmailRegister() throws UiObjectNotFoundException, IOException {
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
+        MainAction.clickMe();
+        clickByText("注册");
+        clickByText("邮箱注册");
+        String Email = Constant.randomEmail(18);
+        getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(Email);
+        waitTime(3);
+        clickById(AccountPage.SIGN_UP_CONTINUE);
+        waitTime(1);
+    }
+    //进入注册输入密码
+    public static void inputPassword(String password) throws UiObjectNotFoundException, IOException {
+        getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(password);
+        waitTime(1);
+    }
+    //进入注册输入SioEyeID
+    public static void inputSioEyeId(String sioEye) throws UiObjectNotFoundException, IOException {
+        getObjectById(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID).setText(sioEye);
+        waitTime(2);
+    }
+    public static void checkVisibleAndUnVisiblePassword() throws UiObjectNotFoundException, IOException {
+        String randomPassword= Constant.randomStringGenerator(16);
+        getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(randomPassword);
+        waitTime(1);
+        if (getUiObjectByText(randomPassword).exists())
+        {
+            clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
+            clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
+            waitTime(1);
+            if (getUiObjectByText(randomPassword).exists())
+            {
+                Spoon.screenshot("SetPasswordUnVisibleFailed");
+                Assert.fail("SetPasswordUnVisibleFailed");
+            }
+            else
+            {
+                clearText(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT);
+                randomPassword= Constant.randomStringGenerator(28);
+                getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(randomPassword);
+                waitTime(1);
+                if (getUiObjectByText(randomPassword).exists())
+                {
+                    Spoon.screenshot("PasswordIsVisible");
+                    Assert.fail("InputPasswordByUnVisibleButPasswordIsVisible");
+                }
+                else {
+                    clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
+                    waitTime(1);
+                    if (!getUiObjectByText(randomPassword).exists())
+                    {
+                        Spoon.screenshot("PasswordIsUNVisible");
+                        Assert.fail("PasswordIsVisible");
+                    }
+                }
+            }
+        }
+        else
+        {
+            Spoon.screenshot("DefaultPasswordIsUnVisible");
+            Assert.fail("DefaultPasswordIsUnVisible");
+        }
+    }
+        //仅仅一个登陆的动作
     public static void justLogIn(String username,String password) throws UiObjectNotFoundException {
         getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(username);
         getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);
@@ -128,7 +192,7 @@ public class AccountAction extends VP2{
      */
     public static boolean isLogin() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         //判断是否登录
         if (gDevice.findObject(new UiSelector().text("Login")).exists()) {
             System.out.println("you haven't login");

@@ -1,9 +1,11 @@
 package cn.testcase.discover;
 
 import android.graphics.Rect;
+import android.os.RemoteException;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -25,14 +27,19 @@ import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
 import cn.action.DiscoverAction;
+import cn.action.FollowersAction;
 import cn.action.MainAction;
+import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
+import cn.page.Other;
+import iris4G.page.NavPage;
+import usa.action.Nav;
 
 
 /**
- * Created by caibing.yin on 2016/11/5.
+ * Created by Caibing.yin on 2016/11/5.
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
@@ -65,8 +72,8 @@ public class DiscoverCase extends VP2 {
     /**
      * case2、双击搜索图标
      */
-    public void testDoubleClickSearch() throws IOException {
-        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+    public void testDoubleClickSearch() throws IOException, UiObjectNotFoundException {
+        MainAction.clickDiscover();
         UiObject2 frameLayout=getObject2ById(DiscoverPage.APP_TITLE).getParent();
         UiObject2 searchObject=frameLayout.findObject(By.clazz(android.widget.ImageView.class));
         Rect searchRect=searchObject.getVisibleBounds();
@@ -74,9 +81,9 @@ public class DiscoverCase extends VP2 {
         clickRect(searchRect);
         clickRect(searchRect);
         waitTime(1);
-        if(!getObjectById(DiscoverPage.ID_SEARCH_FILTER_INPUT).exists()){
-            Spoon.screenshot("Go to SearchActivity Fail","跳转失败");
-            makeToast("跳转失败",5);
+        //验证进入搜索界面
+        if(!id_exists(DiscoverPage.ID_SEARCH_FILTER_INPUT)){
+            Spoon.screenshot("navToSearchPage","跳转失败");
             Assert.fail("跳转失败");
         }
     }
@@ -87,7 +94,7 @@ public class DiscoverCase extends VP2 {
      * 第一个头像的昵称是不一样的
      */
     public void testFlush() throws UiObjectNotFoundException, IOException {
-        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        MainAction.clickDiscover();
         waitTime(2);
         // UiObject Discover
         getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
@@ -142,6 +149,216 @@ public class DiscoverCase extends VP2 {
         Asst.assertEquals("加载2分钟",false,id_exists(MePage.BROADCAST_VIEW_VIDEO_LOADING));
         Spoon.screenshot("testViewVideo");
         gDevice.pressBack();
+    }
+    @Test
+    /**
+     * 未登陆点击输入框
+     * 1、未登录状态下在discover界面点击任意视频进入观看
+     * 2、点击输入框
+     * Result:弹出登陆界面
+     * */
+    public void testClickInput () throws UiObjectNotFoundException {
+        //注销账号
+        AccountAction.logOutAccount();
+        //进入-发现
+        MainAction.clickDiscover();
+        //播放一个视频
+        DiscoverAction.navToPlayVideo();
+        //等待连接聊天室
+        BroadcastAction.waitBroadcastLoading();
+        //点击评论框
+        clickById(Other.chattextfield);
+        //弹出登陆界面
+        waitUntilFind(AccountPage.ACCOUNT_WEIXIN,5000);
+        Spoon.screenshot("loginIn_page");
+        Asst.assertFalse("ClickInputFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    /**
+     * 已登录点击输入框
+     *1、已登录状态下在discover界面点击任意视频进入观看，点击输入框
+     * Result：正常弹出输入字符界面
+     * */
+    public void testClickInputSuccess() throws UiObjectNotFoundException, IOException {
+        //账号登录
+        AccountAction.logInAccount("13688169291","123456");
+        //进入发现界面
+        MainAction.clickDiscover();
+        //播放一个视频
+        DiscoverAction.navToPlayVideo();
+        //等待连接聊天室
+        BroadcastAction.waitBroadcastLoading();
+        //点击评论框
+        clickById(Other.chattextfield);
+        //弹出输入框界面
+        waitUntilFind(Other.chattextfield, 2000);
+        Spoon.screenshot("Input_page");
+        Asst.assertFalse("ClickInputSuccess_Fail",!id_exists(Other.chattextfield_tanchu));
+    }
+    @Test
+    /**
+     * 未登陆点击关注主播
+     *1.未登陆状态下，在观看视频界面点击关注主播
+     *Result:弹出登陆界面
+     * */
+    public void testUnLoginFollowAnchor() throws UiObjectNotFoundException {
+        //注销账号
+        AccountAction.logOutAccount();
+        //进入-发现界面
+        MainAction.clickDiscover();
+        //播放一个视频
+        DiscoverAction.navToPlayVideo();
+        //点击主播
+        FollowersAction.clickToAnchor();
+        //点击关注
+        clickByText("关注");
+        //弹出登录界面
+        waitUntilFind(AccountPage.ACCOUNT_WEIXIN,5000);
+        Spoon.screenshot("loginIn_page");
+        Asst.assertFalse("ClickInputFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    /**
+     *
+     *1.已登录状态下，在观看界面点击任意键关注主播
+     *Result:
+     * */
+    public void testLoginFollowAnchor() throws UiObjectNotFoundException {
+        //账号登录
+        AccountAction.logInAccount("13688169291","123456");
+        //进入发现界面
+        MainAction.clickDiscover();
+        //播放一个视频
+        DiscoverAction.navToPlayVideo();
+        //点击主播
+        FollowersAction.clickToAnchor();
+        //判断是否关注
+        if(text_exists("已关注")){
+            //点击已关注
+            clickByText("已关注");
+            //取消关注成功，变为关注
+            waitUntilFindText("关注", 3000);
+            Spoon.screenshot("cancel_follow");
+            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
+        }else {
+            //点击关注
+            clickByText("关注");
+            //关注成功，变为已关注
+            waitUntilFindText("已关注", 3000);
+            Spoon.screenshot("关注成功");
+            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
+        }
+    }
+
+    @Test
+    /**
+     * 单击广告封面
+     *1、点击广告封面
+     *Result:跳转至广告链接，在网络良好的情况下不应卡顿，延迟
+     * */
+    public void testClickAD() throws UiObjectNotFoundException {
+        DiscoverAction.navToAd();
+        waitUntilFind(DiscoverPage.ID_PROFILE_AVATOR,0);
+        Spoon.screenshot("JumpSuccess");
+        Asst.assertFalse("LoginFollowAnchor", !id_exists(DiscoverPage.ID_PROFILE_AVATOR));
+    }
+    @Test
+    /**
+     * 广告内容页面点返回上级
+     *1、点击广告页面里的返回键
+     *Result：迅速响应，返回上一级界面
+     * */
+    public void testClickADBack(){
+        //DiscoverAction.clickADBack();
+    }
+    @Test
+    /**
+     * 未登录点击follow
+     *1、点击任一推荐对象，点击follow
+     *Result:弹出登陆界面
+     * */
+    public void testUnLoginClickFollow() throws UiObjectNotFoundException {
+        //注销账号
+        AccountAction.logOutAccount();
+        //进入-发现
+        MainAction.clickDiscover();
+        //点击任一推荐对象
+        DiscoverAction.navToRecommendList(1,1);
+        //点击follow
+        clickById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
+        waitTime(1);
+        Spoon.screenshot("loginIn_page");
+        Asst.assertFalse("testUnLoginClickFollowFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    /**
+     *未登陆单击推荐人头像
+     *1、点击推荐头像
+     *Result:唤出对应对象的个人资料页面
+     * */
+    public void testUnLoginClickAvatar() throws UiObjectNotFoundException {
+        //注销账号
+        AccountAction.logOutAccount();
+        //进入-发现
+        MainAction.clickDiscover();
+        //点击推荐对象
+        DiscoverAction.navToRecommendList(0,1);
+        //弹出个人头像页面
+        waitUntilFind(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW,1000);
+        Spoon.screenshot("Profile_page");
+        Asst.assertFalse("testUnLoginClickAvatarFail",!id_exists(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW));
+    }
+    @Test
+    /**
+     *向上迅速滑动视频列表
+     *1、迅速滑动推荐视频列表
+     *Result:APP响应迅速不会出现延迟卡顿carsh闪退现象
+     * */
+    public void testSwipeUpQuickly() throws UiObjectNotFoundException {
+        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        //迅速滑动推荐视频列表
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        Spoon.screenshot("DiscoverPage");
+        Asst.assertFalse("testSwipeUpQuicklyFail",!id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
+    }
+    @Test
+    /**
+     * 在discover界面待手机自动灭屏后静置一段时间后，重新唤醒手机
+     *1、唤醒后APP停留在灭屏前的界面，APP不会出现carsh ,闪退
+     * */
+    public void testSleepThenWakeUp() throws RemoteException, UiObjectNotFoundException {
+        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        gDevice.sleep();
+        gDevice.wakeUp();
+        //需要先解锁
+        Spoon.screenshot("DiscoverPage");
+        Asst.assertFalse("testSwipeUpQuicklyFail",!id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
+    }
+    @Test
+    /**
+     *进入搜索界面，检查默认推荐联系人状态
+     *1、已经关注的不再显示在默认推荐人列表
+     * */
+    public void testCheckDefaultRecommendListStatus() {
+        DiscoverAction.navToSearch();
+    }
+    @Test
+    /**
+     *
+     *
+     * */
+    public void test(){
+
     }
 }
 

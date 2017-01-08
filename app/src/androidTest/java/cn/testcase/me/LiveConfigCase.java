@@ -118,11 +118,12 @@ public class LiveConfigCase extends VP2{
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
         MeAction.setToPublic();
         clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
-
+        waitTime(3);
+        Spoon.screenshot("public");
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
-
+        waitUntilFind(MePage.WHO_CAN_VIEW_MY_BROADCAST_PUBLIC,10000);
         String permission=MeAction.getPermissionToView();
         Asst.assertEquals("set Privacy Setting:Public","public",permission);
         Spoon.screenshot("Public","Permission_Public");
@@ -138,6 +139,7 @@ public class LiveConfigCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
+        waitUntilFind(MePage.WHO_CAN_VIEW_MY_BROADCAST_PRIVATE,10000);
         String permission=MeAction.getPermissionToView();
         Asst.assertEquals("set Privacy Setting:private","private",permission);
         Spoon.screenshot("private","Privacy_Settings_Private");

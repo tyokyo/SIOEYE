@@ -134,7 +134,7 @@ public class BroadCastsCase extends VP2{
     }
     //title 输入字符长度35
     @Test
-    public void testEditTitle35() throws UiObjectNotFoundException, IOException {
+    public void testEditTitle70() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
@@ -170,7 +170,7 @@ public class BroadCastsCase extends VP2{
     }
     //title 输入字符长度>35
     @Test
-    public void testEditTitleMoreThan35() throws UiObjectNotFoundException, IOException {
+    public void testEditTitleMoreThan70() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
@@ -183,6 +183,7 @@ public class BroadCastsCase extends VP2{
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
             String input_title=getRandomString(80);
+            logger.info("input-80:"+input_title);
             clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             shellInputText(input_title);
             gDevice.pressBack();
@@ -193,7 +194,9 @@ public class BroadCastsCase extends VP2{
             //check
             BroadcastBean activeBean = BroadcastAction.getChinaBean(index);
             String active_title = activeBean.getBroadcast_title();
-            input_title=input_title.substring(0,35);
+            input_title=input_title.substring(0,70);
+            logger.info("expect:"+input_title);
+            logger.info("active:"+active_title);
             Asst.assertEquals("modify title",input_title,active_title);
             Spoon.screenshot("modify_title",input_title);
         }
@@ -254,6 +257,8 @@ public class BroadCastsCase extends VP2{
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
+            //滑动显示最新消息
+            MeAction.displayNewMessages();
             Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
@@ -288,7 +293,9 @@ public class BroadCastsCase extends VP2{
             gDevice.pressBack();
             waitTime(2);
             input_comments=input_comments.substring(0,120);
-            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
+            //滑动显示最新消息
+            MeAction.displayNewMessages();
+            Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
@@ -320,7 +327,9 @@ public class BroadCastsCase extends VP2{
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
-            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
+            //滑动显示最新消息
+            MeAction.displayNewMessages();
+            Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();

@@ -94,7 +94,10 @@ public class FollowingCase extends VP2 {
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
-            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
+            //滑动显示最新消息
+            MeAction.displayNewMessages();
+            waitTime(2);
+            Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
@@ -127,8 +130,11 @@ public class FollowingCase extends VP2 {
             clickByPoint(point);
             gDevice.pressBack();
             waitTime(2);
+            //滑动显示最新消息
+            MeAction.displayNewMessages();
+            waitTime(2);
             input_comments=input_comments.substring(0,120);
-            Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
+            Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
@@ -170,8 +176,10 @@ public class FollowingCase extends VP2 {
                 //点击评论
                 clickRect(rect);
                 waitTime(2);
+                //滑动显示最新消息
+                MeAction.displayNewMessages();
                 //input_comments=input_comments.substring(0,120);
-                Asst.assertTrue("comments success",getUiObjectByTextContains(input_comments).exists());
+                Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
                 //验证评论数+1
                 gDevice.pressBack();
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
@@ -275,7 +283,7 @@ public class FollowingCase extends VP2 {
                 clickById(MePage.BROADCAST_VIEW_TIPTEXT);
                 waitTime(2);
                 //进行点赞操作
-                clickById(MePage.BROADCAST_VIEW_ZAN);
+                clickById(MePage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
                 gDevice.pressBack();
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();

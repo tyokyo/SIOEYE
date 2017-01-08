@@ -15,18 +15,21 @@ import com.squareup.spoon.Spoon;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import bean.InfoBean;
 import ckt.base.VP;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.MePage;
+import cn.testcase.me.BroadCastsCase;
 
 /**
  * Created by elon on 2016/10/27.
  */
 public class MeAction extends VP2{
-    public static void getAccountPrivacyInfo(InfoBean infoBean){
+    private static Logger logger = Logger.getLogger(MeAction.class.getName());
+    public static void getAccountPrivacyInfo(InfoBean infoBean) throws UiObjectNotFoundException {
         //启动被测App
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         SettingAction.navToAccountAndPrivacy();
@@ -75,12 +78,13 @@ public class MeAction extends VP2{
         if (status_public==true&&status_private==false&&status_personal==true){
             permission="public";
         }
-        if (status_public==false&&status_private==true&&status_personal==true){
-            permission="private";
+        if(status_private==true&&status_personal==true) {
+            permission = "private";
         }
         if (status_public==false&&status_private==false&&status_personal==true){
             permission="personal";
         }
+        logger.info(permission);
         return  permission;
     }
     //编辑界面所有用户的信息
@@ -120,37 +124,41 @@ public class MeAction extends VP2{
     //Go to 直播配置
     public static void navToLiveConfiguration(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.LIVE_CONFIGURATION);
+        //clickById(MePage.LIVE_CONFIGURATION);
+        clickByText("直播配置");
         Spoon.screenshot("navToLiveConfiguration");
     }
     //Go to 我的二维码
-    public static void navToQrCode(){
-        clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.LIVE_CONFIGURATION);
+    public static void navToQrCode() throws UiObjectNotFoundException {
+        MainAction.clickMe();
+        //clickById(MePage.LIVE_CONFIGURATION);
+        clickByText("我的二维码");
         Spoon.screenshot("navToQrCode");
     }
     //Go to 消息
-    public static void navToNotifications(){
-        clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.NOTIFICATIONS);
+    public static void navToNotifications() throws UiObjectNotFoundException {
+        MainAction.clickMe();
+        //clickById(MePage.NOTIFICATIONS);
+        clickByText("消息");
         gDevice.wait(Until.gone(By.res(MePage.IS_LOCATING)),20000);
         Spoon.screenshot("navToNotifications");
     }
     //Go to 设置
-    public static void navToSettings(){
-        clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.SETTINGS_USER_MAIN);
+    public static void navToSettings() throws UiObjectNotFoundException {
+        MainAction.clickMe();
+        //clickById(MePage.SETTINGS_USER_MAIN);
+        clickByText("设置");
         Spoon.screenshot("navToSettings");
     }
     //Go to 帮助中心
-    public static void navToFeedback(){
-        clickById(MePage.ID_MAIN_TAB_ME);
+    public static void navToFeedback() throws UiObjectNotFoundException {
+        MainAction.clickMe();
         clickById(MePage.SETTINGS_USER_MAIN);
         Spoon.screenshot("navToFeedback");
     }
     //编辑 -> 昵称
     public static InfoBean navToNickName() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -160,7 +168,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 性别
     public static InfoBean navToSex() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -170,7 +178,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 邮箱
     public static InfoBean navToEmail() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -180,7 +188,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 地址
     public static InfoBean navToLocation() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -193,7 +201,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 爱好
     public static InfoBean navToActivities() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -204,7 +212,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> Sio Eye ID
     public static InfoBean navToSioEyeId() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -214,7 +222,7 @@ public class MeAction extends VP2{
     }
     //编辑 -> 个性签名
     public static InfoBean navToAboutMe() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
         logger.info(infoBean.toString());
@@ -224,7 +232,7 @@ public class MeAction extends VP2{
     }
     //Go to 编辑
     public static InfoBean navToUserEdit() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
+        MainAction.clickMe();
         Spoon.screenshot(gDevice,"Me");
         clickById(MePage.ID_USER_EDIT);
         InfoBean infoBean=getEditUserInfo();
@@ -321,5 +329,11 @@ public class MeAction extends VP2{
     public static void setToPersonal() throws UiObjectNotFoundException {
         clickByText("部分可见");
     }
-
+    //评论区域-滑动更新,显示最新消息
+    public static void displayNewMessages() throws UiObjectNotFoundException {
+        if (id_exists(MePage.NEW_MESSAGES_DISPLAY)){
+            getObject2ById(MePage.NEW_MESSAGES_DISPLAY).swipe(Direction.UP,(float)0.5);
+            waitTime(2);
+        }
+    }
 }

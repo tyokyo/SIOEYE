@@ -447,4 +447,9 @@ public final class Spoon extends VP2{
         Logger.getLogger("screenshot").info(testClass.getClassName()+"|"+className+"|"+methodName+"|"+tag);
         screenshot(gDevice,tag,className,methodName);
     }
+    //runListener监听执行失败时候的截图方法-ckt.listener
+    public static void screenshot(String tag,String className,String methodName) {
+        Logger.getLogger("screenshot").info(className+"|"+methodName+"|"+tag);
+        screenshot(gDevice,tag,className,methodName);
+    }
 }

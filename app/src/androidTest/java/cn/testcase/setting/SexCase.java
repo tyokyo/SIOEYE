@@ -43,7 +43,7 @@ public class SexCase extends VP2 {
         Spoon.screenshot("male");
     }
     @Test
-    public void testFeMale() throws UiObjectNotFoundException {
+    public void testFemale() throws UiObjectNotFoundException {
         //修改性别为-female
         MeAction.navToSex();
         clickById(MePage.SETTINGS_SEX_FEMALE);

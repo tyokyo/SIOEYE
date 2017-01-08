@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-library android:name="android.test.runner"/>
     <application
         android:windowSoftInputMode="adjustUnspecified|stateHidden"
         android:configChanges="orientation|keyboardHidden"
@@ -42,8 +43,8 @@
             </intent-filter>
         </receiver>
     </application>
-    <service
-        android:name="com.sioeye.ToastInfo"
+    <!--<service
+        android:name=".ToastInfo"
         android:enabled="true"
         android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
         <intent-filter>
@@ -52,5 +53,5 @@
         <meta-data
             android:name="android.accessibilityservice"
             android:resource="@xml/accessibilityservice" />
-    </service>
+    </service>-->
 </manifest>

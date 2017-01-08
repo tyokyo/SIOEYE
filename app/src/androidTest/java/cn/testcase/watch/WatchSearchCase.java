@@ -126,11 +126,12 @@ public class WatchSearchCase extends VP2 {
         waitUntilGone(WatchPage.WATCH_WAIT_SEARCH_LOADING, 60000);
         //验证搜索结果
         Spoon.screenshot("search_Email_result_1");
-        waitUntilFind(WatchPage.WATCH_SEARCH_RESULT_USER_AVATAR,10);
+        waitUntilFind(WatchPage.WATCH_SEARCH_RESULT_USER_AVATAR,10000);
         //验证搜索数目
         int avatars = getObjectsById(WatchPage.WATCH_SEARCH_RESULT_USER_AVATAR).size();
         if (avatars == 1) {
             clickById(WatchPage.WATCH_SEARCH_RESULT);
+            waitTime(2);
             Spoon.screenshot("search_Email_result_2", search_content);
             //验证搜到的信息
             boolean active_result = getUiObjectByTextContains(Constant.CORRECT_EMAIL_SIOEYE_ID).exists();
@@ -142,7 +143,7 @@ public class WatchSearchCase extends VP2 {
         }
     }
 
-    //搜索虚假的email
+    //搜索虚假的email地址
     @Test
     public void test_search_email_WRONG() throws UiObjectNotFoundException, InterruptedException {
         //进入Watch

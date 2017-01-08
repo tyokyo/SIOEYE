@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.io.IOException;
+import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
@@ -26,6 +28,7 @@ import cn.page.MePage;
 * 昵称
 * 4-40个字符*/
 public class NickNameCase extends VP2 {
+    private Logger logger = Logger.getLogger(NickNameCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
@@ -74,17 +77,16 @@ public class NickNameCase extends VP2 {
         clickById(MePage.ID_MAIN_TAB_ME);
         Spoon.screenshot(gDevice,"Me");
         clickById(MePage.ID_USER_EDIT);
-        String nicknameBefore = getTex(MePage.GETNICKNAMECONTENT);
+        waitUntilFind(MePage.GETNICKNAMECONTENT,10000);
+        String expectNick = getTex(MePage.GETNICKNAMECONTENT);
         clickById(MePage.NAV_EDIT_NICKNAME);
         clearText(MePage.SAMPLE_CONTENT);
         String nickname = getRandomString(20);
         shellInputText(nickname);
         gDevice.pressBack();
         waitTime(3);
-        String currentNick = getTex(MePage.GETNICKNAMECONTENT);
-        if (!nicknameBefore.equals(currentNick)){
-            Assert.fail("change nick but not save it");
-        }
+        String activeNick = getTex(MePage.GETNICKNAMECONTENT);
+        Asst.assertEquals("change nick but not save it",expectNick,activeNick);
         Spoon.screenshot(gDevice,"change_nick_name");
     }
 }

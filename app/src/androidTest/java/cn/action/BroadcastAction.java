@@ -9,6 +9,8 @@ import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.widget.FrameLayout;
 
+import org.hamcrest.Asst;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -69,8 +71,8 @@ public class BroadcastAction extends VP2{
     }
     //wait 加载完成 此时点赞图标变为绿色
     public  static void waitBroadcastLoading() throws UiObjectNotFoundException {
-        gDevice.wait(Until.findObject(By.res(MePage.BROADCAST_VIEW_TIPTEXT)),20000);
-        waitUntilFind(MePage.BROADCAST_VIEW_ZAN,10);
+        waitUntilFind(MePage.BROADCAST_VIEW_TIPTEXT,20000);
+        waitUntilFind(MePage.BROADCAST_VIEW_ZAN,10000);
         for (int i = 0; i <20 ; i++) {
             if (getObjectById(MePage.BROADCAST_VIEW_ZAN).isEnabled()==true&&
                     getObjectById(MePage.BROADCAST_VIEW_TIPTEXT).isEnabled()==true&&
@@ -81,7 +83,10 @@ public class BroadcastAction extends VP2{
                 waitTime(4);
             }
         }
-        //正在连接聊天室
+        //视频加载失败
+        if (id_exists(MePage.LOAD_VIDEO_ERROR)){
+            Asst.fail("视频加载失败");
+        }
     }
     //视频回放页面的播放数-点赞数-评论数
     public static WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {

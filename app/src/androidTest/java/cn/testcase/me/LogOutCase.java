@@ -10,8 +10,12 @@ import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
+import cn.action.MeAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
@@ -23,6 +27,7 @@ import cn.page.MePage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class LogOutCase extends VP2 {
+    private Logger logger = Logger.getLogger(LogOutCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
@@ -31,12 +36,12 @@ public class LogOutCase extends VP2 {
     //注销Log out时->取消注销
     @Test
     public void testLogOut_Cancel() throws UiObjectNotFoundException {
-        clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.SETTINGS_USER_MAIN);
+        MeAction.navToSettings();
         clickByText("账号与安全");
         //clickById(AccountPage.LOG_OUT);
         clickByText("退出登录");
         clickById(AccountPage.LOG_OUT_CANCEL);
+        waitTime(2);
         boolean active = text_exists("退出登录");
         Asst.assertEquals("testLogOut_Cancel",true,active);
         Spoon.screenshot("testLogOut_Cancel");
@@ -45,8 +50,7 @@ public class LogOutCase extends VP2 {
     @Test
     public void testLogOut_OK() throws UiObjectNotFoundException {
         //log out
-        clickById(MePage.ID_MAIN_TAB_ME);
-        clickById(MePage.SETTINGS_USER_MAIN);
+        MeAction.navToSettings();
         clickByText("账号与安全");
         //clickById(AccountPage.LOG_OUT);
         clickByText("退出登录");

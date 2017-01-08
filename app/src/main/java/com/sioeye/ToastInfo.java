@@ -3,9 +3,13 @@ package com.sioeye;
 import android.accessibilityservice.AccessibilityService;
 import android.app.Notification;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
+import java.util.logging.Logger;
+
 public class ToastInfo extends AccessibilityService {
+    Logger logger= Logger.getLogger(ToastInfo.class.getName());
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         // TODO Auto-generated method stub
@@ -23,7 +27,7 @@ public class ToastInfo extends AccessibilityService {
             //其它通知信息，包括Toast
             String toastMsg = (String) event.getText().get(0);
             String log = "Latest Toast Message: " + toastMsg + " [Source: " + sourcePackageName + "]";
-            System.out.println(log);
+            logger.info(log);
         }
     }
     @Override
