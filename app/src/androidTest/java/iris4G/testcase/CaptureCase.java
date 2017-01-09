@@ -110,6 +110,7 @@ public class CaptureCase extends VP2{
         for (int i=0;i<10;i++){
             waitTime(1);
             Iris4GAction.powerKey();
+            waitTime(1);
         }
         Photo(NavPage.imageSize8M,4/3);
     }

@@ -341,6 +341,8 @@ public class CameraAction extends VP2 {
         return textObject.getParent().hasObject(By.clazz(android.widget.ImageView.class));
     }
     public static void checkVideoAngle(String navConfig,String angle) throws Exception {
+        //等待加载完成
+        gDevice.wait(Until.findObject(By.pkg("com.hicam")),20000);
         //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
         CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();

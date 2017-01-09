@@ -483,6 +483,7 @@ public class Iris4GAction extends VP2 {
     //如Video quality -  右边的值
     public static String getRightValue(String text) throws UiObjectNotFoundException {
         String value="";
+        gDevice.wait(Until.findObject(By.clazz(android.widget.ScrollView.class)),10000);
         UiObject2 scrollView = getObject2ByClass(android.widget.ScrollView.class);
         List<UiObject2> relativeLayouts=scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
         for (UiObject2 relativeLayout:relativeLayouts) {

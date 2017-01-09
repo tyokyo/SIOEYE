@@ -66,7 +66,7 @@ public class ImageSizeCase extends VP2{
     public void testCapture3M() throws Exception {
         //Capture - 修改ImageSize 3M
         CameraAction.configImageSize(NavPage.navConfig_Capture,NavPage.imageSize3M);
-        //Lapse - 修改ImageSize 4M
+        //Burst - 修改ImageSize 2M
         CameraAction.configImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
         //切换到Burst
         CameraAction.navConfig(NavPage.navConfig_Burst);
@@ -87,7 +87,7 @@ public class ImageSizeCase extends VP2{
 
         //验证Capture - 修改ImageSize 3M
         CameraAction.checkImageSize(NavPage.navConfig_Capture,NavPage.imageSize3M);
-        //验证Lapse - 修改ImageSize 4M
+        //验证Burst - 修改ImageSize 2M
         CameraAction.checkImageSize(NavPage.navConfig_Burst,NavPage.imageSize2M);
     }
     @Test

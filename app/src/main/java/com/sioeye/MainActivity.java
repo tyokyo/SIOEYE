@@ -6,37 +6,58 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+
+import com.sioeye.elon.JUnitActivity;
 
 import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
     Logger logger = Logger.getLogger(MainActivity.class.getName());
+    static final String LOG_TAG = "MainActivity";
+    Thread testRunnerThread = null;
     private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1;
 
-   /* private void requestMultiplePermissions() {
-        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,Manifest.permission.READ_EXTERNAL_STORAGE};
-        ActivityCompat.requestPermissions(MainActivity.this,permissions,REQUEST_CODE);
-    }*/
-   private void doNext(int requestCode, int[] grantResults) {
-       if (requestCode == 101) {
-           if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-               // Permission Granted
-               logger.info("Allow");
-           } else {
-               // Permission Denied
-               logger.info("Denied");
-           }
-       }
-   }
-   @Override
-   public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-       super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-       doNext(requestCode,grantResults);
-   }
+    /* private void requestMultiplePermissions() {
+         String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,Manifest.permission.READ_EXTERNAL_STORAGE};
+         ActivityCompat.requestPermissions(MainActivity.this,permissions,REQUEST_CODE);
+     }*/
+    private void doNext(int requestCode, int[] grantResults) {
+        if (requestCode == 101) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted
+                logger.info("Allow");
+            } else {
+                // Permission Denied
+                logger.info("Denied");
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        doNext(requestCode, grantResults);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button launcherButton = (Button) findViewById(R.id.ok);
+        launcherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logger.info("click launcherButton");
+                Intent intent = new Intent();
+                /* 指定intent要启动的类 */
+                intent.setClass(MainActivity.this, JUnitActivity.class);
+                /* 启动一个新的Activity */
+                startActivity(intent);
+                /* 关闭当前的Activity */
+                MainActivity.this.finish();
+            }
+        });
 
         /*//开启辅助功能
         Intent intent = new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);

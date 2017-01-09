@@ -1,9 +1,11 @@
 package cn.testcase.discover;
 
 import android.graphics.Rect;
+import android.os.RemoteException;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -261,15 +263,13 @@ public class DiscoverCase extends VP2 {
         Asst.assertFalse("LoginFollowAnchor", !id_exists(DiscoverPage.ID_PROFILE_AVATOR));
     }
     @Test
-
-
     /**
      * 广告内容页面点返回上级
      *1、点击广告页面里的返回键
      *Result：迅速响应，返回上一级界面
      * */
     public void testClickADBack(){
-        DiscoverAction.clickADBack();
+        //DiscoverAction.clickADBack();
     }
     @Test
     /**
@@ -289,6 +289,76 @@ public class DiscoverCase extends VP2 {
         waitTime(1);
         Spoon.screenshot("loginIn_page");
         Asst.assertFalse("testUnLoginClickFollowFail",!id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    /**
+     *未登陆单击推荐人头像
+     *1、点击推荐头像
+     *Result:唤出对应对象的个人资料页面
+     * */
+    public void testUnLoginClickAvatar() throws UiObjectNotFoundException {
+        //注销账号
+        AccountAction.logOutAccount();
+        //进入-发现
+        MainAction.clickDiscover();
+        //点击推荐对象
+        DiscoverAction.navToRecommendList(0,1);
+        //弹出个人头像页面
+        waitUntilFind(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW,1000);
+        Spoon.screenshot("Profile_page");
+        Asst.assertFalse("testUnLoginClickAvatarFail",!id_exists(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW));
+    }
+    @Test
+    /**
+     *向上迅速滑动视频列表
+     *1、迅速滑动推荐视频列表
+     *Result:APP响应迅速不会出现延迟卡顿carsh闪退现象
+     * */
+    public void testSwipeUpQuickly() throws UiObjectNotFoundException {
+        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        //迅速滑动推荐视频列表
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        Spoon.screenshot("DiscoverPage");
+        Asst.assertFalse("testSwipeUpQuicklyFail",!id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
+    }
+    @Test
+    /**
+     * 在discover界面待手机自动灭屏后静置一段时间后，重新唤醒手机
+     *1、唤醒后APP停留在灭屏前的界面，APP不会出现carsh ,闪退
+     * */
+    public void testSleepThenWakeUp() throws RemoteException, UiObjectNotFoundException {
+        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        gDevice.sleep();
+        gDevice.wakeUp();
+        //需要先解锁
+        Spoon.screenshot("DiscoverPage");
+        Asst.assertFalse("testSwipeUpQuicklyFail",!id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
+    }
+    @Test
+    /**
+     *进入搜索界面，检查默认推荐联系人状态
+     *1、已经关注的不再显示在默认推荐人列表
+     * */
+    public void testCheckDefaultRecommendListStatus() {
+        DiscoverAction.navToSearch();
+    }
+    @Test
+    /**
+     *
+     *
+     * */
+    public void test(){
+
     }
 }
 
