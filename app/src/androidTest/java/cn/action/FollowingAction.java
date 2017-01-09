@@ -104,11 +104,65 @@ public class FollowingAction extends VP2{
         followingBean.setIndex_linearLayout(int_r);
         return  followingBean;
     }
+    //watch界面随机选择一个Following 对象
+    public static FollowingBean randomFollowingUser1() throws IOException, UiObjectNotFoundException {
+        FollowingBean followingBean = new FollowingBean();
+        waitUntilFind(MePage.FOLLOWERING_VIEW,30000);
+        UiObject2 follow_view = getObject2ById(MePage.FOLLOWERING_VIEW);
+        List<UiObject2> LinearLayoutList = follow_view.findObjects(By.clazz(LinearLayout.class));
+        List<UiObject2> LinearLayoutList_filter=new ArrayList<>();
+        int size=0;
+        for (UiObject2 linear:LinearLayoutList){
+            if (linear.hasObject(By.res(MePage.FOLLOWERING_AVATAR))){
+                size=size+1;
+                LinearLayoutList_filter.add(linear);
+            }
+        }
+        Random r = new Random();
+        int int_r =r.nextInt(size);
+        logger.info("size:"+size);
+        UiObject2 linearLayout_UiObject2 =LinearLayoutList_filter.get(int_r);
+        List<UiObject2> textViews =linearLayout_UiObject2.findObjects(By.clazz(TextView.class));
+        String followers_videos=textViews.get(1).getText();
+        String name=textViews.get(0).getText();
+        followingBean.setName(name);
+        followingBean.setAvatar(linearLayout_UiObject2);
+        followingBean.setInfo(followers_videos);
+        followingBean.setIndex_linearLayout(int_r);
+        return  followingBean;
+    }
     //随机选择一个fans对象
     public static FollowingBean randomFansUser() throws IOException, UiObjectNotFoundException {
         FollowingBean followingBean = new FollowingBean();
         waitUntilFind(MePage.FANS_VIEW_LIST,30000);
         UiObject2 follow_view = getObject2ById(MePage.FANS_VIEW_LIST);
+        List<UiObject2> LinearLayoutList = follow_view.findObjects(By.clazz(LinearLayout.class));
+        List<UiObject2> LinearLayoutList_filter=new ArrayList<>();
+        int size=0;
+        for (UiObject2 linear:LinearLayoutList){
+            if (linear.hasObject(By.res(MePage.FOLLOWERING_AVATAR))){
+                size=size+1;
+                LinearLayoutList_filter.add(linear);
+            }
+        }
+        Random r = new Random();
+        int int_r =r.nextInt(size);
+        logger.info("size:"+size);
+        UiObject2 linearLayout_UiObject2 =LinearLayoutList_filter.get(int_r);
+        List<UiObject2> textViews =linearLayout_UiObject2.findObjects(By.clazz(TextView.class));
+        String followers_videos=textViews.get(1).getText();
+        String name=textViews.get(0).getText();
+        followingBean.setName(name);
+        followingBean.setAvatar(linearLayout_UiObject2);
+        followingBean.setInfo(followers_videos);
+        followingBean.setIndex_linearLayout(int_r);
+        return  followingBean;
+    }
+    //随机选择一个fans对象
+    public static FollowingBean randomFansArav() throws IOException, UiObjectNotFoundException {
+        FollowingBean followingBean = new FollowingBean();
+        waitUntilFind(WatchPage.WATCH_USER_AVATAR,30000);
+        UiObject2 follow_view = getObject2ById(WatchPage.WATCH_USER_AVATAR);
         List<UiObject2> LinearLayoutList = follow_view.findObjects(By.clazz(LinearLayout.class));
         List<UiObject2> LinearLayoutList_filter=new ArrayList<>();
         int size=0;

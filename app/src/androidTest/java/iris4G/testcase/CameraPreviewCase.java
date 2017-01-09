@@ -6,6 +6,8 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.view.KeyEvent;
 
+import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,11 +39,11 @@ public class CameraPreviewCase extends VP2{
 
         if(id_exists(Iris4GPage.camera_live_shortcut_id)&&id_exists(Iris4GPage.camera_cap_shortcut_id)&&id_exists(Iris4GPage.camera_video_shortcut_id)&&id_exists(Iris4GPage.camera_setting_shortcut_id)){
             Asst.assertEquals("UI is correct",true,id_exists(Iris4GPage.camera_live_shortcut_id));
-            VP2.logger.info("UI is correct");
+            Spoon.screenshot("UI is correct");
             return true;
         }else {
             Asst.assertEquals("UI is wrong",true,id_exists(Iris4GPage.camera_cap_shortcut_id));
-            VP2.logger.info("UI is wrong");
+            Spoon.screenshot("UI is wrong");
             return false;
         }
 

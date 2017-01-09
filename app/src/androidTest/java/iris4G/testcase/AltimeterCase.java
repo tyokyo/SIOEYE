@@ -3,6 +3,8 @@ package iris4G.testcase;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,8 +47,10 @@ public class AltimeterCase extends VP2{
             System.out.println("i:"+i);
             if (i%2==0){
                 logger.info("Altimeter service is closed");
+                Spoon.screenshot("高度计功能关闭");
             }else{
                 logger.info("Altimeter service is opened");
+                Spoon.screenshot("高度计功能开启");
             }
             waitTime(1);
             gDevice.pressBack();
@@ -64,13 +68,34 @@ public class AltimeterCase extends VP2{
      * Case 2:
      * 打开高度计开关后发起直播
      */
-    public void testAltimeterAndLive() throws Exception {
+    public void testOpenAltimeterAndLive() throws Exception {
         //清除缓存数据
         CameraAction.initDevice();
         Iris4GAction.pmClear();
         Iris4GAction.initIris4G();
         CameraAction.navToAltimeter();
         CameraAction.openCompoundButton("Altimeter");
+        //添加验证开关是否打开的方法
+        //登录直播账号
+        String username= Constant.getUserName("email");
+        String password= Constant.getPassword("email_password");
+        AccountAction.loginAccount(username,password);
+        Iris4GAction.cameraKey();
+        Asst.assertEquals("Live_Succeed",true,CameraAction.checkLiveSuccess());
+        waitTime(20);
+        Iris4GAction.cameraKey();
+    }
+    @Test
+    /**
+     * Case 3:
+     * 关闭高度计后发起直播
+     */
+    public void testCloseAltimeterAndLive() throws Exception {
+        //清除缓存数据
+        CameraAction.initDevice();
+        Iris4GAction.pmClear();
+        Iris4GAction.initIris4G();
+        CameraAction.cameraLive();
         //添加验证开关是否打开的方法
         //登录直播账号
         String username= Constant.getUserName("email");
