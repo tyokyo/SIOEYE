@@ -1,12 +1,15 @@
 package com.sioeye;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.sioeye.elon.JUnitActivity;
 
 import java.util.logging.Logger;
 
@@ -46,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 logger.info("click launcherButton");
+                Intent intent = new Intent();
+                /* 指定intent要启动的类 */
+                intent.setClass(MainActivity.this, JUnitActivity.class);
+                /* 启动一个新的Activity */
+                startActivity(intent);
+                /* 关闭当前的Activity */
+                MainActivity.this.finish();
             }
         });
 

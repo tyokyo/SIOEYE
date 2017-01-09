@@ -1,4 +1,4 @@
-package elon;
+package com.sioeye.elon;
 
 import android.app.Activity;
 import android.test.AndroidTestRunner;
