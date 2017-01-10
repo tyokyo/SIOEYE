@@ -331,11 +331,11 @@ public class DiscoverCase extends VP2 {
         Spoon.screenshot("DiscoverPage");
         Asst.assertFalse("testSwipeUpQuicklyFail",!id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
     }
-    @Test
-    /**
+
+    /*@Test
      * 在discover界面待手机自动灭屏后静置一段时间后，重新唤醒手机
      *1、唤醒后APP停留在灭屏前的界面，APP不会出现carsh ,闪退
-     * */
+     *
     public void testSleepThenWakeUp() throws RemoteException, UiObjectNotFoundException {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         gDevice.sleep();
@@ -343,7 +343,7 @@ public class DiscoverCase extends VP2 {
         //需要先解锁
         Spoon.screenshot("DiscoverPage");
         Asst.assertFalse("testSwipeUpQuicklyFail",!id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
-    }
+    } */
     @Test
     /**
      *进入搜索界面，检查默认推荐联系人状态
@@ -354,10 +354,121 @@ public class DiscoverCase extends VP2 {
     }
     @Test
     /**
-     *
-     *
+     *1.进入搜索界面
+     *2.输入邮箱地址后点击搜索
+     *Result:结果匹配搜索内容，成功搜索出该ID的联系人
      * */
-    public void test(){
+    public void testToSearchByEmail() throws UiObjectNotFoundException, IOException {
+        AccountAction.logInAccount("YCB123","123456");
+        DiscoverAction.navToSearch();
+        shellInputText("835135815@qq.com");
+        Spoon.screenshot("testToSearchByEmail");
+        waitTime(2);
+        Asst.assertTrue(text_exists("YCCDDM"));
+    }
+    @Test
+    /**
+     *1.进入搜索界面
+     *2.输入Sioeye Id后点击搜索
+     *Result:结果匹配搜索内容，成功搜索出该ID的联系人
+     * */
+    public void testToSearchBySioeyeID() throws UiObjectNotFoundException, IOException {
+        AccountAction.logInAccount("YCB123","123456");
+        DiscoverAction.navToSearch();
+        shellInputText("YTaidi");
+        Spoon.screenshot("testToSearchBySioeyeID");
+        waitTime(2);
+        Asst.assertTrue(text_exists("尹才兵"));
+    }
+    @Test
+    /**
+     *1.进入搜索界面
+     *2.输入昵称后点击搜索
+     *Result:结果匹配搜索内容，成功搜索出该ID的联系人
+     * */
+    public void testToSearchByNickname() throws UiObjectNotFoundException, IOException {
+        AccountAction.logInAccount("YCB123","123456");
+        DiscoverAction.navToSearch();
+        shellInputText("尹才兵");
+        Spoon.screenshot("testToSearchByNickname");
+        waitTime(2);
+        Asst.assertTrue(text_exists("YTaidi"));
+    }
+    @Test
+    /**
+     *1.进入搜索界面
+     *2.输入手机号码后点击搜索
+     *Result:结果匹配搜索内容，成功搜索出该ID的联系人
+     * */
+    public void testToSearchByPhoneNumber() throws UiObjectNotFoundException, IOException {
+        AccountAction.logInAccount("YCB123","123456");
+        DiscoverAction.navToSearch();
+        shellInputText("13688169291");
+        Spoon.screenshot("testToSearchByPhoneNumber");
+        waitTime(2);
+        Asst.assertTrue(text_exists("尼古拉斯.泰迪"));
+    }
+    @Test
+    /**
+     *1.进入搜索界面，在输入框输入三方账号Facebook/qq的ID或账号
+     *2.点击搜索
+     *Result:1.进入到搜索界面2.搜索出该联系人
+
+     * */
+    public void testToSearchByQQ() throws UiObjectNotFoundException, IOException {
+        AccountAction.logInAccount("YCB123","123456");
+        DiscoverAction.navToSearch();
+        shellInputText("835135815");
+        Spoon.screenshot("testToSearchByQQ");
+        waitTime(2);
+        Asst.assertTrue(text_exists("YCCDDM"));
+    }
+    @Test
+    /**
+     *1.在搜索界面点击Video切换到视频搜索
+     *Result:成功切换到视频搜索
+     * */
+    public void testToSearchVideo() throws UiObjectNotFoundException, IOException {
+        AccountAction.logInAccount("YCB123","123456");
+        DiscoverAction.navToSearch();
+        shellInputText("a");
+        clickByText("视频");
+        waitTime(2);
+        UiObject2 SP = getUiObject2ByText("视频");
+        Boolean Actual = SP.isChecked()&&(text_exists("搜索无内容")||text_exists_contain("a"));
+        Asst.assertTrue(Actual);
+    }
+    @Test
+    /**
+     *1.
+     *2.
+     *Result:
+     * */
+    public void testToSearchBy2(){
+
+    } @Test
+    /**
+     *1.
+     *2.
+     *Result:
+     * */
+    public void testToSearchBy3(){
+
+    } @Test
+    /**
+     *1.
+     *2.
+     *Result:
+     * */
+    public void testToSearchBy4(){
+
+    } @Test
+    /**
+     *1.
+     *2.
+     *Result:
+     * */
+    public void testToSearchBy5(){
 
     }
 }
