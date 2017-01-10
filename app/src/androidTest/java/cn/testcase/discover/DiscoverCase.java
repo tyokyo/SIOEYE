@@ -335,7 +335,6 @@ public class DiscoverCase extends VP2 {
     /*@Test
      * 在discover界面待手机自动灭屏后静置一段时间后，重新唤醒手机
      *1、唤醒后APP停留在灭屏前的界面，APP不会出现carsh ,闪退
-     *
     public void testSleepThenWakeUp() throws RemoteException, UiObjectNotFoundException {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         gDevice.sleep();
