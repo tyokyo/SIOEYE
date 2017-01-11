@@ -759,6 +759,11 @@ public class VP2 extends  VP{
         List<UiObject2> lists =gDevice.findObjects(By.res(ResourceID));
         return  lists;
     }
+    public static List<UiObject2> getObjectsByClassname(String ClassName) {
+        initDevice();
+        List<UiObject2> lists =gDevice.findObjects(By.res(ClassName));
+        return  lists;
+    }
     /**
      * Get a UI Element.
      *
