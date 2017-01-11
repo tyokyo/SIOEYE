@@ -464,12 +464,17 @@ public class DiscoverCase extends VP2 {
     }
     @Test
     /**
-     *1.
-     *2.
-     *Result:
+     *1.在输入界面输入视频名称
+     *2.点击搜索
+     *Result:成功搜索出该名称的视频，绿色高亮显示
      * */
-    public void testToSearchBy4(){
-
+    public void testToSearchByVideoName() throws UiObjectNotFoundException, IOException {
+        AccountAction.logInAccount("YCB123","123456");
+        DiscoverAction.navToSearch();
+        shellInputText("a");
+        clickByText("视频");
+        waitTime(2);
+        Asst.assertTrue(text_exists_contain("a"));
     } @Test
     /**
      *1.
