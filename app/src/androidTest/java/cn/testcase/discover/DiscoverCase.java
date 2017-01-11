@@ -439,21 +439,30 @@ public class DiscoverCase extends VP2 {
     }
     @Test
     /**
-     *1.
-     *2.
-     *Result:
+     *1.在搜索输入框输入一些数据
+     *2.点击输入框中的×按钮清空数据
+     *Result:成功清空输入的数据，返回推荐
      * */
-    public void testToSearchBy2(){
-
-    } @Test
+    public void testToSearchByData() throws UiObjectNotFoundException, IOException {
+        AccountAction.logInAccount("YCB123","123456");
+        DiscoverAction.navToSearch();
+        shellInputText("1234");
+        clickById(Other.filter_clear);
+        Spoon.screenshot("AfterClickFilter_clear");
+        Asst.assertTrue(text_exists("你可能感兴趣"));
+    }
+    @Test
     /**
-     *1.
-     *2.
-     *Result:
+     *1.在搜索界面点击取消按钮
+     *Result:退出搜索界面，返回到上一界面
      * */
-    public void testToSearchBy3(){
-
-    } @Test
+    public void testToSearchClickCancle() throws UiObjectNotFoundException {
+        AccountAction.logInAccount("YCB123","123456");
+        DiscoverAction.navToSearch();
+        clickByText("取消");
+        Asst.assertTrue(text_exists("发现"));
+    }
+    @Test
     /**
      *1.
      *2.
