@@ -2,6 +2,7 @@ package cn.action;
 
 import android.graphics.Rect;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.BySelector;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.StaleObjectException;
 import android.support.test.uiautomator.UiObject;
@@ -17,6 +18,7 @@ import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
 import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -326,6 +328,28 @@ public class DiscoverAction extends VP2 {
             }
         }
         return zanBeforeNumber;
+    }
+
+    /**
+    * 点击广告界面的返回键
+    */
+    public static void  clickADBack(){
+        DiscoverAction.navToAd();
+        UiObject2 Frame = getObject2ByClass(android.widget.FrameLayout.class);
+        waitTime(2);
+        List<UiObject2> RelativeLayouts = Frame.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        List<UiObject2> ImageViews;
+        for (UiObject2  RelativeLayout: RelativeLayouts) {
+            ImageViews = RelativeLayout.findObjects(By.clazz(android.widget.ImageView.class).depth(1));
+            if (ImageViews.size() == 1) {
+                ImageViews.get(0).click();
+                break;
+            }
+        }
+    }
+    //生成一个随机子字符串
+    public static void RandChar(){
+
     }
 }
 
