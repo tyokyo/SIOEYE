@@ -5,6 +5,7 @@ import android.os.RemoteException;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.BySelector;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
@@ -22,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 import ckt.base.VP2;
 import cn.action.AccountAction;
@@ -29,6 +31,7 @@ import cn.action.BroadcastAction;
 import cn.action.DiscoverAction;
 import cn.action.FollowersAction;
 import cn.action.MainAction;
+import cn.action.MeAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.DiscoverPage;
@@ -50,6 +53,18 @@ import usa.action.Nav;
 * */
 public class DiscoverCase extends VP2 {
     Logger logger = Logger.getLogger(DiscoverCase.class.getName());
+
+    //生成一个随机子字符串
+    public  String getRandomString(int length) { //length表示生成字符串的长度
+        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
+    }
     @Before
     public  void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
@@ -475,14 +490,27 @@ public class DiscoverCase extends VP2 {
         clickByText("视频");
         waitTime(2);
         Asst.assertTrue(text_exists_contain("a"));
-    } @Test
-    /**
-     *1.
-     *2.
-     *Result:
-     * */
-    public void testToSearchBy5(){
+    }
 
+    @Test
+    /**
+     *1.在输入框输入随意字符
+     *Result:自动匹配出包含这些字符的视频，匹配字符绿色高亮显示
+     * */
+    public void testToSearchByRandChar() throws UiObjectNotFoundException, IOException {
+        AccountAction.logInAccount("YCB123", "123456");
+        DiscoverAction.navToSearch();
+        for (int i = 0; i < 5; i++) {
+            //将由5个字符组成的字符串逐个输入搜索框内。备注：此处未输入中文
+            shellInputText(getRandomString(5).charAt(i));
+            clickByText("视频");
+            waitTime(1);
+            String s = getObjectById(DiscoverPage.ID_SEARCH_FILTER_INPUT).getText();
+            if (text_exists_contain(s) || text_exists("搜索无内容")) {
+                continue;
+            }
+            Asst.fail();
+        }
     }
 }
 
