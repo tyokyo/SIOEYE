@@ -17,9 +17,11 @@ import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import cn.action.AccountAction;
+import cn.action.MainAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
+import cn.page.MePage;
 
 /**
  * Created by caibing.yin on 2016/11/16.
@@ -126,7 +128,7 @@ public class RegisterCase extends VP2 {
             Asst.fail("InValidEmailCase_fail");
         }
     }
-    /* case5:
+    /**case5:
      *    2016/12/29 徐瑞香
      *    注册时输入12位不合法的电话号码
      */
@@ -256,6 +258,31 @@ public void testSioEyeIDInRegisterByEmail() throws UiObjectNotFoundException, IO
             }
         }
     }
+
+    /**
+     * Created by 徐瑞香 on 2017/01/16
+     *   默认的注册方式：手机号码
+     */
+    @Test
+    public void defaultRegisterMode() throws UiObjectNotFoundException {
+        //先执行before中的logout方法，会出现两种界面：登陆界面，me界面，所以用if判断一下
+        if(id_exists(MePage.ID_MAIN_TAB_ME)){
+            MainAction.clickMe();
+        }
+        clickByText("注册");
+        waitTime(2);
+        //根据文本内容，判断默认的注册方式是否是手机号码注册
+        Boolean phoneRegisterText1=text_exists("输入手机号");
+        Boolean phoneRegisterText2= text_exists("请输入手机号");
+        Boolean Actual = phoneRegisterText1 && phoneRegisterText2;
+        Asst.assertFalse(!Actual);
+
+    }
+
+
+
+
+
 
 
 }
