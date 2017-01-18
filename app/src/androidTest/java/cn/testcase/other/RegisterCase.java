@@ -130,10 +130,10 @@ public class RegisterCase extends VP2 {
     }
     /**case5:
      *    2016/12/29 徐瑞香
-     *    注册时输入12位不合法的电话号码
+     *    检查注册时输入12位不合法的电话号码
      */
     @Test
-    public void err_mobile_reg() throws UiObjectNotFoundException {
+    public void testErrMobileReg() throws UiObjectNotFoundException {
         AccountAction.navToSignUp_ByMobile();
         //到手机注册界面
         clickById(AccountPage.SIGN_UP_TEL_ET_INPUT_PHONE);
@@ -260,11 +260,12 @@ public void testSioEyeIDInRegisterByEmail() throws UiObjectNotFoundException, IO
     }
 
     /**
+     * case10:
      * Created by 徐瑞香 on 2017/01/16
-     *   默认的注册方式：手机号码
+     *   检查默认的注册方式：手机号码
      */
     @Test
-    public void defaultRegisterMode() throws UiObjectNotFoundException {
+    public void testDefaultRegisterMode() throws UiObjectNotFoundException {
         //先执行before中的logout方法，会出现两种界面：登陆界面，me界面，所以用if判断一下
         if(id_exists(MePage.ID_MAIN_TAB_ME)){
             MainAction.clickMe();
