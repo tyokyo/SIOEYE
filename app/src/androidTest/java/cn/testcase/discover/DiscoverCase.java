@@ -1,18 +1,15 @@
 package cn.testcase.discover;
 
 import android.graphics.Rect;
-import android.os.RemoteException;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.BySelector;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
-import android.widget.ImageView;
 
 import com.squareup.spoon.Spoon;
 
@@ -21,24 +18,23 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
 import cn.action.DiscoverAction;
 import cn.action.FollowersAction;
 import cn.action.MainAction;
-import cn.action.MeAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
 import cn.page.Other;
-import iris4G.page.NavPage;
-import usa.action.Nav;
 
 
 /**
@@ -260,7 +256,7 @@ public class DiscoverCase extends VP2 {
             clickByText("关注");
             //关注成功，变为已关注
             waitUntilFindText("已关注", 3000);
-            Spoon.screenshot("关注成功");
+            Spoon.screenshot("addsuccess");
             Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
         }
     }
