@@ -1,38 +1,30 @@
 package cn.testcase.me;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Direction;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.HorizontalScrollView;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.io.IOException;
-import java.util.List;
-import java.util.Random;
 import java.util.logging.Logger;
+
 import bean.BroadcastBean;
-import bean.FollowingBean;
 import bean.WatcherBean;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
-import cn.action.FollowingAction;
 import cn.action.MeAction;
-import cn.action.WatchAction;
 import cn.page.App;
 import cn.page.MePage;
 
@@ -209,6 +201,8 @@ public class BroadCastsCase extends VP2{
             int index=BroadcastAction.getRandomBroadcastsIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcasts(index);
             broadcast.swipe(Direction.LEFT,0.9f);
+            //wait dialog
+            waitUntilFind(MePage.BROADCAST_EDIT_TITLE,10000);
             clickById(MePage.BROADCAST_EDIT_TITLE);
             waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
