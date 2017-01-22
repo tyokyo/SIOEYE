@@ -273,8 +273,8 @@ public void testSioEyeIDInRegisterByEmail() throws UiObjectNotFoundException, IO
         clickByText("注册");
         waitTime(2);
         //根据文本内容，判断默认的注册方式是否是手机号码注册
-        Boolean phoneRegisterText1=text_exists("输入手机号");
-        Boolean phoneRegisterText2= text_exists("请输入手机号");
+        Boolean phoneRegisterText1=text_exists("输入手机号码");
+        Boolean phoneRegisterText2= text_exists("请输入手机号码");
         Boolean Actual = phoneRegisterText1 && phoneRegisterText2;
         Asst.assertFalse(!Actual);
 
