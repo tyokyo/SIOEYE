@@ -1,12 +1,8 @@
 package cn.action;
 
-import android.graphics.Point;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
-import android.support.test.uiautomator.Until;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,10 +19,7 @@ import java.util.logging.Logger;
 import bean.FollowingBean;
 import bean.UserBean;
 import ckt.base.VP2;
-import cn.page.App;
 import cn.page.MePage;
-import cn.page.WatchPage;
-import cn.action.*;
 
 /**
  * Created by elon on 2016/10/27.

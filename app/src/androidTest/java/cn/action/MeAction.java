@@ -4,17 +4,13 @@ import android.graphics.Point;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
-import android.widget.TextView;
 
 import com.squareup.spoon.Spoon;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import bean.InfoBean;
@@ -22,7 +18,6 @@ import ckt.base.VP;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.MePage;
-import cn.testcase.me.BroadCastsCase;
 
 /**
  * Created by elon on 2016/10/27.
@@ -332,7 +327,7 @@ public class MeAction extends VP2{
     //评论区域-滑动更新,显示最新消息
     public static void displayNewMessages() throws UiObjectNotFoundException {
         if (id_exists(MePage.NEW_MESSAGES_DISPLAY)){
-            getObject2ById(MePage.NEW_MESSAGES_DISPLAY).swipe(Direction.UP,(float)0.5);
+            getObject2ById(MePage.NEW_MESSAGES_DISPLAY).click();
             waitTime(2);
         }
     }

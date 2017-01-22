@@ -550,12 +550,16 @@ public class VP2 extends  VP{
      */
     public static UiObject scrollAndGetUIObject(String TargetText) throws UiObjectNotFoundException {
         UiScrollable obj = new UiScrollable(new UiSelector()).setAsVerticalList();
-        if (obj.scrollTextIntoView(TargetText)) {
-            return getObjectByTextReg(TargetText);
-        } else {
-            Log.e("scrollAndFindObject", "Can not found text:"+TargetText);
-            return null;
+        UiObject objFind = null;
+        if (obj.exists()){
+            if (obj.scrollTextIntoView(TargetText)) {
+                objFind= getObjectByTextReg(TargetText);
+            } else {
+                Log.e("scrollAndFindObject", "Can not found text:"+TargetText);
+                objFind= null;
+            }
         }
+        return  objFind;
     }
     public static UiObject scrollAndGetUIObject(String TargetText,int maxSearchStrps) throws UiObjectNotFoundException {
         UiScrollable obj = new UiScrollable(new UiSelector()).setAsVerticalList();
