@@ -30,6 +30,7 @@ import cn.action.BroadcastAction;
 import cn.action.DiscoverAction;
 import cn.action.FollowersAction;
 import cn.action.MainAction;
+import cn.action.MeAction;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.DiscoverPage;
@@ -399,12 +400,11 @@ public class DiscoverCase extends VP2 {
      *Result:结果匹配搜索内容，成功搜索出该ID的联系人
      * */
     public void testToSearchBySioeyeID() throws UiObjectNotFoundException, IOException {
-        AccountAction.logInAccount("YCB123", "123456");
         DiscoverAction.navToSearch();
         shellInputText("tyokyo");
         Spoon.screenshot("testToSearchBySioeyeID");
         waitTime(2);
-        Asst.assertTrue(text_exists("尹才兵"));
+        Asst.assertTrue(text_exists("tyo000"));
     }
 
     @Test
@@ -415,10 +415,10 @@ public class DiscoverCase extends VP2 {
      * */
     public void testToSearchByNickname() throws UiObjectNotFoundException, IOException {
         DiscoverAction.navToSearch();
-        shellInputText("尹才兵");
+        shellInputText("xiaoxiao");
         Spoon.screenshot("testToSearchByNickname");
         waitTime(2);
-        Asst.assertTrue(text_exists("YTaidi"));
+        Asst.assertTrue(text_exists("你是谁"));//看ID对应的昵称是否存在，如果账号修改昵称可能会导致用例执行失败
     }
 
     @Test
@@ -432,24 +432,8 @@ public class DiscoverCase extends VP2 {
         shellInputText("13688169291");
         Spoon.screenshot("testToSearchByPhoneNumber");
         waitTime(2);
-        Asst.assertTrue(text_exists("尼古拉斯.泰迪"));
+        Asst.assertTrue(text_exists("123123123"));
     }
-
-    @Test
-    /**
-     *1.进入搜索界面，在输入框输入三方账号Facebook/qq的ID或账号
-     *2.点击搜索
-     *Result:1.进入到搜索界面2.搜索出该联系人
-
-     * */
-    public void testToSearchByQQ() throws UiObjectNotFoundException, IOException {
-        DiscoverAction.navToSearch();
-        shellInputText("835135815");
-        Spoon.screenshot("testToSearchByQQ");
-        waitTime(2);
-        Asst.assertTrue(text_exists("YCCDDM"));
-    }
-
     @Test
     /**
      *1.在搜索界面点击Video切换到视频搜索
@@ -524,3 +508,5 @@ public class DiscoverCase extends VP2 {
         }
     }
 }
+
+
