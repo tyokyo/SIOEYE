@@ -20,6 +20,7 @@ import bean.FollowingBean;
 import bean.UserBean;
 import ckt.base.VP2;
 import cn.page.MePage;
+import cn.page.WatchPage;
 
 /**
  * Created by elon on 2016/10/27.
