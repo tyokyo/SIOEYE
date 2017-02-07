@@ -125,20 +125,24 @@ public class AboutMeCase extends VP2 {
     public void testNotSave() throws UiObjectNotFoundException {
         MainAction.navToMe();
         Spoon.screenshot(gDevice,"Me");
-        String expect = getUiObjectById(MePage.ABOUT_ME_DISPLAY).getText();
-        clickById(MePage.ID_USER_EDIT);
-        clickById(MePage.NAV_EDIT_ABOUT_ME);
-        getObjectById(MePage.ABOUT_ME_CONTENT).clearTextField();
-        String input = getRandomString(50);
-        getObjectById(MePage.ABOUT_ME_CONTENT).setText(input);
-        gDevice.pressBack();
-        //验证个人信息编辑界面的个性签名
-        String active = MeAction.getAboutMe();
-        Assert.assertEquals("change success",expect,active);
-        //验证个人主页上面的个性签名
-        gDevice.pressBack();
-        active = getUiObjectById(MePage.ABOUT_ME_DISPLAY).getText();
-        Assert.assertEquals("change success",expect,active);
+        waitUntilFind(MePage.ABOUT_ME_DISPLAY,10000);
+        String expect="";
+        if (id_exists(MePage.ABOUT_ME_DISPLAY)){
+            expect = getUiObjectById(MePage.ABOUT_ME_DISPLAY).getText();
+            clickById(MePage.ID_USER_EDIT);
+            clickById(MePage.NAV_EDIT_ABOUT_ME);
+            getObjectById(MePage.ABOUT_ME_CONTENT).clearTextField();
+            String input = getRandomString(50);
+            getObjectById(MePage.ABOUT_ME_CONTENT).setText(input);
+            gDevice.pressBack();
+            //验证个人信息编辑界面的个性签名
+            String active = MeAction.getAboutMe();
+            Assert.assertEquals("change success",expect,active);
+            //验证个人主页上面的个性签名
+            gDevice.pressBack();
+            active = getUiObjectById(MePage.ABOUT_ME_DISPLAY).getText();
+            Assert.assertEquals("change success",expect,active);
+        }
     }
     //删除功能验证
     @Test

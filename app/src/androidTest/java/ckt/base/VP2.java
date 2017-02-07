@@ -61,6 +61,12 @@ public class VP2 extends  VP{
         logger.info(command);
         gDevice.executeShellCommand("input text "+text);
     }
+    public static void shellInputText(char text) throws IOException {
+        initDevice();
+        String command = String.format("input text %s",text);
+        logger.info(command);
+        gDevice.executeShellCommand("input text "+text);
+    }
     public static void makeToast(String message,float time) throws IOException{
         initDevice();
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %f",message,time);
@@ -544,12 +550,16 @@ public class VP2 extends  VP{
      */
     public static UiObject scrollAndGetUIObject(String TargetText) throws UiObjectNotFoundException {
         UiScrollable obj = new UiScrollable(new UiSelector()).setAsVerticalList();
-        if (obj.scrollTextIntoView(TargetText)) {
-            return getObjectByTextReg(TargetText);
-        } else {
-            Log.e("scrollAndFindObject", "Can not found text:"+TargetText);
-            return null;
+        UiObject objFind = null;
+        if (obj.exists()){
+            if (obj.scrollTextIntoView(TargetText)) {
+                objFind= getObjectByTextReg(TargetText);
+            } else {
+                Log.e("scrollAndFindObject", "Can not found text:"+TargetText);
+                objFind= null;
+            }
         }
+        return  objFind;
     }
     public static UiObject scrollAndGetUIObject(String TargetText,int maxSearchStrps) throws UiObjectNotFoundException {
         UiScrollable obj = new UiScrollable(new UiSelector()).setAsVerticalList();
@@ -751,6 +761,11 @@ public class VP2 extends  VP{
     public static List<UiObject2> getObjectsById(String ResourceID) {
         initDevice();
         List<UiObject2> lists =gDevice.findObjects(By.res(ResourceID));
+        return  lists;
+    }
+    public static List<UiObject2> getObjectsByClassname(String ClassName) {
+        initDevice();
+        List<UiObject2> lists =gDevice.findObjects(By.res(ClassName));
         return  lists;
     }
     /**

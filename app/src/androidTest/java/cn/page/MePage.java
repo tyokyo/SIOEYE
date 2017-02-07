@@ -108,7 +108,7 @@ public class MePage {
     //全屏播放按钮
     public static final String BROADCAST_VIEW_VIDEO_FULL_SCREEN="cn.sioeye.sioeyeapp:id/app_video_fullscreen";
     //modify title
-    public static final String BROADCAST_VIEW_VIDEO_TITLE_MODIFY="cn.sioeye.sioeyeapp:id/content_dialog";
+    public static final String BROADCAST_VIEW_VIDEO_TITLE_MODIFY="cn.sioeye.sioeyeapp:id/content";
 
     //delete a video
     public static final String BROADCAST_VIEW_VIDEO_DELETE="cn.sioeye.sioeyeapp:id/delete_ok";
@@ -256,7 +256,13 @@ public class MePage {
     public static final String SETTINGS_SEX_FEMALE="cn.sioeye.sioeyeapp:id/rlt_female";
     public static final String SETTINGS_SEX_SECRET="cn.sioeye.sioeyeapp:id/rlt_other";
     //底部有新消息
-    public static final String NEW_MESSAGES_DISPLAY="cn.sioeye.sioeyeapp:id/botoom_messages_recyclerView";
+    public static final String NEW_MESSAGES_DISPLAY="cn.sioeye.sioeyeapp:id/tv_new_message";
     //视频加载失败
     public static final String LOAD_VIDEO_ERROR="cn.sioeye.sioeyeapp:id/layout_error";
+    //主播
+    public static final String TV_AUCHOR_ID="cn.sioeye.sioeyeapp:id/tv_anchor";
+    //聊天室
+    public static final String TV_CHAT_ROOM_ID="cn.sioeye.sioeyeapp:id/tv_chat_room";
+
+
 }
