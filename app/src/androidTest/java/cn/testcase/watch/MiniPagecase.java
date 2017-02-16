@@ -6,8 +6,6 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 
-import cn.action.WatchAction;
-
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,9 +15,10 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
+import cn.action.AccountAction;
+import cn.action.WatchAction;
 import cn.page.App;
 import cn.page.WatchPage;
-import cn.action.AccountAction;
 
 /**
  * Created by jiali.liu on 2016/12/29.
