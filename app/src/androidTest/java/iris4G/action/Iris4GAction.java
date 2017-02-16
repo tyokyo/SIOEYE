@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
@@ -410,8 +409,10 @@ public class Iris4GAction extends VP2 {
         UiScrollable listScrollable = new UiScrollable(new UiSelector().scrollable(true));
         listScrollable.setMaxSearchSwipes(10);
         try {
-            if (listScrollable.scrollTextIntoView(text)) {
-                logger.info(FindScrollFindObject + text);
+            if (listScrollable.exists()){
+                if (listScrollable.scrollTextIntoView(text)) {
+                    logger.info(FindScrollFindObject + text);
+                }
             }
         } catch (UiObjectNotFoundException e) {
             // TODO Auto-generated catch block
@@ -429,8 +430,10 @@ public class Iris4GAction extends VP2 {
         UiScrollable listScrollable = new UiScrollable(new UiSelector().scrollable(true));
         listScrollable.setMaxSearchSwipes(10);
         try {
-            if (listScrollable.scrollTextIntoView(text)) {
-                logger.info(FindScrollFindObject + text);
+            if (listScrollable.exists()){
+                if (listScrollable.scrollTextIntoView(text)) {
+                    logger.info(FindScrollFindObject + text);
+                }
             }
         } catch (UiObjectNotFoundException e) {
             // TODO Auto-generated catch block
@@ -477,6 +480,10 @@ public class Iris4GAction extends VP2 {
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Live&Save");
         CameraAction.openCompoundButton("Live&Save");
+        waitUntilFindText("OK",5000);
+        if (text_exists("OK")){
+            clickByText("OK");
+        }
         Spoon.screenshot("live_save","liveSave");
         gDevice.pressBack();
     }
