@@ -2,7 +2,6 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.view.KeyEvent;
 
@@ -39,11 +38,11 @@ public class CameraPreviewCase extends VP2{
 
         if(id_exists(Iris4GPage.camera_live_shortcut_id)&&id_exists(Iris4GPage.camera_cap_shortcut_id)&&id_exists(Iris4GPage.camera_video_shortcut_id)&&id_exists(Iris4GPage.camera_setting_shortcut_id)){
             Asst.assertEquals("UI is correct",true,id_exists(Iris4GPage.camera_live_shortcut_id));
-            Spoon.screenshot("UI is correct");
+            Spoon.screenshot("UI_is_correct");
             return true;
         }else {
             Asst.assertEquals("UI is wrong",true,id_exists(Iris4GPage.camera_cap_shortcut_id));
-            Spoon.screenshot("UI is wrong");
+            Spoon.screenshot("UI_is_correct");
             return false;
         }
 
