@@ -220,7 +220,6 @@ public class Iris4GAction extends VP2 {
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.hicam/.application.HiCam");
         gDevice.wait(Until.findObject(By.pkg("com.hicam")),40000);
-        gDevice.wait(Until.findObject(By.res(Iris4GPage.camera_setting_shortcut_id)),10000);
         //if new version is available update now pop up ?
         if (text_exists("Update")){
             clickByText("Cancel");
@@ -228,15 +227,11 @@ public class Iris4GAction extends VP2 {
         if (id_exists("android:id/button2")){
             clickById("android:id/button2");
         }
-        for (int i = 0; i < 120; i++) {
-            if (id_exists(Iris4GPage.camera_setting_shortcut_id)){
-                break;
-            }else{
-                logger.info("swipe Direction.LEFT");
-                getObjectById(Iris4GPage.content_id).swipeLeft(60);
-            }
-            waitTime(1);
-        }
+
+        getObjectById(Iris4GPage.content_id).swipeLeft(60);
+        getObjectById(Iris4GPage.content_id).swipeLeft(60);
+        getObjectById(Iris4GPage.content_id).swipeLeft(60);
+
         String pkg = gDevice.getCurrentPackageName();
         logger.info("current-package:"+pkg);
     }
@@ -448,10 +443,8 @@ public class Iris4GAction extends VP2 {
         UiScrollable listScrollable = new UiScrollable(new UiSelector().scrollable(true));
         listScrollable.setMaxSearchSwipes(10);
         try {
-            if (listScrollable.exists()){
-                if (listScrollable.scrollTextIntoView(text)) {
-                    logger.info(FindScrollFindObject + text);
-                }
+            if (listScrollable.scrollTextIntoView(text)) {
+                logger.info(FindScrollFindObject + text);
             }
         } catch (UiObjectNotFoundException e) {
             // TODO Auto-generated catch block
