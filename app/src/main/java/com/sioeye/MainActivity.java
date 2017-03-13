@@ -6,14 +6,12 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.sioeye.toast.AccessibilityServiceListener;
 import com.sioeye.toast.ToasterService;
 
 import java.util.logging.Logger;
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         return false;
     }
-    //@Override
+    /*@Override
     protected void onResume() {
         super.onResume();
 
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     .setNegativeButton(android.R.string.cancel, null)
                     .show();
         }
-    }
+    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
