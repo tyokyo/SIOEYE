@@ -6,7 +6,6 @@ import android.media.MediaMetadataRetriever;
 import android.os.RemoteException;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Configurator;
-import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -25,6 +24,7 @@ import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
 
@@ -220,7 +220,7 @@ public class Iris4GAction extends VP2 {
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.hicam/.application.HiCam");
         gDevice.wait(Until.findObject(By.pkg("com.hicam")),40000);
-        gDevice.wait(Until.findObject(By.res(Iris4GPage.camera_setting_shortcut_id)),20000);
+        gDevice.wait(Until.findObject(By.res(Iris4GPage.camera_setting_shortcut_id)),10000);
         //if new version is available update now pop up ?
         if (text_exists("Update")){
             clickByText("Cancel");
@@ -233,7 +233,7 @@ public class Iris4GAction extends VP2 {
                 break;
             }else{
                 logger.info("swipe Direction.LEFT");
-                getObject2ById(Iris4GPage.content_id).swipe(Direction.LEFT,0.1f);
+                getObjectById(Iris4GPage.content_id).swipeLeft(60);
             }
             waitTime(1);
         }
