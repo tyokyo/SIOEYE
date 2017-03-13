@@ -6,6 +6,7 @@ import android.media.MediaMetadataRetriever;
 import android.os.RemoteException;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Configurator;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -219,6 +220,23 @@ public class Iris4GAction extends VP2 {
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.hicam/.application.HiCam");
         gDevice.wait(Until.findObject(By.pkg("com.hicam")),40000);
+        gDevice.wait(Until.findObject(By.res(Iris4GPage.camera_setting_shortcut_id)),20000);
+        //if new version is available update now pop up ?
+        if (text_exists("Update")){
+            clickByText("Cancel");
+        }
+        if (id_exists("android:id/button2")){
+            clickById("android:id/button2");
+        }
+        for (int i = 0; i < 120; i++) {
+            if (id_exists(Iris4GPage.camera_setting_shortcut_id)){
+                break;
+            }else{
+                logger.info("swipe Direction.LEFT");
+                getObject2ById(Iris4GPage.content_id).swipe(Direction.LEFT,0.1f);
+            }
+            waitTime(1);
+        }
         String pkg = gDevice.getCurrentPackageName();
         logger.info("current-package:"+pkg);
     }
