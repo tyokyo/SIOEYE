@@ -1,5 +1,9 @@
 package iris4G.action;
 
+import android.app.ActivityManager;
+import android.app.Service;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
@@ -21,6 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
@@ -215,6 +220,9 @@ public class Iris4GAction extends VP2 {
      * 启动CAMERA
      */
     public static void startCamera() throws Exception {
+        /*ActivityManager manager = (ActivityManager) context.getSystemService(Service.ACTIVITY_SERVICE);
+        manager.killBackgroundProcesses(getPackageName());*/
+
         gDevice.pressHome();
         //gDevice.pressHome();
         waitTime(2);
@@ -404,13 +412,41 @@ public class Iris4GAction extends VP2 {
             logger.info("make screen on");
         }
     }
+    public static List<ActivityManager.RunningAppProcessInfo> runningProcessInBackground(){
+        List<ActivityManager.RunningAppProcessInfo> runningAppsInfo = new ArrayList<ActivityManager.RunningAppProcessInfo>();
+        PackageManager pm = context.getPackageManager();
+        ActivityManager am = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> runningServices = am
+                .getRunningServices(Integer.MAX_VALUE);
+        for (ActivityManager.RunningServiceInfo service : runningServices) {
+            String pkgName = service.process.split(":")[0];
+            ActivityManager.RunningAppProcessInfo item = new ActivityManager.RunningAppProcessInfo();
+            item.pkgList = new String[] { pkgName };
+            item.pid = service.pid;
+            item.processName = service.process;
+            item.uid = service.uid;
+            runningAppsInfo.add(item);
+        }
+        return  runningAppsInfo;
+    }
+    public static void  killBackgroundProcesses(){
+        ActivityManager manager = (ActivityManager)context.getSystemService(Service.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningAppsInfo = runningProcessInBackground();
+        for (ActivityManager.RunningAppProcessInfo runInfo:runningAppsInfo) {
+            String pkgName = runInfo.pkgList[0];
+            manager.killBackgroundProcesses(pkgName);
+            logger.info("kill process-"+pkgName);
+        }
+    }
     public static void initIris4G() throws Exception {
         try {
             initDevice();
             makeScreenOn();
-            stopCamera();
+            /*stopCamera();
             stopFileManager();
-            stopGallery();
+            stopGallery();*/
+            killBackgroundProcesses();
             deleteVideo();
             deletePhoto();
             startCamera();
