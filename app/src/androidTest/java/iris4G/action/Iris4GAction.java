@@ -1,5 +1,9 @@
 package iris4G.action;
 
+import android.app.ActivityManager;
+import android.app.Service;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
@@ -21,9 +25,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
 
@@ -36,15 +42,18 @@ public class Iris4GAction extends VP2 {
     private static String NotFindScrollFindObject = "[Scroll Not Find Object]: ";
     private static String NotFindObject = "[Not Find Object]: ";
     private static Logger logger = Logger.getLogger(Iris4GAction.class.getName());
-    private static int secondsToWait=2;
+    private static int secondsToWait = 2;
+
     public static void cameraKey() {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         logger.info("Launch-Camera-Key");
     }
-    public static void powerKey(){
+
+    public static void powerKey() {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
         logger.info("Launch-Power-Key");
     }
+
     /**
      * 关闭文件管理器
      */
@@ -69,7 +78,7 @@ public class Iris4GAction extends VP2 {
         options.inJustDecodeBounds = false;
         Bitmap bmp = BitmapFactory.decodeFile(picPath, options);
         logger.info(bmp.getHeight() + "-" + bmp.getWidth());
-        logger.info("photo quality:"+bmp.getHeight()*bmp.getWidth()/1000);
+        logger.info("photo quality:" + bmp.getHeight() * bmp.getWidth() / 1000);
         double result = bmp.getWidth() / bmp.getHeight();
         return result;
     }
@@ -111,20 +120,20 @@ public class Iris4GAction extends VP2 {
         logger.info("1080|1920 720|1280 480|640");
         boolean result = false;
         logger.info(vd.toString());
-        logger.info(String.format("checkVideoInfo-expect|active [%d|%d]",height,vd.getHeight()));
+        logger.info(String.format("checkVideoInfo-expect|active [%d|%d]", height, vd.getHeight()));
         if (height == 1080) {
-            if (vd.getHeight() == height && vd.getWidth()==1920) {
-                result=true;
+            if (vd.getHeight() == height && vd.getWidth() == 1920) {
+                result = true;
             }
         }
         if (height == 720) {
             if (vd.getHeight() == height && vd.getWidth() == 1280) {
-                result=true;
+                result = true;
             }
         }
         if (height == 480) {
             if (vd.getHeight() == height && vd.getWidth() == 640) {
-                result=true;
+                result = true;
             }
         }
         return result;
@@ -214,14 +223,30 @@ public class Iris4GAction extends VP2 {
      * 启动CAMERA
      */
     public static void startCamera() throws Exception {
+        /*ActivityManager manager = (ActivityManager) context.getSystemService(Service.ACTIVITY_SERVICE);
+        manager.killBackgroundProcesses(getPackageName());*/
+
         gDevice.pressHome();
         //gDevice.pressHome();
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.hicam/.application.HiCam");
-        gDevice.wait(Until.findObject(By.pkg("com.hicam")),40000);
+        gDevice.wait(Until.findObject(By.pkg("com.hicam")), 40000);
+        //if new version is available update now pop up ?
+        if (text_exists("Update")) {
+            clickByText("Cancel");
+        }
+        if (id_exists("android:id/button2")) {
+            clickById("android:id/button2");
+        }
+
+        getObjectById(Iris4GPage.content_id).swipeLeft(60);
+        getObjectById(Iris4GPage.content_id).swipeLeft(60);
+        getObjectById(Iris4GPage.content_id).swipeLeft(60);
+
         String pkg = gDevice.getCurrentPackageName();
-        logger.info("current-package:"+pkg);
+        logger.info("current-package:" + pkg);
     }
+
     /**
      * 关闭CAMERA
      */
@@ -237,6 +262,7 @@ public class Iris4GAction extends VP2 {
             logger.info("stop settings-Fail");
         }
     }
+
     /**
      * 启动Settings
      */
@@ -245,9 +271,9 @@ public class Iris4GAction extends VP2 {
         gDevice.pressHome();
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.android.settings/.CustomSettings");
-        gDevice.wait(Until.findObject(By.pkg("com.android.settings")),40000);
+        gDevice.wait(Until.findObject(By.pkg("com.android.settings")), 40000);
         String pkg = gDevice.getCurrentPackageName();
-        logger.info("current-package:"+pkg);
+        logger.info("current-package:" + pkg);
     }
 
     /**
@@ -258,9 +284,9 @@ public class Iris4GAction extends VP2 {
         gDevice.pressHome();
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.mediatek.filemanager/.FileManagerOperationActivity");
-        gDevice.wait(Until.findObject(By.pkg("com.mediatek.filemanager")),40000);
+        gDevice.wait(Until.findObject(By.pkg("com.mediatek.filemanager")), 40000);
         String pkg = gDevice.getCurrentPackageName();
-        logger.info("current-package:"+pkg);
+        logger.info("current-package:" + pkg);
     }
 
     /**
@@ -286,9 +312,9 @@ public class Iris4GAction extends VP2 {
         gDevice.pressHome();
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.hicam.gallery/.ui.GalleryPage");
-        gDevice.wait(Until.findObject(By.pkg("com.mediatek.filemanager")),40000);
+        gDevice.wait(Until.findObject(By.pkg("com.mediatek.filemanager")), 40000);
         String pkg = gDevice.getCurrentPackageName();
-        logger.info("current-package:"+pkg);
+        logger.info("current-package:" + pkg);
     }
 
     /**
@@ -384,11 +410,45 @@ public class Iris4GAction extends VP2 {
         //获取Selector timeout
         confg.setWaitForSelectorTimeout(timeout + time);
     }
+
     public static void makeScreenOn() throws RemoteException {
         initDevice();
         if (!gDevice.isScreenOn()) {
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
             logger.info("make screen on");
+        }
+    }
+
+    public static List<ActivityManager.RunningAppProcessInfo> runningProcessInBackground() {
+        List<ActivityManager.RunningAppProcessInfo> runningAppsInfo = new ArrayList<ActivityManager.RunningAppProcessInfo>();
+        PackageManager pm = context.getPackageManager();
+        ActivityManager am = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> runningServices = am
+                .getRunningServices(Integer.MAX_VALUE);
+        for (ActivityManager.RunningServiceInfo service : runningServices) {
+            String pkgName = service.process.split(":")[0];
+            ActivityManager.RunningAppProcessInfo item = new ActivityManager.RunningAppProcessInfo();
+            item.pkgList = new String[]{pkgName};
+            item.pid = service.pid;
+            item.processName = service.process;
+            item.uid = service.uid;
+            runningAppsInfo.add(item);
+        }
+        return runningAppsInfo;
+    }
+    public static void killBackgroundProcesses() {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Service.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningAppsInfo = runningProcessInBackground();
+        for (ActivityManager.RunningAppProcessInfo runInfo : runningAppsInfo) {
+            String pkgName = runInfo.pkgList[0];
+            if (pkgName.equals("com.hicam") ||
+                    pkgName.equals("com.mediatek.filemanager") ||
+                    pkgName.equals("com.android.settings") ||
+                    pkgName.equals("com.hicam.gallery")) {
+                manager.killBackgroundProcesses(pkgName);
+                logger.info("kill process-" + pkgName);
+            }
         }
     }
     public static void initIris4G() throws Exception {
@@ -405,11 +465,12 @@ public class Iris4GAction extends VP2 {
             e.printStackTrace();
         }
     }
+
     public static UiObject scrollTextIntoView(String text) throws Exception {
         UiScrollable listScrollable = new UiScrollable(new UiSelector().scrollable(true));
         listScrollable.setMaxSearchSwipes(10);
         try {
-            if (listScrollable.exists()){
+            if (listScrollable.exists()) {
                 if (listScrollable.scrollTextIntoView(text)) {
                     logger.info(FindScrollFindObject + text);
                 }
@@ -421,6 +482,7 @@ public class Iris4GAction extends VP2 {
         }
         return getUiObjectByText(text);
     }
+
     /**
      * 强查找可翻滚控件，存在返回控件对象，不存在抛异常，当前测试停止
      *
@@ -430,10 +492,8 @@ public class Iris4GAction extends VP2 {
         UiScrollable listScrollable = new UiScrollable(new UiSelector().scrollable(true));
         listScrollable.setMaxSearchSwipes(10);
         try {
-            if (listScrollable.exists()){
-                if (listScrollable.scrollTextIntoView(text)) {
-                    logger.info(FindScrollFindObject + text);
-                }
+            if (listScrollable.scrollTextIntoView(text)) {
+                logger.info(FindScrollFindObject + text);
             }
         } catch (UiObjectNotFoundException e) {
             // TODO Auto-generated catch block
@@ -441,12 +501,13 @@ public class Iris4GAction extends VP2 {
             throw new UiObjectNotFoundException("ScrollNotFindObject-" + text);
         }
     }
+
     /**
      * 强查找可翻滚控件，存在返回控件对象，不存在抛异常，当前测试停止
      *
      * @throws Exception
      */
-    public static void ScrollViewByText(String resourceID,String text) throws Exception {
+    public static void ScrollViewByText(String resourceID, String text) throws Exception {
         UiScrollable listScrollable = new UiScrollable(new UiSelector().resourceId(resourceID).scrollable(true));
         try {
             if (listScrollable.scrollTextIntoView(text)) {
@@ -458,6 +519,7 @@ public class Iris4GAction extends VP2 {
             throw new UiObjectNotFoundException("ScrollFindObject" + text);
         }
     }
+
     /**
      * 强查找可翻滚控件，存在返回控件对象，不存在抛异常，当前测试停止
      *
@@ -475,29 +537,31 @@ public class Iris4GAction extends VP2 {
         }
         return isFind;
     }
+
     public static void clickLiveAndSave() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Live&Save");
         CameraAction.openCompoundButton("Live&Save");
-        waitUntilFindText("OK",5000);
-        if (text_exists("OK")){
+        waitUntilFindText("OK", 5000);
+        if (text_exists("OK")) {
             clickByText("OK");
         }
-        Spoon.screenshot("live_save","liveSave");
+        Spoon.screenshot("live_save", "liveSave");
         gDevice.pressBack();
     }
+
     //如Video quality -  右边的值
     public static String getRightValue(String text) throws UiObjectNotFoundException {
-        String value="";
-        gDevice.wait(Until.findObject(By.clazz(android.widget.ScrollView.class)),10000);
+        String value = "";
+        gDevice.wait(Until.findObject(By.clazz(android.widget.ScrollView.class)), 10000);
         UiObject2 scrollView = getObject2ByClass(android.widget.ScrollView.class);
-        List<UiObject2> relativeLayouts=scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
-        for (UiObject2 relativeLayout:relativeLayouts) {
+        List<UiObject2> relativeLayouts = scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        for (UiObject2 relativeLayout : relativeLayouts) {
             List<UiObject2> texts = relativeLayout.findObjects(By.clazz(android.widget.TextView.class));
-            if (texts.size()==2){
+            if (texts.size() == 2) {
                 String key = texts.get(0).getText();
-                if (text.equals(key)){
+                if (text.equals(key)) {
                     value = texts.get(1).getText();
                     break;
                 }

@@ -47,10 +47,10 @@ public class AltimeterCase extends VP2{
             System.out.println("i:"+i);
             if (i%2==0){
                 logger.info("Altimeter service is closed");
-                Spoon.screenshot("高度计功能关闭");
+                Spoon.screenshot("Altimeter_close");
             }else{
                 logger.info("Altimeter service is opened");
-                Spoon.screenshot("高度计功能开启");
+                Spoon.screenshot("Altimeter_on");
             }
             waitTime(1);
             gDevice.pressBack();

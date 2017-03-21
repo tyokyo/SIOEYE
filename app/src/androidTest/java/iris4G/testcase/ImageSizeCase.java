@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
-import iris4G.page.Iris4GPage;
 import iris4G.page.NavPage;
 
 /**

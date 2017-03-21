@@ -1,15 +1,18 @@
 package com.sioeye;
 
 import android.Manifest;
-import android.content.Intent;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.sioeye.elon.JUnitActivity;
+import com.sioeye.toast.ToasterService;
 
 import java.util.logging.Logger;
 
@@ -40,6 +43,54 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         doNext(requestCode, grantResults);
     }
+    /**
+     * Checks if the app is set as accessibility
+     *
+     * @param context current context
+     * @return true, if set
+     */
+    private boolean isAccessibilitySettingsOn(Context context) {
+        int accessibilityEnabled = 0;
+        final String service = BuildConfig.APPLICATION_ID + "/" + ToasterService.class.getName();
+
+        try {
+            accessibilityEnabled = Settings.Secure.getInt(context.getApplicationContext().getContentResolver(),
+                    android.provider.Settings.Secure.ACCESSIBILITY_ENABLED);
+        } catch (Settings.SettingNotFoundException ex) {
+            Log.e(LOG_TAG, "Error finding setting, default accessibility to not found: " + ex.getMessage());
+        }
+        TextUtils.SimpleStringSplitter mStringColonSplitter = new TextUtils.SimpleStringSplitter(':');
+
+        if (accessibilityEnabled == 1) {
+            String settingValue = Settings.Secure.getString(context.getApplicationContext().getContentResolver(),
+                    Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+            if (settingValue != null) {
+                mStringColonSplitter.setString(settingValue);
+                while (mStringColonSplitter.hasNext()) {
+                    String serviceName = mStringColonSplitter.next();
+                    if (serviceName.equalsIgnoreCase(service)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+    /*@Override
+    protected void onResume() {
+        super.onResume();
+
+        if (!isAccessibilitySettingsOn(getApplicationContext())) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.toaster_service_header)
+                    .setMessage(R.string.toaster_service_message)
+                    .setCancelable(true)
+                    .setPositiveButton(android.R.string.ok, new AccessibilityServiceListener(this))
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+        }
+    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +99,18 @@ public class MainActivity extends AppCompatActivity {
         launcherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logger.info("click launcherButton");
+                CommandExecution commandExecution = new CommandExecution();
+                CommandExecution.execCommand("sh /sdcard/run.sh ",false);
+
+
+              /*  logger.info("click launcherButton");
                 Intent intent = new Intent();
-                /* 指定intent要启动的类 */
+                *//* 指定intent要启动的类 *//*
                 intent.setClass(MainActivity.this, JUnitActivity.class);
-                /* 启动一个新的Activity */
+                *//* 启动一个新的Activity *//*
                 startActivity(intent);
-                /* 关闭当前的Activity */
-                MainActivity.this.finish();
+                *//* 关闭当前的Activity *//*
+                MainActivity.this.finish();*/
             }
         });
 

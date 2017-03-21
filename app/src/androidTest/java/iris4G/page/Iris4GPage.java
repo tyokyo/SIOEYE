@@ -67,5 +67,7 @@ public class Iris4GPage {
     public static String info = "com.hicam:id/info";
 
     public static String mode_setting_view = "com.hicam:id/mode_setting_view";
+    //content for camera
+    public static String content_id = "android:id/content";
 
 }
