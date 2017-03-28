@@ -7,19 +7,18 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import com.squareup.spoon.Spoon;
 
-import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.text.ParseException;
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
-import cn.action.MeAction;
 import cn.action.WatchAction;
 import cn.page.App;
-import cn.page.MePage;
 
 /**
  * Created by elon on 2016/11/14.
@@ -39,13 +38,19 @@ public class WatchView extends VP2 {
         //进入Watch
         WatchAction.navToWatch();
         waitTime(3);
-        UiObject2 timeObj=WatchAction.getDurationObjects().get(0);
-        String dateStr=timeObj.getText();
-        timeObj.click();
-        BroadcastAction.waitBroadcastLoading();
-        Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
-        //click play screen center
-        waitTime(dateInSeconds(dateStr));
-        Spoon.screenshot("play_video");
+        try {
+            UiObject2 timeObj=WatchAction.getDurationObjects().get(0);
+            String dateStr=timeObj.getText();
+            timeObj.click();
+            BroadcastAction.waitBroadcastLoading();
+            //Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+            //click play screen center
+            waitTime(dateInSeconds(dateStr));
+            Spoon.screenshot("play_video");
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,12 +1,10 @@
 package cn.action;
 
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
-import android.support.test.uiautomator.Until;
 import android.widget.FrameLayout;
 
 import org.hamcrest.Asst;
@@ -26,12 +24,19 @@ import cn.page.MePage;
  */
 public class BroadcastAction extends VP2{
     private static Logger logger = Logger.getLogger(BroadcastAction.class.getName());
+    public static void navEdit(){
+        clickById(MePage.BROADCAST_DELETE);
+        clickByText("编辑视频标题");
+        waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
+    }
     //根据title 删除视频
     public static void deleteBroadcast(String title) throws UiObjectNotFoundException {
         scrollAndGetUIObject(title);
         UiObject broadcast=getUiObjectByText(title);
         broadcast.swipeLeft(20);
+        waitUntilFind(MePage.BROADCAST_DELETE,10000);
         clickById(MePage.BROADCAST_DELETE);
+        clickByText("删除");
         clickById(MePage.BROADCAST_EDIT_DELETE_OK);
         waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
     }

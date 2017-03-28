@@ -30,9 +30,9 @@ import cn.action.BroadcastAction;
 import cn.action.DiscoverAction;
 import cn.action.FollowersAction;
 import cn.action.MainAction;
-import cn.action.MeAction;
 import cn.page.AccountPage;
 import cn.page.App;
+import cn.page.Constant;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
 import cn.page.Other;
@@ -385,12 +385,13 @@ public class DiscoverCase extends VP2 {
      *Result:结果匹配搜索内容，成功搜索出该ID的联系人
      * */
     public void testToSearchByEmail() throws UiObjectNotFoundException, IOException {
-        AccountAction.logInAccount("YCB123", "123456");
+        //AccountAction.logInAccount("YCB123", "123456");
         DiscoverAction.navToSearch();
-        shellInputText("835135815@qq.com");
+        shellInputText(Constant.userName);
         Spoon.screenshot("testToSearchByEmail");
         waitTime(2);
-        Asst.assertTrue(text_exists("YCCDDM"));
+        waitUntilFindText(Constant.CORRECT_SIO_EYE_ID,20000);
+        Asst.assertTrue(text_exists(Constant.CORRECT_SIO_EYE_ID));
     }
 
     @Test

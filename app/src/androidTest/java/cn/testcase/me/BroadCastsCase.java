@@ -74,8 +74,7 @@ public class BroadCastsCase extends VP2{
             int index=BroadcastAction.getRandomBroadcastsIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcasts(index);
             broadcast.swipe(Direction.LEFT,0.9f);
-            clickById(MePage.BROADCAST_EDIT_TITLE);
-            waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
+            BroadcastAction.navEdit();
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
@@ -102,8 +101,7 @@ public class BroadCastsCase extends VP2{
             int index=BroadcastAction.getRandomBroadcastsIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcasts(index);
             broadcast.swipe(Direction.LEFT,0.9f);
-            clickById(MePage.BROADCAST_EDIT_TITLE);
-            waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
+            BroadcastAction.navEdit();
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
@@ -133,8 +131,7 @@ public class BroadCastsCase extends VP2{
             int index=BroadcastAction.getRandomBroadcastsIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcasts(index);
             broadcast.swipe(Direction.LEFT,0.9f);
-            clickById(MePage.BROADCAST_EDIT_TITLE);
-            waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
+            BroadcastAction.navEdit();
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
@@ -169,8 +166,7 @@ public class BroadCastsCase extends VP2{
             int index=BroadcastAction.getRandomBroadcastsIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcasts(index);
             broadcast.swipe(Direction.LEFT,0.9f);
-            clickById(MePage.BROADCAST_EDIT_TITLE);
-            waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
+            BroadcastAction.navEdit();
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
@@ -201,10 +197,11 @@ public class BroadCastsCase extends VP2{
             int index=BroadcastAction.getRandomBroadcastsIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcasts(index);
             broadcast.swipe(Direction.LEFT,0.9f);
+
             //wait dialog
-            waitUntilFind(MePage.BROADCAST_EDIT_TITLE,10000);
-            clickById(MePage.BROADCAST_EDIT_TITLE);
-            waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
+            waitUntilFind(MePage.BROADCAST_DELETE,10000);
+            clickById(MePage.BROADCAST_DELETE);
+            clickByText("编辑视频标题");
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
