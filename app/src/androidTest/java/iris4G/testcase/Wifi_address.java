@@ -29,7 +29,7 @@ public class Wifi_address extends VP2{
     }
     @Test
     public void testB(){
-        logger.info("-------testB");
+        logger.info("-------testBcv");
     }
     @Test
     public void testC(){
