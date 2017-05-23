@@ -201,7 +201,8 @@ public class BroadCastsCase extends VP2{
             //wait dialog
             waitUntilFind(MePage.BROADCAST_DELETE,10000);
             clickById(MePage.BROADCAST_DELETE);
-            clickByText("编辑视频标题");
+            //编辑视频标题
+            clickByText("Edit the title");
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
             //修改title
             getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();

@@ -175,7 +175,7 @@ public class RegisterCase extends VP2 {
          AccountAction.navToInputPassword_ByEmailRegister();
          String password=Constant.randomFixedLengthStringGenerator(5);
          AccountAction.inputPassword(password);
-         if (getObjectByTextStartsWith("继续").exists()){
+         if (getObjectByTextStartsWith("Continue").exists()){
              Spoon.screenshot("ItCanContinueWith5DigitPassword");
              Assert.fail("ItCanContinueWith5DigitPassword");
          }else {
@@ -183,7 +183,7 @@ public class RegisterCase extends VP2 {
              password=Constant.randomFixedLengthStringGenerator(6);
              getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(password);
              waitTime(2);
-             if (!getObjectByTextStartsWith("继续").exists()){
+             if (!getObjectByTextStartsWith("Continue").exists()){
                  Spoon.screenshot("ItCannotContinueWith6DigitPassword");
                  Assert.fail("ItCan'tContinueWith6DigitPassword");
              }

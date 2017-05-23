@@ -7,8 +7,8 @@ public class DiscoverPage {
     //search
     public static final String ID_SEARCH_FILTER_INPUT = "cn.sioeye.sioeyeapp:id/search_filter_input";
     //Activity of Discover
-    public static final String ID_DISCOVER_MAIN_CONTENT="cn.sioeye.sioeyeapp:id/discover_swipe_view";
-
+    //public static final String ID_DISCOVER_MAIN_CONTENT="cn.sioeye.sioeyeapp:id/discover_swipe_view";
+    public static final String ID_DISCOVER_MAIN_CONTENT="cn.sioeye.sioeyeapp:id/swipe_target";
     //navigate to  Discover
     public static final String ID_MAIN_TAB_DISCOVER = "cn.sioeye.sioeyeapp:id/main_tab_discover";
     //navigate to ad_splash
@@ -29,11 +29,20 @@ public class DiscoverPage {
     public static final String ID_Reloading_gif ="cn.sioeye.sioeyeapp:id/status_image";
     public static final String ID_SWIPE_TARGET =  "cn.sioeye.sioeyeapp:id/swipe_target";
     public static final String ID_Swipe_target ="cn.sioeye.sioeyeapp:id/swipe_target";
+    //Hot
+    public static final String ID_HOT_RECOMMEND ="cn.sioeye.sioeyeapp:id/recommend";
+    //New
+    public static final String ID_NEW_RECOMMEND ="cn.sioeye.sioeyeapp:id/newest";
     //APP title
-    public static final String  APP_TITLE ="cn.sioeye.sioeyeapp:id/title";
+    //public static final String  APP_TITLE ="cn.sioeye.sioeyeapp:id/title";
     //get id
     public static final String  ID_PROFILE_MINI_DEVICES ="cn.sioeye.sioeyeapp:id/profile_mini_device";
     //取消关注
     public static final String  ID_PROFILE_DELETE_FOLLOW ="cn.sioeye.sioeyeapp:id/following";
+
     public  static final String ID_PROFILE_AVATOR="cn.sioeye.sioeyeapp:id/user_profile_avatar";
+    //Follow or Following id
+    public  static final String ID_ANCHOR_FOLLOW="cn.sioeye.sioeyeapp:id/rl_follow";
+
+
 }

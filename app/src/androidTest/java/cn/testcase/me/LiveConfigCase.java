@@ -154,9 +154,10 @@ public class LiveConfigCase extends VP2{
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
         //设置为部分可见
         MeAction.setToPersonal();
-        //没有选择用户
+        //如果没有选择用户
         if (!id_exists(MePage.SELECT_PEOPLE_LIST_Horizontal)){
             logger.info("Not select user");
+            //选择第一个用户
             getObject2ById(MePage.SELECT_PEOPLE_LIST_Vertical).findObjects(By.res(MePage.SELECT_PEOPLE)).get(0).click();
         }else{
             logger.info("select user");

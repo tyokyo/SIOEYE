@@ -28,7 +28,7 @@ public class MeAction extends VP2{
         //启动被测App
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         SettingAction.navToAccountAndPrivacy();
-        String email=getUiObject2ByText("邮箱地址").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
+        String email=getUiObject2ByText("Email").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
         infoBean.setEmail(email);
         String eyeId=getUiObject2ByText("Sioeye ID").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
         infoBean.setId(eyeId);
@@ -37,21 +37,21 @@ public class MeAction extends VP2{
         if (id_exists(MePage.ID_ME_BROADCAST)){
             clickById(MePage.ID_ME_BROADCAST);
         }else{
-            clickByText("直播");
+            clickByText("Video");
         }
     }
     public static void clickFollowing() throws UiObjectNotFoundException {
         if (id_exists(MePage.ID_ME_FOLLOWING)){
             clickById(MePage.ID_ME_FOLLOWING);
         }else{
-            clickByText("关注");
+            clickByText("Following");
         }
     }
     public static void clickFollowers() throws UiObjectNotFoundException {
         if (id_exists(MePage.ID_ME_FOLLOWERS)){
             clickById(MePage.ID_ME_FOLLOWERS);
         }else{
-            clickByText("粉丝");
+            clickByText("Follower");
         }
     }
     public static void swipeUpDown(String ResourceID,int times) throws UiObjectNotFoundException {
@@ -116,33 +116,33 @@ public class MeAction extends VP2{
         Spoon.screenshot("navToFans");
     }
 
-    //Go to 直播配置
+    //Me-> 直播配置
     public static void navToLiveConfiguration(){
         clickById(MePage.ID_MAIN_TAB_ME);
         //clickById(MePage.LIVE_CONFIGURATION);
-        clickByText("直播配置");
+        clickByText("Live Configuration");
         Spoon.screenshot("navToLiveConfiguration");
     }
-    //Go to 我的二维码
+    //Me-> 我的二维码
     public static void navToQrCode() throws UiObjectNotFoundException {
         MainAction.clickMe();
         //clickById(MePage.LIVE_CONFIGURATION);
-        clickByText("我的二维码");
+        clickByText("QR Code");
         Spoon.screenshot("navToQrCode");
     }
-    //Go to 消息
+    //Me-> 消息
     public static void navToNotifications() throws UiObjectNotFoundException {
         MainAction.clickMe();
         //clickById(MePage.NOTIFICATIONS);
-        clickByText("消息");
+        clickByText("Notifications");
         gDevice.wait(Until.gone(By.res(MePage.IS_LOCATING)),20000);
         Spoon.screenshot("navToNotifications");
     }
-    //Go to 设置
+    //Me-> 设置
     public static void navToSettings() throws UiObjectNotFoundException {
         MainAction.clickMe();
         //clickById(MePage.SETTINGS_USER_MAIN);
-        clickByText("设置");
+        clickByText("Settings");
         Spoon.screenshot("navToSettings");
     }
     //Go to 帮助中心
@@ -314,15 +314,17 @@ public class MeAction extends VP2{
     }
     //谁可以看我的直播-设置为 公开public
     public static void setToPublic() throws UiObjectNotFoundException {
-        clickByText("公开");
+        clickByText("Public");
     }
     //谁可以看我的直播-设置为 秘密private
     public static void setToPrivate() throws UiObjectNotFoundException {
-        clickByText("私密");
+        clickByText("Private");
     }
     //谁可以看我的直播-设置为 秘密private
     public static void setToPersonal() throws UiObjectNotFoundException {
-        clickByText("部分可见");
+        clickByText("Private");
+        clickByText("Visible to someone");
+        waitUntilFind(MePage.SELECT_PEOPLE,10000);
     }
     //评论区域-滑动更新,显示最新消息
     public static void displayNewMessages() throws UiObjectNotFoundException {

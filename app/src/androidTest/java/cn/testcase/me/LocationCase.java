@@ -2,10 +2,10 @@ package cn.testcase.me;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.Until;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class LocationCase extends VP2{
         waitUntilGone(MePage.IS_LOCATING,120000);
         Spoon.screenshot("locate_result");
         String locate_result=getTex(MePage.LOCATION_NAME);
-        if ("定位中".equals(locate_result)){
+        if ("Locating".equals(locate_result)){
             Asst.fail("can not locate");
         }
     }
@@ -50,15 +50,15 @@ public class LocationCase extends VP2{
     public void testLocating() throws UiObjectNotFoundException {
         MeAction.navToLocation();
         waitUntilGone(MePage.IS_LOCATING,60000);
-        if (getUiObjectByText("定位中").exists()){
-            clickByText("定位中");
+        if (getUiObjectByText("Locating").exists()){
+            clickByText("Locating");
             waitTime(2);
             waitUntilGone(MePage.IS_LOCATING,120000);
             Asst.assertTrue("locating time out in 120 seconds",!getObjectById(MePage.IS_LOCATING).exists());
             Spoon.screenshot("locate_result");
         }
         String locate_result=getTex(MePage.LOCATION_NAME);
-        if ("定位中".equals(locate_result)){
+        if ("Locating".equals(locate_result)){
             Asst.fail("can not locate");
         }
     }
