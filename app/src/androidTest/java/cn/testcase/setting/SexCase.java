@@ -3,16 +3,19 @@ package cn.testcase.setting;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
-import cn.action.SettingAction;
 import cn.page.App;
 import cn.page.MePage;
 
@@ -38,7 +41,7 @@ public class SexCase extends VP2 {
         MeAction.navToSex();
         gDevice.pressBack();
         String sex =MeAction.getSex();
-        Asst.assertEquals("change to male","男",sex);
+        Asst.assertEquals("change to male","Male",sex);
         gDevice.pressBack();
         Spoon.screenshot("male");
     }
@@ -52,7 +55,7 @@ public class SexCase extends VP2 {
         MeAction.navToSex();
         gDevice.pressBack();
         String sex =MeAction.getSex();
-        Asst.assertEquals("change to female","女",sex);
+        Asst.assertEquals("change to female","Female",sex);
         gDevice.pressBack();
         Spoon.screenshot("female");
     }
@@ -66,7 +69,7 @@ public class SexCase extends VP2 {
         MeAction.navToSex();
         gDevice.pressBack();
         String sex =MeAction.getSex();
-        Asst.assertEquals("change to secret","保密",sex);
+        Asst.assertEquals("change to secret","Privacy",sex);
         gDevice.pressBack();
         Spoon.screenshot("secret");
     }
