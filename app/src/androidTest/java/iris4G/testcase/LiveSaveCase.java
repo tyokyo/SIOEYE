@@ -76,7 +76,7 @@ public class LiveSaveCase extends VP2 {
             VideoNode activeNode = Iris4GAction.VideoInfo(videoPath);
             //默认视频质量为1080 30FPS
             //int height = Integer.parseInt(quality.split("@")[0]);
-            int height = 1080;
+            int height = 720;
             if (Iris4GAction.checkVideoInfo(height, activeNode)) {
                 logger.info("video info check success-" + videoPath);
                 FileManagerAction.playVideoByFileManager(videoName);
