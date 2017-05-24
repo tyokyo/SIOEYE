@@ -207,7 +207,7 @@ public void testSioEyeIDInRegisterByEmail() throws UiObjectNotFoundException, IO
     clickById(AccountPage.SIGN_UP_CONTINUE);
     String sioEye = Constant.randomFixedLengthStringGenerator(4);
     AccountAction.inputSioEyeId(sioEye);
-    if (!getObjectByTextStartsWith("继续").exists()) {
+    if (!getObjectByTextStartsWith("Continue").exists()) {
         Spoon.screenshot("CannotContinueWith4DigitSioEye");
         Assert.fail("CannotContinueWith4DigitSioEye");
     } else {
@@ -215,7 +215,7 @@ public void testSioEyeIDInRegisterByEmail() throws UiObjectNotFoundException, IO
         sioEye = Constant.randomFixedLengthStringGenerator(8);
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID).setText(sioEye);
         waitTime(2);
-        if (!getObjectByTextStartsWith("继续").exists()) {
+        if (!getObjectByTextStartsWith("Continue").exists()) {
             Spoon.screenshot("CannotContinueWith8DigitSioEyeID");
             Assert.fail("CannotContinueWith8DigitSioEyeID");
         } else {
@@ -223,7 +223,7 @@ public void testSioEyeIDInRegisterByEmail() throws UiObjectNotFoundException, IO
             sioEye = Constant.randomFixedLengthStringGenerator(15);
             getObjectById(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID).setText(sioEye);
             waitTime(2);
-            if (!getObjectByTextStartsWith("继续").exists()) {
+            if (!getObjectByTextStartsWith("Continue").exists()) {
                 Spoon.screenshot("CannotContinueWith15DigitSioEye");
                 Assert.fail("CannotContinueWith15DigitSioEye");
             }
@@ -270,11 +270,12 @@ public void testSioEyeIDInRegisterByEmail() throws UiObjectNotFoundException, IO
         if(id_exists(MePage.ID_MAIN_TAB_ME)){
             MainAction.clickMe();
         }
-        clickByText("注册");
+        clickByText("Sign Up");
         waitTime(2);
         //根据文本内容，判断默认的注册方式是否是手机号码注册
-        Boolean phoneRegisterText1=text_exists("输入手机号码");
-        Boolean phoneRegisterText2= text_exists("请输入手机号码");
+        //请输入手机号码
+        Boolean phoneRegisterText1=text_exists("Enter your phone number");
+        Boolean phoneRegisterText2= text_exists("Enter your phone number");
         Boolean Actual = phoneRegisterText1 && phoneRegisterText2;
         Asst.assertFalse(!Actual);
 

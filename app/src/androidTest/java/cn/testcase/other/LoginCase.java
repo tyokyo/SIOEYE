@@ -292,6 +292,7 @@ public class LoginCase extends VP2 {
             getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(email);
             waitTime(1);
             getObjectById(AccountPage.SIGN_UP_CONTINUE).click();
+            waitTime(5);
             if (!getObjectByTextContains("The reset password email has been sent").exists()){
                 Spoon.screenshot("RegisteredEmailCannotSentForgotPasswordEmail");
                 Assert.fail("RegisteredEmailCannotSentForgotPasswordEmail");

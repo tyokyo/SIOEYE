@@ -69,6 +69,10 @@ public class DiscoverAction extends VP2 {
     //index=0-3
     public static String navToRecommendList(int index, int click_time) {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        //刷新列表
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
+        swipe_target.swipe(Direction.DOWN, 0.6f);
+        logger.info("刷新列表");
         waitUntilFind(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST, 30000);
         //into discover
         List<UiObject2> linearLayout_avatars = getObject2ById(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST).findObjects(By.clazz(LinearLayout.class));
