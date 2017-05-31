@@ -50,17 +50,17 @@ public class DiscoverAction extends VP2 {
         }
         return like;
     }
-
+    //发现页面-搜索按钮
     public static void navToSearch() {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         waitTime(3);
-        UiObject2 frameLayout = getObject2ById(DiscoverPage.APP_TITLE).getParent();
+        UiObject2 frameLayout = getObject2ById(DiscoverPage.ID_HOT_RECOMMEND).getParent().getParent();
         UiObject2 searchObject = frameLayout.findObject(By.clazz(android.widget.ImageView.class));
         Rect searchRect = searchObject.getVisibleBounds();
         //double click
         clickRect(searchRect);
     }
-
+    //广告
     public static void navToAd() {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         clickById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
@@ -69,6 +69,10 @@ public class DiscoverAction extends VP2 {
     //index=0-3
     public static String navToRecommendList(int index, int click_time) {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        //刷新列表
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
+        swipe_target.swipe(Direction.DOWN, 0.6f);
+        logger.info("刷新列表");
         waitUntilFind(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST, 30000);
         //into discover
         List<UiObject2> linearLayout_avatars = getObject2ById(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST).findObjects(By.clazz(LinearLayout.class));

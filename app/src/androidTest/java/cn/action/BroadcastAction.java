@@ -26,7 +26,8 @@ public class BroadcastAction extends VP2{
     private static Logger logger = Logger.getLogger(BroadcastAction.class.getName());
     public static void navEdit(){
         clickById(MePage.BROADCAST_DELETE);
-        clickByText("编辑视频标题");
+        //编辑视频标题
+        clickByText("Edit the title");
         waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
     }
     //根据title 删除视频
@@ -36,7 +37,7 @@ public class BroadcastAction extends VP2{
         broadcast.swipeLeft(20);
         waitUntilFind(MePage.BROADCAST_DELETE,10000);
         clickById(MePage.BROADCAST_DELETE);
-        clickByText("删除");
+        clickByText("Delete");
         clickById(MePage.BROADCAST_EDIT_DELETE_OK);
         waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
     }
@@ -81,7 +82,7 @@ public class BroadcastAction extends VP2{
         for (int i = 0; i <20 ; i++) {
             if (getObjectById(MePage.BROADCAST_VIEW_ZAN).isEnabled()==true&&
                     getObjectById(MePage.BROADCAST_VIEW_TIPTEXT).isEnabled()==true&&
-                    getUiObjectByText("说点什么吧").exists()){
+                    getUiObjectByText("what is your opinion").exists()){
                 logger.info("聊天室连接成功-说点什么吧");
                 break;
             } else{

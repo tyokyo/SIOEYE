@@ -89,7 +89,7 @@ public class DiscoverCase extends VP2 {
      */
     public void testDoubleClickSearch() throws IOException, UiObjectNotFoundException {
         MainAction.clickDiscover();
-        UiObject2 frameLayout = getObject2ById(DiscoverPage.APP_TITLE).getParent();
+        UiObject2 frameLayout = getObject2ById(DiscoverPage.ID_HOT_RECOMMEND).getParent().getParent();
         UiObject2 searchObject = frameLayout.findObject(By.clazz(android.widget.ImageView.class));
         Rect searchRect = searchObject.getVisibleBounds();
         //double click
@@ -232,7 +232,7 @@ public class DiscoverCase extends VP2 {
         //点击主播
         FollowersAction.clickToAnchor();
         //点击关注
-        clickByText("关注");
+        clickByText("Follow");
         //弹出登录界面
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
         Spoon.screenshot("loginIn_page");
@@ -247,26 +247,27 @@ public class DiscoverCase extends VP2 {
      * */
     public void testLoginFollowAnchor() throws UiObjectNotFoundException {
         //账号登录
-        AccountAction.logInAccount("13688169291", "123456");
+        //AccountAction.logInAccount("13688169291", "123456");
         //进入发现界面
         MainAction.clickDiscover();
         //播放一个视频
         DiscoverAction.navToPlayVideo();
         //点击主播
         FollowersAction.clickToAnchor();
+        waitUntilFind(DiscoverPage.ID_ANCHOR_FOLLOW,10000);
         //判断是否关注
-        if (text_exists("已关注")) {
+        if (text_exists("Follow")) {
             //点击已关注
-            clickByText("已关注");
+            clickByText("Follow");
             //取消关注成功，变为关注
-            waitUntilFindText("关注", 3000);
+            waitUntilFindText("Following", 3000);
             Spoon.screenshot("cancel_follow");
             Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
         } else {
             //点击关注
-            clickByText("关注");
+            clickByText("Following");
             //关注成功，变为已关注
-            waitUntilFindText("已关注", 3000);
+            waitUntilFindText("Follow", 3000);
             Spoon.screenshot("addsuccess");
             Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
         }
@@ -282,7 +283,7 @@ public class DiscoverCase extends VP2 {
         DiscoverAction.navToAd();
         waitUntilFind(DiscoverPage.ID_PROFILE_AVATOR, 0);
         Spoon.screenshot("JumpSuccess");
-        Asst.assertFalse("LoginFollowAnchor", !id_exists(DiscoverPage.ID_PROFILE_AVATOR));
+        Asst.assertFalse("LoginFollowAnchor", id_exists(DiscoverPage.ID_PROFILE_AVATOR));
     }
 
     @Test
@@ -343,6 +344,7 @@ public class DiscoverCase extends VP2 {
     public void testSwipeUpQuickly() throws UiObjectNotFoundException {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         //迅速滑动推荐视频列表
+        waitUntilFind(DiscoverPage.ID_Swipe_target,10000);
         UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
         swipe_target.swipe(Direction.UP, 0.6f);
         swipe_target.swipe(Direction.UP, 0.6f);
@@ -443,10 +445,10 @@ public class DiscoverCase extends VP2 {
     public void testToSearchVideo() throws UiObjectNotFoundException, IOException {
         DiscoverAction.navToSearch();
         shellInputText("a");
-        clickByText("视频");
+        clickByText("Video");
         waitTime(2);
-        UiObject2 SP = getUiObject2ByText("视频");
-        Boolean Actual = SP.isChecked() && (text_exists("搜索无内容") || text_exists_contain("a"));
+        UiObject2 SP = getUiObject2ByText("Video");
+        Boolean Actual = SP.isChecked() && (text_exists_contain("Oops,There's nothing") || text_exists_contain("a"));
         Asst.assertTrue(Actual);
     }
 
@@ -461,7 +463,7 @@ public class DiscoverCase extends VP2 {
         shellInputText("1234");
         clickById(Other.filter_clear);
         Spoon.screenshot("AfterClickFilter_clear");
-        Asst.assertTrue(text_exists("你可能感兴趣"));
+        Asst.assertTrue(text_exists("Search"));
     }
 
     @Test
@@ -471,8 +473,8 @@ public class DiscoverCase extends VP2 {
      * */
     public void testToSearchClickCancle() throws UiObjectNotFoundException {
         DiscoverAction.navToSearch();
-        clickByText("取消");
-        Asst.assertTrue(text_exists("发现"));
+        clickByText("Cancel");
+        Asst.assertTrue(text_exists("Discover"));
     }
 
     @Test
@@ -484,7 +486,7 @@ public class DiscoverCase extends VP2 {
     public void testToSearchByVideoName() throws UiObjectNotFoundException, IOException {
         DiscoverAction.navToSearch();
         shellInputText("a");
-        clickByText("视频");
+        clickByText("Video");
         waitTime(2);
         Asst.assertTrue(text_exists_contain("a"));
     }
@@ -499,10 +501,10 @@ public class DiscoverCase extends VP2 {
         for (int i = 0; i < 5; i++) {
             //将由5个字符组成的字符串逐个输入搜索框内。备注：此处未输入中文
             shellInputText(getRandomString(5).charAt(i));
-            clickByText("视频");
+            clickByText("Video");
             waitTime(1);
             String s = getObjectById(DiscoverPage.ID_SEARCH_FILTER_INPUT).getText();
-            if (text_exists_contain(s) || text_exists("搜索无内容")) {
+            if (text_exists_contain(s) || text_exists_contain("Oops,There's nothing")) {
                 continue;
             }
             Asst.fail();

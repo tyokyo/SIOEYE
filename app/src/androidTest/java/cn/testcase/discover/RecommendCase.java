@@ -3,18 +3,18 @@ package cn.testcase.discover;
 import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.widget.ImageView;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import java.util.List;
+
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.DiscoverAction;
@@ -182,7 +182,7 @@ public class RecommendCase extends VP2 {
         //关闭弹出框
         clickByClass("android.widget.ImageView",2);
         logger.info(expect_name);
-        Rect rect=getUiObjectByText("你可能感兴趣").getVisibleBounds();
+        Rect rect=getUiObjectByText("WHO TO FOLLOW").getVisibleBounds();
         int y=rect.centerY();
         int x=gDevice.getDisplayWidth();
         //你可能感兴趣-关闭按钮
@@ -205,16 +205,17 @@ public class RecommendCase extends VP2 {
         //关闭弹出框
         clickByClass("android.widget.ImageView",2);
         logger.info(expect_name);
-        Rect rect=getUiObjectByText("你可能感兴趣").getVisibleBounds();
+        Rect rect=getUiObjectByText("WHO TO FOLLOW").getVisibleBounds();
         int y=rect.centerY();
         int x=gDevice.getDisplayWidth();
         //你可能感兴趣-关闭按钮
         gDevice.click(x-5,y);
-        boolean expect_name_exist=text_exists(expect_name);
+        waitUntilRegexGone("WHO TO FOLLOW",10000);
+        boolean expect_name_exist=text_exists("WHO TO FOLLOW");
         Asst.assertEquals("关闭-你可能感兴趣",false,expect_name_exist);
         getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
         waitTime(5);
-        expect_name_exist=text_exists(expect_name);
+        expect_name_exist=text_exists("WHO TO FOLLOW");
         Asst.assertEquals("恢复-你可能感兴趣",true,expect_name_exist);
     }
 }
