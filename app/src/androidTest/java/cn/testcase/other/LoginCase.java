@@ -53,17 +53,17 @@ public class LoginCase extends VP2 {
     public void testCheckLoginInterface() throws UiObjectNotFoundException{
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
         waitTime(2);
-        if (getUiObjectByText("邮箱、手机号、Sioeye ID").exists()){
+        if (getUiObjectByText("Email, phone number, Sioeye ID").exists()){
             logger.info("输入手机号或者邮箱存在");
-            if (getUiObjectByText("登录").exists()){
+            if (getUiObjectByText("Log in").exists()){
                 logger.info("Login Exist");
-                if (getUiObjectByText("忘记密码？").exists()){
+                if (getUiObjectByText("Forgot your password?").exists()){
                     logger.info("Forgot password Exist");
                     clickByClass("android.widget.ImageView", 0);
                     //点击返回键；检查返回键功能是否正常
-                    if (getUiObjectByText("登录").exists()) {
+                    if (getUiObjectByText("Log in").exists()) {
                         logger.info("back icon is ok");
-                        clickByText("登录");
+                        clickByText("Log in");
                     } else {
                         Spoon.screenshot("LoginInterface", "返回键无功能");
                         Assert.fail("Back icon can't back");}
@@ -88,7 +88,7 @@ public class LoginCase extends VP2 {
     public void testLoginByLoseUseNameAndPassword() throws UiObjectNotFoundException {
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
         AccountAction.justLogIn("", "");
-        if (!getUiObjectByText("登录").exists()) {
+        if (!getUiObjectByText("Log in").exists()) {
             Assert.fail("无账号和密码点击登陆后页面变化");
         }
     }
@@ -102,7 +102,7 @@ public class LoginCase extends VP2 {
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
         String userName = Constant.getUserName("email");
         AccountAction.justLogIn(userName, "");
-        if (!getUiObjectByText("登录").exists()) {
+        if (!getUiObjectByText("Log in").exists()) {
             Assert.fail("无密码点击登陆后页面变化");
         }
     }
@@ -115,7 +115,7 @@ public class LoginCase extends VP2 {
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
         String userPassword = Constant.getUserName("email_password");
         AccountAction.justLogIn("",userPassword);
-        if (!getUiObjectByText("登录").exists()){
+        if (!getUiObjectByText("Log in").exists()){
             Assert.fail("无账号点击登陆后页面变化");
         }
     }
@@ -161,7 +161,7 @@ public class LoginCase extends VP2 {
         String userPassword=Constant.randomStringGenerator(20);
         AccountAction.justLogIn(userName,userPassword);
         waitTime(2);
-        if (!getUiObjectByText("登录").exists()) {
+        if (!getUiObjectByText("Log in").exists()) {
             Assert.fail("输入不存在的邮箱账号和密码点击登陆后页面有变化");}
     }
     @Test
@@ -177,7 +177,7 @@ public class LoginCase extends VP2 {
         String userPassword=Constant.randomStringGenerator(20);
         AccountAction.justLogIn(userName,userPassword);
         waitTime(2);
-        if (!getUiObjectByText("登录").exists()) {
+        if (!getUiObjectByText("Log in").exists()) {
             Assert.fail("使用不存在的电话号码账号和密码点击登陆后页面变化");}
     }
     @Test
@@ -194,7 +194,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.randomStringGenerator(20);
         AccountAction.justLogIn(userName, userPassword);
         waitTime(2);
-        if (!getUiObjectByText("登录").exists()) {
+        if (!getUiObjectByText("Log in").exists()) {
             Assert.fail("错误的密码点击登陆后页面变化");
         }
     }
@@ -212,7 +212,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.randomStringGenerator(20);
         AccountAction.justLogIn(userName, userPassword);
         waitTime(2);
-        if (!getUiObjectByText("登录").exists()) {
+        if (!getUiObjectByText("Log in").exists()) {
             Assert.fail("错误密码点击登陆后页面变化");
         }
     }
@@ -229,7 +229,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.getUserName("email_password");
         AccountAction.justLogIn(userName,userPassword );
         waitTime(3);
-        if (getUiObjectByText("登录").exists()) {
+        if (getUiObjectByText("Log in").exists()) {
             Assert.fail("LoginFailByEmail");
         }
     }
@@ -246,7 +246,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.getUserName("phone_password");
         AccountAction.justLogIn(userName,userPassword );
         waitTime(3);
-        if (getUiObjectByText("登录").exists()) {
+        if (getUiObjectByText("Log in").exists()) {
             Assert.fail("LoginFailByPhoneNumber");
         }
     }
@@ -263,7 +263,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.getUserName("sioeye_password");
         AccountAction.justLogIn(userName,userPassword );
         waitTime(3);
-        if (getUiObjectByText("登录").exists()) {
+        if (getUiObjectByText("Log in").exists()) {
             Assert.fail("LoginFailBySioEeyId");
         }
     }
@@ -278,12 +278,13 @@ public class LoginCase extends VP2 {
     结果：无“提示重置密码链接已经发送到注册邮箱中”
      */
     public void testForgotPasswordByEmail() throws UiObjectNotFoundException {
-        getObjectByTextContains("忘记密码？").click();
+        getObjectByTextContains("Forgot your password?").click();
         String email=Constant.randomEmail(26);
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(email);
         waitTime(1);
         getObjectById(AccountPage.SIGN_UP_CONTINUE).click();
-        if (getObjectByTextContains("重置密码的链接已经发送到你注册的邮箱").exists()){
+        //重置密码的链接已经发送到你注册的邮箱
+        if (getObjectByTextContains("The reset password email has been sent").exists()){
             Spoon.screenshot("invalidEmailCanSentForgotPasswordEmail");
             Assert.fail("invalidEmailCanSentForgotPasswordEmail");
         }else {
@@ -291,7 +292,8 @@ public class LoginCase extends VP2 {
             getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(email);
             waitTime(1);
             getObjectById(AccountPage.SIGN_UP_CONTINUE).click();
-            if (!getObjectByTextContains("重置密码的链接已经发送到你注册的邮箱").exists()){
+            waitTime(5);
+            if (!getObjectByTextContains("The reset password email has been sent").exists()){
                 Spoon.screenshot("RegisteredEmailCannotSentForgotPasswordEmail");
                 Assert.fail("RegisteredEmailCannotSentForgotPasswordEmail");
             }

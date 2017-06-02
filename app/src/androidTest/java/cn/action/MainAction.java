@@ -16,7 +16,7 @@ public class MainAction extends VP2 {
             if (id_exists(MePage.ID_MAIN_TAB_ME)){
                 clickById(MePage.ID_MAIN_TAB_ME);
             }else{
-                clickByText("我");
+                clickByText("Me");
             }
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
@@ -28,7 +28,7 @@ public class MainAction extends VP2 {
         if (id_exists(MePage.ID_MAIN_TAB_DISCOVER)){
             clickById(MePage.ID_MAIN_TAB_DISCOVER);
         }else{
-            clickByText("发现");
+            clickByText("Discover");
         }
     }
     //Discover
@@ -40,7 +40,7 @@ public class MainAction extends VP2 {
         if (id_exists(MePage.ID_MAIN_TAB_LIVE)){
             clickById(MePage.ID_MAIN_TAB_LIVE);
         }else{
-            clickByText("关注");
+            clickByText("Watch");
         }
     }
     //Discover
@@ -63,7 +63,7 @@ public class MainAction extends VP2 {
         if (id_exists(MePage.ID_MAIN_TAB_DEVICE)){
             clickById(MePage.ID_MAIN_TAB_DEVICE);
         }else{
-            clickByText("相机");
+            clickByText("Remote");
         }
     }
 }

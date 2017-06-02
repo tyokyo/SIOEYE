@@ -29,10 +29,10 @@ public class AccountAction extends VP2{
             logger.info("当前账号已经处于logout状态");
         }else{
             //clickById(MePage.SETTINGS_USER_MAIN);
-            clickByText("设置");
-            clickByText("账号与安全");
+            clickByText("Settings");
+            clickByText("Account and Security");
             //clickById(AccountPage.LOG_OUT);
-            clickByText("退出登录");
+            clickByText("Log out");
             clickById(AccountPage.LOG_OUT_OK);
             //wait logout
             waitUntilFind(MePage.ID_MAIN_TAB_ME,60000);
@@ -52,7 +52,7 @@ public class AccountAction extends VP2{
         }
         MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
-            clickByText("登录");
+            clickByText("Log in");
             /*
             如果手机sdcard存在config.properties
             并且内容为
@@ -90,7 +90,7 @@ public class AccountAction extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
-            clickByText("登录");
+            clickByText("Log in");
             getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(username);
             getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);
             clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
@@ -101,27 +101,27 @@ public class AccountAction extends VP2{
     public static void navToLogin() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
-        clickByText("登录");
+        clickByText("Log in");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByMobile() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
-        clickByText("注册");
+        clickByText("Sign Up");
     }
     //进入Sign Up界面-Email
     public static void navToSignUp_ByEmail() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
-        clickByText("注册");
-        clickByText("邮箱注册");
+        clickByText("Sign Up");
+        clickByText("Register with email");
     }
     //进入注册输入密码界面by Email
     public static void navToInputPassword_ByEmailRegister() throws UiObjectNotFoundException, IOException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
-        clickByText("注册");
-        clickByText("邮箱注册");
+        clickByText("Sign Up");
+        clickByText("Register with email");
         String Email = Constant.randomEmail(18);
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(Email);
         waitTime(3);

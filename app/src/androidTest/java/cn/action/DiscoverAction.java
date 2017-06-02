@@ -2,7 +2,6 @@ package cn.action;
 
 import android.graphics.Rect;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.BySelector;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.StaleObjectException;
 import android.support.test.uiautomator.UiObject;
@@ -10,7 +9,6 @@ import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,7 +16,6 @@ import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
 import org.junit.Assert;
-import org.junit.Test;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -53,17 +50,17 @@ public class DiscoverAction extends VP2 {
         }
         return like;
     }
-
+    //发现页面-搜索按钮
     public static void navToSearch() {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         waitTime(3);
-        UiObject2 frameLayout = getObject2ById(DiscoverPage.APP_TITLE).getParent();
+        UiObject2 frameLayout = getObject2ById(DiscoverPage.ID_HOT_RECOMMEND).getParent().getParent();
         UiObject2 searchObject = frameLayout.findObject(By.clazz(android.widget.ImageView.class));
         Rect searchRect = searchObject.getVisibleBounds();
         //double click
         clickRect(searchRect);
     }
-
+    //广告
     public static void navToAd() {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         clickById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
@@ -72,6 +69,10 @@ public class DiscoverAction extends VP2 {
     //index=0-3
     public static String navToRecommendList(int index, int click_time) {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        //刷新列表
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
+        swipe_target.swipe(Direction.DOWN, 0.6f);
+        logger.info("刷新列表");
         waitUntilFind(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST, 30000);
         //into discover
         List<UiObject2> linearLayout_avatars = getObject2ById(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST).findObjects(By.clazz(LinearLayout.class));
@@ -127,7 +128,9 @@ public class DiscoverAction extends VP2 {
         MeAction.navToFollowing();
         scrollAndGetUIObject(userName);
         clickByText(userName);
+        waitUntilFind(DiscoverPage.ID_PROFILE_DELETE_FOLLOW,10000);
         clickById(DiscoverPage.ID_PROFILE_DELETE_FOLLOW);
+        waitTime(3);
         gDevice.pressBack();
         logger.info("deleteFollowing-"+userName);
     }
@@ -147,8 +150,7 @@ public class DiscoverAction extends VP2 {
     }
 
     public static String checkMiniProfileNumFollowerAddOneAfterFollow() throws UiObjectNotFoundException {
-        int NumFollower = Integer.parseInt(getTex(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
-        int expect_NumFollower = NumFollower + 1;
+        int expect_NumFollower = Integer.parseInt(getTex(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
         //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
         clickById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
         //关注操作
@@ -158,7 +160,7 @@ public class DiscoverAction extends VP2 {
         String sioEye_id = getObject2ById(DiscoverPage.ID_PROFILE_MINI_DEVICES).findObject(By.clazz(android.widget.TextView.class)).getText();
         //id for user
         Spoon.screenshot("testAddFriendsRecommend0", "该用户followers没有加1");
-        Asst.assertEquals("添加推荐用户为好友后，该用户followers没有加1", expect_NumFollower, active_NumFollower);
+        Asst.assertEquals("添加推荐用户为好友后，该用户followers没有加1", expect_NumFollower+1, active_NumFollower);
         //断言该用户followers有没有+1
         clickByClass("android.widget.ImageView", 2);
         //关闭弹出框

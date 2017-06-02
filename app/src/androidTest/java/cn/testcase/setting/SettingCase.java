@@ -2,16 +2,18 @@ package cn.testcase.setting;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.Until;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.io.IOException;
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.SettingAction;
@@ -54,7 +56,7 @@ public class SettingCase extends VP2 {
             clickById(MePage.SETTINGS_CB_DIRECTOR);
             waitTime(2);
             String active=getTex(MePage.SETTINGS_CB_DIRECTOR_TEXT);
-            String expect="关闭后，正在直播的视频将会继续导播，下次直播则为普通直播模式";
+            String expect="Disable the direct control, the changes will take effect on the new live stream";
             Asst.assertEquals("打开直播",expect,active);
         }
     }
@@ -67,7 +69,7 @@ public class SettingCase extends VP2 {
             clickById(MePage.SETTINGS_CB_DIRECTOR);
             waitTime(2);
             String active=getTex(MePage.SETTINGS_CB_DIRECTOR_TEXT);
-            String expect="打开后，在多机位直播时，你可以控制给观众看哪一个机位。";
+            String expect="Enable the direct control, you can switch the scenes ";
             Asst.assertEquals("关闭直播",expect,active);
         }
     }

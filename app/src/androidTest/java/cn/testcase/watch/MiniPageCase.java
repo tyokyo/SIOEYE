@@ -30,7 +30,7 @@ public class MiniPageCase extends VP2{
     @Before
     public void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
-        AccountAction.isLogin();
+        AccountAction.inLogin();
     }
     /**
      * 个人弹出框变化：

@@ -37,12 +37,12 @@ public class LogOutCase extends VP2 {
     @Test
     public void testLogOut_Cancel() throws UiObjectNotFoundException {
         MeAction.navToSettings();
-        clickByText("账号与安全");
+        clickByText("Account and Security");
         //clickById(AccountPage.LOG_OUT);
-        clickByText("退出登录");
+        clickByText("Log out");
         clickById(AccountPage.LOG_OUT_CANCEL);
         waitTime(2);
-        boolean active = text_exists("退出登录");
+        boolean active = text_exists("Log out");
         Asst.assertEquals("testLogOut_Cancel",true,active);
         Spoon.screenshot("testLogOut_Cancel");
     }
@@ -51,13 +51,13 @@ public class LogOutCase extends VP2 {
     public void testLogOut_OK() throws UiObjectNotFoundException {
         //log out
         MeAction.navToSettings();
-        clickByText("账号与安全");
+        clickByText("Account and Security");
         //clickById(AccountPage.LOG_OUT);
-        clickByText("退出登录");
+        clickByText("Log out");
         clickById(AccountPage.LOG_OUT_OK);
         //log in
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickByText("登录");
+        clickByText("Log in");
         //input username
         getObjectById(MePage.INPUT_USERNAME).clearTextField();
         getObjectById(MePage.INPUT_USERNAME).setText(Constant.userName);

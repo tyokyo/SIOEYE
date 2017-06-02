@@ -647,8 +647,7 @@ public class VP2 extends  VP{
      *
      * @param BASIC_PACKAGE_NAME The package Name
      */
-    public static void openAppByPackageName(String BASIC_PACKAGE_NAME)
-    {
+    public static void openAppByPackageName(String BASIC_PACKAGE_NAME) {
         logger.info("openAppByPackageName-"+BASIC_PACKAGE_NAME);
         initDevice();
         //Start form the home screen.
@@ -675,6 +674,21 @@ public class VP2 extends  VP{
                 e.printStackTrace();
             }
         }
+        UiObject advObj = gDevice.findObject(new UiSelector().textContains("跳过广告"));
+        if(advObj.exists()){
+            try {
+                advObj.click();
+            } catch (UiObjectNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        waitTime(3);
+        //do welcome page
+        UiObject welcomeObj = gDevice.findObject(new UiSelector().resourceId("cn.sioeye.sioeyeapp:id/welcome_item_img"));
+        if(welcomeObj.exists()){
+            gDevice.findObject(By.res("cn.sioeye.sioeyeapp:id/welcome_page_ok")).click();
+        }
+
     }
     /**
      * You can use the method to open a new app by activity.
