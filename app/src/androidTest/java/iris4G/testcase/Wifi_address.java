@@ -25,7 +25,7 @@ public class Wifi_address extends VP2{
     }
     @Test
     public void testA(){
-        logger.info("-------testAsA");
+        logger.info("-------testAA");
     }
     @Test
     public void testB(){
