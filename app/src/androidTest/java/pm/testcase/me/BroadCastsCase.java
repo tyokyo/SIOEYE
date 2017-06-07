@@ -186,6 +186,7 @@ public class BroadCastsCase extends VP2{
             logger.info("active:"+active_title);
             Asst.assertEquals("modify title",input_title,active_title);
             Spoon.screenshot("modify_title",input_title);
+
         }
     }
     //进入视频回放界面-直接点赞
