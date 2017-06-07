@@ -36,6 +36,11 @@ public class MainAction extends VP2 {
         clickDiscover();
         Spoon.screenshot("navToDiscover");
     }
+    //Discover
+    public static void navToDiscover(String page) throws UiObjectNotFoundException {
+        clickDiscover();
+        Spoon.screenshot("navToDiscover");
+    }
     public static void clickLive() throws UiObjectNotFoundException {
         if (id_exists(MePage.ID_MAIN_TAB_LIVE)){
             clickById(MePage.ID_MAIN_TAB_LIVE);

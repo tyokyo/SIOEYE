@@ -50,8 +50,25 @@ public class AccountAction extends VP2{
             clickById(MePage.ID_TV_OK);
             waitHasObject(MePage.ID_MAIN_TAB_ME,10000);
         }
+        waitUntilFind(MePage.ID_MAIN_TAB_ME,10000);
+        if(text_exists_contain("CLOSE")){
+            clickTextContain("CLOSE");
+        }
+        if(text_exists_contain("Close")){
+            clickTextContain("Close");
+        }
+        if(text_exists_contain("OK")){
+            clickTextContain("OK");
+        }
+        if(text_exists_contain("Ok")){
+            clickTextContain("Ok");
+        }
         MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
+            waitUntilFindText("Log in",10000);
+            if (text_exists("Log in")){
+                logger.info("===============================================================");
+            }
             clickByText("Log in");
             /*
             如果手机sdcard存在config.properties
