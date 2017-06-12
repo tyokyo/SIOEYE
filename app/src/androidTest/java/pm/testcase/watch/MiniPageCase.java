@@ -1,4 +1,4 @@
-package cn.testcase.watch;
+package pm.testcase.watch;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -15,10 +15,10 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
-import cn.action.AccountAction;
-import cn.action.WatchAction;
-import cn.page.App;
-import cn.page.WatchPage;
+import pm.action.AccountAction;
+import pm.action.WatchAction;
+import pm.page.App;
+import pm.page.WatchPage;
 
 /**
  * Created by jiali.liu on 2016/12/29.
@@ -76,13 +76,13 @@ public class MiniPageCase extends VP2{
         waitTime(3);
         WatchAction.clickMiniLive();
         //检查是否显示视频列表
-        //Asst.assertEquals("显示视频列表",true,WatchAction.LiveList_isExist());
+        Asst.assertEquals("显示视频列表",true, WatchAction.LiveList_isExist());
         waitTime(10);
         WatchAction.clickMiniFollow();
         //检查是否显示关注列表
-        //Asst.assertEquals("显示关注列表",true,WatchAction.FollowList_isExist());
+        Asst.assertEquals("显示关注列表",true, WatchAction.FollowList_isExist());
         WatchAction.clickMiniFans();
         //检查是否显示粉丝列表
-        //Asst.assertEquals("显示粉丝列表",true,WatchAction.FansList_isExist());
+        Asst.assertEquals("显示粉丝列表",true, WatchAction.FansList_isExist());
     }
 }

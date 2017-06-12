@@ -1,16 +1,21 @@
-package cn.action;
+package pm.action;
 
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
+
 import com.squareup.spoon.Spoon;
+
 import org.junit.Assert;
+
 import java.io.IOException;
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
-import cn.page.AccountPage;
-import cn.page.App;
-import cn.page.Constant;
-import cn.page.MePage;
+import pm.page.AccountPage;
+import pm.page.App;
+import pm.page.Constant;
+import pm.page.MePage;
+
 /**
  * Created by admin on 2016/11/2.
  **/
@@ -79,14 +84,14 @@ public class AccountAction extends VP2{
             如果没有配置:
             采用cn.page.Constant.java 文件中的Constant.userName Constant.passwd 登录app
             * */
-            String useName=Constant.getUserName();
-            String password=Constant.getPassword();
+            String useName= Constant.getUserName();
+            String password= Constant.getPassword();
             if (useName!=null&&password!=null){
                 logger.info(String.format("use config.properties userName:%s password:%s to login app",useName,password));
             }else{
-                useName=Constant.userName;
-                password=Constant.passwd;
-                logger.info(String.format("use local userName:%s password:%s to login app",Constant.userName,Constant.passwd));
+                useName= Constant.userName;
+                password= Constant.passwd;
+                logger.info(String.format("use local userName:%s password:%s to login app", Constant.userName, Constant.passwd));
             }
             //input username
             //getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).click();

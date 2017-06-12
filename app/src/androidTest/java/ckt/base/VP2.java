@@ -68,16 +68,16 @@ public class VP2 extends  VP{
         gDevice.executeShellCommand("input text "+text);
     }
     public static void makeToast(String message,float time) throws IOException{
-        initDevice();
-        String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %f",message,time);
-        logger.info(command);
-        gDevice.executeShellCommand(command);
+        //initDevice();
+        //String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %f",message,time);
+        //logger.info(command);
+        //gDevice.executeShellCommand(command);
     }
     public static void makeToast(String message,int time) throws IOException{
-        initDevice();
-        String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
-        logger.info(command);
-        gDevice.executeShellCommand(command);
+        //initDevice();
+        //String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
+        //logger.info(command);
+        //gDevice.executeShellCommand(command);
     }
     public static void startLog() throws IOException{
         initDevice();

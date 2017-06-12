@@ -3,13 +3,17 @@ package iris4G.testcase;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObjectNotFoundException;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import iris4G.action.Iris4GAction;
+import iris4G.action.SettingAction;
 
 /**
  * @Author yun.yang
@@ -55,5 +59,28 @@ public class SettingCase extends VP2 {
             clickByText("Connect");
         }
         Iris4GAction.stopSettings();
+    }
+    @Test
+    /**case 1
+     * yun.yang
+     * 录制一段视频检查设置存储是否更新
+     */
+    public void testStorageUpdate()throws Exception{
+        Iris4GAction.startSettings();
+        SettingAction.navToStorage();
+        float originalUsed=SettingAction.getUesd();
+        float originalFree=SettingAction.getFree();
+        int makeVideoTime=90;
+        Iris4GAction.markVideoSomeTime(makeVideoTime);
+        waitTime(1);
+        gDevice.pressMenu();
+        SettingAction.navToStorage();
+        float updateUsed=SettingAction.getUesd();
+        float updateFree=SettingAction.getFree();
+        float result=SettingAction.floatAbs(updateUsed,originalUsed,updateFree,originalFree);
+        if (originalUsed==updateUsed||originalFree==updateFree||result>=0.02){
+            Assert.fail("storageUsedOrFreeNotUpdate");
+        }else
+            logger.info("录制"+makeVideoTime+"秒视频后相机存储更新正确");
     }
 }

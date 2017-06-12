@@ -1,4 +1,4 @@
-package cn.testcase.discover;
+package pm.testcase.discover;
 
 import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
@@ -25,17 +25,17 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
-import cn.action.AccountAction;
-import cn.action.BroadcastAction;
-import cn.action.DiscoverAction;
-import cn.action.FollowersAction;
-import cn.action.MainAction;
-import cn.page.AccountPage;
-import cn.page.App;
-import cn.page.Constant;
-import cn.page.DiscoverPage;
-import cn.page.MePage;
-import cn.page.Other;
+import pm.action.AccountAction;
+import pm.action.BroadcastAction;
+import pm.action.DiscoverAction;
+import pm.action.FollowersAction;
+import pm.action.MainAction;
+import pm.page.AccountPage;
+import pm.page.App;
+import pm.page.Constant;
+import pm.page.DiscoverPage;
+import pm.page.MePage;
+import pm.page.Other;
 
 
 /**
