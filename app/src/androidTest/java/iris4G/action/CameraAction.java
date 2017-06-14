@@ -1,13 +1,17 @@
 package iris4G.action;
 
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
+import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
+import android.view.KeyEvent;
 
 import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
+import org.junit.Assert;
 
 import java.io.File;
 import java.text.ParseException;
@@ -497,5 +501,83 @@ public class CameraAction extends VP2 {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Altimeter");
+    }
+    /**
+     * 直播视频质量设置
+     * "480@30FPS(CD)",
+     * "480@30FPS(HD)",
+     * "720@30FPS(HD)",
+     */
+    public static void configLiveVideoQuality(String quality) throws Exception {
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Video Quality");
+        clickByText("Video Quality");
+        Iris4GAction.ScrollViewByText(quality);
+        clickByText(quality);
+        waitTime(1);
+        gDevice.pressBack();
+        Spoon.screenshot("configLiveVideoQuality",quality);
+        logger.info(" -configLiveVideoQuality - "+quality);
+    }
+
+    public static void checkLiveVideoQualityStatus(String LiveQuality) throws Exception{
+        if (!getUiObjectByText(LiveQuality).exists()){
+            Assert.fail("LiveQualityNotIs"+LiveQuality);
+        }
+        logger.info("直播预览界面视频质量显示正确："+LiveQuality);
+    }
+
+    /**
+     * Live Angle设置
+     * {"Super Wide","Wide","Medium"};
+     */
+    public static void configLiveAngle(String angle) throws Exception {
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Video Angle");
+        clickByText("Video Angle");
+        clickByText(angle);
+        logger.info("Video Angle set to :" + angle);
+        Spoon.screenshot("configLiveAngle",angle);
+        logger.info(" -configLiveAngle - "+angle);
+        gDevice.pressBack();
+        waitTime(1);
+    }
+    /**
+     * 设置每种直播质量和视场角对应并发起直播
+     * 检查预览界面直播分辨率显示和是否成功发起直播
+     */
+    public static void checkLiveQualityAndAngleLiveAndZoom(String LiveQuality,String LiveAngle,String CheckLiveQuality)throws Exception{
+        CameraAction.configLiveVideoQuality( LiveQuality);
+        logger.info("设置直播视频质量为："+LiveQuality);
+        CameraAction.configLiveAngle(LiveAngle);
+        logger.info("设置直播视场角为："+LiveAngle);
+        CameraAction.checkLiveVideoQualityStatus(CheckLiveQuality);
+        logger.info("正在发起直播中...");
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        CameraAction.checkLiveStatus(1);
+        if (!CameraAction.checkLiveSuccess()){
+            Assert.fail(LiveQuality+LiveAngle+"LiveFailed");
+        }
+        logger.info("发起直播成功");
+        CameraAction.openAndCloseSeekBarForZoom();
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(2);
+        logger.info("已停止直播");
+    }
+    public static void openAndCloseSeekBarForZoom() throws Exception{
+        UiDevice.getInstance().click(178,98);
+        UiDevice.getInstance().click(178,98);
+        waitTime(2);
+        if (!gDevice.findObject(new UiSelector().resourceId(Iris4GPage.seekbarforzoom_id)).exists()){
+                Assert.fail("OpenSeekBarForZoomFailed");
+        }
+        logger.info("打开变焦功能成功");
+        UiDevice.getInstance().click(178,98);
+        UiDevice.getInstance().click(188,99);
+        waitTime(2);
+        if (gDevice.findObject(new UiSelector().resourceId(Iris4GPage.seekbarforzoom_id)).exists()){
+                Assert.fail("CloseSeekBarForZoomFailed");
+        }
+        logger.info("关闭变焦功能成功");
     }
 }

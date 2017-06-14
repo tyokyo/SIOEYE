@@ -1,11 +1,11 @@
-package cn.action;
+package pm.action;
 
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import com.squareup.spoon.Spoon;
 
 import ckt.base.VP2;
-import cn.page.MePage;
+import pm.page.MePage;
 
 /**
  * Created by elon on 2016/11/8.

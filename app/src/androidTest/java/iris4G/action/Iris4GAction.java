@@ -569,4 +569,19 @@ public class Iris4GAction extends VP2 {
         }
         return value;
     }
+
+    /**
+     * yun.yang
+     * 录像int a 秒
+     * 录像结束后返回主页面
+     */
+    public static void markVideoSomeTime(int a) throws Exception {
+        Iris4GAction.startCamera();
+        waitTime(1);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(a+1);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        gDevice.pressHome();
+        gDevice.pressHome();
+    }
 }
