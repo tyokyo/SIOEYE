@@ -36,4 +36,25 @@ public class SettingAction extends VP2 {
         logger.info("resultAbS："+resultAbS);
         return resultAbS;
     }
+    public static void navToPreferredNetworkType() throws Exception {
+        Iris4GAction.startSettings();
+        clickByText("Connection");
+        Iris4GAction.ScrollViewByText("SimCard Info");
+        clickByText("SimCard Info");
+        clickByText("Preferred network type");
+    }
+    public static void navToSleepTime() throws Exception {
+        Iris4GAction.startSettings();
+        clickByText("Device");
+        Iris4GAction.ScrollViewByText("Display");
+        clickByText("Display");
+        Iris4GAction.ScrollViewByText("Sleep");
+        clickByText("Sleep");
+    }
+    public static void navToWifi() throws Exception {
+        Iris4GAction.startSettings();
+        clickByText("Connection");
+        Iris4GAction.ScrollViewByText("Wi-Fi");
+        clickByText("Wi-Fi");
+    }
 }

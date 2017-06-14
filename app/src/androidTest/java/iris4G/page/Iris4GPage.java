@@ -71,5 +71,6 @@ public class Iris4GPage {
     public static String content_id = "android:id/content";
     public static String preview_id="com.hicam:id/preview;";
     public static String seekbarforzoom_id="com.hicam:id/seekbarforzoom";
+    public static String btn_manual="com.hicam:id/btn_manual";
 
 }
