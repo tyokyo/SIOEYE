@@ -74,7 +74,7 @@ public class LiveSaveCase extends VP2 {
             logger.info("new file:" + videoPath);
             String videoName = new File(videoPath).getName();
             VideoNode activeNode = Iris4GAction.VideoInfo(videoPath);
-            //默认视频质量为1080 30FPS
+            //默认视频质量为720 30FPS
             //int height = Integer.parseInt(quality.split("@")[0]);
             int height = 720;
             if (Iris4GAction.checkVideoInfo(height, activeNode)) {
@@ -97,8 +97,8 @@ public class LiveSaveCase extends VP2 {
     }
 
     @Test
-    public void testL72030fpsSuperWide() throws Exception {
-        Live(NavPage.quality720_30, NavPage.angleSuperWide);
+    public void testL72025fpsSuperWide() throws Exception {
+        Live(NavPage.quality720_25, NavPage.angleSuperWide);
     }
 
     @Test
@@ -107,13 +107,13 @@ public class LiveSaveCase extends VP2 {
     }
 
     @Test
-    public void testL108030fpsSuperWide() throws Exception {
-        Live(NavPage.quality1080_30, NavPage.angleSuperWide);
+    public void testL108025fpsSuperWide() throws Exception {
+        Live(NavPage.quality1080_25, NavPage.angleSuperWide);
     }
 
     @Test
-    public void testL72030fpsWide() throws Exception {
-        Live(NavPage.quality720_30, NavPage.angleWide);
+    public void testL72025fpsWide() throws Exception {
+        Live(NavPage.quality720_25, NavPage.angleWide);
     }
 
     @Test
@@ -122,13 +122,13 @@ public class LiveSaveCase extends VP2 {
     }
 
     @Test
-    public void testL108030fpsWide() throws Exception {
-        Live(NavPage.quality1080_30, NavPage.angleWide);
+    public void testL108025fpsWide() throws Exception {
+        Live(NavPage.quality1080_25, NavPage.angleWide);
     }
 
     @Test
-    public void testL72030fpsMedium() throws Exception {
-        Live(NavPage.quality720_30, NavPage.angleMedium);
+    public void testL72025fpsMedium() throws Exception {
+        Live(NavPage.quality720_25, NavPage.angleMedium);
     }
 
     @Test
@@ -137,7 +137,7 @@ public class LiveSaveCase extends VP2 {
     }
 
     @Test
-    public void testL108030fpsMedium() throws Exception {
-        Live(NavPage.quality1080_30, NavPage.angleMedium);
+    public void testL108025fpsMedium() throws Exception {
+        Live(NavPage.quality1080_25, NavPage.angleMedium);
     }
 }

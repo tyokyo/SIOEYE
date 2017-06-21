@@ -21,7 +21,7 @@ import iris4G.page.NavPage;
 
 /**
  * @Author elon
- * @Description 所有视频质量[72030|72060|108030] * Video Angle
+ * @Description 所有视频质量[72025|72060|108025] * Video Angle
  * 1.更改视频质量参数为480@120FPS
    2.录制设置过参数的普通录像视频
    1.可以成功设置为对应的参数
@@ -56,52 +56,70 @@ public class VideoCase extends VP2{
         CameraAction.openPlayVideoAndCheck(quality,beforeTakeVideoList);
     }
     @Test
-    public void testV72030fpsSuperWide() throws Exception {
-        Video(NavPage.quality720_30,NavPage.angleSuperWide);
+    public void testV72025fpsSuperWide() throws Exception {
+        Video(NavPage.quality720_25,NavPage.angleSuperWide);
     }
     @Test
     public void testV72060fpsSuperWide() throws Exception {
         Video(NavPage.quality720_60,NavPage.angleSuperWide);
     }
     @Test
-    public void testV108030fpsSuperWide() throws Exception {
-        Video(NavPage.quality1080_30,NavPage.angleSuperWide);
+    public void testV108025fpsSuperWide() throws Exception {
+        Video(NavPage.quality1080_25,NavPage.angleSuperWide);
     }
     @Test
     public void testV480120fpsSuperWide() throws Exception {
         Video(NavPage.quality480_120,NavPage.angleSuperWide);
     }
     @Test
-    public void testV72030fpsWide() throws Exception {
-        Video(NavPage.quality720_30,NavPage.angleWide);
+    public void testV72025fpsWide() throws Exception {
+        Video(NavPage.quality720_25,NavPage.angleWide);
     }
     @Test
     public void testV72060fpsWide() throws Exception {
         Video(NavPage.quality720_60,NavPage.angleWide);
     }
     @Test
-    public void testV108030fpsWide() throws Exception {
-        Video(NavPage.quality1080_30,NavPage.angleWide);
+    public void testV108025fpsWide() throws Exception {
+        Video(NavPage.quality1080_25,NavPage.angleWide);
     }
     @Test
     public void testV480120fpsWide() throws Exception {
         Video(NavPage.quality480_120,NavPage.angleWide);
     }
     @Test
-    public void testV72030fpsMedium() throws Exception {
-        Video(NavPage.quality720_30,NavPage.angleMedium);
+    public void testV72025fpsMedium() throws Exception {
+        Video(NavPage.quality720_25,NavPage.angleMedium);
     }
     @Test
     public void testV72060fpsMedium() throws Exception {
         Video(NavPage.quality720_60,NavPage.angleMedium);
     }
     @Test
-    public void testV108030fpsMedium() throws Exception {
-        Video(NavPage.quality1080_30,NavPage.angleMedium);
+    public void testV108025fpsMedium() throws Exception {
+        Video(NavPage.quality1080_25,NavPage.angleMedium);
     }
     @Test
     public void testV480120fpsMedium() throws Exception {
         Video(NavPage.quality480_120,NavPage.angleMedium);
     }
+//暂时还未添加480@25FPS 普通录像
+  /*  @Test
+    public void testV48025fpsMedium() throws Exception {
+        Video(NavPage.quality480_25,NavPage.angleMedium);
+    }
+
+    @Test
+    public void testV48025fpsWide() throws Exception {
+        Video(NavPage.quality480_25,NavPage.angleWide);
+    }
+
+    @Test
+    public void testV48025fpsSuperWide() throws Exception {
+        Video(NavPage.quality480_25,NavPage.angleSuperWide);
+    }*/
+
+
+
 
 }
