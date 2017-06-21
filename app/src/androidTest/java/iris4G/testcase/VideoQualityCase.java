@@ -41,6 +41,10 @@ public class VideoQualityCase extends VP2{
        //Lapse - 修改视频质量 720@60FPS
         CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_60);*/
 
+       //Lapse - 修改视频质量 480@30FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_30)
+
+
         //切换到Burst
         CameraAction.navConfig(NavPage.navConfig_Burst);
         //切换到Lapse
@@ -61,6 +65,10 @@ public class VideoQualityCase extends VP2{
         CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality720_25);
      /*   //验证Lapse视频质量 720@60FPS
         CameraAction.checkVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_60);*/
+
+        //验证Lapse视频质量 480@30FPS
+        CameraAction.checkVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_30);
+
     }
     @Test
     public void test720_60() throws Exception {
@@ -94,8 +102,8 @@ public class VideoQualityCase extends VP2{
     public void test1080_25() throws Exception {
         //Video - 修改视频质量 1080@30FPS
         CameraAction.configVideoQuality(NavPage.navConfig_Video,NavPage.quality1080_25);
-        //Lapse - 修改视频质量 480@120FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_120);
+        //Lapse - 修改视频质量 1080@30FPS
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality1080_30);
 
         //切换到Burst
         CameraAction.navConfig(NavPage.navConfig_Burst);
@@ -115,8 +123,8 @@ public class VideoQualityCase extends VP2{
         Iris4GAction.startCamera();
         //验证Lapse视频质量 1080@30FPS
         CameraAction.checkVideoQuality(NavPage.navConfig_Video,NavPage.quality1080_25);
-        //验证Lapse视频质量 480@120FPS
-        CameraAction.checkVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_120);
+        //验证Lapse视频质量 1080@30FPS
+        CameraAction.checkVideoQuality(NavPage.navConfig_Lapse,NavPage.quality1080_30);
     }
     @Test
     public void test480_120() throws Exception {
