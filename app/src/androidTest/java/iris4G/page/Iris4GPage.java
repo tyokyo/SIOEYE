@@ -31,12 +31,24 @@ public class Iris4GPage {
             "10P",
             "20P",
             "30P"};
+
+    public  static  String[] lapse_quality  ={
+            "720@30FPS",
+            "1080@30FPS",
+            "480@30FPS"
+    };
+
     //delete 480
     public static String[] video_quality ={
             "720@30FPS",
             "720@60FPS",
             "1080@30FPS",
-            "480@120FPS"};
+            "480@120FPS",
+            "1080@25FPS",
+            "720@25FPS",
+            "480@25FPS",
+            "480@30FPS"
+            };
     public static String[] imsge_size ={
             "4M(16:9)",
             "3M(4:3)",

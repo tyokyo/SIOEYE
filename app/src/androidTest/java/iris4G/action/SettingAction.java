@@ -11,6 +11,7 @@ import iris4G.page.SettingPage;
 
 public class SettingAction extends VP2 {
     public static void navToStorage() throws Exception {
+        waitTime(2);
         clickByText("Device");
         Iris4GAction.ScrollViewByText("Storage");
         clickByText("Storage");
