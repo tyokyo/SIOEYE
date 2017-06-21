@@ -42,7 +42,7 @@ public class VideoQualityCase extends VP2{
         CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality720_60);*/
 
        //Lapse - 修改视频质量 480@30FPS
-        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_30)
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,NavPage.quality480_30);
 
 
         //切换到Burst
