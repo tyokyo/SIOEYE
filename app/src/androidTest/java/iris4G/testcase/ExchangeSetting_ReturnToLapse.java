@@ -16,6 +16,7 @@ import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
 import iris4G.page.NavPage;
 
+import static iris4G.page.Iris4GPage.lapse_quality;
 import static iris4G.page.Iris4GPage.lapse_time;
 import static iris4G.page.Iris4GPage.video_Angle;
 import static iris4G.page.Iris4GPage.video_quality;
@@ -35,7 +36,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2 {
     }
     //获取随机的视频质量
     private String randomVideoQuality() {
-        int qualityLength = video_quality.length;
+        int qualityLength = lapse_quality.length;
         int qualityIndex = (int) (Math.random() * (qualityLength - 1));
         return video_quality[qualityIndex];
     }

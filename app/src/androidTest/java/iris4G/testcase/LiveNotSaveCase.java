@@ -26,7 +26,7 @@ import iris4G.page.NavPage;
  * 默认live&save 开关-关闭状态
  * 所有不同设置下发起直播
  * 没有视频文件生成
- * 所有视频质量[72030|72060|108030]*视频角度[Super Wide|Wide|Medium]
+ * 所有视频质量[72025|72060|108025]*视频角度[Super Wide|Wide|Medium]
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
@@ -79,8 +79,8 @@ public class LiveNotSaveCase extends VP2 {
     }
 
     @Test
-    public void testL72030fpsSuperWide() throws Exception {
-        Live(NavPage.quality720_30, NavPage.angleSuperWide);
+    public void testL72025fpsSuperWide() throws Exception {
+        Live(NavPage.quality720_25, NavPage.angleSuperWide);
     }
 
     @Test
@@ -89,13 +89,13 @@ public class LiveNotSaveCase extends VP2 {
     }
 
     @Test
-    public void testL108030fpsSuperWide() throws Exception {
-        Live(NavPage.quality1080_30, NavPage.angleSuperWide);
+    public void testL108025fpsSuperWide() throws Exception {
+        Live(NavPage.quality1080_25, NavPage.angleSuperWide);
     }
 
     @Test
-    public void testL72030fpsWide() throws Exception {
-        Live(NavPage.quality720_30, NavPage.angleWide);
+    public void testL72025fpsWide() throws Exception {
+        Live(NavPage.quality720_25, NavPage.angleWide);
     }
 
     @Test
@@ -104,13 +104,13 @@ public class LiveNotSaveCase extends VP2 {
     }
 
     @Test
-    public void testL108030fpsWide() throws Exception {
-        Live(NavPage.quality1080_30, NavPage.angleWide);
+    public void testL108025fpsWide() throws Exception {
+        Live(NavPage.quality1080_25, NavPage.angleWide);
     }
 
     @Test
-    public void testL72030fpsMedium() throws Exception {
-        Live(NavPage.quality720_30, NavPage.angleMedium);
+    public void testL72025fpsMedium() throws Exception {
+        Live(NavPage.quality720_25, NavPage.angleMedium);
     }
 
     @Test
@@ -119,7 +119,9 @@ public class LiveNotSaveCase extends VP2 {
     }
 
     @Test
-    public void testL108030fpsMedium() throws Exception {
-        Live(NavPage.quality1080_30, NavPage.angleMedium);
+    public void testL108025fpsMedium() throws Exception {
+        Live(NavPage.quality1080_25, NavPage.angleMedium);
     }
+
+
 }

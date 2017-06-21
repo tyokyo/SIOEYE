@@ -82,6 +82,7 @@ public class ScreenCase extends VP2 {
 
         gDevice.pressHome();
         gDevice.pressMenu();
+        waitTime(1);
         clickByText("Connection");
         clickByText("Wi-Fi");
         waitTime(3);

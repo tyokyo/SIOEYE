@@ -169,7 +169,9 @@ public class LapseCase extends VP2 {
     public void testTLap10s72030Medium() throws Exception {
         Lapse(NavPage.quality720_30,NavPage.lapseTime_10s,NavPage.angleMedium);
     }
-    //480@120 2s - All Angle[SuperWide Wide Medium]*/
+
+    //慢动作  480@120FPS 和720@60FPS 取消了
+  /*  //480@120 2s - All Angle[SuperWide Wide Medium]*//*
     @Test
     public void testTLap2s480120SuperWide() throws Exception {
         Lapse(NavPage.quality480_120,NavPage.lapseTime_2s,NavPage.angleSuperWide);
@@ -182,7 +184,7 @@ public class LapseCase extends VP2 {
     public void testTLap2s480120Medium() throws Exception {
         Lapse(NavPage.quality480_120,NavPage.lapseTime_5s,NavPage.angleMedium);
     }
-    //720@120 5s - All Angle[SuperWide Wide Medium]*/
+    //720@120 5s - All Angle[SuperWide Wide Medium]*//*
     @Test
     public void testTLap5s480120SuperWide() throws Exception {
         Lapse(NavPage.quality480_120,NavPage.lapseTime_5s,NavPage.angleSuperWide);
@@ -195,7 +197,7 @@ public class LapseCase extends VP2 {
     public void testTLap5s480120Medium() throws Exception {
         Lapse(NavPage.quality480_120,NavPage.lapseTime_5s,NavPage.angleMedium);
     }
-    //720@120 10s - All Angle[SuperWide Wide Medium]*/
+    //720@120 10s - All Angle[SuperWide Wide Medium]*//*
     @Test
     public void testTLap10s480120SuperWide() throws Exception {
         Lapse(NavPage.quality480_120,NavPage.lapseTime_10s,NavPage.angleSuperWide);
@@ -208,7 +210,7 @@ public class LapseCase extends VP2 {
     public void testTLap10s480120Medium() throws Exception {
         Lapse(NavPage.quality480_120,NavPage.lapseTime_10s,NavPage.angleMedium);
     }
-    /* 720@60FPS  -2s - All Angle[SuperWide Wide Medium]*/
+    *//* 720@60FPS  -2s - All Angle[SuperWide Wide Medium]*//*
     @Test
     public void testTLap2s72060SuperWide() throws Exception {
         Lapse(NavPage.quality720_60,NavPage.lapseTime_2s,NavPage.angleSuperWide);
@@ -221,7 +223,7 @@ public class LapseCase extends VP2 {
     public void testTLap2s72060Medium() throws Exception {
         Lapse(NavPage.quality720_60,NavPage.lapseTime_2s,NavPage.angleMedium);
     }
-    /* 720@60FPS  -3s - All Angle[SuperWide Wide Medium]*/
+    *//* 720@60FPS  -3s - All Angle[SuperWide Wide Medium]*//*
     @Test
     public void testTLap3s72060SuperWide() throws Exception {
         Lapse(NavPage.quality720_60,NavPage.lapseTime_3s,NavPage.angleSuperWide);
@@ -235,7 +237,7 @@ public class LapseCase extends VP2 {
         Lapse(NavPage.quality720_60,NavPage.lapseTime_3s,NavPage.angleMedium);
     }
 
-    /* 720@60FPS  -5s - All Angle[SuperWide Wide Medium]*/
+    *//* 720@60FPS  -5s - All Angle[SuperWide Wide Medium]*//*
     @Test
     public void testTLap5s72060SuperWide() throws Exception {
         Lapse(NavPage.quality720_60,NavPage.lapseTime_5s,NavPage.angleSuperWide);
@@ -248,7 +250,7 @@ public class LapseCase extends VP2 {
     public void testTLap5s72060Medium() throws Exception {
         Lapse(NavPage.quality720_60,NavPage.lapseTime_5s,NavPage.angleMedium);
     }
-    /* 720@60FPS  -10s - All Angle[SuperWide Wide Medium]*/
+    *//* 720@60FPS  -10s - All Angle[SuperWide Wide Medium]*//*
     @Test
     public void testTLap10s72060SuperWide() throws Exception {
         Lapse(NavPage.quality720_60,NavPage.lapseTime_10s,NavPage.angleSuperWide);
@@ -261,7 +263,7 @@ public class LapseCase extends VP2 {
     public void testTLap10s72060Medium() throws Exception {
         Lapse(NavPage.quality720_60,NavPage.lapseTime_10s,NavPage.angleMedium);
     }
-
+*/
     /* 1080@30FPS  -2s - All Angle[SuperWide Wide Medium]*/
     @Test
     public void testTLap2s108030SuperWide() throws Exception {

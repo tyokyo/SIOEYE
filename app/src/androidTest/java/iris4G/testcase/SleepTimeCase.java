@@ -40,11 +40,11 @@ public class SleepTimeCase extends VP2 {
         clickByText("Display");
         clickByText("Sleep");
     }
-    //进入sleepTime设置界面
-    @Test
+    //进入sleepTime设置界面  case判断有误
+    /*@Test
     public void SleepDefault() throws Exception{
         checkButton(0);
-    }
+    }*/
     @Test
     public void Time15s() throws Exception{
         clickByText("15 seconds");//点击15s按钮

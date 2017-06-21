@@ -46,7 +46,7 @@ public class SloMoCase extends VP2 {
         CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
 
         //验证视频质量显示
-        Asst.assertEquals("480@120FPS","480@120",getTex(Iris4GPage.info).trim());
+        Asst.assertEquals("480@30FPS","480@30",getTex(Iris4GPage.info).trim());
 
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         Iris4GAction.cameraKey();
