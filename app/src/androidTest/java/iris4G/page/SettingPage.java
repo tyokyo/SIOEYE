@@ -13,4 +13,11 @@ public class SettingPage extends VP2{
     public static String wifi_connected_state="com.android.settings:id/state";
     public static String wifi_switch_state="com.android.settings:id/switchState";
     public static String category_content="com.android.settings:id/category_content";
+
+    //galleryPage
+    public static String video_timeText="com.hicam.gallery:id/timeText";
+    public static String gallery_live_bottom="com.hicam.gallery:id/gallery_bottom_share_im";
+    public static String gallery_live="com.hicam.gallery:id/gallery_live";
+    public static String gallery_live_retry="android:id/button1";
+    public static String gallery_live_cancel="android:id/button2";
 }
