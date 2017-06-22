@@ -305,7 +305,7 @@ public class Iris4GAction extends VP2 {
     }
 
     /**
-     * 启动相册
+     * 启动相册x
      */
     public static void startGallery() throws Exception {
         gDevice.pressHome();
