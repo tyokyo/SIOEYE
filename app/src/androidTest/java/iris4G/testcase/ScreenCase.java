@@ -5,6 +5,8 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObject;
 import android.view.KeyEvent;
 
+import junit.framework.Assert;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
@@ -81,8 +83,10 @@ public class ScreenCase extends VP2 {
         Iris4GAction.ScrollViewByText("Never");
         clickByText("Never");
 
-        gDevice.pressHome();
-        gDevice.pressMenu();
+        gDevice.pressBack();
+        gDevice.pressBack();
+        gDevice.pressBack();
+        //gDevice.pressMenu();
         waitTime(3);
         clickByText("Connection");
         clickByText("Wi-Fi");
@@ -99,7 +103,7 @@ public class ScreenCase extends VP2 {
             password.setText("ck88888!");
         }
         if (text_exists("Connect")) {
-            clearText("Connect");
+            clickByText("Connect");
         }
 
         Iris4GAction.stopSettings();
