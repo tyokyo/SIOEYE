@@ -305,110 +305,16 @@ public class Iris4GAction extends VP2 {
     }
 
     /**
-     * 启动相册
+     * 启动相册x
      */
-    public void startGallery() throws Exception {
+    public static void startGallery() throws Exception {
         gDevice.pressHome();
         gDevice.pressHome();
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.hicam.gallery/.ui.GalleryPage");
-        gDevice.wait(Until.findObject(By.pkg("com.mediatek.filemanager")), 40000);
+        gDevice.wait(Until.findObject(By.pkg("com.hicam.gallery")), 40000);
         String pkg = gDevice.getCurrentPackageName();
         logger.info("current-package:" + pkg);
-    }
-
-    /**
-     * 安装手机存储内的APP
-     *
-     * @param path path=/sdcard/***.apk
-     */
-    public void install(String path) {
-        try {
-            gDevice.executeShellCommand("pm install  com.hicam");
-            logger.info("pm clear com.sioeye.sioeyeapp - Success");
-        } catch (IOException e) {
-            logger.info("pm clear com.sioeye.sioeyeapp - Failed");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 清除数据
-     *
-     * @param ks ks = false 删除全部数据
-     *           ks = true 卸载应用且保留数据与缓存
-     */
-    public void uninstall(boolean ks) {
-        try {
-            if (ks) {
-                gDevice.executeShellCommand("pm uninstall -k com.hicam");
-                logger.info("pm uninstall -k com.sioeye.sioeyeapp");
-            } else {
-                gDevice.executeShellCommand("pm uninstall  com.sioeye.sioeyeapp");
-            }
-        } catch (IOException e) {
-            logger.info("pm clear com.sioeye.sioeyeapp - Failed");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 在手机路径/sdcard/CktTest/创建对应用例的文件夹，用于存放失败截图，性能测试的LOG等
-     */
-    public void createFolder() throws IOException {
-        waitTime(1);
-        gDevice.executeShellCommand("mkdir -p /sdcard/CktTest/screen/");
-        waitTime(1);
-        Runtime.getRuntime().exec("rm -r /sdcard/CktTest/Performance/");
-        waitTime(1);
-        gDevice.executeShellCommand("mkdir -p /sdcard/CktTest/Performance/");
-    }
-
-    /**
-     * 抓取并保存bugreport
-     */
-    public String takeBugReport(String crashType, String currentTime)
-            throws IOException {
-        logger.info("开始抓取崩溃日志");
-        try {
-            // Executes the command.
-            String logname = "/sdcard/CktTest/" + "screen" + "/Crash_"
-                    + crashType + "_" + currentTime + ".txt";
-            File file = new File(logname);
-            file.createNewFile();
-            FileOutputStream out = new FileOutputStream(file, true);
-            Process process = Runtime.getRuntime()
-                    .exec("/system/bin/bugreport");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    process.getInputStream()));
-            int read;
-            char[] buffer = new char[4096];
-            while ((read = reader.read(buffer)) > 0) {
-                StringBuffer output = new StringBuffer();
-                output.append(buffer, 0, read);
-                out.write(output.toString().getBytes("utf-8"));
-            }
-            // Waits for the command to finish.
-            process.waitFor();
-            reader.close();
-            out.close();
-            logger.info("崩溃日志文件抓取成功-" + logname);
-            return logname;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * 配置timeout时间
-     *
-     * @param time Integer
-     */
-    public void configTimeout(int time) {
-        Configurator confg = Configurator.getInstance();
-        long timeout = confg.getWaitForSelectorTimeout();
-        //获取Selector timeout
-        confg.setWaitForSelectorTimeout(timeout + time);
     }
 
     public static void makeScreenOn() throws RemoteException {
@@ -437,6 +343,7 @@ public class Iris4GAction extends VP2 {
         }
         return runningAppsInfo;
     }
+
     public static void killBackgroundProcesses() {
         ActivityManager manager = (ActivityManager) context.getSystemService(Service.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> runningAppsInfo = runningProcessInBackground();
@@ -451,6 +358,7 @@ public class Iris4GAction extends VP2 {
             }
         }
     }
+
     public static void initIris4G() throws Exception {
         try {
             initDevice();
@@ -579,9 +487,103 @@ public class Iris4GAction extends VP2 {
         Iris4GAction.startCamera();
         waitTime(1);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
-        waitTime(a+1);
+        waitTime(a + 1);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         gDevice.pressHome();
         gDevice.pressHome();
+    }
+
+    /**
+     * 安装手机存储内的APP
+     *
+     * @param path path=/sdcard/***.apk
+     */
+    public void install(String path) {
+        try {
+            gDevice.executeShellCommand("pm install  com.hicam");
+            logger.info("pm clear com.sioeye.sioeyeapp - Success");
+        } catch (IOException e) {
+            logger.info("pm clear com.sioeye.sioeyeapp - Failed");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 清除数据
+     *
+     * @param ks ks = false 删除全部数据
+     *           ks = true 卸载应用且保留数据与缓存
+     */
+    public void uninstall(boolean ks) {
+        try {
+            if (ks) {
+                gDevice.executeShellCommand("pm uninstall -k com.hicam");
+                logger.info("pm uninstall -k com.sioeye.sioeyeapp");
+            } else {
+                gDevice.executeShellCommand("pm uninstall  com.sioeye.sioeyeapp");
+            }
+        } catch (IOException e) {
+            logger.info("pm clear com.sioeye.sioeyeapp - Failed");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 在手机路径/sdcard/CktTest/创建对应用例的文件夹，用于存放失败截图，性能测试的LOG等
+     */
+    public void createFolder() throws IOException {
+        waitTime(1);
+        gDevice.executeShellCommand("mkdir -p /sdcard/CktTest/screen/");
+        waitTime(1);
+        Runtime.getRuntime().exec("rm -r /sdcard/CktTest/Performance/");
+        waitTime(1);
+        gDevice.executeShellCommand("mkdir -p /sdcard/CktTest/Performance/");
+    }
+
+    /**
+     * 抓取并保存bugreport
+     */
+    public String takeBugReport(String crashType, String currentTime)
+            throws IOException {
+        logger.info("开始抓取崩溃日志");
+        try {
+            // Executes the command.
+            String logname = "/sdcard/CktTest/" + "screen" + "/Crash_"
+                    + crashType + "_" + currentTime + ".txt";
+            File file = new File(logname);
+            file.createNewFile();
+            FileOutputStream out = new FileOutputStream(file, true);
+            Process process = Runtime.getRuntime()
+                    .exec("/system/bin/bugreport");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    process.getInputStream()));
+            int read;
+            char[] buffer = new char[4096];
+            while ((read = reader.read(buffer)) > 0) {
+                StringBuffer output = new StringBuffer();
+                output.append(buffer, 0, read);
+                out.write(output.toString().getBytes("utf-8"));
+            }
+            // Waits for the command to finish.
+            process.waitFor();
+            reader.close();
+            out.close();
+            logger.info("崩溃日志文件抓取成功-" + logname);
+            return logname;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 配置timeout时间
+     *
+     * @param time Integer
+     */
+    public void configTimeout(int time) {
+        Configurator confg = Configurator.getInstance();
+        long timeout = confg.getWaitForSelectorTimeout();
+        //获取Selector timeout
+        confg.setWaitForSelectorTimeout(timeout + time);
     }
 }
