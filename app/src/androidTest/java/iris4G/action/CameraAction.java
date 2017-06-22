@@ -66,6 +66,9 @@ public class CameraAction extends VP2 {
             if (connFail.exists()) {
                 logger.info("Connection fail, please try again");
             }
+            if (connTooSlow.exists()){
+                logger.info("connection too slow");
+            }
         }
         Spoon.screenshot("checkLiveStatus");
     }

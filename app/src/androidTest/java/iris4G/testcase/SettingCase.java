@@ -28,7 +28,7 @@ public class SettingCase extends VP2 {
         Iris4GAction.initIris4G();
     }
     @Test
-    public void test() throws Exception {
+    public void testLinkCktWifi() throws Exception {
 
         Iris4GAction.startSettings();
         gDevice.waitForWindowUpdate("com.android.settings", 5000);
@@ -39,8 +39,12 @@ public class SettingCase extends VP2 {
         Iris4GAction.ScrollViewByText("Never");
         clickByText("Never");
 
-        gDevice.pressHome();
-        gDevice.pressMenu();
+
+        //返回setting界面
+        for(int i=0;i<3;i++){
+        gDevice.pressBack();
+        }
+      //  gDevice.pressMenu();
         clickByText("Connection");
         clickByText("Wi-Fi");
         waitTime(3);
@@ -58,6 +62,17 @@ public class SettingCase extends VP2 {
         if (text_exists("Connect")) {
             clickByText("Connect");
         }
+
+        waitTime(1);
+        UiObject linkok=getObjectById("com.android.settings:id/state");
+        if(linkok.exists()){
+            logger.info("first link ckt success");
+        }else {
+            logger.info("link ckt wifi failed ");
+        }
+
+
+
         Iris4GAction.stopSettings();
     }
     @Test

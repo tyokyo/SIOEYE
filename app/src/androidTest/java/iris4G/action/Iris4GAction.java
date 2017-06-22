@@ -32,6 +32,7 @@ import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 /**
  * Created by elon on 2016/11/21.
@@ -486,11 +487,14 @@ public class Iris4GAction extends VP2 {
     public static void markVideoSomeTime(int a) throws Exception {
         Iris4GAction.startCamera();
         waitTime(1);
+        //增加切换到video模式
+        CameraAction.navConfig(NavPage.navConfig_Video);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         waitTime(a + 1);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
-        gDevice.pressHome();
-        gDevice.pressHome();
+        //camera内部，：：是返回键，home键是。。。，双击返回键才能退出camera
+        gDevice.pressBack();
+        gDevice.pressBack();
     }
 
     /**
