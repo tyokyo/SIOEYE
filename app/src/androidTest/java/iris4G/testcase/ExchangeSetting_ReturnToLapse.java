@@ -34,11 +34,12 @@ public class ExchangeSetting_ReturnToLapse extends VP2 {
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
-    //获取随机的视频质量
-    private String randomVideoQuality() {
+
+    //获取随机的延时视频质量
+    private String randomLapseQuality() {
         int qualityLength = lapse_quality.length;
         int qualityIndex = (int) (Math.random() * (qualityLength - 1));
-        return video_quality[qualityIndex];
+        return lapse_quality[qualityIndex];
     }
 
     //获取随机的视频角度
@@ -60,7 +61,7 @@ public class ExchangeSetting_ReturnToLapse extends VP2 {
         CameraAction.navConfig(NavPage.navConfig_Lapse);
         //总共测试3次
         for (int iteration = 1; iteration <=3; iteration++) {
-            String quality=randomVideoQuality();
+            String quality=randomLapseQuality();
             String angle=randomVideoAngle();
             String lapse_time=randomLapseSize();
             logger.info("[iteration] - " + iteration);

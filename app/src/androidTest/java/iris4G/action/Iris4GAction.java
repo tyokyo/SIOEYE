@@ -267,8 +267,8 @@ public class Iris4GAction extends VP2 {
      * 启动Settings
      */
     public static void startSettings() throws Exception {
-        gDevice.pressHome();
-        gDevice.pressHome();
+        gDevice.pressBack();
+        gDevice.pressBack();
         waitTime(2);
         gDevice.executeShellCommand("am start -n com.android.settings/.CustomSettings");
         gDevice.wait(Until.findObject(By.pkg("com.android.settings")), 40000);

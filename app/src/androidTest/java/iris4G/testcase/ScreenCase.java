@@ -18,6 +18,7 @@ import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.FileManagerAction;
 import iris4G.action.Iris4GAction;
+import iris4G.page.NavPage;
 
 /**
  * Created by elon on 2016/12/8.
@@ -82,7 +83,7 @@ public class ScreenCase extends VP2 {
 
         gDevice.pressHome();
         gDevice.pressMenu();
-        waitTime(1);
+        waitTime(3);
         clickByText("Connection");
         clickByText("Wi-Fi");
         waitTime(3);
@@ -113,6 +114,8 @@ public class ScreenCase extends VP2 {
         Iris4GAction.startCamera();
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         logger.info("record when screen is on "+WaitTime+" seconds");
+       //增加切换到video模式
+        CameraAction.navConfig(NavPage.navConfig_Video);
         Iris4GAction.cameraKey();
 
         CameraAction.cameraRecordTime();
