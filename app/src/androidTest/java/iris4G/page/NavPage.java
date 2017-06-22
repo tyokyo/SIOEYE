@@ -26,7 +26,7 @@ public class NavPage{
 
 
     public static final String lapse720_30         =Iris4GPage.lapse_quality[0];
-    public static final String lapse1080_30         =Iris4GPage.lapse_quality[1];
+    public static final String lapse1080_30        =Iris4GPage.lapse_quality[1];
     public static final String lapse480_30         =Iris4GPage.lapse_quality[2];
 
 
