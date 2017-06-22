@@ -106,4 +106,5 @@ public class AltimeterCase extends VP2{
         waitTime(30);
         Iris4GAction.cameraKey();
     }
+
 }
