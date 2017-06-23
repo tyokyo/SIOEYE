@@ -103,8 +103,8 @@ public class VideoCase extends VP2{
     public void testV480120fpsMedium() throws Exception {
         Video(NavPage.quality480_120,NavPage.angleMedium);
     }
-//暂时还未添加480@25FPS 普通录像
-  /*  @Test
+
+    @Test
     public void testV48025fpsMedium() throws Exception {
         Video(NavPage.quality480_25,NavPage.angleMedium);
     }
@@ -117,7 +117,7 @@ public class VideoCase extends VP2{
     @Test
     public void testV48025fpsSuperWide() throws Exception {
         Video(NavPage.quality480_25,NavPage.angleSuperWide);
-    }*/
+    }
 
 
 
