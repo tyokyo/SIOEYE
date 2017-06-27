@@ -118,7 +118,7 @@ public class Iris4GAction extends VP2 {
     }
 
     public static boolean checkVideoInfo(int height, VideoNode vd) {
-        logger.info("1080|1920 720|1280 480|640");
+        logger.info("1080|1920 720|1280 480|864");
         boolean result = false;
         logger.info(vd.toString());
         logger.info(String.format("checkVideoInfo-expect|active [%d|%d]", height, vd.getHeight()));
@@ -133,7 +133,7 @@ public class Iris4GAction extends VP2 {
             }
         }
         if (height == 480) {
-            if (vd.getHeight() == height && vd.getWidth() == 640) {
+            if (vd.getHeight() == height && vd.getWidth() == 864) {
                 result = true;
             }
         }
