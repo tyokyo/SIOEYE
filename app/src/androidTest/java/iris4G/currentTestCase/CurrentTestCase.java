@@ -36,7 +36,7 @@ import iris4G.page.SettingPage;
  */
 public class CurrentTestCase extends VP2 {
     Logger logger = Logger.getLogger(CurrentTestCase.class.getName());
-    private int testTime=118;
+    private int testTime=100;
     /**
      * 格式化存储空间
      */
@@ -76,7 +76,7 @@ public class CurrentTestCase extends VP2 {
         if (text_exists("Add new network...")){
             clickById("android:id/switchWidget");
             logger.info("开启wifi中..");
-            waitTime(15);
+            waitTime(10);
             logger.info("wifi自动连接中..");
         }else {
             logger.info("wifi为开启状态");
@@ -191,11 +191,11 @@ public class CurrentTestCase extends VP2 {
                 logger.info("Live Failed");
                 Spoon.screenshot("LiveFailed");
                 logger.info("电流锯齿波");
-                for (int i=0;i<3;i++) {
+                for (int i=0;i<4;i++) {
                     waitTime(15);
                     gDevice.pressBack();
                     gDevice.pressBack();
-                    waitTime(25);
+                    waitTime(15);
                     Iris4GAction.startCamera();
                 }
                 CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
@@ -261,11 +261,11 @@ public class CurrentTestCase extends VP2 {
                 Iris4GAction.stopGallery();
                 launchCamera();
                 //相册直播失败后
-                for (int i=0;i<3;i++) {
+                for (int i=0;i<4;i++) {
                     waitTime(15);
                     gDevice.pressBack();
                     gDevice.pressBack();
-                    waitTime(25);
+                    waitTime(15);
                     Iris4GAction.startCamera();
                 }
                 Iris4GAction.stopCamera();

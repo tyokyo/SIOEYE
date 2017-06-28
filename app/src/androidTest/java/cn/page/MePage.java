@@ -28,7 +28,7 @@ public class MePage {
     public static final String ID_IMAGE_CHANGE="cn.sioeye.sioeyeapp:id/llt_layout";
     public static final String ID_IMAGE_CANCEL="org.codeaurora.snapcam:id/btn_cancel";
     public static final String CHANGECOVERPHOTO="cn.sioeye.sioeyeapp:id/bg_text_hint";
-    public static final String SAMPLE_CONTENT="cn.sioeye.sioeyeapp:id/sample_content";
+    public static final String SAMPLE_CONTENT="cn.sioeye.sioeyeapp:id/content";
     public static final String GETNICKNAMECONTENT="cn.sioeye.sioeyeapp:id/content_text";
 
     //permission allow
