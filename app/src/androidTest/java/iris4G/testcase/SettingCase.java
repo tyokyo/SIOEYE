@@ -3,13 +3,17 @@ package iris4G.testcase;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObjectNotFoundException;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import iris4G.action.Iris4GAction;
+import iris4G.action.SettingAction;
 
 /**
  * @Author yun.yang
@@ -24,7 +28,7 @@ public class SettingCase extends VP2 {
         Iris4GAction.initIris4G();
     }
     @Test
-    public void test() throws Exception {
+    public void testLinkCktWifi() throws Exception {
 
         Iris4GAction.startSettings();
         gDevice.waitForWindowUpdate("com.android.settings", 5000);
@@ -35,8 +39,12 @@ public class SettingCase extends VP2 {
         Iris4GAction.ScrollViewByText("Never");
         clickByText("Never");
 
-        gDevice.pressHome();
-        gDevice.pressMenu();
+
+        //返回setting界面
+        for(int i=0;i<3;i++){
+        gDevice.pressBack();
+        }
+      //  gDevice.pressMenu();
         clickByText("Connection");
         clickByText("Wi-Fi");
         waitTime(3);
@@ -54,6 +62,40 @@ public class SettingCase extends VP2 {
         if (text_exists("Connect")) {
             clickByText("Connect");
         }
+
+        waitTime(1);
+        UiObject linkok=getObjectById("com.android.settings:id/state");
+        if(linkok.exists()){
+            logger.info("first link ckt success");
+        }else {
+            logger.info("link ckt wifi failed ");
+        }
+
+
+
         Iris4GAction.stopSettings();
+    }
+    @Test
+    /**case 1
+     * yun.yang
+     * 录制一段视频检查设置存储是否更新
+     */
+    public void testStorageUpdate()throws Exception{
+        Iris4GAction.startSettings();
+        SettingAction.navToStorage();
+        float originalUsed=SettingAction.getUesd();
+        float originalFree=SettingAction.getFree();
+        int makeVideoTime=90;
+        Iris4GAction.markVideoSomeTime(makeVideoTime);
+        waitTime(1);
+        gDevice.pressMenu();
+        SettingAction.navToStorage();
+        float updateUsed=SettingAction.getUesd();
+        float updateFree=SettingAction.getFree();
+        float result=SettingAction.floatAbs(updateUsed,originalUsed,updateFree,originalFree);
+        if (originalUsed==updateUsed||originalFree==updateFree||result>=0.02){
+            Assert.fail("storageUsedOrFreeNotUpdate");
+        }else
+            logger.info("录制"+makeVideoTime+"秒视频后相机存储更新正确");
     }
 }

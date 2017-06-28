@@ -82,7 +82,7 @@ public class AltimeterCase extends VP2{
         AccountAction.loginAccount(username,password);
         Iris4GAction.cameraKey();
         Asst.assertEquals("Live_Succeed",true,CameraAction.checkLiveSuccess());
-        waitTime(20);
+        waitTime(30);
         Iris4GAction.cameraKey();
     }
     @Test
@@ -103,7 +103,8 @@ public class AltimeterCase extends VP2{
         AccountAction.loginAccount(username,password);
         Iris4GAction.cameraKey();
         Asst.assertEquals("Live_Succeed",true,CameraAction.checkLiveSuccess());
-        waitTime(20);
+        waitTime(30);
         Iris4GAction.cameraKey();
     }
+
 }

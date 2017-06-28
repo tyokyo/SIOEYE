@@ -5,6 +5,8 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObject;
 import android.view.KeyEvent;
 
+import junit.framework.Assert;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +20,7 @@ import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.FileManagerAction;
 import iris4G.action.Iris4GAction;
+import iris4G.page.NavPage;
 
 /**
  * Created by elon on 2016/12/8.
@@ -80,8 +83,11 @@ public class ScreenCase extends VP2 {
         Iris4GAction.ScrollViewByText("Never");
         clickByText("Never");
 
-        gDevice.pressHome();
-        gDevice.pressMenu();
+        gDevice.pressBack();
+        gDevice.pressBack();
+        gDevice.pressBack();
+        //gDevice.pressMenu();
+        waitTime(3);
         clickByText("Connection");
         clickByText("Wi-Fi");
         waitTime(3);
@@ -97,7 +103,7 @@ public class ScreenCase extends VP2 {
             password.setText("ck88888!");
         }
         if (text_exists("Connect")) {
-            clearText("Connect");
+            clickByText("Connect");
         }
 
         Iris4GAction.stopSettings();
@@ -112,6 +118,8 @@ public class ScreenCase extends VP2 {
         Iris4GAction.startCamera();
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         logger.info("record when screen is on "+WaitTime+" seconds");
+       //增加切换到video模式
+        CameraAction.navConfig(NavPage.navConfig_Video);
         Iris4GAction.cameraKey();
 
         CameraAction.cameraRecordTime();

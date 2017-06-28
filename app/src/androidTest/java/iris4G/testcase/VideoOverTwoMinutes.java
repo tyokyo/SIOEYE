@@ -21,6 +21,7 @@ import iris4G.action.CameraAction;
 import iris4G.action.FileManagerAction;
 import iris4G.action.Iris4GAction;
 import iris4G.action.VideoNode;
+import iris4G.page.NavPage;
 
 /**
  * @Author caiBin
@@ -46,6 +47,9 @@ public class VideoOverTwoMinutes extends VP2 {
         initDevice();
         Iris4GAction.startCamera();
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
+
+       //增加切换到Video模式的操作
+        CameraAction.navConfig(NavPage.navConfig_Video);
         Iris4GAction.cameraKey();
         CameraAction.cameraRecordTime();
         waitTime(WaitTime);

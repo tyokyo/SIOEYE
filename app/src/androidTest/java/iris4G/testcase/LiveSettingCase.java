@@ -19,7 +19,7 @@ import static ckt.base.VP.initDevice;
 
 /**
  * Created by yun.yang on 2017/6/2.
- * @Description 所有直播视频质量[72030HD|48030HD|48030CD]*视频角度[Super Wide|Wide|Medium][up/down]
+ * @Description 所有直播视频质量[72025HD|48025HD|48025CD]*视频角度[Super Wide|Wide|Medium][up/down]
  */
 
 @RunWith(AndroidJUnit4.class)
@@ -47,13 +47,13 @@ public class LiveSettingCase {
      * case1
      * 连续修改10次直播视频质量
      * 在预览界面检查是否设置成功
-     * LiveVideoQuality为"480@30FPS(CD)","480@30FPS(HD)","720@30FPS(HD)",
+     * LiveVideoQuality为"480@25FPS(CD)","480@25FPS(HD)","720@25FPS(HD)",
      *
      */
     public void testSettingLiveQuality() throws Exception {
-        String LiveQuality480SD="480@30FPS(SD)",checkLiveQuality480SD="480@30SD";
-        String LiveQuality480HD="480@30FPS(HD)",checkLiveQuality480HD="480@30HD";
-        String LiveQuality720HD="720@30FPS(HD)",checkLiveQuality720HD="720@30HD";
+        String LiveQuality480SD="480@25FPS(SD)",checkLiveQuality480SD="480@25SD";
+        String LiveQuality480HD="480@25FPS(HD)",checkLiveQuality480HD="480@25HD";
+        String LiveQuality720HD="720@25FPS(HD)",checkLiveQuality720HD="720@25HD";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
         for (int i=0;i<10;i++) {
@@ -68,13 +68,13 @@ public class LiveSettingCase {
     @Test
     /**
      * case2
-     * 480@30FPS(SD)和"Super Wide"
+     * 480@25FPS(SD)和"Super Wide"
      * 设置成功后检查预览界面视频质量并发起直播，检查双击屏幕开启和关闭变焦功能
-     * LiveVideoQuality为"480@30FPS(SD)",
+     * LiveVideoQuality为"480@25FPS(SD)",
      *
      */
-    public void test48030SDSuperWideLiveForAllAngle() throws Exception {
-        String LiveQuality480SD="480@30FPS(SD)",CheckLiveQuality480SD="480@30SD";
+    public void test48025SDSuperWideLiveForAllAngle() throws Exception {
+        String LiveQuality480SD="480@25FPS(SD)",CheckLiveQuality480SD="480@25SD";
         String LiveAngleSW="Super Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -83,13 +83,13 @@ public class LiveSettingCase {
     @Test
     /**
      * case3
-     * 480@30FPS(SD)和"Wide"
+     * 480@25FPS(SD)和"Wide"
      * 设置成功后检查预览界面视频质量并发起直播，检查双击屏幕开启和关闭变焦功能
-     * LiveVideoQuality为"480@30FPS(SD)",
+     * LiveVideoQuality为"480@25FPS(SD)",
      *
      */
-    public void test48030SDWideLiveForAllAngle() throws Exception {
-        String LiveQuality480SD="480@30FPS(SD)",CheckLiveQuality480SD="480@30SD";
+    public void test48025SDWideLiveForAllAngle() throws Exception {
+        String LiveQuality480SD="480@25FPS(SD)",CheckLiveQuality480SD="480@25SD";
         String LiveAngleWide="Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -98,13 +98,13 @@ public class LiveSettingCase {
     @Test
     /**
      * case4
-     * 480@30FPS(SD)和"Medium"
+     * 480@25FPS(SD)和"Medium"
      * 设置成功后检查预览界面视频质量并发起直播，检查双击屏幕开启和关闭变焦功能
-     * LiveVideoQuality为"480@30FPS(SD)",
+     * LiveVideoQuality为"480@25FPS(SD)",
      *
      */
-    public void test48030SDMediumLiveForAllAngle() throws Exception {
-        String LiveQuality480SD="480@30FPS(SD)",CheckLiveQuality480SD="480@30SD";
+    public void test48025SDMediumLiveForAllAngle() throws Exception {
+        String LiveQuality480SD="480@25FPS(SD)",CheckLiveQuality480SD="480@25SD";
         String LiveAngleWide="Medium";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -113,13 +113,13 @@ public class LiveSettingCase {
     @Test
     /**
      * case5
-     * 480@30FPS(HD)和"Super Wide"
+     * 480@25FPS(HD)和"Super Wide"
      * 设置成功后检查预览界面视频质量并发起直播，检查双击屏幕开启和关闭变焦功能
-     * LiveVideoQuality为"480@30FPS(HD)",
+     * LiveVideoQuality为"480@25FPS(HD)",
      *
      */
-    public void test48030HDSuperWideLiveForAllAngle() throws Exception {
-        String LiveQuality480HD="480@30FPS(HD)",CheckLiveQuality480HD="480@30HD";
+    public void test48025HDSuperWideLiveForAllAngle() throws Exception {
+        String LiveQuality480HD="480@25FPS(HD)",CheckLiveQuality480HD="480@25HD";
         String LiveAngleSW="Super Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -128,13 +128,13 @@ public class LiveSettingCase {
     @Test
     /**
      * case6
-     * 480@30FPS(HD)和"Wide"
+     * 480@25FPS(HD)和"Wide"
      * 设置成功后检查预览界面视频质量并发起直播，检查双击屏幕开启和关闭变焦功能
-     * LiveVideoQuality为"480@30FPS(HD)",
+     * LiveVideoQuality为"480@25FPS(HD)",
      *
      */
-    public void test48030HDWideLiveForAllAngle() throws Exception {
-        String LiveQuality480HD="480@30FPS(HD)",CheckLiveQuality480HD="480@30HD";
+    public void test48025HDWideLiveForAllAngle() throws Exception {
+        String LiveQuality480HD="480@25FPS(HD)",CheckLiveQuality480HD="480@25HD";
         String LiveAngleWide="Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -143,13 +143,13 @@ public class LiveSettingCase {
     @Test
     /**
      * case7
-     * 480@30FPS(HD)和"Medium"
+     * 480@25FPS(HD)和"Medium"
      * 设置成功后检查预览界面视频质量并发起直播，检查双击屏幕开启和关闭变焦功能
-     * LiveVideoQuality为"480@30FPS(HD)",
+     * LiveVideoQuality为"480@25FPS(HD)",
      *
      */
-    public void test48030HDMediumLiveForAllAngle() throws Exception {
-        String LiveQuality480HD="480@30FPS(HD)",CheckLiveQuality480HD="480@30HD";
+    public void test48025HDMediumLiveForAllAngle() throws Exception {
+        String LiveQuality480HD="480@25FPS(HD)",CheckLiveQuality480HD="480@25HD";
         String LiveAngleWide="Medium";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -158,13 +158,13 @@ public class LiveSettingCase {
     @Test
     /**
      * case8
-     * 720@30FPS(HD)和"Super Wide"
+     * 720@25FPS(HD)和"Super Wide"
      * 设置成功后检查预览界面视频质量并发起直播，检查双击屏幕开启和关闭变焦功能
-     * LiveVideoQuality为"720@30FPS(HD)",
+     * LiveVideoQuality为"720@25FPS(HD)",
      *
      */
-    public void test72030HDSuperWideLiveForAllAngle() throws Exception {
-        String LiveQuality720HD="720@30FPS(HD)",CheckLiveQuality720HD="720@30HD";
+    public void test72025HDSuperWideLiveForAllAngle() throws Exception {
+        String LiveQuality720HD="720@25FPS(HD)",CheckLiveQuality720HD="720@25HD";
         String LiveAngleSW="Super Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -173,13 +173,13 @@ public class LiveSettingCase {
     @Test
     /**
      * case9
-     * 720@30FPS(HD)和"Wide"
+     * 720@25FPS(HD)和"Wide"
      * 设置成功后检查预览界面视频质量并发起直播，检查双击屏幕开启和关闭变焦功能
-     * LiveVideoQuality为"720@30FPS(HD)",
+     * LiveVideoQuality为"720@25FPS(HD)",
      *
      */
-    public void test72030HDWideLiveForAllAngle() throws Exception {
-        String LiveQuality720HD="720@30FPS(HD)",CheckLiveQuality720HD="720@30HD";
+    public void test72025HDWideLiveForAllAngle() throws Exception {
+        String LiveQuality720HD="720@25FPS(HD)",CheckLiveQuality720HD="720@25HD";
         String LiveAngleWide="Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -188,13 +188,13 @@ public class LiveSettingCase {
     @Test
     /**
      * case10
-     * 720@30FPS(HD)和"Medium"
+     * 720@25FPS(HD)和"Medium"
      * 设置成功后检查预览界面视频质量并发起直播，检查双击屏幕开启和关闭变焦功能
-     * LiveVideoQuality为"720@30FPS(HD)",
+     * LiveVideoQuality为"720@25FPS(HD)",
      *
      */
-    public void test72030HDMediumLiveForAllAngle() throws Exception {
-        String LiveQuality720HD="720@30FPS(HD)",CheckLiveQuality720HD="720@30HD";
+    public void test72025HDMediumLiveForAllAngle() throws Exception {
+        String LiveQuality720HD="720@25FPS(HD)",CheckLiveQuality720HD="720@25HD";
         String LiveAngleWide="Medium";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);

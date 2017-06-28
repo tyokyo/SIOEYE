@@ -46,7 +46,7 @@ public class SloMoCase extends VP2 {
         CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
 
         //验证视频质量显示
-        Asst.assertEquals("480@120FPS","480@120",getTex(Iris4GPage.info).trim());
+        Asst.assertEquals("480@30FPS","480@30",getTex(Iris4GPage.info).trim());
 
         HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
         Iris4GAction.cameraKey();
@@ -60,7 +60,7 @@ public class SloMoCase extends VP2 {
         }
         CameraAction.cameraRecordTime();
         Iris4GAction.cameraKey();
-        waitTime(3);
+        waitTime(5);
 
         if (moStatus) {
             HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
@@ -143,7 +143,7 @@ public class SloMoCase extends VP2 {
         {
             logger.info("screen 0ff success");
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            waitTime(3);
+            waitTime(5);
             if(gDevice.isScreenOn() == true &&
                     id_exists("com.hicam:id/recording_time2")== true)
             {
@@ -169,10 +169,10 @@ public class SloMoCase extends VP2 {
         Iris4GAction.startCamera();
         CameraAction.navConfig(Iris4GPage.nav_menu[4]);
         Iris4GAction.cameraKey();
-        waitTime(3);
+        waitTime(5);
         for(int i= 1;i<11;i++){
             gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-            waitTime(3);
+            waitTime(5);
         }
         Iris4GAction.cameraKey();
     }
