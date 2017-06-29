@@ -70,7 +70,7 @@ public class AboutMeCase extends VP2 {
         clickById(MePage.ID_USER_EDIT);
         clickById(MePage.NAV_EDIT_ABOUT_ME);
         getObjectById(MePage.ABOUT_ME_CONTENT).clearTextField();
-        String input = getRandomString(40);
+        String input = getRandomString(20);
         //设置个性签名
         setText(MePage.ABOUT_ME_CONTENT,input);
         clickById(MePage.USER_EDIT_DONE);
@@ -92,11 +92,11 @@ public class AboutMeCase extends VP2 {
     }
     //输入最大的字符容量
     @Test
-    public void testEdit60C() throws UiObjectNotFoundException {
+    public void testEdit30C() throws UiObjectNotFoundException {
         MeAction.navToUserEdit();
         clickById(MePage.NAV_EDIT_ABOUT_ME);
         getObjectById(MePage.ABOUT_ME_CONTENT).clearTextField();
-        String input = getRandomString(60);
+        String input = getRandomString(30);
         getObjectById(MePage.ABOUT_ME_CONTENT).setText(input);
         clickById(MePage.USER_EDIT_DONE);
         //验证个性签名
@@ -106,17 +106,17 @@ public class AboutMeCase extends VP2 {
     }
     //超过最大的字符时的处理
     @Test
-    public void testEdit61C() throws UiObjectNotFoundException, IOException {
+    public void testEdit40C() throws UiObjectNotFoundException, IOException {
         MeAction.navToUserEdit();
         clickById(MePage.NAV_EDIT_ABOUT_ME);
         getObjectById(MePage.ABOUT_ME_CONTENT).clearTextField();
-        String input = getRandomString(100);
+        String input = getRandomString(40);
         shellInputText(input);
         clickById(MePage.USER_EDIT_DONE);
         gDevice.pressBack();
         //验证个性签名
         String expect = MeAction.getAboutMe();
-        input = input.substring(0,60);
+        input = input.substring(0,30);
         Assert.assertEquals("change success",expect,input);
         Spoon.screenshot(gDevice,input);
     }
@@ -163,19 +163,19 @@ public class AboutMeCase extends VP2 {
         }
         gDevice.pressBack();
     }
-    //输入内容为特殊符号时的处理,长度=60
+    //输入内容为特殊符号时的处理,长度=30
     @Test
-    public void testEdit61_Symbol() throws UiObjectNotFoundException, IOException {
+    public void testEdi40_Symbol() throws UiObjectNotFoundException, IOException {
         MainAction.navToMe();
         Spoon.screenshot(gDevice,"Me");
         clickById(MePage.ID_USER_EDIT);
         clickById(MePage.NAV_EDIT_ABOUT_ME);
         getObjectById(MePage.ABOUT_ME_CONTENT).clearTextField();
-        String input = getRandomSymbol(100);
+        String input = getRandomSymbol(40);
         shellInputText(input);
         clickById(MePage.USER_EDIT_DONE);
         String expect = MeAction.getAboutMe();
-        input = input.substring(0,60);
+        input = input.substring(0,30);
         Assert.assertEquals("about me",input,expect);
         Spoon.screenshot("symbol",input);
     }

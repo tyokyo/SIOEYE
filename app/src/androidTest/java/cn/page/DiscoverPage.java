@@ -16,7 +16,8 @@ public class DiscoverPage {
     //recommend_list
     public static final String ID_MAIN_TAB_RECOMMAND_LIST = "cn.sioeye.sioeyeapp:id/recommend_list";
     public static final String ID_MAIN_TAB_PROFILE_MINI_HOME ="cn.sioeye.sioeyeapp:id/profile_mini_home";
-    public static final String ID_MAIN_TAB_PROFILE_MINI_NAME ="cn.sioeye.sioeyeapp:id/profile_mini_name";
+    //nick name
+    public static final String ID_MAIN_TAB_PROFILE_MINI_NAME ="cn.sioeye.sioeyeapp:id/tv_nickname";
     public static final String ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER ="cn.sioeye.sioeyeapp:id/profile_mini_num_follower";
     public static final String ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW ="cn.sioeye.sioeyeapp:id/profile_mini_follow";
     //navigate to  Device

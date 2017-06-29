@@ -37,7 +37,7 @@ public class MeAction extends VP2{
         if (id_exists(MePage.ID_ME_BROADCAST)){
             clickById(MePage.ID_ME_BROADCAST);
         }else{
-            clickByText("Video");
+            clickByText("Videos");
         }
     }
     public static void clickFollowing() throws UiObjectNotFoundException {
@@ -51,7 +51,7 @@ public class MeAction extends VP2{
         if (id_exists(MePage.ID_ME_FOLLOWERS)){
             clickById(MePage.ID_ME_FOLLOWERS);
         }else{
-            clickByText("Follower");
+            clickByText("Followers");
         }
     }
     public static void swipeUpDown(String ResourceID,int times) throws UiObjectNotFoundException {

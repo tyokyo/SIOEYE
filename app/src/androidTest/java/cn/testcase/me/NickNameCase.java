@@ -40,8 +40,6 @@ public class NickNameCase extends VP2 {
         clearText(MePage.SAMPLE_CONTENT);
         setText(MePage.SAMPLE_CONTENT,getRandomString(3));
         clickById(MePage.USER_EDIT_DONE);
-        clickById(MePage.USER_EDIT_DONE);
-        clickById(MePage.USER_EDIT_DONE);
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
@@ -62,13 +60,13 @@ public class NickNameCase extends VP2 {
     public void testChangeNnMaxC() throws UiObjectNotFoundException, IOException {
         MeAction.navToNickName();
         clearText(MePage.SAMPLE_CONTENT);
-        String nickname = getRandomString(60);
+        String nickname = getRandomString(100);
         shellInputText(nickname);
         clickById(MePage.USER_EDIT_DONE);
         waitTime(3);
         String currentNick = getTex(MePage.GETNICKNAMECONTENT);
-        if (currentNick.length()!=30){
-            Asst.fail("max length is 30");
+        if (currentNick.length()!=15){
+            Asst.fail("max length is 15");
         }
         Spoon.screenshot(gDevice,"change_nick_name");
     }
@@ -81,7 +79,7 @@ public class NickNameCase extends VP2 {
         String expectNick = getTex(MePage.GETNICKNAMECONTENT);
         clickById(MePage.NAV_EDIT_NICKNAME);
         clearText(MePage.SAMPLE_CONTENT);
-        String nickname = getRandomString(20);
+        String nickname = getRandomString(10);
         shellInputText(nickname);
         gDevice.pressBack();
         waitTime(3);
