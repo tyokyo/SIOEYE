@@ -1,9 +1,7 @@
 package iris4G.currentTestCase;
 
 import android.os.RemoteException;
-import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
 
 import com.squareup.spoon.Spoon;
@@ -175,19 +173,19 @@ public class CurrentTestCase extends VP2 {
      * 两次失败会产生一个两分钟的电流锯齿波
      */
     private void checkLiveStatusAndTry2s(int a) throws Exception {
-        gDevice.wait(Until.gone(By.textStartsWith("Initializing Live Stream")), 60000);
+        waitUntilFind(Iris4GPage.recording_time_id,38000);
         waitTime(3);
         UiObject recordingTimeId = getObjectById(Iris4GPage.recording_time_id);
         if (!recordingTimeId.exists()) {
-            waitTime(1);
             gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);//消除对话框
-            waitTime(3);
+            waitTime(2);
             gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
             logger.info("Try again");
-            gDevice.wait(Until.gone(By.textStartsWith("Initializing Live Stream")), 60000);
+            waitUntilFind(Iris4GPage.recording_time_id,38000);
             waitTime(3);
             UiObject recordingTimeIdAgain = getObjectById(Iris4GPage.recording_time_id);
             if (!recordingTimeIdAgain.exists()) {
+                gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);//消除对话框
                 logger.info("Live Failed");
                 Spoon.screenshot("LiveFailed");
                 logger.info("电流锯齿波");
@@ -410,7 +408,8 @@ public class CurrentTestCase extends VP2 {
     }
 //    @Test
 //    public void testGalleryLive() throws Exception {
-//        galleryToLiveScreenOn();
+//        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+//        checkLiveStatusAndTry2s(1);
 //    }
 
     @Test
