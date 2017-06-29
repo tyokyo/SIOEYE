@@ -36,8 +36,8 @@ public class FeedBackCase extends VP2{
         //String input = getRandomString(40);
         //shellInputText(input);
         clickById(MePage.HELP_DONE);
-        waitHasObject(MePage.SETTINGS_CB_DIRECTOR,10000);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
+        waitHasObject(MePage.SETTINGS_3G_NETWORK,10000);
+        boolean feedback_status=getObjectById(MePage.SETTINGS_3G_NETWORK).exists();
         Asst.assertEquals("Submit success",true,feedback_status);
         Spoon.screenshot("feedback");
     }
@@ -50,8 +50,8 @@ public class FeedBackCase extends VP2{
         shellInputText(input);
         Spoon.screenshot("100c");
         clickById(MePage.HELP_DONE);
-        waitHasObject(MePage.SETTINGS_CB_DIRECTOR,10000);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
+        waitHasObject(MePage.SETTINGS_3G_NETWORK,10000);
+        boolean feedback_status=getObjectById(MePage.SETTINGS_3G_NETWORK).exists();
         Asst.assertEquals("Submit success",true,feedback_status);
         Spoon.screenshot("feedback");
     }
@@ -65,8 +65,8 @@ public class FeedBackCase extends VP2{
         logger.info("input char:"+getObjectById(MePage.HELP_FEEDBACK_CONTENT).getText().length());
         Spoon.screenshot("1000c");
         clickById(MePage.HELP_DONE);
-        waitHasObject(MePage.SETTINGS_CB_DIRECTOR,10000);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
+        waitHasObject(MePage.SETTINGS_3G_NETWORK,10000);
+        boolean feedback_status=getObjectById(MePage.SETTINGS_3G_NETWORK).exists();
         Asst.assertEquals("Submit success",true,feedback_status);
         Spoon.screenshot("feedback");
     }
@@ -80,8 +80,8 @@ public class FeedBackCase extends VP2{
         logger.info("input char:"+getObjectById(MePage.HELP_FEEDBACK_CONTENT).getText().length());
         Spoon.screenshot("500c");
         clickById(MePage.HELP_DONE);
-        waitHasObject(MePage.SETTINGS_CB_DIRECTOR,10000);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
+        waitHasObject(MePage.SETTINGS_3G_NETWORK,10000);
+        boolean feedback_status=getObjectById(MePage.SETTINGS_3G_NETWORK).exists();
         Asst.assertEquals("Submit success",true,feedback_status);
         Spoon.screenshot("feedback");
     }
