@@ -88,6 +88,7 @@ public class FollowingAction extends VP2{
         Random r = new Random();
         int int_r =r.nextInt(size);
         logger.info("size:"+size);
+        logger.info("size_int_random:"+int_r);
         UiObject2 linearLayout_UiObject2 =LinearLayoutList_filter.get(int_r);
         List<UiObject2> textViews =linearLayout_UiObject2.findObjects(By.clazz(TextView.class));
         String followers_videos=textViews.get(1).getText();
