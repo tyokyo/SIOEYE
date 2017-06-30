@@ -163,46 +163,29 @@ public class AccountAction extends VP2{
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID).setText(sioEye);
         waitTime(2);
     }
-    public static void checkVisibleAndUnVisiblePassword() throws UiObjectNotFoundException, IOException {
+    public static void checkUnVisiblePassword() throws UiObjectNotFoundException, IOException {
         String randomPassword= Constant.randomStringGenerator(16);
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(randomPassword);
         waitTime(1);
         if (getUiObjectByText(randomPassword).exists())
         {
-            clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
-            clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
-            waitTime(1);
-            if (getUiObjectByText(randomPassword).exists())
-            {
-                Spoon.screenshot("SetPasswordUnVisibleFailed");
-                Assert.fail("SetPasswordUnVisibleFailed");
-            }
-            else
-            {
-                clearText(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT);
-                randomPassword= Constant.randomStringGenerator(28);
-                getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(randomPassword);
-                waitTime(1);
-                if (getUiObjectByText(randomPassword).exists())
-                {
-                    Spoon.screenshot("PasswordIsVisible");
-                    Assert.fail("InputPasswordByUnVisibleButPasswordIsVisible");
-                }
-                else {
-                    clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
-                    waitTime(1);
-                    if (!getUiObjectByText(randomPassword).exists())
-                    {
-                        Spoon.screenshot("PasswordIsUNVisible");
-                        Assert.fail("PasswordIsVisible");
-                    }
-                }
-            }
+            Assert.fail("DefaultPasswordIsUnVisible");
+        }
+        Spoon.screenshot("DefaultPasswordIsUnVisible");
+    }
+    public static void checkVisiblePassword() throws UiObjectNotFoundException, IOException {
+        String randomPassword= Constant.randomStringGenerator(16);
+        getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(randomPassword);
+        waitTime(1);
+        clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
+        waitTime(1);
+        if (getUiObjectByText(randomPassword).exists())
+        {
+            Spoon.screenshot("PasswordIsVisible");
         }
         else
         {
-            Spoon.screenshot("DefaultPasswordIsUnVisible");
-            Assert.fail("DefaultPasswordIsUnVisible");
+            Assert.fail("PasswordIsVisible");
         }
     }
         //仅仅一个登陆的动作

@@ -4,6 +4,8 @@ package cn.page;
  * Created by elon on 2016/10/11.
  */
 public class MePage {
+    //返回
+    public static final String ID_IMG_BACK="cn.sioeye.sioeyeapp:id/img_back_logo";
     public static final String ID_WELCOME_PAGE_VP="cn.sioeye.sioeyeapp:id/welcome_page_vp";
     public static final String ID_WELCOME_PAGE_VP_OK="cn.sioeye.sioeyeapp:id/welcome_page_ok";
 

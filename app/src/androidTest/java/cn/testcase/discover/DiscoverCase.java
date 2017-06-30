@@ -89,6 +89,7 @@ public class DiscoverCase extends VP2 {
      */
     public void testDoubleClickSearch() throws IOException, UiObjectNotFoundException {
         MainAction.clickDiscover();
+        waitUntilFind(DiscoverPage.ID_HOT_RECOMMEND,10000);
         UiObject2 frameLayout = getObject2ById(DiscoverPage.ID_HOT_RECOMMEND).getParent().getParent();
         UiObject2 searchObject = frameLayout.findObject(By.clazz(android.widget.ImageView.class));
         Rect searchRect = searchObject.getVisibleBounds();

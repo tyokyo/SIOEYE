@@ -277,27 +277,36 @@ public class LoginCase extends VP2 {
     随机产生一个邮箱
     结果：无“提示重置密码链接已经发送到注册邮箱中”
      */
-    public void testForgotPasswordByEmail() throws UiObjectNotFoundException {
+    public void testForgotPasswordByEmailNotExist() throws UiObjectNotFoundException {
         getObjectByTextContains("Forgot your password?").click();
         String email=Constant.randomEmail(26);
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(email);
         waitTime(1);
+        Spoon.screenshot("resetPassword");
         getObjectById(AccountPage.SIGN_UP_CONTINUE).click();
-        //重置密码的链接已经发送到你注册的邮箱
+        //无重置密码的链接已经发送到你注册的邮箱
         if (getObjectByTextContains("The reset password email has been sent").exists()){
             Spoon.screenshot("invalidEmailCanSentForgotPasswordEmail");
             Assert.fail("invalidEmailCanSentForgotPasswordEmail");
         }else {
-            email=Constant.getUserName("email");
-            getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(email);
-            waitTime(1);
-            getObjectById(AccountPage.SIGN_UP_CONTINUE).click();
-            waitTime(5);
-            if (!getObjectByTextContains("The reset password email has been sent").exists()){
-                Spoon.screenshot("RegisteredEmailCannotSentForgotPasswordEmail");
-                Assert.fail("RegisteredEmailCannotSentForgotPasswordEmail");
-            }
-        }
 
+        }
+    }
+    @Test
+    public void testForgotPasswordByEmailExist() throws UiObjectNotFoundException {
+        getObjectByTextContains("Forgot your password?").click();
+        String email=Constant.getUserName("email");
+        Spoon.screenshot("resetPassword");
+        getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(email);
+        waitTime(1);
+        getObjectById(AccountPage.SIGN_UP_CONTINUE).click();
+        waitUntilFindTextContains("Reset your password",10000);
+        Spoon.screenshot("resetPassword");
+        //无重置密码的链接已经发送到你注册的邮箱
+        if (getObjectByTextContains("The reset password email has been sent").exists()){
+            clickById(AccountPage.LOG_OUT_OK);
+        }else {
+            Assert.fail("reset");
+        }
     }
 }

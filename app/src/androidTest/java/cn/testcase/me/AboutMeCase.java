@@ -106,17 +106,18 @@ public class AboutMeCase extends VP2 {
     }
     //超过最大的字符时的处理
     @Test
-    public void testEdit40C() throws UiObjectNotFoundException, IOException {
+    public void testEdit70C() throws UiObjectNotFoundException, IOException {
         MeAction.navToUserEdit();
         clickById(MePage.NAV_EDIT_ABOUT_ME);
         getObjectById(MePage.ABOUT_ME_CONTENT).clearTextField();
-        String input = getRandomString(40);
+        String input = getRandomString(70);
         shellInputText(input);
         clickById(MePage.USER_EDIT_DONE);
-        gDevice.pressBack();
+        waitTime(3);
+        //gDevice.pressBack();
         //验证个性签名
         String expect = MeAction.getAboutMe();
-        input = input.substring(0,30);
+        input = input.substring(0,60);
         Assert.assertEquals("change success",expect,input);
         Spoon.screenshot(gDevice,input);
     }
@@ -171,11 +172,10 @@ public class AboutMeCase extends VP2 {
         clickById(MePage.ID_USER_EDIT);
         clickById(MePage.NAV_EDIT_ABOUT_ME);
         getObjectById(MePage.ABOUT_ME_CONTENT).clearTextField();
-        String input = getRandomSymbol(40);
+        String input = getRandomSymbol(10);
         shellInputText(input);
         clickById(MePage.USER_EDIT_DONE);
         String expect = MeAction.getAboutMe();
-        input = input.substring(0,30);
         Assert.assertEquals("about me",input,expect);
         Spoon.screenshot("symbol",input);
     }
