@@ -4,6 +4,9 @@ package cn.page;
  * Created by elon on 2016/10/11.
  */
 public class MePage {
+    public static final String ID_WELCOME_PAGE_VP="cn.sioeye.sioeyeapp:id/welcome_page_vp";
+    public static final String ID_WELCOME_PAGE_VP_OK="cn.sioeye.sioeyeapp:id/welcome_page_ok";
+
     //navigate to 我
     public static final String ID_MAIN_TAB_ME="cn.sioeye.sioeyeapp:id/main_tab_me";
     //navigate to 发现

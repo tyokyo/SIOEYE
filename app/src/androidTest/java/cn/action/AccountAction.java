@@ -1,5 +1,6 @@
 package cn.action;
 
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import com.squareup.spoon.Spoon;
@@ -57,12 +58,19 @@ public class AccountAction extends VP2{
         if(text_exists_contain("Close")){
             clickTextContain("Close");
         }
+        if (id_exists(MePage.ID_WELCOME_PAGE_VP)){
+            getObject2ById(MePage.ID_WELCOME_PAGE_VP).swipe(Direction.LEFT,1000);
+            waitTime(3);
+            clickById(MePage.ID_WELCOME_PAGE_VP);
+            waitTime(2);
+        }
         if(text_exists_contain("OK")){
             clickTextContain("OK");
         }
         if(text_exists_contain("Ok")){
             clickTextContain("Ok");
         }
+
         MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             waitUntilFindText("Log in",10000);
