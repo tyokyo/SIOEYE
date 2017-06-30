@@ -50,7 +50,7 @@ public class TestFailedListener extends RunListener {
         super.testFailure(failure);
         String className=failure.getDescription().getClassName();
         String methodName=failure.getDescription().getMethodName();
-        Spoon.screenshot("failure",className,methodName);
+        Spoon.screenshot("ListenerFailure",className,methodName);
         logger.info("testFailure-" +className+"."+methodName);
     }
 
