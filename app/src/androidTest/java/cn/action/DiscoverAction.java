@@ -235,7 +235,14 @@ public class DiscoverAction extends VP2 {
                     }else{
                         like = Integer.parseInt(likeStr);
                     }
-                    int zan = Integer.parseInt(textViews.get(1).getText());
+                    int zan =0;
+                    String zanStr = textViews.get(1).getText().trim();
+                    if (zanStr.toLowerCase().contains("k")){
+                        zanStr=zanStr.replaceAll("k","");
+                        zan = (int) (Double.parseDouble(zanStr)*1000);
+                    }else{
+                        zan = Integer.parseInt(zanStr);
+                    }
                     String address = textViews.get(2).getText();
                     videoBean.setAddress(address);
                     videoBean.setLike(like);
