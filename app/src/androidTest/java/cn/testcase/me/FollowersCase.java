@@ -1,18 +1,17 @@
 package cn.testcase.me;
 
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.Until;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -21,7 +20,6 @@ import bean.WatcherBean;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
-import cn.action.FollowersAction;
 import cn.action.FollowingAction;
 import cn.action.MeAction;
 import cn.page.App;
@@ -266,7 +264,7 @@ public class FollowersCase extends VP2 {
                 String zan_before = bean_before_zan.getZan();
                 boolean K=false;
                 int zan_before_int = 0;
-                if (zan_before.contains("K")){
+                if (zan_before.toUpperCase().contains("K")){
                     K=true;
                 }else{
                     zan_before_int=Integer.parseInt(zan_before);
@@ -322,7 +320,7 @@ public class FollowersCase extends VP2 {
                 String zan_before = bean_before_zan.getZan();
                 boolean K=false;
                 int zan_before_int = 0;
-                if (zan_before.contains("K")){
+                if (zan_before.toUpperCase().contains("K")){
                     K=true;
                 }else{
                     zan_before_int=Integer.parseInt(zan_before);

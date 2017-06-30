@@ -227,7 +227,14 @@ public class DiscoverAction extends VP2 {
                 if (textViews.size() == 3) {
                     isFind=true;
                     logger.info("playBackVideo-size=3");
-                    int like = Integer.parseInt(textViews.get(0).getText());
+                    String likeStr = textViews.get(0).getText();
+                    int like=0;
+                    if (likeStr.contains("k")){
+                        likeStr=likeStr.replaceAll("k","");
+                        like = (int) (Double.parseDouble(likeStr)*1000);
+                    }else{
+                        like = Integer.parseInt(likeStr);
+                    }
                     int zan = Integer.parseInt(textViews.get(1).getText());
                     String address = textViews.get(2).getText();
                     videoBean.setAddress(address);

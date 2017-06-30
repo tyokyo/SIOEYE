@@ -223,7 +223,7 @@ public class FollowingCase extends VP2 {
                 String zan_before = bean_before_zan.getZan();
                 boolean K=false;
                 int zan_before_int = 0;
-                if (zan_before.contains("K")){
+                if (zan_before.toUpperCase().contains("K")){
                     K=true;
                 }else{
                     zan_before_int=Integer.parseInt(zan_before);
@@ -276,7 +276,7 @@ public class FollowingCase extends VP2 {
                 String zan_before = bean_before_zan.getZan();
                 boolean K=false;
                 int zan_before_int = 0;
-                if (zan_before.contains("K")){
+                if (zan_before.toUpperCase().contains("K")){
                     K=true;
                 }else{
                     zan_before_int=Integer.parseInt(zan_before);
