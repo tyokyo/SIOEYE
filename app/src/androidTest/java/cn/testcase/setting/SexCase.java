@@ -36,6 +36,7 @@ public class SexCase extends VP2 {
         //修改性别为-male
         MeAction.navToSex();
         clickById(MePage.SETTINGS_SEX_MALE);
+        waitUntilGone(MePage.SETTINGS_SEX_MALE,10000);
         //验证
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToSex();
@@ -50,6 +51,7 @@ public class SexCase extends VP2 {
         //修改性别为-female
         MeAction.navToSex();
         clickById(MePage.SETTINGS_SEX_FEMALE);
+        waitUntilGone(MePage.SETTINGS_SEX_MALE,10000);
         //验证
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToSex();
@@ -64,6 +66,7 @@ public class SexCase extends VP2 {
         //修改性别为-female
         MeAction.navToSex();
         clickById(MePage.SETTINGS_SEX_SECRET);
+        waitUntilGone(MePage.SETTINGS_SEX_MALE,10000);
         //验证
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToSex();

@@ -5,20 +5,21 @@ import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Direction;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.io.IOException;
 import java.util.logging.Logger;
+
 import bean.FollowingBean;
 import bean.WatcherBean;
-import ckt.base.VP;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
@@ -202,6 +203,7 @@ public class FollowingCase extends VP2 {
     public void testFollowingZanKAdd() throws UiObjectNotFoundException, IOException {
         //进入关注
         MeAction.navToFollowing();
+        waitTime(3);
         int following_size= FollowingAction.getFollowingSize();
         if (following_size>=1){
             //获取随机的一个用户信息
@@ -313,6 +315,7 @@ public class FollowingCase extends VP2 {
     @Test
     public void testSwipeToViewVideo() throws UiObjectNotFoundException, IOException {
         MeAction.navToFollowing();
+        waitTime(3);
         int following_size= FollowingAction.getFollowingSize();
         if (following_size>=1){
             //获取随机的一个用户信息
@@ -326,7 +329,9 @@ public class FollowingCase extends VP2 {
             if (broadcast_size>=1){
                 //滑动操作
                 MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,10);
+                //播放视频
                 FollowingAction.clickFollowingBroadcast();
+                //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
                 waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);
                 //play video

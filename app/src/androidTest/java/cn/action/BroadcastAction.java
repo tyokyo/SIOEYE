@@ -82,7 +82,7 @@ public class BroadcastAction extends VP2{
         for (int i = 0; i <20 ; i++) {
             if (getObjectById(MePage.BROADCAST_VIEW_ZAN).isEnabled()==true&&
                     getObjectById(MePage.BROADCAST_VIEW_TIPTEXT).isEnabled()==true&&
-                    getUiObjectByText("what is your opinion").exists()){
+                    getUiObjectByText("Add a comment").exists()){
                 logger.info("聊天室连接成功-说点什么吧");
                 break;
             } else{
