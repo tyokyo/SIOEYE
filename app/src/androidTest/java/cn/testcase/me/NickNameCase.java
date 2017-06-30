@@ -65,8 +65,8 @@ public class NickNameCase extends VP2 {
         clickById(MePage.USER_EDIT_DONE);
         waitTime(3);
         String currentNick = getTex(MePage.GETNICKNAMECONTENT);
-        if (currentNick.length()!=15){
-            Asst.fail("max length is 15");
+        if (currentNick.length()!=30){
+            Asst.fail("max length is 30");
         }
         Spoon.screenshot(gDevice,"change_nick_name");
     }
@@ -81,7 +81,7 @@ public class NickNameCase extends VP2 {
         clearText(MePage.SAMPLE_CONTENT);
         String nickname = getRandomString(10);
         shellInputText(nickname);
-        gDevice.pressBack();
+        clickById(MePage.ID_IMG_BACK);
         waitTime(3);
         String activeNick = getTex(MePage.GETNICKNAMECONTENT);
         Asst.assertEquals("change nick but not save it",expectNick,activeNick);
