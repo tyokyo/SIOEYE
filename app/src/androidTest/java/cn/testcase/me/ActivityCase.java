@@ -3,12 +3,8 @@ package cn.testcase.me;
 import android.graphics.Point;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiCollection;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
-import android.support.test.uiautomator.Until;
 
 import com.squareup.spoon.Spoon;
 
@@ -18,7 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -27,7 +22,6 @@ import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.ActivityAction;
 import cn.action.MeAction;
-import cn.action.WatchAction;
 import cn.page.App;
 import cn.page.MePage;
 
@@ -221,7 +215,7 @@ public class ActivityCase extends VP2{
     //My interests
     //最多可以添加多少个My interests  10个?
     @Test
-    public void test_Add_Input_MyInterests_10() throws IOException, UiObjectNotFoundException {
+    public void test_Add_Input_MyInterests_6() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
         Point point = MeAction.getPointToDoComment();
         MeAction.navToActivities();
@@ -229,7 +223,7 @@ public class ActivityCase extends VP2{
         ActivityAction.deleteAllMyInterests();
         String content="";
         //添加10个 爱好
-        int total_add = 10;
+        int total_add = 6;
         clickById(MePage.ACTIVITIES_MY_INTERESTS_ADD);
         for (int i = 1; i <=total_add ; i++) {
             String input = getRandomString(3);
