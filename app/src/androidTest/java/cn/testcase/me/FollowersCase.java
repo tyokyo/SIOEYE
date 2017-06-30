@@ -103,7 +103,7 @@ public class FollowersCase extends VP2 {
                 WatcherBean watcherBean1 = BroadcastAction.getWatcher();
                 String comments_before = watcherBean1.getComments();
                 String input_comments = getRandomString(130);
-                int comments_count_before=Integer.parseInt(comments_before);
+                int comments_count_before=cover(comments_before);
                 //输入评论内容
                 clickById(MePage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
@@ -118,8 +118,12 @@ public class FollowersCase extends VP2 {
                 //验证评论数+1
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
-                int comments_count=Integer.parseInt(after_comments);
-                Asst.assertEquals(comments_count_before+1,comments_count);
+                int comments_count=cover(after_comments);
+                if (comments_count_before>1000){
+                    Asst.assertEquals(comments_count_before,comments_count);
+                }else{
+                    Asst.assertEquals(comments_count_before+1,comments_count);
+                }
                 Spoon.screenshot("testComments_Length_130",input_comments);
             }else{
                 logger.info("no_video");
@@ -156,7 +160,7 @@ public class FollowersCase extends VP2 {
                 WatcherBean watcherBean1 = BroadcastAction.getWatcher();
                 String comments_before = watcherBean1.getComments();
                 String input_comments = getRandomString(120);
-                int comments_count_before=Integer.parseInt(comments_before);
+                int comments_count_before=cover(comments_before);
                 //输入评论内容
                 clickById(MePage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
@@ -170,8 +174,12 @@ public class FollowersCase extends VP2 {
                 //验证评论数+1
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
-                int comments_count=Integer.parseInt(after_comments);
-                Asst.assertEquals(comments_count_before+1,comments_count);
+                int comments_count=cover(after_comments);
+                if (comments_count_before>1000){
+                    Asst.assertEquals(comments_count_before,comments_count);
+                }else{
+                    Asst.assertEquals(comments_count_before+1,comments_count);
+                }
                 Spoon.screenshot("testComments_Length_130",input_comments);
                 gDevice.pressBack();
             }else{
@@ -209,7 +217,7 @@ public class FollowersCase extends VP2 {
                 WatcherBean watcherBean1 = BroadcastAction.getWatcher();
                 String comments_before = watcherBean1.getComments();
                 String input_comments = getRandomString(20);
-                int comments_count_before=Integer.parseInt(comments_before);
+                int comments_count_before=cover(comments_before);
                 //输入评论内容
                 clickById(MePage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
@@ -223,8 +231,12 @@ public class FollowersCase extends VP2 {
                 //验证评论数+1
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
-                int comments_count=Integer.parseInt(after_comments);
-                Asst.assertEquals(comments_count_before+1,comments_count);
+                int comments_count=cover(after_comments);
+                if (comments_count_before>1000){
+                    Asst.assertEquals(comments_count_before,comments_count);
+                }else{
+                    Asst.assertEquals(comments_count_before+1,comments_count);
+                }
                 Spoon.screenshot("testComments_Length_130",input_comments);
                 gDevice.pressBack();
             }else{
@@ -262,21 +274,15 @@ public class FollowersCase extends VP2 {
                 //获取当前的点赞数目
                 WatcherBean bean_before_zan = BroadcastAction.getWatcher();
                 String zan_before = bean_before_zan.getZan();
-                boolean K=false;
-                int zan_before_int = 0;
-                if (zan_before.toUpperCase().contains("K")){
-                    K=true;
-                }else{
-                    zan_before_int=Integer.parseInt(zan_before);
-                }
+                int zan_before_int = cover(zan_before);
                 //进行点赞操作
                 clickById(MePage.BROADCAST_VIEW_ZAN);
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();
                 String zan_after = bean_after_zan.getZan();
-                int zan_after_int= Integer.parseInt(zan_after);
+                int zan_after_int= cover(zan_after);
                 //验证点赞数+1
-                if (K){
+                if (zan_before_int>1000){
                     Asst.assertEquals("check zan +1",zan_before,zan_after);
                 }else{
                     Asst.assertEquals("check zan +1",zan_before_int+1,zan_after_int);
@@ -318,13 +324,7 @@ public class FollowersCase extends VP2 {
                 //获取当前的点赞数目
                 WatcherBean bean_before_zan = BroadcastAction.getWatcher();
                 String zan_before = bean_before_zan.getZan();
-                boolean K=false;
-                int zan_before_int = 0;
-                if (zan_before.toUpperCase().contains("K")){
-                    K=true;
-                }else{
-                    zan_before_int=Integer.parseInt(zan_before);
-                }
+                int zan_before_int = cover(zan_before);
                 //弹出评论输入框-点赞
                 clickById(MePage.BROADCAST_VIEW_TIPTEXT);
                 waitTime(2);
@@ -334,9 +334,9 @@ public class FollowersCase extends VP2 {
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();
                 String zan_after = bean_after_zan.getZan();
-                int zan_after_int= Integer.parseInt(zan_after);
+                int zan_after_int= cover(zan_after);
                 //验证点赞数+1
-                if (K){
+                if (zan_before_int>1000){
                     Asst.assertEquals("check zan +1",zan_before,zan_after);
                 }else{
                     Asst.assertEquals("check zan +1",zan_before_int+1,zan_after_int);

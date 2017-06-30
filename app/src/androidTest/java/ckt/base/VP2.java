@@ -41,6 +41,15 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 public class VP2 extends  VP{
     private static final int LAUNCH_TIMEOUT = 10000;
     public static Logger logger = Logger.getLogger(VP.class.getName());
+    public static int cover(String key){
+        int value = 0 ;
+        if (key.trim().toUpperCase().contains("K")){
+            value= (int) (Double.parseDouble(key.replaceAll("K","").replaceAll("k",""))*1000);
+        }else{
+            value = Integer.parseInt(key);
+        }
+        return  value;
+    }
     /**
      * 等待时间设置
      *

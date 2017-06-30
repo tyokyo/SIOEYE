@@ -48,6 +48,7 @@ public class BroadCastsCase extends VP2{
         //确保App 处于登录状态
         AccountAction.inLogin();
     }
+
     //直播 ：随机选择一个直播列表的视频-播放视频60秒
     @Test
     public void testPlayBroadcastVideo() throws UiObjectNotFoundException, IOException {
@@ -256,7 +257,11 @@ public class BroadCastsCase extends VP2{
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
-            Asst.assertEquals(comments_count_before+1,comments_count);
+            if (comments_count_before>1000){
+                Asst.assertEquals(comments_count_before,comments_count);
+            }else{
+                Asst.assertEquals(comments_count_before+1,comments_count);
+            }
             Spoon.screenshot("testComments_Length_120",input_comments);
             gDevice.pressBack();
         }
@@ -276,7 +281,12 @@ public class BroadCastsCase extends VP2{
             WatcherBean watcherBean1 = BroadcastAction.getWatcher();
             String comments_before = watcherBean1.getComments();
             String input_comments = getRandomString(130);
-            int comments_count_before=Integer.parseInt(comments_before);
+            int comments_count_before= 0 ;
+            if (comments_before.trim().toUpperCase().contains("K")){
+                comments_count_before= (int) (Double.parseDouble(comments_before.replaceAll("k",""))*1000);
+            }else{
+                comments_count_before = Integer.parseInt(comments_before);
+            }
             //输入评论内容
             clickById(MePage.BROADCAST_VIEW_TIPTEXT);
             shellInputText(input_comments);
@@ -292,7 +302,11 @@ public class BroadCastsCase extends VP2{
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
-            Asst.assertEquals(comments_count_before+1,comments_count);
+            if (comments_count_before>1000){
+                Asst.assertEquals(comments_count_before,comments_count);
+            }else{
+                Asst.assertEquals(comments_count_before+1,comments_count);
+            }
             Spoon.screenshot("testComments_Length_130",input_comments);
             gDevice.pressBack();
         }
@@ -311,7 +325,13 @@ public class BroadCastsCase extends VP2{
             WatcherBean watcherBean1 = BroadcastAction.getWatcher();
             String comments_before = watcherBean1.getComments();
             String input_comments = getRandomString(20);
-            int comments_count_before=Integer.parseInt(comments_before);
+            int comments_count_before= 0 ;
+            if (comments_before.trim().toUpperCase().contains("K")){
+                comments_count_before= (int) (Double.parseDouble(comments_before.replaceAll("k",""))*1000);
+            }else{
+                comments_count_before = Integer.parseInt(comments_before);
+            }
+
             //输入评论内容
             clickById(MePage.BROADCAST_VIEW_TIPTEXT);
             shellInputText(input_comments);
@@ -326,7 +346,11 @@ public class BroadCastsCase extends VP2{
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
             int comments_count=Integer.parseInt(after_comments);
-            Asst.assertEquals(comments_count_before+1,comments_count);
+            if (comments_count_before>1000){
+                Asst.assertEquals(comments_count_before,comments_count);
+            }else{
+                Asst.assertEquals(comments_count_before+1,comments_count);
+            }
             Spoon.screenshot("testComments_Length_20",input_comments);
         }
     }
