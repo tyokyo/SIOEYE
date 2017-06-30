@@ -59,7 +59,7 @@ public class AccountAction extends VP2{
             clickTextContain("Close");
         }
         if (id_exists(MePage.ID_WELCOME_PAGE_VP)){
-            getObject2ById(MePage.ID_WELCOME_PAGE_VP).swipe(Direction.LEFT,1000);
+            getObject2ById(MePage.ID_WELCOME_PAGE_VP).swipe(Direction.LEFT,0.6f);
             waitTime(3);
             clickById(MePage.ID_WELCOME_PAGE_VP);
             waitTime(2);
