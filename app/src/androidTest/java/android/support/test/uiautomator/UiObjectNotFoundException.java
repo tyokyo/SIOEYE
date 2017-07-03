@@ -38,7 +38,7 @@ public class UiObjectNotFoundException extends Exception {
         super(msg);
         logger.info("UiObjectNotFoundException->"+msg);
         Asst.fail("UiObjectNotFoundException:"+msg);
-        //Spoon.screenshot("UiObjectNotFoundException",msg);
+        Spoon.screenshot("UiObjectNotFoundException",msg);
     }
 
     /**
@@ -48,7 +48,7 @@ public class UiObjectNotFoundException extends Exception {
         super(detailMessage, throwable);
         logger.info("UiObjectNotFoundException->"+detailMessage+throwable.toString());
         Asst.fail("UiObjectNotFoundException:"+detailMessage+throwable.toString());
-        //Spoon.screenshot("throwable"+System.currentTimeMillis());
+        Spoon.screenshot("throwable"+System.currentTimeMillis());
     }
 
     /**
@@ -58,7 +58,7 @@ public class UiObjectNotFoundException extends Exception {
         super(throwable);
         logger.info("UiObjectNotFoundException->"+throwable.toString());
         Asst.fail("UiObjectNotFoundException:"+throwable.toString());
-        //Spoon.screenshot("UiObjectNotFoundException",throwable.toString());
+        Spoon.screenshot("UiObjectNotFoundException",throwable.toString());
     }
 
 }

@@ -4,6 +4,11 @@ package cn.page;
  * Created by elon on 2016/10/11.
  */
 public class MePage {
+    //返回
+    public static final String ID_IMG_BACK="cn.sioeye.sioeyeapp:id/img_back_logo";
+    public static final String ID_WELCOME_PAGE_VP="cn.sioeye.sioeyeapp:id/welcome_page_vp";
+    public static final String ID_WELCOME_PAGE_VP_OK="cn.sioeye.sioeyeapp:id/welcome_page_ok";
+
     //navigate to 我
     public static final String ID_MAIN_TAB_ME="cn.sioeye.sioeyeapp:id/main_tab_me";
     //navigate to 发现
@@ -46,7 +51,7 @@ public class MePage {
     public static final String ACTIVITY_IN_INTERESTED="cn.sioeye.sioeyeapp:id/tag_text";
 
     //about me
-    public static final String ABOUT_ME_CONTENT="cn.sioeye.sioeyeapp:id/sample_content";
+    public static final String ABOUT_ME_CONTENT="cn.sioeye.sioeyeapp:id/content";
     public static final String ABOUT_ME_DISPLAY="cn.sioeye.sioeyeapp:id/user_desc";
     public static final String ABOUT_ME_ID="cn.sioeye.sioeyeapp:id/about";
     public static final String ABOUT_ME_CONTENT_TEXT="cn.sioeye.sioeyeapp:id/content_text";
@@ -251,6 +256,8 @@ public class MePage {
     //导播控制
     public static final String SETTINGS_CB_DIRECTOR="cn.sioeye.sioeyeapp:id/cb_director";
     public static final String SETTINGS_CB_DIRECTOR_TEXT="cn.sioeye.sioeyeapp:id/tv_director_txt";
+    //允许在移动网络下播放\
+    public static final String SETTINGS_3G_NETWORK="cn.sioeye.sioeyeapp:id/cb_3g_network";
     //sex
     public static final String SETTINGS_SEX_MALE="cn.sioeye.sioeyeapp:id/rlt_male";
     public static final String SETTINGS_SEX_FEMALE="cn.sioeye.sioeyeapp:id/rlt_female";

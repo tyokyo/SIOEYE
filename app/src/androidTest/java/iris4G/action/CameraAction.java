@@ -120,6 +120,7 @@ public class CameraAction extends VP2 {
      * Click camera_setting_shortcut_id按钮
      */
     public static void cameraSetting() throws Exception {
+        waitUntilFind(Iris4GPage.camera_setting_shortcut_id,2000);
         clickById(Iris4GPage.camera_setting_shortcut_id);
     }
 

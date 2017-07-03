@@ -1,5 +1,6 @@
 package cn.action;
 
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import com.squareup.spoon.Spoon;
@@ -57,12 +58,19 @@ public class AccountAction extends VP2{
         if(text_exists_contain("Close")){
             clickTextContain("Close");
         }
+        if (id_exists(MePage.ID_WELCOME_PAGE_VP)){
+            getObject2ById(MePage.ID_WELCOME_PAGE_VP).swipe(Direction.LEFT,0.6f);
+            waitTime(3);
+            clickById(MePage.ID_WELCOME_PAGE_VP);
+            waitTime(2);
+        }
         if(text_exists_contain("OK")){
             clickTextContain("OK");
         }
         if(text_exists_contain("Ok")){
             clickTextContain("Ok");
         }
+
         MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
             waitUntilFindText("Log in",10000);
@@ -155,46 +163,29 @@ public class AccountAction extends VP2{
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID).setText(sioEye);
         waitTime(2);
     }
-    public static void checkVisibleAndUnVisiblePassword() throws UiObjectNotFoundException, IOException {
+    public static void checkUnVisiblePassword() throws UiObjectNotFoundException, IOException {
         String randomPassword= Constant.randomStringGenerator(16);
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(randomPassword);
         waitTime(1);
         if (getUiObjectByText(randomPassword).exists())
         {
-            clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
-            clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
-            waitTime(1);
-            if (getUiObjectByText(randomPassword).exists())
-            {
-                Spoon.screenshot("SetPasswordUnVisibleFailed");
-                Assert.fail("SetPasswordUnVisibleFailed");
-            }
-            else
-            {
-                clearText(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT);
-                randomPassword= Constant.randomStringGenerator(28);
-                getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(randomPassword);
-                waitTime(1);
-                if (getUiObjectByText(randomPassword).exists())
-                {
-                    Spoon.screenshot("PasswordIsVisible");
-                    Assert.fail("InputPasswordByUnVisibleButPasswordIsVisible");
-                }
-                else {
-                    clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
-                    waitTime(1);
-                    if (!getUiObjectByText(randomPassword).exists())
-                    {
-                        Spoon.screenshot("PasswordIsUNVisible");
-                        Assert.fail("PasswordIsVisible");
-                    }
-                }
-            }
+            Assert.fail("DefaultPasswordIsUnVisible");
+        }
+        Spoon.screenshot("DefaultPasswordIsUnVisible");
+    }
+    public static void checkVisiblePassword() throws UiObjectNotFoundException, IOException {
+        String randomPassword= Constant.randomStringGenerator(16);
+        getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(randomPassword);
+        waitTime(1);
+        clickById(AccountPage.ACCOUNT_PASSWORD_SHOW_BTN);
+        waitTime(1);
+        if (getUiObjectByText(randomPassword).exists())
+        {
+            Spoon.screenshot("PasswordIsVisible");
         }
         else
         {
-            Spoon.screenshot("DefaultPasswordIsUnVisible");
-            Assert.fail("DefaultPasswordIsUnVisible");
+            Assert.fail("PasswordIsVisible");
         }
     }
         //仅仅一个登陆的动作

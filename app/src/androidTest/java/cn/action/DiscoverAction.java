@@ -44,7 +44,7 @@ public class DiscoverAction extends VP2 {
         for (UiObject2 linearLayout : linearLayouts) {
             List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
             if (textViews.size() == 3) {
-                like = Integer.parseInt(textViews.get(1).getText());
+                like = cover(textViews.get(1).getText());
                 break;
             }
         }
@@ -69,6 +69,7 @@ public class DiscoverAction extends VP2 {
     //index=0-3
     public static String navToRecommendList(int index, int click_time) {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        waitUntilFind(DiscoverPage.ID_Swipe_target,5000);
         //刷新列表
         UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
         swipe_target.swipe(Direction.DOWN, 0.6f);
@@ -227,8 +228,13 @@ public class DiscoverAction extends VP2 {
                 if (textViews.size() == 3) {
                     isFind=true;
                     logger.info("playBackVideo-size=3");
-                    int like = Integer.parseInt(textViews.get(0).getText());
-                    int zan = Integer.parseInt(textViews.get(1).getText());
+                    String likeStr = textViews.get(0).getText();
+                    int like=cover(likeStr);
+
+                    int zan =0;
+                    String zanStr = textViews.get(1).getText().trim();
+                    zan = cover(zanStr);
+
                     String address = textViews.get(2).getText();
                     videoBean.setAddress(address);
                     videoBean.setLike(like);
@@ -256,8 +262,8 @@ public class DiscoverAction extends VP2 {
                 textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
                 if (textViews.size() == 2) {
                     if (linearLayout.getChildCount()==2&&linearLayout.getParent().getChildCount()==2){
-                        int like = Integer.parseInt(textViews.get(0).getText());
-                        int zan = Integer.parseInt(textViews.get(1).getText());
+                        int like = cover(textViews.get(0).getText());
+                        int zan = cover(textViews.get(1).getText());
                         videoBean.setAddress("");
                         videoBean.setLike(like);
                         videoBean.setZan(zan);

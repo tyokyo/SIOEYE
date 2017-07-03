@@ -240,7 +240,7 @@ public class AccountCase extends VP2{
             waitTime(3);
             Iris4GAction.cameraKey();
             Asst.assertEquals("Live succeed",true,CameraAction.checkLiveSuccess());
-            waitTime(20);
+            waitTime(35);
             Iris4GAction.cameraKey();
         }
     }

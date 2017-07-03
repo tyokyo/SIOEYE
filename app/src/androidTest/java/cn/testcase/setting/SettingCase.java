@@ -38,8 +38,42 @@ public class SettingCase extends VP2 {
         SettingAction.navToUpdate();
         Spoon.screenshot("HELP_VERSION_CHECK");
         //clickById(Me.HELP_BACK);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
+        boolean feedback_status=getObjectById(MePage.SETTINGS_3G_NETWORK).exists();
         Asst.assertEquals("back logo success",true,feedback_status);
+        gDevice.pressBack();
+    }
+    /**
+     *测试3G网络下可以观看
+     * @author elon
+     */
+    @Test
+    public void testEnable() throws UiObjectNotFoundException {
+        SettingAction.navToSetting();
+        boolean isChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
+        logger.info(""+isChecked);
+        if (isChecked==false){
+            clickById(MePage.SETTINGS_3G_NETWORK);
+            waitTime(2);
+        }
+    }
+    @Test
+    public void testDisable() throws UiObjectNotFoundException {
+        SettingAction.navToSetting();
+        boolean isChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
+        logger.info(""+isChecked);
+        if (isChecked==true){
+            clickById(MePage.SETTINGS_3G_NETWORK);
+            waitTime(2);
+        }
+    }
+    @Test
+    public void testAboutSioEye() throws UiObjectNotFoundException, IOException {
+        SettingAction.navToAboutSioEye();
+        Spoon.screenshot("HELP_ABOUT");
+        clickById(MePage.HELP_BACK);
+        waitUntilFind(MePage.SETTINGS_3G_NETWORK,10000);
+        boolean feedback_status=getObjectById(MePage.SETTINGS_3G_NETWORK).exists();
+        Asst.assertEquals("HELP_ABOUT",true,feedback_status);
         gDevice.pressBack();
     }
     /**
@@ -47,8 +81,7 @@ public class SettingCase extends VP2 {
      *测试开关导播
      * @author elon
      */
-    @Test
-    public void testEnable() throws UiObjectNotFoundException {
+    public void tesDirectorEnable() throws UiObjectNotFoundException {
         SettingAction.navToSetting();
         boolean isChecked=getObject2ById(MePage.SETTINGS_CB_DIRECTOR).isChecked();
         logger.info(""+isChecked);
@@ -60,8 +93,7 @@ public class SettingCase extends VP2 {
             Asst.assertEquals("打开直播",expect,active);
         }
     }
-    @Test
-    public void testDisable() throws UiObjectNotFoundException {
+    public void testDirectorDisable() throws UiObjectNotFoundException {
         SettingAction.navToSetting();
         boolean isChecked=getObject2ById(MePage.SETTINGS_CB_DIRECTOR).isChecked();
         logger.info(""+isChecked);
@@ -72,15 +104,5 @@ public class SettingCase extends VP2 {
             String expect="Enable the direct control, you can switch the scenes ";
             Asst.assertEquals("关闭直播",expect,active);
         }
-    }
-    @Test
-    public void testAboutSioEye() throws UiObjectNotFoundException, IOException {
-        SettingAction.navToAboutSioEye();
-        Spoon.screenshot("HELP_ABOUT");
-        clickById(MePage.HELP_BACK);
-        waitUntilFind(MePage.SETTINGS_CB_DIRECTOR,10000);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_CB_DIRECTOR).exists();
-        Asst.assertEquals("HELP_ABOUT",true,feedback_status);
-        gDevice.pressBack();
     }
 }

@@ -41,6 +41,15 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 public class VP2 extends  VP{
     private static final int LAUNCH_TIMEOUT = 10000;
     public static Logger logger = Logger.getLogger(VP.class.getName());
+    public static int cover(String key){
+        int value = 0 ;
+        if (key.trim().toUpperCase().contains("K")){
+            value= (int) (Double.parseDouble(key.replaceAll("K","").replaceAll("k",""))*1000);
+        }else{
+            value = Integer.parseInt(key);
+        }
+        return  value;
+    }
     /**
      * 等待时间设置
      *
@@ -56,10 +65,15 @@ public class VP2 extends  VP{
         }
     }
     public static void shellInputText(String text) throws IOException {
-        initDevice();
-        String command = String.format("input text %s",text);
-        logger.info(command);
-        gDevice.executeShellCommand("input text "+text);
+        try {
+            initDevice();
+            String command = String.format("input text %s",text);
+            logger.info(command);
+            gDevice.executeShellCommand("input text "+text);
+            waitTime(4);
+        }catch (Exception e){
+
+        }
     }
     public static void shellInputText(char text) throws IOException {
         initDevice();
@@ -657,15 +671,24 @@ public class VP2 extends  VP{
         Asst.assertThat(launcherPackage, notNullValue());
         gDevice.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), 5000);
 
-        //Launch the blueprint app
-        Context context = InstrumentationRegistry.getContext();
-        final Intent intent = context.getPackageManager().getLaunchIntentForPackage(BASIC_PACKAGE_NAME);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);//Clear out any previous instances.
-        context.startActivity(intent);
-        // Wait for the app to appear
-        gDevice.wait(Until.hasObject(By.pkg(BASIC_PACKAGE_NAME).depth(0)), LAUNCH_TIMEOUT);
-        //cn.sioeye.sioeyeapp:id/txt_cancel
-        //cn.sioeye.sioeyeapp:id/txt_ok
+        boolean launched = false;
+        for (int i = 0; i <5 ; i++) {
+            if (!launched){
+                //Launch the blueprint app
+                Context context = InstrumentationRegistry.getContext();
+                final Intent intent = context.getPackageManager().getLaunchIntentForPackage(BASIC_PACKAGE_NAME);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);//Clear out any previous instances.
+                context.startActivity(intent);
+                // Wait for the app to appear
+                gDevice.wait(Until.hasObject(By.pkg(BASIC_PACKAGE_NAME).depth(0)), LAUNCH_TIMEOUT);
+                //cn.sioeye.sioeyeapp:id/txt_cancel
+                //cn.sioeye.sioeyeapp:id/txt_ok
+                String pkgname = gDevice.getCurrentPackageName();
+                if (pkgname.contains(BASIC_PACKAGE_NAME)){
+                    launched = true;
+                }
+            }
+        }
         UiObject update_ok=gDevice.findObject(new UiSelector().resourceId("cn.sioeye.sioeyeapp:id/txt_cancel"));
         if (update_ok.exists()){
             try {
@@ -887,6 +910,14 @@ public class VP2 extends  VP{
      */
     public static void waitUntilFindText(String textString,int timeout){
         gDevice.wait(Until.findObject(By.text(textString)),timeout);
+    }
+    /**
+     * Get the Launcher Package Name.
+     * @param textString text
+     * @param timeout timeout for wait
+     */
+    public static void waitUntilFindTextContains(String textString,int timeout){
+        gDevice.wait(Until.findObject(By.textContains(textString)),timeout);
     }
     /**
      * Get the Launcher Package Name.

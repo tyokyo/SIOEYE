@@ -159,10 +159,16 @@ public class RegisterCase extends VP2 {
      * Result：可见
      * */
     @Test
-    public void testVisibleAndUnVisiblePasswordInRegisterByEmail() throws UiObjectNotFoundException, IOException {
+    public void testUnVisiblePasswordInRegisterByEmail() throws UiObjectNotFoundException, IOException {
         AccountAction.navToInputPassword_ByEmailRegister();
-        AccountAction.checkVisibleAndUnVisiblePassword();
+        AccountAction.checkUnVisiblePassword();
     }
+    @Test
+    public void testVisiblePasswordInRegisterByEmail() throws UiObjectNotFoundException, IOException {
+        AccountAction.navToInputPassword_ByEmailRegister();
+        AccountAction.checkVisiblePassword();
+    }
+
 /**By yun.yang 2017.1.2
  *case7:
  *Email注册,检查输入密码达到6位字符后有提示继续按钮

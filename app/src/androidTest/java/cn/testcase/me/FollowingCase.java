@@ -5,20 +5,21 @@ import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Direction;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.io.IOException;
 import java.util.logging.Logger;
+
 import bean.FollowingBean;
 import bean.WatcherBean;
-import ckt.base.VP;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
@@ -86,7 +87,8 @@ public class FollowingCase extends VP2 {
             WatcherBean watcherBean1 = BroadcastAction.getWatcher();
             String comments_before = watcherBean1.getComments();
             String input_comments = getRandomString(120);
-            int comments_count_before=Integer.parseInt(comments_before);
+            //评论数
+            int comments_count_before=cover(comments_before);
             //输入评论内容
             clickById(MePage.BROADCAST_VIEW_TIPTEXT);
             shellInputText(input_comments);
@@ -101,8 +103,12 @@ public class FollowingCase extends VP2 {
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
-            int comments_count=Integer.parseInt(after_comments);
-            Asst.assertEquals(comments_count_before+1,comments_count);
+            int comments_count_after=cover(after_comments);
+            if (comments_count_before>1000){
+                Asst.assertEquals(comments_count_before,comments_count_after);
+            }else{
+                Asst.assertEquals(comments_count_before+1,comments_count_after);
+            }
             Spoon.screenshot("testComments_Length_120",input_comments);
             gDevice.pressBack();
         }
@@ -122,7 +128,7 @@ public class FollowingCase extends VP2 {
             WatcherBean watcherBean1 = BroadcastAction.getWatcher();
             String comments_before = watcherBean1.getComments();
             String input_comments = getRandomString(130);
-            int comments_count_before=Integer.parseInt(comments_before);
+            int comments_count_before=cover(comments_before);
             //输入评论内容
             clickById(MePage.BROADCAST_VIEW_TIPTEXT);
             shellInputText(input_comments);
@@ -138,8 +144,12 @@ public class FollowingCase extends VP2 {
             //验证评论数+1
             WatcherBean watcherBean_after = BroadcastAction.getWatcher();
             String after_comments = watcherBean_after.getComments();
-            int comments_count=Integer.parseInt(after_comments);
-            Asst.assertEquals(comments_count_before+1,comments_count);
+            int comments_count_after=cover(after_comments);
+            if (comments_count_before>1000){
+                Asst.assertEquals(comments_count_before,comments_count_after);
+            }else{
+                Asst.assertEquals(comments_count_before+1,comments_count_after);
+            }
             Spoon.screenshot("testComments_Length_130",input_comments);
             gDevice.pressBack();
         }
@@ -169,7 +179,7 @@ public class FollowingCase extends VP2 {
                 WatcherBean watcherBean1 = BroadcastAction.getWatcher();
                 String comments_before = watcherBean1.getComments();
                 String input_comments = getRandomString(20);
-                int comments_count_before=Integer.parseInt(comments_before);
+                int comments_count_before=cover(comments_before);
                 //输入评论内容
                 clickById(MePage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
@@ -184,8 +194,12 @@ public class FollowingCase extends VP2 {
                 gDevice.pressBack();
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
                 String after_comments = watcherBean_after.getComments();
-                int comments_count=Integer.parseInt(after_comments);
-                Asst.assertEquals(comments_count_before+1,comments_count);
+                int comments_count_after=cover(after_comments);
+                if (comments_count_before>1000){
+                    Asst.assertEquals(comments_count_before,comments_count_after);
+                }else{
+                    Asst.assertEquals(comments_count_before+1,comments_count_after);
+                }
                 Spoon.screenshot("testFollowingComments_Length_20",input_comments);
                 gDevice.pressBack();
                 Spoon.screenshot("play_20_seconds");
@@ -202,6 +216,7 @@ public class FollowingCase extends VP2 {
     public void testFollowingZanKAdd() throws UiObjectNotFoundException, IOException {
         //进入关注
         MeAction.navToFollowing();
+        waitTime(3);
         int following_size= FollowingAction.getFollowingSize();
         if (following_size>=1){
             //获取随机的一个用户信息
@@ -219,21 +234,16 @@ public class FollowingCase extends VP2 {
                 //获取当前的点赞数目
                 WatcherBean bean_before_zan = BroadcastAction.getWatcher();
                 String zan_before = bean_before_zan.getZan();
-                boolean K=false;
-                int zan_before_int = 0;
-                if (zan_before.contains("K")){
-                    K=true;
-                }else{
-                    zan_before_int=Integer.parseInt(zan_before);
-                }
+                int zan_before_int = cover(zan_before);
+
                 //进行点赞操作
                 clickById(MePage.BROADCAST_VIEW_ZAN);
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();
                 String zan_after = bean_after_zan.getZan();
-                int zan_after_int= Integer.parseInt(zan_after);
+                int zan_after_int= cover(zan_after);
                 //验证点赞数+1
-                if (K){
+                if (zan_before_int>1000){
                     Asst.assertEquals("check zan +1",zan_before,zan_after);
                 }else{
                     Asst.assertEquals("check zan +1",zan_before_int+1,zan_after_int);
@@ -272,13 +282,7 @@ public class FollowingCase extends VP2 {
                 //获取当前的点赞数目
                 WatcherBean bean_before_zan = BroadcastAction.getWatcher();
                 String zan_before = bean_before_zan.getZan();
-                boolean K=false;
-                int zan_before_int = 0;
-                if (zan_before.contains("K")){
-                    K=true;
-                }else{
-                    zan_before_int=Integer.parseInt(zan_before);
-                }
+                int zan_before_int = cover(zan_before);
                 //弹出评论输入框-点赞
                 clickById(MePage.BROADCAST_VIEW_TIPTEXT);
                 waitTime(2);
@@ -288,9 +292,9 @@ public class FollowingCase extends VP2 {
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();
                 String zan_after = bean_after_zan.getZan();
-                int zan_after_int= Integer.parseInt(zan_after);
+                int zan_after_int=cover(zan_after);
                 //验证点赞数+1
-                if (K){
+                if (zan_before_int>1000){
                     Asst.assertEquals("check zan +1",zan_before,zan_after);
                 }else{
                     Asst.assertEquals("check zan +1",zan_before_int+1,zan_after_int);
@@ -313,6 +317,7 @@ public class FollowingCase extends VP2 {
     @Test
     public void testSwipeToViewVideo() throws UiObjectNotFoundException, IOException {
         MeAction.navToFollowing();
+        waitTime(3);
         int following_size= FollowingAction.getFollowingSize();
         if (following_size>=1){
             //获取随机的一个用户信息
@@ -326,7 +331,9 @@ public class FollowingCase extends VP2 {
             if (broadcast_size>=1){
                 //滑动操作
                 MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,10);
+                //播放视频
                 FollowingAction.clickFollowingBroadcast();
+                //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
                 waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);
                 //play video
