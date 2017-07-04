@@ -299,6 +299,7 @@ public class LoginCase extends VP2 {
         Spoon.screenshot("resetPassword");
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT).setText(email);
         waitTime(1);
+        Spoon.screenshot("inputPassword",email);
         getObjectById(AccountPage.SIGN_UP_CONTINUE).click();
         waitUntilFindTextContains("Reset your password",10000);
         Spoon.screenshot("resetPassword");

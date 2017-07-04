@@ -61,7 +61,7 @@ public class MiniPageCase extends VP2{
             Random random = new Random();
             int num = random.nextInt(10);
             if(num>0){
-                watch_list.swipeUp(num);
+                watch_list.swipeUp(4);
             }else{
                 watch_list.swipeUp(3);
             }
