@@ -322,6 +322,7 @@ public class Iris4GAction extends VP2 {
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
         }
+        waitTime(3);
     }
     public static void makeScreenOn() throws RemoteException {
         initDevice();
