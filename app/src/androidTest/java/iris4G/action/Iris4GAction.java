@@ -33,6 +33,7 @@ import java.util.logging.Logger;
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
 import iris4G.page.NavPage;
+import iris4G.page.SettingPage;
 
 /**
  * Created by elon on 2016/11/21.
@@ -316,8 +317,13 @@ public class Iris4GAction extends VP2 {
         gDevice.wait(Until.findObject(By.pkg("com.hicam.gallery")), 40000);
         String pkg = gDevice.getCurrentPackageName();
         logger.info("current-package:" + pkg);
+        if (!id_exists(SettingPage.video_timeText)){
+            getObjectById(Iris4GPage.content_id).swipeLeft(60);
+            getObjectById(Iris4GPage.content_id).swipeLeft(60);
+            getObjectById(Iris4GPage.content_id).swipeLeft(60);
+        }
+        waitTime(3);
     }
-
     public static void makeScreenOn() throws RemoteException {
         initDevice();
         if (!gDevice.isScreenOn()) {
@@ -458,6 +464,7 @@ public class Iris4GAction extends VP2 {
         }
         Spoon.screenshot("live_save", "liveSave");
         gDevice.pressBack();
+        waitTime(2);
     }
 
     //如Video quality -  右边的值

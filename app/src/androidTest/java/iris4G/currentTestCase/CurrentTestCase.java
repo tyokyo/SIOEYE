@@ -34,7 +34,7 @@ import iris4G.page.SettingPage;
  */
 public class CurrentTestCase extends VP2 {
     Logger logger = Logger.getLogger(CurrentTestCase.class.getName());
-    private int testTime=100;
+    private int testTime=108;
     /**
      * 格式化存储空间
      */
@@ -113,6 +113,31 @@ public class CurrentTestCase extends VP2 {
     }
 
     /**
+     *结束直播
+     */
+    private void makeLiveStop() throws Exception {
+        waitTime(1);
+        makeScreenOn();
+        if (text_exists("OK")) {
+            logger.info("Bad network, livestream has ended");
+            Spoon.screenshot("BadNetworkLiveHasEnded","BadNetworkLiveHasEnded");
+            clickByText("OK");
+            logger.info("SawtoothWaveNoteLiveBreakOff");
+            for (int i=0;i<3;i++){
+                gDevice.pressBack();
+                gDevice.pressBack();
+                waitTime(15);
+                launchCamera();
+                waitTime(15);
+            }
+        }else {
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        }
+        logger.info("LiveHasStop");
+        waitTime(2);
+    }
+
+    /**
      *灭屏录像
      */
     private void p2pScreenOff() throws RemoteException {
@@ -149,10 +174,8 @@ public class CurrentTestCase extends VP2 {
         makeScreenOn();
         Iris4GAction.cameraKey();
         logger.info("LaunchCameraKeyForStart");
-        checkLiveStatusAndTry2s(1);
-        Iris4GAction.cameraKey();
-        logger.info("LaunchCameraKeyForEnd");
-        waitTime(5);
+        checkLiveStatusAndTry2s(1);//0---灭屏；1---亮屏
+        waitTime(1);
     }
     /**
      *灭屏屏直播
@@ -163,10 +186,7 @@ public class CurrentTestCase extends VP2 {
         logger.info("LaunchCameraKeyForStart");
         waitTime(2);
         checkLiveStatusAndTry2s(0);
-        makeScreenOn();
-        Iris4GAction.cameraKey();
-        logger.info("LaunchCameraKeyForEnd");
-        waitTime(5);
+        waitTime(1);
     }
     /**
      *检查发起直播是否成功，并会重试一次
@@ -188,7 +208,7 @@ public class CurrentTestCase extends VP2 {
                 gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);//消除对话框
                 logger.info("Live Failed");
                 Spoon.screenshot("LiveFailed");
-                logger.info("电流锯齿波");
+                logger.info("SawtoothWaveNoteMakeLiveFailed");
                 for (int i=0;i<4;i++) {
                     waitTime(15);
                     gDevice.pressBack();
@@ -201,11 +221,13 @@ public class CurrentTestCase extends VP2 {
                 logger.info("Live succeed");
                 if (a==0){makeScreenOff();}
                 waitTime(testTime);
+                makeLiveStop();
             }
         } else {
             logger.info("Live succeed");
             if (a==0){makeScreenOff();}
             waitTime(testTime);
+            makeLiveStop();
         }
     }
 
@@ -213,21 +235,18 @@ public class CurrentTestCase extends VP2 {
      * 相册亮屏直播，相册第一个视频可以直播
      */
     private void galleryLiveScreenOn() throws Exception {
-        Iris4GAction.startGallery();
         clickById(SettingPage.video_timeText);//点击屏幕
         clickById(SettingPage.gallery_live_bottom);//点击live
         waitTime(2);
         clickById(SettingPage.gallery_live);
         checkGalleryToLiveStatusAndTryAgain(1);
         stopGalleryLive();
-        Iris4GAction.stopGallery();
         waitTime(2);
     }
     /**
      * 相册灭屏直播，相册第一个视频可以直播
      */
     private void galleryLiveScreenOff() throws Exception {
-        Iris4GAction.startGallery();
         clickById(SettingPage.video_timeText);//点击屏幕
         clickById(SettingPage.gallery_live_bottom);//点击live
         waitTime(2);
@@ -235,7 +254,6 @@ public class CurrentTestCase extends VP2 {
         checkGalleryToLiveStatusAndTryAgain(0);
         makeScreenOn();
         stopGalleryLive();
-        Iris4GAction.stopGallery();
         waitTime(2);
     }
     /**
@@ -243,22 +261,24 @@ public class CurrentTestCase extends VP2 {
      * 若两次均失败会产生一个两分钟的电流锯齿波
      */
     private void checkGalleryToLiveStatusAndTryAgain(int a) throws Exception {
-        waitUntilFindText("broadcasting",5000);
-        if (text_exists("broadcasting")){
-            logger.info("直播已发起成功");
-            Spoon.screenshot("galleryLiveSuccess","galleryLiveSuccess");
-            if (a==0){makeScreenOff();}
-            waitTime(testTime-2);
-        }else {
+        waitUntilFindText("broadcasting",15000);
+        if (!text_exists("broadcasting")){
+            waitUntilFind(SettingPage.gallery_live_retry,3000);
             clickById(SettingPage.gallery_live_retry);
-            //直播失败后会出现锯齿状电流波形
-            if (id_exists(SettingPage.gallery_live_retry)){
+            waitUntilFindText("broadcasting",15000);
+            if (!text_exists("broadcasting")){
                 logger.info("galleryLiveFailed");
                 Spoon.screenshot("galleryLiveFailed","galleryLiveFailed");
+                waitUntilFind(SettingPage.gallery_live_cancel,3000);
                 clickById(SettingPage.gallery_live_cancel);
                 Iris4GAction.stopGallery();
+                waitTime(1);
+                gDevice.pressBack();
+                gDevice.pressBack();
+                waitTime(1);
+                //直播失败后会出现锯齿状电流波形
+                logger.info("SawtoothWaveNoteMakeGalleryLiveFailed");
                 launchCamera();
-                //相册直播失败后
                 for (int i=0;i<4;i++) {
                     waitTime(15);
                     gDevice.pressBack();
@@ -266,13 +286,21 @@ public class CurrentTestCase extends VP2 {
                     waitTime(15);
                     Iris4GAction.startCamera();
                 }
-                Iris4GAction.stopCamera();
+                gDevice.pressBack();
+                gDevice.pressBack();
+                waitTime(2);
                 Iris4GAction.startGallery();
             }else {
                 logger.info("retryLiveSuccess");
-                if (a==0){makeScreenOff();}
+                Spoon.screenshot("galleryRetryLiveSuccess","galleryRetryLiveSuccess");
+                if (a==0){makeScreenOff();}//判断用例该亮灭屏
                 waitTime(testTime-2);
             }
+        }else {
+            logger.info("LiveSuccess");
+            Spoon.screenshot("galleryLiveSuccess","galleryLiveSuccess");
+            if (a==0){makeScreenOff();}
+            waitTime(testTime-2);
         }
     }
     /**
@@ -284,6 +312,30 @@ public class CurrentTestCase extends VP2 {
             waitTime(1);
             clickByText("Yes");
             waitTime(2);
+            logger.info("galleryLiveHasStop");
+        }
+        if (id_exists(SettingPage.gallery_live_cancel)){
+            logger.info("galleryLiveBreakOff");
+            Spoon.screenshot("galleryLiveBreakOff","galleryLiveBreakOff");
+            clickById(SettingPage.gallery_live_cancel);
+            waitTime(2);
+            gDevice.pressBack();
+            gDevice.pressBack();
+            waitTime(1);
+            logger.info("SawtoothWaveNoteGalleryLiveBreakOff");
+            //出现锯齿状电流波形
+            launchCamera();
+            for (int i=0;i<4;i++) {
+                waitTime(15);
+                gDevice.pressBack();
+                gDevice.pressBack();
+                waitTime(15);
+                launchCamera();
+            }
+            gDevice.pressBack();
+            gDevice.pressBack();
+            waitTime(2);
+            Iris4GAction.startGallery();
         }
     }
     /**
@@ -408,15 +460,21 @@ public class CurrentTestCase extends VP2 {
     }
 //    @Test
 //    public void testGalleryLive() throws Exception {
-//        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
-//        checkLiveStatusAndTry2s(1);
+//        live2ScreenOn();
+//        Iris4GAction.startGallery();
+//        galleryLiveScreenOff();
 //    }
 
     @Test
     public void testForCurrent() throws Exception {
-        String liveQuality480SD="480@25FPS(SD)",liveQuality480HD="480@25FPS(HD)",liveQuality720HD="720@25FPS(HD)";
-        String videoQuality1080P25="1080@25FPS",videoQuality720P60="720@60FPS",videoQuality720P25="720@25FPS",
-                videoQuality480P120="480@120FPS";
+        String liveQuality480SD="480@25FPS(SD)",
+                liveQuality480HD="480@25FPS(HD)",
+                liveQuality720HD="720@25FPS(HD)";
+        String videoQuality1080P25="1080@25FPS",
+                videoQuality720P60="720@60FPS",
+                videoQuality720P25="720@25FPS",
+                videoQuality480P120="480@120FPS",
+                videoQuality480P25="480@25FPS";
         String switchName[]={
                 "Altimeter",//高度计0
                 "Speedometer",//速度计1
@@ -430,11 +488,10 @@ public class CurrentTestCase extends VP2 {
                 "Super Wide"
         };
         for (int i = 1;i<=1;i++){
-            //格式化储存空间
             makeScreenOn();
-            changeSleepTime("Never");
+//            changeSleepTime("Never");
             switchTo4G();
-            storageFormat();
+            storageFormat();//格式化储存空间
             closeWifi();
             //开启相机
             launchCamera();
@@ -538,16 +595,9 @@ public class CurrentTestCase extends VP2 {
             gDevice.pressBack();
             openWifi();
             launchCamera();
-            CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
-            waitTime(2);
-            configVideoQuality(videoQuality1080P25);//1080P30FPS
-            logger.info("连接wifi相机预览界面亮屏");
-            waitTime(testTime);
-            makeScreenOn();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
             Iris4GAction.clickLiveAndSave();//开启直播保存
-            waitTime(2);
             configVideoQuality(liveQuality480SD);
             //WIFI亮屏直播保存480SD
             live2ScreenOn();
@@ -563,6 +613,11 @@ public class CurrentTestCase extends VP2 {
             //wifi 480HD 亮屏
             live2ScreenOn();
             //wifi 480HD 灭屏
+            live2ScreenOff();
+            configVideoQuality(liveQuality720HD);
+            //wifi 720HD 亮屏
+            live2ScreenOn();
+            //wifi 720HD 灭屏
             live2ScreenOff();
             gDevice.pressHome();
             gDevice.pressHome();
@@ -587,10 +642,12 @@ public class CurrentTestCase extends VP2 {
             p2pScreenOff();
             Iris4GAction.stopCamera();
             waitTime(2);
+            Iris4GAction.startGallery();
             galleryLiveScreenOn();//4G相册亮屏直播720P
             galleryLiveScreenOff();//4G相册灭屏直播720P
             Iris4GAction.stopGallery();
             openWifi();
+            Iris4GAction.startGallery();
 //            galleryToLiveScreenOn();//WIFI相册亮屏直播720P
             galleryLiveScreenOff();//WIFI相册灭屏直播720P
             Iris4GAction.stopGallery();
@@ -601,6 +658,19 @@ public class CurrentTestCase extends VP2 {
             configVideoQuality(videoQuality480P120);//480P120FPS
             p2pScreenOff();
             //亮屏录播
+            configVideoQuality(videoQuality480P25);//480P480FPS
+            p2pScreenOff();
+            Iris4GAction.stopCamera();
+            waitTime(2);
+            Iris4GAction.startGallery();
+            galleryLiveScreenOff();//4G相册灭屏直播480P
+            openWifi();
+            Iris4GAction.startGallery();
+            galleryLiveScreenOff();//WIFI相册灭屏直播480P
+            closeWifi();
+            launchCamera();
+            CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
+            waitTime(2);
             clickSwitch(switchName[2]);//开启录播
             p2pScreenOn();
             //灭屏录播
