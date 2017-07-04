@@ -34,7 +34,7 @@ import iris4G.page.SettingPage;
  */
 public class CurrentTestCase extends VP2 {
     Logger logger = Logger.getLogger(CurrentTestCase.class.getName());
-    private int testTime=106;
+    private int testTime=108;
     /**
      * 格式化存储空间
      */
@@ -122,31 +122,7 @@ public class CurrentTestCase extends VP2 {
             logger.info("Bad network, livestream has ended");
             Spoon.screenshot("BadNetworkLiveHasEnded","BadNetworkLiveHasEnded");
             clickByText("OK");
-            logger.info("3端锯齿提示直播异常中断");
-            for (int i=0;i<3;i++){
-                gDevice.pressBack();
-                gDevice.pressBack();
-                waitTime(15);
-                launchCamera();
-                waitTime(15);
-            }
-        }else {
-            gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
-        }
-        logger.info("LiveHasStop");
-        waitTime(2);
-    }
-    /**
-     *结束图库直播
-     */
-    private void makeGalleryLiveStop() throws Exception {
-        waitTime(1);
-        makeScreenOn();
-        if (text_exists("No")) {
-            logger.info("The network was too slow to launch the live stream.");
-            Spoon.screenshot("NetworkTooSlow","NetworkTooSlow");
-            clickByText("No");
-            logger.info("3端锯齿提示直播异常中断");
+            logger.info("SawtoothWaveNoteLiveBreakOff");
             for (int i=0;i<3;i++){
                 gDevice.pressBack();
                 gDevice.pressBack();
@@ -232,7 +208,7 @@ public class CurrentTestCase extends VP2 {
                 gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);//消除对话框
                 logger.info("Live Failed");
                 Spoon.screenshot("LiveFailed");
-                logger.info("电流锯齿波");
+                logger.info("SawtoothWaveNoteMakeLiveFailed");
                 for (int i=0;i<4;i++) {
                     waitTime(15);
                     gDevice.pressBack();
@@ -300,8 +276,8 @@ public class CurrentTestCase extends VP2 {
                 gDevice.pressBack();
                 gDevice.pressBack();
                 waitTime(1);
-                //相册直播失败后
                 //直播失败后会出现锯齿状电流波形
+                logger.info("SawtoothWaveNoteMakeGalleryLiveFailed");
                 launchCamera();
                 for (int i=0;i<4;i++) {
                     waitTime(15);
@@ -317,7 +293,7 @@ public class CurrentTestCase extends VP2 {
             }else {
                 logger.info("retryLiveSuccess");
                 Spoon.screenshot("galleryRetryLiveSuccess","galleryRetryLiveSuccess");
-                if (a==0){makeScreenOff();}
+                if (a==0){makeScreenOff();}//判断用例该亮灭屏
                 waitTime(testTime-2);
             }
         }else {
@@ -336,6 +312,7 @@ public class CurrentTestCase extends VP2 {
             waitTime(1);
             clickByText("Yes");
             waitTime(2);
+            logger.info("galleryLiveHasStop");
         }
         if (id_exists(SettingPage.gallery_live_cancel)){
             logger.info("galleryLiveBreakOff");
@@ -345,7 +322,7 @@ public class CurrentTestCase extends VP2 {
             gDevice.pressBack();
             gDevice.pressBack();
             waitTime(1);
-            //相册直播中途停止
+            logger.info("SawtoothWaveNoteGalleryLiveBreakOff");
             //出现锯齿状电流波形
             launchCamera();
             for (int i=0;i<4;i++) {
@@ -490,9 +467,14 @@ public class CurrentTestCase extends VP2 {
 
     @Test
     public void testForCurrent() throws Exception {
-        String liveQuality480SD="480@25FPS(SD)",liveQuality480HD="480@25FPS(HD)",liveQuality720HD="720@25FPS(HD)";
-        String videoQuality1080P25="1080@25FPS",videoQuality720P60="720@60FPS",videoQuality720P25="720@25FPS",
-                videoQuality480P120="480@120FPS",videoQuality480P25="480@25FPS";
+        String liveQuality480SD="480@25FPS(SD)",
+                liveQuality480HD="480@25FPS(HD)",
+                liveQuality720HD="720@25FPS(HD)";
+        String videoQuality1080P25="1080@25FPS",
+                videoQuality720P60="720@60FPS",
+                videoQuality720P25="720@25FPS",
+                videoQuality480P120="480@120FPS",
+                videoQuality480P25="480@25FPS";
         String switchName[]={
                 "Altimeter",//高度计0
                 "Speedometer",//速度计1
