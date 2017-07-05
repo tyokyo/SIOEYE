@@ -146,7 +146,7 @@ public class DiscoverAction extends VP2 {
                 Assert.fail("AddFriendsRecommand" + target_nick_name + "Failed");
             }
         } else {
-            Assert.fail("出现异常nick name获取为空");
+            Assert.fail("出现异常,nick name获取为空-未找到"+target_nick_name);
         }
     }
 

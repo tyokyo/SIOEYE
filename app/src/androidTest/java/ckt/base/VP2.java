@@ -563,6 +563,7 @@ public class VP2 extends  VP{
      * @throws UiObjectNotFoundException
      */
     public static UiObject scrollAndGetUIObject(String TargetText) throws UiObjectNotFoundException {
+        logger.info("scroll to find text-"+TargetText);
         UiScrollable obj = new UiScrollable(new UiSelector()).setAsVerticalList();
         UiObject objFind = null;
         if (obj.exists()){
@@ -686,6 +687,9 @@ public class VP2 extends  VP{
                 String pkgname = gDevice.getCurrentPackageName();
                 if (pkgname.contains(BASIC_PACKAGE_NAME)){
                     launched = true;
+                    logger.info(BASIC_PACKAGE_NAME+" launch Success");
+                }else {
+                    logger.info(BASIC_PACKAGE_NAME+" launch Failed");
                 }
             }
         }

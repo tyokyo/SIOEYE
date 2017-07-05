@@ -98,7 +98,7 @@ public class LiveConfigCase extends VP2{
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
-        String expect = getRandomString(50);
+        String expect = getRandomString(100);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
 
@@ -107,7 +107,7 @@ public class LiveConfigCase extends VP2{
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
         String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
         logger.info("length:"+active.length());
-        expect=expect.substring(0,35);
+        expect=expect.substring(0,70);
         Asst.assertEquals("修改video title",expect,active);
         gDevice.pressBack();
         gDevice.pressBack();
