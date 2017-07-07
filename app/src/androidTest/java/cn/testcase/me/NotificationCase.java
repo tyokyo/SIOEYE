@@ -3,10 +3,10 @@ package cn.testcase.me;
 import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.Until;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,10 +14,11 @@ import org.junit.runner.RunWith;
 
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
-import cn.action.WatchAction;
 import cn.page.App;
 import cn.page.WatchPage;
 import usa.page.Me;
@@ -37,6 +38,8 @@ public class NotificationCase extends VP2 {
         AccountAction.inLogin();
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testNotificationAD() throws UiObjectNotFoundException {
         MeAction.navToNotifications();
         waitTime(3);

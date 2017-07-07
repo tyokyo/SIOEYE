@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
@@ -35,6 +37,8 @@ public class LogOutCase extends VP2 {
     }
     //注销Log out时->取消注销
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testLogOut_Cancel() throws UiObjectNotFoundException {
         MeAction.navToSettings();
         clickByText("Account and Security");
@@ -48,6 +52,8 @@ public class LogOutCase extends VP2 {
     }
     //注销Log out
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testLogOut_OK() throws UiObjectNotFoundException {
         //log out
         MeAction.navToSettings();

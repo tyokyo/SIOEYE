@@ -12,6 +12,8 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import cn.action.AccountAction;
 import cn.action.MainAction;
 import cn.action.MeAction;
@@ -38,6 +40,8 @@ public class AboutMeCase extends VP2 {
     }
     //about me input string length 10
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEdit10C() throws UiObjectNotFoundException {
         MainAction.navToMe();
         //获取sio eye id，进入about me 界面
@@ -62,6 +66,8 @@ public class AboutMeCase extends VP2 {
     }
     //修改内容之后到watch搜索对应id号 查看about me 内容是否修改成功
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testMeSearch() throws UiObjectNotFoundException {
         MainAction.navToMe();
         //获取 id
@@ -92,6 +98,8 @@ public class AboutMeCase extends VP2 {
     }
     //输入最大的字符容量
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEdit30C() throws UiObjectNotFoundException {
         MeAction.navToUserEdit();
         clickById(MePage.NAV_EDIT_ABOUT_ME);
@@ -106,6 +114,8 @@ public class AboutMeCase extends VP2 {
     }
     //超过最大的字符时的处理
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEdit70C() throws UiObjectNotFoundException, IOException {
         MeAction.navToUserEdit();
         clickById(MePage.NAV_EDIT_ABOUT_ME);
@@ -123,6 +133,8 @@ public class AboutMeCase extends VP2 {
     }
     //输入之后不保存
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testNotSave() throws UiObjectNotFoundException {
         MainAction.navToMe();
         Spoon.screenshot(gDevice,"Me");
@@ -147,6 +159,8 @@ public class AboutMeCase extends VP2 {
     }
     //删除功能验证
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testDeleteToNull() throws UiObjectNotFoundException {
         MeAction.navToUserEdit();
         clickById(MePage.NAV_EDIT_ABOUT_ME);
@@ -166,6 +180,8 @@ public class AboutMeCase extends VP2 {
     }
     //输入内容为特殊符号时的处理,长度=30
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEdi40_Symbol() throws UiObjectNotFoundException, IOException {
         MainAction.navToMe();
         Spoon.screenshot(gDevice,"Me");

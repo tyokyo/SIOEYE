@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
@@ -32,6 +34,8 @@ public class SexCase extends VP2 {
         AccountAction.inLogin();
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testMale() throws UiObjectNotFoundException {
         //修改性别为-male
         MeAction.navToSex();
@@ -47,6 +51,8 @@ public class SexCase extends VP2 {
         Spoon.screenshot("male");
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testFemale() throws UiObjectNotFoundException {
         //修改性别为-female
         MeAction.navToSex();
@@ -62,6 +68,8 @@ public class SexCase extends VP2 {
         Spoon.screenshot("female");
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testSecret() throws UiObjectNotFoundException {
         //修改性别为-female
         MeAction.navToSex();

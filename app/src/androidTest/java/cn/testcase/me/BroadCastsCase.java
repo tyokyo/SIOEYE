@@ -21,6 +21,8 @@ import java.util.logging.Logger;
 
 import bean.BroadcastBean;
 import bean.WatcherBean;
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
@@ -51,6 +53,8 @@ public class BroadCastsCase extends VP2{
 
     //直播 ：随机选择一个直播列表的视频-播放视频60秒
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testPlayBroadcastVideo() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -68,6 +72,8 @@ public class BroadCastsCase extends VP2{
     }
     //1:编辑title 2:放弃保存
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEditTitleCancel() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -95,6 +101,8 @@ public class BroadCastsCase extends VP2{
     }
     //title 输入字符长度3
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEditTitle3() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -125,6 +133,8 @@ public class BroadCastsCase extends VP2{
     }
     //title 输入字符长度35
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEditTitle70() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -160,6 +170,8 @@ public class BroadCastsCase extends VP2{
     }
     //title 输入字符长度>35
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEditTitleMoreThan70() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -191,6 +203,8 @@ public class BroadCastsCase extends VP2{
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testDeleteBroadcastsVideo() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -229,6 +243,7 @@ public class BroadCastsCase extends VP2{
     }
     //验证-评论，允许的最大字符数
     @Test
+    @PerformanceTest
     public void testCmts120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
@@ -268,6 +283,8 @@ public class BroadCastsCase extends VP2{
     }
     //验证-评论 超过最大的字符限制
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testCmts130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
@@ -312,6 +329,8 @@ public class BroadCastsCase extends VP2{
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testCmts20c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         MeAction.navToBroadcasts();
@@ -357,6 +376,8 @@ public class BroadCastsCase extends VP2{
     //进入视频回放界面-直接点赞
     // 验证点赞数+1
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testZanKAdd() throws UiObjectNotFoundException, IOException {
         //进入broadcasts
         MeAction.navToBroadcasts();
@@ -398,6 +419,8 @@ public class BroadCastsCase extends VP2{
     //进入视频回放界面-弹出的输入框中点赞
     // 验证点赞数+1
     @Test
+    @SanityTest
+    @PerformanceTest
     public void tesZanKAddByPopup() throws UiObjectNotFoundException, IOException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
@@ -441,6 +464,8 @@ public class BroadCastsCase extends VP2{
      选择一个视频观看
     * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testSwipeToViewVideo() throws UiObjectNotFoundException {
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();

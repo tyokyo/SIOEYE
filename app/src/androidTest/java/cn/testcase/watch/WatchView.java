@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 import java.text.ParseException;
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
@@ -34,6 +36,8 @@ public class WatchView extends VP2 {
     }
     /*播放关注列表的视频文件*/
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testViewWatchVideo() throws UiObjectNotFoundException, ParseException {
         //进入Watch
         WatchAction.navToWatch();

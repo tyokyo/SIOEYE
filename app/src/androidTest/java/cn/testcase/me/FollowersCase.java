@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 
 import bean.FollowingBean;
 import bean.WatcherBean;
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
@@ -45,6 +47,8 @@ public class FollowersCase extends VP2 {
     }
     //粉丝 ：列表里随机选择一个直播的视频-播放视频60秒
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testPlayFansVideo() throws UiObjectNotFoundException, IOException {
         //进入粉丝界面
         MeAction.navToFans();
@@ -79,6 +83,7 @@ public class FollowersCase extends VP2 {
     }
     //验证-评论 超过最大限制的字符长度120
     @Test
+    @PerformanceTest
     public void testComments130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
@@ -136,6 +141,7 @@ public class FollowersCase extends VP2 {
     }
     //评论-关注的好友中的直播视频
     @Test
+    @PerformanceTest
     public void testComments120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
@@ -193,6 +199,7 @@ public class FollowersCase extends VP2 {
     }
     //评论-关注的好友中的直播视频
     @Test
+    @PerformanceTest
     public void testComments20c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
@@ -251,6 +258,8 @@ public class FollowersCase extends VP2 {
     //进入视频回放界面-直接点赞
     // 验证点赞数+1
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testZanKAdd() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
@@ -301,6 +310,8 @@ public class FollowersCase extends VP2 {
     //进入视频回放界面-弹出的输入框中点赞
     // 验证点赞数+1
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testZanKAddByPopup() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
         //进入粉丝界面
@@ -357,6 +368,8 @@ public class FollowersCase extends VP2 {
      选择一个视频观看
      * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testSwipeToViewVideo() throws UiObjectNotFoundException, IOException {
         //进入粉丝界面
         MeAction.navToFans();

@@ -12,6 +12,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.logging.Logger;
+
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.SettingAction;
@@ -32,6 +35,8 @@ public class HelpCenterCase extends VP2 {
     }
     //TermOfService
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testTermOfService() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_TermService();
         Spoon.screenshot("TermOfService");
@@ -42,6 +47,8 @@ public class HelpCenterCase extends VP2 {
     }
     //PrivacyPolicy
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testPrivacyPolicy() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_Privacy();
         clickById(MePage.HELP_BACK);
@@ -51,6 +58,8 @@ public class HelpCenterCase extends VP2 {
     }
     //最终用户协议
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEULA() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_UserProtocol();
         clickById(MePage.HELP_BACK);
@@ -59,6 +68,8 @@ public class HelpCenterCase extends VP2 {
         Asst.assertEquals("back logo success",true,feedback_status);
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testNeedHelp() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_Help();
         gDevice.wait(Until.findObject(By.text("www.sioeye.cn")),20000);
@@ -73,6 +84,8 @@ public class HelpCenterCase extends VP2 {
         //Asst.assertEquals("back logo success",true,text_exists("Support - Sioeye 喜爱直播"));
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testNeedHelpBack() throws UiObjectNotFoundException, IOException {
         SettingAction.navToHP_Help();
         gDevice.wait(Until.findObject(By.text("www.sioeye.cn")),20000);

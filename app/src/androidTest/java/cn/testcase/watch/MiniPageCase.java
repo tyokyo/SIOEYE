@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.WatchAction;
@@ -42,6 +44,8 @@ public class MiniPageCase extends VP2{
      *      3.切换到关注或粉丝列表
      */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testMiniToLive() throws Exception {
         //进入Watch界面
         WatchAction.navToWatch();

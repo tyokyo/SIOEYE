@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
@@ -37,6 +39,8 @@ public class LiveConfigCase extends VP2{
 
     //直播标题内容设置-长度-3
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testTitle3c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
@@ -56,6 +60,8 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度-35
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testTitle40c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
@@ -75,6 +81,8 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度-120
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testTitle20c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
@@ -94,6 +102,8 @@ public class LiveConfigCase extends VP2{
     }
     //直播标题内容设置-长度->170(最多允许设置35)
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testTitle50c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
@@ -115,6 +125,8 @@ public class LiveConfigCase extends VP2{
     }
     //privacy_settings to public
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testSetPublic() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
@@ -133,6 +145,8 @@ public class LiveConfigCase extends VP2{
     }
     //privacy_settings to private
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testSetPrivate() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
@@ -148,6 +162,8 @@ public class LiveConfigCase extends VP2{
         Spoon.screenshot("private","Privacy_Settings_Private");
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testSetPersonal() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
         //谁可以看我的直播

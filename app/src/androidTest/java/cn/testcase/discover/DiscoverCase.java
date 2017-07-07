@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
@@ -70,6 +72,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      * case1、单击搜索图标
      * */
@@ -84,6 +88,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      * case2、双击搜索图标
      */
@@ -105,6 +111,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *case3、下拉刷新、在discover界面手指从上往下滑动
      * 思路：通过判断刷新前后的推介列表的头像昵称是否相同来判定是否刷新，因为刷新后，
@@ -139,6 +147,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *
      *case4.来回频繁切换主界面
@@ -157,6 +167,8 @@ public class DiscoverCase extends VP2 {
 
     //play the first video in discover page
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testViewVideo() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_SWIPE_TARGET);
@@ -171,6 +183,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      * 未登陆点击输入框
      * 1、未登录状态下在discover界面点击任意视频进入观看
@@ -195,6 +209,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      * 已登录点击输入框
      *1、已登录状态下在discover界面点击任意视频进入观看，点击输入框
@@ -218,6 +234,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      * 未登陆点击关注主播
      *1.未登陆状态下，在观看视频界面点击关注主播
@@ -241,6 +259,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *
      *1.已登录状态下，在观看界面点击任意键关注主播
@@ -275,6 +295,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      * 单击广告封面
      *1、点击广告封面
@@ -288,6 +310,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      * 广告内容页面点返回上级
      *1、点击广告页面里的返回键
@@ -298,6 +322,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      * 未登录点击follow
      *1、点击任一推荐对象，点击follow
@@ -318,6 +344,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *未登陆单击推荐人头像
      *1、点击推荐头像
@@ -337,6 +365,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *向上迅速滑动视频列表
      *1、迅速滑动推荐视频列表
@@ -373,6 +403,8 @@ public class DiscoverCase extends VP2 {
         Asst.assertFalse("testSwipeUpQuicklyFail",!id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
     } */
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *进入搜索界面，检查默认推荐联系人状态
      *1、已经关注的不再显示在默认推荐人列表
@@ -382,6 +414,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *1.进入搜索界面
      *2.输入邮箱地址后点击搜索
@@ -398,6 +432,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *1.进入搜索界面
      *2.输入Sioeye Id后点击搜索
@@ -412,6 +448,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *1.进入搜索界面
      *2.输入昵称后点击搜索
@@ -426,6 +464,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *1.进入搜索界面
      *2.输入手机号码后点击搜索
@@ -439,6 +479,8 @@ public class DiscoverCase extends VP2 {
         Asst.assertTrue(text_exists("123123123"));
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *1.在搜索界面点击Video切换到视频搜索
      *Result:成功切换到视频搜索
@@ -454,6 +496,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *1.在搜索输入框输入一些数据
      *2.点击输入框中的×按钮清空数据
@@ -468,6 +512,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *1.在搜索界面点击取消按钮
      *Result:退出搜索界面，返回到上一界面
@@ -479,6 +525,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *1.在输入界面输入视频名称
      *2.点击搜索
@@ -493,6 +541,8 @@ public class DiscoverCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**
      *1.在输入框输入随意字符
      *Result:自动匹配出包含这些字符的视频，匹配字符绿色高亮显示

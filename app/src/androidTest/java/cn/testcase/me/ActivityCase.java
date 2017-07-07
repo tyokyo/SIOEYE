@@ -18,6 +18,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.ActivityAction;
@@ -47,6 +49,8 @@ public class ActivityCase extends VP2{
     添加一个爱好
     * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testAddOneActivity() throws UiObjectNotFoundException {
         //进入爱好界面
         MeAction.navToActivities();
@@ -77,6 +81,8 @@ public class ActivityCase extends VP2{
     验证添加功能
     添加所有推荐的爱好*/
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testAddAllActivity() throws UiObjectNotFoundException {
         //进入爱好界面
         MeAction.navToActivities();
@@ -106,6 +112,8 @@ public class ActivityCase extends VP2{
     }
     //验证取消功能 what are you interested in ?
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testDelSomeActivity() throws UiObjectNotFoundException {
         //进入爱好界面
         MeAction.navToActivities();
@@ -134,6 +142,8 @@ public class ActivityCase extends VP2{
     }
     //验证取消所有功能 what are you interested in ?
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testDelAllActivity() throws UiObjectNotFoundException {
         //进入爱好界面
         MeAction.navToActivities();
@@ -156,6 +166,8 @@ public class ActivityCase extends VP2{
     //My interests
     //添加-String 长度为10
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_Add_Input_MyInterests_String_10c() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
         Point point = MeAction.getPointToDoComment();
@@ -186,6 +198,8 @@ public class ActivityCase extends VP2{
     //My interests
     //添加-String 长度为40  MAX=16
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_Add_Input_MyInterests_String_40c() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
         Point point = MeAction.getPointToDoComment();
@@ -215,6 +229,8 @@ public class ActivityCase extends VP2{
     //My interests
     //最多可以添加多少个My interests  10个?
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_Add_Input_MyInterests_6() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
         Point point = MeAction.getPointToDoComment();
@@ -245,6 +261,8 @@ public class ActivityCase extends VP2{
     }
     //添加interests = a,b,c
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_ErrorSymbol() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
         Point p = MeAction.getPointToDoComment();
@@ -268,6 +286,8 @@ public class ActivityCase extends VP2{
     }
     //添加interests特殊字符
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_Symbol() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
         Point point = MeAction.getPointToDoComment();
@@ -291,6 +311,8 @@ public class ActivityCase extends VP2{
     }
     //添加interests特殊字符
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_MyInterests_back() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
         Point p = MeAction.getPointToDoComment();
@@ -317,6 +339,8 @@ public class ActivityCase extends VP2{
 
     //添加相同的interests
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_add_SameInterest() throws IOException, UiObjectNotFoundException {
         //点赞图标的Point
         Point point = MeAction.getPointToDoComment();

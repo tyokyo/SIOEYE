@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 import java.util.logging.Logger;
 
 import bean.InfoBean;
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
@@ -40,6 +42,8 @@ public class AccountCase extends VP2{
 "	提示电话号码不正确
     * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testRegErrorMobileNumber() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
@@ -61,6 +65,8 @@ public class AccountCase extends VP2{
 "	提示电话号码正确
    * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testRegMobileNumber() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
@@ -85,6 +91,8 @@ public class AccountCase extends VP2{
     4、创建用户名"	注册成功
     * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testRegEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
@@ -131,6 +139,8 @@ public class AccountCase extends VP2{
     注册失败
     * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testRegRepeatEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
@@ -184,6 +194,8 @@ public class AccountCase extends VP2{
     注册失败
     * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testRegRepeatEyeID() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
@@ -248,6 +260,8 @@ public class AccountCase extends VP2{
     "1、输入无效邮件地址
     * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testRegErrorEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
@@ -268,6 +282,8 @@ public class AccountCase extends VP2{
     }
     /*登录	1、输入正确的手机号码/Email、密码登录	成功登录*/
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_logInAccount_email() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
@@ -278,6 +294,8 @@ public class AccountCase extends VP2{
     }
     /*登录	1、输入正确的手机号码/Email、密码登录	成功登录*/
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testLogInErrorEmailPwd() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();

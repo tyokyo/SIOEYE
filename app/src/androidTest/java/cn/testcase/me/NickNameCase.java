@@ -3,6 +3,8 @@ package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.test.suitebuilder.annotation.LargeTest;
+
 import com.squareup.spoon.Spoon;
 import org.hamcrest.Asst;
 import org.junit.Assert;
@@ -12,6 +14,8 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
@@ -35,6 +39,8 @@ public class NickNameCase extends VP2 {
         AccountAction.inLogin();
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testChangeNmc4() throws UiObjectNotFoundException {
         MeAction.navToNickName();
         clearText(MePage.SAMPLE_CONTENT);
@@ -43,6 +49,8 @@ public class NickNameCase extends VP2 {
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testChangeMoreThanC4() throws UiObjectNotFoundException {
         MeAction.navToNickName();
         clearText(MePage.SAMPLE_CONTENT);
@@ -56,6 +64,8 @@ public class NickNameCase extends VP2 {
         }
         Spoon.screenshot(gDevice,"change_nick_name");
     }
+    @SanityTest
+    @PerformanceTest
     @Test
     public void testChangeNnMaxC() throws UiObjectNotFoundException, IOException {
         MeAction.navToNickName();
@@ -71,6 +81,9 @@ public class NickNameCase extends VP2 {
         Spoon.screenshot(gDevice,"change_nick_name");
     }
     @Test
+    @SanityTest
+    @PerformanceTest
+    @LargeTest
     public void testChangeNnNotSave() throws UiObjectNotFoundException, IOException {
         clickById(MePage.ID_MAIN_TAB_ME);
         Spoon.screenshot(gDevice,"Me");

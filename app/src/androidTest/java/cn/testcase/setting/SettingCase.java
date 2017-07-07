@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.SettingAction;
@@ -34,6 +36,8 @@ public class SettingCase extends VP2 {
     }
     //check for updates
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testCheckForUpdates() throws UiObjectNotFoundException, IOException {
         SettingAction.navToUpdate();
         Spoon.screenshot("HELP_VERSION_CHECK");
@@ -47,6 +51,8 @@ public class SettingCase extends VP2 {
      * @author elon
      */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testEnable() throws UiObjectNotFoundException {
         SettingAction.navToSetting();
         boolean isChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
@@ -57,6 +63,8 @@ public class SettingCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testDisable() throws UiObjectNotFoundException {
         SettingAction.navToSetting();
         boolean isChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
@@ -67,6 +75,8 @@ public class SettingCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testAboutSioEye() throws UiObjectNotFoundException, IOException {
         SettingAction.navToAboutSioEye();
         Spoon.screenshot("HELP_ABOUT");

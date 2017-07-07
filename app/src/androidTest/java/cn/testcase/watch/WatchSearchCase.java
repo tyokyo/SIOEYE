@@ -3,14 +3,18 @@ package cn.testcase.watch;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
-import cn.action.MeAction;
 import cn.action.WatchAction;
 import cn.page.App;
 import cn.page.Constant;
@@ -34,6 +38,8 @@ public class WatchSearchCase extends VP2 {
     * */
     //验证真实昵称
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_search_NickName_CORRECT() throws UiObjectNotFoundException, InterruptedException {
         //进入Watch
         WatchAction.navToWatchSearch();
@@ -52,6 +58,8 @@ public class WatchSearchCase extends VP2 {
 
     //验证虚假昵称
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_search_NickName_WRONG() throws UiObjectNotFoundException, InterruptedException {
         //进入Watch
         WatchAction.navToWatchSearch();
@@ -75,6 +83,8 @@ public class WatchSearchCase extends VP2 {
 
     //验证真实ID
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_search_sioeyeID_CORRECT() throws UiObjectNotFoundException, InterruptedException {
         //进入Watch
         WatchAction.navToWatchSearch();
@@ -93,6 +103,8 @@ public class WatchSearchCase extends VP2 {
 
     //验证虚假ID
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_search_sioeyeID_WRONG() throws UiObjectNotFoundException, InterruptedException {
         //进入Watch
         WatchAction.navToWatchSearch();
@@ -116,6 +128,8 @@ public class WatchSearchCase extends VP2 {
 
     //搜索真实email
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_search_email_CORRECT() throws UiObjectNotFoundException, InterruptedException {
         //进入Watch
         WatchAction.navToWatchSearch();
@@ -145,6 +159,8 @@ public class WatchSearchCase extends VP2 {
 
     //搜索虚假的email地址
     @Test
+    @SanityTest
+    @PerformanceTest
     public void test_search_email_WRONG() throws UiObjectNotFoundException, InterruptedException {
         //进入Watch
         WatchAction.navToWatchSearch();

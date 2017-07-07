@@ -1,36 +1,24 @@
 package cn.testcase.watch;
 
-import android.graphics.Point;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.BySelector;
 import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import cn.action.FollowingAction;
-import cn.action.WatchAction;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.MePage;
 import cn.page.WatchPage;
-import iris4G.action.AccountAction;
 
 /**
  * Created by jiali.liu on 2016/12/29.
@@ -50,6 +38,8 @@ public class MiniFollowAndFansCase extends VP2{
      *      2.点击“直播”
      */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testMiniToLive() throws IOException, UiObjectNotFoundException {
         //进入Watch界面
         clickById(MePage.ID_MAIN_TAB_LIVE);

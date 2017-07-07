@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
@@ -33,6 +35,8 @@ public class LocationCase extends VP2{
     }
     //搜索位置
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testSearchLocation() throws UiObjectNotFoundException {
         MeAction.navToLocation();
         waitUntilGone(MePage.IS_LOCATING,60000);
@@ -47,6 +51,8 @@ public class LocationCase extends VP2{
     }
     //定位位置
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testLocating() throws UiObjectNotFoundException {
         MeAction.navToLocation();
         waitUntilGone(MePage.IS_LOCATING,60000);

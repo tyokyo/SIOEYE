@@ -15,6 +15,8 @@ import org.junit.runner.RunWith;
 
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.DiscoverAction;
@@ -35,6 +37,8 @@ public class RecommendCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /**case1 单击推荐列表头像
      * 唤出对应对象的个人资料页面；
      * 单击推送列表好友后检查弹窗好友信息
@@ -50,6 +54,8 @@ public class RecommendCase extends VP2 {
         //关闭弹出框
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /**case2 双击推荐列表头像
      * 唤出对应对象的个人资料页面；
      * 双击推送列表好友后检查弹窗好友信息
@@ -65,6 +71,8 @@ public class RecommendCase extends VP2 {
         //关闭弹出框
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /**case3添加推荐列表第一个为好友
      * 检查该用户followers有没有增加;
      * 检查自己好友列表有没有增加该好友
@@ -84,6 +92,8 @@ public class RecommendCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /**case4 滑动推荐列表后关注第二个推荐用户
      * 检查该用户followers有没有增加;
      *  并到Me关注好友去寻找是否添加成功
@@ -101,6 +111,8 @@ public class RecommendCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /**case5 检查nick name长度是否≤30
      * [字体颜色，字体大小]无法实现，请检查截图或者
      */
@@ -114,6 +126,8 @@ public class RecommendCase extends VP2 {
         //关闭弹出框
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /**case6 刷新discover后检查推荐follow列表是否更新
      * 检查刷新前后，前三个用户是否完全一致，判断是否刷新成功
      */
@@ -143,6 +157,8 @@ public class RecommendCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /**case 7 Follow一个推荐列表好友后，刷新discover，
      * 检查该好友是否从discover消失
      */
@@ -170,6 +186,8 @@ public class RecommendCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     关闭推荐列表
     点击推荐列表右上角关闭按钮
@@ -191,6 +209,8 @@ public class RecommendCase extends VP2 {
         Asst.assertEquals("关闭-你可能感兴趣",false,expect_name_exist);
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     关闭推荐列表
     点击推荐列表右上角关闭按钮

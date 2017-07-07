@@ -10,6 +10,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.logging.Logger;
+
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.SettingAction;
@@ -30,6 +33,8 @@ public class FeedBackCase extends VP2{
     }
     //Feedback为空
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testFeedback_Space() throws UiObjectNotFoundException, IOException {
         SettingAction.navToFeedBack();
         getObjectById(MePage.HELP_FEEDBACK_CONTENT).clearTextField();
@@ -43,6 +48,8 @@ public class FeedBackCase extends VP2{
     }
     //Feedback 输入字符长度100
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testFeedback_100c() throws UiObjectNotFoundException, IOException {
         SettingAction.navToFeedBack();
         getObjectById(MePage.HELP_FEEDBACK_CONTENT).clearTextField();
@@ -57,6 +64,8 @@ public class FeedBackCase extends VP2{
     }
     //Feedback 输入字符长度1000
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testFeedback_1000c() throws UiObjectNotFoundException, IOException {
         SettingAction.navToFeedBack();
         getObjectById(MePage.HELP_FEEDBACK_CONTENT).clearTextField();
@@ -72,6 +81,8 @@ public class FeedBackCase extends VP2{
     }
     //Feedback 输入字符长度500
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testFeedback_500c() throws UiObjectNotFoundException, IOException {
         SettingAction.navToFeedBack();
         getObjectById(MePage.HELP_FEEDBACK_CONTENT).clearTextField();

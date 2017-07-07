@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 
 import java.util.logging.Logger;
 
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.page.AccountPage;
@@ -44,6 +46,8 @@ public class LoginCase extends VP2 {
     }
 
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 1：login界面元素检查
     1.检查返回按钮(点击返回键是否起作用）
@@ -80,6 +84,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 2：未输入账号和密码；点击login
     无账号无密码
@@ -93,6 +99,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 3：输入正确的账号，未输入密码；点击login
     账号通过读取本地config.properties文件中email；
@@ -120,6 +128,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 5：密码可见和不可见
     1.在密码不可见情况下输入密码
@@ -149,6 +159,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 6：输入不存在的邮箱账号和密码后点击登录
     1.输入不存在的账号和密码
@@ -181,6 +193,8 @@ public class LoginCase extends VP2 {
             Assert.fail("使用不存在的电话号码账号和密码点击登陆后页面变化");}
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 8：输入正确的邮箱账号和错误的密码后点击登录
     1.输入正确的账号和错误的密码密码
@@ -199,6 +213,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 9：输入正确的电话号码账号和错误的密码后点击登录
     1.输入正确的账号和错误的密码密码
@@ -217,6 +233,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 10：使用email登录
     读取本地config.properties文件中email和email_password来进行登录
@@ -234,6 +252,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 11：使用phone登录
     读取本地config.properties文件中phone_number和phone_password来进行登录
@@ -251,6 +271,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 12：使用sioEye登录
     读取本地config.properties文件中phone_number和phone_password来进行登录
@@ -268,6 +290,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     /*
     case 13：使用邮箱找回密码
     1.读取本地config.properties文件中email
@@ -293,6 +317,8 @@ public class LoginCase extends VP2 {
         }
     }
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testForgotPasswordByEmailExist() throws UiObjectNotFoundException {
         getObjectByTextContains("Forgot your password?").click();
         String email=Constant.getUserName("email");

@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 import java.util.logging.Logger;
 
 import bean.VideoBean;
+import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.DiscoverAction;
@@ -40,6 +42,8 @@ public class CountPersonCase extends VP2 {
      *  Result：每次进入播放视频界面后退出视频封面界面，历史观看人数加1
      * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testCountWatchPerson() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.scrollVideoList();
@@ -76,6 +80,8 @@ public class CountPersonCase extends VP2 {
      *备注：用不同账户暂无法实现，暂时只能用本账户的点赞；
      * */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testCountZanPerson() throws UiObjectNotFoundException{
         MainAction.navToDiscover();
         DiscoverAction.scrollVideoList();
@@ -118,6 +124,8 @@ public class CountPersonCase extends VP2 {
      *备注：只能检查是否有位置信息
      */
     @Test
+    @SanityTest
+    @PerformanceTest
     public void testHasLocationService() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         boolean findVideoHasLocation=false;
