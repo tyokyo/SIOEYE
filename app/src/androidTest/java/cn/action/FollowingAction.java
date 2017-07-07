@@ -136,8 +136,11 @@ public class FollowingAction extends VP2{
         int size=0;
         for (UiObject2 linear:LinearLayoutList){
             if (linear.hasObject(By.res(MePage.FOLLOWERING_AVATAR))){
-                size=size+1;
-                LinearLayoutList_filter.add(linear);
+                List<UiObject2> textViews =linear.findObjects(By.clazz(TextView.class));
+                if (textViews.size()>=2){
+                    size=size+1;
+                    LinearLayoutList_filter.add(linear);
+                }
             }
         }
         Random r = new Random();
