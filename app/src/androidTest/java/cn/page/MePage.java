@@ -270,6 +270,54 @@ public class MePage {
     public static final String TV_AUCHOR_ID="cn.sioeye.sioeyeapp:id/tv_anchor";
     //聊天室
     public static final String TV_CHAT_ROOM_ID="cn.sioeye.sioeyeapp:id/tv_chat_room";
+    //会员权益
+    public static final String VIP_RIGHT_TV_OPEN="cn.sioeye.sioeyeapp:id/tv_vip_open";
+    public static final String VIP_RIGHT_TV_CONTENT="cn.sioeye.sioeyeapp:id/tv_content";
+    public static final String VIP_RIGHT_TV_CHOOSE_CANCEL="cn.sioeye.sioeyeapp:id/tv_choose_cancel";
+    public static final String VIP_RIGHT_CONTENT="cn.sioeye.sioeyeapp:id/content_text";
+    public static final String VIP_RIGHT_SIV_PRIVILEGE="cn.sioeye.sioeyeapp:id/siv_privilege";
+    public static final String VIP_RIGHT_TV_MEMBER_TEXT= "cn.sioeye.sioeyeapp:id/tv_member_text";
+    public static final String VIP_RIGHT_TV_SIOEYE_VIP_TEXT= "You have not signed up for Sioeye VIP";
+    public static final String VIP_RIGHT_TITLE="cn.sioeye.sioeyeapp:id/title";
+    //固定拉流地址
+    public static final String SELECT_PULLINS_TV_MEMBER_TEXT="cn.sioeye.sioeyeapp:id/tv_member_text";
+    public static final String SELECT_PULLINS_TV_OPEN="cn.sioeye.sioeyeapp:id/tv_vip_open";
+    //相机
+    public static final String CAMERA_ADD_DEVICE="cn.sioeye.sioeyeapp:id/add_device";
+    public static final String CAMERA_LEARN_DEVICE="cn.sioeye.sioeyeapp:id/learn_device";
+    public static final String CAMERA_ADD_DEVICE_TAG="cn.sioeye.sioeyeapp:id/device_tag";
+    public static final String CAMERA_BTN_ADD_DEVICE="cn.sioeye.sioeyeapp:id/btn_add_device";
+    public static final String CAMERA_CONNECT_DEVICES="cn.sioeye.sioeyeapp:id/toolbar_title";
+    public static final String CAMERA_INACTIVE="cn.sioeye.sioeyeapp:id/inactive";
+    public static final String CAMERA_ACTIVE="cn.sioeye.sioeyeapp:id/active";
+    public static final String CAMERA_DEVICE_IMAGE="cn.sioeye.sioeyeapp:id/device_type_image";
+    public static final String CAMERA_DEVICE_IMAGE_BLINK="cn.sioeye.sioeyeapp:id/device_type_image";
+    //账号与安全
+    public static final String ACCOUNT_AND_SECURITY_RIGHT="cn.sioeye.sioeyeapp:id/right";
+    public static final String ACCOUNT_AND_SECURITY_TITLE="cn.sioeye.sioeyeapp:id/title";
+    public static final String ACCOUNT_AND_PASSWORD="cn.sioeye.sioeyeapp:id/et_password";
+    public static final String ACCOUNT_AND_PASSWORD_VISIBLE="cn.sioeye.sioeyeapp:id/password_visible";
+    public static final String ACCOUNT_AND_TV_TOBING_PHONE="cn.sioeye.sioeyeapp:id/tv_tobind_account";
+    public static final String ACCOUNT_AND_TV_TOBING_PHONE_PASSWORD="cn.sioeye.sioeyeapp:id/et_password";
+    public static final String ACCOUNT_AND_TV_TOBING_PHONE_NEXT="cn.sioeye.sioeyeapp:id/tv_next";
+    public static final String ACCOUNT_AND_TV_TOBING_EMAIL="cn.sioeye.sioeyeapp:id/tv_tobind_account";
+    public static final String ACCOUNT_AND_TV_TOBING_EMAIL_PASSWORD="cn.sioeye.sioeyeapp:id/et_password";
+    public static final String ACCOUNT_AND_TV_TOBING_EMAIL_NEXT="cn.sioeye.sioeyeapp:id/tv_next";
+    //直播封面弹窗
+    public static final String COVER_PLOT_BTN_DIALOG_CANCEL="cn.sioeye.sioeyeapp:id/btn_dialog_cancel";
+    public static final String COVER_PLOT_BTN_DIALOG_ALBUM="cn.sioeye.sioeyeapp:id/btn_dialog_album";
+    public static final String COVER_PLOT_BTN_DIALOG_PHOTO="cn.sioeye.sioeyeapp:id/btn_dialog_photo";
+    public static final String SETTINGS_SELECT_VIDEO_TEXT="Select video and audio source";
+    //流量开关
+    public static final String SETTINGS_CB_3G_NETWORK="cn.sioeye.sioeyeapp:id/cb_3g_network";
+    public static final String SETTINGS_CB_3G_NETWORK_TEXT="Autoplay on mobile data";
+    //推送通知开关
+    public static final String SETTINGS_PUSH_TYPE_LIVE="cn.sioeye.sioeyeapp:id/push_type_live";
+    public static final String SETTINGS_PUSH_TYPE_AT="cn.sioeye.sioeyeapp:id/push_type_at";
+    public static final String SETTINGS_PUSH_TYPE_COMMENT="cn.sioeye.sioeyeapp:id/push_type_comment";
+
+
+
 
 
 }
