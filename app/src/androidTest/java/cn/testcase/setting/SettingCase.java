@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
 import ckt.annotation.PerformanceTest;
@@ -103,6 +104,127 @@ public class SettingCase extends VP2 {
             Asst.assertEquals("打开直播",expect,active);
         }
     }
+    /**
+     * 流量控制测试
+     *测试流量开关
+     * @author chendaofa
+     */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testThreeDNetwork() throws UiObjectNotFoundException {
+        SettingAction.navToSetting();
+        boolean isChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
+        logger.info(""+isChecked);
+        if (isChecked==false){
+            clickById(MePage.SETTINGS_3G_NETWORK);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
+            boolean expect;
+            expect=true;
+            Asst.assertEquals("打开流量",expect,avtiveisChecked);
+            Spoon.screenshot("testThreeDNetwork");
+        }if (isChecked==true){
+            clickById(MePage.SETTINGS_3G_NETWORK);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
+            boolean expect;
+            expect=false;
+            Asst.assertEquals("关闭流量",expect,avtiveisChecked);
+            Spoon.screenshot("testThreeDNetwork");
+        }
+    }
+    /**
+     * 直播推送测试
+     *直播推送开关
+     * @author chendaofa
+     */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testLiveNotifications() throws UiObjectNotFoundException {
+        SettingAction.navToMessageNotification();
+        boolean isChecked=getObject2ById(MePage.SETTINGS_PUSH_TYPE_LIVE).isChecked();
+        logger.info(""+isChecked);
+        if (isChecked==false){
+            clickById(MePage.SETTINGS_PUSH_TYPE_LIVE);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ById(MePage.SETTINGS_PUSH_TYPE_LIVE).isChecked();
+            boolean expect;
+            expect=true;
+            Asst.assertEquals("打开直播推送",expect,avtiveisChecked);
+            Spoon.screenshot("testLiveNotifications");
+        }if (isChecked==true){
+            clickById(MePage.SETTINGS_PUSH_TYPE_LIVE);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ById(MePage.SETTINGS_PUSH_TYPE_LIVE).isChecked();
+            boolean expect;
+            expect=false;
+            Asst.assertEquals("关闭直播推送",expect,avtiveisChecked);
+            Spoon.screenshot("testLiveNotifications");
+        }
+    }
+    /**
+     * @ME测试
+     *@ME开关
+     * @author chendaofa
+     */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testPushTypeAt() throws UiObjectNotFoundException {
+        SettingAction.navToMessageNotification();
+        boolean isChecked=getObject2ById(MePage.SETTINGS_PUSH_TYPE_AT).isChecked();
+        logger.info(""+isChecked);
+        if (isChecked==false){
+            clickById(MePage.SETTINGS_PUSH_TYPE_AT);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ById(MePage.SETTINGS_PUSH_TYPE_AT).isChecked();
+            boolean expect;
+            expect=true;
+            Asst.assertEquals("打开@ME推送",expect,avtiveisChecked);
+            Spoon.screenshot("testPushTypeAt");
+        }if (isChecked==true){
+            clickById(MePage.SETTINGS_PUSH_TYPE_AT);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ById(MePage.SETTINGS_PUSH_TYPE_AT).isChecked();
+            boolean expect;
+            expect=false;
+            Asst.assertEquals("关闭@ME推送",expect,avtiveisChecked);
+            Spoon.screenshot("testPushTypeAt");
+        }
+    }
+    /**
+     * 评论推送测试
+     *评论推送开关
+     * @author chendaofa
+     */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testCommentsNotify() throws UiObjectNotFoundException {
+        SettingAction.navToMessageNotification();
+        boolean isChecked=getObject2ById(MePage.SETTINGS_PUSH_TYPE_COMMENT).isChecked();
+        logger.info(""+isChecked);
+        if (isChecked==false){
+            clickById(MePage.SETTINGS_PUSH_TYPE_COMMENT);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ById(MePage.SETTINGS_PUSH_TYPE_COMMENT).isChecked();
+            boolean expect;
+            expect=true;
+            Asst.assertEquals("打开评论推送",expect,avtiveisChecked);
+            Spoon.screenshot("testCommentsNotify");
+        }if (isChecked==true){
+            clickById(MePage.SETTINGS_PUSH_TYPE_COMMENT);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ById(MePage.SETTINGS_PUSH_TYPE_COMMENT).isChecked();
+            boolean expect;
+            expect=false;
+            Asst.assertEquals("关闭评论推送",expect,avtiveisChecked);
+            Spoon.screenshot("testCommentsNotify");
+        }
+    }
+
     public void testDirectorDisable() throws UiObjectNotFoundException {
         SettingAction.navToSetting();
         boolean isChecked=getObject2ById(MePage.SETTINGS_CB_DIRECTOR).isChecked();

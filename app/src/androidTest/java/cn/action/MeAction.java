@@ -123,6 +123,26 @@ public class MeAction extends VP2{
         clickByText("Live Configuration");
         Spoon.screenshot("navToLiveConfiguration");
     }
+    //me->固定拉流地址
+    public static void navToPullingSource(){
+        clickById(MePage.ID_MAIN_TAB_ME);
+        clickByText("Live Configuration");
+        clickByText("Select pulling source");
+        Spoon.screenshot("navToPullingSource");
+    }
+    //me->直播封面
+    public static void navToCoverplot(){
+        clickById(MePage.ID_MAIN_TAB_ME);
+        clickByText("Live Configuration");
+        clickByText("Cover plot");
+        Spoon.screenshot("navToCoverplot");
+    }
+    //Me->会员权益
+    public static void navToVipRights(){
+        clickById(MePage.ID_MAIN_TAB_ME);
+        clickByText("VIP Rights");
+        Spoon.screenshot("navToVipRights");
+    }
     //Me-> 我的二维码
     public static void navToQrCode() throws UiObjectNotFoundException {
         MainAction.clickMe();
@@ -144,6 +164,13 @@ public class MeAction extends VP2{
         //clickById(MePage.SETTINGS_USER_MAIN);
         clickByText("Settings");
         Spoon.screenshot("navToSettings");
+    }
+    //Me->相机
+    public static void navToCamera() throws UiObjectNotFoundException {
+        MainAction.clickMe();
+        //clickById(MePage.SETTINGS_USER_MAIN);
+        clickByText("Camera");
+        Spoon.screenshot("Camera");
     }
     //Go to 帮助中心
     public static void navToFeedback() throws UiObjectNotFoundException {

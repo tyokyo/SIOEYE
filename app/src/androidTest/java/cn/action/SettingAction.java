@@ -41,6 +41,12 @@ public class SettingAction extends VP2 {
         MeAction.navToSettings();
         Spoon.screenshot("HelpCenter");
     }
+    //推送通知
+    public static void navToMessageNotification() throws UiObjectNotFoundException {
+        MeAction.navToSettings();
+        clickByText("Message notification");
+        Spoon.screenshot("HelpCenter");
+    }
     //关于SioEye
     public static void navToAboutSioEye() throws UiObjectNotFoundException {
         MeAction.navToSettings();
@@ -71,5 +77,6 @@ public class SettingAction extends VP2 {
         clickById(MePage.HELP_HELP);
         Spoon.screenshot("HELP_HELP");
     }
+
 
 }
