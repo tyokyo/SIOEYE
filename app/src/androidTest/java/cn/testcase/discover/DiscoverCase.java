@@ -177,7 +177,7 @@ public class DiscoverCase extends VP2 {
         linearLayouts.get(size - 1).click();
         BroadcastAction.waitBroadcastLoading();
         gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)), 120000);
-        //Asst.assertEquals("加载2分钟", false, id_exists(MePage.BROADCAST_VIEW_VIDEO_LOADING));
+      //Asst.assertEquals("加载2分钟", false, id_exists(MePage.BROADCAST_VIEW_VIDEO_LOADING));
         Spoon.screenshot("testViewVideo");
         gDevice.pressBack();
     }
@@ -370,7 +370,7 @@ public class DiscoverCase extends VP2 {
     /**
      *向上迅速滑动视频列表
      *1、迅速滑动推荐视频列表
-     *Result:APP响应迅速不会出现延迟卡顿carsh闪退现象
+     *Result:APP响应迅速不会出现延迟卡顿crash闪退现象
      * */
     public void testSwipeUpQuickly() throws UiObjectNotFoundException {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
