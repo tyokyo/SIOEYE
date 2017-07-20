@@ -3,7 +3,9 @@ package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.widget.CheckBox;
 
 import com.squareup.spoon.Spoon;
 
@@ -13,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.List;
 
 import ckt.annotation.PerformanceTest;
 import ckt.annotation.SanityTest;
@@ -23,7 +26,7 @@ import cn.page.App;
 import cn.page.MePage;
 
 /**
- * Created by elon on 2016/10/27.
+ * Created by chendaofa on 2016/10/27.
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
@@ -195,4 +198,82 @@ public class LiveConfigCase extends VP2{
         MeAction.setToPersonal();
         Spoon.screenshot("personal");
     }
+    //点击直播封面检查弹出框-陈道发
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testSetCoverPlot() throws UiObjectNotFoundException {
+        MeAction.navToCoverplot();
+        String expect_name1="Camera";
+        String active_name1=getObjectById(MePage.COVER_PLOT_BTN_DIALOG_PHOTO).getText();
+        String expect_name2="Album";
+        String active_name2=getObjectById(MePage.COVER_PLOT_BTN_DIALOG_ALBUM).getText();
+        String expect_name3="Cancel";
+        String active_name3=getObjectById(MePage.COVER_PLOT_BTN_DIALOG_CANCEL).getText();
+        Asst.assertEquals("点击的信息是否一致", expect_name1+expect_name2+expect_name3, active_name1+active_name2+active_name3);
+        clickById(MePage.COVER_PLOT_BTN_DIALOG_CANCEL);
+        Spoon.screenshot("testSetCoverPlot");
+
+    }
+    /**
+     * 固定拉流地址跳转到会员权益
+     * @author chendaofa
+     */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testSelectPullingSource() throws UiObjectNotFoundException {
+        MeAction.navToPullingSource();
+
+
+        String active_name1=getObjectById(MePage.SELECT_PULLINS_TV_MEMBER_TEXT).getText();
+        String expect_name1="You have not signed up for Sioeye VIP";
+        if (active_name1.equals(expect_name1)){
+            clickById(MePage.SELECT_PULLINS_TV_OPEN);
+            waitTime(5);
+            String active_name2=getObjectById(MePage.VIP_RIGHT_TITLE).getText();
+            String expect_name2="VIP Rights";
+            Asst.assertEquals("是否跳转到会员权益界面", expect_name2, active_name2);
+        }
+
+        Spoon.screenshot("testSetCoverPlot");
+
+    }
+    /**
+     * 水印开关测试
+     *测试开关水印
+     * @author chendaofa
+     */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testWaterMarkDelete() throws UiObjectNotFoundException {
+        MeAction.navToLiveConfiguration();
+
+        //findObjects(By.clazz(android.widget.CheckBox.class));
+        boolean isChecked=getObject2ByClass(CheckBox.class).isChecked();
+       // List<UiObject2> checkBoxs=getObjectsByClassname("android.widget.CheckBox");
+        //boolean isChecked=checkBoxs.get(1).isChecked();
+        logger.info(""+isChecked);
+        if (isChecked==false){
+            clickByClass("android.widget.CheckBox",1);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ByClass(CheckBox.class).isChecked();
+            boolean expect;
+            expect=true;
+            Asst.assertEquals("打开水印开关",expect,avtiveisChecked);
+            Spoon.screenshot("testWaterMarkDelete");
+        }if (isChecked==true){
+            //clickByClass("android.widget.RelativeLayout");
+            clickByClass("android.widget.CheckBox",1);
+            waitTime(2);
+            boolean avtiveisChecked=getObject2ByClass(CheckBox.class).isChecked();
+            boolean expect;
+            expect=false;
+            Asst.assertEquals("关闭水印开关",expect,avtiveisChecked);
+            Spoon.screenshot("testWaterMarkDelete");
+        }
+
+    }
+
 }
