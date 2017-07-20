@@ -144,7 +144,7 @@ public class AccountCase extends VP2{
     public void testRegRepeatEmail() throws UiObjectNotFoundException {
         //注销登录
         AccountAction.logOutAccount();
-        //进入手机注册界面
+        //进入邮件注册界面
         AccountAction.navToSignUp_ByEmail();
         String email_address=getRandomEmail(3,8);
         //输入有效邮件地址
@@ -178,7 +178,7 @@ public class AccountCase extends VP2{
 
         //注销登录
         AccountAction.logOutAccount();
-        //进入手机注册界面
+        //进入邮箱注册界面
         AccountAction.navToSignUp_ByEmail();
         //输入有效邮件地址
         setText(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT,email_address);
@@ -190,7 +190,7 @@ public class AccountCase extends VP2{
         AccountAction.logInAccount(Constant.userName,Constant.passwd);
     }
     /*
-    重复Email注册
+    重复sioeye id
     注册失败
     * */
     @Test
