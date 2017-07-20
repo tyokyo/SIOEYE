@@ -90,9 +90,9 @@ public class BroadcastAction extends VP2{
             }
         }
         //视频加载失败
-        if (id_exists(MePage.LOAD_VIDEO_ERROR)){
-            Asst.fail("视频加载失败");
-        }
+//        if (id_exists(MePage.LOAD_VIDEO_ERROR)){
+//            Asst.fail("视频加载失败");
+//        }
     }
     //视频回放页面的播放数-点赞数-评论数
     public static WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {
