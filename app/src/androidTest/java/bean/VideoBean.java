@@ -5,6 +5,7 @@ package bean;
  */
 public class VideoBean {
     private int zan;
+    private int comment;
 
     public int getZan() {
         return zan;
@@ -29,6 +30,14 @@ public class VideoBean {
     public void setAddress(String address) {
         this.address = address;
     }
+    public int getComment() {
+        return comment;
+    }
+
+    public void setComment(int Comment) {
+        this.comment = Comment;
+    }
+
 
     private int like;
 
@@ -37,6 +46,7 @@ public class VideoBean {
         return "VideoBean{" +
                 "zan=" + zan +
                 ", like=" + like +
+                ",comment="+comment+
                 ", address='" + address + '\'' +
                 '}';
     }
