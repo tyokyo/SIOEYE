@@ -65,6 +65,16 @@ public class DiscoverAction extends VP2 {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         clickById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
     }
+    public static void navToNew(){
+
+        clickById(DiscoverPage.ID_NEW_RECOMMEND);
+
+    }
+    public static void navToPopular(){
+
+        clickById(DiscoverPage.ID_HOT_RECOMMEND);
+
+    }
 
     //index=0-3
     public static String navToRecommendList(int index, int click_time) {
