@@ -309,7 +309,7 @@ public class ActivityCase extends VP2{
         Asst.assertEquals("add one interest",1,myInterests_after_add.size());
         Spoon.screenshot("add_my_interests",input);
     }
-    //添加interests特殊字符
+    //添加interests特殊字符不保存
     @Test
     @SanityTest
     @PerformanceTest
