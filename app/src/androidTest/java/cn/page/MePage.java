@@ -270,6 +270,6 @@ public class MePage {
     public static final String TV_AUCHOR_ID="cn.sioeye.sioeyeapp:id/tv_anchor";
     //聊天室
     public static final String TV_CHAT_ROOM_ID="cn.sioeye.sioeyeapp:id/tv_chat_room";
-
-
+    //编辑框
+    public static final String EDIT_COMMENT_TEXT="cn.sioeye.sioeyeapp:id/edit_text";
 }
