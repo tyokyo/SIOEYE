@@ -64,17 +64,16 @@ public class NewCase  extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
     }
-
     @Test
     @SanityTest
     @PerformanceTest
     /**
     *case1.在discover界面切换到最新列表
     */
-
     public void testToNewList() throws UiObjectNotFoundException{
         MainAction.clickDiscover();
         DiscoverAction.navToNew();
+        //点击切换到最新列表，根据有无广告判断
         UiObject object=getUiObjectById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
         if(object!=null){
             Asst.assertFalse("testToNewListFail",id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
@@ -106,7 +105,6 @@ public class NewCase  extends VP2{
             Asst.assertTrue(!id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
         }
         Spoon.screenshot("New","Popular");
-
     }
 
     @Test
@@ -119,6 +117,7 @@ public class NewCase  extends VP2{
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         DiscoverAction.navToSearch();
+        //点击搜索按钮，根据有无输入框判断
         UiObject object= getObjectById(NewPage.ID_NEW_SEARCH_INPUT);
         Spoon.screenshot("Search");
         if (object!=null) {
@@ -139,8 +138,10 @@ public class NewCase  extends VP2{
     public void testClickAnchor() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        //跳转到最新列表，获取到主播头像
         UiObject object = getObjectById(NewPage.ID_NEW_AVATOR);
         object.click();
+        //点击主播头像，弹出详情框
         waitUntilFind(NewPage.ID_NEW_PROFILE_MINI_NUM_FOLLOWER, 1000);
         Asst.assertTrue(id_exists(NewPage.ID_NEW_PROFILE_MINI_NUM_FOLLOWER));
         Spoon.screenshot("Profile_page");
@@ -157,6 +158,7 @@ public class NewCase  extends VP2{
         DiscoverAction.navToNew();
         UiObject object = getObjectById(NewPage.ID_NEW_AVATOR);
         object.click();
+        //点击主播头像，弹出详情框
         waitUntilFind(NewPage.ID_NEW_PROFILE_MINI_NUM_FOLLOWER, 1000);
         Asst.assertTrue(id_exists(NewPage.ID_NEW_PROFILE_MINI_NUM_FOLLOWER));
         Spoon.screenshot("Profile_page");
@@ -194,7 +196,6 @@ public class NewCase  extends VP2{
         Spoon.screenshot("PlayVideo");
 
     }
-
     @Test
     @SanityTest
     @PerformanceTest
@@ -225,6 +226,7 @@ public class NewCase  extends VP2{
         DiscoverAction.navToNew();
         waitUntilFind(NewPage.ID_NEW_VIDEO,10000);
         UiObject2 swipe_target = getObject2ById(NewPage.ID_NEW_VIDEO);
+        //获取到视频列表后向上滑动四次加载视频
         swipe_target.swipe(Direction.UP,0.5f);
         swipe_target.swipe(Direction.UP,0.5f);
         swipe_target.swipe(Direction.UP,0.5f);
@@ -232,7 +234,6 @@ public class NewCase  extends VP2{
         Spoon.screenshot("New_page");
         Asst.assertFalse("testSwipeUpFail", !id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
     }
-
     @Test
     @SanityTest
     @PerformanceTest
@@ -251,19 +252,12 @@ public class NewCase  extends VP2{
         VideoBean watch_after = NewAction.getNumberPlayVideo();
         int watchnum_after = watch_after.getLike();
         Asst.assertEquals("点赞数+10",watchnum_after,watchnum_before+1);
-//        if (watchnum_after==(watchnum_before+1)){
-//            Assert.assertTrue(true);
-//        }else{
-//            Asst.fail("AssertionError");
-//        }
-
     }
     @Test
     @SanityTest
     @PerformanceTest
     /**
      * case10:视频封面观看人数统计
-     *
      * */
     public void testNewCoverCountWatch() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
@@ -327,7 +321,6 @@ public class NewCase  extends VP2{
         waitTime(5);
         Spoon.screenshot("after_zan"+zan_after);
         Asst.assertEquals("点赞数+5",zan_after,zan_before+5);
-
     }
 
     @Test
@@ -341,6 +334,7 @@ public class NewCase  extends VP2{
         DiscoverAction.navToNew();
         Boolean videoLocation = false;
         for (int i = 1; i <= 5; i++) {
+            //获取位置信息
             String Location= NewAction.getLocation();
             if (Location!=null) {
                 videoLocation =true;
@@ -354,7 +348,6 @@ public class NewCase  extends VP2{
         //验证是否存在位置信息
         Asst.assertEquals("5轮查找-findLocationInVideo",true,videoLocation);
     }
-
     @Test
     @SanityTest
     @PerformanceTest
@@ -387,7 +380,6 @@ public class NewCase  extends VP2{
         }else{
             Asst.fail("AssertionError");
         }
-
     }
 
     @Test
