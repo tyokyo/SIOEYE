@@ -38,6 +38,11 @@ import cn.page.App;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
 import cn.page.NewPage;
+import cn.page.Other;
+import cn.page.AccountPage;
+import cn.action.FollowersAction;
+import cn.page.Constant;
+
 
 import static cn.action.NewAction.getNewZanNumber;
 
@@ -384,6 +389,262 @@ public class NewCase  extends VP2{
         }
 
     }
+
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /** zhengziongfan
+     * case15、未登陆点击输入框
+     * 1、未登录状态下在new界面点击任意视频进入观看
+     * 2、点击输入框
+     * Result:弹出登陆界面
+     * */
+    public void testClickInput() throws UiObjectNotFoundException {
+        //注销账号
+        AccountAction.logOutAccount();
+        //进入-发现
+        MainAction.clickDiscover();
+        //点击最新TAB
+        clickById(DiscoverPage.ID_NEW_RECOMMEND);
+        //滑动视频列表
+        // NewAction.scrollNewVideoList();
+        //播放一个视频
+        NewAction.navToPlayNewlistVideo();
+        //等待连接聊天室
+        BroadcastAction.waitBroadcastLoading();
+        //点击评论框
+        clickById(Other.chattextfield);
+        //弹出登陆界面
+        waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
+        Spoon.screenshot("loginIn_page");
+        Asst.assertFalse("ClickInputFail", !id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**
+     * case16、已登录点击输入框
+     *1、已登录状态下在new界面点击任意视频进入观看，点击输入框
+     * Result：正常弹出输入字符界面
+     * */
+    public void testClickInputSuccess() throws UiObjectNotFoundException, IOException {
+        //账号登录
+        AccountAction.logInAccount("46@qq.com", "123456");
+        //进入发现界面
+        MainAction.clickDiscover();
+        //点击最新TAB
+        clickById(DiscoverPage.ID_NEW_RECOMMEND);
+        //播放一个视频
+        NewAction.navToPlayNewlistVideo();
+        //等待连接聊天室
+        BroadcastAction.waitBroadcastLoading();
+        //点击评论框
+        clickById(Other.chattextfield);
+        //弹出输入框界面
+        waitUntilFind(Other.chattextfield, 2000);
+        Spoon.screenshot("Input_page");
+        Asst.assertFalse("ClickInputSuccess_Fail", !id_exists(Other.chattextfield_tanchu));
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**
+     * case17、New界面未登陆点击关注主播
+     *1.未登陆状态下，在观看视频界面点击关注主播
+     *Result:弹出登陆界面
+     * */
+    public void testUnLoginFollowAnchor() throws UiObjectNotFoundException {
+        //注销账号
+        AccountAction.logOutAccount();
+        //进入-发现界面
+        MainAction.clickDiscover();
+        //点击最新TAB
+        clickById(DiscoverPage.ID_NEW_RECOMMEND);
+        //播放一个视频
+        NewAction.navToPlayNewlistVideo();
+        //点击主播
+        FollowersAction.clickToAnchor();
+        //点击关注
+        clickByText("Follow");
+        //弹出登录界面
+        waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
+        Spoon.screenshot("loginIn_page");
+        Asst.assertFalse("ClickInputFail", !id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**
+     *
+     *1.case18、
+     *2.已登录状态下，在观看界面点击任意键关注主播
+     *Result:
+     * */
+    public void testLoginFollowAnchor() throws UiObjectNotFoundException {
+        //账号登录
+        //AccountAction.logInAccount("13688169291", "123456");
+        //进入发现界面
+        MainAction.clickDiscover();
+        //点击最新TAB
+        clickById(DiscoverPage.ID_NEW_RECOMMEND);
+        //播放一个视频
+        NewAction.navToPlayNewlistVideo();
+        //点击主播
+        FollowersAction.clickToAnchor();
+        waitUntilFind(DiscoverPage.ID_ANCHOR_FOLLOW,10000);
+        //判断是否关注
+        if (text_exists("Follow")) {
+            //点击已关注
+            clickByText("Follow");
+            //取消关注成功，变为关注
+            waitUntilFindText("Following", 3000);
+            Spoon.screenshot("cancel_follow");
+            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
+        } else {
+            //点击关注
+            clickByText("Following");
+            //关注成功，变为已关注
+            waitUntilFindText("Follow", 3000);
+            Spoon.screenshot("addsuccess");
+            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
+        }
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**case19
+     *1.进入搜索界面
+     *2.输入邮箱地址后点击搜索
+     *Result:结果匹配搜索内容，成功搜索出该ID的联系人
+     * */
+    public void testToSearchByEmail() throws UiObjectNotFoundException, IOException {
+        //AccountAction.logInAccount("YCB123", "123456");
+        NewAction.navToNewSearch();
+        shellInputText(Constant.userName);
+        Spoon.screenshot("testToSearchByEmail");
+        waitTime(2);
+        waitUntilFindText(Constant.CORRECT_SIO_EYE_ID,20000);
+        Asst.assertTrue(text_exists(Constant.CORRECT_SIO_EYE_ID));
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**case20
+     *1.进入搜索界面
+     *2.输入Sioeye Id后点击搜索
+     *Result:结果匹配搜索内容，成功搜索出该ID的联系人
+     * */
+    public void testToSearchBySioeyeID() throws UiObjectNotFoundException, IOException {
+        NewAction.navToNewSearch();
+        shellInputText("tyokyo");
+        Spoon.screenshot("testToSearchBySioeyeID");
+        waitTime(2);
+        Asst.assertTrue(text_exists("tyo000"));
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**case21、
+     *1.进入搜索界面
+     *2.输入昵称后点击搜索
+     *Result:结果匹配搜索内容，成功搜索出该ID的联系人
+     * */
+    public void testToSearchByNickname() throws UiObjectNotFoundException, IOException {
+        NewAction.navToNewSearch();
+        shellInputText("xiaoxiao");
+        Spoon.screenshot("testToSearchByNickname");
+        waitTime(2);
+        //Asst.assertTrue(text_exists("你是谁"));//看ID对应的昵称是否存在，如果账号修改昵称可能会导致用例执行失败
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**case22、
+     *1.进入搜索界面
+     *2.输入手机号码后点击搜索
+     *Result:结果匹配搜索内容，成功搜索出该ID的联系人
+     * */
+    public void testToSearchByPhoneNumber() throws UiObjectNotFoundException, IOException {
+        NewAction.navToNewSearch();
+        shellInputText("13688169291");
+        Spoon.screenshot("testToSearchByPhoneNumber");
+        waitTime(2);
+        Asst.assertTrue(text_exists("尼古拉斯·泰迪"));
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**case23
+     *1.在搜索界面点击Video切换到视频搜索
+     *Result:成功切换到视频搜索
+     * */
+    public void testToSearchVideo() throws UiObjectNotFoundException, IOException {
+        NewAction.navToNewSearch();
+        shellInputText("a");
+        clickByText("Video");
+        waitTime(2);
+        UiObject2 SP = getUiObject2ByText("Video");
+        Boolean Actual = SP.isChecked() && (text_exists_contain("Oops,There's nothing") || text_exists_contain("a"));
+        Asst.assertTrue(Actual);
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**case24
+     *1.在搜索输入框输入一些数据
+     *2.点击输入框中的×按钮清空数据
+     *Result:成功清空输入的数据，返回推荐
+     * */
+    public void testToSearchByData() throws UiObjectNotFoundException, IOException {
+        NewAction.navToNewSearch();
+        shellInputText("1234");
+        clickById(Other.filter_clear);
+        Spoon.screenshot("AfterClickFilter_clear");
+        Asst.assertTrue(text_exists("Search"));
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**case25
+     *1.在搜索界面点击取消按钮
+     *Result:退出搜索界面，返回到上一界面
+     * */
+    public void testToSearchClickCancle() throws UiObjectNotFoundException {
+        NewAction.navToNewSearch();
+        clickByText("Cancel");
+        Asst.assertTrue(text_exists("Discover"));
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**case26
+     *1.在输入界面输入视频名称
+     *2.点击搜索
+     *Result:成功搜索出该名称的视频，绿色高亮显示
+     * */
+    public void testToSearchByVideoName() throws UiObjectNotFoundException, IOException {
+        NewAction.navToNewSearch();
+        shellInputText("a");
+        clickByText("Video");
+        waitTime(2);
+        Asst.assertTrue(text_exists_contain("a"));
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
