@@ -34,7 +34,7 @@ import iris4G.page.SettingPage;
  */
 public class CurrentTestCase extends VP2 {
     Logger logger = Logger.getLogger(CurrentTestCase.class.getName());
-    private int testTime=108;
+    private int testTime=120;
     /**
      * 格式化存储空间
      */
@@ -498,6 +498,7 @@ public class CurrentTestCase extends VP2 {
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             makeToasts("start"+i,5);
             waitTime(2);
+
             configVideoQuality(liveQuality480SD);
             //4G亮屏直播不保存480SD
             live2ScreenOn();
@@ -521,7 +522,6 @@ public class CurrentTestCase extends VP2 {
             live2ScreenOn();
             //4G灭屏直播保存480SD
             live2ScreenOff();
-
             //4G亮屏直播保存480HD
             logger.info("case:4G灭屏直播保存480HD");
             configVideoQuality(liveQuality480HD);
@@ -594,6 +594,7 @@ public class CurrentTestCase extends VP2 {
             gDevice.pressBack();
             gDevice.pressBack();
             openWifi();
+            gDevice.executeShellCommand("dumpsys battery set level 100");//修改电量显示
             launchCamera();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
@@ -658,7 +659,7 @@ public class CurrentTestCase extends VP2 {
             configVideoQuality(videoQuality480P120);//480P120FPS
             p2pScreenOff();
             //亮屏录播
-            configVideoQuality(videoQuality480P25);//480P480FPS
+            configVideoQuality(videoQuality480P25);//480P25FPS
             p2pScreenOff();
             Iris4GAction.stopCamera();
             waitTime(2);
@@ -679,12 +680,12 @@ public class CurrentTestCase extends VP2 {
             //灭屏慢速录像2min
             CameraAction.navConfig(Iris4GPage.nav_menu[4]);//"Slo_Mo" Modem
             waitTime(2);
-            p2pScreenOff();//case9
+            p2pScreenOff();
             //灭屏延时录像2min
             CameraAction.navConfig(Iris4GPage.nav_menu[5]);//"Lapse" Modem
             waitTime(2);
             logger.info("case：灭屏延时录像");
-            p2pScreenOff();//case10
+            p2pScreenOff();
             //相机预览界面亮屏
             logger.info("case:相机预览界面亮屏待机");
             CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
