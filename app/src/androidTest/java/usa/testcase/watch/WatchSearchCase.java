@@ -29,6 +29,7 @@ public class WatchSearchCase extends VP2 {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_USA);
     }
 
+
     /*验证搜索功能
     有搜索图标
     2、进入搜索界面，可正确搜索

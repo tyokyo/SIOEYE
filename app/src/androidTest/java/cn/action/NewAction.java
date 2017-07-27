@@ -8,13 +8,25 @@ import android.widget.RelativeLayout;
 
 import com.squareup.spoon.Spoon;
 
+import android.support.test.uiautomator.Direction;
+
+
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Logger;
+
 import bean.VideoBean;
 import ckt.base.VP2;
+
+import cn.page.DiscoverPage;
 import cn.page.MePage;
+
+
+import java.util.Random;
+
 import cn.page.NewPage;
+
+import android.graphics.Rect;
+
 
 /**
  * Created by yajuan on 2017/7/19.
@@ -133,6 +145,71 @@ public class NewAction extends VP2 {
         }
         return like;
     }
+    //播放最新视频
+    public static int navToPlayNewlistVideo() throws UiObjectNotFoundException {
+        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        clickById(DiscoverPage.ID_NEW_RECOMMEND);
+        int person = 0;
+        UiObject2 swipe_target = getObject2ById(NewPage.ID_New_Vediolist);
+        swipe_target.swipe(Direction.UP, 0.6f);
+        waitTime(5);
+        List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
+        logger.info(linearLayouts.size() + "");
+        int zanBeforeNumber = 0;
+        List<UiObject2> textViews;
+        for (UiObject2 linearLayout : linearLayouts) {
+            try {
+                textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
+                if (textViews.size() == 3) {
+                    person = Integer.parseInt(textViews.get(0).getText());
+                    //获取点赞数
+                    zanBeforeNumber = NewAction.getZanNumber();
+                    logger.info("赞前人数是" + zanBeforeNumber + "人");
+                    Spoon.screenshot("before_zan", "" + zanBeforeNumber);
+                    //点击视频进行播放
+                    textViews.get(0).getParent().getParent().getParent().click();
+                    waitTime(3);
+                    //等待视频加载完成
+                    BroadcastAction.waitBroadcastLoading();
+                    break;
+                }
+            } catch (StaleObjectException e) {
+                e.printStackTrace();
+            }
+        }
+        if (!id_exists(MePage.BROADCAST_VIEW_ZAN)) {
+            linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
+            for (UiObject2 linearLayout : linearLayouts) {
+                textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
+                if (textViews.size() == 2) {
+                    if (linearLayout.getChildCount() == 2 && linearLayout.getParent().getChildCount() == 2) {
+                        person = Integer.parseInt(textViews.get(0).getText());
+                        //获取点赞数
+                        zanBeforeNumber = NewAction.getZanNumber();
+                        logger.info("赞前人数是" + zanBeforeNumber + "人");
+                        Spoon.screenshot("before_zan", "" + zanBeforeNumber);
+                        //点击视频进行播放
+                        textViews.get(0).getParent().getParent().getParent().click();
+                        waitTime(3);
+                        break;
+                    }
+                }
+            }
+        }
+        return zanBeforeNumber;
 
 
+    }
+    //最新页面-搜索按钮
+    public static void navToNewSearch() {
+        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+        //点击最新TAB
+        clickById(DiscoverPage.ID_NEW_RECOMMEND);
+        waitTime(3);
+        UiObject2 frameLayout = getObject2ById(DiscoverPage.ID_NEW_RECOMMEND).getParent().getParent();
+        UiObject2 searchObject = frameLayout.findObject(By.clazz(android.widget.ImageView.class));
+        Rect searchRect = searchObject.getVisibleBounds();
+        //double click
+        clickRect(searchRect);
+    }
 }
