@@ -137,6 +137,7 @@ public class SloMoCase extends VP2 {
         Iris4GAction.startCamera();
         CameraAction.navConfig(Iris4GPage.nav_menu[4]);
         Iris4GAction.cameraKey();
+        waitTime(5);//等待开始延时录像
         gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
         if (gDevice.isScreenOn() == false &&
                 id_exists("com.hicam:id/recording_time2")== true)
@@ -147,9 +148,9 @@ public class SloMoCase extends VP2 {
             if(gDevice.isScreenOn() == true &&
                     id_exists("com.hicam:id/recording_time2")== true)
             {
-                logger.info("screen 0ff success");
+                logger.info("screen wake up success");
                 Iris4GAction.cameraKey();
-                logger.info("screen on");
+                logger.info("stop recording");
             }
             else {
                 Spoon.screenshot("isScreenOn","isScreenOn=true");
