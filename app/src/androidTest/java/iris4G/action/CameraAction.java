@@ -74,7 +74,7 @@ public class CameraAction extends VP2 {
     }
     public static boolean checkLiveSuccess() {
         gDevice.wait(Until.gone(By.textStartsWith("Initializing Live Stream")), 60000);
-        waitTime(3);
+        waitTime(30);
         UiObject recordingTimeId=getObjectById(Iris4GPage.recording_time_id);
         if (!recordingTimeId.exists()) {
             logger.info("Live Failed");
