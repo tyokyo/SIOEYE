@@ -316,8 +316,11 @@ public class Iris4GAction extends VP2 {
         gDevice.executeShellCommand("am start -n com.hicam.gallery/.ui.GalleryPage");
         gDevice.wait(Until.findObject(By.pkg("com.hicam.gallery")), 40000);
         String pkg = gDevice.getCurrentPackageName();
-        logger.info("current-package:" + pkg);
-        if (!id_exists(SettingPage.video_timeText)){
+        logger.info("pkg:"+pkg);
+        waitTime(10);
+        clickByPonit(60,60);
+        waitTime(1);
+        if (!id_exists(SettingPage.gallery_live_bottom)){
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
