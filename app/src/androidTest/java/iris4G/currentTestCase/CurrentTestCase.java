@@ -3,15 +3,11 @@ package iris4G.currentTestCase;
 import android.os.RemoteException;
 import android.support.test.uiautomator.UiObject;
 import android.view.KeyEvent;
-
 import com.squareup.spoon.Spoon;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.util.logging.Logger;
-
 import ckt.base.VP2;
 import cn.page.Constant;
 import iris4G.action.AccountAction;
@@ -321,6 +317,9 @@ public class CurrentTestCase extends VP2 {
             waitTime(2);
             gDevice.pressBack();
             gDevice.pressBack();
+            waitTime(2);
+            gDevice.pressBack();
+            gDevice.pressBack();
             waitTime(1);
             logger.info("SawtoothWaveNoteGalleryLiveBreakOff");
             //出现锯齿状电流波形
@@ -489,77 +488,140 @@ public class CurrentTestCase extends VP2 {
         };
         for (int i = 1;i<=1;i++){
             makeScreenOn();
+            gDevice.executeShellCommand("dumpsys battery set level 100");//修改电量显示
 //            changeSleepTime("Never");
             switchTo4G();
             storageFormat();//格式化储存空间
             closeWifi();
-            //开启相机
             launchCamera();
-            CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
-            makeToasts("start"+i,5);
+            makeToasts("Start"+i,5);
             waitTime(2);
-
+            //开始录像测试
+            CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
+            waitTime(2);
+            //1080P25
+            configVideoQuality(videoQuality1080P25);
+            p2pScreenOn();
+            p2pScreenOff();
+            //720P60
+            configVideoQuality(videoQuality720P60);
+            p2pScreenOff();
+            //720P25
+            configVideoQuality(videoQuality720P25);
+            p2pScreenOn();
+            p2pScreenOff();
+            //4G相册直播720P
+            Iris4GAction.stopCamera();
+            waitTime(2);
+            Iris4GAction.startGallery();
+            galleryLiveScreenOn();
+            galleryLiveScreenOff();
+            //WIFI相册直播720P
+            Iris4GAction.stopGallery();
+            openWifi();
+            Iris4GAction.startGallery();
+            galleryLiveScreenOff();
+            //480P120FPS
+            Iris4GAction.stopGallery();
+            closeWifi();
+            launchCamera();
+            CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
+            waitTime(2);
+            configVideoQuality(videoQuality480P120);
+            p2pScreenOff();
+            //480P25FPS
+            configVideoQuality(videoQuality480P25);
+            p2pScreenOff();
+            //4G相册直播480P
+            Iris4GAction.stopCamera();
+            waitTime(2);
+            Iris4GAction.startGallery();
+            galleryLiveScreenOff();
+            //WIFI相册直播480P
+            Iris4GAction.stopGallery();
+            openWifi();
+            Iris4GAction.startGallery();
+            galleryLiveScreenOff();
+            //慢速+延时录像
+            closeWifi();
+            launchCamera();
+            CameraAction.navConfig(Iris4GPage.nav_menu[4]);//"Slo_Mo" Modem
+            waitTime(2);
+            p2pScreenOff();
+            CameraAction.navConfig(Iris4GPage.nav_menu[5]);//"Lapse" Modem
+            waitTime(2);
+            p2pScreenOff();
+            //相机预览界面亮屏
+            CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
+            waitTime(2);
+            configVideoQuality(videoQuality720P25);
+            waitTime(testTime);
+            //录播
+            waitTime(10);
+            clickSwitch(switchName[2]);//开启录播
+            p2pScreenOn();
+            p2pScreenOff();
+            clickSwitch(switchName[2]);//关闭录播
+            //主屏幕亮屏待机 6分钟
+            gDevice.pressBack();
+            gDevice.pressBack();
+            gDevice.pressBack();
+            waitTime(testTime);
+            waitTime(testTime);
+            waitTime(testTime);
+            //4G 不保存直播
+            CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
+            waitTime(2);
             configVideoQuality(liveQuality480SD);
-            //4G亮屏直播不保存480SD
             live2ScreenOn();
-            //4G灭屏直播不保存480SD
             live2ScreenOff();
-            //4G亮屏直播不保存480HD
             configVideoQuality(liveQuality480HD);
             live2ScreenOn();
-            //4G灭屏直播不保存480HD
             live2ScreenOff();
-            //4G亮屏直播不保存720HD
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
-            //4G灭屏直播不保存720HD
             live2ScreenOff();
+            //4G 保存直播
             Iris4GAction.clickLiveAndSave();//开启直播保存
             waitTime(2);
             configVideoQuality(liveQuality480SD);
-            //4G亮屏直播保存480SD
-            logger.info("case：4G亮屏直播保存480SD");
             live2ScreenOn();
-            //4G灭屏直播保存480SD
             live2ScreenOff();
-            //4G亮屏直播保存480HD
-            logger.info("case:4G灭屏直播保存480HD");
             configVideoQuality(liveQuality480HD);
             live2ScreenOn();
-            //4G灭屏直播保存480HD
             live2ScreenOff();
-            //4G亮屏直播保存720HD
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
-            //4G灭屏直播保存720HD
             live2ScreenOff();
             Iris4GAction.clickLiveAndSave();//关闭直播保存
-            //高度4G灭屏直播480SD
-
             waitTime(1);
+            //高度计
+            configVideoQuality(liveQuality480SD);
+            waitTime(2);
             clickSwitch(switchName[0]);//开启高度计
             live2ScreenOff();
-            //速度计4G灭屏直播480SD
-            configVideoQuality(liveQuality480SD);
             clickSwitch(switchName[0]);//关闭高度计
-            waitTime(2);
+            //速度计
             clickSwitch(switchName[1]);//开启速度计
-            logger.info("case:开启速度计4G灭屏直播保存720HD");
             live2ScreenOff();
             clickSwitch(switchName[1]);//关闭速度计
-            waitTime(2);
+            //静音
             clickLiveMute();  //开启静音开关
             live2ScreenOff();
             clickLiveMute();//关闭静音开关
+            //防抖
             clickSwitch(switchName[3]); //开启防抖开关
             live2ScreenOff();
             clickSwitch(switchName[3]);//关闭防抖开关
+            //语音交互
             clickSwitch(switchName[4]);//开启语音交互
             live2ScreenOff();
             clickSwitch(switchName[4]);//关闭语音交互
+            //Down
             changeUpDownTo("Down"); //修改为倒置
             live2ScreenOff();
             changeUpDownTo("Up");//修改为Up
+            //视场角
             configVideoAngle(videoAngle[0]);//视场角为普通
             live2ScreenOff();
             configVideoAngle(videoAngle[1]);//视场角为宽
@@ -567,141 +629,49 @@ public class CurrentTestCase extends VP2 {
             configVideoAngle(videoAngle[2]);//视场角为超级
             live2ScreenOff();
             configVideoAngle(videoAngle[0]);//视场角为普通(默认)
+            //3G直播不保存
             gDevice.pressBack();
             gDevice.pressBack();
-            //切换网络模式为3G
             switchTo3G();
             launchCamera();
-            //3G亮屏直播不保存480SD
-            logger.info("case:3G灭屏直播不保存480SD");
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
             configVideoQuality(liveQuality480SD);
             live2ScreenOn();
-            //3G灭屏直播不保存480SD
-            logger.info("case:3G亮屏直播不保存480SD");
             live2ScreenOff();
-            //3G亮屏直播保存480SD
+            //3G直播保存
             Iris4GAction.clickLiveAndSave();//开启直播保存
-            logger.info("3G灭屏直播保存480SD");
             live2ScreenOn();
-            //3G灭屏直播保存480SD
-            logger.info("3G亮屏直播保存480SD");
             live2ScreenOff();
             Iris4GAction.clickLiveAndSave();//关闭直播保存
             waitTime(2);
-            //连接wifi相机预览界面亮屏
+            //WIFI不保存
             gDevice.pressBack();
             gDevice.pressBack();
             openWifi();
-            gDevice.executeShellCommand("dumpsys battery set level 100");//修改电量显示
             launchCamera();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
-            Iris4GAction.clickLiveAndSave();//开启直播保存
             configVideoQuality(liveQuality480SD);
-            //WIFI亮屏直播保存480SD
             live2ScreenOn();
-            //WIFI灭屏直播保存480SD
-            live2ScreenOff();
-            Iris4GAction.clickLiveAndSave();//关闭直播保存
-            waitTime(1);
-            //WIFI亮屏直播不保存480SD
-            live2ScreenOn();
-            //WIFI灭屏直播不保存480SD
             live2ScreenOff();
             configVideoQuality(liveQuality480HD);
-            //wifi 480HD 亮屏
             live2ScreenOn();
-            //wifi 480HD 灭屏
             live2ScreenOff();
             configVideoQuality(liveQuality720HD);
-            //wifi 720HD 亮屏
             live2ScreenOn();
-            //wifi 720HD 灭屏
             live2ScreenOff();
-            gDevice.pressHome();
-            gDevice.pressHome();
-            switchTo4G();
-            closeWifi();
-            //开启相机
-            launchCamera();
-            CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
-            waitTime(2);
-            //四种分辨率灭屏录像2分钟
-            configVideoQuality(videoQuality1080P25);//1080P30FPS
-            logger.info("case:1080PVideoScreenOn");
-            p2pScreenOn();
-            logger.info("case:1080PVideoScreenOff");
-            p2pScreenOff();
-            configVideoQuality(videoQuality720P60);//720P60FPS
-            p2pScreenOff();
-            configVideoQuality(videoQuality720P25);//720P30FPS
-            logger.info("case:720P30FPSVideoScreenOn");
-            p2pScreenOn();
-            logger.info("case:720P30FPSVideoScreenOff");
-            p2pScreenOff();
-            Iris4GAction.stopCamera();
-            waitTime(2);
-            Iris4GAction.startGallery();
-            galleryLiveScreenOn();//4G相册亮屏直播720P
-            galleryLiveScreenOff();//4G相册灭屏直播720P
-            Iris4GAction.stopGallery();
-            openWifi();
-            Iris4GAction.startGallery();
-//            galleryToLiveScreenOn();//WIFI相册亮屏直播720P
-            galleryLiveScreenOff();//WIFI相册灭屏直播720P
-            Iris4GAction.stopGallery();
-            closeWifi();
-            launchCamera();
-            CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
-            waitTime(2);
-            configVideoQuality(videoQuality480P120);//480P120FPS
-            p2pScreenOff();
-            //亮屏录播
-            configVideoQuality(videoQuality480P25);//480P25FPS
-            p2pScreenOff();
-            Iris4GAction.stopCamera();
-            waitTime(2);
-            Iris4GAction.startGallery();
-            galleryLiveScreenOff();//4G相册灭屏直播480P
-            openWifi();
-            Iris4GAction.startGallery();
-            galleryLiveScreenOff();//WIFI相册灭屏直播480P
-            closeWifi();
-            launchCamera();
-            CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
-            waitTime(2);
-            clickSwitch(switchName[2]);//开启录播
-            p2pScreenOn();
-            //灭屏录播
-            p2pScreenOff();
-            clickSwitch(switchName[2]);//关闭录播
-            //灭屏慢速录像2min
-            CameraAction.navConfig(Iris4GPage.nav_menu[4]);//"Slo_Mo" Modem
-            waitTime(2);
-            p2pScreenOff();
-            //灭屏延时录像2min
-            CameraAction.navConfig(Iris4GPage.nav_menu[5]);//"Lapse" Modem
-            waitTime(2);
-            logger.info("case：灭屏延时录像");
-            p2pScreenOff();
-            //相机预览界面亮屏
-            logger.info("case:相机预览界面亮屏待机");
-            CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
-            waitTime(2);
-            configVideoQuality(videoQuality1080P25);//1080P30FPS
-            waitTime(2);
-            waitTime(testTime);
+            //WIFI保存
+            Iris4GAction.clickLiveAndSave();//开启直播保存
+            waitTime(1);
+            configVideoQuality(liveQuality480SD);
+            live2ScreenOn();
+            live2ScreenOff();
+            Iris4GAction.clickLiveAndSave();//关闭直播保存
             gDevice.pressBack();
-            gDevice.pressBack();
-            gDevice.pressBack();
-            logger.info("主屏幕亮屏待机");
-            waitTime(testTime);
             makeToast("end-"+i,5);
         }
         makeToast("10秒后关机......",5);
-        logger.info("10秒后关机....");
         waitTime(10);
         gDevice.executeShellCommand("reboot -p ");
     }
@@ -710,54 +680,11 @@ public class CurrentTestCase extends VP2 {
 //        gDevice.pressBack();
 //        gDevice.pressBack();
 //        waitTime(3);
+//        Iris4GAction.startGallery();
 //        galleryLiveScreenOff();
 //    }
 }
 
-
-//            //4G开启运程控制灭屏待机
-//            logger.info("case:4G开启运程控制灭屏待机");
-//            openRemoteControl();
-//            makeScreenOff();
-//            waitTime(testStandbyTime);
-//            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-//            waitTime(1);
-//            makeScreenOn();
-//            closeRemoteControl();
-//            连接wifi相机预览界面灭屏待机
-//            makeScreenOff();
-//            logger.info("连接wifi相机预览界面灭屏待机");
-//            waitTime(testStandbyTime);
-//            //WIFI灭屏直播不保存480SD
-//            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-//            configVideoQuality(liveQuality720HD);
-//            live2ScreenOn();
-//            live2ScreenOff();
-//            //WIFI开启运程控制灭屏待机
-//            openRemoteControl();
-//            makeScreenOff();
-//            logger.info("WIFI开启运程控制灭屏待机");
-//            waitTime(testStandbyTime);
-//            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
-//            waitTime(2);
-//            makeScreenOn();
-//            closeRemoteControl();
-
-//    public boolean sendKey(int keyCode, int metaState) {
-//        if(DEBUG) {
-//            Log.d(LOG_TAG, "sendKey (" + keyCode + ", " + metaState + ")");
-//        }
-//
-//        long eventTime = SystemClock.uptimeMillis();
-//        KeyEvent downEvent = new KeyEvent(eventTime, eventTime, 0, keyCode, 0, metaState, -1, 0, 0, 257);
-//        if(this.injectEventSync(downEvent)) {
-//            KeyEvent upEvent = new KeyEvent(eventTime, eventTime, 1, keyCode, 0, metaState, -1, 0, 0, 257);
-//            if(this.injectEventSync(upEvent)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 //private void openRemoteControl() throws Exception {
 //    makeScreenOn();
 //    CameraAction.cameraSetting();
@@ -778,11 +705,6 @@ public class CurrentTestCase extends VP2 {
 //        waitTime(20);
 //    }
 //}
-//    private void closeRemoteControl() throws RemoteException {
-//        makeScreenOn();
-//        clickById(Iris4GPage.btn_manual);
-//        waitTime(2);
-//    }
 //private void clickAirModem() throws Exception {
 //    Iris4GAction.startSettings();
 //    clickByText("Advance");
