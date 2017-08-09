@@ -18,6 +18,7 @@ import bean.BroadcastBean;
 import bean.WatcherBean;
 import ckt.base.VP2;
 import cn.page.MePage;
+import cn.page.PlayPage;
 
 /**
  * Created by elon on 2016/11/8.
@@ -77,11 +78,11 @@ public class BroadcastAction extends VP2{
     }
     //wait 加载完成 此时点赞图标变为绿色
     public  static void waitBroadcastLoading() throws UiObjectNotFoundException {
-        waitUntilFind(MePage.BROADCAST_VIEW_TIPTEXT,20000);
-        waitUntilFind(MePage.BROADCAST_VIEW_ZAN,10000);
+        waitUntilFind(PlayPage.BROADCAST_VIEW_TIPTEXT,20000);
+        waitUntilFind(PlayPage.BROADCAST_VIEW_ZAN,10000);
         for (int i = 0; i <20 ; i++) {
-            if (getObjectById(MePage.BROADCAST_VIEW_ZAN).isEnabled()==true&&
-                    getObjectById(MePage.BROADCAST_VIEW_TIPTEXT).isEnabled()==true&&
+            if (getObjectById(PlayPage.BROADCAST_VIEW_ZAN).isEnabled()==true&&
+                    getObjectById(PlayPage.BROADCAST_VIEW_TIPTEXT).isEnabled()==true&&
                     getUiObjectByText("Add a comment").exists()){
                 logger.info("聊天室连接成功-说点什么吧");
                 break;
@@ -98,10 +99,10 @@ public class BroadcastAction extends VP2{
     public static WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {
         FollowersAction.clickToAnchor();
         WatcherBean watcherBean = new WatcherBean();
-        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.BROADCAST_VIEW_WATCHER_COUNT));
-        String watcher = getObject2ById(MePage.VIDEO_WATCH_NUMBER).getText();
-        String comments = getObject2ById(MePage.VIDEO_LIKE_NUMBER).getText();
-        String zan = getObject2ById(MePage.VIDEO_CHAT_NUMBER).getText();
+        UiObject u =  gDevice.findObject(new UiSelector().resourceId(PlayPage.BROADCAST_VIEW_WATCHER_COUNT));
+        String watcher = getObject2ById(PlayPage.VIDEO_WATCH_NUMBER).getText();
+        String comments = getObject2ById(PlayPage.VIDEO_LIKE_NUMBER).getText();
+        String zan = getObject2ById(PlayPage.VIDEO_CHAT_NUMBER).getText();
         makeToast(zan,3);
         watcherBean.setComments(comments);
         watcherBean.setWatch(watcher);
@@ -134,21 +135,21 @@ public class BroadcastAction extends VP2{
         String startTime="";
         String endTime="";
         //click play screen center
-        clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+        clickById(PlayPage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
         for (int i=0;i<10;i++){
-            if (getObjectById(MePage.BROADCAST_VIEW_VIDEO_CURRENT_TIME).exists()){
-                startTime = getObjectById(MePage.BROADCAST_VIEW_VIDEO_CURRENT_TIME).getText();
+            if (getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_CURRENT_TIME).exists()){
+                startTime = getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_CURRENT_TIME).getText();
                 break;
             }else{
-                clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+                clickById(PlayPage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
             }
         }
         for (int i=0;i<10;i++){
-            if (getObjectById(MePage.BROADCAST_VIEW_VIDEO_END_TIME).exists()){
-                endTime = getObjectById(MePage.BROADCAST_VIEW_VIDEO_END_TIME).getText();
+            if (getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_END_TIME).exists()){
+                endTime = getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_END_TIME).getText();
                 break;
             }else{
-                clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
+                clickById(PlayPage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
             }
         }
         makeToast(startTime+"|"+endTime,10);
