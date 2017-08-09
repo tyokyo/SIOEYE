@@ -38,6 +38,11 @@ import cn.page.Constant;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
 import cn.page.Other;
+import cn.page.PlayPage;
+
+import static cn.action.PlayAction.addFollow;
+import static cn.action.PlayAction.clickFollow;
+import static cn.action.PlayAction.getFollowing;
 
 
 /**
@@ -176,7 +181,7 @@ public class DiscoverCase extends VP2 {
         int size = linearLayouts.size();
         linearLayouts.get(size - 1).click();
         BroadcastAction.waitBroadcastLoading();
-        gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)), 120000);
+        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)), 120000);
       //Asst.assertEquals("加载2分钟", false, id_exists(MePage.BROADCAST_VIEW_VIDEO_LOADING));
         Spoon.screenshot("testViewVideo");
         gDevice.pressBack();
@@ -238,7 +243,8 @@ public class DiscoverCase extends VP2 {
     @PerformanceTest
     /**
      * 未登陆点击关注主播
-     *1.未登陆状态下，在观看视频界面点击关注主播
+     *1.未登陆状态下，在观看视频界面点击关注图标
+     * creat BY yajuan 2017.8.8
      *Result:弹出登陆界面
      * */
     public void testUnLoginFollowAnchor() throws UiObjectNotFoundException {
@@ -250,9 +256,8 @@ public class DiscoverCase extends VP2 {
         DiscoverAction.navToPlayVideo();
         //点击主播
         FollowersAction.clickToAnchor();
-        //点击关注
-        clickByText("Follow");
-        //弹出登录界面
+        //点击关注图标
+        clickFollow();
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
         Spoon.screenshot("loginIn_page");
         Asst.assertFalse("ClickInputFail", !id_exists(AccountPage.ACCOUNT_WEIXIN));
@@ -262,8 +267,8 @@ public class DiscoverCase extends VP2 {
     @SanityTest
     @PerformanceTest
     /**
-     *
-     *1.已登录状态下，在观看界面点击任意键关注主播
+     *creat by yajuan 2017.8.8
+     *1.已登录状态下，在聊天室简介中关注主播
      *Result:
      * */
     public void testLoginFollowAnchor() throws UiObjectNotFoundException {
@@ -275,23 +280,8 @@ public class DiscoverCase extends VP2 {
         DiscoverAction.navToPlayVideo();
         //点击主播
         FollowersAction.clickToAnchor();
-        waitUntilFind(DiscoverPage.ID_ANCHOR_FOLLOW,10000);
-        //判断是否关注
-        if (text_exists("Follow")) {
-            //点击已关注
-            clickByText("Follow");
-            //取消关注成功，变为关注
-            waitUntilFindText("Following", 3000);
-            Spoon.screenshot("cancel_follow");
-            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
-        } else {
-            //点击关注
-            clickByText("Following");
-            //关注成功，变为已关注
-            waitUntilFindText("Follow", 3000);
-            Spoon.screenshot("addsuccess");
-            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
-        }
+        waitUntilFind(PlayPage.PLAY_ABOUT,3000);
+        addFollow();
     }
 
     @Test
@@ -473,10 +463,10 @@ public class DiscoverCase extends VP2 {
      * */
     public void testToSearchByPhoneNumber() throws UiObjectNotFoundException, IOException {
         DiscoverAction.navToSearch();
-        shellInputText("13688169291");
+        shellInputText("13183883473");
         Spoon.screenshot("testToSearchByPhoneNumber");
         waitTime(2);
-        Asst.assertTrue(text_exists("123123123"));
+        Asst.assertTrue(text_exists("1350"));
     }
     @Test
     @SanityTest
