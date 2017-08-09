@@ -18,6 +18,7 @@ import ckt.base.VP;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.MePage;
+import cn.page.PlayPage;
 
 /**
  * Created by elon on 2016/10/27.
@@ -112,7 +113,7 @@ public class MeAction extends VP2{
     public static void navToFans() throws UiObjectNotFoundException {
         clickById(MePage.ID_MAIN_TAB_ME);
         clickFollowers();
-        gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),40000);
+        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),40000);
         Spoon.screenshot("navToFans");
     }
 
@@ -272,7 +273,7 @@ public class MeAction extends VP2{
         int index=BroadcastAction.getRandomBroadcastsIndex();
         BroadcastAction.getRandomBroadcasts(index).click();
         BroadcastAction.waitBroadcastLoading();
-        UiObject zan = getUiObjectById(MePage.BROADCAST_VIEW_ZAN);
+        UiObject zan = getUiObjectById(PlayPage.BROADCAST_VIEW_ZAN);
         int x = zan.getBounds().centerX();
         int y = zan.getBounds().centerY();
         point.set(x,y);
@@ -355,8 +356,8 @@ public class MeAction extends VP2{
     }
     //评论区域-滑动更新,显示最新消息
     public static void displayNewMessages() throws UiObjectNotFoundException {
-        if (id_exists(MePage.NEW_MESSAGES_DISPLAY)){
-            getObject2ById(MePage.NEW_MESSAGES_DISPLAY).click();
+        if (id_exists(PlayPage.NEW_MESSAGES_DISPLAY)){
+            getObject2ById(PlayPage.NEW_MESSAGES_DISPLAY).click();
             waitTime(2);
         }
     }
