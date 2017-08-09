@@ -29,6 +29,7 @@ import cn.action.FollowingAction;
 import cn.action.MeAction;
 import cn.page.App;
 import cn.page.MePage;
+import cn.page.PlayPage;
 
 /**
  * Created by elon on 2016/11/9.
@@ -64,10 +65,10 @@ public class FollowingCase extends VP2 {
             if (broadcast_size>=1){
                 FollowingAction.clickFollowingBroadcast();
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);
+                waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,60000);
                 //play video
                 waitTime(20);
-                Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+                Asst.assertTrue("time out 60 seconds.",!getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
                 Spoon.screenshot("play_video");
                 gDevice.pressBack();
                 Spoon.screenshot("play_20_seconds");
@@ -87,7 +88,7 @@ public class FollowingCase extends VP2 {
             int index=BroadcastAction.getRandomBroadcastsIndex();
             BroadcastAction.getRandomBroadcasts(index).click();
             BroadcastAction.waitBroadcastLoading();
-            gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+            gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             //当前的评论数
             WatcherBean watcherBean1 = BroadcastAction.getWatcher();
             String comments_before = watcherBean1.getComments();
@@ -95,7 +96,7 @@ public class FollowingCase extends VP2 {
             //评论数
             int comments_count_before=cover(comments_before);
             //输入评论内容
-            clickById(MePage.BROADCAST_VIEW_TIPTEXT);
+            clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
             shellInputText(input_comments);
             //点击评论
             clickByPoint(point);
@@ -129,14 +130,14 @@ public class FollowingCase extends VP2 {
             int index=BroadcastAction.getRandomBroadcastsIndex();
             BroadcastAction.getRandomBroadcasts(index).click();
             BroadcastAction.waitBroadcastLoading();
-            gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+            gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             //当前的评论数
             WatcherBean watcherBean1 = BroadcastAction.getWatcher();
             String comments_before = watcherBean1.getComments();
             String input_comments = getRandomString(130);
             int comments_count_before=cover(comments_before);
             //输入评论内容
-            clickById(MePage.BROADCAST_VIEW_TIPTEXT);
+            clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
             shellInputText(input_comments);
             //点击评论
             clickByPoint(point);
@@ -179,16 +180,16 @@ public class FollowingCase extends VP2 {
                 //随机播放一个视频
                 FollowingAction.clickFollowingBroadcast();
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);
+                waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,60000);
                 //点赞对象的坐标
-                Rect rect=getRect(MePage.BROADCAST_VIEW_ZAN);
+                Rect rect=getRect(PlayPage.BROADCAST_VIEW_ZAN);
                 //当前的评论数
                 WatcherBean watcherBean1 = BroadcastAction.getWatcher();
                 String comments_before = watcherBean1.getComments();
                 String input_comments = getRandomString(20);
                 int comments_count_before=cover(comments_before);
                 //输入评论内容
-                clickById(MePage.BROADCAST_VIEW_TIPTEXT);
+                clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
                 //点击评论
                 clickRect(rect);
@@ -239,14 +240,14 @@ public class FollowingCase extends VP2 {
                 //随机播放一个视频
                 FollowingAction.clickFollowingBroadcast();
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);
+                waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,60000);
                 //获取当前的点赞数目
                 WatcherBean bean_before_zan = BroadcastAction.getWatcher();
                 String zan_before = bean_before_zan.getZan();
                 int zan_before_int = cover(zan_before);
 
                 //进行点赞操作
-                clickById(MePage.BROADCAST_VIEW_ZAN);
+                clickById(PlayPage.BROADCAST_VIEW_ZAN);
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();
                 String zan_after = bean_after_zan.getZan();
@@ -289,16 +290,16 @@ public class FollowingCase extends VP2 {
                 //随机播放一个视频
                 FollowingAction.clickFollowingBroadcast();
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);
+                waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,60000);
                 //获取当前的点赞数目
                 WatcherBean bean_before_zan = BroadcastAction.getWatcher();
                 String zan_before = bean_before_zan.getZan();
                 int zan_before_int = cover(zan_before);
                 //弹出评论输入框-点赞
-                clickById(MePage.BROADCAST_VIEW_TIPTEXT);
+                clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
                 waitTime(2);
                 //进行点赞操作
-                clickById(MePage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
+                clickById(PlayPage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
                 gDevice.pressBack();
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();
@@ -348,10 +349,10 @@ public class FollowingCase extends VP2 {
                 FollowingAction.clickFollowingBroadcast();
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();
-                waitUntilGone(MePage.BROADCAST_VIEW_VIDEO_LOADING,60000);
+                waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,60000);
                 //play video
                 waitTime(20);
-                Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+                Asst.assertTrue("time out 60 seconds.",!getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
                 Spoon.screenshot("play_video");
                 gDevice.pressBack();
                 Spoon.screenshot("play_20_seconds");
