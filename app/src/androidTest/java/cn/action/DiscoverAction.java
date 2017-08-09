@@ -25,6 +25,7 @@ import ckt.base.VP2;
 import cn.page.App;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
+import cn.page.PlayPage;
 
 /**
  * Created by caibing.yin on 2016/11/5.
@@ -326,7 +327,7 @@ public class DiscoverAction extends VP2 {
                 e.printStackTrace();
             }
         }
-        if (!id_exists(MePage.BROADCAST_VIEW_ZAN)){
+        if (!id_exists(PlayPage.BROADCAST_VIEW_ZAN)){
             linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
             for (UiObject2 linearLayout : linearLayouts) {
                 textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
