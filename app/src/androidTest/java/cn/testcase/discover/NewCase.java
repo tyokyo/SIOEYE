@@ -16,15 +16,12 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
-import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.Until;
-import android.widget.TextView;
 
 import org.hamcrest.Asst;
 import org.junit.Assert;
-import java.util.Random;
 import java.util.logging.Logger;
 import com.squareup.spoon.Spoon;
 import ckt.base.VP2;
@@ -34,17 +31,17 @@ import cn.action.DiscoverAction;
 import cn.action.MainAction;
 import cn.action.MeAction;
 import cn.action.NewAction;
+import cn.action.PlayAction;
 import cn.page.App;
 import cn.page.DiscoverPage;
-import cn.page.MePage;
 import cn.page.NewPage;
 import cn.page.Other;
 import cn.page.AccountPage;
 import cn.action.FollowersAction;
 import cn.page.Constant;
-
-
-import static cn.action.NewAction.getNewZanNumber;
+import cn.page.PlayPage;
+import static cn.action.PlayAction.addFollow;
+import static cn.action.PlayAction.clickFollow;
 
 /**
  * Created by yajuan on 2017/7/12.
@@ -210,8 +207,8 @@ public class NewCase  extends VP2{
         randomVideo.click();
         waitTime(5);
         BroadcastAction.waitBroadcastLoading();
-        gDevice.wait(Until.gone(By.res(MePage.BROADCAST_VIEW_VIDEO_LOADING)),30000);
-        Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),30000);
+        Asst.assertTrue("time out 60 seconds.",!getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
         Spoon.screenshot("testWatchNewVideo");
         gDevice.pressBack();
     }
@@ -245,11 +242,11 @@ public class NewCase  extends VP2{
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         //获取第一次进入的观看数
-        VideoBean watch_before = NewAction.getNumberPlayVideo();
+        VideoBean watch_before = PlayAction.getNumberPlayVideo();
         int watchnum_before = watch_before.getLike();
         gDevice.pressBack();
         //获取第二次进入的观看数
-        VideoBean watch_after = NewAction.getNumberPlayVideo();
+        VideoBean watch_after = PlayAction.getNumberPlayVideo();
         int watchnum_after = watch_after.getLike();
         Asst.assertEquals("点赞数+10",watchnum_after,watchnum_before+1);
     }
@@ -284,16 +281,16 @@ public class NewCase  extends VP2{
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         //获取点赞前的点赞数
-        int  zan_before= NewAction.getNewZanNumber();
-        clickById(MePage.TV_CHAT_ROOM_ID);
-        waitUntilFind(MePage.BROADCAST_VIEW_ZAN,5000);
+        int  zan_before= PlayAction.getNewZanNumber();
+        clickById(PlayPage.TV_CHAT_ROOM_ID);
+        waitUntilFind(PlayPage.BROADCAST_VIEW_ZAN,5000);
         for(int i=1;i<=10;i++) {
-            clickById(MePage.BROADCAST_VIEW_ZAN);
+            clickById(PlayPage.BROADCAST_VIEW_ZAN);
         }
         //点赞后再获取点赞数
-        clickById(MePage.TV_AUCHOR_ID);
-        waitUntilFind(MePage.VIDEO_CHAT_NUMBER,10000);
-        int zan_after = cover(getObject2ById(MePage.VIDEO_CHAT_NUMBER).getText());
+        clickById(PlayPage.TV_AUCHOR_ID);
+        waitUntilFind(PlayPage.VIDEO_CHAT_NUMBER,10000);
+        int zan_after = cover(getObject2ById(PlayPage.VIDEO_CHAT_NUMBER).getText());
         Spoon.screenshot("after_zan"+zan_after);
         Asst.assertEquals("点赞数+10",zan_after,zan_before+10);
     }
@@ -311,16 +308,16 @@ public class NewCase  extends VP2{
         int  zan_before= NewAction.getZanNumber();
         List<UiObject2> relativeLayouts = gDevice.findObjects(By.res(NewPage.ID_NEW_VIDEO));
         relativeLayouts.get(0).click();
-        waitUntilFind(MePage.BROADCAST_VIEW_ZAN,10000);
+        waitUntilFind(PlayPage.BROADCAST_VIEW_ZAN,10000);
         for(int i=1;i<=5;i++) {
-            clickById(MePage.BROADCAST_VIEW_ZAN);
+            clickById(PlayPage.BROADCAST_VIEW_ZAN);
         }
         gDevice.pressBack();
         //点赞后再获取点赞数
         int zan_after = NewAction.getZanNumber();
         waitTime(5);
         Spoon.screenshot("after_zan"+zan_after);
-        Asst.assertEquals("点赞数+5",zan_after,zan_before+5);
+        Asst.assertEquals("点赞数加5",zan_before+5,zan_after);
     }
 
     @Test
@@ -333,7 +330,7 @@ public class NewCase  extends VP2{
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         Boolean videoLocation = false;
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 10; i++) {
             //获取位置信息
             String Location= NewAction.getLocation();
             if (Location!=null) {
@@ -341,7 +338,7 @@ public class NewCase  extends VP2{
                     break;
             } else {
                 //继续滑动查找
-                getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.UP,0.3f);
+                getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.UP,0.2f);
                 waitTime(5);
             }
         }
@@ -360,21 +357,22 @@ public class NewCase  extends VP2{
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         //获取第一次进入的评论数
-        VideoBean comment_before = NewAction.getNumberPlayVideo();
+        VideoBean comment_before = PlayAction.getNumberPlayVideo();
         int cmtnum_before = comment_before.getComment();
-        clickById(MePage.TV_CHAT_ROOM_ID);
-        clickById(MePage.BROADCAST_VIEW_TIPTEXT);
+        clickById(PlayPage.TV_CHAT_ROOM_ID);
+        clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
         //清空输入框后随机输入十个字符
-        getObjectById(MePage.EDIT_COMMENT_TEXT).clearTextField();
+        getObjectById(PlayPage.EDIT_COMMENT_TEXT).clearTextField();
         String comment = getRandomString(10);
-        getObjectById(MePage.EDIT_COMMENT_TEXT).setText(comment);
+        getObjectById(PlayPage.EDIT_COMMENT_TEXT).setText(comment);
         shellInputText(comment);
         clickByPoint(point);
         gDevice.pressBack();
+        waitUntilFind(PlayPage.TV_AUCHOR_ID,5000);
         //发送评论后返回主播界面检查评论数显示
-        clickById(MePage.TV_AUCHOR_ID);
-        waitUntilFind(MePage.VIDEO_LIKE_NUMBER,5000);
-        int  cmtnum_after = Integer.parseInt(getObject2ById(MePage.VIDEO_LIKE_NUMBER).getText());
+        clickById(PlayPage.TV_AUCHOR_ID);
+        waitUntilFind(PlayPage.VIDEO_LIKE_NUMBER,5000);
+        int  cmtnum_after = cover(getObject2ById(PlayPage.VIDEO_LIKE_NUMBER).getText());
         if (cmtnum_after==(cmtnum_before+1)){
             Assert.assertTrue(true);
         }else{
@@ -443,6 +441,7 @@ public class NewCase  extends VP2{
     /**
      * case17、New界面未登陆点击关注主播
      *1.未登陆状态下，在观看视频界面点击关注主播
+     *  * creat by yajuan 2017.8.8
      *Result:弹出登陆界面
      * */
     public void testUnLoginFollowAnchor() throws UiObjectNotFoundException {
@@ -451,14 +450,14 @@ public class NewCase  extends VP2{
         //进入-发现界面
         MainAction.clickDiscover();
         //点击最新TAB
-        clickById(DiscoverPage.ID_NEW_RECOMMEND);
+        DiscoverAction.navToNew();
         //播放一个视频
-        NewAction.navToPlayNewlistVideo();
+        UiObject2 randomVideo=NewAction.getRandomVideo();
+        randomVideo.click();
         //点击主播
         FollowersAction.clickToAnchor();
         //点击关注
-        clickByText("Follow");
-        //弹出登录界面
+        clickFollow();
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
         Spoon.screenshot("loginIn_page");
         Asst.assertFalse("ClickInputFail", !id_exists(AccountPage.ACCOUNT_WEIXIN));
@@ -469,7 +468,8 @@ public class NewCase  extends VP2{
     /**
      *
      *1.case18、
-     *2.已登录状态下，在观看界面点击任意键关注主播
+     *2.已登录状态下，在观看界面点击关注图标关注主播
+     * creat by yajuan 2017.8.8
      *Result:
      * */
     public void testLoginFollowAnchor() throws UiObjectNotFoundException {
@@ -477,29 +477,15 @@ public class NewCase  extends VP2{
         //AccountAction.logInAccount("13688169291", "123456");
         //进入发现界面
         MainAction.clickDiscover();
-        //点击最新TAB
-        clickById(DiscoverPage.ID_NEW_RECOMMEND);
+        DiscoverAction.navToNew();
         //播放一个视频
-        NewAction.navToPlayNewlistVideo();
+        UiObject2 randomVideo=NewAction.getRandomVideo();
+        randomVideo.click();
         //点击主播
         FollowersAction.clickToAnchor();
-        waitUntilFind(DiscoverPage.ID_ANCHOR_FOLLOW,10000);
-        //判断是否关注
-        if (text_exists("Follow")) {
-            //点击已关注
-            clickByText("Follow");
-            //取消关注成功，变为关注
-            waitUntilFindText("Following", 3000);
-            Spoon.screenshot("cancel_follow");
-            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
-        } else {
-            //点击关注
-            clickByText("Following");
-            //关注成功，变为已关注
-            waitUntilFindText("Follow", 3000);
-            Spoon.screenshot("addsuccess");
-            Asst.assertFalse("LoginFollowAnchor", !id_exists(Other.anchor));
-        }
+        waitUntilFind(PlayPage.PLAY_ABOUT,3000);
+        addFollow();
+
     }
     @Test
     @SanityTest
@@ -558,10 +544,10 @@ public class NewCase  extends VP2{
      * */
     public void testToSearchByPhoneNumber() throws UiObjectNotFoundException, IOException {
         NewAction.navToNewSearch();
-        shellInputText("13688169291");
+        shellInputText("13183883473");
         Spoon.screenshot("testToSearchByPhoneNumber");
         waitTime(2);
-        Asst.assertTrue(text_exists("尼古拉斯·泰迪"));
+        Asst.assertTrue(text_exists("1350"));
     }
     @Test
     @SanityTest
