@@ -22,6 +22,7 @@ import cn.action.DiscoverAction;
 import cn.action.MainAction;
 import cn.page.App;
 import cn.page.MePage;
+import cn.page.PlayPage;
 
 /**
  * Created by caibing.yin on 2016/11/7.
@@ -94,7 +95,7 @@ public class CountPersonCase extends VP2 {
 
         //now zan operation
         for(int times=0;times<5;times++){
-            clickById(MePage.BROADCAST_VIEW_ZAN);
+            clickById(PlayPage.BROADCAST_VIEW_ZAN);
             waitTime(2);
         }
         gDevice.pressBack();
