@@ -87,7 +87,7 @@ public class MePage {
     public static final String BROADCAST_DELETE="cn.sioeye.sioeyeapp:id/delete_broadcasts";
     public static final String BROADCAST_EDIT_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
     public static final String BROADCAST_EDIT_OK="cn.sioeye.sioeyeapp:id/tv_ok";
-    public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/tv_ok";
+    public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/positive";
     public static final String BROADCAST_EDIT_DELETE_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
 
 
