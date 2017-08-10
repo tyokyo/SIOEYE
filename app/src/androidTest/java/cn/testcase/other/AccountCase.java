@@ -185,7 +185,7 @@ public class AccountCase extends VP2{
         waitUntilFind(AccountPage.SIGN_UP_ACCOUNT_TV_CONTENT,10);
         //check
         String pop_message="This email address has been registered";
-        Asst.assertEquals(pop_message,pop_message,getTex(AccountPage.SIGN_UP_ACCOUNT_TV_CONTENT));
+        Asst.assertEquals(pop_message,pop_message,getTex(AccountPage.SIGN_UP_ACCOUNT_OK_NEUTRAL));
 
         AccountAction.logInAccount(Constant.userName,Constant.passwd);
     }
