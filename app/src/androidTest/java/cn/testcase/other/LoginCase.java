@@ -331,7 +331,7 @@ public class LoginCase extends VP2 {
         Spoon.screenshot("resetPassword");
         //无重置密码的链接已经发送到你注册的邮箱
         if (getObjectByTextContains("The reset password email has been sent").exists()){
-            clickById(AccountPage.LOG_OUT_OK);
+            clickById(AccountPage.LOG_OUT_I_KNOW);
         }else {
             Assert.fail("reset");
         }
