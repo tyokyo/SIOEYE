@@ -283,6 +283,9 @@ public class MePage {
     public static final String SETTINGS_PUSH_TYPE_LIVE="cn.sioeye.sioeyeapp:id/push_type_live";
     public static final String SETTINGS_PUSH_TYPE_AT="cn.sioeye.sioeyeapp:id/push_type_at";
     public static final String SETTINGS_PUSH_TYPE_COMMENT="cn.sioeye.sioeyeapp:id/push_type_comment";
+    public static final String SETTINGS_PASSWORD_OLD_PASSWORD="cn.sioeye.sioeyeapp:id/originpd_red";
+    public static final String SETTINGS_PASSWORD_NEW_PASSWORD="cn.sioeye.sioeyeapp:id/newpd_first_red";
+    public static final String SETTINGS_PASSWORD_SECONDARY_PASSWORD="cn.sioeye.sioeyeapp:id/newpd_second_red";
 
 
 }
