@@ -203,8 +203,8 @@ public class NewCase  extends VP2{
         MainAction.clickDiscover();
         DiscoverAction.navToNew();
         //随机选择一个最新列表的视频
-        UiObject2 randomVideo=NewAction.getRandomVideo();
-        randomVideo.click();
+        int index=NewAction.getRandomVideoIndex();
+        NewAction.getRandomVideo(index).click();
         waitTime(5);
         BroadcastAction.waitBroadcastLoading();
         gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),30000);
@@ -241,14 +241,18 @@ public class NewCase  extends VP2{
     public void testNewCountWatchPerson() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        getObjectById(NewPage.ID_NEW_VIDEO).swipeDown(50);
         //获取第一次进入的观看数
+        int index = NewAction.getRandomVideoIndex();
+        NewAction.getRandomVideo(index).click();
         VideoBean watch_before = PlayAction.getNumberPlayVideo();
-        int watchnum_before = watch_before.getLike();
+        int watchnum_before = watch_before.getWatch();
         gDevice.pressBack();
         //获取第二次进入的观看数
+        NewAction.getRandomVideo(index).click();
         VideoBean watch_after = PlayAction.getNumberPlayVideo();
-        int watchnum_after = watch_after.getLike();
-        Asst.assertEquals("点赞数+10",watchnum_after,watchnum_before+1);
+        int watchnum_after = watch_after.getWatch();
+        Asst.assertEquals("观看数+1",watchnum_after,watchnum_before+1);
     }
     @Test
     @SanityTest
@@ -338,12 +342,12 @@ public class NewCase  extends VP2{
                     break;
             } else {
                 //继续滑动查找
-                getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.UP,0.2f);
+                getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.UP,0.1f);
                 waitTime(5);
             }
         }
         //验证是否存在位置信息
-        Asst.assertEquals("5轮查找-findLocationInVideo",true,videoLocation);
+        Asst.assertEquals("10轮查找-findLocationInVideo",true,videoLocation);
     }
     @Test
     @SanityTest
@@ -357,27 +361,28 @@ public class NewCase  extends VP2{
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         //获取第一次进入的评论数
+        int index=NewAction.getRandomVideoIndex();
+        NewAction.getRandomVideo(index).click();
+        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
         VideoBean comment_before = PlayAction.getNumberPlayVideo();
         int cmtnum_before = comment_before.getComment();
-        clickById(PlayPage.TV_CHAT_ROOM_ID);
+        FollowersAction.clickToChat();
+        //随机输入20个字符
+        String comment = getRandomString(20);
         clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
-        //清空输入框后随机输入十个字符
-        getObjectById(PlayPage.EDIT_COMMENT_TEXT).clearTextField();
-        String comment = getRandomString(10);
-        getObjectById(PlayPage.EDIT_COMMENT_TEXT).setText(comment);
         shellInputText(comment);
         clickByPoint(point);
         gDevice.pressBack();
-        waitUntilFind(PlayPage.TV_AUCHOR_ID,5000);
-        //发送评论后返回主播界面检查评论数显示
-        clickById(PlayPage.TV_AUCHOR_ID);
-        waitUntilFind(PlayPage.VIDEO_LIKE_NUMBER,5000);
-        int  cmtnum_after = cover(getObject2ById(PlayPage.VIDEO_LIKE_NUMBER).getText());
-        if (cmtnum_after==(cmtnum_before+1)){
-            Assert.assertTrue(true);
-        }else{
-            Asst.fail("AssertionError");
-        }
+        waitTime(2);
+        //滑动显示最新消息
+        MeAction.displayNewMessages();
+        Asst.assertTrue("comments success",getUiObjectByTextContains(comment).exists());
+        //验证评论数+1
+        VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
+        int  cmtnum_after = videoBean_after.getComment();
+        Asst.assertEquals(cmtnum_before+1,cmtnum_after);
+        Spoon.screenshot("testComments_Length_20",comment);
+        gDevice.pressBack();
     }
 
     @Test
@@ -397,7 +402,6 @@ public class NewCase  extends VP2{
         //点击最新TAB
         clickById(DiscoverPage.ID_NEW_RECOMMEND);
         //滑动视频列表
-        // NewAction.scrollNewVideoList();
         //播放一个视频
         NewAction.navToPlayNewlistVideo();
         //等待连接聊天室
@@ -452,8 +456,8 @@ public class NewCase  extends VP2{
         //点击最新TAB
         DiscoverAction.navToNew();
         //播放一个视频
-        UiObject2 randomVideo=NewAction.getRandomVideo();
-        randomVideo.click();
+        int index=NewAction.getRandomVideoIndex();
+        NewAction.getRandomVideo(index).click();
         //点击主播
         FollowersAction.clickToAnchor();
         //点击关注
@@ -470,7 +474,7 @@ public class NewCase  extends VP2{
      *1.case18、
      *2.已登录状态下，在观看界面点击关注图标关注主播
      * creat by yajuan 2017.8.8
-     *Result:
+     *Result:关注成功
      * */
     public void testLoginFollowAnchor() throws UiObjectNotFoundException {
         //账号登录
@@ -479,8 +483,9 @@ public class NewCase  extends VP2{
         MainAction.clickDiscover();
         DiscoverAction.navToNew();
         //播放一个视频
-        UiObject2 randomVideo=NewAction.getRandomVideo();
-        randomVideo.click();
+        int index=NewAction.getRandomVideoIndex();
+        NewAction.getRandomVideo(index).click();
+        waitTime(5);
         //点击主播
         FollowersAction.clickToAnchor();
         waitUntilFind(PlayPage.PLAY_ABOUT,3000);
