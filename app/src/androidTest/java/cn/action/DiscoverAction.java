@@ -224,7 +224,7 @@ public class DiscoverAction extends VP2 {
         waitTime(5);
     }
     /*回放界面上第一个包含 点赞数 回放数的视频
-     返回对象：VideoBean，like zan 数量 address 信息(如果存在地址信息及返回)
+     返回对象：VideoBean，watch zan 数量 address 信息(如果存在地址信息及返回)
     */
     public static VideoBean playBackVideo(boolean play) throws UiObjectNotFoundException {
         VideoBean videoBean =new VideoBean();
@@ -239,8 +239,8 @@ public class DiscoverAction extends VP2 {
                 if (textViews.size() == 3) {
                     isFind=true;
                     logger.info("playBackVideo-size=3");
-                    String likeStr = textViews.get(0).getText();
-                    int like=cover(likeStr);
+                    String WatchStr = textViews.get(0).getText();
+                    int Watch=cover(WatchStr);
 
                     int zan =0;
                     String zanStr = textViews.get(1).getText().trim();
@@ -248,7 +248,7 @@ public class DiscoverAction extends VP2 {
 
                     String address = textViews.get(2).getText();
                     videoBean.setAddress(address);
-                    videoBean.setLike(like);
+                    videoBean.setWatch(Watch);
                     videoBean.setZan(zan);
                     //获取点赞数
                     logger.info("playBackVideo-"+videoBean.toString());
@@ -273,10 +273,10 @@ public class DiscoverAction extends VP2 {
                 textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
                 if (textViews.size() == 2) {
                     if (linearLayout.getChildCount()==2&&linearLayout.getParent().getChildCount()==2){
-                        int like = cover(textViews.get(0).getText());
+                        int Watch = cover(textViews.get(0).getText());
                         int zan = cover(textViews.get(1).getText());
                         videoBean.setAddress("");
-                        videoBean.setLike(like);
+                        videoBean.setWatch(Watch);
                         videoBean.setZan(zan);
                         //获取点赞数
                         logger.info("playBackVideo-"+videoBean.toString());
