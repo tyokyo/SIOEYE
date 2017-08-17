@@ -15,12 +15,12 @@ public class VideoBean {
         this.zan = zan;
     }
 
-    public int getLike() {
-        return like;
+    public int getWatch() {
+        return watch;
     }
 
-    public void setLike(int like) {
-        this.like = like;
+    public void setWatch(int watch) {
+        this.watch = watch;
     }
 
     public String getAddress() {
@@ -39,13 +39,13 @@ public class VideoBean {
     }
 
 
-    private int like;
+    private int watch;
 
     @Override
     public String toString() {
         return "VideoBean{" +
                 "zan=" + zan +
-                ", like=" + like +
+                ", watch=" + watch +
                 ",comment="+comment+
                 ", address='" + address + '\'' +
                 '}';
