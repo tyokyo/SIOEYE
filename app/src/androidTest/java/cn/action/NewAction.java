@@ -43,19 +43,27 @@ public class NewAction extends VP2 {
         return watch;
     }
 
-    //随机选择视频视频
-    public static UiObject2 getRandomVideo() {
+    //返回随机视频的index
+    public static int getRandomVideoIndex() {
         List<UiObject2> relativeLayouts = gDevice.findObjects(By.res(NewPage.ID_NEW_VIDEO));
         //获取视频列表数目
         int size = relativeLayouts.size();
         //随机选择一个视频
         Random random = new Random();
         int number = random.nextInt(size);
-        UiObject2 new_video = relativeLayouts.get(number);
+       // UiObject2 new_video = relativeLayouts.get(number);
         //new_video.click();
-        return new_video;
+        return number==0?number:number-1;
     }
+    public static UiObject2 getRandomVideo(int index) {
+        List<UiObject2> relativeLayouts = gDevice.findObjects(By.res(NewPage.ID_NEW_VIDEO));
+        //获取视频列表数目
+        int size = relativeLayouts.size();
+        //随机选择一个视频
+        UiObject2 new_video = relativeLayouts.get(index);
+        return new_video;
 
+    }
     //获取视频封面位置信息
     public static String getLocation() {
         UiObject2 swipe = getObject2ById(NewPage.ID_NEW_VIDEO);
