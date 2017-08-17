@@ -41,21 +41,18 @@ public class PlayAction extends VP2 {
     //观看视频统计点赞数、观看人数、评论数
     public static VideoBean getNumberPlayVideo() throws UiObjectNotFoundException {
         VideoBean videoBean = new VideoBean();
-        List<UiObject2> relativeLayouts = gDevice.findObjects(By.res(NewPage.ID_New_Vediolist));
-        logger.info(relativeLayouts.size() + "");
-        relativeLayouts.get(0).click();
-        clickById(PlayPage.TV_AUCHOR_ID);
+        FollowersAction.clickToAnchor();
         try {
             waitUntilFind(PlayPage.VIDEO_WATCH_NUMBER,5000);
             waitUntilFind(PlayPage.VIDEO_CHAT_NUMBER,5000);
             waitUntilFind(PlayPage.VIDEO_LIKE_NUMBER,5000);
             //获取观看数
-            int like = cover(getObject2ById(PlayPage.VIDEO_WATCH_NUMBER).getText());
+            int watch = cover(getObject2ById(PlayPage.VIDEO_WATCH_NUMBER).getText());
             //获取点赞数
             int zan = cover(getObject2ById(PlayPage.VIDEO_CHAT_NUMBER).getText());
             // 获取评论数
             int comment =cover(getObject2ById(PlayPage.VIDEO_LIKE_NUMBER).getText());
-            videoBean.setLike(like);
+            videoBean.setWatch(watch);
             videoBean.setZan(zan);
             videoBean.setComment(comment);
             //获取点赞数
@@ -143,5 +140,10 @@ public class PlayAction extends VP2 {
         }else if(str=="Follow"){
             Spoon.screenshot("Follow");
         }
+    }
+    //全屏播放视频
+    public static void fullSreenPlay(){
+      //  UiObject2 viewPlay = getObject2ById(PlayPage.)
+
     }
 }
