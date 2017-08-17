@@ -55,24 +55,6 @@ public class VipRightCase extends VP2 {
 
     }
     /**
-     * 导播控制测试
-     *测试开关导播
-     * @author elon
-     */
-    /*public void tesDirectorEnable() throws UiObjectNotFoundException {
-        MeAction.navToLiveConfiguration();
-       // SettingAction.navToSetting();
-        boolean isChecked=getObject2ById(MePage.SETTINGS_CB_DIRECTOR).isChecked();
-        logger.info(""+isChecked);
-        if (isChecked==false){
-            clickById(MePage.SETTINGS_CB_DIRECTOR);
-            waitTime(2);
-            String active=getTex(MePage.SETTINGS_CB_DIRECTOR_TEXT);
-            String expect="Disable the direct control, the changes will take effect on the new live stream";
-            Asst.assertEquals("打开直播",expect,active);
-        }
-    }*/
-    /**
      * 开通会员检查弹出框
      * @author chendaofa
      */
