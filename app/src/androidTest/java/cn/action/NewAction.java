@@ -51,8 +51,6 @@ public class NewAction extends VP2 {
         //随机选择一个视频
         Random random = new Random();
         int number = random.nextInt(size);
-       // UiObject2 new_video = relativeLayouts.get(number);
-        //new_video.click();
         return number==0?number:number-1;
     }
     public static UiObject2 getRandomVideo(int index) {
@@ -67,7 +65,6 @@ public class NewAction extends VP2 {
     //获取视频封面位置信息
     public static String getLocation() {
         UiObject2 swipe = getObject2ById(NewPage.ID_NEW_VIDEO);
-        waitTime(5);
         List<UiObject2> linearLayouts = swipe.findObjects(By.clazz(android.widget.LinearLayout.class));
         logger.info(linearLayouts.size() + "");
         String address = null;
