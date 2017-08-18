@@ -203,6 +203,7 @@ public class NewCase  extends VP2{
         MainAction.clickDiscover();
         DiscoverAction.navToNew();
         //随机选择一个最新列表的视频
+        getObjectById(NewPage.ID_NEW_VIDEO).swipeDown(50);
         int index=NewAction.getRandomVideoIndex();
         NewAction.getRandomVideo(index).click();
         waitTime(5);
@@ -477,8 +478,6 @@ public class NewCase  extends VP2{
      *Result:关注成功
      * */
     public void testLoginFollowAnchor() throws UiObjectNotFoundException {
-        //账号登录
-        //AccountAction.logInAccount("13688169291", "123456");
         //进入发现界面
         MainAction.clickDiscover();
         DiscoverAction.navToNew();
@@ -501,7 +500,6 @@ public class NewCase  extends VP2{
      *Result:结果匹配搜索内容，成功搜索出该ID的联系人
      * */
     public void testToSearchByEmail() throws UiObjectNotFoundException, IOException {
-        //AccountAction.logInAccount("YCB123", "123456");
         NewAction.navToNewSearch();
         shellInputText(Constant.userName);
         Spoon.screenshot("testToSearchByEmail");
