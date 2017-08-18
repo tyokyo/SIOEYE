@@ -61,15 +61,7 @@ public class NotificationCase extends VP2 {
             Asst.assertEquals("delete_followed_user",f_users-1,followed);
             Spoon.screenshot("delete_all_who_followed_me_"+username);
             gDevice.pressBack();
-            /*//+Follow
-            MeAction.navToNotifications();
-            Rect rect1 = getUiObjectByTextContains(username).getBounds();
-            gDevice.click(rect1.left-10,rect1.centerY());
-            clickById(Watch.WATCH_USER_MINI_FOLLOW);
-            gDevice.pressBack();
-            int ff_users = gDevice.findObjects(By.res(Me.NOTIFICATIONS_USER_FOLLOW)).size();
-            Asst.assertEquals("delete_followed_user",followed+1,ff_users);
-            Spoon.screenshot("add_follow",username+"followed_me");*/
+
         }
     }
 }
