@@ -19,14 +19,17 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import bean.FollowingBean;
+import bean.VideoBean;
 import bean.WatcherBean;
 import ckt.annotation.PerformanceTest;
 import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
+import cn.action.FollowersAction;
 import cn.action.FollowingAction;
 import cn.action.MeAction;
+import cn.action.PlayAction;
 import cn.page.App;
 import cn.page.MePage;
 import cn.page.PlayPage;
@@ -90,11 +93,11 @@ public class FollowingCase extends VP2 {
             BroadcastAction.waitBroadcastLoading();
             gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             //当前的评论数
-            WatcherBean watcherBean1 = BroadcastAction.getWatcher();
-            String comments_before = watcherBean1.getComments();
-            String input_comments = getRandomString(120);
+            VideoBean videoBean1 = PlayAction.getNumberPlayVideo();
             //评论数
-            int comments_count_before=cover(comments_before);
+            int  comments_before = videoBean1.getComment();
+            FollowersAction.clickToChat();
+            String input_comments = getRandomString(120);
             //输入评论内容
             clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
             shellInputText(input_comments);
@@ -107,14 +110,9 @@ public class FollowingCase extends VP2 {
             waitTime(2);
             Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
-            WatcherBean watcherBean_after = BroadcastAction.getWatcher();
-            String after_comments = watcherBean_after.getComments();
-            int comments_count_after=cover(after_comments);
-            if (comments_count_before>1000){
-                Asst.assertEquals(comments_count_before,comments_count_after);
-            }else{
-                Asst.assertEquals(comments_count_before+1,comments_count_after);
-            }
+            VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
+            int  after_comments = videoBean_after.getComment();
+            Asst.assertEquals(comments_before+1,after_comments);
             Spoon.screenshot("testComments_Length_120",input_comments);
             gDevice.pressBack();
         }
