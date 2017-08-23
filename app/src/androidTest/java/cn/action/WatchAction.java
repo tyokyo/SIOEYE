@@ -3,6 +3,7 @@ package cn.action;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import cn.page.App;
+import cn.page.DiscoverPage;
 import cn.page.MePage;
 import cn.page.WatchPage;
 
@@ -62,7 +64,8 @@ public class WatchAction extends VP2 {
     /**
      * 点击Watch界面任意主播的头像
      */
-    public static void ClickImageObjects() {
+    public static UiObject2 ClickImageObjects() {
+        UiObject2 object=getObject2ById(WatchPage.WATCH_AVATAR);
         //取出所有的imageview
         List<UiObject2> LinearLayouts = gDevice.findObjects(By.clazz(android.widget.LinearLayout.class));
         //从imageviews中找出其父容器内有textview和lsinearlayout的需要的imageview，并且点击该对象
@@ -71,11 +74,13 @@ public class WatchAction extends VP2 {
                 if (obj.hasObject(By.clazz(android.widget.TextView.class).depth(1)) &&
                         obj.hasObject(By.clazz(android.widget.LinearLayout.class).depth(1))&&
                         obj.hasObject(By.clazz(android.widget.ImageView.class).depth(1))) {
-                    obj.getChildren().get(0).click();
+                     object =obj.getChildren().get(0);
+                    object.click();
                     break;
                 }
         }
         waitTime(5);
+        return object;
     }
 
     /**
@@ -267,4 +272,52 @@ public class WatchAction extends VP2 {
         clickById(MePage.ID_MAIN_TAB_LIVE);
         waitTime(2);
     }
+    /**
+     * 在弹出框中取关好友
+     * */
+    public static void unFollow(){
+        clickById(WatchPage.WATCH_USER_MINI_FOLLOW);
+    }
+    /**
+     * 获取mini界面粉丝数目
+     * */
+    public static int getFollower(){
+        int num=cover(getObject2ById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER).getText());
+        return num;
+    }
+    /**
+     * 获取mini界面关注数目
+     * */
+    public static int getFollowing(){
+        int num=cover(getObject2ById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW).getText());
+        return num;
+    }
+    /**
+     * 播放弹出框视频列表中的视频
+     * */
+    public static void playProfileVideo(){
+       List<UiObject2> linearLayouts=getObject2ById(WatchPage.WATCH_LIST).findObjects(By.clazz(android.widget.LinearLayout.class));
+        linearLayouts.get(0).click();
+        waitTime(10);
+        Spoon.screenshot("PlayVideo");
+    }
+    /**
+     * 弹出框中关注好友粉丝
+     * */
+    public static void followFans() throws UiObjectNotFoundException{
+        for(int i=1;i<5;i++){
+            if(id_exists(WatchPage.WATCH_SEARCH_USER_FOLLOW)){
+                int num_before=getFollowing();
+                clickById(WatchPage.WATCH_SEARCH_USER_FOLLOW);
+                int num_after=getFollowing();
+                Asst.assertEquals("添加关注",num_before+1,num_after);
+                break;
+            }else{
+                //继续滑动查找
+                getObject2ById(WatchPage.WATCH_LIST).swipe(Direction.UP,0.2f);
+                waitTime(5);
+            }
+        }
+    }
+
 }
