@@ -98,7 +98,7 @@ public class NewAction extends VP2 {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         clickById(DiscoverPage.ID_NEW_RECOMMEND);
         int person = 0;
-        UiObject2 swipe_target = getObject2ById(NewPage.ID_New_Vediolist);
+        UiObject2 swipe_target = getObject2ById(NewPage.ID_NEW_VIDEO);
         swipe_target.swipe(Direction.UP, 0.2f);
         waitTime(5);
         List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
