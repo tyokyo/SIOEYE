@@ -87,8 +87,7 @@ public class AccountCase extends VP2{
     Email注册
     "1、输入正确的Email进行注册
     2、创建密码
-    3、创建Sioeye ID
-    4、创建用户名"	注册成功
+    3、创建用户名"	注册成功
     * */
     @Test
     @SanityTest
@@ -106,29 +105,20 @@ public class AccountCase extends VP2{
         //输入密码
         setText(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT,"123456789");
         clickById(AccountPage.SIGN_UP_CONTINUE);
-        //id
-        String eye_id=getRandomString(4);
-        setText(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID,eye_id);
-        clickById(AccountPage.SIGN_UP_CONTINUE);
         //nick name
         String nick_name=getRandomString(4);
         setText(AccountPage.SIGN_UP_ACCOUNT_NICK_NAME,nick_name);
         clickById(AccountPage.SIGN_UP_CONTINUE);
         //tv select default
         clickById(AccountPage.SIGN_UP_ACCOUNT_DEFAULT_SELECT);
-
         //check for user info
         InfoBean infoBean =MeAction.navToUserEdit();
         MeAction.getAccountPrivacyInfo(infoBean);
         logger.info(infoBean.toString());
-
         String active_nickName=infoBean.getNick_name();
         String active_email=infoBean.getEmail();
-        String active_eye_id=infoBean.getId();
-
         Asst.assertEquals("nick name",nick_name,active_nickName);
         Asst.assertEquals("email",email_address,active_email);
-        Asst.assertEquals("id",eye_id,active_eye_id);
 
         //注销登录
         AccountAction.logOutAccount();
@@ -152,11 +142,7 @@ public class AccountCase extends VP2{
         waitUntilFind(AccountPage.SIGN_UP_CONTINUE,10);
         clickById(AccountPage.SIGN_UP_CONTINUE);
         //输入密码
-        setText(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT,"123456789");
-        clickById(AccountPage.SIGN_UP_CONTINUE);
-        //id
-        String eye_id=getRandomString(4);
-        setText(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID,eye_id);
+        setText(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT,"123456");
         clickById(AccountPage.SIGN_UP_CONTINUE);
         //nick name
         String nick_name=getRandomString(4);
@@ -164,18 +150,14 @@ public class AccountCase extends VP2{
         clickById(AccountPage.SIGN_UP_CONTINUE);
         //tv select default
         clickById(AccountPage.SIGN_UP_ACCOUNT_DEFAULT_SELECT);
-
         //check for user info
         InfoBean infoBean =MeAction.navToUserEdit();
         MeAction.getAccountPrivacyInfo(infoBean);
         logger.info(infoBean.toString());
-
         String active_nickName=infoBean.getNick_name();
         String active_email=infoBean.getEmail();
-        String active_eye_id=infoBean.getId(); Asst.assertEquals("nick name",nick_name,active_nickName);
+        Asst.assertEquals("nick name",nick_name,active_nickName);
         Asst.assertEquals("email",email_address,active_email);
-        Asst.assertEquals("id",eye_id,active_eye_id);
-
         //注销登录
         AccountAction.logOutAccount();
         //进入邮箱注册界面
@@ -186,73 +168,6 @@ public class AccountCase extends VP2{
         //check
         String pop_message="This email address has been registered";
         Asst.assertEquals(pop_message,pop_message,getTex(AccountPage.SIGN_UP_ACCOUNT_OK_NEUTRAL));
-
-        AccountAction.logInAccount(Constant.userName,Constant.passwd);
-    }
-    /*
-    重复sioeye id
-    注册失败
-    * */
-    @Test
-    @SanityTest
-    @PerformanceTest
-    public void testRegRepeatEyeID() throws UiObjectNotFoundException {
-        //注销登录
-        AccountAction.logOutAccount();
-        //进入手机注册界面
-        AccountAction.navToSignUp_ByEmail();
-        String email_address=getRandomEmail(3,8);
-        //输入有效邮件地址
-        setText(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT,email_address);
-        waitUntilFind(AccountPage.SIGN_UP_CONTINUE,10);
-        clickById(AccountPage.SIGN_UP_CONTINUE);
-        //输入密码
-        setText(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT,"123456789");
-        clickById(AccountPage.SIGN_UP_CONTINUE);
-        //id
-        String eye_id=getRandomString(4);
-        setText(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID,eye_id);
-        clickById(AccountPage.SIGN_UP_CONTINUE);
-        //nick name
-        String nick_name=getRandomString(4);
-        setText(AccountPage.SIGN_UP_ACCOUNT_NICK_NAME,nick_name);
-        clickById(AccountPage.SIGN_UP_CONTINUE);
-        //tv select default
-        clickById(AccountPage.SIGN_UP_ACCOUNT_DEFAULT_SELECT);
-
-        //check for user info
-        InfoBean infoBean =MeAction.navToUserEdit();
-        MeAction.getAccountPrivacyInfo(infoBean);
-        logger.info(infoBean.toString());
-
-        String active_nickName=infoBean.getNick_name();
-        String active_email=infoBean.getEmail();
-        String active_eye_id=infoBean.getId();
-        Asst.assertEquals("nick name",nick_name,active_nickName);
-        Asst.assertEquals("email",email_address,active_email);
-        Asst.assertEquals("id",eye_id,active_eye_id);
-
-        //-----------------repeat to register with same sioeye id-------------------
-        //注销登录
-        AccountAction.logOutAccount();
-        //进入手机注册界面
-        AccountAction.navToSignUp_ByEmail();
-        email_address=getRandomEmail(3,8);
-        //输入有效邮件地址
-        setText(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT,email_address);
-        waitUntilFind(AccountPage.SIGN_UP_CONTINUE,10);
-        clickById(AccountPage.SIGN_UP_CONTINUE);
-        //输入密码
-        setText(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT,"123456789");
-        clickById(AccountPage.SIGN_UP_CONTINUE);
-        //repeat id
-        setText(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID,eye_id);
-        waitUntilFind(AccountPage.SIGN_UP_ERROR_TIP,10);
-        //check 这个ID已被注册
-        String pop_message="The Sioeye ID is registered";
-        Spoon.screenshot("id_repeat",pop_message);
-        Asst.assertEquals(pop_message,pop_message,getTex(AccountPage.SIGN_UP_ERROR_TIP));
-        //登录系统
         AccountAction.logInAccount(Constant.userName,Constant.passwd);
     }
     /*
