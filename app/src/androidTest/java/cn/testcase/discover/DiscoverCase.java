@@ -42,7 +42,6 @@ import cn.page.PlayPage;
 
 import static cn.action.PlayAction.addFollow;
 import static cn.action.PlayAction.clickFollow;
-import static cn.action.PlayAction.getFollowing;
 
 
 /**
@@ -283,7 +282,6 @@ public class DiscoverCase extends VP2 {
         waitUntilFind(PlayPage.PLAY_ABOUT,3000);
         addFollow();
     }
-
     @Test
     @SanityTest
     @PerformanceTest
@@ -298,7 +296,6 @@ public class DiscoverCase extends VP2 {
         Spoon.screenshot("JumpSuccess");
         Asst.assertFalse("LoginFollowAnchor", id_exists(DiscoverPage.ID_PROFILE_AVATOR));
     }
-
     @Test
     @SanityTest
     @PerformanceTest
@@ -327,12 +324,11 @@ public class DiscoverCase extends VP2 {
         //点击任一推荐对象
         DiscoverAction.navToRecommendList(1, 1);
         //点击follow
-        clickById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
+        clickById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_FOLLOW);
         waitTime(1);
         Spoon.screenshot("loginIn_page");
         Asst.assertFalse("testUnLoginClickFollowFail", !id_exists(AccountPage.ACCOUNT_WEIXIN));
     }
-
     @Test
     @SanityTest
     @PerformanceTest
@@ -380,18 +376,6 @@ public class DiscoverCase extends VP2 {
         Spoon.screenshot("DiscoverPage");
         Asst.assertFalse("testSwipeUpQuicklyFail", !id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
     }
-
-    /*@Test
-     * 在discover界面待手机自动灭屏后静置一段时间后，重新唤醒手机
-     *1、唤醒后APP停留在灭屏前的界面，APP不会出现carsh ,闪退
-    public void testSleepThenWakeUp() throws RemoteException, UiObjectNotFoundException {
-        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
-        gDevice.sleep();
-        gDevice.wakeUp();
-        //需要先解锁
-        Spoon.screenshot("DiscoverPage");
-        Asst.assertFalse("testSwipeUpQuicklyFail",!id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
-    } */
     @Test
     @SanityTest
     @PerformanceTest
@@ -450,7 +434,6 @@ public class DiscoverCase extends VP2 {
         shellInputText("xiaoxiao");
         Spoon.screenshot("testToSearchByNickname");
         waitTime(2);
-        //Asst.assertTrue(text_exists("你是谁"));//看ID对应的昵称是否存在，如果账号修改昵称可能会导致用例执行失败
     }
 
     @Test
@@ -529,7 +512,6 @@ public class DiscoverCase extends VP2 {
         waitTime(2);
         Asst.assertTrue(text_exists_contain("a"));
     }
-
     @Test
     @SanityTest
     @PerformanceTest
