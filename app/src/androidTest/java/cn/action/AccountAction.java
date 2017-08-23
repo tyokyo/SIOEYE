@@ -158,11 +158,6 @@ public class AccountAction extends VP2{
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(password);
         waitTime(1);
     }
-    //进入注册输入SioEyeID
-    public static void inputSioEyeId(String sioEye) throws UiObjectNotFoundException, IOException {
-        getObjectById(AccountPage.SIGN_UP_ACCOUNT_SIOEYE_ID).setText(sioEye);
-        waitTime(2);
-    }
     public static void checkUnVisiblePassword() throws UiObjectNotFoundException, IOException {
         String randomPassword= Constant.randomStringGenerator(16);
         getObjectById(AccountPage.SIGN_UP_ACCOUNT_PASSWORD_INPUT).setText(randomPassword);
