@@ -17,7 +17,8 @@ public class MePage {
     public static final String ID_MAIN_TAB_LIVE="cn.sioeye.sioeyeapp:id/main_tab_live";
     //navigate to 相机
     public static final String ID_MAIN_TAB_DEVICE="cn.sioeye.sioeyeapp:id/main_tab_device";
-
+    //账号昵称
+    public static final String WATCH_USER_MINI_NAME="cn.sioeye.sioeyeapp:id/tv_nickname";
     //following
     public static final String ID_ME_FOLLOWING="cn.sioeye.sioeyeapp:id/llt_following";
     public static final String ID_ME_TYPE_FOLLOWING="cn.sioeye.sioeyeapp:id/profile_type_following";
