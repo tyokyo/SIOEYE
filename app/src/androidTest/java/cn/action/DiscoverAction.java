@@ -164,7 +164,7 @@ public class DiscoverAction extends VP2 {
     public static String checkMiniProfileNumFollowerAddOneAfterFollow() throws UiObjectNotFoundException {
         int expect_NumFollower = Integer.parseInt(getTex(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
         //该目标用户的Follower的数量，+1表示点击关注后该用户的Follower实际数量
-        clickById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW);
+        clickById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_FOLLOW);
         //关注操作
         waitTime(3);
         int active_NumFollower = Integer.parseInt(getTex(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER));
@@ -365,10 +365,6 @@ public class DiscoverAction extends VP2 {
                 break;
             }
         }
-    }
-    //生成一个随机子字符串
-    public static void RandChar(){
-
     }
 }
 
