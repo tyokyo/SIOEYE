@@ -32,6 +32,7 @@ import cn.action.MainAction;
 import cn.action.MeAction;
 import cn.action.NewAction;
 import cn.action.PlayAction;
+import cn.action.WatchAction;
 import cn.page.App;
 import cn.page.DiscoverPage;
 import cn.page.NewPage;
@@ -40,6 +41,8 @@ import cn.page.AccountPage;
 import cn.action.FollowersAction;
 import cn.page.Constant;
 import cn.page.PlayPage;
+import cn.page.WatchPage;
+
 import static cn.action.PlayAction.addFollow;
 import static cn.action.PlayAction.clickFollow;
 
@@ -187,11 +190,8 @@ public class NewCase  extends VP2{
         //点击直播列表，选择视频播放
         clickByText("Video");
         //获取当前直播视频数，播放第一个视频
-        List<UiObject2> elements=gDevice.findObject(By.res("cn.sioeye.sioeyeapp:id/list")).findObjects(By.clazz("android.widget.LinearLayout"));
-        UiObject2 select = elements.get(0);
-        select.click();
-        Spoon.screenshot("PlayVideo");
-
+        WatchAction.playProfileVideo();
+        gDevice.pressBack();
     }
     @Test
     @SanityTest
@@ -362,6 +362,7 @@ public class NewCase  extends VP2{
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         //获取第一次进入的评论数
+        waitUntilFind(NewPage.ID_NEW_VIDEO,5000);
         int index=NewAction.getRandomVideoIndex();
         NewAction.getRandomVideo(index).click();
         gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
