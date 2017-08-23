@@ -286,6 +286,13 @@ public class MePage {
     public static final String SETTINGS_PASSWORD_OLD_PASSWORD="cn.sioeye.sioeyeapp:id/originpd_red";
     public static final String SETTINGS_PASSWORD_NEW_PASSWORD="cn.sioeye.sioeyeapp:id/newpd_first_red";
     public static final String SETTINGS_PASSWORD_SECONDARY_PASSWORD="cn.sioeye.sioeyeapp:id/newpd_second_red";
-
+    //消息
+    public static final String NOTIFICATION_MESSAGE = "cn.sioeye.sioeyeapp:id/tv_notification";
+    public static final String NOTIFICATION_OTHER = "cn.sioeye.sioeyeapp:id/tv_inform";
+    public static final String NOTIFICATION_ZAN_VIP = "cn.sioeye.sioeyeapp:id/user_head_img";
+    public static final String NOTIFICATION_REPLY_COMMENT = "cn.sioeye.sioeyeapp:id/edit_text";
+    public static final String NOTIFICATION_WATCH_VIDEO = "cn.sioeye.sioeyeapp:id/llt_video_info";
+    public static final String NOTIFICATION_DETAIL = "cn.sioeye.sioeyeapp:id/tv_detail";
+    public static final String NOTIFICATION_COMMENT = "cn.sioeye.sioeyeapp:id/expandable_text";
 
 }
