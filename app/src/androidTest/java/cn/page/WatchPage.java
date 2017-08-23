@@ -25,11 +25,9 @@ public class WatchPage {
     public static final String WATCH_SEARCH_DATA_LOADING="cn.sioeye.sioeyeapp:id/data_loading";
     //user list
     public static final String WATCH_LIST="cn.sioeye.sioeyeapp:id/list";
-    //用户头像
-    public static final String WATCH_USER_AVATAR="cn.sioeye.sioeyeapp:id/user_avatar";
     public static final String WATCH_USER_MINI_FOLLOW="cn.sioeye.sioeyeapp:id/profile_mini_follow";
     //用户姓名
-    public static final String WATCH_USER_MINI_NAME="cn.sioeye.sioeyeapp:id/profile_mini_name";
+    public static final String WATCH_USER_MINI_NAME="cn.sioeye.sioeyeapp:id/tv_nickname";
     //搜索按钮
     public static final String WATCH_INPUT_SEARCH="cn.sioeye.sioeyeapp:id/search_filter_input";
     //等待搜索完成
@@ -40,7 +38,8 @@ public class WatchPage {
     public static final String WATCH_SEARCH_RESULT_USER_AVATAR="cn.sioeye.sioeyeapp:id/user_avatar";
     //点击搜索到的结果
     public static final String WATCH_SEARCH_RESULT="cn.sioeye.sioeyeapp:id/user_avatar";
-
+    //主播头像
+    public static final String WATCH_AVATAR="cn.sioeye.sioeyeapp:id/media_avatar";
 
 
 }
