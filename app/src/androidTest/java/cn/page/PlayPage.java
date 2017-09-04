@@ -22,14 +22,26 @@ public class PlayPage {
     public static final String VIDEO_LIKE_NUMBER="cn.sioeye.sioeyeapp:id/tv_like_number";
     //video loading
     public static final String BROADCAST_VIEW_VIDEO_LOADING="cn.sioeye.sioeyeapp:id/app_video_loading";
+    //播放界面
+    public static final String VIDEO_VIEW="cn.sioeye.sioeyeapp:id/video_view1";
     //play video
-    public static final String BROADCAST_VIEW_VIDEO_PLAY="cn.sioeye.sioeyeapp:id/app_video_play";
+    public static final String VIEW_VIDEO_PLAY="cn.sioeye.sioeyeapp:id/portrait_app_video_play";
     //current video time
     public static final String BROADCAST_VIEW_VIDEO_CURRENT_TIME="cn.sioeye.sioeyeapp:id/app_video_currentTime";
     //播放进度
     public static final String BROADCAST_VIEW_VIDEO_SEEKBAR="cn.sioeye.sioeyeapp:id/app_video_seekBar";
     //video end time
     public static final String BROADCAST_VIEW_VIDEO_END_TIME="cn.sioeye.sioeyeapp:id/app_video_endTime";
+    //举报
+    public static final String REPORT_VIDEO="cn.sioeye.sioeyeapp:id/iv_more";
+    //举报列表
+    public static final String REPORT_LIST="cn.sioeye.sioeyeapp:id/list_view";
+    //确认举报
+    public static final String REPORT_OK="cn.sioeye.sioeyeapp:id/report";
+    //举报后的提示
+    public static final String REPORT_THANKS="cn.sioeye.sioeyeapp:id/message";
+    //举报成功后确认
+    public static final String REPORT_THANKS_OK="cn.sioeye.sioeyeapp:id/neutral";
     //全屏播放按钮
     public static final String BROADCAST_VIEW_VIDEO_FULL_SCREEN="cn.sioeye.sioeyeapp:id/app_video_fullscreen";
     //简介界面
