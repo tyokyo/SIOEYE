@@ -8,6 +8,8 @@ import android.widget.RelativeLayout;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -145,5 +147,27 @@ public class PlayAction extends VP2 {
     public static void fullSreenPlay(){
       //  UiObject2 viewPlay = getObject2ById(PlayPage.)
 
+    }
+    //获取暂停广告信息
+    public static void getAdvertising() {
+        UiObject2 swipe = getObject2ById(PlayPage.BROADCAST_VIDEO_VIEW);
+        List<UiObject2> relativeLayouts = swipe.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        logger.info(relativeLayouts.size() + "");
+        for (UiObject2 relativeLayout : relativeLayouts) {
+            if (relativeLayout.hasObject(By.clazz(android.widget.ImageView.class).depth(1)) &&
+                    relativeLayout.hasObject(By.clazz(android.widget.TextView.class).depth(1)) &&
+                    relativeLayout.hasObject(By.clazz(android.widget.ImageView.class).depth(1))) {
+                    break;
+                 }
+              }
+         Asst.assertTrue(true);
+       }
+    //连续点击播放按钮
+    public static void getContinuousClickPlay(){
+        int i;
+        for(i=1;i<=3;i++){
+            clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
+            waitTime(1);
+        }
     }
 }
