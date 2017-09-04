@@ -4,7 +4,6 @@ import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import com.squareup.spoon.Spoon;
-import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +17,8 @@ import cn.action.AccountAction;
 import cn.action.MainAction;
 import cn.action.MeAction;
 import ckt.base.VP2;
-import cn.action.WatchAction;
 import cn.page.App;
 import cn.page.MePage;
-import cn.page.WatchPage;
 /**
  * Created by elon on 2016/10/12.
  */
@@ -64,38 +61,7 @@ public class AboutMeCase extends VP2 {
         Spoon.screenshot(gDevice,input);
         gDevice.pressBack();
     }
-    //修改内容之后到watch搜索对应id号 查看about me 内容是否修改成功
-    @Test
-    @SanityTest
-    @PerformanceTest
-    public void testMeSearch() throws UiObjectNotFoundException {
-        MainAction.navToMe();
-        //获取 id
-        String user_id = getTex(MePage.SIOEYE_USER_ID);
-        Spoon.screenshot("Me");
-        clickById(MePage.ID_USER_EDIT);
-        clickById(MePage.NAV_EDIT_ABOUT_ME);
-        getObjectById(MePage.ABOUT_ME_CONTENT).clearTextField();
-        String input = getRandomString(20);
-        //设置个性签名
-        setText(MePage.ABOUT_ME_CONTENT,input);
-        clickById(MePage.USER_EDIT_DONE);
-        //获取个性签名显示内容
-        String expect = MeAction.getAboutMe();
-        if (!expect.equals(input)){
-            Assert.fail(expect+" not equal "+input);
-        }
-        Spoon.screenshot("about_me",input);
-        gDevice.pressBack();
-        //搜索账号 查看个性签名是否显示正确
-        WatchAction.navToWatchSearch();
-        getObjectById(MePage.SEARCH_BTN_WATCH_FILTER).setText(user_id);
-        waitUntilFind(WatchPage.WATCH_SEARCH_TYPE_CONTACTS,30);
-        waitTime(3);
-        clickById(WatchPage.WATCH_USER_AVATAR);
-        Spoon.screenshot("about_me",input);
-        Asst.assertTrue(input+" save success",getUiObjectByText(input).exists());
-    }
+
     //输入最大的字符容量
     @Test
     @SanityTest

@@ -227,11 +227,11 @@ public class DiscoverAction extends VP2 {
                 if (textViews.size() == 3) {
                     isFind=true;
                     logger.info("playBackVideo-size=3");
-                    int like = Integer.parseInt(textViews.get(0).getText());
+                    int watch = Integer.parseInt(textViews.get(0).getText());
                     int zan = Integer.parseInt(textViews.get(1).getText());
                     String address = textViews.get(2).getText();
                     videoBean.setAddress(address);
-                    videoBean.setLike(like);
+                    videoBean.setWatch(watch);
                     videoBean.setZan(zan);
                     //获取点赞数
                     logger.info("playBackVideo-"+videoBean.toString());
@@ -256,10 +256,10 @@ public class DiscoverAction extends VP2 {
                 textViews = linearLayout.findObjects(By.depth(1).clazz(TextView.class));
                 if (textViews.size() == 2) {
                     if (linearLayout.getChildCount()==2&&linearLayout.getParent().getChildCount()==2){
-                        int like = Integer.parseInt(textViews.get(0).getText());
+                        int watch = Integer.parseInt(textViews.get(0).getText());
                         int zan = Integer.parseInt(textViews.get(1).getText());
                         videoBean.setAddress("");
-                        videoBean.setLike(like);
+                        videoBean.setWatch(watch);
                         videoBean.setZan(zan);
                         //获取点赞数
                         logger.info("playBackVideo-"+videoBean.toString());

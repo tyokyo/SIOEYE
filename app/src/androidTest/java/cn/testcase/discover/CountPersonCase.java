@@ -22,6 +22,7 @@ import cn.action.DiscoverAction;
 import cn.action.MainAction;
 import cn.page.App;
 import cn.page.MePage;
+import cn.page.PlayPage;
 
 /**
  * Created by caibing.yin on 2016/11/7.
@@ -50,7 +51,7 @@ public class CountPersonCase extends VP2 {
         //1.滑动视频列表 2.播放视频(true)
         VideoBean before_playback=DiscoverAction.playBackVideo(true);
         logger.info(before_playback.toString());
-        int clickBeforeNumber =before_playback.getLike();
+        int clickBeforeNumber =before_playback.getWatch();
         logger.info("点击观看前"+before_playback.toString());
         Spoon.screenshot("person",""+clickBeforeNumber);
         gDevice.pressBack();
@@ -58,7 +59,7 @@ public class CountPersonCase extends VP2 {
         VideoBean after_playback=DiscoverAction.playBackVideo(false);
         logger.info("点击观看后"+after_playback.toString());
         logger.info(after_playback.toString());
-        int clickAfterNumber =after_playback.getLike();
+        int clickAfterNumber =after_playback.getWatch();
 
         Spoon.screenshot("person",""+clickAfterNumber);
         if (clickBeforeNumber>1000){
@@ -94,7 +95,7 @@ public class CountPersonCase extends VP2 {
 
         //now zan operation
         for(int times=0;times<5;times++){
-            clickById(MePage.BROADCAST_VIEW_ZAN);
+            clickById(PlayPage.BROADCAST_VIEW_ZAN);
             waitTime(2);
         }
         gDevice.pressBack();

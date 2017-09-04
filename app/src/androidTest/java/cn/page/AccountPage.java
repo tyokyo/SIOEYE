@@ -31,7 +31,7 @@ public class AccountPage {
     public static String SIGN_UP_ACCOUNT_NICK_NAME = "cn.sioeye.sioeyeapp:id/et_input_name";
     public static String SIGN_UP_ACCOUNT_DEFAULT_SELECT = "cn.sioeye.sioeyeapp:id/tv_select_count";
     //pop dialog
-    public static String SIGN_UP_ACCOUNT_TV_CONTENT = "cn.sioeye.sioeyeapp:id/tv_content";
+    public static final String SIGN_UP_ACCOUNT_TV_CONTENT = "cn.sioeye.sioeyeapp:id/tv_content";
     //logout loading
     public static final String ACCOUNT_LOGOUT="cn.sioeye.sioeyeapp:id/llt_layout";
     //login
@@ -43,5 +43,9 @@ public class AccountPage {
     public static final String ACCOUNT_PASSWORD_SHOW_BTN="cn.sioeye.sioeyeapp:id/show_password_btn";
     public static final String TV_PASSWORD_TIP="cn.sioeye.sioeyeapp:id/tv_password_tip";
     public static final String SIOEYEID_VERIFIED_BTN="cn.sioeye.sioeyeapp:id/sioeyeid_verified_btn";
+    public static final String LOG_OUT_I_KNOW = "cn.sioeye.sioeyeapp:id/neutral";
+    public static final String SIGN_UP_ACCOUNT_OK_NEUTRAL="cn.sioeye.sioeyeapp:id/message";
+
+
 
 }

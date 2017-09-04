@@ -17,7 +17,8 @@ public class MePage {
     public static final String ID_MAIN_TAB_LIVE="cn.sioeye.sioeyeapp:id/main_tab_live";
     //navigate to 相机
     public static final String ID_MAIN_TAB_DEVICE="cn.sioeye.sioeyeapp:id/main_tab_device";
-
+    //账号昵称
+    public static final String WATCH_USER_MINI_NAME="cn.sioeye.sioeyeapp:id/tv_nickname";
     //following
     public static final String ID_ME_FOLLOWING="cn.sioeye.sioeyeapp:id/llt_following";
     public static final String ID_ME_TYPE_FOLLOWING="cn.sioeye.sioeyeapp:id/profile_type_following";
@@ -87,31 +88,11 @@ public class MePage {
     public static final String BROADCAST_DELETE="cn.sioeye.sioeyeapp:id/delete_broadcasts";
     public static final String BROADCAST_EDIT_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
     public static final String BROADCAST_EDIT_OK="cn.sioeye.sioeyeapp:id/tv_ok";
-    public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/tv_ok";
+    public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/positive";
     public static final String BROADCAST_EDIT_DELETE_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
 
-    public static final String BROADCAST_VIEW_TIPTEXT="cn.sioeye.sioeyeapp:id/tipText";
-    public static final String BROADCAST_VIEW_ZAN="cn.sioeye.sioeyeapp:id/watch_player_portrait_like";
-    //键盘弹出时的点赞图标
-    public static final String BROADCAST_VIEW_ZAN_FLOAT_LIKE="cn.sioeye.sioeyeapp:id/float_like";
 
-    public static final String BROADCAST_VIEW_SHARE="cn.sioeye.sioeyeapp:id/iv_share";
 
-    public static final String BROADCAST_VIEW_MESSAGE_TEXT="cn.sioeye.sioeyeapp:id/message_text";
-    public static final String BROADCAST_VIEW_WATCHER_COUNT="cn.sioeye.sioeyeapp:id/watch_player_portrait_watcher_count";
-
-    //video loading
-    public static final String BROADCAST_VIEW_VIDEO_LOADING="cn.sioeye.sioeyeapp:id/app_video_loading";
-    //play video
-    public static final String BROADCAST_VIEW_VIDEO_PLAY="cn.sioeye.sioeyeapp:id/app_video_play";
-    //current video time
-    public static final String BROADCAST_VIEW_VIDEO_CURRENT_TIME="cn.sioeye.sioeyeapp:id/app_video_currentTime";
-    //播放进度
-    public static final String BROADCAST_VIEW_VIDEO_SEEKBAR="cn.sioeye.sioeyeapp:id/app_video_seekBar";
-    //video end time
-    public static final String BROADCAST_VIEW_VIDEO_END_TIME="cn.sioeye.sioeyeapp:id/app_video_endTime";
-    //全屏播放按钮
-    public static final String BROADCAST_VIEW_VIDEO_FULL_SCREEN="cn.sioeye.sioeyeapp:id/app_video_fullscreen";
     //modify title
     public static final String BROADCAST_VIEW_VIDEO_TITLE_MODIFY="cn.sioeye.sioeyeapp:id/content";
 
@@ -249,10 +230,6 @@ public class MePage {
     public static final String SELECT_PEOPLE_LIST_Horizontal="cn.sioeye.sioeyeapp:id/horizontal_recycleview";
     //粉丝滑动列表
     public static final String FANS_SWIPE_LAYOUT="cn.sioeye.sioeyeapp:id/swipeLayout";
-    //视频信息
-    public static final String VIDEO_WATCH_NUMBER="cn.sioeye.sioeyeapp:id/tv_watch_number";
-    public static final String VIDEO_CHAT_NUMBER="cn.sioeye.sioeyeapp:id/tv_chat_number";
-    public static final String VIDEO_LIKE_NUMBER="cn.sioeye.sioeyeapp:id/tv_like_number";
     //导播控制
     public static final String SETTINGS_CB_DIRECTOR="cn.sioeye.sioeyeapp:id/cb_director";
     public static final String SETTINGS_CB_DIRECTOR_TEXT="cn.sioeye.sioeyeapp:id/tv_director_txt";
@@ -262,16 +239,6 @@ public class MePage {
     public static final String SETTINGS_SEX_MALE="cn.sioeye.sioeyeapp:id/rlt_male";
     public static final String SETTINGS_SEX_FEMALE="cn.sioeye.sioeyeapp:id/rlt_female";
     public static final String SETTINGS_SEX_SECRET="cn.sioeye.sioeyeapp:id/rlt_other";
-    //底部有新消息
-    public static final String NEW_MESSAGES_DISPLAY="cn.sioeye.sioeyeapp:id/tv_new_message";
-    //视频加载失败
-    public static final String LOAD_VIDEO_ERROR="cn.sioeye.sioeyeapp:id/layout_error";
-    //主播
-    public static final String TV_AUCHOR_ID="cn.sioeye.sioeyeapp:id/tv_anchor";
-    //聊天室
-    public static final String TV_CHAT_ROOM_ID="cn.sioeye.sioeyeapp:id/tv_chat_room";
-    //编辑框
-    public static final String EDIT_COMMENT_TEXT="cn.sioeye.sioeyeapp:id/edit_text";
     //会员权益
     public static final String VIP_RIGHT_TV_OPEN="cn.sioeye.sioeyeapp:id/tv_vip_open";
     public static final String VIP_RIGHT_TV_CONTENT="cn.sioeye.sioeyeapp:id/tv_content";
@@ -317,6 +284,16 @@ public class MePage {
     public static final String SETTINGS_PUSH_TYPE_LIVE="cn.sioeye.sioeyeapp:id/push_type_live";
     public static final String SETTINGS_PUSH_TYPE_AT="cn.sioeye.sioeyeapp:id/push_type_at";
     public static final String SETTINGS_PUSH_TYPE_COMMENT="cn.sioeye.sioeyeapp:id/push_type_comment";
-
+    public static final String SETTINGS_PASSWORD_OLD_PASSWORD="cn.sioeye.sioeyeapp:id/originpd_red";
+    public static final String SETTINGS_PASSWORD_NEW_PASSWORD="cn.sioeye.sioeyeapp:id/newpd_first_red";
+    public static final String SETTINGS_PASSWORD_SECONDARY_PASSWORD="cn.sioeye.sioeyeapp:id/newpd_second_red";
+    //消息
+    public static final String NOTIFICATION_MESSAGE = "cn.sioeye.sioeyeapp:id/tv_notification";
+    public static final String NOTIFICATION_OTHER = "cn.sioeye.sioeyeapp:id/tv_inform";
+    public static final String NOTIFICATION_ZAN_VIP = "cn.sioeye.sioeyeapp:id/user_head_img";
+    public static final String NOTIFICATION_REPLY_COMMENT = "cn.sioeye.sioeyeapp:id/edit_text";
+    public static final String NOTIFICATION_WATCH_VIDEO = "cn.sioeye.sioeyeapp:id/llt_video_info";
+    public static final String NOTIFICATION_DETAIL = "cn.sioeye.sioeyeapp:id/tv_detail";
+    public static final String NOTIFICATION_COMMENT = "cn.sioeye.sioeyeapp:id/expandable_text";
 
 }

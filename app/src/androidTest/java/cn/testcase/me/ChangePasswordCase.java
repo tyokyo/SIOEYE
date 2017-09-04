@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import ckt.annotation.PerformanceTest;
@@ -40,19 +41,21 @@ public class ChangePasswordCase extends VP2{
     @Test
     @SanityTest
     @PerformanceTest
-    public void testChangeCroectPassword() throws UiObjectNotFoundException {
+    public void testChangeCroectPassword() throws UiObjectNotFoundException,IOException {
         MeAction.navToSettings();
         clickByText("Account and Security");
         clickByText("Change your password");
-        getUiObject2ByText("Current password").setText("123456");
-        getUiObject2ByText("New password").setText("123456");
-        getUiObject2ByText("Re-type password").setText("123456");
+        clickById(MePage.SETTINGS_PASSWORD_NEW_PASSWORD);
+        shellInputText("123456");
+        clickById(MePage.SETTINGS_PASSWORD_OLD_PASSWORD);
+        shellInputText("123456");
+        clickById(MePage.SETTINGS_PASSWORD_SECONDARY_PASSWORD);
+        shellInputText("123456");
         clickById(MePage.ACCOUNT_AND_SECURITY_RIGHT);
         Spoon.screenshot("testChangeCroectPassword");
         waitTime(3);
         String active_title=getObjectById(MePage.ACCOUNT_AND_SECURITY_TITLE).getText();
         String expect_title="Change your password";
-
         Asst.assertEquals("testLogOut_Cancel",expect_title,active_title);
         Spoon.screenshot("testChangeCroectPassword");
     }
@@ -89,7 +92,6 @@ public class ChangePasswordCase extends VP2{
             Spoon.screenshot("Password_Unvisible_Fail","关闭密码可见失败");
             Assert.fail("FailedClosePasswordVisible");
         }
-
     }
     /**
      * 绑定手机号的时候输入错误密码
@@ -108,10 +110,8 @@ public class ChangePasswordCase extends VP2{
         getObjectById(MePage.ACCOUNT_AND_TV_TOBING_PHONE_PASSWORD).setText(userPassword);
         clickById(MePage.ACCOUNT_AND_TV_TOBING_PHONE_NEXT);
         waitTime(3);
-
         String active_title=getObjectById(MePage.ACCOUNT_AND_TV_TOBING_PHONE_NEXT).getText();
         String expect_title="Next";
-
         Asst.assertEquals("testLogOut_Cancel",expect_title,active_title);
         Spoon.screenshot("testChangePhoneNumber");
     }
@@ -132,10 +132,8 @@ public class ChangePasswordCase extends VP2{
         getObjectById(MePage.ACCOUNT_AND_TV_TOBING_EMAIL_PASSWORD).setText(userPassword);
         clickById(MePage.ACCOUNT_AND_TV_TOBING_EMAIL_NEXT);
         waitTime(3);
-
         String active_title=getObjectById(MePage.ACCOUNT_AND_TV_TOBING_EMAIL_NEXT).getText();
         String expect_title="Next";
-
         Asst.assertEquals("testLogOut_Cancel",expect_title,active_title);
         Spoon.screenshot("testChangePhoneNumber");
     }

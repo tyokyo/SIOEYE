@@ -159,8 +159,8 @@ public class FollowingAction extends VP2{
     //随机选择一个fans对象
     public static FollowingBean randomFansArav() throws IOException, UiObjectNotFoundException {
         FollowingBean followingBean = new FollowingBean();
-        waitUntilFind(WatchPage.WATCH_USER_AVATAR,30000);
-        UiObject2 follow_view = getObject2ById(WatchPage.WATCH_USER_AVATAR);
+        waitUntilFind(MePage.FOLLOWERING_AVATAR,30000);
+        UiObject2 follow_view = getObject2ById(MePage.FOLLOWERING_AVATAR);
         List<UiObject2> LinearLayoutList = follow_view.findObjects(By.clazz(LinearLayout.class));
         List<UiObject2> LinearLayoutList_filter=new ArrayList<>();
         int size=0;
