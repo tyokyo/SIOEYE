@@ -323,18 +323,6 @@ public class MeAction extends VP2{
         String me = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
         return  me;
     }
-
-    /*
-    获取子对象内容MePage.ABOUT_ME_CONTENT_TEXT
-    父对象id-MePage.ABOUT_ME_ID
-    public static final String NAV_EDIT_NICKNAME="cn.sioeye.sioeyeapp:id/nickname";
-    public static final String NAV_EDIT_SEX="cn.sioeye.sioeyeapp:id/sex";
-    public static final String NAV_EDIT_EMAIL="cn.sioeye.sioeyeapp:id/email";
-    public static final String NAV_EDIT_LOCATION="cn.sioeye.sioeyeapp:id/location";
-    public static final String NAV_EDIT_ACTIVITY="cn.sioeye.sioeyeapp:id/interest";
-    public static final String NAV_EDIT_SIOEYE_ID="cn.sioeye.sioeyeapp:id/sioeye_id";
-    public static final String NAV_EDIT_ABOUT_ME="cn.sioeye.sioeyeapp:id/about";
-    * */
     public static String getEditContent(String resourceID) throws UiObjectNotFoundException {
         UiObject u =  gDevice.findObject(new UiSelector().resourceId(resourceID));
         String me = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
