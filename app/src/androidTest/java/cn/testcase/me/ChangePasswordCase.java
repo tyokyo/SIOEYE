@@ -56,7 +56,6 @@ public class ChangePasswordCase extends VP2{
         waitTime(3);
         String active_title=getObjectById(MePage.ACCOUNT_AND_SECURITY_TITLE).getText();
         String expect_title="Change your password";
-
         Asst.assertEquals("testLogOut_Cancel",expect_title,active_title);
         Spoon.screenshot("testChangeCroectPassword");
     }
@@ -93,7 +92,6 @@ public class ChangePasswordCase extends VP2{
             Spoon.screenshot("Password_Unvisible_Fail","关闭密码可见失败");
             Assert.fail("FailedClosePasswordVisible");
         }
-
     }
     /**
      * 绑定手机号的时候输入错误密码
@@ -112,10 +110,8 @@ public class ChangePasswordCase extends VP2{
         getObjectById(MePage.ACCOUNT_AND_TV_TOBING_PHONE_PASSWORD).setText(userPassword);
         clickById(MePage.ACCOUNT_AND_TV_TOBING_PHONE_NEXT);
         waitTime(3);
-
         String active_title=getObjectById(MePage.ACCOUNT_AND_TV_TOBING_PHONE_NEXT).getText();
         String expect_title="Next";
-
         Asst.assertEquals("testLogOut_Cancel",expect_title,active_title);
         Spoon.screenshot("testChangePhoneNumber");
     }
@@ -136,10 +132,8 @@ public class ChangePasswordCase extends VP2{
         getObjectById(MePage.ACCOUNT_AND_TV_TOBING_EMAIL_PASSWORD).setText(userPassword);
         clickById(MePage.ACCOUNT_AND_TV_TOBING_EMAIL_NEXT);
         waitTime(3);
-
         String active_title=getObjectById(MePage.ACCOUNT_AND_TV_TOBING_EMAIL_NEXT).getText();
         String expect_title="Next";
-
         Asst.assertEquals("testLogOut_Cancel",expect_title,active_title);
         Spoon.screenshot("testChangePhoneNumber");
     }
