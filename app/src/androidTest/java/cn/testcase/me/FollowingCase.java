@@ -359,4 +359,72 @@ public class FollowingCase extends VP2 {
             }
         }
     }
+    /****
+    上下滑动直播列表
+    选择一个视频全屏观看
+     * */
+    @Test
+    public void testFullscreenPlayVideo() throws UiObjectNotFoundException, IOException {
+        MeAction.navToFollowing();
+        waitTime(3);
+        int following_size= FollowingAction.getFollowingSize();
+        if(following_size>=1){
+            FollowingBean followingBean=FollowingAction.randomFollowingUser();
+            logger.info(followingBean.toString());
+            int indx=followingBean.getIndex_linearLayout();
+            FollowingAction.clickRandomFollower(followingBean);
+            int broadcast_size=FollowingAction.hasBroadcasts();
+            if(broadcast_size>=1){
+                MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,10);//上下滑动视频列表
+                FollowingAction.clickFollowingBroadcast();//选择视频播放
+                //等待视频加载完成
+                BroadcastAction.waitBroadcastLoading();//等待加载评论区
+                waitTime(3);
+                clickById(PlayPage.BROADCAST_VIDEO_VIEW);
+                clickById(PlayPage.BROADCAST_VIDEO_FULLPLAY);//点击全屏按钮播放
+                waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,600000);//等待视频加载图标消失
+                waitTime(20);
+                Asst.assertTrue("time out 60 seconds.",!getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+                Spoon.screenshot("play_video");
+                gDevice.pressBack();
+                Spoon.screenshot("play_20_seconds");
+            }else{
+                Spoon.screenshot("no_video");
+            }
+        }
+    }
+    /****
+     上下滑动直播列表
+     选择一个视频播放
+     多次点击播放/暂停按钮
+     * */
+    @Test
+    public void testContinuousStopPlayVideo() throws UiObjectNotFoundException,IOException{
+        MeAction.navToFollowing();
+        waitTime(3);
+        int following_size=FollowingAction.getFollowingSize();
+        if(following_size>=1){
+            FollowingBean followingBean=FollowingAction.randomFollowingUser();
+            logger.info(followingBean.toString());
+            int indx=followingBean.getIndex_linearLayout();
+            FollowingAction.clickRandomFollower(followingBean);
+            int broadcast_size=FollowingAction.hasBroadcasts();
+            if(broadcast_size>=1){
+                MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,10);
+                FollowingAction.clickFollowingBroadcast();//选择视频播放
+                BroadcastAction.waitBroadcastLoading();//等待加载评论区
+                waitTime(3);
+                clickById(PlayPage.BROADCAST_VIDEO_VIEW);
+                PlayAction.getContinuousClickPlay();
+                //clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
+                PlayAction.getAdvertising();
+            }
+            else{
+                Spoon.screenshot("no_video");
+           }
+        }
+    }
 }
+
+
+
