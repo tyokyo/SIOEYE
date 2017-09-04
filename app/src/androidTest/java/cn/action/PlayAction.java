@@ -11,6 +11,7 @@ import com.squareup.spoon.Spoon;
 import org.hamcrest.Asst;
 
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import bean.VideoBean;
@@ -143,10 +144,33 @@ public class PlayAction extends VP2 {
             Spoon.screenshot("Follow");
         }
     }
-    //全屏播放视频
-    public static void fullSreenPlay(){
-      //  UiObject2 viewPlay = getObject2ById(PlayPage.)
-
+    //点击播放界面，弹出界面ui
+    public static void clickPlayView(){
+        clickById(PlayPage.VIDEO_VIEW);
+    }
+    //点击暂停/播放
+    public static void pauseVideo(){
+        clickById(PlayPage.VIEW_VIDEO_PLAY);
+    }
+    //举报好友视频
+    public static void reportVideo() throws UiObjectNotFoundException{
+        PlayAction.clickPlayView();
+        PlayAction.pauseVideo();
+        if(id_exists(PlayPage.REPORT_VIDEO)){
+            clickById(PlayPage.REPORT_VIDEO);
+            waitUntilFind(PlayPage.REPORT_LIST,5000);
+            List<UiObject2> textViews =getObject2ById(PlayPage.REPORT_LIST).findObjects(By.clazz(android.widget.TextView.class));
+            int size = textViews.size();
+            Random random = new Random();
+            int rd = random.nextInt(size);
+            textViews.get(rd).click();
+            waitTime(2);
+            clickById(PlayPage.REPORT_OK);
+            waitUntilFind(PlayPage.REPORT_THANKS,5000);
+            Asst.assertEquals("举报成功","Thank you for your report, we will review it",getObject2ById(PlayPage.REPORT_THANKS).getText());
+            Spoon.screenshot("report_video");
+            clickById(PlayPage.REPORT_THANKS_OK);
+        }
     }
     //获取暂停广告信息
     public static void getAdvertising() {
