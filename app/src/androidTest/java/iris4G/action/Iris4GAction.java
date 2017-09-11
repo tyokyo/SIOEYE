@@ -498,7 +498,7 @@ public class Iris4GAction extends VP2 {
         Iris4GAction.startCamera();
         waitTime(1);
         //增加切换到video模式
-        CameraAction.navConfig(NavPage.navConfig_Video);
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         waitTime(a + 1);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);

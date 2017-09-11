@@ -1,6 +1,9 @@
 package iris4G.action;
 
+import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+
+import java.io.IOException;
 
 import ckt.base.VP2;
 import iris4G.page.SettingPage;
@@ -57,5 +60,53 @@ public class SettingAction extends VP2 {
         clickByText("Connection");
         Iris4GAction.ScrollViewByText("Wi-Fi");
         clickByText("Wi-Fi");
+    }
+    public static void cancelFormat(){
+        clickById(SettingPage.storage_delete_img);
+        clickById(SettingPage.storage_delete_cancel_text);
+        waitTime(3);
+    }
+    public static void format(){
+        clickById(SettingPage.storage_delete_img);
+        clickById(SettingPage.storage_delete_ok_text);
+        clickById(SettingPage.storage_delete_ok_text);
+        waitTime(8);
+        gDevice.pressBack();
+    }
+    public static void closeWifi() throws Exception {
+        Iris4GAction.startSettings();
+        clickByText("Connection");
+        clickByText("Wi-Fi");
+        waitTime(2);
+        UiObject addNewNetWork = getObjectByTextContains("Add new network...");
+        if (!addNewNetWork.exists()) {
+            clickById(SettingPage.wifi_switch_Widget);
+            waitTime(1);
+        }
+        Iris4GAction.stopSettings();
+    }
+    public static void openWifi() throws Exception {
+        Iris4GAction.startSettings();
+        clickByText("Connection");
+        clickByText("Wi-Fi");
+        waitTime(2);
+        UiObject addNewNetWork = getObjectByTextContains("Add new network...");
+        if (addNewNetWork.exists()) {
+            clickById(SettingPage.wifi_switch_Widget);
+            waitTime(5);
+        }
+        Iris4GAction.stopSettings();
+    }
+    public static void disableSimData() throws IOException {
+        gDevice.executeShellCommand("svc data disable");
+    }
+    public static void enableSimData() throws IOException {
+        gDevice.executeShellCommand("svc data enable");
+    }
+    public static void navToUpdate() throws Exception {
+        Iris4GAction.startSettings();
+        clickById(SettingPage.advance_id);
+        clickByText("Update");
+        waitTime(1);
     }
 }
