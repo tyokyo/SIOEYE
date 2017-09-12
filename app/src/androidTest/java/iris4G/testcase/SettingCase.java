@@ -3,6 +3,7 @@ package iris4G.testcase;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiSelector;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 import ckt.base.VP2;
 import iris4G.action.Iris4GAction;
 import iris4G.action.SettingAction;
+import iris4G.page.SettingPage;
 
 /**
  * @Author yun.yang
@@ -183,6 +185,25 @@ public class SettingCase extends VP2 {
             SettingAction.openWifi();
             SettingAction.enableSimData();
             Assert.fail("notFound'NoAvailableNetwork'");
+        }
+    }
+    @Test
+    /*
+    case 6
+    检查选中的和日期和展示的是否一致
+     */
+    public void testCheckDateDisplay() throws Exception {
+        SettingAction.navToSetDate();
+        if (SettingAction.checkYear()&&SettingAction.checkMonth()&&SettingAction.checkDay()){
+            getObjectById(SettingPage.month_view).swipeLeft(60);
+            getObjectById(SettingPage.month_view).getChild(new UiSelector().text(SettingAction.getRandomDay())).click();
+            if (SettingAction.checkYear()&&SettingAction.checkMonth()&&SettingAction.checkDay()){
+                logger.info("CheckDateDisplayPass");
+            }else {
+                Assert.fail("CheckDateDisplayFailed");
+            }
+        }else {
+            Assert.fail("CheckDateDisplayFailed");
         }
     }
 }

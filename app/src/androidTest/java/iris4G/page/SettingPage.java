@@ -17,6 +17,9 @@ public class SettingPage extends VP2{
     public static String storage_delete_ok_text ="com.android.settings:id/storage_delete_ok_text";
     public static String wifi_switch_Widget="android:id/switchWidget";
     public static String advance_id="com.android.settings:id/advance";
+    public static String system_id="com.android.settings:id/system";
+    public static String dispay_week_month_day="android:id/date_picker_header_date";
+    public static String month_view ="android:id/month_view";
 
     //galleryPage
     public static String video_timeText="com.hicam.gallery:id/timeText";
