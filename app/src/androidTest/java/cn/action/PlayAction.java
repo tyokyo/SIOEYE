@@ -1,5 +1,6 @@
 package cn.action;
 
+import android.graphics.Rect;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.StaleObjectException;
 import android.support.test.uiautomator.UiObject2;
@@ -145,18 +146,23 @@ public class PlayAction extends VP2 {
         }
     }
     //点击播放界面，弹出界面ui
-    public static void clickPlayView(){
-        clickById(PlayPage.VIDEO_VIEW);
+    public static void clickPlayView() throws UiObjectNotFoundException{
+     clickById(PlayPage.BROADCAST_VIDEO_VIEW);
     }
     //点击暂停/播放
     public static void pauseVideo(){
-        clickById(PlayPage.VIEW_VIDEO_PLAY);
+        clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
     }
-    //举报好友视频
-    public static void reportVideo() throws UiObjectNotFoundException{
+    //弹出UI界面举报好友视频
+    public static void toReportVideo() throws UiObjectNotFoundException{
         PlayAction.clickPlayView();
         PlayAction.pauseVideo();
         if(id_exists(PlayPage.REPORT_VIDEO)){
+           reportVideo();
+        }
+    }
+    //点击举报
+    public static void reportVideo() throws UiObjectNotFoundException{
             clickById(PlayPage.REPORT_VIDEO);
             waitUntilFind(PlayPage.REPORT_LIST,5000);
             List<UiObject2> textViews =getObject2ById(PlayPage.REPORT_LIST).findObjects(By.clazz(android.widget.TextView.class));
@@ -170,7 +176,6 @@ public class PlayAction extends VP2 {
             Asst.assertEquals("举报成功","Thank you for your report, we will review it",getObject2ById(PlayPage.REPORT_THANKS).getText());
             Spoon.screenshot("report_video");
             clickById(PlayPage.REPORT_THANKS_OK);
-        }
     }
     //获取暂停广告信息
     public static void getAdvertising() {
