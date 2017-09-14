@@ -188,10 +188,6 @@ public class LiveConfigCase extends VP2{
         MeAction.navToLiveConfiguration();
         //谁可以看我的直播
         clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
-        /*//设置为部分可见
-        MeAction.setToPersonal();
-        clickById(MePage.PRIVACY_PERSONAL_DONE);
-        clickById(MePage.PRIVACY_PERSONAL_RIGHT);*/
         String permission=MeAction.getPermissionToView();
         Asst.assertEquals("set Privacy Setting:Public","personal",permission);
         Spoon.screenshot("personal");
@@ -224,8 +220,6 @@ public class LiveConfigCase extends VP2{
     @PerformanceTest
     public void testSelectPullingSource() throws UiObjectNotFoundException {
         MeAction.navToPullingSource();
-
-
         String active_name1=getObjectById(MePage.SELECT_PULLINS_TV_MEMBER_TEXT).getText();
         String expect_name1="You have not signed up for Sioeye VIP";
         if (active_name1.equals(expect_name1)){
@@ -235,9 +229,7 @@ public class LiveConfigCase extends VP2{
             String expect_name2="VIP Rights";
             Asst.assertEquals("是否跳转到会员权益界面", expect_name2, active_name2);
         }
-
         Spoon.screenshot("testSetCoverPlot");
-
     }
     /**
      * 水印开关测试
@@ -248,32 +240,36 @@ public class LiveConfigCase extends VP2{
     @SanityTest
     @PerformanceTest
     public void testWaterMarkDelete() throws UiObjectNotFoundException {
+        boolean vip = id_exists(MePage.ID_VIP);
         MeAction.navToLiveConfiguration();
-
-        //findObjects(By.clazz(android.widget.CheckBox.class));
         boolean isChecked=getObject2ByClass(CheckBox.class).isChecked();
-       // List<UiObject2> checkBoxs=getObjectsByClassname("android.widget.CheckBox");
-        //boolean isChecked=checkBoxs.get(1).isChecked();
         logger.info(""+isChecked);
-        if (isChecked==false){
+        if(vip==false){
             clickByClass("android.widget.CheckBox",1);
-            waitTime(2);
-            boolean avtiveisChecked=getObject2ByClass(CheckBox.class).isChecked();
-            boolean expect;
-            expect=true;
-            Asst.assertEquals("打开水印开关",expect,avtiveisChecked);
-            Spoon.screenshot("testWaterMarkDelete");
-        }if (isChecked==true){
-            //clickByClass("android.widget.RelativeLayout");
-            clickByClass("android.widget.CheckBox",1);
-            waitTime(2);
-            boolean avtiveisChecked=getObject2ByClass(CheckBox.class).isChecked();
-            boolean expect;
-            expect=false;
-            Asst.assertEquals("关闭水印开关",expect,avtiveisChecked);
-            Spoon.screenshot("testWaterMarkDelete");
+            clickById(MePage.BECOME_VIP);
+            if(text_exists("You have not signed up for Sioeye VIP")){
+                Asst.assertTrue(true);
+                Spoon.screenshot("VIPRights");
+            }
+        }else if(vip==true){
+            if (isChecked==false){
+                clickByClass("android.widget.CheckBox",1);
+                waitTime(2);
+                boolean avtiveisChecked=getObject2ByClass(CheckBox.class).isChecked();
+                boolean expect;
+                expect=true;
+                Asst.assertEquals("打开水印开关",expect,avtiveisChecked);
+                Spoon.screenshot("testWaterMarkDelete");
+            }if (isChecked==true){
+                clickByClass("android.widget.CheckBox",1);
+                waitTime(2);
+                boolean avtiveisChecked=getObject2ByClass(CheckBox.class).isChecked();
+                boolean expect;
+                expect=false;
+                Asst.assertEquals("关闭水印开关",expect,avtiveisChecked);
+                Spoon.screenshot("testWaterMarkDelete");
+            }
         }
-
     }
 
 }
