@@ -130,10 +130,10 @@ public class FollowingCase extends VP2 {
             BroadcastAction.waitBroadcastLoading();
             gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             //当前的评论数
-            WatcherBean watcherBean1 = BroadcastAction.getWatcher();
-            String comments_before = watcherBean1.getComments();
+            VideoBean videoBean1 = PlayAction.getNumberPlayVideo();
+            int  comments_before = videoBean1.getComment();
+            FollowersAction.clickToChat();
             String input_comments = getRandomString(130);
-            int comments_count_before=cover(comments_before);
             //输入评论内容
             clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
             shellInputText(input_comments);
@@ -147,14 +147,9 @@ public class FollowingCase extends VP2 {
             input_comments=input_comments.substring(0,120);
             Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
-            WatcherBean watcherBean_after = BroadcastAction.getWatcher();
-            String after_comments = watcherBean_after.getComments();
-            int comments_count_after=cover(after_comments);
-            if (comments_count_before>1000){
-                Asst.assertEquals(comments_count_before,comments_count_after);
-            }else{
-                Asst.assertEquals(comments_count_before+1,comments_count_after);
-            }
+            VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
+            int  after_comments = videoBean_after.getComment();
+            Asst.assertEquals(comments_before+1,after_comments);
             Spoon.screenshot("testComments_Length_130",input_comments);
             gDevice.pressBack();
         }
@@ -182,10 +177,10 @@ public class FollowingCase extends VP2 {
                 //点赞对象的坐标
                 Rect rect=getRect(PlayPage.BROADCAST_VIEW_ZAN);
                 //当前的评论数
-                WatcherBean watcherBean1 = BroadcastAction.getWatcher();
-                String comments_before = watcherBean1.getComments();
+                VideoBean videoBean = PlayAction.getNumberPlayVideo();
+                int  comments_before = videoBean.getComment();
                 String input_comments = getRandomString(20);
-                int comments_count_before=cover(comments_before);
+                FollowersAction.clickToChat();
                 //输入评论内容
                 clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
@@ -198,14 +193,9 @@ public class FollowingCase extends VP2 {
                 Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
                 //验证评论数+1
                 gDevice.pressBack();
-                WatcherBean watcherBean_after = BroadcastAction.getWatcher();
-                String after_comments = watcherBean_after.getComments();
-                int comments_count_after=cover(after_comments);
-                if (comments_count_before>1000){
-                    Asst.assertEquals(comments_count_before,comments_count_after);
-                }else{
-                    Asst.assertEquals(comments_count_before+1,comments_count_after);
-                }
+                VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
+                int  after_comments = videoBean_after.getComment();
+                Asst.assertEquals(comments_before+1,after_comments);
                 Spoon.screenshot("testFollowingComments_Length_20",input_comments);
                 gDevice.pressBack();
                 Spoon.screenshot("play_20_seconds");
@@ -290,9 +280,8 @@ public class FollowingCase extends VP2 {
                 BroadcastAction.waitBroadcastLoading();
                 waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,60000);
                 //获取当前的点赞数目
-                WatcherBean bean_before_zan = BroadcastAction.getWatcher();
-                String zan_before = bean_before_zan.getZan();
-                int zan_before_int = cover(zan_before);
+                VideoBean bean_before_zan =PlayAction.getNumberPlayVideo();
+                int  zan_before = bean_before_zan.getZan();
                 //弹出评论输入框-点赞
                 clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
                 waitTime(2);
@@ -300,15 +289,10 @@ public class FollowingCase extends VP2 {
                 clickById(PlayPage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
                 gDevice.pressBack();
                 //获取点赞操作之后的点赞数目
-                WatcherBean bean_after_zan = BroadcastAction.getWatcher();
-                String zan_after = bean_after_zan.getZan();
-                int zan_after_int=cover(zan_after);
+                VideoBean bean_after_zan = PlayAction.getNumberPlayVideo();
+                int zan_after = bean_after_zan.getZan();
                 //验证点赞数+1
-                if (zan_before_int>1000){
-                    Asst.assertEquals("check zan +1",zan_before,zan_after);
-                }else{
-                    Asst.assertEquals("check zan +1",zan_before_int+1,zan_after_int);
-                }
+                Asst.assertEquals("check zan +1",zan_before+1,zan_after);
                 //截取屏幕
                 Spoon.screenshot("testBroadcastsZanKAdd");
             }else {
