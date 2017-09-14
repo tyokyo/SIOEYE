@@ -36,7 +36,7 @@ public class NewAction extends VP2 {
             List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
             waitTime(3);
               if (textViews.size() == 3||textViews.size() == 2) {
-                watch = Integer.parseInt(textViews.get(0).getText());
+                watch =cover(textViews.get(0).getText());
                 break;
             }
         }
@@ -45,6 +45,7 @@ public class NewAction extends VP2 {
 
     //返回随机视频的index
     public static int getRandomVideoIndex() {
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
         List<UiObject2> relativeLayouts = gDevice.findObjects(By.res(NewPage.ID_NEW_VIDEO));
         //获取视频列表数目
         int size = relativeLayouts.size();
@@ -87,7 +88,7 @@ public class NewAction extends VP2 {
         for (UiObject2 linearLayout : linearLayouts) {
             List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
             if (textViews.size() == 3||textViews.size() == 2) {
-                like = Integer.parseInt(textViews.get(1).getText());
+                like = cover(textViews.get(1).getText());
                 break;
             }
         }
@@ -99,7 +100,7 @@ public class NewAction extends VP2 {
         clickById(DiscoverPage.ID_NEW_RECOMMEND);
         int person = 0;
         UiObject2 swipe_target = getObject2ById(NewPage.ID_NEW_VIDEO);
-        swipe_target.swipe(Direction.UP, 0.2f);
+        swipe_target.swipe(Direction.DOWN, 0.2f);
         waitTime(5);
         List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
         logger.info(linearLayouts.size() + "");
