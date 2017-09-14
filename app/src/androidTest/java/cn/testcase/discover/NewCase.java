@@ -264,6 +264,8 @@ public class NewCase  extends VP2{
     public void testNewCoverCountWatch() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        waitTime(3);
         //获取视频封面的观看数
         int watchnum_before = NewAction.getNewWatchNumber();
         List<UiObject2> linearLayouts = gDevice.findObjects(By.res(NewPage.ID_NEW_VIDEO));
@@ -309,6 +311,8 @@ public class NewCase  extends VP2{
     public void testNewCoverCountZan() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        waitTime(3);
         //获取点赞前的点赞数
         int  zan_before= NewAction.getZanNumber();
         List<UiObject2> relativeLayouts = gDevice.findObjects(By.res(NewPage.ID_NEW_VIDEO));
@@ -334,6 +338,8 @@ public class NewCase  extends VP2{
     public void testLocation() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        waitTime(3);
         Boolean videoLocation = false;
         for (int i = 1; i <= 10; i++) {
             //获取位置信息
@@ -354,13 +360,15 @@ public class NewCase  extends VP2{
     @SanityTest
     @PerformanceTest
     /**
-     * case14.评论视频后检查评论数显示
-     */
+      *  case14.评论视频后检查评论数显示
+      */
      public void testNewCommentCount() throws UiObjectNotFoundException,IOException {
         //获取点赞按钮的坐标作为键盘的确认按钮
         Point point= MeAction.getPointToDoComment();
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        waitTime(3);
         //获取第一次进入的评论数
         waitUntilFind(NewPage.ID_NEW_VIDEO,5000);
         int index=NewAction.getRandomVideoIndex();
@@ -482,6 +490,8 @@ public class NewCase  extends VP2{
         //进入发现界面
         MainAction.clickDiscover();
         DiscoverAction.navToNew();
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        waitTime(3);
         //播放一个视频
         int index=NewAction.getRandomVideoIndex();
         NewAction.getRandomVideo(index).click();
