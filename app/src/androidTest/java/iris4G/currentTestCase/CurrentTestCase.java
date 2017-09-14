@@ -447,6 +447,52 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(2);
     }
+    private void liveOfBiggerZoom() throws Exception {
+        makeScreenOn();
+        Iris4GAction.cameraKey();
+        makeLive();
+        clickById(Iris4GPage.recording_time_id);
+        clickById(Iris4GPage.recording_time_id);
+        getObjectById(Iris4GPage.content_id).swipeRight(80);
+        makeScreenOff();
+        waitTime(testTime);
+        makeScreenOn();
+        makeLiveStop();
+    }
+    private void makeLive() throws Exception {
+        Iris4GAction.cameraKey();
+        waitUntilFind(Iris4GPage.recording_time_id,38000);
+        waitTime(3);
+        UiObject recordingTimeId = getObjectById(Iris4GPage.recording_time_id);
+        if (!recordingTimeId.exists()) {
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);//消除对话框
+            waitTime(2);
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+            logger.info("Try again");
+            waitUntilFind(Iris4GPage.recording_time_id,38000);
+            waitTime(3);
+            UiObject recordingTimeIdAgain = getObjectById(Iris4GPage.recording_time_id);
+            if (!recordingTimeIdAgain.exists()) {
+                gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);//消除对话框
+                logger.info("Live Failed");
+                Spoon.screenshot("LiveFailed");
+                logger.info("SawtoothWaveNoteMakeLiveFailed");
+                for (int i=0;i<4;i++) {
+                    waitTime(15);
+                    gDevice.pressBack();
+                    gDevice.pressBack();
+                    waitTime(15);
+                    Iris4GAction.startCamera();
+                }
+                CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
+            }else {
+                logger.info("Live succeed");
+            }
+        } else {
+            logger.info("Live succeed");
+        }
+
+    }
     @Before
     public void setup() throws Exception {
         initDevice();
@@ -570,6 +616,7 @@ public class CurrentTestCase extends VP2 {
             waitTime(testTime);
             waitTime(testTime);
             //4G 不保存直播
+            launchCamera();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
             configVideoQuality(liveQuality480SD);
@@ -629,6 +676,7 @@ public class CurrentTestCase extends VP2 {
             configVideoAngle(videoAngle[2]);//视场角为超级
             live2ScreenOff();
             configVideoAngle(videoAngle[0]);//视场角为普通(默认)
+            liveOfBiggerZoom();
             //3G直播不保存
             gDevice.pressBack();
             gDevice.pressBack();
@@ -684,38 +732,3 @@ public class CurrentTestCase extends VP2 {
 //        galleryLiveScreenOff();
 //    }
 }
-
-//private void openRemoteControl() throws Exception {
-//    makeScreenOn();
-//    CameraAction.cameraSetting();
-//    waitTime(1);
-//    Iris4GAction.ScrollViewByText("Remote control");
-//    CameraAction.openCompoundButton("Remote control");
-//    waitUntilFindText("OK", 5000);
-//    if (text_exists("OK")) {
-//        clickByText("OK");
-//    }
-//    Spoon.screenshot("RemoteControl", "RemoteControl");
-//    waitTime(1);
-//    waitUntilFindText("You are in remote control:",5000);
-//    if (text_exists("You are in remote control:")){
-//        logger.info("远程控制已连接服务器");
-//        waitTime(2);
-//    }else {
-//        waitTime(20);
-//    }
-//}
-//private void clickAirModem() throws Exception {
-//    Iris4GAction.startSettings();
-//    clickByText("Advance");
-//    waitTime(1);
-//    clickByText("Developer options");
-//    Iris4GAction.scrollTextIntoView("Airplane mode");
-//    clickByText("Airplane mode");
-//    waitTime(1);
-//    gDevice.pressBack();
-//    waitTime(1);
-//    gDevice.pressBack();
-//    waitTime(1);
-//    gDevice.pressBack();
-//}

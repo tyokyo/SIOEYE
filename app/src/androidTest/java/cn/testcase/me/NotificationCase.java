@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
@@ -33,6 +34,7 @@ import usa.page.Me;
 
 /**
  * Created by elon on 2016/10/31.
+ * Changed by jqx on 2017/8/29
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
@@ -73,9 +75,9 @@ public class NotificationCase extends VP2 {
         }
     }
     /**
+     * Created by jqx on 2017/8/29.
      * 检查团队消息
-     * 1.回复消息
-     * 2.进入视频检查回复的消息
+     * 1.检查加载团队消息是否成功
      */
     @Test
     @SanityTest
@@ -88,10 +90,11 @@ public class NotificationCase extends VP2 {
             Asst.assertTrue(loadMessage);
         }else{
             Spoon.screenshot("load_error");
-            Asst.fail("加载Sioeye团队消息失败");
+            Asst.fail("Loading Sioeye message fail.");
         }
     }
     /**
+     * Created by jqx on 2017/8/29.
      * 检查消息回复功能
      * 1.回复消息
      * 2.进入视频检查回复的消息
@@ -115,7 +118,44 @@ public class NotificationCase extends VP2 {
             Asst.assertTrue(isComment);
         }else{
             Spoon.screenshot("no_comment_video");
-            Asst.fail("没有人评论过你的视频");
+            Asst.fail("Reply comment fail.");
         }
+    }
+    /**
+     * Created by jqx on 2017/9/7.
+     * 关注/取关评论者
+     * 1.如果已经关注评论者，则先取消关注，并在关注者中确认已经取关
+     * 2.关注评论者
+     * 3.在关注者中查找已经关注的人
+     */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testCommentFollow() throws UiObjectNotFoundException, IOException{
+        MeAction.navToNotifications();
+        waitTime(3);
+        boolean isFollow = false;
+        isFollow = NotificationAction.getFollowButton();
+        Asst.assertTrue(isFollow);
+        Spoon.screenshot("is_follow_comments_success");
+    }
+    /**
+     * Created by jqx on 2017/9/7.
+     * 关注/取关点赞者
+     * 1.如果已经关注点赞者，则先取消关注，并在关注者中确认已经取关
+     * 2.关注点赞者
+     * 3.在关注者中查找已经关注的人
+     */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testLikesFollow() throws UiObjectNotFoundException, IOException{
+        MeAction.navToNotifications();
+        waitTime(3);
+        NotificationAction.navToLikes();
+        boolean isFollow = false;
+        isFollow = NotificationAction.getFollowLikes();
+        Asst.assertTrue(isFollow);
+        Spoon.screenshot("is_follow_likes_success");
     }
 }
