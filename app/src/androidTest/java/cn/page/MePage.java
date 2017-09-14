@@ -36,6 +36,7 @@ public class MePage {
     public static final String CHANGECOVERPHOTO="cn.sioeye.sioeyeapp:id/bg_text_hint";
     public static final String SAMPLE_CONTENT="cn.sioeye.sioeyeapp:id/content";
     public static final String GETNICKNAMECONTENT="cn.sioeye.sioeyeapp:id/content_text";
+    public static final String VIP_DATE="cn.sioeye.sioeyeapp:id/content_text";
 
     //permission allow
     public static final String PERMISSION_ALLOW="com.android.packageinstaller:id/permission_allow_button";
@@ -248,6 +249,13 @@ public class MePage {
     public static final String VIP_RIGHT_TV_MEMBER_TEXT= "cn.sioeye.sioeyeapp:id/tv_member_text";
     public static final String VIP_RIGHT_TV_SIOEYE_VIP_TEXT= "You have not signed up for Sioeye VIP";
     public static final String VIP_RIGHT_TITLE="cn.sioeye.sioeyeapp:id/title";
+    public static final String BECOME_VIP="cn.sioeye.sioeyeapp:id/positive";
+    public static final String CANCEL_BECOME_VIP="cn.sioeye.sioeyeapp:id/negative";
+    public static final String VIP_RIGHT="cn.sioeye.sioeyeapp:id/asv_content";
+    public static final String VIP_RIGHT_PAY="cn.sioeye.sioeyeapp:id/rv_choose_pay_way";
+    public static final String VIP_RIGHT_TOAST="android:id/content";
+    //会员图标
+    public  static final String ID_VIP="cn.sioeye.sioeyeapp:id/iv_level";
     //固定拉流地址
     public static final String SELECT_PULLINS_TV_MEMBER_TEXT="cn.sioeye.sioeyeapp:id/tv_member_text";
     public static final String SELECT_PULLINS_TV_OPEN="cn.sioeye.sioeyeapp:id/tv_vip_open";
@@ -273,9 +281,9 @@ public class MePage {
     public static final String ACCOUNT_AND_TV_TOBING_EMAIL_PASSWORD="cn.sioeye.sioeyeapp:id/et_password";
     public static final String ACCOUNT_AND_TV_TOBING_EMAIL_NEXT="cn.sioeye.sioeyeapp:id/tv_next";
     //直播封面弹窗
-    public static final String COVER_PLOT_BTN_DIALOG_CANCEL="cn.sioeye.sioeyeapp:id/btn_dialog_cancel";
-    public static final String COVER_PLOT_BTN_DIALOG_ALBUM="cn.sioeye.sioeyeapp:id/btn_dialog_album";
-    public static final String COVER_PLOT_BTN_DIALOG_PHOTO="cn.sioeye.sioeyeapp:id/btn_dialog_photo";
+    public static final String COVER_PLOT_BTN_DIALOG_CANCEL="cn.sioeye.sioeyeapp:id/cancel";
+    public static final String COVER_PLOT_BTN_DIALOG_ALBUM="cn.sioeye.sioeyeapp:id/album";
+    public static final String COVER_PLOT_BTN_DIALOG_PHOTO="cn.sioeye.sioeyeapp:id/camera";
     public static final String SETTINGS_SELECT_VIDEO_TEXT="Select video and audio source";
     //流量开关
     public static final String SETTINGS_CB_3G_NETWORK="cn.sioeye.sioeyeapp:id/cb_3g_network";
