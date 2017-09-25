@@ -4,6 +4,7 @@ package cn.page;
  * Created by elon on 2016/10/11.
  */
 public class MePage {
+
     //返回
     public static final String ID_IMG_BACK="cn.sioeye.sioeyeapp:id/img_back_logo";
     public static final String ID_WELCOME_PAGE_VP="cn.sioeye.sioeyeapp:id/welcome_page_vp";
@@ -91,6 +92,9 @@ public class MePage {
     public static final String BROADCAST_EDIT_OK="cn.sioeye.sioeyeapp:id/tv_ok";
     public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/positive";
     public static final String BROADCAST_EDIT_DELETE_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
+    //视频显示的封面
+    public static final String BROADCAST_VIDEO_THUMB="cn.sioeye.sioeyeapp:id/sdv_preview";
+    public static final String BROADCAST_VIDEO_MORE_OPTION_LIST="cn.sioeye.sioeyeapp:id/option_list";
 
 
 
