@@ -1,13 +1,12 @@
 package cn.action;
 
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.widget.FrameLayout;
-
-import org.hamcrest.Asst;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,8 +24,9 @@ import cn.page.PlayPage;
  */
 public class BroadcastAction extends VP2{
     private static Logger logger = Logger.getLogger(BroadcastAction.class.getName());
-    public static void navEdit(){
-        clickById(MePage.BROADCAST_DELETE);
+    public static void navEdit(UiObject2 broadcast){
+        //more
+        broadcast.findObject(By.text("More")).click();
         //编辑视频标题
         clickByText("Edit the title");
         waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
@@ -45,7 +45,7 @@ public class BroadcastAction extends VP2{
     //直播-直播数目
     public static int getBroadcastsSize(){
         waitHasObject(MePage.BROADCAST_CONTENT,50000);
-        List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_CONTENT));
+        List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_VIDEO_THUMB));
         int size = lisCollect.size();
         logger.info("getBroadcastsSize:"+size);
         return  size;
@@ -59,22 +59,74 @@ public class BroadcastAction extends VP2{
     }
     //随机获取一个broadcasts对象的index
     public static int getRandomBroadcastsIndex(){
-        waitHasObject(MePage.BROADCAST_VIEW,10000);
-        UiObject2 listView = gDevice.findObject(By.res(MePage.BROADCAST_VIEW));
-        List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_CONTENT));
-        int size = lisCollect.size();
+        waitHasObject(MePage.BROADCASTS_LIST,10000);
+        UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
+        List<UiObject2> broadcasts = view.findObjects(By.res(MePage.BROADCAST_CONTENT));
+        int size = broadcasts.size();
         logger.info("getRandomBroadcastsIndex-size:"+size);
         Random random = new Random();
         int rd = random.nextInt(size);
         logger.info("size-"+size+"random:"+rd);
         return  rd==0?rd:rd-1;
     }
-    //随机获取一个broadcasts对象
-    public static UiObject2 getRandomBroadcasts(int index){
-        List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.BROADCAST_VIEW));
-        logger.info("getRandomBroadcasts:"+lisCollect.size());
-        UiObject2 broadcast = lisCollect.get(index);
+    //随机获取一个broadcasts对象的index
+    public static int getRandomBroadcastsWithNoRoomIndex(){
+        waitHasObject(MePage.BROADCASTS_LIST,10000);
+        int index = 0;
+        boolean exit = true;
+        int search = 1;
+
+        while (exit){
+            logger.info("================================");
+            UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
+            List<UiObject2> broadcasts = view.findObjects(By.clazz(android.widget.LinearLayout.class).depth(1));
+            logger.info("getRandomBroadcastsWithNoRoomIndex size is -"+broadcasts.size());
+            for (int j = 1; j <broadcasts.size() ; j++) {
+                UiObject2 bsObject = broadcasts.get(j);
+                List<UiObject2> lines= bsObject.findObjects(By.clazz(android.widget.LinearLayout.class).depth(1));
+                int size = lines.size();
+                UiObject2 nav =  lines.get(size-1);
+                List<UiObject2> texts = nav.findObjects(By.clazz(android.widget.TextView.class));
+                String cover = texts.get(2).getText();
+                if ("Cover".equals(cover)){
+                    exit=false;
+                    logger.info("find Cover");
+                    index=j;
+                    break;
+                }
+            }
+            if (exit){
+                view.swipe(Direction.UP,0.85f,2000);
+                waitTime(3);
+            }
+            search=search+1;
+            if (exit){
+                if (search==10){
+                    exit=false;
+                }
+            }
+            logger.info("================================");
+        }
+        logger.info("getRandomBroadcastsWithNoRoomIndex-"+index);
+        return  index;
+    }
+    //随机获取一个broadcasts对象的index
+    public static UiObject2 getRandomBroadcastsElement(int index){
+        waitHasObject(MePage.BROADCASTS_LIST,10000);
+        UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
+        List<UiObject2> broadcasts = view.findObjects(By.clazz(android.widget.LinearLayout.class).depth(1));
+        logger.info("getRandomBroadcastsElement:"+broadcasts.size());
+        UiObject2 broadcast = broadcasts.get(index);
         return  broadcast;
+    }
+    //随机获取一个broadcasts对象
+    public static void clickRandomBroadcastsVideo(int index){
+        waitHasObject(MePage.BROADCASTS_LIST,10000);
+        UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
+        List<UiObject2> broadcasts = view.findObjects(By.res(MePage.BROADCAST_CONTENT));
+        logger.info("getRandomBroadcasts:"+broadcasts.size());
+        UiObject2 broadcast = broadcasts.get(index);
+        broadcast.click();
     }
     //wait 加载完成 此时点赞图标变为绿色
     public  static void waitBroadcastLoading() throws UiObjectNotFoundException {
@@ -111,24 +163,18 @@ public class BroadcastAction extends VP2{
         logger.info(watcherBean.toString());
         return  watcherBean;
     }
-    public static BroadcastBean getChinaBean(int index) throws UiObjectNotFoundException {
-        UiObject hsv_view =  gDevice.findObject(new UiSelector().resourceId(MePage.BROADCAST_VIEW).index(index));
-        String title = hsv_view.getChild(new UiSelector().resourceId(MePage.BROADCAST_TITLE)).getText();
+    public static BroadcastBean getBroadcastBean(int index) throws UiObjectNotFoundException {
+        UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
+        List<UiObject2> broadcasts = view.findObjects(By.clazz(android.widget.LinearLayout.class).depth(1));
+        logger.info("getRandomBroadcastsElement:"+broadcasts.size());
+        UiObject2 broadcast = broadcasts.get(index);
+        UiObject2 texts = broadcast.findObject(By.res(MePage.BROADCAST_CONTENT));
+        List<UiObject2> objects = texts.findObject(By.clazz(android.widget.LinearLayout.class).depth(1)).
+                findObjects(By.clazz(android.widget.TextView.class));
         BroadcastBean bb = new BroadcastBean();
-        bb.setBroadcast_title(title);
-        return  bb;
-    }
-    public static BroadcastBean getBean(int index) throws UiObjectNotFoundException {
-        UiObject u =  gDevice.findObject(new UiSelector().resourceId(MePage.BROADCAST_VIEW).index(index));
-        String title = u.getChild(new UiSelector().resourceId(MePage.BROADCAST_TITLE)).getText();
-        String desc = u.getChild(new UiSelector().resourceId(MePage.BROADCAST_DESC)).getText();
-        String time = u.getChild(new UiSelector().resourceId(MePage.BROADCAST_TIME)).getText();
-        String like = u.getChild(new UiSelector().resourceId(MePage.BROADCAST_LIKE)).getText();
-        BroadcastBean bb = new BroadcastBean();
-        bb.setBroadcast_desc(desc);
-        bb.setBroadcast_like(like);
-        bb.setBroadcast_time(time);
-        bb.setBroadcast_title(title);
+        bb.setBroadcast_title(objects.get(0).getText());
+        bb.setBroadcast_time(objects.get(1).getText());
+        bb.setBroadcast_like(objects.get(2).getText());
         return  bb;
     }
     public void getPlayTime() throws UiObjectNotFoundException, IOException {

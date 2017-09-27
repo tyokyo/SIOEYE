@@ -89,7 +89,7 @@ public class FollowingCase extends VP2 {
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
             int index=BroadcastAction.getRandomBroadcastsIndex();
-            BroadcastAction.getRandomBroadcasts(index).click();
+            BroadcastAction.clickRandomBroadcastsVideo(index);
             BroadcastAction.waitBroadcastLoading();
             gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             //当前的评论数
@@ -126,7 +126,7 @@ public class FollowingCase extends VP2 {
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
             int index=BroadcastAction.getRandomBroadcastsIndex();
-            BroadcastAction.getRandomBroadcasts(index).click();
+            BroadcastAction.clickRandomBroadcastsVideo(index);
             BroadcastAction.waitBroadcastLoading();
             gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             //当前的评论数

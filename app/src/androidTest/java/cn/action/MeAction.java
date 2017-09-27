@@ -99,7 +99,7 @@ public class MeAction extends VP2{
         clickById(MePage.ID_MAIN_TAB_ME);
         clickBroadcast();
         waitTime(2);
-        gDevice.wait(Until.findObject(By.res(MePage.BROADCAST_VIEW)),40000);
+        gDevice.wait(Until.findObject(By.res(MePage.BROADCASTS_LIST)),40000);
         Spoon.screenshot("navToBroadcasts");
     }
     //Go to 关注
@@ -271,7 +271,7 @@ public class MeAction extends VP2{
         Point point = new Point();
         navToBroadcasts();
         int index=BroadcastAction.getRandomBroadcastsIndex();
-        BroadcastAction.getRandomBroadcasts(index).click();
+        BroadcastAction.clickRandomBroadcastsVideo(index);
         BroadcastAction.waitBroadcastLoading();
         UiObject zan = getUiObjectById(PlayPage.BROADCAST_VIEW_ZAN);
         int x = zan.getBounds().centerX();

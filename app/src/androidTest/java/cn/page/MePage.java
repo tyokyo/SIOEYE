@@ -4,6 +4,7 @@ package cn.page;
  * Created by elon on 2016/10/11.
  */
 public class MePage {
+
     //返回
     public static final String ID_IMG_BACK="cn.sioeye.sioeyeapp:id/img_back_logo";
     public static final String ID_WELCOME_PAGE_VP="cn.sioeye.sioeyeapp:id/welcome_page_vp";
@@ -77,11 +78,8 @@ public class MePage {
     //broadcasts
     public static final String BROAD_TIP_TEXT="cn.sioeye.sioeyeapp:id/tipText";
     public static final String BROADCASTS_LIST="cn.sioeye.sioeyeapp:id/recyclerview_broadcasts";
-    public static final String BROADCAST_VIEW="cn.sioeye.sioeyeapp:id/hsv_view";
+    public static final String BROADCAST_VIEW="cn.sioeye.sioeyeapp:id/swipeLayout";
     public static final String BROADCAST_TITLE="cn.sioeye.sioeyeapp:id/broadcast_title";
-    public static final String BROADCAST_DESC="cn.sioeye.sioeyeapp:id/broadcast_desc";
-    public static final String BROADCAST_TIME="cn.sioeye.sioeyeapp:id/broadcast_time";
-    public static final String BROADCAST_LIKE="cn.sioeye.sioeyeapp:id/broadcast_like";
     public static final String BROADCAST_CONTENT="cn.sioeye.sioeyeapp:id/llt_broadcast_content";
     //编辑视频标题
     public static final String BROADCAST_EDIT_TITLE="cn.sioeye.sioeyeapp:id/edit_broadcasts_title";
@@ -91,9 +89,13 @@ public class MePage {
     public static final String BROADCAST_EDIT_OK="cn.sioeye.sioeyeapp:id/tv_ok";
     public static final String BROADCAST_EDIT_DELETE_OK="cn.sioeye.sioeyeapp:id/positive";
     public static final String BROADCAST_EDIT_DELETE_CANCEL="cn.sioeye.sioeyeapp:id/tv_cancel";
+    //视频显示的封面
+    public static final String BROADCAST_VIDEO_THUMB="cn.sioeye.sioeyeapp:id/sdv_preview";
+    public static final String BROADCAST_VIDEO_MORE_OPTION_LIST="cn.sioeye.sioeyeapp:id/option_list";
 
-
-
+   //分享弹出框
+    public static final String BROADCAST_SHARE="cn.sioeye.sioeyeapp:id/rv_share";
+    public static final String BROADCAST_CANCEL="cn.sioeye.sioeyeapp:id/cancel";
     //modify title
     public static final String BROADCAST_VIEW_VIDEO_TITLE_MODIFY="cn.sioeye.sioeyeapp:id/content";
 
@@ -101,7 +103,7 @@ public class MePage {
     public static final String BROADCAST_VIEW_VIDEO_DELETE="cn.sioeye.sioeyeapp:id/delete_ok";
 
     //refresh ui
-    public static final String BROADCAST_VIEW_STATUS_IMAGE="cn.sioeye.sioeyeapp:id/status_image";
+    public static final String BROADCAST_VIEW_STATUS_IMAGE="cn.sioeye.sioeyeapp:id/view_status";
 
     //allow sioeye to access this devices location
     public static final String LOCATION_PERMISSION_DENY="com.android.packageinstaller:id/permission_deny_button";
