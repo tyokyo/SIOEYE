@@ -1,8 +1,6 @@
 package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
-import android.support.test.uiautomator.UiObject;
-import android.view.KeyEvent;
 
 import org.hamcrest.Asst;
 import org.junit.AfterClass;
@@ -19,9 +17,6 @@ import cn.page.Constant;
 import iris4G.action.AccountAction;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
-import iris4G.page.Iris4GPage;
-import iris4G.page.NavPage;
-import usa.page.Account;
 
 /**
  * Created by jiali.liu on 2016/12/10.

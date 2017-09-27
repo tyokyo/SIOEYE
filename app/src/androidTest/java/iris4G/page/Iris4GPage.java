@@ -49,6 +49,11 @@ public class Iris4GPage {
             "480@25FPS",
             "480@30FPS"
             };
+    public static String[] live_quality={
+            "480@25FPS(Bitrate0.6-1.5Mbps)",
+            "480@25FPS(Bitrate0.6-4Mbps)",
+            "720@25FPS(Bitrate1.3-6Mbps)"
+        };
     public static String[] imsge_size ={
             "4M(16:9)",
             "3M(4:3)",

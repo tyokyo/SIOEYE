@@ -334,6 +334,9 @@ public class CameraAction extends VP2 {
         //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
         CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
+        waitTime(1);
         Iris4GAction.ScrollViewByText("Video Angle");
         clickByText("Video Angle");
         clickByText(angle);
@@ -499,6 +502,9 @@ public class CameraAction extends VP2 {
     public static void navToLocation() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
+        waitTime(1);
         Iris4GAction.ScrollViewByText("Live&Location");
     }
     public static void navToAltimeter() throws Exception {

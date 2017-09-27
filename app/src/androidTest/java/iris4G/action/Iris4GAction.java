@@ -459,6 +459,8 @@ public class Iris4GAction extends VP2 {
     public static void clickLiveAndSave() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
         Iris4GAction.ScrollViewByText("Live&Save");
         CameraAction.openCompoundButton("Live&Save");
         waitUntilFindText("OK", 5000);
