@@ -359,6 +359,9 @@ public class CurrentTestCase extends VP2 {
         makeScreenOn();
         CameraAction.cameraSetting();
         waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
+        waitTime(1);
         Iris4GAction.ScrollViewByText("Video Angle");
         clickByText("Video Angle");
         waitTime(2);
@@ -372,6 +375,9 @@ public class CurrentTestCase extends VP2 {
     private void clickLiveMute() throws Exception {
         makeScreenOn();
         CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
         waitTime(1);
         Iris4GAction.ScrollViewByText("Live Mute");
         CameraAction.openCompoundButton("Live Mute");
@@ -388,6 +394,9 @@ public class CurrentTestCase extends VP2 {
     private void changeUpDownTo(String UpDown) throws Exception {
         makeScreenOn();
         CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
         waitTime(1);
         Iris4GAction.ScrollViewByText("Up/Down");
         clickByText("Up/Down");
@@ -439,6 +448,9 @@ public class CurrentTestCase extends VP2 {
     private void clickSwitch(String switchName) throws Exception {
         makeScreenOn();
         clickById(Iris4GPage.camera_setting_shortcut_id);
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
         waitTime(1);
         Iris4GAction.ScrollViewByText(switchName);
         CameraAction.openCompoundButton(switchName);
@@ -512,9 +524,9 @@ public class CurrentTestCase extends VP2 {
 
     @Test
     public void testForCurrent() throws Exception {
-        String liveQuality480SD="480@25FPS(SD)",
-                liveQuality480HD="480@25FPS(HD)",
-                liveQuality720HD="720@25FPS(HD)";
+        String liveQuality480SD="480@25FPS(Bitrate0.6-1.5Mbps)",
+                liveQuality480HD="480@25FPS(Bitrate0.6-4Mbps)",
+                liveQuality720HD="720@25FPS(Bitrate1.3-6Mbps)";
         String videoQuality1080P25="1080@25FPS",
                 videoQuality720P60="720@60FPS",
                 videoQuality720P25="720@25FPS",
