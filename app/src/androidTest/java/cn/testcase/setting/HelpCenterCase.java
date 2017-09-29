@@ -17,6 +17,7 @@ import ckt.annotation.PerformanceTest;
 import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
+import cn.action.MeAction;
 import cn.action.SettingAction;
 import cn.page.App;
 import cn.page.MePage;
@@ -67,10 +68,22 @@ public class HelpCenterCase extends VP2 {
         boolean feedback_status=getObjectById(MePage.HELP_EMULA).exists();
         Asst.assertEquals("back logo success",true,feedback_status);
     }
+    //用户内容管理条例
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testUserManagement() throws UiObjectNotFoundException, IOException {
+        SettingAction.navToHP_UserManagement();
+        clickById(MePage.HELP_BACK);
+        waitUntilFind(MePage.HELP_MANAGEMENT,10000);
+        boolean status=getObjectById(MePage.HELP_MANAGEMENT).exists();
+        Asst.assertEquals("back logo success",true,status);
+    }
     @Test
     @SanityTest
     @PerformanceTest
     public void testNeedHelp() throws UiObjectNotFoundException, IOException {
+        MeAction.navToHelp();
         SettingAction.navToHP_Help();
         gDevice.wait(Until.findObject(By.text("www.sioeye.cn")),20000);
         Spoon.screenshot("HELP_HELP");
@@ -79,14 +92,13 @@ public class HelpCenterCase extends VP2 {
             clickById("android:id/button1");
         }
         waitTime(3);
-        //String webAddress=getObjectById(MePage.HELP_HELP_NAV_WEB).getText();
         Spoon.screenshot("Support_sioEye");
-        //Asst.assertEquals("back logo success",true,text_exists("Support - Sioeye 喜爱直播"));
     }
     @Test
     @SanityTest
     @PerformanceTest
     public void testNeedHelpBack() throws UiObjectNotFoundException, IOException {
+        MeAction.navToHelp();
         SettingAction.navToHP_Help();
         gDevice.wait(Until.findObject(By.text("www.sioeye.cn")),20000);
         Spoon.screenshot("HELP_HELP");
