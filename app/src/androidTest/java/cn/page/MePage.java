@@ -170,7 +170,7 @@ public class MePage {
     public static final String HELP_POLICY="cn.sioeye.sioeyeapp:id/privacy_policy";
     public static final String HELP_VERSION_CHECK="cn.sioeye.sioeyeapp:id/version_check";
     public static final String HELP_EMULA="cn.sioeye.sioeyeapp:id/eula";
-
+    public static final String HELP_MANAGEMENT="cn.sioeye.sioeyeapp:id/management";
     public static final String HELP_HELP="cn.sioeye.sioeyeapp:id/help";
     public static final String HELP_HELP_NAV_WEB="com.android.chrome:id/url_bar";
 
