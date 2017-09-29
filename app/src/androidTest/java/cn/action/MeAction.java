@@ -29,9 +29,9 @@ public class MeAction extends VP2{
         //启动被测App
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         SettingAction.navToAccountAndPrivacy();
-        String email=getUiObject2ByText("Email").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
+        String email=getUiObject2ByText("Email").getParent().getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
         infoBean.setEmail(email);
-        String eyeId=getUiObject2ByText("Sioeye ID").getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
+        String eyeId=getUiObject2ByText("Sioeye ID").getParent().getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
         infoBean.setId(eyeId);
     }
     public static void clickBroadcast() throws UiObjectNotFoundException {
@@ -88,9 +88,7 @@ public class MeAction extends VP2{
         InfoBean infoBean=new InfoBean();
         infoBean.setNick_name(getNkName());
         infoBean.setSex(getSex());
-        //infoBean.setEmail(getEmailAddress());
         infoBean.setLocation(getLocation());
-        //infoBean.setId(getSioEyeID());
         infoBean.setAbout_me(getAboutMe());
         return  infoBean;
     }
@@ -116,11 +114,9 @@ public class MeAction extends VP2{
         gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),40000);
         Spoon.screenshot("navToFans");
     }
-
     //Me-> 直播配置
     public static void navToLiveConfiguration(){
         clickById(MePage.ID_MAIN_TAB_ME);
-        //clickById(MePage.LIVE_CONFIGURATION);
         clickByText("Live Configuration");
         Spoon.screenshot("navToLiveConfiguration");
     }
@@ -147,14 +143,12 @@ public class MeAction extends VP2{
     //Me-> 我的二维码
     public static void navToQrCode() throws UiObjectNotFoundException {
         MainAction.clickMe();
-        //clickById(MePage.LIVE_CONFIGURATION);
         clickByText("QR Code");
         Spoon.screenshot("navToQrCode");
     }
     //Me-> 消息
     public static void navToNotifications() throws UiObjectNotFoundException {
         MainAction.clickMe();
-        //clickById(MePage.NOTIFICATIONS);
         clickByText("Notifications");
         gDevice.wait(Until.gone(By.res(MePage.IS_LOCATING)),20000);
         Spoon.screenshot("navToNotifications");
@@ -162,22 +156,26 @@ public class MeAction extends VP2{
     //Me-> 设置
     public static void navToSettings() throws UiObjectNotFoundException {
         MainAction.clickMe();
-        //clickById(MePage.SETTINGS_USER_MAIN);
         clickByText("Settings");
         Spoon.screenshot("navToSettings");
     }
     //Me->相机
     public static void navToCamera() throws UiObjectNotFoundException {
         MainAction.clickMe();
-        //clickById(MePage.SETTINGS_USER_MAIN);
         clickByText("Camera");
         Spoon.screenshot("Camera");
     }
-    //Go to 帮助中心
-    public static void navToFeedback() throws UiObjectNotFoundException {
+    //Me->收藏
+    public static void navToCollection() throws UiObjectNotFoundException {
         MainAction.clickMe();
-        clickById(MePage.SETTINGS_USER_MAIN);
-        Spoon.screenshot("navToFeedback");
+        clickByText("Collection");
+        Spoon.screenshot("Collection");
+    }
+    //Go to 帮助
+    public static void navToHelp() throws UiObjectNotFoundException {
+        MainAction.clickMe();
+        clickByText("Help");
+        Spoon.screenshot("Help");
     }
     //编辑 -> 昵称
     public static InfoBean navToNickName() throws UiObjectNotFoundException {
