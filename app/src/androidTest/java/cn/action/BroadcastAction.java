@@ -8,6 +8,8 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.widget.FrameLayout;
 
+import com.squareup.spoon.Spoon;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -31,16 +33,15 @@ public class BroadcastAction extends VP2{
         clickByText("Edit the title");
         waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
     }
-    //根据title 删除视频
-    public static void deleteBroadcast(String title) throws UiObjectNotFoundException {
-        scrollAndGetUIObject(title);
-        UiObject broadcast=getUiObjectByText(title);
-        broadcast.swipeLeft(20);
-        waitUntilFind(MePage.BROADCAST_DELETE,10000);
-        clickById(MePage.BROADCAST_DELETE);
+    // 删除视频
+    public static void deleteBroadcast(UiObject2 object) throws UiObjectNotFoundException {
+        UiObject2 view=BroadcastAction.getVideoAction(object);
+        view.getChildren().get(3).click();
+        waitUntilFind(MePage.BROADCAST_VIDEO_MORE_OPTION_LIST,3000);
         clickByText("Delete");
+        Spoon.screenshot("Delete");
         clickById(MePage.BROADCAST_EDIT_DELETE_OK);
-        waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
+       // waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
     }
     //直播-直播数目
     public static int getBroadcastsSize(){
@@ -69,7 +70,7 @@ public class BroadcastAction extends VP2{
         logger.info("size-"+size+"random:"+rd);
         return  rd==0?rd:rd-1;
     }
-    //随机获取一个broadcasts对象的index
+    //随机获取一个普通直播broadcasts对象的index
     public static int getRandomBroadcastsWithNoRoomIndex(){
         waitHasObject(MePage.BROADCASTS_LIST,10000);
         int index = 0;
@@ -110,7 +111,7 @@ public class BroadcastAction extends VP2{
         logger.info("getRandomBroadcastsWithNoRoomIndex-"+index);
         return  index;
     }
-    //随机获取一个broadcasts对象的index
+    //随机获取一个broadcasts对象
     public static UiObject2 getRandomBroadcastsElement(int index){
         waitHasObject(MePage.BROADCASTS_LIST,10000);
         UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
@@ -119,7 +120,7 @@ public class BroadcastAction extends VP2{
         UiObject2 broadcast = broadcasts.get(index);
         return  broadcast;
     }
-    //随机获取一个broadcasts对象
+    //随机获取一个broadcasts对象并点击
     public static void clickRandomBroadcastsVideo(int index){
         waitHasObject(MePage.BROADCASTS_LIST,10000);
         UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
@@ -130,22 +131,18 @@ public class BroadcastAction extends VP2{
     }
     //wait 加载完成 此时点赞图标变为绿色
     public  static void waitBroadcastLoading() throws UiObjectNotFoundException {
-        waitUntilFind(PlayPage.BROADCAST_VIEW_TIPTEXT,20000);
-        waitUntilFind(PlayPage.BROADCAST_VIEW_ZAN,10000);
-        for (int i = 0; i <20 ; i++) {
-            if (getObjectById(PlayPage.BROADCAST_VIEW_ZAN).isEnabled()==true&&
-                    getObjectById(PlayPage.BROADCAST_VIEW_TIPTEXT).isEnabled()==true&&
-                    getUiObjectByText("Add a comment").exists()){
+        waitUntilFind(PlayPage.BROADCAST_VIEW_TIPTEXT, 20000);
+        waitUntilFind(PlayPage.BROADCAST_VIEW_ZAN, 10000);
+        for (int i = 0; i < 20; i++) {
+            if (getObjectById(PlayPage.BROADCAST_VIEW_ZAN).isEnabled() == true &&
+                    getObjectById(PlayPage.BROADCAST_VIEW_TIPTEXT).isEnabled() == true &&
+                    getUiObjectByText("Add a comment").exists()) {
                 logger.info("聊天室连接成功-说点什么吧");
                 break;
-            } else{
+            } else {
                 waitTime(4);
             }
         }
-        //视频加载失败
-//        if (id_exists(MePage.LOAD_VIDEO_ERROR)){
-//            Asst.fail("视频加载失败");
-//        }
     }
     //视频回放页面的播放数-点赞数-评论数
     public static WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {
@@ -200,5 +197,51 @@ public class BroadcastAction extends VP2{
         }
         makeToast(startTime+"|"+endTime,10);
 
+    }
+    //获取直播列表中视频的可操作按钮
+    public static UiObject2 getVideoAction(UiObject2 object){
+       UiObject2 view= object.getChildren().get(2);
+        return view;
+    }
+    //随机获取一个直播间broadcasts对象的index
+    public static int getRandomBroadcastsRoomIndex(){
+        waitHasObject(MePage.BROADCASTS_LIST,10000);
+        int index = 0;
+        boolean exit = true;
+        int search = 1;
+
+        while (exit){
+            logger.info("================================");
+            UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
+            List<UiObject2> broadcasts = view.findObjects(By.clazz(android.widget.LinearLayout.class).depth(1));
+            logger.info("getRandomBroadcastsWithNoRoomIndex size is -"+broadcasts.size());
+            for (int j = 1; j <broadcasts.size() ; j++) {
+                UiObject2 bsObject = broadcasts.get(j);
+                List<UiObject2> lines= bsObject.findObjects(By.clazz(android.widget.LinearLayout.class).depth(1));
+                int size = lines.size();
+                UiObject2 nav =  lines.get(size-1);
+                List<UiObject2> texts = nav.findObjects(By.clazz(android.widget.TextView.class));
+                String str = texts.get(2).getText();
+                if ("Edit".equals(str)){
+                    exit=false;
+                    logger.info("find Edit");
+                    index=j;
+                    break;
+                }
+            }
+            if (exit){
+                view.swipe(Direction.UP,0.85f,2000);
+                waitTime(3);
+            }
+            search=search+1;
+            if (exit){
+                if (search==10){
+                    exit=false;
+                }
+            }
+            logger.info("================================");
+        }
+        logger.info("getRandomBroadcastsWithNoRoomIndex-"+index);
+        return  index;
     }
 }
