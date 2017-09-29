@@ -30,11 +30,11 @@ public class SettingAction extends VP2 {
         clickByText("Check for updates");
         Spoon.screenshot("checkUpdate");
     }
-    //帮助中心
-    public static void navToHelpCenter() throws UiObjectNotFoundException {
+    //用户协议
+    public static void navToAgreement() throws UiObjectNotFoundException {
         MeAction.navToSettings();
-        clickByText("Help");
-        Spoon.screenshot("HelpCenter");
+        clickByText("User Agreement");
+        Spoon.screenshot("Agreement");
     }
     //设置
     public static void navToSetting() throws UiObjectNotFoundException {
@@ -53,27 +53,33 @@ public class SettingAction extends VP2 {
         clickByText("About Sioeye");
         Spoon.screenshot("AboutSioeye");
     }
-    //帮助中心->服务条款
+    //用户协议->服务条款
     public static void navToHP_TermService() throws UiObjectNotFoundException {
-        navToHelpCenter();
+        navToAgreement();
         clickById(MePage.HELP_SERVICE);
         Spoon.screenshot("HELP_SERVICE");
     }
-    //帮助中心->隐私策略
+    //用户协议->隐私策略
     public static void navToHP_Privacy() throws UiObjectNotFoundException {
-        navToHelpCenter();
+        navToAgreement();
         clickById(MePage.HELP_POLICY);
         Spoon.screenshot("HELP_POLICY");
     }
-    //帮助中心->最终用户协议
+    //用户协议->最终用户协议
     public static void navToHP_UserProtocol() throws UiObjectNotFoundException {
-        navToHelpCenter();
+        navToAgreement();
         clickById(MePage.HELP_EMULA);
         Spoon.screenshot("HELP_EMULA");
     }
-    //帮助中心->帮助
+    //用户协议->用户内容管理条例
+    public static void navToHP_UserManagement() throws UiObjectNotFoundException {
+        navToAgreement();
+        clickById(MePage.HELP_MANAGEMENT);
+        Spoon.screenshot("HELP_MANAGEMENT");
+    }
+
+    //帮助->常见问题
     public static void navToHP_Help() throws UiObjectNotFoundException {
-        navToHelpCenter();
         clickById(MePage.HELP_HELP);
         Spoon.screenshot("HELP_HELP");
     }
