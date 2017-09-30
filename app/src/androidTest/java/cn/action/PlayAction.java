@@ -153,17 +153,9 @@ public class PlayAction extends VP2 {
     public static void pauseVideo(){
         clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
     }
-    //弹出UI界面举报好友视频
-    public static void toReportVideo() throws UiObjectNotFoundException{
-        PlayAction.clickPlayView();
-        PlayAction.pauseVideo();
-        if(id_exists(PlayPage.REPORT_VIDEO)){
-           reportVideo();
-        }
-    }
+
     //点击举报
     public static void reportVideo() throws UiObjectNotFoundException{
-            clickById(PlayPage.REPORT_VIDEO);
             waitUntilFind(PlayPage.REPORT_LIST,5000);
             List<UiObject2> textViews =getObject2ById(PlayPage.REPORT_LIST).findObjects(By.clazz(android.widget.TextView.class));
             int size = textViews.size();
