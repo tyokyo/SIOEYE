@@ -83,6 +83,11 @@ public class SettingAction extends VP2 {
         clickById(MePage.HELP_HELP);
         Spoon.screenshot("HELP_HELP");
     }
+    //帮助->使用指南
+    public static void navToUserGuide() throws UiObjectNotFoundException {
+        clickById(MePage.USER_GUIDE);
+        Spoon.screenshot("USER_GUIDE");
+    }
 
 
 }
