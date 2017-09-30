@@ -34,6 +34,8 @@ public class PlayPage {
     public static final String BROADCAST_VIEW_VIDEO_END_TIME="cn.sioeye.sioeyeapp:id/app_video_endTime";
     //举报
     public static final String REPORT_VIDEO="cn.sioeye.sioeyeapp:id/iv_more";
+    //举报弹出框标题
+    public static final String REPORT_TITLE="cn.sioeye.sioeyeapp:id/dialog_title";
     //举报列表
     public static final String REPORT_LIST="cn.sioeye.sioeyeapp:id/list_view";
     //确认举报
@@ -42,6 +44,8 @@ public class PlayPage {
     public static final String REPORT_THANKS="cn.sioeye.sioeyeapp:id/message";
     //举报成功后确认
     public static final String REPORT_THANKS_OK="cn.sioeye.sioeyeapp:id/neutral";
+    //收藏按钮
+    public static final String COLLECTION="cn.sioeye.sioeyeapp:id/btn_collect";
     //全屏播放按钮
     public static final String BROADCAST_VIEW_VIDEO_FULL_SCREEN="cn.sioeye.sioeyeapp:id/app_video_fullscreen";
     //简介界面
