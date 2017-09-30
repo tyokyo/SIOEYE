@@ -113,4 +113,16 @@ public class HelpCenterCase extends VP2 {
         boolean status=getObjectById(MePage.HELP_HELP).exists();
         Asst.assertEquals("back logo success",true,status);
     }
+    /***
+     * 进入使用指南
+     * zyj by 2017.09.30
+     */
+    @Test
+    @PerformanceTest
+    public void testUserGuide() throws UiObjectNotFoundException {
+        MeAction.navToHelp();
+        SettingAction.navToUserGuide();
+        String str="sioeyetraining";
+        Asst.assertEquals("使用指南",str,getTex(MePage.WATCH_USER_MINI_NAME));
+    }
 }
