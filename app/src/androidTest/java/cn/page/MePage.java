@@ -173,7 +173,8 @@ public class MePage {
     public static final String HELP_MANAGEMENT="cn.sioeye.sioeyeapp:id/management";
     public static final String HELP_HELP="cn.sioeye.sioeyeapp:id/help";
     public static final String HELP_HELP_NAV_WEB="com.android.chrome:id/url_bar";
-
+   //使用指南
+    public static final String USER_GUIDE="cn.sioeye.sioeyeapp:id/user_guide";
 
     public static final String HELP_ABOUT="cn.sioeye.sioeyeapp:id/about";
     public static final String HELP_ABOUT_VERSION="cn.sioeye.sioeyeapp:id/version";
@@ -305,5 +306,7 @@ public class MePage {
     public static final String NOTIFICATION_WATCH_VIDEO = "cn.sioeye.sioeyeapp:id/llt_video_info";
     public static final String NOTIFICATION_DETAIL = "cn.sioeye.sioeyeapp:id/tv_detail";
     public static final String NOTIFICATION_COMMENT = "cn.sioeye.sioeyeapp:id/expandable_text";
+    //收藏
+    public static final String COLLECION_EMPTY="cn.sioeye.sioeyeapp:id/status_text";
 
 }
