@@ -38,7 +38,7 @@ public class VideoAngleCase extends VP2{
     @Test
     public void testLiveStreamSuperWide() throws Exception {
         //LiveStream - 修改视频角度Wide
-        CameraAction.configVideoAngle(NavPage.navConfig_LiveStream,NavPage.angleSuperWide);
+        CameraAction.configLiveAngle(NavPage.navConfig_LiveStream,NavPage.angleSuperWide);
         //切换到Burst
         CameraAction.navConfig(NavPage.navConfig_Burst);
         //切换到Lapse
@@ -56,11 +56,11 @@ public class VideoAngleCase extends VP2{
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
         //验证LiveStream 的视频角度
-        CameraAction.checkVideoAngle(NavPage.navConfig_LiveStream,NavPage.angleSuperWide);
+        CameraAction.checkLiveAngle(NavPage.navConfig_LiveStream,NavPage.angleSuperWide);
     }
     @Test
     public void testLiveStreamWide() throws Exception {
-        CameraAction.configVideoAngle(NavPage.navConfig_LiveStream,NavPage.angleWide);
+        CameraAction.configLiveAngle(NavPage.navConfig_LiveStream,NavPage.angleWide);
 
         CameraAction.navConfig(NavPage.navConfig_Burst);
         CameraAction.navConfig(NavPage.navConfig_Lapse);
@@ -71,11 +71,11 @@ public class VideoAngleCase extends VP2{
 
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
-        CameraAction.checkVideoAngle(NavPage.navConfig_LiveStream,NavPage.angleWide);
+        CameraAction.checkLiveAngle(NavPage.navConfig_LiveStream,NavPage.angleWide);
     }
     @Test
-    public void testLiveStreamSuperMedium() throws Exception {
-        CameraAction.configVideoAngle(NavPage.navConfig_LiveStream,NavPage.angleMedium);
+    public void testLiveStreamMedium() throws Exception {
+        CameraAction.configLiveAngle(NavPage.navConfig_LiveStream,NavPage.angleMedium);
 
         CameraAction.navConfig(NavPage.navConfig_Burst);
         CameraAction.navConfig(NavPage.navConfig_Lapse);
@@ -86,7 +86,7 @@ public class VideoAngleCase extends VP2{
 
         Iris4GAction.stopCamera();
         Iris4GAction.startCamera();
-        CameraAction.checkVideoAngle(NavPage.navConfig_LiveStream,NavPage.angleMedium);
+        CameraAction.checkLiveAngle(NavPage.navConfig_LiveStream,NavPage.angleMedium);
     }
 
     @Test

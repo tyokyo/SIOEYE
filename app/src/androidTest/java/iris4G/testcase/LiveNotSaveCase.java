@@ -55,7 +55,7 @@ public class LiveNotSaveCase extends VP2 {
         //String quality = Iris4GPage.video_quality[0];
         //String angle =Iris4GPage.video_Angle[0];
         CameraAction.configVideoQuality(NavPage.navConfig_Video,quality);
-        CameraAction.configVideoAngle(NavPage.navConfig_LiveStream,angle);
+        CameraAction.configLiveAngle(NavPage.navConfig_LiveStream,angle);
         CameraAction.navConfig(NavPage.navConfig_LiveStream);
         waitTime(2);
         //验证设置的显示,当前处于直播模式，左顶部显示直播图标

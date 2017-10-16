@@ -25,9 +25,9 @@ public class NavPage{
     public static  final String quality480_30        =Iris4GPage.video_quality[7];
 
     //live
-    public static final String live_quality480SD         =Iris4GPage.video_quality[0];
-    public static final String live_quality480HD         =Iris4GPage.video_quality[1];
-    public static final String live_quality720HD        =Iris4GPage.video_quality[2];
+    public static final String live_qualityUserDefined   =Iris4GPage.live_quality[2];
+    public static final String live_quality480         =Iris4GPage.live_quality[1];
+    public static final String live_quality720         =Iris4GPage.live_quality[0];
 
 
     public static final String lapse720_30         =Iris4GPage.lapse_quality[0];

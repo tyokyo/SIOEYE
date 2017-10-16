@@ -327,10 +327,28 @@ public class CameraAction extends VP2 {
     }
 
     /**
-     * Angle设置
+     *video,慢动作和lapse的 Angle设置
      * {"Super Wide","Wide","Medium"};
      */
     public static void configVideoAngle(String navConfig,String angle) throws Exception {
+        //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+        CameraAction.navConfig(navConfig);
+        CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("Video Angle");
+        clickByText("Video Angle");
+        clickByText(angle);
+        logger.info("Video Angle set to :" + angle);
+        Spoon.screenshot("configVideoAngle",angle);
+        logger.info(navConfig+" -configVideoAngle - "+angle);
+        gDevice.pressBack();
+    }
+
+    /**
+     *  live模式下的 Angle设置
+     * {"Super Wide","Wide","Medium"};
+     */
+    public static void configLiveAngle(String navConfig,String angle) throws Exception {
         //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
         CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
@@ -345,6 +363,11 @@ public class CameraAction extends VP2 {
         logger.info(navConfig+" -configVideoAngle - "+angle);
         gDevice.pressBack();
     }
+
+
+
+
+
     //某一个选项处于选中状态-  如 视频角度 - Wide
     public static boolean hasObjectSelected(String text) throws Exception {
         Iris4GAction.ScrollViewByText(text);
@@ -368,6 +391,36 @@ public class CameraAction extends VP2 {
         gDevice.pressBack();
         gDevice.pressBack();
     }
+
+    /**
+     * 检查live的视场角设置
+     * @param navConfig
+     * @param angle
+     * @throws Exception
+     */
+    public static void checkLiveAngle(String navConfig,String angle) throws Exception {
+        //等待加载完成
+        gDevice.wait(Until.findObject(By.pkg("com.hicam")),20000);
+        //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+        CameraAction.navConfig(navConfig);
+        CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
+        Iris4GAction.ScrollViewByText("Video Angle");
+        String active_angle = Iris4GAction.getRightValue("Video Angle");
+        Spoon.screenshot("currentVideoAngle",angle);
+        Asst.assertEquals("VideoAngle",angle,active_angle);
+        clickByText("Video Angle");
+        if (!hasObjectSelected(angle)){
+            Asst.fail(angle+" not selected");
+        }
+        gDevice.pressBack();
+        gDevice.pressBack();
+    }
+
+
+
     public static void checkLapseTime(String navConfig,String Time) throws Exception {
         //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
         CameraAction.navConfig(navConfig);
@@ -543,6 +596,9 @@ public class CameraAction extends VP2 {
      */
     public static void configLiveAngle(String angle) throws Exception {
         CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
         Iris4GAction.ScrollViewByText("Video Angle");
         clickByText("Video Angle");
         clickByText(angle);
