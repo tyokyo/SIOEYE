@@ -350,9 +350,9 @@ public class CurrentTestCase extends VP2 {
         Iris4GAction.ScrollViewByText(videoQuality);
         clickByText(videoQuality);
         waitTime(2);
-        gDevice.pressBack();
         Spoon.screenshot("configLiveVideoQuality",videoQuality);
         logger.info(" -configLiveVideoQuality - "+videoQuality);
+        gDevice.pressBack();
         waitTime(2);
     }
     private void configVideoAngle(String VideoAngle) throws Exception {
@@ -459,6 +459,17 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(2);
     }
+    private void clickSwitchForVideo(String switchName) throws Exception {
+        makeScreenOn();
+        clickById(Iris4GPage.camera_setting_shortcut_id);
+        waitTime(1);
+        Iris4GAction.ScrollViewByText(switchName);
+        CameraAction.openCompoundButton(switchName);
+        logger.info("已点击" + switchName);
+        waitTime(2);
+        gDevice.pressBack();
+        waitTime(2);
+    }
     private void liveOfBiggerZoom() throws Exception {
         makeScreenOn();
         Iris4GAction.cameraKey();
@@ -524,9 +535,9 @@ public class CurrentTestCase extends VP2 {
 
     @Test
     public void testForCurrent() throws Exception {
-        String liveQuality480SD="480@25FPS(Bitrate0.6-1.5Mbps)",
-                liveQuality480HD="480@25FPS(Bitrate0.6-4Mbps)",
-                liveQuality720HD="720@25FPS(Bitrate1.3-6Mbps)";
+        String liveQuality480="480@25FPS(Bitrate0.3-4Mbps)",
+                liveQuality720HD="720@25FPS(Bitrate1.3-6Mbps)",
+                liveQualityUserDefined="480@25FPS(Bitrate0.6-4Mbps)";
         String videoQuality1080P25="1080@25FPS",
                 videoQuality720P60="720@60FPS",
                 videoQuality720P25="720@25FPS",
@@ -613,13 +624,12 @@ public class CurrentTestCase extends VP2 {
             CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
             waitTime(2);
             configVideoQuality(videoQuality720P25);
-            waitTime(testTime);
+            waitTime(testTime+20);
             //录播
-            waitTime(10);
-            clickSwitch(switchName[2]);//开启录播
+            clickSwitchForVideo(switchName[2]);//开启录播
             p2pScreenOn();
             p2pScreenOff();
-            clickSwitch(switchName[2]);//关闭录播
+            clickSwitchForVideo(switchName[2]);//关闭录播
             //主屏幕亮屏待机 6分钟
             gDevice.pressBack();
             gDevice.pressBack();
@@ -631,31 +641,31 @@ public class CurrentTestCase extends VP2 {
             launchCamera();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
-            configVideoQuality(liveQuality480HD);
-            live2ScreenOn();
-            live2ScreenOff();
+//            configVideoQuality(liveQuality480HD);
+//            live2ScreenOn();
+//            live2ScreenOff();
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
             live2ScreenOff();
             //4G 保存直播
             Iris4GAction.clickLiveAndSave();//开启直播保存
             waitTime(2);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
-            configVideoQuality(liveQuality480HD);
-            live2ScreenOn();
-            live2ScreenOff();
+//            configVideoQuality(liveQuality480HD);
+//            live2ScreenOn();
+//            live2ScreenOff();
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
             live2ScreenOff();
             Iris4GAction.clickLiveAndSave();//关闭直播保存
             waitTime(1);
             //高度计
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             waitTime(2);
             clickSwitch(switchName[0]);//开启高度计
             live2ScreenOff();
@@ -696,7 +706,7 @@ public class CurrentTestCase extends VP2 {
             launchCamera();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
             //3G直播保存
@@ -712,19 +722,19 @@ public class CurrentTestCase extends VP2 {
             launchCamera();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
-            configVideoQuality(liveQuality480HD);
-            live2ScreenOn();
-            live2ScreenOff();
+//            configVideoQuality(liveQuality480HD);
+//            live2ScreenOn();
+//            live2ScreenOff();
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
             live2ScreenOff();
             //WIFI保存
             Iris4GAction.clickLiveAndSave();//开启直播保存
             waitTime(1);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
             Iris4GAction.clickLiveAndSave();//关闭直播保存
