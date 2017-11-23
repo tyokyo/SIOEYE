@@ -73,11 +73,11 @@ public class AccountAction extends VP2{
 
         MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
-            waitUntilFindText("Log in",10000);
-            if (text_exists("Log in")){
+            waitUntilFindText("Login",10000);
+            if (text_exists("Login")){
                 logger.info("===============================================================");
             }
-            clickByText("Log in");
+            clickByText("Login");
             /*
             如果手机sdcard存在config.properties
             并且内容为
@@ -126,7 +126,11 @@ public class AccountAction extends VP2{
     public static void navToLogin() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
-        clickByText("Log in");
+        clickByText("Login");
+    }
+    //点击验证码登录
+    public static void navToSMScode()throws UiObjectNotFoundException{
+        clickByText("SMS Code");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByMobile() throws UiObjectNotFoundException {
