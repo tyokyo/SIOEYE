@@ -6,12 +6,14 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import ckt.annotation.PerformanceTest;
@@ -59,15 +61,15 @@ public class LoginCase extends VP2 {
         waitTime(2);
         if (getUiObjectByText("Email, phone number, Sioeye ID").exists()){
             logger.info("输入手机号或者邮箱存在");
-            if (getUiObjectByText("Log in").exists()){
+            if (getUiObjectByText("Login").exists()){
                 logger.info("Login Exist");
                 if (getUiObjectByText("Forgot your password?").exists()){
                     logger.info("Forgot password Exist");
                     clickByClass("android.widget.ImageView", 0);
                     //点击返回键；检查返回键功能是否正常
-                    if (getUiObjectByText("Log in").exists()) {
+                    if (getUiObjectByText("Login").exists()) {
                         logger.info("back icon is ok");
-                        clickByText("Log in");
+                        clickByText("Login");
                     } else {
                         Spoon.screenshot("LoginInterface", "返回键无功能");
                         Assert.fail("Back icon can't back");}
@@ -94,7 +96,7 @@ public class LoginCase extends VP2 {
     public void testLoginByLoseUseNameAndPassword() throws UiObjectNotFoundException {
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
         AccountAction.justLogIn("", "");
-        if (!getUiObjectByText("Log in").exists()) {
+        if (!getUiObjectByText("Login").exists()) {
             Assert.fail("无账号和密码点击登陆后页面变化");
         }
     }
@@ -110,7 +112,7 @@ public class LoginCase extends VP2 {
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
         String userName = Constant.getUserName("email");
         AccountAction.justLogIn(userName, "");
-        if (!getUiObjectByText("Log in").exists()) {
+        if (!getUiObjectByText("Login").exists()) {
             Assert.fail("无密码点击登陆后页面变化");
         }
     }
@@ -123,7 +125,7 @@ public class LoginCase extends VP2 {
         clearText(AccountPage.LOGIN_ET_INPUT_USERNAME);
         String userPassword = Constant.getUserName("email_password");
         AccountAction.justLogIn("",userPassword);
-        if (!getUiObjectByText("Log in").exists()){
+        if (!getUiObjectByText("Login").exists()){
             Assert.fail("无账号点击登陆后页面变化");
         }
     }
@@ -173,7 +175,7 @@ public class LoginCase extends VP2 {
         String userPassword=Constant.randomStringGenerator(20);
         AccountAction.justLogIn(userName,userPassword);
         waitTime(2);
-        if (!getUiObjectByText("Log in").exists()) {
+        if (!getUiObjectByText("Login").exists()) {
             Assert.fail("输入不存在的邮箱账号和密码点击登陆后页面有变化");}
     }
     @Test
@@ -189,7 +191,7 @@ public class LoginCase extends VP2 {
         String userPassword=Constant.randomStringGenerator(20);
         AccountAction.justLogIn(userName,userPassword);
         waitTime(2);
-        if (!getUiObjectByText("Log in").exists()) {
+        if (!getUiObjectByText("Login").exists()) {
             Assert.fail("使用不存在的电话号码账号和密码点击登陆后页面变化");}
     }
     @Test
@@ -208,7 +210,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.randomStringGenerator(20);
         AccountAction.justLogIn(userName, userPassword);
         waitTime(2);
-        if (!getUiObjectByText("Log in").exists()) {
+        if (!getUiObjectByText("Login").exists()) {
             Assert.fail("错误的密码点击登陆后页面变化");
         }
     }
@@ -228,7 +230,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.randomStringGenerator(20);
         AccountAction.justLogIn(userName, userPassword);
         waitTime(2);
-        if (!getUiObjectByText("Log in").exists()) {
+        if (!getUiObjectByText("Login").exists()) {
             Assert.fail("错误密码点击登陆后页面变化");
         }
     }
@@ -247,7 +249,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.getUserName("email_password");
         AccountAction.justLogIn(userName,userPassword );
         waitTime(3);
-        if (getUiObjectByText("Log in").exists()) {
+        if (getUiObjectByText("Login").exists()) {
             Assert.fail("LoginFailByEmail");
         }
     }
@@ -266,7 +268,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.getUserName("phone_password");
         AccountAction.justLogIn(userName,userPassword );
         waitTime(3);
-        if (getUiObjectByText("Log in").exists()) {
+        if (getUiObjectByText("Login").exists()) {
             Assert.fail("LoginFailByPhoneNumber");
         }
     }
@@ -285,7 +287,7 @@ public class LoginCase extends VP2 {
         String userPassword = Constant.getUserName("sioeye_password");
         AccountAction.justLogIn(userName,userPassword );
         waitTime(3);
-        if (getUiObjectByText("Log in").exists()) {
+        if (getUiObjectByText("Login").exists()) {
             Assert.fail("LoginFailBySioEeyId");
         }
     }
@@ -334,6 +336,23 @@ public class LoginCase extends VP2 {
             clickById(AccountPage.LOG_OUT_I_KNOW);
         }else {
             Assert.fail("reset");
+        }
+    }
+    /**点击手机验证码登录
+     * 输入手机号码发送验证码**/
+    /**
+     * zhangyajuan 2017.11.14
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testSMScode() throws UiObjectNotFoundException, IOException {
+        AccountAction.navToSMScode();
+        clickById(AccountPage.SIGN_UP_TEL_ET_INPUT_PHONE);
+        shellInputText(Constant.getUserName("phone_number"));
+        boolean getcode= getObject2ById(AccountPage.LOGIN_SEND_CODE).isEnabled();
+        if(getcode=true){
+            Asst.assertTrue(true);
         }
     }
 }
