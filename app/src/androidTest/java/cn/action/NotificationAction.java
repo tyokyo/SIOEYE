@@ -151,6 +151,7 @@ public class NotificationAction extends VP2 {
     //跳转到Likes界面
     public static void navToLikes(){
         clickById(MePage.NOTIFICATION_OTHER);
+        waitTime(3);
         clickByText("Likes");
     }
     //获取点赞界面关注按钮
@@ -161,14 +162,13 @@ public class NotificationAction extends VP2 {
         navToLikes();
         waitTime(5);
         List<UiObject2> childPart = getCommentsParent().getChildren();
-        List<UiObject2> litterChild = childPart.get(1).getChildren();
-        List<UiObject2> litterChild2 = litterChild.get(0).getChildren();
-        UiObject2 followButton = litterChild2.get(1);
+        List<UiObject2> litterChild = childPart.get(1).getChildren().get(0).getChildren();
+        UiObject2 followButton = litterChild.get(1);
         if(followButton!=null){
             followButton.click();
         }
         List<UiObject2> childPart2 = getCommentsParent().getChildren();
-        UiObject2 miniActor = childPart2.get(0);
+        UiObject2 miniActor = childPart2.get(1);
         miniActor.click();
         String s = getObjectById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
         clickByClass("android.widget.ImageView", 2);

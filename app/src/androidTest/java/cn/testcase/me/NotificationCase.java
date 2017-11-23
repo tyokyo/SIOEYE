@@ -113,6 +113,7 @@ public class NotificationCase extends VP2 {
             String input_title=getRandomString(10);
             setText(MePage.NOTIFICATION_REPLY_COMMENT,input_title);
             clickByPoint(point);
+            waitTime(4);
             isComment = NotificationAction.getVideoComment(input_title);
             Spoon.screenshot("has_comment");
             Asst.assertTrue(isComment);
