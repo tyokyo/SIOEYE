@@ -4,6 +4,7 @@ import android.graphics.Point;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
@@ -346,5 +347,9 @@ public class MeAction extends VP2{
             getObject2ById(PlayPage.NEW_MESSAGES_DISPLAY).click();
             waitTime(2);
         }
+    }
+    //确认创建直播间
+    public static void creatLiveRoom(){
+        getUiObject2ByText("OK").click();
     }
 }
