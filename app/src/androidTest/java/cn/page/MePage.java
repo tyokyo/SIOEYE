@@ -308,5 +308,12 @@ public class MePage {
     public static final String NOTIFICATION_COMMENT = "cn.sioeye.sioeyeapp:id/expandable_text";
     //收藏
     public static final String COLLECION_EMPTY="cn.sioeye.sioeyeapp:id/status_text";
-
+    //直播间
+    public static final String LIVE_ROOM="cn.sioeye.sioeyeapp:id/llt_create_single_room";
+    //直播间描述
+    public static final String LIVE_ROOM_INFO="cn.sioeye.sioeyeapp:id/room_intro";
+    //创建多个直播间按钮
+    public static final String CREAT_LIVE_ROOM="cn.sioeye.sioeyeapp:id/llt_muti_room_create";
+    //直播间名字
+    public static final String LIVE_ROOM_NAME="cn.sioeye.sioeyeapp:id/et_room_name";
 }
