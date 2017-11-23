@@ -3,6 +3,7 @@ package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.widget.CheckBox;
@@ -269,6 +270,37 @@ public class LiveConfigCase extends VP2{
                 Asst.assertEquals("关闭水印开关",expect,avtiveisChecked);
                 Spoon.screenshot("testWaterMarkDelete");
             }
+        }
+    }
+  /**
+   *点击直播间
+   * zhangyajuan 2017.11.15
+   * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testLiveRoom() throws UiObjectNotFoundException {
+        MeAction.navToLiveConfiguration();
+        UiObject2 obj=getObject2ById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE).getParent().getChildren().get(8);
+        String str= obj.getChildren().get(0).getChildren().get(1).getText();
+        if (str==null){   //
+            obj.click();
+            if(id_exists(MePage.LIVE_ROOM_INFO)){
+                waitTime(3);
+                MeAction.creatLiveRoom();
+                Asst.assertTrue(text_exists("I know"));
+            }
+            else{
+                getObject2ById(MePage.LIVE_ROOM).getChildren().get(0).click();
+                waitTime(3);
+                MeAction.creatLiveRoom();
+              //Asst.assertTrue(text_exists("I know"));
+            }
+        }
+        else{
+            obj.click();
+            waitTime(3);
+            Asst.assertTrue(id_exists(MePage.CREAT_LIVE_ROOM));
         }
     }
 
