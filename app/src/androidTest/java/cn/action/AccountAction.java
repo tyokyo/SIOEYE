@@ -187,7 +187,7 @@ public class AccountAction extends VP2{
             Assert.fail("PasswordIsVisible");
         }
     }
-        //仅仅一个登陆的动作
+    //仅仅一个登陆的动作
     public static void justLogIn(String username,String password) throws UiObjectNotFoundException {
         getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(username);
         getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);
