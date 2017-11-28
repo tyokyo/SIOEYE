@@ -115,7 +115,7 @@ public class AccountAction extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
-            clickByText("Log in");
+            clickByText("Login");
             getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(username);
             getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);
             clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
