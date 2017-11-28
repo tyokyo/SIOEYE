@@ -63,7 +63,7 @@ public class LogOutCase extends VP2 {
         clickById(AccountPage.LOG_OUT_OK);
         //log in
         clickById(MePage.ID_MAIN_TAB_ME);
-        clickByText("Log in");
+        clickByText("Login");
         //input username
         getObjectById(MePage.INPUT_USERNAME).clearTextField();
         getObjectById(MePage.INPUT_USERNAME).setText(Constant.userName);
