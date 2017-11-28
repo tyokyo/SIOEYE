@@ -351,7 +351,7 @@ public class LoginCase extends VP2 {
         clickById(AccountPage.SIGN_UP_TEL_ET_INPUT_PHONE);
         shellInputText(Constant.getUserName("phone_number"));
         boolean getcode= getObject2ById(AccountPage.LOGIN_SEND_CODE).isEnabled();
-        if(getcode=true){
+        if(getcode==true){
             Asst.assertTrue(true);
         }
     }
