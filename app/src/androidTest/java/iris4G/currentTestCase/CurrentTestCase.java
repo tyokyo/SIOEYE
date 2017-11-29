@@ -235,6 +235,8 @@ public class CurrentTestCase extends VP2 {
         clickById(SettingPage.gallery_live_bottom);//点击live
         waitTime(2);
         clickById(SettingPage.gallery_live);
+        waitTime(1);
+        clickById(SettingPage.gallery_skip);
         checkGalleryToLiveStatusAndTryAgain(1);
         stopGalleryLive();
         waitTime(2);
@@ -247,6 +249,8 @@ public class CurrentTestCase extends VP2 {
         clickById(SettingPage.gallery_live_bottom);//点击live
         waitTime(2);
         clickById(SettingPage.gallery_live);
+        waitTime(1);
+        clickById(SettingPage.gallery_skip);
         checkGalleryToLiveStatusAndTryAgain(0);
         makeScreenOn();
         stopGalleryLive();
@@ -256,7 +260,7 @@ public class CurrentTestCase extends VP2 {
      * 检查相册直播是否发起成功，并会重试一次
      * 若两次均失败会产生一个两分钟的电流锯齿波
      */
-    private void checkGalleryToLiveStatusAndTryAgain(int a) throws Exception {
+    private void checkGalleryToLiveStatusAndTryAgain(int screenStatus ) throws Exception {
         waitUntilFindText("broadcasting",15000);
         if (!text_exists("broadcasting")){
             waitUntilFind(SettingPage.gallery_live_retry,3000);
@@ -289,13 +293,13 @@ public class CurrentTestCase extends VP2 {
             }else {
                 logger.info("retryLiveSuccess");
                 Spoon.screenshot("galleryRetryLiveSuccess","galleryRetryLiveSuccess");
-                if (a==0){makeScreenOff();}//判断用例该亮灭屏
+                if (screenStatus==0){makeScreenOff();}//判断用例该亮灭屏
                 waitTime(testTime-2);
             }
         }else {
             logger.info("LiveSuccess");
             Spoon.screenshot("galleryLiveSuccess","galleryLiveSuccess");
-            if (a==0){makeScreenOff();}
+            if (screenStatus==0){makeScreenOff();}
             waitTime(testTime-2);
         }
     }
@@ -526,12 +530,6 @@ public class CurrentTestCase extends VP2 {
         //登录账号
         AccountAction.loginAccount(useName, password);
     }
-//    @Test
-//    public void testGalleryLive() throws Exception {
-//        live2ScreenOn();
-//        Iris4GAction.startGallery();
-//        galleryLiveScreenOff();
-//    }
 
     @Test
     public void testForCurrent() throws Exception {
@@ -746,7 +744,7 @@ public class CurrentTestCase extends VP2 {
         gDevice.executeShellCommand("reboot -p ");
     }
 //    @Test
-//    public void testClickAirModem() throws Exception {
+//    public void testGalleryLive() throws Exception {
 //        gDevice.pressBack();
 //        gDevice.pressBack();
 //        waitTime(3);
