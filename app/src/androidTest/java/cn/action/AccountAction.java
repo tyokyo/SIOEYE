@@ -73,11 +73,11 @@ public class AccountAction extends VP2{
 
         MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
-            waitUntilFindText("Log in",10000);
-            if (text_exists("Log in")){
+            waitUntilFindText("Login",10000);
+            if (text_exists("Login")){
                 logger.info("===============================================================");
             }
-            clickByText("Log in");
+            clickByText("Login");
             /*
             如果手机sdcard存在config.properties
             并且内容为
@@ -115,7 +115,7 @@ public class AccountAction extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
         if (id_exists(AccountPage.ACCOUNT_WEIXIN)){
-            clickByText("Log in");
+            clickByText("Login");
             getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(username);
             getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);
             clickById(AccountPage.LOGIN_ET_SIGN_UP_BTN);
@@ -126,7 +126,11 @@ public class AccountAction extends VP2{
     public static void navToLogin() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
-        clickByText("Log in");
+        clickByText("Login");
+    }
+    //点击验证码登录
+    public static void navToSMScode()throws UiObjectNotFoundException{
+        clickByText("SMS Code");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByMobile() throws UiObjectNotFoundException {
@@ -183,7 +187,7 @@ public class AccountAction extends VP2{
             Assert.fail("PasswordIsVisible");
         }
     }
-        //仅仅一个登陆的动作
+    //仅仅一个登陆的动作
     public static void justLogIn(String username,String password) throws UiObjectNotFoundException {
         getObjectById(AccountPage.LOGIN_ET_INPUT_USERNAME).setText(username);
         getObjectById(AccountPage.LOGIN_ET_INPUT_PASSWORD).setText(password);

@@ -18,7 +18,10 @@ public class AccountPage {
     public static String LOGIN_ET_INPUT_USERNAME = "cn.sioeye.sioeyeapp:id/et_input_username";
     public static String LOGIN_ET_INPUT_PASSWORD = "cn.sioeye.sioeyeapp:id/et_input_password";
     public static String LOGIN_ET_SIGN_UP_BTN = "cn.sioeye.sioeyeapp:id/login_signup";
-
+    //输入手机号码
+    public static String LOGIN_BY_SMSCODE="cn.sioeye.sioeyeapp:id/et_input_phone";
+    //获取验证码
+    public static String LOGIN_SEND_CODE="cn.sioeye.sioeyeapp:id/btn_send_code";
     //sign up by mobile step
     public static String SIGN_UP_TEL_ET_INPUT_PHONE = "cn.sioeye.sioeyeapp:id/et_input_phone";
     //error tip for sign up

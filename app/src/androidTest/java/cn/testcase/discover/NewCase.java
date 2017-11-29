@@ -630,6 +630,30 @@ public class NewCase  extends VP2{
         Asst.assertTrue(text_exists_contain("a"));
 
     }
+    /**
+     *1.case27、
+     *2.在最新和推荐多次滑动切换
+     * creat by yajuan 2017.11.15
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testSwipeNew() throws UiObjectNotFoundException {
+        MainAction.navToDiscover();
+        for(int i=0;i<20;i++){
+            getObject2ById(DiscoverPage.ID_SWIPE_PAGE).swipe(Direction.LEFT,0.8f);
+            getObject2ById(DiscoverPage.ID_SWIPE_PAGE).swipe(Direction.RIGHT,0.8f);
+        }
+        UiObject object=getUiObjectById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
+        if(object==null){
+            Asst.assertTrue("testToNewListFail",id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
+        }
+        else{
+            Asst.assertFalse(!id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
+        }
+        Spoon.screenshot("New","Popular");
+    }
+
 
 
 
