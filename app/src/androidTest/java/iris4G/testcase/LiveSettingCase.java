@@ -55,9 +55,9 @@ public class LiveSettingCase {
      *
      */
     public void testSettingLiveQuality() throws Exception {
-        String LiveQualityUserDefined=NavPage.live_qualityUserDefined,checkLiveQualityUserDefined="720@30";
-        String LiveQuality480=NavPage.live_quality480,checkLiveQuality480="480@25";
-        String LiveQuality720=NavPage.live_quality720,checkLiveQuality720="720@25";
+        String LiveQualityUserDefined=NavPage.live_qualityUserDefined,checkLiveQualityUserDefined="720@30(0.4-10.0)";
+        String LiveQuality480=NavPage.live_quality480,checkLiveQuality480="480@25(0.3-4.0)";
+        String LiveQuality720=NavPage.live_quality720,checkLiveQuality720="720@25(1.3-6.0)";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
         for (int i=0;i<10;i++) {
