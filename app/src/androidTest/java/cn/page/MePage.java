@@ -316,4 +316,6 @@ public class MePage {
     public static final String CREAT_LIVE_ROOM="cn.sioeye.sioeyeapp:id/llt_muti_room_create";
     //直播间名字
     public static final String LIVE_ROOM_NAME="cn.sioeye.sioeyeapp:id/et_room_name";
+    //2017/11/30修改，“我”界面滑动界面ID
+    public static final String SCROLL_ME_VIEW = "cn.sioeye.sioeyeapp:id/scrollview";
 }

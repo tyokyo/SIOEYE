@@ -1,6 +1,7 @@
 package cn.action;
 
 import android.support.test.uiautomator.Direction;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import com.squareup.spoon.Spoon;
@@ -11,6 +12,7 @@ import ckt.base.VP2;
 import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
+import cn.page.DiscoverPage;
 import cn.page.MePage;
 /**
  * Created by admin on 2016/11/2.
@@ -30,6 +32,11 @@ public class AccountAction extends VP2{
             logger.info("当前账号已经处于logout状态");
         }else{
             //clickById(MePage.SETTINGS_USER_MAIN);
+            //2017/11/30修改，小屏手机找不到Settings，需要滑动实现
+            if(!text_exists_contain("Settings")){
+                UiObject2 swipe_target = getObject2ById(MePage.SCROLL_ME_VIEW);
+                swipe_target.swipe(Direction.UP, 0.6f);
+            }
             clickByText("Settings");
             clickByText("Account and Security");
             //clickById(AccountPage.LOG_OUT);
