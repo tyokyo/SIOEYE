@@ -157,6 +157,11 @@ public class MeAction extends VP2{
     //Me-> 设置
     public static void navToSettings() throws UiObjectNotFoundException {
         MainAction.clickMe();
+        //2017/11/30修改，小屏手机找不到Settings，需要滑动实现--jqx
+        if(!text_exists_contain("Settings")){
+            UiObject2 swipe_target = getObject2ById(MePage.SCROLL_ME_VIEW);
+            swipe_target.swipe(Direction.UP, 0.6f);
+        }
         clickByText("Settings");
         Spoon.screenshot("navToSettings");
     }

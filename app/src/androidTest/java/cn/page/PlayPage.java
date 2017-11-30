@@ -45,7 +45,7 @@ public class PlayPage {
     //举报成功后确认
     public static final String REPORT_THANKS_OK="cn.sioeye.sioeyeapp:id/neutral";
     //收藏按钮
-    public static final String COLLECTION="cn.sioeye.sioeyeapp:id/btn_collect";
+    public static final String COLLECTION="cn.sioeye.sioeyeapp:id/favorite";
     //全屏播放按钮
     public static final String BROADCAST_VIEW_VIDEO_FULL_SCREEN="cn.sioeye.sioeyeapp:id/app_video_fullscreen";
     //简介界面
