@@ -97,6 +97,8 @@ public class NewCase  extends VP2{
             DiscoverAction.navToPopular();
             DiscoverAction.navToNew();
         }
+        //jqx--加等待时间
+        waitTime(2);
         UiObject object=getUiObjectById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
         if(object!=null){
             Asst.assertFalse("testToNewListFail",id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
