@@ -49,7 +49,7 @@ public class PlayPage {
     //全屏播放按钮
     public static final String BROADCAST_VIEW_VIDEO_FULL_SCREEN="cn.sioeye.sioeyeapp:id/app_video_fullscreen";
     //简介界面
-    public static final String PLAY_ABOUT="cn.sioeye.sioeyeapp:id/anchor_recyclerView";
+    public static final String PLAY_ABOUT="cn.sioeye.sioeyeapp:id/video_list";
     //键盘弹出时的点赞图标
     public static final String BROADCAST_VIEW_ZAN_FLOAT_LIKE="cn.sioeye.sioeyeapp:id/like";
 
