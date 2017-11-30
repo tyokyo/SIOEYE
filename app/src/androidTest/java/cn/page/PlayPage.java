@@ -62,7 +62,7 @@ public class PlayPage {
     //键盘输入框
     public static final String EDIT_COMMENT_TEXT="cn.sioeye.sioeyeapp:id/edit_text";
     public static final String BROADCAST_VIDEO_FULLPLAY="cn.sioeye.sioeyeapp:id/app_video_fullscreen";
-    public static final String BROADCAST_VIDEO_VIEW="cn.sioeye.sioeyeapp:id/video_view1";
+    public static final String BROADCAST_VIDEO_VIEW="cn.sioeye.sioeyeapp:id/toggle";
     public static final String BROADCAST_VIEW_VIDEO_STOP="cn.sioeye.sioeyeapp:id/portrait_app_video_play";
     public static final String BROADCAST_VIEW_PAGE="cn.sioeye.sioeyeapp:id/action_bar_root";
 

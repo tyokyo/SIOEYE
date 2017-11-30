@@ -168,7 +168,7 @@ public class NotificationAction extends VP2 {
             followButton.click();
         }
         List<UiObject2> childPart2 = getCommentsParent().getChildren();
-        UiObject2 miniActor = childPart2.get(1);
+        UiObject2 miniActor = childPart2.get(0);
         miniActor.click();
         String s = getObjectById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
         clickByClass("android.widget.ImageView", 2);
