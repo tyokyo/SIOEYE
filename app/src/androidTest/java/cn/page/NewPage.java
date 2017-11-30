@@ -18,8 +18,8 @@ public class NewPage {
     public static final String ID_NEW_PROFILE_NAME = "cn.sioeye.sioeyeapp:id/llt_name";
     //主播头像
     public static final String ID_NEW_AVATOR = "cn.sioeye.sioeyeapp:id/media_avatar";
-    //视频列表
-    public static final String ID_NEW_VIDEO = "cn.sioeye.sioeyeapp:id/newest_list";
+    //视频列表--20171130修改ID
+    public static final String ID_NEW_VIDEO = "cn.sioeye.sioeyeapp:id/list";
     public static final String ID_New_Vediolist ="cn.sioeye.sioeyeapp:id/discover_newest_swipe";
     //播放界面
     public static final String NEW_VIEW_VIDEO="cn.sioeye.sioeyeapp:id/video_view1";
