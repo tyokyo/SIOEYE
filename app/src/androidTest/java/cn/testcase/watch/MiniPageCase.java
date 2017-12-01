@@ -3,6 +3,7 @@ package cn.testcase.watch;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 
@@ -11,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -20,10 +22,12 @@ import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.WatchAction;
 import cn.page.App;
+import cn.page.MePage;
 import cn.page.WatchPage;
 
 /**
  * Created by jiali.liu on 2016/12/29.
+ * changed by qiuxia.jian on 2017/12/29.
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
@@ -79,14 +83,40 @@ public class MiniPageCase extends VP2{
         Asst.assertEquals(true,result);
         waitTime(3);
         WatchAction.clickMiniLive();
+        //UiObject2 liveObj = getObject2ById(WatchPage.WATCH_LIST).getChildren().get(0);
         //检查是否显示视频列表
-        //Asst.assertEquals("显示视频列表",true,WatchAction.LiveList_isExist());
+        Asst.assertEquals("显示视频列表",true,WatchAction.LiveList_isExist());
         waitTime(10);
         WatchAction.clickMiniFollow();
         //检查是否显示关注列表
-        //Asst.assertEquals("显示关注列表",true,WatchAction.FollowList_isExist());
+        Asst.assertEquals("显示关注列表",true,WatchAction.FollowList_isExist());
         WatchAction.clickMiniFans();
         //检查是否显示粉丝列表
-        //Asst.assertEquals("显示粉丝列表",true,WatchAction.FansList_isExist());
+        Asst.assertEquals("显示粉丝列表",true,WatchAction.FansList_isExist());
+    }
+    /**
+     * 个人弹出框变化：
+     * 步骤：1.随机点击watch界面的任一播主头像
+     *      2.点击“直播”
+     */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testMiniPlayVideo() throws IOException, UiObjectNotFoundException {
+        //进入Watch界面
+        clickById(MePage.ID_MAIN_TAB_LIVE);
+        waitTime(1);
+        UiObject watch_list = getObjectById(WatchPage.WATCH_LIST);
+        Random random = new Random();
+        int size = random.nextInt(20);
+        watch_list.swipeDown(size);
+        /*//UiObject2 follow_view = getObject2ByClass(LinearLayout.class);
+        *//*Random r = new Random();
+        int int_r =r.nextInt(20);*//*
+        UiObject2 follow_view = getObject2ByClass(RelativeLayout.class);
+        List<UiObject2> LinearLayoutList = follow_view.findObjects(By.clazz(LinearLayout.class));
+        UiObject2 touxiang = LinearLayoutList.get(0);
+        touxiang.click();*/
+
     }
 }
