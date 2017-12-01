@@ -13,7 +13,7 @@ public class PlayPage {
     //聊天室
     public static final String TV_CHAT_ROOM_ID="cn.sioeye.sioeyeapp:id/chat_frag";
     //底部有新消息
-    public static final String NEW_MESSAGES_DISPLAY="cn.sioeye.sioeyeapp:id/tv_new_message";
+    public static final String NEW_MESSAGES_DISPLAY="cn.sioeye.sioeyeapp:id/new_message";
     //视频加载失败
     public static final String LOAD_VIDEO_ERROR="cn.sioeye.sioeyeapp:id/layout_error";
     //视频信息
