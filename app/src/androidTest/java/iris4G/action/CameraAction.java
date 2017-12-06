@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 
 import ckt.base.VP2;
 import iris4G.page.Iris4GPage;
+import iris4G.page.NavPage;
 
 public class CameraAction extends VP2 {
     private static Logger logger = Logger.getLogger(CameraAction.class.getName());
@@ -362,6 +363,35 @@ public class CameraAction extends VP2 {
         Spoon.screenshot("configVideoAngle",angle);
         logger.info(navConfig+" -configVideoAngle - "+angle);
         gDevice.pressBack();
+    }
+    public static void makeSlo_MoSomeTime(int time) throws Exception {
+        CameraAction.navConfig(NavPage.navConfig_Slo_Mo);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(time);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(2);
+    }
+    public static void makeLapseSomeTime(int time) throws Exception {
+        CameraAction.navConfig(NavPage.navConfig_Lapse);
+        configVideoQuality(Iris4GPage.video_quality[6]);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(time*10);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(2);
+    }
+    public static void configVideoQuality(String videoQuality) throws Exception {
+        CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("Video Quality");
+        clickByText("Video Quality");
+        waitTime(2);
+        Iris4GAction.ScrollViewByText(videoQuality);
+        clickByText(videoQuality);
+        waitTime(2);
+        Spoon.screenshot("configLiveVideoQuality",videoQuality);
+        logger.info(" -configLiveVideoQuality - "+videoQuality);
+        gDevice.pressBack();
+        waitTime(2);
     }
 
 

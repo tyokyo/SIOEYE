@@ -359,6 +359,39 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(2);
     }
+    private void configUserDefinedLiveQuality(String resolution,String minBitrate,String maxBitrate) throws
+            Exception {
+        makeScreenOn();
+        CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("Video Quality");
+        clickByText("Video Quality");
+        waitTime(2);
+        clickById(Iris4GPage.user_defined_setting_image_view);
+        waitTime(2);
+        Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"Resolution");
+        clickById(Iris4GPage.user_defined_resolution_options);
+        waitTime(1);
+        clickByText(resolution);
+        Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"Frame Rate");
+        clickById(Iris4GPage.user_defined_frame_rate);
+        waitTime(1);
+        clickByText("25");
+        if (resolution.equals("480P")){
+            Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"(range: 200Kbps ~ 5,000Kbps)");
+        }else {
+            Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"(range: 400Kbps ~ 10,000Kbps)");
+        }
+
+        Iris4GAction.setText(Iris4GPage.user_defined_min_bitrate,minBitrate);
+        Iris4GAction.setText(Iris4GPage.user_defined_max_bitrate,maxBitrate);
+        waitTime(1);
+//        Spoon.screenshot("configLiveVideoQuality");
+        logger.info(" -configLiveVideoQuality - ");
+        clickById(Iris4GPage.user_defined_sure);
+        gDevice.pressBack();
+        waitTime(2);
+    }
     private void configVideoAngle(String VideoAngle) throws Exception {
         makeScreenOn();
         CameraAction.cameraSetting();
@@ -446,7 +479,7 @@ public class CurrentTestCase extends VP2 {
     private void makeToasts(String message,int time) throws IOException {
 //        initDevice();
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
-        logger.info(command);
+                logger.info(command);
         gDevice.executeShellCommand(command);
     }
     private void clickSwitch(String switchName) throws Exception {
@@ -535,7 +568,7 @@ public class CurrentTestCase extends VP2 {
     public void testForCurrent() throws Exception {
         String liveQuality480="480@25FPS(Bitrate0.3-4Mbps)",
                 liveQuality720HD="720@25FPS(Bitrate1.3-6Mbps)",
-                liveQualityUserDefined="480@25FPS(Bitrate0.6-4Mbps)";
+                liveQualityUserDefined="User Defined(720@30FPS Bitrate0.4-10.0Mbps)";
         String videoQuality1080P25="1080@25FPS",
                 videoQuality720P60="720@60FPS",
                 videoQuality720P25="720@25FPS",
@@ -662,7 +695,17 @@ public class CurrentTestCase extends VP2 {
             live2ScreenOff();
             Iris4GAction.clickLiveAndSave();//关闭直播保存
             waitTime(1);
-            //高度计
+            //自定义直播质量
+            configUserDefinedLiveQuality("480P","200","200");
+            live2ScreenOff();
+            configUserDefinedLiveQuality("480P","5000","5000");
+            live2ScreenOff();
+            configUserDefinedLiveQuality("720P","400","400");
+            live2ScreenOff();
+            configUserDefinedLiveQuality("720P","10000","10000");
+            live2ScreenOff();
+
+            //其他设置项 高度计
             configVideoQuality(liveQuality480);
             waitTime(2);
             clickSwitch(switchName[0]);//开启高度计
@@ -697,6 +740,7 @@ public class CurrentTestCase extends VP2 {
             live2ScreenOff();
             configVideoAngle(videoAngle[0]);//视场角为普通(默认)
             liveOfBiggerZoom();
+
             //3G直播不保存
             gDevice.pressBack();
             gDevice.pressBack();
@@ -745,10 +789,12 @@ public class CurrentTestCase extends VP2 {
     }
 //    @Test
 //    public void testGalleryLive() throws Exception {
-//        gDevice.pressBack();
-//        gDevice.pressBack();
-//        waitTime(3);
-//        Iris4GAction.startGallery();
-//        galleryLiveScreenOff();
+//        configUserDefinedLiveQuality("480P","200","200");
+//        live2ScreenOff();
+//        configUserDefinedLiveQuality("480P","5000","5000");
+//        live2ScreenOff();
+//        configUserDefinedLiveQuality("720P","400","400");
+//        live2ScreenOff();
+//        configUserDefinedLiveQuality("720P","10000","10000");
 //    }
 }
