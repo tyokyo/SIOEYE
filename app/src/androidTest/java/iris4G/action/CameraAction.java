@@ -373,7 +373,7 @@ public class CameraAction extends VP2 {
     }
     public static void makeLapseSomeTime(int time) throws Exception {
         CameraAction.navConfig(NavPage.navConfig_Lapse);
-        configVideoQuality(Iris4GPage.video_quality[6]);
+        configVideoQuality(Iris4GPage.video_quality[7]);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         waitTime(time*10);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
