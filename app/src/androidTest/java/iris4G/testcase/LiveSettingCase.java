@@ -79,7 +79,7 @@ public class LiveSettingCase {
      *
      */
     public void testUserDefinedSuperWideLiveForAllAngle() throws Exception {
-        String LiveQualityUserDefined=NavPage.live_qualityUserDefined,CheckLiveQualityUserDefined="720@30";
+        String LiveQualityUserDefined=NavPage.live_qualityUserDefined,CheckLiveQualityUserDefined="720@30(0.4-10.0)";
         String LiveAngleSW="Super Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -94,7 +94,7 @@ public class LiveSettingCase {
      *
      */
     public void testUserDefinedWideLiveForAllAngle() throws Exception {
-        String LiveQualityUserDefined=NavPage.live_qualityUserDefined,CheckLiveQualityUserDefined="720@30";
+        String LiveQualityUserDefined=NavPage.live_qualityUserDefined,CheckLiveQualityUserDefined="720@30(0.4-10.0)";
         String LiveAngleWide="Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -109,7 +109,7 @@ public class LiveSettingCase {
      *
      */
     public void testUserDefinedMediumLiveForAllAngle() throws Exception {
-        String LiveQualityUserDefined=NavPage.live_qualityUserDefined,CheckLiveQualityUserDefined="720@30";
+        String LiveQualityUserDefined=NavPage.live_qualityUserDefined,CheckLiveQualityUserDefined="720@30(0.4-10.0)";
         String LiveAngleWide="Medium";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -124,7 +124,7 @@ public class LiveSettingCase {
      *
      */
     public void test48025SuperWideLiveForAllAngle() throws Exception {
-        String LiveQuality480=NavPage.live_quality480,CheckLiveQuality480="480@25";
+        String LiveQuality480=NavPage.live_quality480,CheckLiveQuality480="480@25(0.3-4.0)";
         String LiveAngleSW="Super Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -139,7 +139,7 @@ public class LiveSettingCase {
      *
      */
     public void test48025WideLiveForAllAngle() throws Exception {
-        String LiveQuality480=NavPage.live_quality480,CheckLiveQuality480="480@25";
+        String LiveQuality480=NavPage.live_quality480,CheckLiveQuality480="480@25(0.3-4.0)";
         String LiveAngleWide="Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -154,7 +154,7 @@ public class LiveSettingCase {
      *
      */
     public void test48025HDMediumLiveForAllAngle() throws Exception {
-        String LiveQuality480=NavPage.live_quality480,CheckLiveQuality480="480@25";
+        String LiveQuality480=NavPage.live_quality480,CheckLiveQuality480="480@25(0.3-4.0)";
         String LiveAngleWide="Medium";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -169,7 +169,7 @@ public class LiveSettingCase {
      *
      */
     public void test72025SuperWideLiveForAllAngle() throws Exception {
-        String LiveQuality720=NavPage.live_quality720,CheckLiveQuality720="720@25";
+        String LiveQuality720=NavPage.live_quality720,CheckLiveQuality720="720@25(1.3-6.0)";
         String LiveAngleSW="Super Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -184,7 +184,7 @@ public class LiveSettingCase {
      *
      */
     public void test72025WideLiveForAllAngle() throws Exception {
-        String LiveQuality720=NavPage.live_quality720,CheckLiveQuality720="720@25";
+        String LiveQuality720=NavPage.live_quality720,CheckLiveQuality720="720@25(1.3-6.0)";
         String LiveAngleWide="Wide";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
@@ -199,7 +199,7 @@ public class LiveSettingCase {
      *
      */
     public void test72025HDMediumLiveForAllAngle() throws Exception {
-        String LiveQuality720=NavPage.live_quality720,CheckLiveQuality720="720@25";
+        String LiveQuality720=NavPage.live_quality720,CheckLiveQuality720="720@25(1.3-6.0)";
         String LiveAngleWide="Medium";
         String LiveModem="Live Stream";
         CameraAction.navConfig(LiveModem);
