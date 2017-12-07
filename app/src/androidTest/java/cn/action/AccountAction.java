@@ -77,7 +77,7 @@ public class AccountAction extends VP2{
             if (text_exists("Log in")){
                 logger.info("===============================================================");
             }
-            clickByText("Log in");
+            clickTextContain("Log");
             /*
             如果手机sdcard存在config.properties
             并且内容为

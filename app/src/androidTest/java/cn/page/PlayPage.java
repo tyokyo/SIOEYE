@@ -9,7 +9,7 @@ public class PlayPage {
     //日期
     public static final String PLAY_ABOUT_TIME="cn.sioeye.sioeyeapp:id/tv_date";
     //主播
-    public static final String TV_AUCHOR_ID="cn.sioeye.sioeyeapp:id/tv_anchor";
+    public static final String TV_AUCHOR_ID="cn.sioeye.sioeyeapp:id/author_frag";
     //聊天室
     public static final String TV_CHAT_ROOM_ID="cn.sioeye.sioeyeapp:id/tv_chat_room";
     //底部有新消息
@@ -53,8 +53,10 @@ public class PlayPage {
 
     public static final String BROADCAST_VIEW_MESSAGE_TEXT="cn.sioeye.sioeyeapp:id/message_text";
     public static final String BROADCAST_VIEW_WATCHER_COUNT="cn.sioeye.sioeyeapp:id/watch_player_portrait_watcher_count";
-    public static final String BROADCAST_VIEW_TIPTEXT="cn.sioeye.sioeyeapp:id/tipText";
-    public static final String BROADCAST_VIEW_ZAN="cn.sioeye.sioeyeapp:id/watch_player_portrait_like";
+    //评论输入框
+    public static final String BROADCAST_VIEW_TIPTEXT="cn.sioeye.sioeyeapp:id/hint";
+    //点赞按钮
+    public static final String BROADCAST_VIEW_ZAN="cn.sioeye.sioeyeapp:id/like";
     //键盘输入框
     public static final String EDIT_COMMENT_TEXT="cn.sioeye.sioeyeapp:id/edit_text";
     public static final String BROADCAST_VIDEO_FULLPLAY="cn.sioeye.sioeyeapp:id/app_video_fullscreen";

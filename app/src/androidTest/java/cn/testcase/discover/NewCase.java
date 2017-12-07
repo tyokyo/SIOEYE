@@ -53,88 +53,82 @@ import static cn.action.PlayAction.clickFollow;
 @SdkSuppress(minSdkVersion = 16)
 
 /**发现界面
-*  最新列表
-*  功能验证
+ *  最新列表
+ *  功能验证
  **/
-public class NewCase  extends VP2{
+public class NewCase extends VP2 {
     Logger logger = Logger.getLogger(NewCase.class.getName());
 
     @Before
-    public void setup() throws UiObjectNotFoundException{
+    public void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
-    }
-    @Test
-    @SanityTest
-    @PerformanceTest
-    /**
-    *case1.在discover界面切换到最新列表
-    */
-    public void testToNewList() throws UiObjectNotFoundException{
-        MainAction.clickDiscover();
-        DiscoverAction.navToNew();
-        //点击切换到最新列表，根据有无广告判断
-        UiObject object=getUiObjectById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
-        if(object!=null){
-            Asst.assertFalse("testToNewListFail",id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
-        }
-        else{
-            Asst.assertTrue(!id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
-        }
-        Spoon.screenshot("New","Popular");
     }
 
     @Test
     @SanityTest
     @PerformanceTest
     /**
-    *case2.频繁切换最新和推荐列表
-    */
-    public void testSwitchList() throws UiObjectNotFoundException{
+     *case1.在discover界面切换到最新列表
+     */
+    public void testToNewList() throws UiObjectNotFoundException {
         MainAction.clickDiscover();
-        for (int i=0;i<20;i++){
+        DiscoverAction.navToNew();
+        waitUntilGone(DiscoverPage.ID_MAIN_TAB_AD_SPALSH,10000);
+        //点击切换到最新列表，根据有无广告判断
+        Asst.assertFalse("testToNewListFail", id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
+        Spoon.screenshot("New", "Popular");
+    }
+
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**
+     *case2.频繁切换最新和推荐列表
+     */
+    public void testSwitchList() throws UiObjectNotFoundException {
+        MainAction.clickDiscover();
+        for (int i = 0; i < 20; i++) {
             DiscoverAction.navToNew();
             DiscoverAction.navToPopular();
             DiscoverAction.navToNew();
         }
-        UiObject object=getUiObjectById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
-        if(object!=null){
-            Asst.assertFalse("testToNewListFail",id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
-        }
-        else{
+        UiObject object = getUiObjectById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
+        if (object != null) {
+            Asst.assertFalse("testToNewListFail", id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
+        } else {
             Asst.assertTrue(!id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
         }
-        Spoon.screenshot("New","Popular");
+        Spoon.screenshot("New", "Popular");
     }
 
     @Test
     @SanityTest
     @PerformanceTest
     /**
-    *case3.单击搜索图标
-    */
-    public void testClickSearch() throws UiObjectNotFoundException{
+     *case3.单击搜索图标
+     */
+    public void testClickSearch() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         DiscoverAction.navToSearch();
         //点击搜索按钮，根据有无输入框判断
-        UiObject object= getObjectById(NewPage.ID_NEW_SEARCH_INPUT);
+        UiObject object = getObjectById(NewPage.ID_NEW_SEARCH_INPUT);
         Spoon.screenshot("Search");
-        if (object!=null) {
+        if (object != null) {
             Assert.assertTrue(true);
-        }
-        else{
+        } else {
             Assert.fail("跳转失败");
         }
-        Spoon.screenshot("Search","Trending");
+        Spoon.screenshot("Search", "Trending");
     }
 
     @Test
     @SanityTest
     @PerformanceTest
     /**
-    * case4.最新列表单击播主头像弹出个人详情框
-    */
+     * case4.最新列表单击播主头像弹出个人详情框
+     */
     public void testClickAnchor() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
@@ -151,8 +145,8 @@ public class NewCase  extends VP2{
     @SanityTest
     @PerformanceTest
     /**
-    * case5.最新列表单击播主头像弹出个人详情框，点击切换直播关注粉丝列表
-    */
+     * case5.最新列表单击播主头像弹出个人详情框，点击切换直播关注粉丝列表
+     */
     public void testProfileSwipeList() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
@@ -173,15 +167,17 @@ public class NewCase  extends VP2{
         Spoon.screenshot("Follower");
 
     }
+
     @Test
     @SanityTest
     @PerformanceTest
     /**
-    * case6.最新列表单击播主头像弹出个人详情框,播放直播列表中第一个视频
-    */
+     * case6.最新列表单击播主头像弹出个人详情框,播放直播列表中第一个视频
+     */
     public void testProfilePlayVideo() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        waitUntilFind(NewPage.ID_NEW_AVATOR, 6000);
         UiObject object = getObjectById(NewPage.ID_NEW_AVATOR);
         object.click();
         waitUntilFind(NewPage.ID_NEW_PROFILE_MINI_NUM_FOLLOWER, 1000);
@@ -193,68 +189,78 @@ public class NewCase  extends VP2{
         WatchAction.playProfileVideo();
         gDevice.pressBack();
     }
+
     @Test
     @SanityTest
     @PerformanceTest
     /**
-    case7.随机播放最新列表的视频
-    */
+     case7.随机播放最新列表的视频
+     */
     public void testWatchNewVideo() throws UiObjectNotFoundException {
         MainAction.clickDiscover();
         DiscoverAction.navToNew();
         //随机选择一个最新列表的视频
         getObjectById(NewPage.ID_NEW_VIDEO).swipeDown(50);
-        int index=NewAction.getRandomVideoIndex();
+        int index = NewAction.getRandomVideoIndex();
         NewAction.getRandomVideo(index).click();
         waitTime(5);
         BroadcastAction.waitBroadcastLoading();
-        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),30000);
-        Asst.assertTrue("time out 60 seconds.",!getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)), 30000);
+        Asst.assertTrue("time out 60 seconds.", !getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
         Spoon.screenshot("testWatchNewVideo");
         gDevice.pressBack();
     }
+
     @Test
     @SanityTest
     @PerformanceTest
     /**
-    case8.上拉加载最新列表的视频
-    */
+     case8.上拉加载最新列表的视频
+     */
     public void testSwipeUp() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
-        waitUntilFind(NewPage.ID_NEW_VIDEO,10000);
+        waitUntilFind(NewPage.ID_NEW_VIDEO, 10000);
         UiObject2 swipe_target = getObject2ById(NewPage.ID_NEW_VIDEO);
         //获取到视频列表后向上滑动四次加载视频
-        swipe_target.swipe(Direction.UP,0.5f);
-        swipe_target.swipe(Direction.UP,0.5f);
-        swipe_target.swipe(Direction.UP,0.5f);
-        swipe_target.swipe(Direction.UP,0.5f);
+        swipe_target.swipe(Direction.UP, 0.5f);
+        swipe_target.swipe(Direction.UP, 0.5f);
+        swipe_target.swipe(Direction.UP, 0.5f);
+        swipe_target.swipe(Direction.UP, 0.5f);
         Spoon.screenshot("New_page");
         Asst.assertFalse("testSwipeUpFail", !id_exists(DiscoverPage.ID_MAIN_TAB_DISCOVER));
     }
+
     @Test
     @SanityTest
     @PerformanceTest
     /**
-    * case9:聊天室中观看人数统计
-    * 思路：在聊天室中检查观看数，再退出重进再次检查
-    * */
+     * case9:聊天室中观看人数统计
+     * 思路：在聊天室中检查观看数，再退出重进再次检查
+     * */
     public void testNewCountWatchPerson() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         getObjectById(NewPage.ID_NEW_VIDEO).swipeDown(50);
         //获取第一次进入的观看数
         int index = NewAction.getRandomVideoIndex();
+        //观看视频
         NewAction.getRandomVideo(index).click();
+        //获取点赞数，评论数
         VideoBean watch_before = PlayAction.getNumberPlayVideo();
-        int watchnum_before = watch_before.getWatch();
+        int watchNum_before = watch_before.getWatch();
         gDevice.pressBack();
         //获取第二次进入的观看数
         NewAction.getRandomVideo(index).click();
         VideoBean watch_after = PlayAction.getNumberPlayVideo();
-        int watchnum_after = watch_after.getWatch();
-        Asst.assertEquals("观看数+1",watchnum_after,watchnum_before+1);
+        int watchNum_after = watch_after.getWatch();
+        if (watchNum_before >= 1000) {
+
+        } else {
+            Asst.assertEquals("观看数+1", watchNum_after, watchNum_before + 1);
+        }
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -264,47 +270,53 @@ public class NewCase  extends VP2{
     public void testNewCoverCountWatch() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
-        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN, 0.5f);
         waitTime(3);
         //获取视频封面的观看数
-        int watchnum_before = NewAction.getNewWatchNumber();
+        int watchNum_before = NewAction.getNewWatchNumber();
         List<UiObject2> linearLayouts = gDevice.findObjects(By.res(NewPage.ID_NEW_VIDEO));
-         linearLayouts.get(0).click();
-         waitTime(2);
+        //播放视频
+        linearLayouts.get(0).click();
+        waitTime(2);
         gDevice.pressBack();
         //获取进入之后的观看数
-        int watchnum_after = NewAction.getNewWatchNumber();
-        Asst.assertEquals("观看数+1",watchnum_after,watchnum_before+1);
-
+        int watchNum_after = NewAction.getNewWatchNumber();
+        if (watchNum_before >= 1000) {
+            Asst.assertEquals("观看数不变", watchNum_after, watchNum_before);
+        } else {
+            Asst.assertEquals("观看数+1", watchNum_after, watchNum_before + 1);
+        }
     }
+
     @Test
     @SanityTest
     @PerformanceTest
     /**
-    * case11:在聊天室统计历史点赞数
-    * 思路：从聊天室中获取点赞数，点赞后再次获取点赞数
-    **/
+     * case11:在聊天室统计历史点赞数
+     * 思路：从聊天室中获取点赞数，点赞后再次获取点赞数
+     **/
     public void testNewCountZan() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
         //获取点赞前的点赞数
-        int  zan_before= PlayAction.getNewZanNumber();
+        int zan_before = PlayAction.getNewZanNumber();
         clickById(PlayPage.TV_CHAT_ROOM_ID);
-        waitUntilFind(PlayPage.BROADCAST_VIEW_ZAN,5000);
-        for(int i=1;i<=10;i++) {
+        waitUntilFind(PlayPage.BROADCAST_VIEW_ZAN, 5000);
+        for (int i = 1; i <= 10; i++) {
             clickById(PlayPage.BROADCAST_VIEW_ZAN);
         }
         //点赞后再获取点赞数
         clickById(PlayPage.TV_AUCHOR_ID);
-        waitUntilFind(PlayPage.VIDEO_CHAT_NUMBER,10000);
+        waitUntilFind(PlayPage.VIDEO_CHAT_NUMBER, 10000);
         int zan_after = cover(getObject2ById(PlayPage.VIDEO_CHAT_NUMBER).getText());
-        Spoon.screenshot("after_zan"+zan_after);
-        if (zan_after>1000){
+        Spoon.screenshot("after_zan" + zan_after);
+        if (zan_after > 1000) {
 
-        }else{
-            Asst.assertEquals("点赞数+10",zan_after,zan_before+10);
+        } else {
+            Asst.assertEquals("点赞数+10", zan_after, zan_before + 10);
         }
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -315,25 +327,25 @@ public class NewCase  extends VP2{
     public void testNewCoverCountZan() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
-        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN, 0.5f);
         waitTime(3);
         //获取点赞前的点赞数
-        int  zan_before= NewAction.getZanNumber();
+        int zan_before = NewAction.getZanNumber();
         List<UiObject2> relativeLayouts = gDevice.findObjects(By.res(NewPage.ID_NEW_VIDEO));
         relativeLayouts.get(0).click();
-        waitUntilFind(PlayPage.BROADCAST_VIEW_ZAN,10000);
-        for(int i=1;i<=5;i++) {
+        waitUntilFind(PlayPage.BROADCAST_VIEW_ZAN, 10000);
+        for (int i = 1; i <= 5; i++) {
             clickById(PlayPage.BROADCAST_VIEW_ZAN);
         }
         gDevice.pressBack();
         //点赞后再获取点赞数
         int zan_after = NewAction.getZanNumber();
         waitTime(5);
-        Spoon.screenshot("after_zan"+zan_after);
-        if (zan_after>1000){
+        Spoon.screenshot("after_zan" + zan_after);
+        if (zan_after > 1000) {
 
-        }else {
-            Asst.assertEquals("点赞数加5",zan_before+5,zan_after);
+        } else {
+            Asst.assertEquals("点赞数加5", zan_before + 5, zan_after);
         }
     }
 
@@ -341,49 +353,50 @@ public class NewCase  extends VP2{
     @SanityTest
     @PerformanceTest
     /**
-    *case13.检查位置信息显示.查找位置信息是否存在
-    */
+     *case13.检查位置信息显示.查找位置信息是否存在
+     */
     public void testLocation() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
-        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN, 0.5f);
         waitTime(3);
         Boolean videoLocation = false;
         for (int i = 1; i <= 10; i++) {
             //获取位置信息
-            String Location= NewAction.getLocation();
-            if (Location!=null) {
-                videoLocation =true;
-                    break;
+            String Location = NewAction.getLocation();
+            if (Location != null) {
+                videoLocation = true;
+                break;
             } else {
                 //继续滑动查找
-                getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.UP,0.1f);
+                getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.UP, 0.1f);
                 waitTime(5);
             }
         }
         //验证是否存在位置信息
-        Asst.assertEquals("10轮查找-findLocationInVideo",true,videoLocation);
+        Asst.assertEquals("10轮查找-findLocationInVideo", true, videoLocation);
     }
+
     @Test
     @SanityTest
     @PerformanceTest
     /**
-      *  case14.评论视频后检查评论数显示
-      */
-     public void testNewCommentCount() throws UiObjectNotFoundException,IOException {
+     *  case14.评论视频后检查评论数显示
+     */
+    public void testNewCommentCount() throws UiObjectNotFoundException, IOException {
         //获取点赞按钮的坐标作为键盘的确认按钮
-        Point point= MeAction.getPointToDoComment();
+        Point point = MeAction.getPointToDoComment();
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
-        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN, 0.5f);
         waitTime(3);
         //获取第一次进入的评论数
-        waitUntilFind(NewPage.ID_NEW_VIDEO,5000);
-        int index=NewAction.getRandomVideoIndex();
+        waitUntilFind(NewPage.ID_NEW_VIDEO, 5000);
+        int index = NewAction.getRandomVideoIndex();
         NewAction.getRandomVideo(index).click();
-        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)), 60000);
         VideoBean comment_before = PlayAction.getNumberPlayVideo();
-        int cmtnum_before = comment_before.getComment();
+        int cmtNum_before = comment_before.getComment();
         FollowersAction.clickToChat();
         //随机输入20个字符
         String comment = getRandomString(20);
@@ -394,12 +407,12 @@ public class NewCase  extends VP2{
         waitTime(2);
         //滑动显示最新消息
         MeAction.displayNewMessages();
-        Asst.assertTrue("comments success",getUiObjectByTextContains(comment).exists());
+        Asst.assertTrue("comments success", getUiObjectByTextContains(comment).exists());
         //验证评论数+1
         VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
-        int  cmtnum_after = videoBean_after.getComment();
-        Asst.assertEquals(cmtnum_before+1,cmtnum_after);
-        Spoon.screenshot("testComments_Length_20",comment);
+        int cmtNum_after = videoBean_after.getComment();
+        Asst.assertEquals(cmtNum_before + 1, cmtNum_after);
+        Spoon.screenshot("testComments_Length_20", comment);
         gDevice.pressBack();
     }
 
@@ -431,6 +444,7 @@ public class NewCase  extends VP2{
         Spoon.screenshot("loginIn_page");
         Asst.assertFalse("ClickInputFail", !id_exists(AccountPage.ACCOUNT_WEIXIN));
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -457,6 +471,7 @@ public class NewCase  extends VP2{
         Spoon.screenshot("Input_page");
         Asst.assertFalse("ClickInputSuccess_Fail", !id_exists(Other.chattextfield_tanchu));
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -474,7 +489,7 @@ public class NewCase  extends VP2{
         //点击最新TAB
         DiscoverAction.navToNew();
         //播放一个视频
-        int index=NewAction.getRandomVideoIndex();
+        int index = NewAction.getRandomVideoIndex();
         NewAction.getRandomVideo(index).click();
         //点击主播
         FollowersAction.clickToAnchor();
@@ -484,6 +499,7 @@ public class NewCase  extends VP2{
         Spoon.screenshot("loginIn_page");
         Asst.assertFalse("ClickInputFail", !id_exists(AccountPage.ACCOUNT_WEIXIN));
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -498,18 +514,19 @@ public class NewCase  extends VP2{
         //进入发现界面
         MainAction.clickDiscover();
         DiscoverAction.navToNew();
-        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN, 0.5f);
         waitTime(3);
         //播放一个视频
-        int index=NewAction.getRandomVideoIndex();
+        int index = NewAction.getRandomVideoIndex();
         NewAction.getRandomVideo(index).click();
         waitTime(5);
         //点击主播
         FollowersAction.clickToAnchor();
-        waitUntilFind(PlayPage.PLAY_ABOUT,3000);
+        waitUntilFind(PlayPage.PLAY_ABOUT, 3000);
         addFollow();
 
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -523,9 +540,10 @@ public class NewCase  extends VP2{
         shellInputText(Constant.userName);
         Spoon.screenshot("testToSearchByEmail");
         waitTime(2);
-        waitUntilFindText(Constant.CORRECT_SIO_EYE_ID,20000);
+        waitUntilFindText(Constant.CORRECT_SIO_EYE_ID, 20000);
         Asst.assertTrue(text_exists(Constant.CORRECT_SIO_EYE_ID));
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -541,6 +559,7 @@ public class NewCase  extends VP2{
         waitTime(2);
         Asst.assertTrue(text_exists("tyo000"));
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -556,6 +575,7 @@ public class NewCase  extends VP2{
         waitTime(2);
         //Asst.assertTrue(text_exists("你是谁"));//看ID对应的昵称是否存在，如果账号修改昵称可能会导致用例执行失败
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -571,6 +591,7 @@ public class NewCase  extends VP2{
         waitTime(2);
         Asst.assertTrue(text_exists("1350"));
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -587,6 +608,7 @@ public class NewCase  extends VP2{
         Boolean Actual = SP.isChecked() && (text_exists_contain("Oops,There's nothing") || text_exists_contain("a"));
         Asst.assertTrue(Actual);
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -602,6 +624,7 @@ public class NewCase  extends VP2{
         Spoon.screenshot("AfterClickFilter_clear");
         Asst.assertTrue(text_exists("Search"));
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -614,6 +637,7 @@ public class NewCase  extends VP2{
         clickByText("Cancel");
         Asst.assertTrue(text_exists("Discover"));
     }
+
     @Test
     @SanityTest
     @PerformanceTest
@@ -630,21 +654,6 @@ public class NewCase  extends VP2{
         Asst.assertTrue(text_exists_contain("a"));
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

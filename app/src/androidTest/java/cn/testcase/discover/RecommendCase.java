@@ -45,13 +45,16 @@ public class RecommendCase extends VP2 {
      */
     public void testSingleClickRecommendList0() throws UiObjectNotFoundException {
         //Single Check Recommend list 0单击推荐列表第一个人，检查弹出框PROFILE_MINI_HOME是否正确
-        String expect_name = DiscoverAction.navToRecommendList(0, 1);
-        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
-        String active_name = getObjectById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
-        Spoon.screenshot("testSingleClickRecommendList0");
-        Asst.assertEquals("点击的推荐用户名与弹出信息框是否一致", expect_name, active_name);
-        clickByClass("android.widget.ImageView", 2);
-        //关闭弹出框
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
+            String expect_name = DiscoverAction.navToRecommendList(0, 1);
+            String active_name = getObjectById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
+            Spoon.screenshot("testSingleClickRecommendList0");
+            Asst.assertEquals("点击的推荐用户名与弹出信息框是否一致", expect_name, active_name);
+            //关闭弹出框
+            gDevice.pressBack();
+        }
     }
     @Test
     @SanityTest
@@ -61,14 +64,17 @@ public class RecommendCase extends VP2 {
      * 双击推送列表好友后检查弹窗好友信息
      */
     public void testDoubleClickRecommend0() throws UiObjectNotFoundException {
-        //double Check Recommend list 0双击推荐列表第二个人，检查是否正确弹出框PROFILE_MINI_HOME是否正确
-        String expect_name=DiscoverAction.navToRecommendList(1,2);
-        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
-        String active_name=getObjectById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
-        Spoon.screenshot("testDoubleClickRecommend0");
-        Asst.assertEquals("点击的推荐用户名与弹出信息框是否一致",expect_name,active_name);
-        clickByClass("android.widget.ImageView",2);
-        //关闭弹出框
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            //double Check Recommend list 0双击推荐列表第二个人，检查是否正确弹出框PROFILE_MINI_HOME是否正确
+            String expect_name=DiscoverAction.navToRecommendList(0,2);
+            //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
+            String active_name=getObjectById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
+            Spoon.screenshot("testDoubleClickRecommend0");
+            Asst.assertEquals("点击的推荐用户名与弹出信息框是否一致",expect_name,active_name);
+            //关闭弹出框
+            gDevice.pressBack();
+        }
     }
     @Test
     @SanityTest
@@ -79,16 +85,22 @@ public class RecommendCase extends VP2 {
      */
     public void testAddDelFriendsRed() throws UiObjectNotFoundException{
         DiscoverAction.scrollRecommendList();
-        String expect_name=DiscoverAction.navToRecommendList(1,1);
-        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
-        DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
-        //验证是否添加成功
-        DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
-        //取消关注
-        DiscoverAction.deleteFollowing(expect_name);
-        if (scrollAndGetUIObject(expect_name)!=null){
-            Spoon.screenshot("delete_user",expect_name);
-            Asst.fail("can not delete user success");
+        Spoon.screenshot("RecommendList","scrollRecommendList");
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            //关注第一个用户
+            String expect_name=DiscoverAction.navToRecommendList(0,1);
+            //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
+            DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
+            //验证是否添加关注成功
+            DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
+            //取消关注
+            DiscoverAction.deleteFollowing(expect_name);
+            //验证是否取消关注成功
+            if (scrollAndGetUIObject(expect_name)!=null){
+                Spoon.screenshot("delete_user",expect_name);
+                Asst.fail("can not delete user success");
+            }
         }
     }
     @Test
@@ -100,14 +112,18 @@ public class RecommendCase extends VP2 {
      */
     public void testSwipeRecommendAD() throws UiObjectNotFoundException{
         DiscoverAction.scrollRecommendList();
-        String expect_name=DiscoverAction.navToRecommendList(1,1);
-        DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
-        DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
-        //取消关注
-        DiscoverAction.deleteFollowing(expect_name);
-        if (scrollAndGetUIObject(expect_name)!=null){
-            Spoon.screenshot("delete_user",expect_name);
-            Asst.fail("can not delete user success");
+        Spoon.screenshot("RecommendList","scrollRecommendList");
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            String expect_name=DiscoverAction.navToRecommendList(1,1);
+            DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
+            DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
+            //取消关注
+            DiscoverAction.deleteFollowing(expect_name);
+            if (scrollAndGetUIObject(expect_name)!=null){
+                Spoon.screenshot("delete_user",expect_name);
+                Asst.fail("can not delete user success");
+            }
         }
     }
     @Test
@@ -117,13 +133,16 @@ public class RecommendCase extends VP2 {
      * [字体颜色，字体大小]无法实现，请检查截图或者
      */
     public void testCheckProfileMiniName() throws UiObjectNotFoundException{
-        String expect_name=DiscoverAction.navToRecommendList(1,1);
-        if (expect_name.length()>30){
-            Spoon.screenshot("testCheckrecommendProfileMiniName","Fail-Nick Name的字符串大于30个");
-            Assert.fail("Nick Name的字符串大于30个");
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            String expect_name=DiscoverAction.navToRecommendList(0,1);
+            if (expect_name.length()>30){
+                Spoon.screenshot("testCheckrecommendProfileMiniName","Fail-Nick Name的字符串大于30个");
+                Assert.fail("Nick Name的字符串大于30个");
+            }
+            //关闭弹出框
+            gDevice.pressBack();
         }
-        clickByClass("android.widget.ImageView",2);
-        //关闭弹出框
     }
     @Test
     @SanityTest
@@ -132,28 +151,31 @@ public class RecommendCase extends VP2 {
      * 检查刷新前后，前三个用户是否完全一致，判断是否刷新成功
      */
     public void testRefreshRecommendList() throws UiObjectNotFoundException{
-        String recommend_list_first_nickname_original=DiscoverAction.navToRecommendList(0,1);
-        clickByClass("android.widget.ImageView",2);
-        String recommend_list_second_nickname_original=DiscoverAction.navToRecommendList(1,1);
-        clickByClass("android.widget.ImageView",2);
-        String recommend_list_3rd_nickname_original=DiscoverAction.navToRecommendList(2,1);
-        clickByClass("android.widget.ImageView",2);
-        Spoon.screenshot("original_recommend_list","刷新前推荐列表");
-        getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
-        waitTime(2);
-        String recommend_list_first_nickname_new=DiscoverAction.navToRecommendList(0,1);
-        clickByClass("android.widget.ImageView",2);
-        String recommend_list_second_nickname_new=DiscoverAction.navToRecommendList(1,1);
-        clickByClass("android.widget.ImageView",2);
-        String recommend_list_3rd_nickname_new=DiscoverAction.navToRecommendList(2,1);
-        clickByClass("android.widget.ImageView",2);
-        Spoon.screenshot("original_recommend_list","刷新后推荐列表");
-        if (recommend_list_first_nickname_original.equals(recommend_list_first_nickname_new)
-                &&recommend_list_second_nickname_original.equals(recommend_list_second_nickname_new)
-                &&recommend_list_3rd_nickname_original.equals(recommend_list_3rd_nickname_new)){
-            Spoon.screenshot("after_refresh");
-        }else{
-            Asst.fail("刷新后的推荐列表前三位与刷新前不一致，请检查图片");
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            String recommend_list_first_nickname_original=DiscoverAction.navToRecommendList(0,1);
+            clickByClass("android.widget.ImageView",2);
+            String recommend_list_second_nickname_original=DiscoverAction.navToRecommendList(1,1);
+            clickByClass("android.widget.ImageView",2);
+            String recommend_list_3rd_nickname_original=DiscoverAction.navToRecommendList(2,1);
+            clickByClass("android.widget.ImageView",2);
+            Spoon.screenshot("original_recommend_list","刷新前推荐列表");
+            getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
+            waitTime(2);
+            String recommend_list_first_nickname_new=DiscoverAction.navToRecommendList(0,1);
+            clickByClass("android.widget.ImageView",2);
+            String recommend_list_second_nickname_new=DiscoverAction.navToRecommendList(1,1);
+            clickByClass("android.widget.ImageView",2);
+            String recommend_list_3rd_nickname_new=DiscoverAction.navToRecommendList(2,1);
+            clickByClass("android.widget.ImageView",2);
+            Spoon.screenshot("original_recommend_list","刷新后推荐列表");
+            if (recommend_list_first_nickname_original.equals(recommend_list_first_nickname_new)
+                    &&recommend_list_second_nickname_original.equals(recommend_list_second_nickname_new)
+                    &&recommend_list_3rd_nickname_original.equals(recommend_list_3rd_nickname_new)){
+                Spoon.screenshot("after_refresh");
+            }else{
+                Asst.fail("刷新后的推荐列表前三位与刷新前不一致，请检查图片");
+            }
         }
     }
     @Test
@@ -164,25 +186,29 @@ public class RecommendCase extends VP2 {
      */
     public void testFollowThenRefresh() throws UiObjectNotFoundException{
         DiscoverAction.scrollRecommendList();
-        String expect_name=DiscoverAction.navToRecommendList(1,1);
-        //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
-        DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
-        DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
-        gDevice.pressBack();
-        clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
-        Spoon.screenshot("recommend_list","推荐列表中有一个被Followed");
-        getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
-        waitTime(2);
-        String new_name=DiscoverAction.navToRecommendList(1,1);
-        if (expect_name.equals(new_name)){
-            Spoon.screenshot("recommend_list","推荐列表不应该有被Follwed");
-            Asst.fail("刷新后的推荐列表中被follow的用户没有消失");
-        }
-        //取消关注
-        DiscoverAction.deleteFollowing(expect_name);
-        if (scrollAndGetUIObject(expect_name)!=null){
-            Spoon.screenshot("delete_user",expect_name);
-            Asst.fail("can not delete user success");
+        Spoon.screenshot("RecommendList","scrollRecommendList");
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            String expect_name=DiscoverAction.navToRecommendList(0,1);
+            //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
+            DiscoverAction.checkMiniProfileNumFollowerAddOneAfterFollow();
+            DiscoverAction.checkAddFriendsInMyFollowing(expect_name);
+            gDevice.pressBack();
+            clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
+            Spoon.screenshot("recommend_list","推荐列表中有一个被Followed");
+            getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
+            waitTime(2);
+            String new_name=DiscoverAction.navToRecommendList(1,1);
+            if (expect_name.equals(new_name)){
+                Spoon.screenshot("recommend_list","推荐列表不应该有被Follwed");
+                Asst.fail("刷新后的推荐列表中被follow的用户没有消失");
+            }
+            //取消关注
+            DiscoverAction.deleteFollowing(expect_name);
+            if (scrollAndGetUIObject(expect_name)!=null){
+                Spoon.screenshot("delete_user",expect_name);
+                Asst.fail("can not delete user success");
+            }
         }
     }
     @Test
@@ -196,17 +222,21 @@ public class RecommendCase extends VP2 {
     public void testCloseRedList() throws UiObjectNotFoundException{
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         waitTime(3);
-        String expect_name=DiscoverAction.navToRecommendList(1,1);
-        //关闭弹出框
-        clickByClass("android.widget.ImageView",2);
-        logger.info(expect_name);
-        Rect rect=getUiObjectByText("WHO TO FOLLOW").getVisibleBounds();
-        int y=rect.centerY();
-        int x=gDevice.getDisplayWidth();
-        //你可能感兴趣-关闭按钮
-        gDevice.click(x-5,y);
-        boolean expect_name_exist=text_exists(expect_name);
-        Asst.assertEquals("关闭-你可能感兴趣",false,expect_name_exist);
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            String expect_name=DiscoverAction.navToRecommendList(0,1);
+            //关闭弹出框
+            //clickByClass("android.widget.ImageView",2);
+            gDevice.pressBack();
+            logger.info(expect_name);
+            Rect rect=getUiObjectByText("WHO TO FOLLOW").getVisibleBounds();
+            int y=rect.centerY();
+            int x=gDevice.getDisplayWidth();
+            //你可能感兴趣-关闭按钮
+            gDevice.click(x-5,y);
+            boolean expect_name_exist=text_exists(expect_name);
+            Asst.assertEquals("关闭-你可能感兴趣",false,expect_name_exist);
+        }
     }
     @Test
     @SanityTest
@@ -221,21 +251,24 @@ public class RecommendCase extends VP2 {
     public void testRecoverRedList() throws UiObjectNotFoundException{
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         waitTime(3);
-        String expect_name=DiscoverAction.navToRecommendList(1,1);
-        //关闭弹出框
-        clickByClass("android.widget.ImageView",2);
-        logger.info(expect_name);
-        Rect rect=getUiObjectByText("WHO TO FOLLOW").getVisibleBounds();
-        int y=rect.centerY();
-        int x=gDevice.getDisplayWidth();
-        //你可能感兴趣-关闭按钮
-        gDevice.click(x-5,y);
-        waitUntilRegexGone("WHO TO FOLLOW",10000);
-        boolean expect_name_exist=text_exists("WHO TO FOLLOW");
-        Asst.assertEquals("关闭-你可能感兴趣",false,expect_name_exist);
-        getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
-        waitTime(5);
-        expect_name_exist=text_exists("WHO TO FOLLOW");
-        Asst.assertEquals("恢复-你可能感兴趣",true,expect_name_exist);
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            String expect_name=DiscoverAction.navToRecommendList(0,1);
+            //关闭弹出框
+            clickByClass("android.widget.ImageView",2);
+            logger.info(expect_name);
+            Rect rect=getUiObjectByText("WHO TO FOLLOW").getVisibleBounds();
+            int y=rect.centerY();
+            int x=gDevice.getDisplayWidth();
+            //你可能感兴趣-关闭按钮
+            gDevice.click(x-5,y);
+            waitUntilRegexGone("WHO TO FOLLOW",10000);
+            boolean expect_name_exist=text_exists("WHO TO FOLLOW");
+            Asst.assertEquals("关闭-你可能感兴趣",false,expect_name_exist);
+            getObjectById(DiscoverPage.ID_DISCOVER_MAIN_CONTENT).swipeDown(50);
+            waitTime(5);
+            expect_name_exist=text_exists("WHO TO FOLLOW");
+            Asst.assertEquals("恢复-你可能感兴趣",true,expect_name_exist);
+        }
     }
 }
