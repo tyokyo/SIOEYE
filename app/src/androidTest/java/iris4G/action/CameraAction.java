@@ -535,6 +535,7 @@ public class CameraAction extends VP2 {
      * 5:"Lapse"
      */
     public static void navConfig(String text) throws Exception {
+        waitTime(1);
         gDevice.pressMenu();
         waitTime(1);
         Iris4GAction.ScrollViewByText(text);
