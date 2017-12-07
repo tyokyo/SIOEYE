@@ -235,6 +235,8 @@ public class CurrentTestCase extends VP2 {
         clickById(SettingPage.gallery_live_bottom);//点击live
         waitTime(2);
         clickById(SettingPage.gallery_live);
+        waitTime(1);
+        clickById(SettingPage.gallery_skip);
         checkGalleryToLiveStatusAndTryAgain(1);
         stopGalleryLive();
         waitTime(2);
@@ -247,6 +249,8 @@ public class CurrentTestCase extends VP2 {
         clickById(SettingPage.gallery_live_bottom);//点击live
         waitTime(2);
         clickById(SettingPage.gallery_live);
+        waitTime(1);
+        clickById(SettingPage.gallery_skip);
         checkGalleryToLiveStatusAndTryAgain(0);
         makeScreenOn();
         stopGalleryLive();
@@ -256,7 +260,7 @@ public class CurrentTestCase extends VP2 {
      * 检查相册直播是否发起成功，并会重试一次
      * 若两次均失败会产生一个两分钟的电流锯齿波
      */
-    private void checkGalleryToLiveStatusAndTryAgain(int a) throws Exception {
+    private void checkGalleryToLiveStatusAndTryAgain(int screenStatus ) throws Exception {
         waitUntilFindText("broadcasting",15000);
         if (!text_exists("broadcasting")){
             waitUntilFind(SettingPage.gallery_live_retry,3000);
@@ -289,13 +293,13 @@ public class CurrentTestCase extends VP2 {
             }else {
                 logger.info("retryLiveSuccess");
                 Spoon.screenshot("galleryRetryLiveSuccess","galleryRetryLiveSuccess");
-                if (a==0){makeScreenOff();}//判断用例该亮灭屏
+                if (screenStatus==0){makeScreenOff();}//判断用例该亮灭屏
                 waitTime(testTime-2);
             }
         }else {
             logger.info("LiveSuccess");
             Spoon.screenshot("galleryLiveSuccess","galleryLiveSuccess");
-            if (a==0){makeScreenOff();}
+            if (screenStatus==0){makeScreenOff();}
             waitTime(testTime-2);
         }
     }
@@ -350,14 +354,50 @@ public class CurrentTestCase extends VP2 {
         Iris4GAction.ScrollViewByText(videoQuality);
         clickByText(videoQuality);
         waitTime(2);
-        gDevice.pressBack();
         Spoon.screenshot("configLiveVideoQuality",videoQuality);
         logger.info(" -configLiveVideoQuality - "+videoQuality);
+        gDevice.pressBack();
+        waitTime(2);
+    }
+    private void configUserDefinedLiveQuality(String resolution,String minBitrate,String maxBitrate) throws
+            Exception {
+        makeScreenOn();
+        CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("Video Quality");
+        clickByText("Video Quality");
+        waitTime(2);
+        clickById(Iris4GPage.user_defined_setting_image_view);
+        waitTime(2);
+        Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"Resolution");
+        clickById(Iris4GPage.user_defined_resolution_options);
+        waitTime(1);
+        clickByText(resolution);
+        Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"Frame Rate");
+        clickById(Iris4GPage.user_defined_frame_rate);
+        waitTime(1);
+        clickByText("25");
+        if (resolution.equals("480P")){
+            Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"(range: 200Kbps ~ 5,000Kbps)");
+        }else {
+            Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"(range: 400Kbps ~ 10,000Kbps)");
+        }
+
+        Iris4GAction.setText(Iris4GPage.user_defined_min_bitrate,minBitrate);
+        Iris4GAction.setText(Iris4GPage.user_defined_max_bitrate,maxBitrate);
+        waitTime(1);
+//        Spoon.screenshot("configLiveVideoQuality");
+        logger.info(" -configLiveVideoQuality - ");
+        clickById(Iris4GPage.user_defined_sure);
+        gDevice.pressBack();
         waitTime(2);
     }
     private void configVideoAngle(String VideoAngle) throws Exception {
         makeScreenOn();
         CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
         waitTime(1);
         Iris4GAction.ScrollViewByText("Video Angle");
         clickByText("Video Angle");
@@ -372,6 +412,9 @@ public class CurrentTestCase extends VP2 {
     private void clickLiveMute() throws Exception {
         makeScreenOn();
         CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
         waitTime(1);
         Iris4GAction.ScrollViewByText("Live Mute");
         CameraAction.openCompoundButton("Live Mute");
@@ -388,6 +431,9 @@ public class CurrentTestCase extends VP2 {
     private void changeUpDownTo(String UpDown) throws Exception {
         makeScreenOn();
         CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
         waitTime(1);
         Iris4GAction.ScrollViewByText("Up/Down");
         clickByText("Up/Down");
@@ -433,10 +479,24 @@ public class CurrentTestCase extends VP2 {
     private void makeToasts(String message,int time) throws IOException {
 //        initDevice();
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
-        logger.info(command);
+                logger.info(command);
         gDevice.executeShellCommand(command);
     }
     private void clickSwitch(String switchName) throws Exception {
+        makeScreenOn();
+        clickById(Iris4GPage.camera_setting_shortcut_id);
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
+        waitTime(1);
+        Iris4GAction.ScrollViewByText(switchName);
+        CameraAction.openCompoundButton(switchName);
+        logger.info("已点击" + switchName);
+        waitTime(2);
+        gDevice.pressBack();
+        waitTime(2);
+    }
+    private void clickSwitchForVideo(String switchName) throws Exception {
         makeScreenOn();
         clickById(Iris4GPage.camera_setting_shortcut_id);
         waitTime(1);
@@ -503,18 +563,12 @@ public class CurrentTestCase extends VP2 {
         //登录账号
         AccountAction.loginAccount(useName, password);
     }
-//    @Test
-//    public void testGalleryLive() throws Exception {
-//        live2ScreenOn();
-//        Iris4GAction.startGallery();
-//        galleryLiveScreenOff();
-//    }
 
     @Test
     public void testForCurrent() throws Exception {
-        String liveQuality480SD="480@25FPS(SD)",
-                liveQuality480HD="480@25FPS(HD)",
-                liveQuality720HD="720@25FPS(HD)";
+        String liveQuality480="480@25FPS(Bitrate0.3-4Mbps)",
+                liveQuality720HD="720@25FPS(Bitrate1.3-6Mbps)",
+                liveQualityUserDefined="User Defined(720@30FPS Bitrate0.4-10.0Mbps)";
         String videoQuality1080P25="1080@25FPS",
                 videoQuality720P60="720@60FPS",
                 videoQuality720P25="720@25FPS",
@@ -601,13 +655,12 @@ public class CurrentTestCase extends VP2 {
             CameraAction.navConfig(Iris4GPage.nav_menu[1]);//Video Modem
             waitTime(2);
             configVideoQuality(videoQuality720P25);
-            waitTime(testTime);
+            waitTime(testTime+20);
             //录播
-            waitTime(10);
-            clickSwitch(switchName[2]);//开启录播
+            clickSwitchForVideo(switchName[2]);//开启录播
             p2pScreenOn();
             p2pScreenOff();
-            clickSwitch(switchName[2]);//关闭录播
+            clickSwitchForVideo(switchName[2]);//关闭录播
             //主屏幕亮屏待机 6分钟
             gDevice.pressBack();
             gDevice.pressBack();
@@ -619,31 +672,41 @@ public class CurrentTestCase extends VP2 {
             launchCamera();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
-            configVideoQuality(liveQuality480HD);
-            live2ScreenOn();
-            live2ScreenOff();
+//            configVideoQuality(liveQuality480HD);
+//            live2ScreenOn();
+//            live2ScreenOff();
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
             live2ScreenOff();
             //4G 保存直播
             Iris4GAction.clickLiveAndSave();//开启直播保存
             waitTime(2);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
-            configVideoQuality(liveQuality480HD);
-            live2ScreenOn();
-            live2ScreenOff();
+//            configVideoQuality(liveQuality480HD);
+//            live2ScreenOn();
+//            live2ScreenOff();
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
             live2ScreenOff();
             Iris4GAction.clickLiveAndSave();//关闭直播保存
             waitTime(1);
-            //高度计
-            configVideoQuality(liveQuality480SD);
+            //自定义直播质量
+            configUserDefinedLiveQuality("480P","200","200");
+            live2ScreenOff();
+            configUserDefinedLiveQuality("480P","5000","5000");
+            live2ScreenOff();
+            configUserDefinedLiveQuality("720P","400","400");
+            live2ScreenOff();
+            configUserDefinedLiveQuality("720P","10000","10000");
+            live2ScreenOff();
+
+            //其他设置项 高度计
+            configVideoQuality(liveQuality480);
             waitTime(2);
             clickSwitch(switchName[0]);//开启高度计
             live2ScreenOff();
@@ -677,6 +740,7 @@ public class CurrentTestCase extends VP2 {
             live2ScreenOff();
             configVideoAngle(videoAngle[0]);//视场角为普通(默认)
             liveOfBiggerZoom();
+
             //3G直播不保存
             gDevice.pressBack();
             gDevice.pressBack();
@@ -684,7 +748,7 @@ public class CurrentTestCase extends VP2 {
             launchCamera();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
             //3G直播保存
@@ -700,19 +764,19 @@ public class CurrentTestCase extends VP2 {
             launchCamera();
             CameraAction.navConfig(Iris4GPage.nav_menu[0]);//Live Modem
             waitTime(2);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
-            configVideoQuality(liveQuality480HD);
-            live2ScreenOn();
-            live2ScreenOff();
+//            configVideoQuality(liveQuality480HD);
+//            live2ScreenOn();
+//            live2ScreenOff();
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
             live2ScreenOff();
             //WIFI保存
             Iris4GAction.clickLiveAndSave();//开启直播保存
             waitTime(1);
-            configVideoQuality(liveQuality480SD);
+            configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
             Iris4GAction.clickLiveAndSave();//关闭直播保存
@@ -724,11 +788,13 @@ public class CurrentTestCase extends VP2 {
         gDevice.executeShellCommand("reboot -p ");
     }
 //    @Test
-//    public void testClickAirModem() throws Exception {
-//        gDevice.pressBack();
-//        gDevice.pressBack();
-//        waitTime(3);
-//        Iris4GAction.startGallery();
-//        galleryLiveScreenOff();
+//    public void testGalleryLive() throws Exception {
+//        configUserDefinedLiveQuality("480P","200","200");
+//        live2ScreenOff();
+//        configUserDefinedLiveQuality("480P","5000","5000");
+//        live2ScreenOff();
+//        configUserDefinedLiveQuality("720P","400","400");
+//        live2ScreenOff();
+//        configUserDefinedLiveQuality("720P","10000","10000");
 //    }
 }

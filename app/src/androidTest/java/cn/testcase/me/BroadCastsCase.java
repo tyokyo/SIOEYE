@@ -66,8 +66,6 @@ public class BroadCastsCase extends VP2{
             BroadcastAction.waitBroadcastLoading();
             gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
             Asst.assertTrue("time out 60 seconds.",!getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
-            //click play screen center
-            //clickById(MePage.BROADCAST_VIEW_WATCHER_COUNT,0,100);
             Spoon.screenshot("play_video");
         }
     }
@@ -207,28 +205,7 @@ public class BroadCastsCase extends VP2{
         if (broadcast_size>=1){
             int index=BroadcastAction.getRandomBroadcastsIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcastsElement(index);
-            broadcast.swipe(Direction.LEFT,0.9f);
-            waitUntilFind(MePage.BROADCAST_DELETE,10000);
-            clickById(MePage.BROADCAST_DELETE);
-            //编辑视频标题
-            clickByText("Edit the title");
-            String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
-            //修改title
-            getUiObjectById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY).clearTextField();
-            String input_title=getRandomString(15);
-            clickById(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
-            shellInputText(input_title);
-            gDevice.pressBack();
-            //确认
-            clickById(MePage.BROADCAST_EDIT_OK);
-            waitTime(5);
-            BroadcastBean activeBean = BroadcastAction.getBroadcastBean(index);
-            String active_title = activeBean.getBroadcast_title();
-            Asst.assertEquals("modify title",input_title,active_title);
-            Spoon.screenshot("modify_title",input_title);
-            BroadcastAction.deleteBroadcast(input_title);
-            Asst.assertEquals("delete success",false,text_exists(input_title));
-            Spoon.screenshot("delete_broadcast",input_title);
+            BroadcastAction.deleteBroadcast(broadcast);
         }
     }
     //验证-评论，允许的最大字符数
@@ -417,7 +394,7 @@ public class BroadCastsCase extends VP2{
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
-            MeAction.swipeUpDown(MePage.BROADCASTS_LIST,10);
+            MeAction.swipeUpDown(MePage.BROADCASTS_LIST,1);
             int index=BroadcastAction.getRandomBroadcastsIndex();
             BroadcastAction.clickRandomBroadcastsVideo(index);
             BroadcastAction.waitBroadcastLoading();
@@ -427,5 +404,66 @@ public class BroadCastsCase extends VP2{
             gDevice.pressBack();
         }
     }
+    /**
+     * 分享直播列表中的视频
+     * zhangyajuan 2017.9.19
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testShareBroadcast() throws UiObjectNotFoundException {
+        MeAction.navToBroadcasts();
+        int broadcast_size=BroadcastAction.getBroadcastsSize();
+        if (broadcast_size>=1){
+            int index=BroadcastAction.getRandomBroadcastsIndex();
+            UiObject2 object=BroadcastAction.getRandomBroadcastsElement(index);
+            UiObject2 view=BroadcastAction.getVideoAction(object);
+            view.getChildren().get(1).click(); //点击分享
+            waitUntilFind(MePage.BROADCAST_SHARE,3000);
+            Asst.assertTrue(id_exists(MePage.BROADCAST_SHARE));
+        }
+    }
+    /**
+     * 播放直播间视频
+     *  zhangyajuan 2017.9.27
+     *  */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testPlayRoomVideo() throws UiObjectNotFoundException {
+        MeAction.navToBroadcasts();
+        int broadcast_size=BroadcastAction.getBroadcastsSize();
+        if (broadcast_size>=1){
+            int index=BroadcastAction.getRandomBroadcastsRoomIndex();
+            logger.info("Index-"+index);
+            BroadcastAction.clickRandomBroadcastsVideo(index);
+            BroadcastAction.waitBroadcastLoading();
+            gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
+            Asst.assertTrue("time out 60 seconds.",!getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+            Spoon.screenshot("play_video");
+        }
+    }
+    /**
+     * 修改普通视频封面（只能调出相机或相册选项）
+     *  zhangyajuan 2017.9.27
+     *  */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testChangeVideoCover() throws UiObjectNotFoundException {
+        MeAction.navToBroadcasts();
+        int broadcast_size=BroadcastAction.getBroadcastsSize();
+        if (broadcast_size>=1){
+            int index=BroadcastAction.getRandomBroadcastsWithNoRoomIndex();
+            UiObject2 object=BroadcastAction.getRandomBroadcastsElement(index);
+            UiObject2 view=BroadcastAction.getVideoAction(object);
+            view.getChildren().get(2).click(); //点击封面
+            waitUntilFind(MePage.COVER_PLOT_BTN_DIALOG_PHOTO,3000);
+            Asst.assertTrue(id_exists(MePage.COVER_PLOT_BTN_DIALOG_PHOTO)); // 相机
+            Asst.assertTrue(id_exists(MePage.COVER_PLOT_BTN_DIALOG_ALBUM)); // 相册
+            clickById(MePage.BROADCAST_CANCEL);
+        }
+    }
+
 
 }

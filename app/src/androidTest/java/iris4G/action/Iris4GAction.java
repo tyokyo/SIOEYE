@@ -31,9 +31,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
+import iris4G.page.GalleryPage;
 import iris4G.page.Iris4GPage;
 import iris4G.page.NavPage;
-import iris4G.page.SettingPage;
 
 /**
  * Created by elon on 2016/11/21.
@@ -320,7 +320,7 @@ public class Iris4GAction extends VP2 {
         waitTime(10);
         clickByPonit(60,60);
         waitTime(1);
-        if (!id_exists(SettingPage.gallery_live_bottom)){
+        if (!id_exists(GalleryPage.gallery_delete_bottom)){
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
@@ -459,6 +459,8 @@ public class Iris4GAction extends VP2 {
     public static void clickLiveAndSave() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
         Iris4GAction.ScrollViewByText("Live&Save");
         CameraAction.openCompoundButton("Live&Save");
         waitUntilFindText("OK", 5000);

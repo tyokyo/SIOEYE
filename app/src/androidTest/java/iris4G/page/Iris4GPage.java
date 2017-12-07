@@ -48,7 +48,12 @@ public class Iris4GPage {
             "720@25FPS",
             "480@25FPS",
             "480@30FPS"
-            };
+    };
+    public static String[] live_quality={
+            "720@25FPS(Bitrate1.3-6Mbps)",
+            "480@25FPS(Bitrate0.3-4Mbps)",
+            "User Defined(720@30FPS Bitrate0.4-10.0Mbps)"
+    };
     public static String[] imsge_size ={
             "4M(16:9)",
             "3M(4:3)",
@@ -85,4 +90,14 @@ public class Iris4GPage {
     public static String seekbarforzoom_id="com.hicam:id/seekbarforzoom";
     public static String btn_manual="com.hicam:id/btn_manual";
 
+
+    //user defined
+    public static String user_defined_setting_image_view="com.hicam:id/settingImageView";
+    public static String user_defined_resolution_options="com.hicam:id/live_quality_resolution_options";
+    public static String user_defined_frame_rate="com.hicam:id/frame_rate";
+    public static String user_defined_min_bitrate="com.hicam:id/live_quality_min_bitrate";
+    public static String user_defined_max_bitrate="com.hicam:id/live_quality_max_bitrate";
+    public static String user_defined_cancel="com.hicam:id/quality_cancel";
+    public static String user_defined_sure="com.hicam:id/quality_sure";
+    public static String user_defined_scrollView="com.hicam:id/scrollView";
 }

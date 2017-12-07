@@ -78,11 +78,8 @@ public class MePage {
     //broadcasts
     public static final String BROAD_TIP_TEXT="cn.sioeye.sioeyeapp:id/tipText";
     public static final String BROADCASTS_LIST="cn.sioeye.sioeyeapp:id/recyclerview_broadcasts";
-    public static final String BROADCAST_VIEW="cn.sioeye.sioeyeapp:id/hsv_view";
+    public static final String BROADCAST_VIEW="cn.sioeye.sioeyeapp:id/swipeLayout";
     public static final String BROADCAST_TITLE="cn.sioeye.sioeyeapp:id/broadcast_title";
-    public static final String BROADCAST_DESC="cn.sioeye.sioeyeapp:id/broadcast_desc";
-    public static final String BROADCAST_TIME="cn.sioeye.sioeyeapp:id/broadcast_time";
-    public static final String BROADCAST_LIKE="cn.sioeye.sioeyeapp:id/broadcast_like";
     public static final String BROADCAST_CONTENT="cn.sioeye.sioeyeapp:id/llt_broadcast_content";
     //编辑视频标题
     public static final String BROADCAST_EDIT_TITLE="cn.sioeye.sioeyeapp:id/edit_broadcasts_title";
@@ -96,8 +93,9 @@ public class MePage {
     public static final String BROADCAST_VIDEO_THUMB="cn.sioeye.sioeyeapp:id/sdv_preview";
     public static final String BROADCAST_VIDEO_MORE_OPTION_LIST="cn.sioeye.sioeyeapp:id/option_list";
 
-
-
+   //分享弹出框
+    public static final String BROADCAST_SHARE="cn.sioeye.sioeyeapp:id/rv_share";
+    public static final String BROADCAST_CANCEL="cn.sioeye.sioeyeapp:id/cancel";
     //modify title
     public static final String BROADCAST_VIEW_VIDEO_TITLE_MODIFY="cn.sioeye.sioeyeapp:id/content";
 
@@ -105,7 +103,7 @@ public class MePage {
     public static final String BROADCAST_VIEW_VIDEO_DELETE="cn.sioeye.sioeyeapp:id/delete_ok";
 
     //refresh ui
-    public static final String BROADCAST_VIEW_STATUS_IMAGE="cn.sioeye.sioeyeapp:id/status_image";
+    public static final String BROADCAST_VIEW_STATUS_IMAGE="cn.sioeye.sioeyeapp:id/view_status";
 
     //allow sioeye to access this devices location
     public static final String LOCATION_PERMISSION_DENY="com.android.packageinstaller:id/permission_deny_button";
@@ -172,10 +170,11 @@ public class MePage {
     public static final String HELP_POLICY="cn.sioeye.sioeyeapp:id/privacy_policy";
     public static final String HELP_VERSION_CHECK="cn.sioeye.sioeyeapp:id/version_check";
     public static final String HELP_EMULA="cn.sioeye.sioeyeapp:id/eula";
-
+    public static final String HELP_MANAGEMENT="cn.sioeye.sioeyeapp:id/management";
     public static final String HELP_HELP="cn.sioeye.sioeyeapp:id/help";
     public static final String HELP_HELP_NAV_WEB="com.android.chrome:id/url_bar";
-
+   //使用指南
+    public static final String USER_GUIDE="cn.sioeye.sioeyeapp:id/user_guide";
 
     public static final String HELP_ABOUT="cn.sioeye.sioeyeapp:id/about";
     public static final String HELP_ABOUT_VERSION="cn.sioeye.sioeyeapp:id/version";
@@ -307,5 +306,16 @@ public class MePage {
     public static final String NOTIFICATION_WATCH_VIDEO = "cn.sioeye.sioeyeapp:id/llt_video_info";
     public static final String NOTIFICATION_DETAIL = "cn.sioeye.sioeyeapp:id/tv_detail";
     public static final String NOTIFICATION_COMMENT = "cn.sioeye.sioeyeapp:id/expandable_text";
-
+    //收藏
+    public static final String COLLECION_EMPTY="cn.sioeye.sioeyeapp:id/status_text";
+    //直播间
+    public static final String LIVE_ROOM="cn.sioeye.sioeyeapp:id/llt_create_single_room";
+    //直播间描述
+    public static final String LIVE_ROOM_INFO="cn.sioeye.sioeyeapp:id/room_intro";
+    //创建多个直播间按钮
+    public static final String CREAT_LIVE_ROOM="cn.sioeye.sioeyeapp:id/llt_muti_room_create";
+    //直播间名字
+    public static final String LIVE_ROOM_NAME="cn.sioeye.sioeyeapp:id/et_room_name";
+    //2017/11/30修改，“我”界面滑动界面ID
+    public static final String SCROLL_ME_VIEW = "cn.sioeye.sioeyeapp:id/scrollview";
 }

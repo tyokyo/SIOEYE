@@ -164,11 +164,10 @@ public class AccountCase extends VP2{
         AccountAction.navToSignUp_ByEmail();
         //输入有效邮件地址
         setText(AccountPage.SIGN_UP_ACCOUNT_EMAIL_ADDRESS_ET_INPUT,email_address);
-        waitUntilFind(AccountPage.SIGN_UP_ACCOUNT_TV_CONTENT,10);
+        waitUntilFind(AccountPage.SIGN_UP_ERROR_TIP,10);
         //check
         String pop_message="This email address has been registered";
-        Asst.assertEquals(pop_message,pop_message,getTex(AccountPage.SIGN_UP_ACCOUNT_OK_NEUTRAL));
-        AccountAction.logInAccount(Constant.userName,Constant.passwd);
+        Asst.assertEquals(pop_message,pop_message,getTex(AccountPage.SIGN_UP_ERROR_TIP));
     }
     /*
     Email注册

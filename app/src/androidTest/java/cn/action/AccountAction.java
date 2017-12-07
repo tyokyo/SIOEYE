@@ -30,6 +30,11 @@ public class AccountAction extends VP2{
             logger.info("当前账号已经处于logout状态");
         }else{
             //clickById(MePage.SETTINGS_USER_MAIN);
+            //2017/11/30修改，小屏手机找不到Settings，需要滑动实现
+            if(!text_exists_contain("Settings")){
+                UiObject2 swipe_target = getObject2ById(MePage.SCROLL_ME_VIEW);
+                swipe_target.swipe(Direction.UP, 0.6f);
+            }
             clickByText("Settings");
             clickByText("Account and Security");
             //clickById(AccountPage.LOG_OUT);
@@ -77,7 +82,7 @@ public class AccountAction extends VP2{
             if (text_exists("Log in")){
                 logger.info("===============================================================");
             }
-            clickTextContain("Log");
+            clickByText("Log in");
             /*
             如果手机sdcard存在config.properties
             并且内容为
@@ -127,6 +132,10 @@ public class AccountAction extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MainAction.clickMe();
         clickByText("Log in");
+    }
+    //点击验证码登录
+    public static void navToSMScode()throws UiObjectNotFoundException{
+        clickByText("SMS Code");
     }
     //进入Sign Up界面-mobile
     public static void navToSignUp_ByMobile() throws UiObjectNotFoundException {
