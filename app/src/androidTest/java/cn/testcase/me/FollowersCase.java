@@ -113,9 +113,9 @@ public class FollowersCase extends VP2 {
                 //输入评论内容
                 clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
+                waitTime(2);
                 //点击评论
                 clickByPoint(point);
-                gDevice.pressBack();
                 waitTime(2);
                 //滑动显示最新消息
                 MeAction.displayNewMessages();
@@ -171,9 +171,9 @@ public class FollowersCase extends VP2 {
                 //输入评论内容
                 clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
+                waitTime(2);
                 //点击评论
                 clickByPoint(point);
-                gDevice.pressBack();
                 waitTime(2);
                 //滑动显示最新消息
                 MeAction.displayNewMessages();
@@ -229,9 +229,9 @@ public class FollowersCase extends VP2 {
                 //输入评论内容
                 clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
+                waitTime(2);
                 //点击评论
                 clickByPoint(point);
-                gDevice.pressBack();
                 waitTime(2);
                 //滑动显示最新消息
                 MeAction.displayNewMessages();

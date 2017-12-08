@@ -20,7 +20,6 @@ import bean.FollowingBean;
 import bean.UserBean;
 import ckt.base.VP2;
 import cn.page.MePage;
-import cn.page.WatchPage;
 
 /**
  * Created by elon on 2016/10/27.
@@ -47,6 +46,7 @@ public class FollowingAction extends VP2{
     public static void clickRandomFollower(FollowingBean followingBean) throws UiObjectNotFoundException {
         scrollAndGetUIObject(followingBean.getName()).clickAndWaitForNewWindow();
         Spoon.screenshot("clickRandomFollower","Name-"+followingBean.getName());
+        waitUntilFind(MePage.USER_FOLLOW_LIST,10000);
     }
     //关注数目
     public static int getFollowingSize(){

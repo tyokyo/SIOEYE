@@ -4,7 +4,6 @@ import android.graphics.Point;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
@@ -28,7 +27,6 @@ import cn.action.PlayAction;
 import cn.page.App;
 import cn.page.MePage;
 import cn.page.PlayPage;
-
 import static cn.action.PlayAction.getNumberPlayVideo;
 
 /**
@@ -458,7 +456,7 @@ public class BroadCastsCase extends VP2{
             UiObject2 object=BroadcastAction.getRandomBroadcastsElement(index);
             UiObject2 view=BroadcastAction.getVideoAction(object);
             view.getChildren().get(2).click(); //点击封面
-            waitUntilFind(MePage.COVER_PLOT_BTN_DIALOG_PHOTO,3000);
+            waitUntilFind(MePage.COVER_PLOT_BTN_DIALOG_PHOTO,10000);
             Asst.assertTrue(id_exists(MePage.COVER_PLOT_BTN_DIALOG_PHOTO)); // 相机
             Asst.assertTrue(id_exists(MePage.COVER_PLOT_BTN_DIALOG_ALBUM)); // 相册
             clickById(MePage.BROADCAST_CANCEL);

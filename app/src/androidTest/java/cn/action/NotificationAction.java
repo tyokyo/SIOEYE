@@ -1,42 +1,26 @@
 package cn.action;
 
-import android.content.pm.PackageManager;
-import android.graphics.Point;
-import android.os.SystemClock;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.BySelector;
-import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.squareup.spoon.Spoon;
-
 import org.hamcrest.Asst;
-import org.junit.Assert;
-
-import java.io.IOException;
-import java.nio.channels.Selector;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Logger;
-
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
-import usa.page.Discover;
+import cn.page.NotificationPage;
 
 /**
  * Created by jqx on 2017/8/18.
  */
 public class NotificationAction extends VP2 {
-    private static Logger logger = Logger.getLogger(MeAction.class.getName());
+    private static Logger logger = Logger.getLogger(NotificationAction.class.getName());
     //获取评论数
     public static int replyCommentSize(){
         waitHasObject(MePage.BROADCAST_CONTENT,50000);
@@ -45,17 +29,71 @@ public class NotificationAction extends VP2 {
         logger.info("getCommentsSize:"+size);
         return  size;
     }
-    //随机获取一个comments对象的index
-    public static int getRandomCommentsIndex(){
-        List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.NOTIFICATION_WATCH_VIDEO));
-        int size = lisCollect.size();
-        logger.info("getRandomCommentsIndex-size:"+size);
-        Random random = new Random();
-        int rd = random.nextInt(size);
-        logger.info("size-"+size+"random:"+rd);
-        return  rd==0?rd:rd-1;
+    //获取所有的notification(未关注的) 不包括Sioeye Team
+    public static List<UiObject2> getAllNotificationsCanBeFollowed() throws UiObjectNotFoundException {
+        List<UiObject2> notifications=null;
+        List<UiObject2> results=new ArrayList<UiObject2>();
+        notifications=gDevice.findObject(By.res(NotificationPage.NTF_LIST)).findObjects(By.depth(1).clazz(android.widget.LinearLayout.class));
+        logger.info(notifications.size()+"");
+        int size = notifications.size();
+        for (int i = 0; i < size; i++) {
+            UiObject2 not = notifications.get(i);
+            if ( not.hasObject(By.res(NotificationPage.NTF_NICK_NAME))){
+                String nickName=not.findObject(By.res(NotificationPage.NTF_NICK_NAME)).getText();
+                if (!nickName.startsWith("Sioeye")){
+                    UiObject2 follow =getNotificationAddDelFollowBtn(not);
+                    if (follow!=null){
+                        results.add(follow);
+                    }
+                }
+            }
+        }
+        return results;
     }
-    //随机获取一个Comments对象
+    //获取所有的notification(关注的) 不包括Sioeye Team
+    public static List<UiObject2> getAllNotificationsHasBeFollowed() throws UiObjectNotFoundException {
+        List<UiObject2> notifications=null;
+        List<UiObject2> results=new ArrayList<UiObject2>();
+        notifications=gDevice.findObject(By.res(NotificationPage.NTF_LIST)).findObjects(By.depth(1).clazz(android.widget.LinearLayout.class));
+        logger.info(notifications.size()+"");
+        int size = notifications.size();
+        for (int i = 0; i < size; i++) {
+            UiObject2 not = notifications.get(i);
+            if ( not.hasObject(By.res(NotificationPage.NTF_NICK_NAME))){
+                String nickName=not.findObject(By.res(NotificationPage.NTF_NICK_NAME)).getText();
+                if (!nickName.startsWith("Sioeye")){
+                    UiObject2 follow =getNotificationAddDelFollowBtn(not);
+                    if (follow==null){
+                        results.add(follow);
+                    }
+                }
+            }
+        }
+        return results;
+    }
+    //获取通知对象
+    public static UiObject2 getRandomNotificationObject(int index){
+        List<UiObject2> lisCollect =gDevice.findObject(By.res(NotificationPage.NTF_LIST)).findObjects(By.depth(1).clazz(android.widget.LinearLayout.class));
+        UiObject2 notification = lisCollect.get(index);
+        return  notification;
+    }
+    //获取通知->头像
+    public static UiObject2 getNotificationIcon(UiObject2 notification){
+        //第一个imageView
+        UiObject2 avatar = notification.findObjects(By.clazz(android.widget.ImageView.class)).get(0);
+        return  notification;
+    }
+    //获取通知->关注/取消关注按钮
+    public static UiObject2 getNotificationAddDelFollowBtn(UiObject2 notification){
+        //ViewGroup ->第一个imageView
+        UiObject2 followBtn=null;
+        try {
+            followBtn = notification.findObject(By.clazz(android.view.ViewGroup.class)).getParent().findObject(By.depth(1).clazz(android.widget.ImageView.class));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  followBtn;
+    }
     public static UiObject2 getRandomComments(int index){
         List<UiObject2> lisCollect = gDevice.findObjects(By.clazz("android.widget.LinearLayout"));
         logger.info("getRandomBroadcasts:"+lisCollect.size());

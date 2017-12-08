@@ -103,7 +103,6 @@ public class FollowingCase extends VP2 {
             shellInputText(input_comments);
             //点击评论
             clickByPoint(point);
-            gDevice.pressBack();
             waitTime(2);
             //滑动显示最新消息
             MeAction.displayNewMessages();
@@ -112,9 +111,13 @@ public class FollowingCase extends VP2 {
             //验证评论数+1
             VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
             int  after_comments = videoBean_after.getComment();
-            Asst.assertEquals(comments_before+1,after_comments);
-            Spoon.screenshot("testComments_Length_120",input_comments);
-            gDevice.pressBack();
+            if (comments_before>=1000){
+
+            }else{
+                Asst.assertEquals(comments_before+1,after_comments);
+                Spoon.screenshot("testComments_Length_120",input_comments);
+                gDevice.pressBack();
+            }
         }
     }
     //验证-评论 超过最大的字符限制
@@ -139,19 +142,22 @@ public class FollowingCase extends VP2 {
             shellInputText(input_comments);
             //点击评论
             clickByPoint(point);
-            gDevice.pressBack();
             waitTime(2);
             //滑动显示最新消息
             MeAction.displayNewMessages();
             waitTime(2);
-            input_comments=input_comments.substring(0,120);
+            input_comments=input_comments.substring(0,60);
             Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
             int  after_comments = videoBean_after.getComment();
-            Asst.assertEquals(comments_before+1,after_comments);
-            Spoon.screenshot("testComments_Length_130",input_comments);
-            gDevice.pressBack();
+            if (comments_before>=1000){
+                Asst.assertEquals(comments_before,after_comments);
+            }else{
+                Asst.assertEquals(comments_before+1,after_comments);
+                Spoon.screenshot("testComments_Length_130",input_comments);
+                gDevice.pressBack();
+            }
         }
     }
     //评论-关注的好友中的直播视频
@@ -192,13 +198,16 @@ public class FollowingCase extends VP2 {
                 //input_comments=input_comments.substring(0,120);
                 Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
                 //验证评论数+1
-                gDevice.pressBack();
                 VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
                 int  after_comments = videoBean_after.getComment();
-                Asst.assertEquals(comments_before+1,after_comments);
-                Spoon.screenshot("testFollowingComments_Length_20",input_comments);
-                gDevice.pressBack();
-                Spoon.screenshot("play_20_seconds");
+                if (comments_before>=1000){
+                    Asst.assertEquals(comments_before,after_comments);
+                }else{
+                    Asst.assertEquals(comments_before+1,after_comments);
+                    Spoon.screenshot("testFollowingComments_Length_20",input_comments);
+                    gDevice.pressBack();
+                    Spoon.screenshot("play_20_seconds");
+                }
             }else {
                 Spoon.screenshot("no_video","没有直播的视频");
             }

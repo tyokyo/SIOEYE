@@ -1,12 +1,9 @@
 package cn.testcase.me;
 
-import android.app.Notification;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
@@ -29,6 +26,7 @@ import cn.action.MeAction;
 import cn.action.NotificationAction;
 import cn.page.App;
 import cn.page.MePage;
+import cn.page.NotificationPage;
 import cn.page.WatchPage;
 import usa.page.Me;
 
@@ -139,6 +137,34 @@ public class NotificationCase extends VP2 {
         isFollow = NotificationAction.getFollowButton();
         Asst.assertTrue(isFollow);
         Spoon.screenshot("is_follow_comments_success");
+    }
+    //add first follow
+    public void testAddFollowByNotification() throws UiObjectNotFoundException, IOException{
+        MeAction.navToNotifications();
+        waitTime(3);
+        List<UiObject2> notifications= NotificationAction.getAllNotificationsCanBeFollowed();
+        if (notifications.size()>=1){
+            UiObject2 follow = notifications.get(0);
+            UiObject2 avatar=NotificationAction.getNotificationIcon(follow);
+            //click user avatar
+            avatar.click();
+            //get follower count
+
+            clickById(NotificationPage.NTF_FOLLOW);
+            waitTime(3);
+            //follower +1
+
+            gDevice.pressBack();
+        }
+    }
+    //delete user has been followed
+    public void testDelFollowByNotification() throws UiObjectNotFoundException, IOException{
+        MeAction.navToNotifications();
+        waitTime(3);
+        List<UiObject2> notifications= NotificationAction.getAllNotificationsHasBeFollowed();
+        if (notifications.size()>=1){
+
+        }
     }
     /**
      * Created by jqx on 2017/9/7.
