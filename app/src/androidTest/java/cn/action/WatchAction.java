@@ -31,11 +31,16 @@ import cn.page.WatchPage;
  */
 public class WatchAction extends VP2 {
     public static Logger logger = Logger.getLogger(WatchAction.class.getName());
-
+    /*获取所有的直播对象*/
+    public static List<UiObject2> getLiveObjects() {
+        List<UiObject2> liveList = new ArrayList<>();
+        liveList=gDevice.findObjects(By.clazz(android.widget.TextView.class).text("LIVE"));
+        return  liveList;
+    }
     /*
-    视频的视频长度对应的-Object
+    视频的视频长度对应的-Object  回放视频
     * */
-    public static List<UiObject2> getDurationObjects() {
+    public static List<UiObject2> getPlayBackObjects() {
         List<UiObject2> dus = new ArrayList<>();
         List<UiObject2> frameLayouts = gDevice.findObjects(By.clazz(android.widget.FrameLayout.class));
         for (UiObject2 obj : frameLayouts) {

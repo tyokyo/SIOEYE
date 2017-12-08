@@ -13,6 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import ckt.annotation.PerformanceTest;
@@ -37,6 +39,51 @@ public class WatchViewCase extends VP2 {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         AccountAction.inLogin();
     }
+    /*播放第一个直播视频*/
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testPlayFirstLiveVideo() throws UiObjectNotFoundException, ParseException {
+        //进入Watch Page
+        WatchAction.navToWatch();
+        waitUntilFind(WatchPage.WATCH_LIST,10000);
+        //获取正在直播的视频列表
+        List<UiObject2> liveList =WatchAction.getLiveObjects();
+        if (liveList.size()>=1){
+            //播放第一个视频
+            liveList.get(0).click();
+            //等待视频加载完成
+            BroadcastAction.waitBroadcastLoading();
+        }
+    }
+    /*回放视频*/
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testPlayBackVideo() throws UiObjectNotFoundException, ParseException {
+        //进入Watch Page
+        WatchAction.navToWatch();
+        waitUntilFind(WatchPage.WATCH_LIST,10000);
+        List<UiObject2> playBackList=new ArrayList<>();
+        //获取回放的视频列表
+        for (int i = 0; i <10 ; i++) {
+            playBackList =WatchAction.getPlayBackObjects();
+            if (playBackList.size()>=1){
+                //寻找到回放的视频,退出查找
+                break;
+            }else{
+                //滑动查找回放的视频
+                getObjectById(WatchPage.WATCH_LIST).swipeUp(2);
+                waitTime(4);
+            }
+        }
+        if(playBackList.size()>=1){
+            //播放第一个视频
+            playBackList.get(0).click();
+            //等待视频加载完成
+            BroadcastAction.waitBroadcastLoading();
+        }
+    }
     /**
      * case1.播放关注列表的视频文件
      * */
@@ -50,7 +97,7 @@ public class WatchViewCase extends VP2 {
         getObjectById(WatchPage.WATCH_LIST).swipeUp(2);
         waitTime(3);
         try {
-            UiObject2 timeObj=WatchAction.getDurationObjects().get(0);
+            UiObject2 timeObj=WatchAction.getPlayBackObjects().get(0);
             String dateStr=timeObj.getText();
             timeObj.click();
             BroadcastAction.waitBroadcastLoading();

@@ -43,7 +43,7 @@ public class WatchView extends VP2 {
         WatchAction.navToWatch();
         waitTime(3);
         try {
-            UiObject2 timeObj=WatchAction.getDurationObjects().get(0);
+            UiObject2 timeObj=WatchAction.getPlayBackObjects().get(0);
             String dateStr=timeObj.getText();
             timeObj.click();
             BroadcastAction.waitBroadcastLoading();
