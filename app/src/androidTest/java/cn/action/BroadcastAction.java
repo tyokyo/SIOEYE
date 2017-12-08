@@ -60,7 +60,7 @@ public class BroadcastAction extends VP2{
     }
     //随机获取一个broadcasts对象的index
     public static int getRandomBroadcastsIndex(){
-        waitHasObject(MePage.BROADCASTS_LIST,10000);
+        waitHasObject(MePage.BROADCAST_CONTENT,20000);
         UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
         List<UiObject2> broadcasts = view.findObjects(By.res(MePage.BROADCAST_CONTENT));
         int size = broadcasts.size();
