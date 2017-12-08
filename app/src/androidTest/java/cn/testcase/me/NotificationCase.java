@@ -18,10 +18,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import bean.MeBean;
+import bean.PopInfoBean;
 import ckt.annotation.PerformanceTest;
 import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
+import cn.action.MainAction;
 import cn.action.MeAction;
 import cn.action.NotificationAction;
 import cn.page.App;
@@ -138,9 +141,18 @@ public class NotificationCase extends VP2 {
         Asst.assertTrue(isFollow);
         Spoon.screenshot("is_follow_comments_success");
     }
+    @Test
+    @SanityTest
+    @PerformanceTest
     //add first follow
     public void testAddFollowByNotification() throws UiObjectNotFoundException, IOException{
-        MeAction.navToNotifications();
+        MainAction.clickMe();
+        waitTime(3);
+        //get me bean data
+        MeBean mb_before=MeAction.getMeBean();
+        clickByText("Notifications");
+        waitUntilFind(NotificationPage.NTF_VIDEO_INFO,40000);
+
         waitTime(3);
         List<UiObject2> notifications= NotificationAction.getAllNotificationsCanBeFollowed();
         if (notifications.size()>=1){
@@ -149,21 +161,54 @@ public class NotificationCase extends VP2 {
             //click user avatar
             avatar.click();
             //get follower count
-
+            PopInfoBean popInfoBeanBefore =NotificationAction.getUserPopInfo();
+            //add follow
             clickById(NotificationPage.NTF_FOLLOW);
             waitTime(3);
+            PopInfoBean popInfoBeanAfter =NotificationAction.getUserPopInfo();
+            waitTime(3);
             //follower +1
-
+            Asst.assertEquals("change nick but not save it",popInfoBeanBefore.getFollower()+1,popInfoBeanAfter.getFollower());
             gDevice.pressBack();
+            gDevice.pressBack();
+            MeBean mb_after=MeAction.getMeBean();
+            //follower +1
+            Asst.assertEquals("change nick but not save it",mb_before.getFollowing()+1,mb_after.getFollowing());
         }
     }
+    @Test
+    @SanityTest
+    @PerformanceTest
     //delete user has been followed
     public void testDelFollowByNotification() throws UiObjectNotFoundException, IOException{
-        MeAction.navToNotifications();
+        MainAction.clickMe();
+        waitTime(3);
+        //get me bean data
+        MeBean mb_before=MeAction.getMeBean();
+        clickByText("Notifications");
+        waitUntilFind(NotificationPage.NTF_VIDEO_INFO,40000);
+
         waitTime(3);
         List<UiObject2> notifications= NotificationAction.getAllNotificationsHasBeFollowed();
         if (notifications.size()>=1){
-
+            UiObject2 follow = notifications.get(0);
+            UiObject2 avatar=NotificationAction.getNotificationIcon(follow);
+            //click user avatar
+            avatar.click();
+            //get follower count
+            PopInfoBean popInfoBeanBefore =NotificationAction.getUserPopInfo();
+            //add follow
+            clickById(NotificationPage.NTF_FOLLOW);
+            waitTime(3);
+            PopInfoBean popInfoBeanAfter =NotificationAction.getUserPopInfo();
+            waitTime(3);
+            //follower -1
+            Asst.assertEquals("change nick but not save it",popInfoBeanBefore.getFollower(),popInfoBeanAfter.getFollower()+1);
+            gDevice.pressBack();
+            gDevice.pressBack();
+            MeBean mb_after=MeAction.getMeBean();
+            //follower -1
+            Asst.assertEquals("change nick but not save it",mb_before.getFollowing(),mb_after.getFollowing()+1);
         }
     }
     /**

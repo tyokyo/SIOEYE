@@ -5,11 +5,16 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import bean.PopInfoBean;
 import ckt.base.VP2;
 import cn.page.App;
 import cn.page.DiscoverPage;
@@ -29,6 +34,19 @@ public class NotificationAction extends VP2 {
         logger.info("getCommentsSize:"+size);
         return  size;
     }
+    public static PopInfoBean getUserPopInfo() throws UiObjectNotFoundException {
+        PopInfoBean pBean = new PopInfoBean();
+        String nickName=getUiObjectById(NotificationPage.NTF_NICK_NAME).getText();
+        String video=getUiObjectById(NotificationPage.MINI_NUM_BROADCAST).getText();
+        String following=getUiObjectById(NotificationPage.MINI_NUM__FOLLOWING).getText();
+        String follower=getUiObjectById(NotificationPage.MINI_NUM__FOLLOWER).getText();
+        pBean.setNickName(nickName);
+        pBean.setVideo(cover(video));
+        pBean.setFollower(cover(follower));
+        pBean.setFollowing(cover(following));
+        logger.info(pBean.toString());
+        return  pBean;
+    }
     //获取所有的notification(未关注的) 不包括Sioeye Team
     public static List<UiObject2> getAllNotificationsCanBeFollowed() throws UiObjectNotFoundException {
         List<UiObject2> notifications=null;
@@ -43,7 +61,7 @@ public class NotificationAction extends VP2 {
                 if (!nickName.startsWith("Sioeye")){
                     UiObject2 follow =getNotificationAddDelFollowBtn(not);
                     if (follow!=null){
-                        results.add(follow);
+                        results.add(not);
                     }
                 }
             }
@@ -64,7 +82,7 @@ public class NotificationAction extends VP2 {
                 if (!nickName.startsWith("Sioeye")){
                     UiObject2 follow =getNotificationAddDelFollowBtn(not);
                     if (follow==null){
-                        results.add(follow);
+                        results.add(not);
                     }
                 }
             }
@@ -80,8 +98,8 @@ public class NotificationAction extends VP2 {
     //获取通知->头像
     public static UiObject2 getNotificationIcon(UiObject2 notification){
         //第一个imageView
-        UiObject2 avatar = notification.findObjects(By.clazz(android.widget.ImageView.class)).get(0);
-        return  notification;
+        UiObject2 avatar = notification.findObject(By.depth(1).clazz(android.widget.ImageView.class));
+        return  avatar;
     }
     //获取通知->关注/取消关注按钮
     public static UiObject2 getNotificationAddDelFollowBtn(UiObject2 notification){

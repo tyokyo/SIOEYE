@@ -119,6 +119,14 @@ public class MePage {
     public static final String FOLLOWERING_AVATAR="cn.sioeye.sioeyeapp:id/user_avatar";
     public static final String FOLLOWERING_USERNAME="cn.sioeye.sioeyeapp:id/user_name";
 
+    //首页>直播数
+    public static final String HOME_BROADCASTS="cn.sioeye.sioeyeapp:id/user_broadcast_count";
+    //首页>关注数
+    public static final String HOME_FOLLOWING="cn.sioeye.sioeyeapp:id/user_following_count";
+    //首页>粉丝数
+    public static final String HOME_FOLLOWERS="cn.sioeye.sioeyeapp:id/user_followers_count";
+    //首页>点赞数
+    public static final String HOME_LIKE="cn.sioeye.sioeyeapp:id/user_main_followes_count";
     //直播数
     public static final String USER_BROADCASTS="cn.sioeye.sioeyeapp:id/profile_type_broadcast";
     //关注数

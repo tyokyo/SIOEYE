@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import bean.InfoBean;
+import bean.MeBean;
 import ckt.base.VP;
 import ckt.base.VP2;
 import cn.page.App;
@@ -34,6 +35,21 @@ public class MeAction extends VP2{
         infoBean.setEmail(email);
         String eyeId=getUiObject2ByText("Sioeye ID").getParent().getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
         infoBean.setId(eyeId);
+    }
+    public static MeBean getMeBean(){
+        MeBean bean=new MeBean();
+        String nickName= getObject2ById(MePage.WATCH_USER_MINI_NAME).getText();
+        int videos= cover(getObject2ById(MePage.HOME_BROADCASTS).getText());
+        int following= cover(getObject2ById(MePage.HOME_FOLLOWING).getText());
+        int follower= cover(getObject2ById(MePage.HOME_FOLLOWERS).getText());
+        int like=cover(getObject2ById(MePage.HOME_LIKE).getText());
+        bean.setNickName(nickName);
+        bean.setLike(like);
+        bean.setVideos(videos);
+        bean.setFollower(follower);
+        bean.setFollowing(following);
+        logger.info(bean.toString());
+        return bean;
     }
     public static void clickBroadcast() throws UiObjectNotFoundException {
         if (id_exists(MePage.ID_ME_BROADCAST)){
