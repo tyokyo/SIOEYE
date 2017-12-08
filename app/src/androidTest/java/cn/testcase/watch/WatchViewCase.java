@@ -20,7 +20,6 @@ import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
-import cn.action.MainAction;
 import cn.action.WatchAction;
 import cn.page.App;
 import cn.page.MePage;
@@ -47,6 +46,8 @@ public class WatchViewCase extends VP2 {
     public void testViewWatchVideo() throws UiObjectNotFoundException, ParseException {
         //进入Watch
         WatchAction.navToWatch();
+        waitUntilFind(WatchPage.WATCH_LIST,10000);
+        getObjectById(WatchPage.WATCH_LIST).swipeUp(2);
         waitTime(3);
         try {
             UiObject2 timeObj=WatchAction.getDurationObjects().get(0);
