@@ -142,6 +142,7 @@ public class MePage {
     //进入live configuration 界面
     public static final String LIVE_CONFIGURATION="cn.sioeye.sioeyeapp:id/user_main_live_configuation";
     public static final String LIVE_CONFIGURATION_VIDEO_TITLE="cn.sioeye.sioeyeapp:id/video_title";
+
     //谁可以看我的直播
     public static final String LIVE_CONFIGURATION_PRIVACY_SETTINGS="cn.sioeye.sioeyeapp:id/privacy_settings";
     public static final String LIVE_CONFIGURATION_SLV_VIDEO="cn.sioeye.sioeyeapp:id/slv_video";
@@ -321,9 +322,17 @@ public class MePage {
     //直播间描述
     public static final String LIVE_ROOM_INFO="cn.sioeye.sioeyeapp:id/room_intro";
     //创建多个直播间按钮
-    public static final String CREAT_LIVE_ROOM="cn.sioeye.sioeyeapp:id/llt_muti_room_create";
-    //直播间名字
+    public static final String CREATE_LIVE_ROOM="cn.sioeye.sioeyeapp:id/llt_muti_room_create";
+    //直播间名字 Live stream channel name
     public static final String LIVE_ROOM_NAME="cn.sioeye.sioeyeapp:id/et_room_name";
     //2017/11/30修改，“我”界面滑动界面ID
     public static final String SCROLL_ME_VIEW = "cn.sioeye.sioeyeapp:id/scrollview";
+    //直播间时间范围
+    public static final String LIVE_ROOM_DATE_RECT="cn.sioeye.sioeyeapp:id/content_text";
+    //live room list
+    public static final String LIVE_ROOM_LIST="cn.sioeye.sioeyeapp:id/room_list";
+    //BROADCAST_CONTENT
+    public static final String LIVE_ROOM_BROADCAST_CONTENT="cn.sioeye.sioeyeapp:id/llt_broadcast_content";
+    public static final String LIVE_ROOM_MORE_OPTION_LIST="cn.sioeye.sioeyeapp:id/option_list";
+
 }

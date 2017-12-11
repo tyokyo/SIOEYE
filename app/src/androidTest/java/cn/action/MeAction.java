@@ -12,6 +12,7 @@ import android.support.test.uiautomator.Until;
 import com.squareup.spoon.Spoon;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import bean.InfoBean;
@@ -136,6 +137,7 @@ public class MeAction extends VP2{
         clickById(MePage.ID_MAIN_TAB_ME);
         clickByText("Live Configuration");
         Spoon.screenshot("navToLiveConfiguration");
+        waitTime(3);
     }
     //me->固定拉流地址
     public static void navToPullingSource(){
@@ -370,7 +372,87 @@ public class MeAction extends VP2{
         }
     }
     //确认创建直播间
-    public static void creatLiveRoom(){
-        getUiObject2ByText("OK").click();
+    public static void createLiveRoom() throws UiObjectNotFoundException {
+        clickLiveStreamChannel();
+        waitUntilFindText("Establish live stream channel",10000);
+        if(text_exists("Establish live stream channel")){
+            clickEstablishLiveStreamChannel();
+            waitUntilFind(MePage.LIVE_ROOM_INFO,5000);
+        }else {
+
+        }
+        clickByText("OK");
+        //pop up dialog(create successful)
+        clickById(MePage.ID_TV_OK);
+        waitTime(3);
+    }
+    //delete live room Effective
+    public static void deleteAllEffectiveRoom() throws UiObjectNotFoundException {
+        waitUntilFind(MePage.LIVE_ROOM_LIST,5000);
+        if (id_exists(MePage.LIVE_ROOM_LIST)){
+            UiObject2 list=getUiObject2ById(MePage.LIVE_ROOM_LIST);
+            List<UiObject2> rooms=list.findObjects(By.depth(1).clazz(android.widget.LinearLayout.class));
+            for (UiObject2 room: rooms) {
+                if (room.hasObject(By.text("Effective"))){
+                    room.findObject(By.text("More")).click();
+                    waitUntilFind(MePage.LIVE_ROOM_MORE_OPTION_LIST,10000);
+                    clickTerminateLiveRoom();
+                    waitTime(3);
+                }
+            }
+        }
+        logger.info("all live room has been deleted success");
+        gDevice.pressBack();
+        waitTime(3);
+    }
+    //Effective=true stop=false
+    public static void liveRoomStatus() throws UiObjectNotFoundException {
+        boolean status=false;
+        if (text_exists("Effective")){
+            status=true;
+        }
+        if (text_exists("Stop")){
+            status=false;
+        }
+    }
+    //Terminate Live room
+    public static void clickTerminateLiveRoom(){
+        getUiObject2ByText("Terminate").click();
+    }
+    //Delete Live room
+    public static void clickDeleteLiveRoom(){
+        getUiObject2ByText("Delete").click();
+    }
+    //click Live stream channel
+    public static void clickLiveStreamChannel(){
+        getLiveStreamChannel().click();
+        waitUntilFindText("Establish live stream channel",5000);
+    }
+    //nav to Live stream channel
+    public static void clickEstablishLiveStreamChannel(){
+        getEstablishLiveStreamChannel().click();
+        waitUntilFind(MePage.LIVE_ROOM_NAME,5000);
+    }
+    public static UiObject2 getLiveStreamChannel(){
+        return  getUiObject2ByText("Live stream channel");
+    }
+    public static UiObject2 getEstablishLiveStreamChannel(){
+        return  getUiObject2ByText("Establish live stream channel");
+    }
+    //judge if live room is has been created
+    public static boolean isLiveRoomEffective() throws UiObjectNotFoundException {
+        waitUntilFind(MePage.LIVE_ROOM_DATE_RECT,10000);
+        boolean isCreated=false;
+        UiObject2 pObj=getLiveStreamChannel().getParent().getParent();
+        UiObject2 live_room_date= pObj.findObject(By.res(MePage.LIVE_ROOM_DATE_RECT));
+        if (live_room_date!=null){
+            String date =live_room_date.getText();
+            if (date!=null){
+                if (date.trim().length()>=1){
+                    isCreated=true;
+                }
+            }
+        }
+        return isCreated;
     }
 }

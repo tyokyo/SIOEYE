@@ -3,8 +3,6 @@ package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.widget.CheckBox;
 
@@ -16,7 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.util.List;
 
 import ckt.annotation.PerformanceTest;
 import ckt.annotation.SanityTest;
@@ -273,35 +270,46 @@ public class LiveConfigCase extends VP2{
         }
     }
   /**
-   *点击直播间
-   * zhangyajuan 2017.11.15
+   *创建直播间
+   * qiang.zhang 2017.12.10
    * */
     @Test
     @SanityTest
     @PerformanceTest
-    public void testLiveRoom() throws UiObjectNotFoundException {
+    public void testCreateLiveRoom() throws UiObjectNotFoundException {
         MeAction.navToLiveConfiguration();
-        UiObject2 obj=getObject2ById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE).getParent().getChildren().get(8);
-        String str= obj.getChildren().get(0).getChildren().get(1).getText();
-        if (str==null){   //
-            obj.click();
-            if(id_exists(MePage.LIVE_ROOM_INFO)){
-                waitTime(3);
-                MeAction.creatLiveRoom();
-                Asst.assertTrue(text_exists("I know"));
-            }
-            else{
-                getObject2ById(MePage.LIVE_ROOM).getChildren().get(0).click();
-                waitTime(3);
-                MeAction.creatLiveRoom();
-              //Asst.assertTrue(text_exists("I know"));
-            }
+        //if live room exist
+        if (MeAction.isLiveRoomEffective()){
+            MeAction.clickLiveStreamChannel();
+            //delete all effective room
+            MeAction.deleteAllEffectiveRoom();
+        }else{
+            //do nothing for no room effective
         }
-        else{
-            obj.click();
-            waitTime(3);
-            Asst.assertTrue(id_exists(MePage.CREAT_LIVE_ROOM));
-        }
+        //create live room
+        MeAction.createLiveRoom();
+        Spoon.screenshot("create_live_room");
+        Asst.assertEquals("create live room success",true,text_exists("Effective"));
     }
-
+    /**
+     *删除所有直播间
+     * qiang.zhang 2017.12.10
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testDeleteAllLiveRoom() throws UiObjectNotFoundException {
+        //navigate to live configuration
+        MeAction.navToLiveConfiguration();
+        //if live room exist
+        if (MeAction.isLiveRoomEffective()){
+            //enter live room
+            MeAction.clickLiveStreamChannel();
+            //delete all live room effective
+            MeAction.deleteAllEffectiveRoom();
+            waitTime(3);
+            Asst.assertEquals("delete all success",false,MeAction.isLiveRoomEffective());
+        }
+        Spoon.screenshot("delete_all_live_room");
+    }
 }

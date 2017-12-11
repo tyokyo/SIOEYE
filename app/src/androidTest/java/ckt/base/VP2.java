@@ -358,7 +358,16 @@ public class VP2 extends  VP{
         initDevice();
         return gDevice.findObject(new UiSelector().resourceId(id));
     }
-
+    /**
+     * This method can return a UI Element by text.
+     *
+     * @param id
+     * @return UiObject
+     */
+    public static UiObject2 getUiObject2ById(String id) {
+        initDevice();
+        return gDevice.findObject(By.res(id));
+    }
     /**
      * 精确查找
      * @param ObjectDescription 文本描述
