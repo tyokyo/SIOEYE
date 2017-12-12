@@ -389,8 +389,11 @@ public class CurrentTestCase extends VP2 {
 //        Spoon.screenshot("configLiveVideoQuality");
         logger.info(" -configLiveVideoQuality - ");
         clickById(Iris4GPage.user_defined_sure);
-        gDevice.pressBack();
         waitTime(2);
+        gDevice.pressBack();
+        waitTime(1);
+        gDevice.pressBack();
+        waitTime(1);
     }
     private void configVideoAngle(String VideoAngle) throws Exception {
         makeScreenOn();
@@ -404,10 +407,12 @@ public class CurrentTestCase extends VP2 {
         waitTime(2);
         clickByText(VideoAngle);
         Spoon.screenshot("VideoAngle", "changeVideoAngleTo"+VideoAngle);
-        waitTime(2);
-        gDevice.pressBack();
+        waitTime(1);
         logger.info("已修改视场角为："+VideoAngle);
-        waitTime(2);
+        gDevice.pressBack();
+        waitTime(1);
+        gDevice.pressBack();
+        waitTime(1);
     }
     private void clickLiveMute() throws Exception {
         makeScreenOn();
@@ -424,9 +429,12 @@ public class CurrentTestCase extends VP2 {
         if (text_exists("OK")) {
             clickByText("OK");
         }
-        gDevice.pressBack();
         logger.info("已点击静音开关");
-        waitTime(2);
+        waitTime(1);
+        gDevice.pressBack();
+        waitTime(1);
+        gDevice.pressBack();
+        waitTime(1);
     }
     private void changeUpDownTo(String UpDown) throws Exception {
         makeScreenOn();
@@ -440,10 +448,12 @@ public class CurrentTestCase extends VP2 {
         waitTime(3);
         clickByText(UpDown);
         Spoon.screenshot("UpDown", "changeUpDownTo"+UpDown);
-        waitTime(2);
-        gDevice.pressBack();
+        waitTime(1);
         logger.info("已修改为："+UpDown);
-        waitTime(2);
+        gDevice.pressBack();
+        waitTime(1);
+        gDevice.pressBack();
+        waitTime(1);
     }
     private void switchTo3G() throws Exception {
         makeScreenOn();
@@ -494,7 +504,9 @@ public class CurrentTestCase extends VP2 {
         logger.info("已点击" + switchName);
         waitTime(2);
         gDevice.pressBack();
-        waitTime(2);
+        waitTime(1);
+        gDevice.pressBack();
+        waitTime(1);
     }
     private void clickSwitchForVideo(String switchName) throws Exception {
         makeScreenOn();
@@ -505,7 +517,7 @@ public class CurrentTestCase extends VP2 {
         logger.info("已点击" + switchName);
         waitTime(2);
         gDevice.pressBack();
-        waitTime(2);
+        waitTime(1);
     }
     private void liveOfBiggerZoom() throws Exception {
         makeScreenOn();
