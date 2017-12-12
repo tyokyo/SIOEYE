@@ -43,6 +43,7 @@ public class CollectionCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //确保App 处于登录状态
         AccountAction.inLogin();
+        CollectionAction.collectDiscoverVideo();
     }
     /**
      *1. 播放收藏视频*/

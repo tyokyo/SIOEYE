@@ -43,8 +43,8 @@ public class NickNameCase extends VP2 {
     @PerformanceTest
     public void testChangeNmc4() throws UiObjectNotFoundException {
         MeAction.navToNickName();
-        clearText(MePage.SAMPLE_CONTENT);
-        setText(MePage.SAMPLE_CONTENT,getRandomString(3));
+        clearText(MePage.NICKNAME_CONTENT);
+        setText(MePage.NICKNAME_CONTENT,getRandomString(3));
         clickById(MePage.USER_EDIT_DONE);
         Spoon.screenshot(gDevice,"change_nick_name");
     }
@@ -53,9 +53,9 @@ public class NickNameCase extends VP2 {
     @PerformanceTest
     public void testChangeMoreThanC4() throws UiObjectNotFoundException {
         MeAction.navToNickName();
-        clearText(MePage.SAMPLE_CONTENT);
+        clearText(MePage.NICKNAME_CONTENT);
         String nickname = getRandomString(4);
-        setText(MePage.SAMPLE_CONTENT,nickname);
+        setText(MePage.NICKNAME_CONTENT,nickname);
         clickById(MePage.USER_EDIT_DONE);
         waitTime(3);
         String currentNick =getTex(MePage.GETNICKNAMECONTENT);
@@ -69,7 +69,7 @@ public class NickNameCase extends VP2 {
     @Test
     public void testChangeNnMaxC() throws UiObjectNotFoundException, IOException {
         MeAction.navToNickName();
-        clearText(MePage.SAMPLE_CONTENT);
+        clearText(MePage.NICKNAME_CONTENT);
         String nickname = getRandomString(100);
         shellInputText(nickname);
         clickById(MePage.USER_EDIT_DONE);
@@ -91,7 +91,7 @@ public class NickNameCase extends VP2 {
         waitUntilFind(MePage.GETNICKNAMECONTENT,10000);
         String expectNick = getTex(MePage.GETNICKNAMECONTENT);
         clickById(MePage.NAV_EDIT_NICKNAME);
-        clearText(MePage.SAMPLE_CONTENT);
+        clearText(MePage.NICKNAME_CONTENT);
         String nickname = getRandomString(10);
         shellInputText(nickname);
         clickById(MePage.ID_IMG_BACK);

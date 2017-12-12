@@ -7,13 +7,17 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.io.IOException;
 import java.util.logging.Logger;
+
 import bean.BroadcastBean;
 import bean.VideoBean;
 import ckt.annotation.PerformanceTest;
@@ -27,6 +31,7 @@ import cn.action.PlayAction;
 import cn.page.App;
 import cn.page.MePage;
 import cn.page.PlayPage;
+
 import static cn.action.PlayAction.getNumberPlayVideo;
 
 /**
@@ -75,7 +80,7 @@ public class BroadCastsCase extends VP2{
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
-            int index=BroadcastAction.getRandomBroadcastsWithNoRoomIndex();
+            int index=BroadcastAction.getRandomBroadcastsWithNoLiveRoomIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcastsElement(index);
             BroadcastAction.navEdit(broadcast);
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
@@ -102,7 +107,7 @@ public class BroadCastsCase extends VP2{
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
-            int index=BroadcastAction.getRandomBroadcastsWithNoRoomIndex();
+            int index=BroadcastAction.getRandomBroadcastsWithNoLiveRoomIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcastsElement(index);
             BroadcastAction.navEdit(broadcast);
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
@@ -133,7 +138,7 @@ public class BroadCastsCase extends VP2{
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
-            int index=BroadcastAction.getRandomBroadcastsWithNoRoomIndex();
+            int index=BroadcastAction.getRandomBroadcastsWithNoLiveRoomIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcastsElement(index);
             BroadcastAction.navEdit(broadcast);
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
@@ -169,7 +174,7 @@ public class BroadCastsCase extends VP2{
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
-            int index=BroadcastAction.getRandomBroadcastsWithNoRoomIndex();
+            int index=BroadcastAction.getRandomBroadcastsWithNoLiveRoomIndex();
             UiObject2 broadcast=BroadcastAction.getRandomBroadcastsElement(index);
             BroadcastAction.navEdit(broadcast);
             String expect_title=getTex(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY);
@@ -221,7 +226,7 @@ public class BroadCastsCase extends VP2{
             //当前的评论数
             VideoBean videoBean1 =PlayAction.getNumberPlayVideo();
             int  comments_before = videoBean1.getComment();
-            FollowersAction.clickToChat();
+            FollowersAction.clickToChatRoom();
             String input_comments = getRandomString(120);
             //输入评论内容
             clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
@@ -259,7 +264,7 @@ public class BroadCastsCase extends VP2{
             //当前的评论数
             VideoBean videoBean1 =PlayAction.getNumberPlayVideo();
             int comments_before = videoBean1.getComment();
-            FollowersAction.clickToChat();
+            FollowersAction.clickToChatRoom();
             String input_comments = getRandomString(130);
             //输入评论内容
             clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
@@ -297,7 +302,7 @@ public class BroadCastsCase extends VP2{
             int comments_before = videoBean.getComment();
             String input_comments = getRandomString(20);
             //输入评论内容
-            FollowersAction.clickToChat();
+            FollowersAction.clickToChatRoom();
             clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
             shellInputText(input_comments);
             //点击评论
@@ -335,7 +340,7 @@ public class BroadCastsCase extends VP2{
             VideoBean bean_before_zan = PlayAction.getNumberPlayVideo();
             int  zan_before = bean_before_zan.getZan();
             //进行点赞操作
-            FollowersAction.clickToChat();
+            FollowersAction.clickToChatRoom();
             clickById(PlayPage.BROADCAST_VIEW_ZAN);
             //获取点赞操作之后的点赞数目
             VideoBean bean_after_zan = PlayAction.getNumberPlayVideo();
@@ -363,13 +368,16 @@ public class BroadCastsCase extends VP2{
             VideoBean bean_before_zan = getNumberPlayVideo();
             int  zan_before = bean_before_zan.getZan();
             //弹出评论输入框-点赞
-            FollowersAction.clickToChat();
+            FollowersAction.clickToChatRoom();
             clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
             waitTime(2);
             //进行点赞操作
             clickById(PlayPage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
+            waitTime(3);
             gDevice.pressBack();
-            FollowersAction.clickToAnchor();
+            waitTime(3);
+            gDevice.pressBack();
+            FollowersAction.clickToAbout();
             //获取点赞操作之后的点赞数目
             VideoBean bean_after_zan = getNumberPlayVideo();
             int  zan_after = bean_after_zan.getZan();
@@ -452,14 +460,16 @@ public class BroadCastsCase extends VP2{
         MeAction.navToBroadcasts();
         int broadcast_size=BroadcastAction.getBroadcastsSize();
         if (broadcast_size>=1){
-            int index=BroadcastAction.getRandomBroadcastsWithNoRoomIndex();
+            int index=BroadcastAction.getRandomBroadcastsWithNoLiveRoomIndex();
             UiObject2 object=BroadcastAction.getRandomBroadcastsElement(index);
             UiObject2 view=BroadcastAction.getVideoAction(object);
             view.getChildren().get(2).click(); //点击封面
+            waitTime(3);
             waitUntilFind(MePage.COVER_PLOT_BTN_DIALOG_PHOTO,10000);
             Asst.assertTrue(id_exists(MePage.COVER_PLOT_BTN_DIALOG_PHOTO)); // 相机
             Asst.assertTrue(id_exists(MePage.COVER_PLOT_BTN_DIALOG_ALBUM)); // 相册
             clickById(MePage.BROADCAST_CANCEL);
+            waitTime(3);
         }
     }
 

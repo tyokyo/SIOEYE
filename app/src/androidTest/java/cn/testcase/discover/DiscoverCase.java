@@ -254,7 +254,7 @@ public class DiscoverCase extends VP2 {
         //播放一个视频
         DiscoverAction.navToPlayVideo();
         //点击主播
-        FollowersAction.clickToAnchor();
+        FollowersAction.clickToAbout();
         //点击关注图标
         clickFollow();
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
@@ -278,7 +278,7 @@ public class DiscoverCase extends VP2 {
         //播放一个视频
         DiscoverAction.navToPlayVideo();
         //点击主播
-        FollowersAction.clickToAnchor();
+        FollowersAction.clickToAbout();
         waitUntilFind(PlayPage.PLAY_ABOUT,3000);
         addFollow();
     }

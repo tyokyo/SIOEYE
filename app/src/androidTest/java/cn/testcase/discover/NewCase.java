@@ -383,7 +383,7 @@ public class NewCase  extends VP2{
         gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
         VideoBean comment_before = PlayAction.getNumberPlayVideo();
         int cmtnum_before = comment_before.getComment();
-        FollowersAction.clickToChat();
+        FollowersAction.clickToChatRoom();
         //随机输入20个字符
         String comment = getRandomString(20);
         clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
@@ -476,7 +476,7 @@ public class NewCase  extends VP2{
         int index=NewAction.getRandomVideoIndex();
         NewAction.getRandomVideo(index).click();
         //点击主播
-        FollowersAction.clickToAnchor();
+        FollowersAction.clickToAbout();
         //点击关注
         clickFollow();
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
@@ -504,7 +504,7 @@ public class NewCase  extends VP2{
         NewAction.getRandomVideo(index).click();
         waitTime(5);
         //点击主播
-        FollowersAction.clickToAnchor();
+        FollowersAction.clickToAbout();
         waitUntilFind(PlayPage.PLAY_ABOUT,3000);
         addFollow();
 

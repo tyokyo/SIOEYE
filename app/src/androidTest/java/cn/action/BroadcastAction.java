@@ -38,7 +38,18 @@ public class BroadcastAction extends VP2{
         UiObject2 view=BroadcastAction.getVideoAction(object);
         view.getChildren().get(3).click();
         waitUntilFind(MePage.BROADCAST_VIDEO_MORE_OPTION_LIST,3000);
-        clickByText("Delete");
+        if (text_exists("Delete")){
+            clickByText("Delete");
+        }else{
+            if (text_exists("Terminate")){
+                clickByText("Terminate");
+                waitTime(3);
+                view.getChildren().get(3).click();
+                waitUntilFind(MePage.BROADCAST_VIDEO_MORE_OPTION_LIST,3000);
+                clickByText("Delete");
+                waitTime(3);
+            }
+        }
         Spoon.screenshot("Delete");
         clickById(MePage.BROADCAST_EDIT_DELETE_OK);
        // waitUntilFind(MePage.BROADCAST_VIEW_VIDEO_TITLE_MODIFY,10000);
@@ -71,7 +82,7 @@ public class BroadcastAction extends VP2{
         return  rd==0?rd:rd-1;
     }
     //随机获取一个普通直播broadcasts对象的index
-    public static int getRandomBroadcastsWithNoRoomIndex(){
+    public static int getRandomBroadcastsWithNoLiveRoomIndex(){
         waitHasObject(MePage.BROADCASTS_LIST,10000);
         int index = 0;
         boolean exit = true;
@@ -86,17 +97,18 @@ public class BroadcastAction extends VP2{
                 UiObject2 bsObject = broadcasts.get(j);
                 List<UiObject2> lines= bsObject.findObjects(By.clazz(android.widget.LinearLayout.class).depth(1));
                 int size = lines.size();
-                UiObject2 nav =  lines.get(size-1);
-                List<UiObject2> texts = nav.findObjects(By.clazz(android.widget.TextView.class));
-                String cover = texts.get(2).getText();
-                if ("Cover".equals(cover)){
-                    exit=false;
-                    logger.info("find Cover");
-                    index=j;
-                    break;
+                if (size==2){
+                    UiObject2 nav =  lines.get(size-1);
+                    if (nav.hasObject(By.text("Cover"))){
+                        exit=false;
+                        logger.info("find Cover");
+                        index=j;
+                        break;
+                    }
                 }
             }
             if (exit){
+                logger.info("Direction.UP");
                 view.swipe(Direction.UP,0.85f,2000);
                 waitTime(3);
             }
@@ -146,7 +158,7 @@ public class BroadcastAction extends VP2{
     }
     //视频回放页面的播放数-点赞数-评论数
     public static WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {
-        FollowersAction.clickToAnchor();
+        FollowersAction.clickToAbout();
         WatcherBean watcherBean = new WatcherBean();
         UiObject u =  gDevice.findObject(new UiSelector().resourceId(PlayPage.BROADCAST_VIEW_WATCHER_COUNT));
         String watcher = getObject2ById(PlayPage.VIDEO_WATCH_NUMBER).getText();
@@ -156,7 +168,7 @@ public class BroadcastAction extends VP2{
         watcherBean.setComments(comments);
         watcherBean.setWatch(watcher);
         watcherBean.setZan(zan);
-        FollowersAction.clickToChat();
+        FollowersAction.clickToChatRoom();
         logger.info(watcherBean.toString());
         return  watcherBean;
     }

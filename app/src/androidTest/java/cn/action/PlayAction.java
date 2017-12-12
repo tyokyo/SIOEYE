@@ -1,6 +1,5 @@
 package cn.action;
 
-import android.graphics.Rect;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.StaleObjectException;
 import android.support.test.uiautomator.UiObject2;
@@ -17,7 +16,6 @@ import java.util.logging.Logger;
 
 import bean.VideoBean;
 import ckt.base.VP2;
-import cn.page.MePage;
 import cn.page.NewPage;
 import cn.page.PlayPage;
 
@@ -45,7 +43,7 @@ public class PlayAction extends VP2 {
     //观看视频统计点赞数、观看人数、评论数
     public static VideoBean getNumberPlayVideo() throws UiObjectNotFoundException {
         VideoBean videoBean = new VideoBean();
-        FollowersAction.clickToAnchor();
+        FollowersAction.clickToAbout();
         try {
             waitUntilFind(PlayPage.VIDEO_WATCH_NUMBER,5000);
             waitUntilFind(PlayPage.VIDEO_CHAT_NUMBER,5000);
@@ -170,25 +168,28 @@ public class PlayAction extends VP2 {
             clickById(PlayPage.REPORT_THANKS_OK);
     }
     //获取暂停广告信息
-    public static void getAdvertising() {
-        UiObject2 swipe = getObject2ById(PlayPage.BROADCAST_VIDEO_VIEW);
-        List<UiObject2> relativeLayouts = swipe.findObjects(By.clazz(android.widget.RelativeLayout.class));
-        logger.info(relativeLayouts.size() + "");
-        for (UiObject2 relativeLayout : relativeLayouts) {
-            if (relativeLayout.hasObject(By.clazz(android.widget.ImageView.class).depth(1)) &&
-                    relativeLayout.hasObject(By.clazz(android.widget.TextView.class).depth(1)) &&
-                    relativeLayout.hasObject(By.clazz(android.widget.ImageView.class).depth(1))) {
+    public static void getAdvertising() throws UiObjectNotFoundException {
+        if (id_exists(PlayPage.BROADCAST_VIDEO_VIEW)){
+            UiObject2 swipe = getObject2ById(PlayPage.BROADCAST_VIDEO_VIEW);
+            List<UiObject2> relativeLayouts = swipe.findObjects(By.clazz(android.widget.RelativeLayout.class));
+            logger.info(relativeLayouts.size() + "");
+            for (UiObject2 relativeLayout : relativeLayouts) {
+                if (relativeLayout.hasObject(By.clazz(android.widget.ImageView.class).depth(1)) &&
+                        relativeLayout.hasObject(By.clazz(android.widget.TextView.class).depth(1)) &&
+                        relativeLayout.hasObject(By.clazz(android.widget.ImageView.class).depth(1))) {
                     break;
-                 }
-              }
-         Asst.assertTrue(true);
-       }
+                }
+            }
+            Asst.assertTrue(true);
+        }
+    }
     //连续点击播放按钮
-    public static void getContinuousClickPlay(){
-        int i;
-        for(i=1;i<=3;i++){
-            clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
-            waitTime(1);
+    public static void getContinuousClickPlay() throws UiObjectNotFoundException {
+        if (id_exists(PlayPage.BROADCAST_VIEW_VIDEO_STOP)){
+            for(int i=1;i<=3;i++){
+                clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
+                waitTime(1);
+            }
         }
     }
 }

@@ -45,7 +45,7 @@ public class LiveConfigCase extends VP2{
     public void testTitle3c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
-        getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
+        getObjectById(MePage.LIVE_CONFIG_CONTENT).clearTextField();
         String expect = getRandomString(3);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
@@ -53,7 +53,7 @@ public class LiveConfigCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
-        String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
+        String active = getObjectById(MePage.LIVE_CONFIG_CONTENT).getText();
         Asst.assertEquals("修改video title",expect,active);
         gDevice.pressBack();
         gDevice.pressBack();
@@ -66,7 +66,7 @@ public class LiveConfigCase extends VP2{
     public void testTitle40c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
-        getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
+        getObjectById(MePage.LIVE_CONFIG_CONTENT).clearTextField();
         String expect = getRandomString(35);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
@@ -74,7 +74,7 @@ public class LiveConfigCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
-        String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
+        String active = getObjectById(MePage.LIVE_CONFIG_CONTENT).getText();
         Asst.assertEquals("修改video title",expect,active);
         gDevice.pressBack();
         gDevice.pressBack();
@@ -87,7 +87,7 @@ public class LiveConfigCase extends VP2{
     public void testTitle20c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
-        getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
+        getObjectById(MePage.LIVE_CONFIG_CONTENT).clearTextField();
         String expect = getRandomString(20);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
@@ -95,7 +95,7 @@ public class LiveConfigCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
-        String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
+        String active = getObjectById(MePage.LIVE_CONFIG_CONTENT).getText();
         Asst.assertEquals("修改video title",expect,active);
         gDevice.pressBack();
         gDevice.pressBack();
@@ -108,7 +108,7 @@ public class LiveConfigCase extends VP2{
     public void testTitle50c() throws UiObjectNotFoundException, IOException {
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
-        getObjectById(MePage.SAMPLE_CONTENT).clearTextField();
+        getObjectById(MePage.LIVE_CONFIG_CONTENT).clearTextField();
         String expect = getRandomString(100);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
@@ -116,7 +116,7 @@ public class LiveConfigCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
-        String active = getObjectById(MePage.SAMPLE_CONTENT).getText();
+        String active = getObjectById(MePage.LIVE_CONFIG_CONTENT).getText();
         logger.info("length:"+active.length());
         expect=expect.substring(0,70);
         Asst.assertEquals("修改video title",expect,active);

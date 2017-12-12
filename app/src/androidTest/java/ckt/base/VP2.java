@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.os.RemoteException;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.BySelector;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
@@ -916,6 +917,9 @@ public class VP2 extends  VP{
     public static void waitUntilFind(String resourceID,int timeout){
         gDevice.wait(Until.findObject(By.res(resourceID)),timeout);
     }
+    public static void waitUntilFind(BySelector by, int timeout){
+        gDevice.wait(Until.findObject(by),timeout);
+    }
     /**
      * Get the Launcher Package Name.
      * @param textString text
@@ -939,6 +943,9 @@ public class VP2 extends  VP{
      */
     public static void waitUntilGone(String resourceID,int timeout){
         gDevice.wait(Until.gone(By.res(resourceID)),timeout);
+    }
+    public static void waitUntilGone(BySelector by, int timeout){
+        gDevice.wait(Until.gone(by),timeout);
     }
     /**
      * Get the Launcher Package Name.

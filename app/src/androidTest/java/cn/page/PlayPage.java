@@ -65,6 +65,8 @@ public class PlayPage {
     public static final String BROADCAST_VIDEO_VIEW="cn.sioeye.sioeyeapp:id/toggle";
     public static final String BROADCAST_VIEW_VIDEO_STOP="cn.sioeye.sioeyeapp:id/portrait_app_video_play";
     public static final String BROADCAST_VIEW_PAGE="cn.sioeye.sioeyeapp:id/action_bar_root";
+    public static final String BROADCAST_VIEW_CONTAINER="cn.sioeye.sioeyeapp:id/video_view_container";
+
 
 
 }

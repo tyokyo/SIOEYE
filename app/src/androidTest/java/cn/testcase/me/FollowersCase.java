@@ -343,6 +343,9 @@ public class FollowersCase extends VP2 {
                 //进行点赞操作
                 clickById(PlayPage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
                 gDevice.pressBack();
+                waitTime(3);
+                gDevice.pressBack();
+                waitTime(3);
                 //获取点赞操作之后的点赞数目
                 WatcherBean bean_after_zan = BroadcastAction.getWatcher();
                 String zan_after = bean_after_zan.getZan();
