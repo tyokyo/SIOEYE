@@ -115,9 +115,13 @@ public class NotificationCase extends VP2 {
             setText(MePage.NOTIFICATION_REPLY_COMMENT,input_title);
             clickByPoint(point);
             waitTime(4);
-            isComment = NotificationAction.getVideoComment(input_title);
-            Spoon.screenshot("has_comment");
-            Asst.assertTrue(isComment);
+            if (text_exists("The video has been deleted")){
+
+            }else {
+                isComment = NotificationAction.getVideoComment(input_title);
+                Spoon.screenshot("has_comment");
+                Asst.assertTrue(isComment);
+            }
         }else{
             Spoon.screenshot("no_comment_video");
             Asst.fail("Reply comment fail.");
@@ -130,17 +134,6 @@ public class NotificationCase extends VP2 {
      * 2.关注评论者
      * 3.在关注者中查找已经关注的人
      */
-    @Test
-    @SanityTest
-    @PerformanceTest
-    public void testCommentFollow() throws UiObjectNotFoundException, IOException{
-        MeAction.navToNotifications();
-        waitTime(3);
-        boolean isFollow = false;
-        isFollow = NotificationAction.getFollowButton();
-        Asst.assertTrue(isFollow);
-        Spoon.screenshot("is_follow_comments_success");
-    }
     @Test
     @SanityTest
     @PerformanceTest
@@ -168,12 +161,12 @@ public class NotificationCase extends VP2 {
             PopInfoBean popInfoBeanAfter =NotificationAction.getUserPopInfo();
             waitTime(3);
             //follower +1
-            Asst.assertEquals("change nick but not save it",popInfoBeanBefore.getFollower()+1,popInfoBeanAfter.getFollower());
+            Asst.assertEquals("getFollower+1",popInfoBeanBefore.getFollower()+1,popInfoBeanAfter.getFollower());
             gDevice.pressBack();
             gDevice.pressBack();
             MeBean mb_after=MeAction.getMeBean();
             //follower +1
-            Asst.assertEquals("change nick but not save it",mb_before.getFollowing()+1,mb_after.getFollowing());
+            Asst.assertEquals("getFollowing+1",mb_before.getFollowing()+1,mb_after.getFollowing());
         }
     }
     @Test

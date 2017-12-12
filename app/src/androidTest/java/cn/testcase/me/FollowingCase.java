@@ -96,7 +96,7 @@ public class FollowingCase extends VP2 {
             VideoBean videoBean1 = PlayAction.getNumberPlayVideo();
             //评论数
             int  comments_before = videoBean1.getComment();
-            FollowersAction.clickToChat();
+            FollowersAction.clickToChatRoom();
             String input_comments = getRandomString(120);
             //输入评论内容
             clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
@@ -135,7 +135,7 @@ public class FollowingCase extends VP2 {
             //当前的评论数
             VideoBean videoBean1 = PlayAction.getNumberPlayVideo();
             int  comments_before = videoBean1.getComment();
-            FollowersAction.clickToChat();
+            FollowersAction.clickToChatRoom();
             String input_comments = getRandomString(130);
             //输入评论内容
             clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
@@ -186,7 +186,7 @@ public class FollowingCase extends VP2 {
                 VideoBean videoBean = PlayAction.getNumberPlayVideo();
                 int  comments_before = videoBean.getComment();
                 String input_comments = getRandomString(20);
-                FollowersAction.clickToChat();
+                FollowersAction.clickToChatRoom();
                 //输入评论内容
                 clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
                 shellInputText(input_comments);
@@ -291,12 +291,16 @@ public class FollowingCase extends VP2 {
                 //获取当前的点赞数目
                 VideoBean bean_before_zan =PlayAction.getNumberPlayVideo();
                 int  zan_before = bean_before_zan.getZan();
+                FollowersAction.clickToChatRoom();
                 //弹出评论输入框-点赞
                 clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
                 waitTime(2);
                 //进行点赞操作
                 clickById(PlayPage.BROADCAST_VIEW_ZAN_FLOAT_LIKE);
                 gDevice.pressBack();
+                waitTime(3);
+                gDevice.pressBack();
+                waitTime(3);
                 //获取点赞操作之后的点赞数目
                 VideoBean bean_after_zan = PlayAction.getNumberPlayVideo();
                 int zan_after = bean_after_zan.getZan();
@@ -373,14 +377,17 @@ public class FollowingCase extends VP2 {
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();//等待加载评论区
                 waitTime(3);
-                clickById(PlayPage.BROADCAST_VIDEO_VIEW);
-                clickById(PlayPage.BROADCAST_VIDEO_FULLPLAY);//点击全屏按钮播放
-                waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,600000);//等待视频加载图标消失
-                waitTime(20);
-                Asst.assertTrue("time out 60 seconds.",!getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
-                Spoon.screenshot("play_video");
-                gDevice.pressBack();
-                Spoon.screenshot("play_20_seconds");
+                clickById(PlayPage.BROADCAST_VIEW_CONTAINER);
+                //如果没有全屏播放按钮
+                if (id_exists(PlayPage.BROADCAST_VIDEO_FULLPLAY)){
+                    clickById(PlayPage.BROADCAST_VIDEO_FULLPLAY);//点击全屏按钮播放
+                    waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,600000);//等待视频加载图标消失
+                    waitTime(20);
+                    Asst.assertTrue("time out 60 seconds.",!getObjectById(PlayPage.BROADCAST_VIEW_VIDEO_LOADING).exists());
+                    Spoon.screenshot("play_video");
+                    gDevice.pressBack();
+                    Spoon.screenshot("play_20_seconds");
+                }
             }else{
                 Spoon.screenshot("no_video");
             }
@@ -407,7 +414,7 @@ public class FollowingCase extends VP2 {
                 FollowingAction.clickFollowingBroadcast();//选择视频播放
                 BroadcastAction.waitBroadcastLoading();//等待加载评论区
                 waitTime(3);
-                clickById(PlayPage.BROADCAST_VIDEO_VIEW);
+                clickById(PlayPage.BROADCAST_VIEW_CONTAINER);
                 PlayAction.getContinuousClickPlay();
                 //clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
                 PlayAction.getAdvertising();

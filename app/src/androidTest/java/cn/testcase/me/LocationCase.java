@@ -2,6 +2,7 @@ package cn.testcase.me;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import com.squareup.spoon.Spoon;
@@ -42,12 +43,17 @@ public class LocationCase extends VP2{
         waitUntilGone(MePage.IS_LOCATING,60000);
         setText(MePage.SEARCH_LOCATE,"yibin");
         clickById(MePage.LOCATION_NAME);
+        waitTime(5);
+        if (text_exists_contain("ALLOW")){
+            clickTextContain("ALLOW");
+        }
         waitUntilGone(MePage.IS_LOCATING,120000);
-        Spoon.screenshot("locate_result");
+        waitUntilGone(By.clazz(android.widget.ProgressBar.class),120000);
         String locate_result=getTex(MePage.LOCATION_NAME);
         if ("Locating".equals(locate_result)){
             Asst.fail("can not locate");
         }
+        Spoon.screenshot("locate_result");
     }
     //定位位置
     @Test

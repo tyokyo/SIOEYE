@@ -35,7 +35,8 @@ public class MePage {
     public static final String ID_IMAGE_CHANGE="cn.sioeye.sioeyeapp:id/llt_layout";
     public static final String ID_IMAGE_CANCEL="org.codeaurora.snapcam:id/btn_cancel";
     public static final String CHANGECOVERPHOTO="cn.sioeye.sioeyeapp:id/bg_text_hint";
-    public static final String SAMPLE_CONTENT="cn.sioeye.sioeyeapp:id/content";
+    public static final String LIVE_CONFIG_CONTENT="cn.sioeye.sioeyeapp:id/multi_content";
+    public static final String NICKNAME_CONTENT="cn.sioeye.sioeyeapp:id/single_content";
     public static final String GETNICKNAMECONTENT="cn.sioeye.sioeyeapp:id/content_text";
     public static final String VIP_DATE="cn.sioeye.sioeyeapp:id/content_text";
 
@@ -54,7 +55,7 @@ public class MePage {
     public static final String ACTIVITY_IN_INTERESTED="cn.sioeye.sioeyeapp:id/tag_text";
 
     //about me
-    public static final String ABOUT_ME_CONTENT="cn.sioeye.sioeyeapp:id/content";
+    public static final String ABOUT_ME_CONTENT="cn.sioeye.sioeyeapp:id/multi_content";
     public static final String ABOUT_ME_DISPLAY="cn.sioeye.sioeyeapp:id/user_desc";
     public static final String ABOUT_ME_ID="cn.sioeye.sioeyeapp:id/about";
     public static final String ABOUT_ME_CONTENT_TEXT="cn.sioeye.sioeyeapp:id/content_text";

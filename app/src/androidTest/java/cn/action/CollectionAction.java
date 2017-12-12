@@ -2,12 +2,17 @@ package cn.action;
 
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject2;
+import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.Until;
+
+import com.squareup.spoon.Spoon;
 
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
+import cn.page.DiscoverPage;
 import cn.page.MePage;
 import cn.page.PlayPage;
 
@@ -46,6 +51,19 @@ public class CollectionAction extends VP2 {
         logger.info("getRandomCollectionElement:"+collection.size());
         UiObject2 broadcast = collection.get(index);
         return  broadcast;
+    }
+    //播放discover视频，并收藏
+    public static void collectDiscoverVideo() throws UiObjectNotFoundException {
+        MainAction.navToDiscover();
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_SWIPE_TARGET);
+        List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        int size = linearLayouts.size();
+        linearLayouts.get(size - 1).click();
+        BroadcastAction.waitBroadcastLoading();
+        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)), 60000);
+        CollectionAction.getClickCollection();
+        Spoon.screenshot("testViewVideo");
+        gDevice.pressBack();
     }
     //播放界面点击收藏按钮
     public static void getClickCollection(){

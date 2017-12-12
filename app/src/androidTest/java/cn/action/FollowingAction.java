@@ -1,6 +1,7 @@
 package cn.action;
 
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.widget.FrameLayout;
@@ -75,14 +76,36 @@ public class FollowingAction extends VP2{
     public static FollowingBean randomFollowingUser() throws IOException, UiObjectNotFoundException {
         FollowingBean followingBean = new FollowingBean();
         waitUntilFind(MePage.FOLLOWERING_VIEW,30000);
-        UiObject2 follow_view = getObject2ById(MePage.FOLLOWERING_VIEW);
-        List<UiObject2> LinearLayoutList = follow_view.findObjects(By.clazz(LinearLayout.class));
-        List<UiObject2> LinearLayoutList_filter=new ArrayList<>();
+        boolean find=false;
         int size=0;
-        for (UiObject2 linear:LinearLayoutList){
-            if (linear.hasObject(By.res(MePage.FOLLOWERING_AVATAR))){
-                size=size+1;
-                LinearLayoutList_filter.add(linear);
+        int trySwipe=0;
+        List<UiObject2> LinearLayoutList_filter = null;
+        while(!find){
+            UiObject2 follow_view = getObject2ById(MePage.FOLLOWERING_VIEW);
+            List<UiObject2> LinearLayoutList = follow_view.findObjects(By.clazz(LinearLayout.class));
+            LinearLayoutList_filter=new ArrayList<>();
+            for (UiObject2 linear:LinearLayoutList){
+                if (linear.hasObject(By.res(MePage.FOLLOWERING_AVATAR))
+                        &&linear.hasObject(By.res(MePage.WATCH_USER_MINI_NAME))
+                        &&linear.hasObject(By.textContains("Follower"))
+                        &&linear.hasObject(By.textContains("Video"))){
+                    if (linear.hasObject(By.textContains("0 Video"))){
+                        //if there is no video
+                    }else{
+                        size=size+1;
+                        LinearLayoutList_filter.add(linear);
+                    }
+                }
+            }
+            trySwipe=trySwipe+1;
+            if (size>=1){
+                break;
+            }else {
+                //swipe to search
+                follow_view.swipe(Direction.UP,0.85f,2000);
+            }
+            if (trySwipe==5){
+                break;
             }
         }
         Random r = new Random();
