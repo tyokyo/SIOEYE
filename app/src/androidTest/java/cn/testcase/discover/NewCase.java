@@ -72,14 +72,11 @@ public class NewCase  extends VP2{
     */
     public void testToNewList() throws UiObjectNotFoundException{
         MainAction.clickDiscover();
-        DiscoverAction.navToNew();
-        //点击切换到最新列表，根据有无广告判断
-        UiObject object=getUiObjectById(DiscoverPage.ID_MAIN_TAB_AD_SPALSH);
-        if(object!=null){
-            Asst.assertFalse("testToNewListFail",id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
-        }
-        else{
-            Asst.assertTrue(!id_exists(DiscoverPage.ID_MAIN_TAB_AD_SPALSH));
+        for (int i = 0; i <5 ; i++) {
+            MainAction.clickDiscover();
+            DiscoverAction.navToNew();
+            //点击切换到最新列表，根据有无换页判断
+            Asst.assertEquals("testToNewListFail",false,id_exists(DiscoverPage.ID_PAGE_INDICATOR));
         }
         Spoon.screenshot("New","Popular");
     }

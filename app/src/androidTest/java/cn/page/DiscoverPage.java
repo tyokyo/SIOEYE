@@ -48,6 +48,7 @@ public class DiscoverPage {
     public  static final String ID_PROFILE_AVATOR="cn.sioeye.sioeyeapp:id/user_profile_avatar";
     //Follow or Following id
     public  static final String ID_ANCHOR_FOLLOW="cn.sioeye.sioeyeapp:id/rl_follow";
+    public  static final String ID_PAGE_INDICATOR="cn.sioeye.sioeyeapp:id/page_indicator";
 
 
 }
