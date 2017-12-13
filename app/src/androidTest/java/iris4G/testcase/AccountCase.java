@@ -224,10 +224,12 @@ public class AccountCase extends VP2{
         String password= Constant.getPassword("email_password");
         //check Account 是否已登录
         if(AccountAction.isLogin()) {
+            CameraAction.navConfig(Iris4GPage.nav_menu[0]);
             CameraAction.cameraSetting();
             Iris4GAction.ScrollViewByText("Account");
             clickByText("Account");
             clickById(Iris4GPage.logout_btn);
+            waitTime(2);
         }
             CameraAction.navToAccount();
             inputObject.setText(username);
@@ -236,6 +238,7 @@ public class AccountCase extends VP2{
             waitTime(5);
             Iris4GAction.powerKey();
             AccountAction.login_btn_login();
+            waitTime(1);
             Asst.assertEquals("login succeed",true,AccountAction.isLogin());
             waitTime(3);
             Iris4GAction.cameraKey();
