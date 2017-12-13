@@ -371,11 +371,28 @@ public class CameraAction extends VP2 {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         waitTime(2);
     }
-    public static void makeLapseSomeTime(int time) throws Exception {
+    public static void makeLapseSomeTime(int time ,String VideoQuality,int timeLapse) throws Exception {
         CameraAction.navConfig(NavPage.navConfig_Lapse);
-        configVideoQuality(Iris4GPage.video_quality[7]);
+        configVideoQuality(VideoQuality);
+        waitTime(1);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Time Lapse");
+        clickByText("Time Lapse");
+        String timeLapseS= String.valueOf(timeLapse)+"s";
+        logger.info("timeLapseS:"+timeLapseS);
+        Iris4GAction.ScrollViewByText(timeLapseS);
+        clickByText(timeLapseS);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
-        waitTime(time*10);
+        waitTime(time*timeLapse);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(2);
+    }
+    /*
+    视频质量等需要配置的项都已经配置好；仅录像，不配置
+     */
+    public static void makeLapseSomeTime(int time,int timeLapse){
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(time*timeLapse);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         waitTime(2);
     }
@@ -391,7 +408,7 @@ public class CameraAction extends VP2 {
         Spoon.screenshot("configLiveVideoQuality",videoQuality);
         logger.info(" -configLiveVideoQuality - "+videoQuality);
         gDevice.pressBack();
-        waitTime(2);
+        waitTime(1);
     }
 
 
