@@ -469,7 +469,9 @@ public class Iris4GAction extends VP2 {
         }
         Spoon.screenshot("live_save", "liveSave");
         gDevice.pressBack();
-        waitTime(2);
+        waitTime(1);
+        gDevice.pressBack();
+        waitTime(1);
     }
 
     //如Video quality -  右边的值
