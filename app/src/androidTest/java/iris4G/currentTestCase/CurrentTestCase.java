@@ -489,7 +489,7 @@ public class CurrentTestCase extends VP2 {
     private void makeToasts(String message,int time) throws IOException {
 //        initDevice();
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
-                logger.info(command);
+        logger.info(command);
         gDevice.executeShellCommand(command);
     }
     private void clickSwitch(String switchName) throws Exception {

@@ -383,6 +383,18 @@ public class Iris4GAction extends VP2 {
             e.printStackTrace();
         }
     }
+    public static void initIris4GWithoutDelete() throws Exception {
+        try {
+            initDevice();
+            makeScreenOn();
+            stopCamera();
+            stopFileManager();
+            stopGallery();
+            startCamera();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static UiObject scrollTextIntoView(String text) throws Exception {
         UiScrollable listScrollable = new UiScrollable(new UiSelector().scrollable(true));

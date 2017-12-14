@@ -1,7 +1,6 @@
 package iris4G.action;
 
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiSelector;
@@ -81,7 +80,7 @@ public class CameraAction extends VP2 {
             logger.info("Live Failed");
             Spoon.screenshot("Live_Failed");
             return false;
-            }
+        }
         else {
             logger.info("Live succeed");
             Spoon.screenshot("Live_succeed");
@@ -396,6 +395,24 @@ public class CameraAction extends VP2 {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         waitTime(2);
     }
+    public static void makeVideoSomeTime(int time ,String VideoQuality) throws Exception {
+        CameraAction.navConfig(NavPage.navConfig_Video);
+        configVideoQuality(VideoQuality);
+        waitTime(1);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(time);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(2);
+    }
+    /*
+    仅录像；不设置
+     */
+    public static void makeVideoSomeTime(int time ) throws Exception {
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(time);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(2);
+    }
     public static void configVideoQuality(String videoQuality) throws Exception {
         CameraAction.cameraSetting();
         waitTime(1);
@@ -679,18 +696,18 @@ public class CameraAction extends VP2 {
         logger.info("已停止直播");
     }
     public static void openAndCloseSeekBarForZoom() throws Exception{
-        UiDevice.getInstance().click(178,98);
-        UiDevice.getInstance().click(178,98);
+        clickByPonit(178,98);
+        clickByPonit(178,98);
         waitTime(2);
         if (!gDevice.findObject(new UiSelector().resourceId(Iris4GPage.seekbarforzoom_id)).exists()){
-                Assert.fail("OpenSeekBarForZoomFailed");
+            Assert.fail("OpenSeekBarForZoomFailed");
         }
         logger.info("打开变焦功能成功");
-        UiDevice.getInstance().click(178,98);
-        UiDevice.getInstance().click(188,99);
+        clickByPonit(178,98);
+        clickByPonit(188,99);
         waitTime(2);
         if (gDevice.findObject(new UiSelector().resourceId(Iris4GPage.seekbarforzoom_id)).exists()){
-                Assert.fail("CloseSeekBarForZoomFailed");
+            Assert.fail("CloseSeekBarForZoomFailed");
         }
         logger.info("关闭变焦功能成功");
     }
