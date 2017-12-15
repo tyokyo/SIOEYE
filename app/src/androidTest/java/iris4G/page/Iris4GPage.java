@@ -100,4 +100,10 @@ public class Iris4GPage {
     public static String user_defined_cancel="com.hicam:id/quality_cancel";
     public static String user_defined_sure="com.hicam:id/quality_sure";
     public static String user_defined_scrollView="com.hicam:id/scrollView";
+
+    public  static  String[] User_defined_resolution={"480P","720P"};
+    public  static  String[] User_defined_rate={"25","30"};
+
+
+
 }
