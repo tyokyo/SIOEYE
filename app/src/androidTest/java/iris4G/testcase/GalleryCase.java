@@ -154,25 +154,14 @@ public class GalleryCase extends VP2 {
         GalleryAction.checkKeyDuringGalleryLive();
         GalleryAction.stopGalleryLive();
     }
-//    @Test
-//    public void testCheckSupport() throws Exception {
-//        waitTime(1);
-//        CameraAction.navConfig(Iris4GPage.nav_menu[1]);
-//        CameraAction.cameraSetting();
-//        clickByText("Video Quality");
-//        Iris4GAction.ScrollViewByText(Iris4GPage.video_quality[5]);
-//        UiObject2 scrollView = getObject2ByClass(android.widget.LinearLayout.class);
-//        List<UiObject2> relatives = scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
-//        String supportLiveString =null;
-//        for (UiObject2 relateLayout : relatives) {
-//            boolean textQuality = relateLayout.hasObject(By.text(Iris4GPage.video_quality[5]));
-//            boolean textSupport = relateLayout.hasObject(By.depth(3));
-//            if (textQuality && textSupport){
-//                supportLiveString=relateLayout.findObject(By.depth(3)).getText();
-//                logger.info("theStringIs:"+supportLiveString);
-//            }else {
-//                Assert.fail("failed");
-//            }
-//        }
-//    }
+    @Test
+    public void testCheckSupport() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+        CameraAction.cameraSetting();
+        clickByText("Video Quality");
+        Iris4GAction.ScrollViewByText(Iris4GPage.video_quality[5]);
+        if (!GalleryAction.checkResolutionRightString(Iris4GPage.video_quality[5])){
+            Assert.fail("theResolutionRightStringNotFindSupportLive");
+        }
+    }
 }

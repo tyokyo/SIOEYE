@@ -1,13 +1,18 @@
 package iris4G.action;
 
 import android.os.RemoteException;
+import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
+import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
 
 import com.squareup.spoon.Spoon;
 
 import org.junit.Assert;
+
+import java.util.List;
 
 import ckt.base.VP2;
 import iris4G.page.GalleryPage;
@@ -159,5 +164,29 @@ public class GalleryAction extends VP2 {
                 }
             }else {Assert.fail("VideoMoreThan10sButAbsentLiveBottom");}
         }else {Assert.fail("VideoLessThan10sButExistLiveBottom");}
+    }
+    //如720P25FPS右边“支持直播”的标志 -  右边的值
+    public static Boolean checkResolutionRightString(String resolution) throws UiObjectNotFoundException {
+        String resolutionRightString = "";
+        gDevice.wait(Until.findObject(By.clazz(android.widget.ListView.class)), 10000);
+        UiObject2 scrollView = getObject2ByClass(android.widget.ListView.class);
+        List<UiObject2> relativeLayouts = scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        for (int a=0;a < relativeLayouts.size();a++) {
+            UiObject2 relativeLayout = relativeLayouts.get(a);
+            List<UiObject2> texts = relativeLayout.findObjects(By.clazz(android.widget.TextView.class));
+            logger.info("texts.size():"+texts.size());
+            if (texts.size() == 2) {
+                String key = texts.get(0).getText();
+                logger.info("keyIs:"+key);
+                if (key.equals(resolution)) {
+                    resolutionRightString = texts.get(1).getText();
+                    logger.info("valueIs:"+resolutionRightString);
+                    if (resolutionRightString.equals("support live")){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

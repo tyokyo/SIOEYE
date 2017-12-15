@@ -1,11 +1,8 @@
 package iris4G.testcase;
 
-import android.os.RemoteException;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.view.KeyEvent;
 
-import org.hamcrest.Asst;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +12,6 @@ import java.util.logging.Logger;
 import ckt.base.VP2;
 import iris4G.action.CameraAction;
 import iris4G.action.Iris4GAction;
-import iris4G.page.Iris4GPage;
 import iris4G.page.NavPage;
 
 /**
@@ -29,7 +25,8 @@ public class VideoSettings extends VP2{
     public void setup() throws Exception {
         Iris4GAction.initIris4G();
     }
-    /*1：Capture  - capture设置为4M(16:9)
+    /* case1 qiangZhang
+    *1：Capture  - capture设置为4M(16:9)
     * 2：Lapse -延时设置为2s
     * 2：Video -视频质量设置为720@60FPS
     * 4：Video -视频角度设置Wide
