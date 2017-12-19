@@ -38,6 +38,9 @@ public class GalleryAction extends VP2 {
     检查相册发起直播，发起成功后即停止
      */
     public static Boolean makeGalleryLive() throws UiObjectNotFoundException {
+        if (!gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_delete_bottom)).exists()){
+            clickByPonit(60,60);
+        }
         clickById(GalleryPage.gallery_live_bottom);
         waitTime(2);
         clickById(GalleryPage.gallery_live);
@@ -123,6 +126,7 @@ public class GalleryAction extends VP2 {
         if (!gDevice.findObject(new UiSelector().text("Confirm to exit live?")).exists()){
             Assert.fail("backKeyNoResponse1DuringGalleryLive");}
         clickByText("Yes");//cancel
+        waitTime(2);
         if (!text_exists("Already Lived")){
             Assert.fail("backKeyStopGalleryLive");}
         startGalleryLive();
@@ -166,7 +170,8 @@ public class GalleryAction extends VP2 {
         }else {Assert.fail("VideoLessThan10sButExistLiveBottom");}
     }
     //如720P25FPS右边“支持直播”的标志 -  右边的值
-    public static Boolean checkResolutionRightString(String resolution) throws UiObjectNotFoundException {
+    public static Boolean checkResolutionRightString(String resolution) throws Exception {
+        Iris4GAction.ScrollViewByText(resolution);
         String resolutionRightString = "";
         gDevice.wait(Until.findObject(By.clazz(android.widget.ListView.class)), 10000);
         UiObject2 scrollView = getObject2ByClass(android.widget.ListView.class);
@@ -189,4 +194,45 @@ public class GalleryAction extends VP2 {
         }
         return false;
     }
+    /*
+    获取相册中右上角，字符串第几张和总数之间 间隔在该字符串中第几位；用来后期获取总数；第几张数据
+     */
+    public static int getGalleryIndex() throws UiObjectNotFoundException {
+        String indexText=getTex(GalleryPage.gallery_indexText);
+        int rankingInt=0;
+        char indexTextB[]=indexText.toCharArray();
+        for (int i=0;i<indexText.length();i++){
+            if (indexTextB[i]=='/'){
+                rankingInt=i;
+                return rankingInt;
+            }
+        }
+        return rankingInt;
+    }
+    public static int getRankOfGallery() throws UiObjectNotFoundException {
+        String indexText=getTex(GalleryPage.gallery_indexText);
+        int rank=Integer.valueOf(indexText.substring(0,getGalleryIndex()));
+        logger.info("rank:"+rank);
+        return rank;
+    }
+    public static int getTotalOfGallery() throws UiObjectNotFoundException {
+        String indexText=getTex(GalleryPage.gallery_indexText);
+        int total=Integer.valueOf(indexText.substring(getGalleryIndex()+1,indexText.length()));
+        logger.info("total:"+total);
+        return total;
+    }
+    public static void deleteOneVideo(){
+        if (!gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_delete_bottom)).exists()){
+            clickByPonit(60,60);
+        }
+        clickById(GalleryPage.gallery_delete_bottom);
+        waitTime(1);
+        if (gDevice.findObject(new UiSelector().text("Do you want to delete this video ?")).exists()){
+            clickByText("Yes");
+        }else {
+            Spoon.screenshot("deletePromptError");
+            Assert.fail("deletePromptError");
+        }
+    }
+
 }

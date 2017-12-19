@@ -16,4 +16,5 @@ public class GalleryPage extends VP2 {
     public static String gallery_live_cancel="android:id/button2";
     public static String gallery_delete_bottom="com.hicam.gallery:id/gallery_bottom_delete_im";
     public static String gallery_root_view="com.hicam.gallery:id/gl_root_view";
+    public static String gallery_indexText="com.hicam.gallery:id/indexText";
 }
