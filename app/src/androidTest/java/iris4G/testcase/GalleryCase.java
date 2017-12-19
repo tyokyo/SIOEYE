@@ -2,6 +2,7 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiSelector;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -144,6 +145,7 @@ public class GalleryCase extends VP2 {
     }
     @Test
     /*case 11
+    case编号：SI-1863:中断直播
     相册直播中按键操作;返回键、电源键、拍照键、S键；不包括长按S键
      */
     public void testClickKeyDuringGalleryLive() throws Exception {
@@ -155,13 +157,64 @@ public class GalleryCase extends VP2 {
         GalleryAction.stopGalleryLive();
     }
     @Test
+    /* case 12
+    case编号：SI-2001:检查‘支持直播’标志
+    检查“支持直播”标志；普通录像模式720P25FPS；480P25FPS   延时录像720P30FPS；480P30FPS
+     */
     public void testCheckSupport() throws Exception {
-        CameraAction.navConfig(Iris4GPage.nav_menu[1]);
+        CameraAction.navConfig(Iris4GPage.nav_menu[1]);//普通录像
         CameraAction.cameraSetting();
         clickByText("Video Quality");
-        Iris4GAction.ScrollViewByText(Iris4GPage.video_quality[5]);
-        if (!GalleryAction.checkResolutionRightString(Iris4GPage.video_quality[5])){
-            Assert.fail("theResolutionRightStringNotFindSupportLive");
+        if (!GalleryAction.checkResolutionRightString(Iris4GPage.video_quality[5])){//720P25FPS
+            Assert.fail("theResolutionNotFindSupportLive");
         }
+        if (!GalleryAction.checkResolutionRightString(Iris4GPage.video_quality[6])){//480P25FPS
+            Assert.fail("theResolutionNotFindSupportLive");
+        }
+        CameraAction.navConfig(Iris4GPage.nav_menu[5]);//延时
+        CameraAction.cameraSetting();
+        clickByText("Video Quality");
+        if (!GalleryAction.checkResolutionRightString(Iris4GPage.lapse_quality[0])){//720P30FPS
+            Assert.fail("theResolutionNotFindSupportLive");
+        }
+        if (!GalleryAction.checkResolutionRightString(Iris4GPage.lapse_quality[2])){//480P30FPS
+            Assert.fail("theResolutionNotFindSupportLive");
+        }
+    }
+    @Test
+    /*case 13
+    case编号：SI-1865:录播
+    检查录播视频，是否存在“已直播”标志，以及发起直播
+     */
+    public void testVideoAndLiveMakeGalleryLive() throws Exception {
+        CameraAction.makeVideoAndLiveSomeTime(13);
+        Iris4GAction.startGallery();
+        if (!gDevice.findObject(new UiSelector().text("Already Lived")).exists()){
+            if (!GalleryAction.makeGalleryLive()){
+                Assert.fail("MakeGalleryLiveFailed");
+            }
+        }else {
+            Assert.fail("VideoAndLiveVideoExistLiveBottom");
+        }
+    }
+    @Test
+    /*case 14
+    case编号：SI-1874:删除视频
+    检查删除已直播的视频
+     */
+    public void testDeleteAlreadyLivedVideo() throws Exception {
+        Iris4GAction.startGallery();
+        while (!gDevice.findObject(new UiSelector().text("Already Lived")).exists()) {
+            getObjectById(GalleryPage.gallery_root_view).swipeLeft(60);
+            waitTime(1);
+        }
+        int originalRank=GalleryAction.getRankOfGallery();
+        int originalTotal=GalleryAction.getTotalOfGallery();
+        GalleryAction.deleteOneVideo();
+        if (originalTotal==GalleryAction.getTotalOfGallery()+1){
+            if (originalRank==GalleryAction.getRankOfGallery()+1||(originalRank==GalleryAction.getRankOfGallery()&&originalRank==1)){
+                logger.info("Pass");
+            }else {Assert.fail("rankNumNotUpdate");}
+        }else {Assert.fail("totalNumNotUpdate");}
     }
 }

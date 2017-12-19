@@ -413,6 +413,20 @@ public class CameraAction extends VP2 {
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         waitTime(2);
     }
+    /*
+    录播一段时间
+     */
+    public static void makeVideoAndLiveSomeTime(int time ) throws Exception {
+        CameraAction.navConfig(NavPage.navConfig_Video);
+        cameraSetting();
+        waitTime(1);
+        openCompoundButton("Video&Live(beta)");
+        waitTime(1);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(time);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitTime(2);
+    }
     public static void configVideoQuality(String videoQuality) throws Exception {
         CameraAction.cameraSetting();
         waitTime(1);
