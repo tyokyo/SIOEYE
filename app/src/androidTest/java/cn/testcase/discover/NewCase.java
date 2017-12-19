@@ -356,7 +356,7 @@ public class NewCase  extends VP2{
                     break;
             } else {
                 //继续滑动查找
-                getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.UP,0.1f);
+                getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.UP,0.5f);
                 waitTime(5);
             }
         }

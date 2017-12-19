@@ -134,6 +134,14 @@ public class NotificationAction extends VP2 {
             return false;
         }
     }
+    //has video can be played
+    public static boolean hasVideo() throws UiObjectNotFoundException {
+        boolean hasComments=false;
+        clickById(MePage.NOTIFICATION_WATCH_VIDEO);
+        waitTime(3);
+        BroadcastAction.waitBroadcastLoading();
+        return  hasComments;
+    }
     //获取Sioeye团队消息
     public static boolean loadSioeyeMessage() throws UiObjectNotFoundException{
         String errorStr = "network connect time out, please retry.";
@@ -200,7 +208,7 @@ public class NotificationAction extends VP2 {
         if(follow.getText().equals("Following")){
             clickById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_FOLLOW);
         }
-        clickByClass("android.widget.ImageView", 2);
+        //clickByClass("android.widget.ImageView", 2);
         String s = getObjectById(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NAME).getText();
         return followOrUnFollow(s);
     }

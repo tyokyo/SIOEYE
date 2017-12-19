@@ -115,10 +115,10 @@ public class NotificationCase extends VP2 {
             setText(MePage.NOTIFICATION_REPLY_COMMENT,input_title);
             clickByPoint(point);
             waitTime(4);
-            if (text_exists("The video has been deleted")){
+            isComment = NotificationAction.getVideoComment(input_title);
+            if (text_exists_contain("The video has been deleted")){
 
-            }else {
-                isComment = NotificationAction.getVideoComment(input_title);
+            }else{
                 Spoon.screenshot("has_comment");
                 Asst.assertTrue(isComment);
             }
