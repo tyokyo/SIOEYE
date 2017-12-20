@@ -27,17 +27,18 @@ public class PlayAction extends VP2 {
     private static Logger logger = Logger.getLogger(NewAction.class.getName());
 
     //聊天室里获取点赞数
-    public static int getNewZanNumber() {
-
+    public static int getNewZanNumber() throws UiObjectNotFoundException {
         // UiObject2 swipe = getObject2ById(NewPage.ID_NEW_VIDEO);
         List<UiObject2> relativeLayouts = getObject2ById(NewPage.ID_NEW_VIDEO).findObjects(By.clazz(RelativeLayout.class).depth(1));
         waitTime(5);
         logger.info(relativeLayouts.size() + "");
         relativeLayouts.get(0).click();
+        BroadcastAction.waitBroadcastLoading();
         waitUntilFind(PlayPage.TV_AUCHOR_ID,5000);
         clickById(PlayPage.TV_AUCHOR_ID);
         waitUntilFind(PlayPage.VIDEO_CHAT_NUMBER,5000);
         int like = cover(getObject2ById(PlayPage.VIDEO_CHAT_NUMBER).getText());
+        logger.info("getNewZanNumber-"+like);
         return like;
     }
     //观看视频统计点赞数、观看人数、评论数
@@ -81,7 +82,6 @@ public class PlayAction extends VP2 {
     }
     //聊天室简介中获取主播关注信息
     public static String  getFollowing() {
-
         List<UiObject2> relativeLayouts = getObject2ById(PlayPage.PLAY_ABOUT).findObjects(By.clazz(RelativeLayout.class).depth(2));
         waitTime(5);
         logger.info(relativeLayouts.size() + "");

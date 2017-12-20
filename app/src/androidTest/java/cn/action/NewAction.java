@@ -28,19 +28,26 @@ public class NewAction extends VP2 {
 
     //获取视频封面观看数
     public static int getNewWatchNumber() {
-        UiObject2 swip = getObject2ById(NewPage.ID_NEW_VIDEO);
-        List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
+        waitUntilFind(NewPage.ID_NEW_VIDEO,10000);
+        UiObject2 swipe = getObject2ById(NewPage.ID_NEW_VIDEO);
+        List<UiObject2> linearLayouts = swipe.findObjects(By.clazz(android.widget.LinearLayout.class));
         waitTime(5);
         logger.info(linearLayouts.size() + "");
         int watch = 0;
         for (UiObject2 linearLayout : linearLayouts) {
             List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
             waitTime(3);
-              if (textViews.size() == 3||textViews.size() == 2) {
-                watch =cover(textViews.get(0).getText());
-                break;
+            if (textViews.size() == 3||textViews.size() == 2) {
+                try {
+                    watch =cover(textViews.get(0).getText());
+                    break;
+                }catch (NumberFormatException e){
+                    logger.info("-NumberFormatException");
+                }
             }
+
         }
+        logger.info("getNewWatchNumber-"+watch);
         return watch;
     }
 
@@ -66,6 +73,7 @@ public class NewAction extends VP2 {
     }
     //获取视频封面位置信息
     public static String getLocation() {
+        waitUntilFind(NewPage.ID_NEW_VIDEO,10000);
         UiObject2 swipe = getObject2ById(NewPage.ID_NEW_VIDEO);
         List<UiObject2> linearLayouts = swipe.findObjects(By.clazz(android.widget.LinearLayout.class));
         logger.info(linearLayouts.size() + "");
@@ -81,8 +89,9 @@ public class NewAction extends VP2 {
     }
     //得到视频封面点赞人数
     public static int getZanNumber() {
-        UiObject2 swip = getObject2ById(NewPage.ID_NEW_VIDEO);
-        List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
+        waitUntilFind(NewPage.ID_NEW_VIDEO,10000);
+        UiObject2 swipe = getObject2ById(NewPage.ID_NEW_VIDEO);
+        List<UiObject2> linearLayouts = swipe.findObjects(By.clazz(android.widget.LinearLayout.class));
         waitTime(5);
         logger.info(linearLayouts.size() + "");
         int like = 0;
@@ -97,6 +106,7 @@ public class NewAction extends VP2 {
                 }
             }
         }
+        logger.info("getZanNumber-"+like);
         return like;
     }
     //播放最新视频
