@@ -396,7 +396,7 @@ public class FollowingCase extends VP2 {
     /****
      上下滑动直播列表
      选择一个视频播放
-     多次点击播放/暂停按钮
+     点击暂停播放
      * */
     @Test
     public void testContinuousStopPlayVideo() throws UiObjectNotFoundException,IOException{
@@ -406,17 +406,15 @@ public class FollowingCase extends VP2 {
         if(following_size>=1){
             FollowingBean followingBean=FollowingAction.randomFollowingUser();
             logger.info(followingBean.toString());
-            int indx=followingBean.getIndex_linearLayout();
             FollowingAction.clickRandomFollower(followingBean);
             int broadcast_size=FollowingAction.hasBroadcasts();
             if(broadcast_size>=1){
-                MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,10);
+                MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,3);
                 FollowingAction.clickFollowingBroadcast();//选择视频播放
                 BroadcastAction.waitBroadcastLoading();//等待加载评论区
                 waitTime(3);
-                clickById(PlayPage.BROADCAST_VIEW_CONTAINER);
-                PlayAction.getContinuousClickPlay();
-                //clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
+                PlayAction.clickPlayView();
+                PlayAction.pauseVideo();
                 PlayAction.getAdvertising();
             }
             else{
