@@ -13,6 +13,7 @@ import com.squareup.spoon.Spoon;
 import org.junit.Assert;
 
 import java.util.List;
+import java.util.Random;
 
 import ckt.base.VP2;
 import iris4G.page.GalleryPage;
@@ -87,6 +88,7 @@ public class GalleryAction extends VP2 {
     结束相册直播
      */
     public static void stopGalleryLive() throws UiObjectNotFoundException {
+        waitTime(1);
         if (text_exists("broadcasting")) {
             gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
             clickByText("Yes");
@@ -233,6 +235,45 @@ public class GalleryAction extends VP2 {
             Spoon.screenshot("deletePromptError");
             Assert.fail("deletePromptError");
         }
+    }
+    public static String getRandomBitrate(int min,int max){
+        int randomInt=new Random().nextInt(max-min)+min;
+        String random= String.valueOf(randomInt);
+        logger.info("randomInt"+randomInt);
+        logger.info("random:"+random);
+        return random;
+    }
+    public static int getGalleryBitrateMin() throws UiObjectNotFoundException {
+        String bitrateTips=getTex(GalleryPage.gallery_bitrate_tips);
+        logger.info("bitrateMin:"+bitrateTips.substring(19,getAppointCharRankInString('k',bitrateTips)));
+        logger.info("bitMinInt:"+Integer.parseInt(bitrateTips.substring(19,getAppointCharRankInString('k',bitrateTips))));
+        return Integer.parseInt(bitrateTips.substring(19,getAppointCharRankInString('k',bitrateTips)));
+    }
+    public static int getGalleryBitrateMax() throws UiObjectNotFoundException {
+        String bitrateTips=getTex(GalleryPage.gallery_bitrate_tips);
+        logger.info("bitrateMaxInt: "+Integer.parseInt(bitrateTips.substring(getAppointCharRankInString('~',bitrateTips)+1,bitrateTips.length()-5)));
+        return Integer.parseInt(bitrateTips.substring(getAppointCharRankInString('~',bitrateTips)+1,bitrateTips.length()-5));
+    }
+    public static int getAppointCharRankInString(char appointChar,String appointString){
+        int rankingInt=0;
+        char indexTextB[]=appointString.toCharArray();
+        for (int i=0;i<appointString.length();i++){
+            if (indexTextB[i]==appointChar){
+                rankingInt=i;
+//                logger.info("rankingTnt:"+rankingInt);
+                return rankingInt;
+            }
+        }
+        return rankingInt;
+    }
+    public static void navToGalleryBitrateSetting() throws Exception {
+        Iris4GAction.startGallery();
+        while (!gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_live_bottom)).exists()) {
+            getObjectById(GalleryPage.gallery_root_view).swipeLeft(60);
+            waitTime(1);
+        }
+        clickById(GalleryPage.gallery_live_bottom);
+        clickById(GalleryPage.gallery_live);
     }
 
 }
