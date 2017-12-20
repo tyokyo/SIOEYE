@@ -16,6 +16,7 @@ import cn.page.NewPage;
 import cn.page.PlayPage;
 
 import android.graphics.Rect;
+import android.util.Log;
 
 
 /**
@@ -28,15 +29,16 @@ public class NewAction extends VP2 {
     //获取视频封面观看数
     public static int getNewWatchNumber() {
         UiObject2 swip = getObject2ById(NewPage.ID_NEW_VIDEO);
-        List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
+        List<UiObject2> RelativeLayouts = swip.findObjects(By.clazz(android.widget.RelativeLayout.class));
         waitTime(5);
-        logger.info(linearLayouts.size() + "");
+        logger.info(RelativeLayouts.size() + "");
         int watch = 0;
-        for (UiObject2 linearLayout : linearLayouts) {
-            List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
-            waitTime(3);
-              if (textViews.size() == 3||textViews.size() == 2) {
-                watch =cover(textViews.get(0).getText());
+        for (UiObject2 RelativeLayout : RelativeLayouts) {
+            List<UiObject2> LinearLayouts = RelativeLayout.findObjects(By.depth(1).clazz(android.widget.LinearLayout.class));
+            if (LinearLayouts.size() == 2) {
+                UiObject2 LinearLayout=LinearLayouts.get(1);
+                List<UiObject2>  textViews=LinearLayout.findObjects(By.clazz(android.widget.TextView.class));
+                watch = cover(textViews.get(0).getText());
                 break;
             }
         }
@@ -81,13 +83,15 @@ public class NewAction extends VP2 {
     //得到视频封面点赞人数
     public static int getZanNumber() {
         UiObject2 swip = getObject2ById(NewPage.ID_NEW_VIDEO);
-        List<UiObject2> linearLayouts = swip.findObjects(By.clazz(android.widget.LinearLayout.class));
+        List<UiObject2> RelativeLayouts = swip.findObjects(By.clazz(android.widget.RelativeLayout.class));
         waitTime(5);
-        logger.info(linearLayouts.size() + "");
+        logger.info(RelativeLayouts.size() + "");
         int like = 0;
-        for (UiObject2 linearLayout : linearLayouts) {
-            List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
-            if (textViews.size() == 3||textViews.size() == 2) {
+        for (UiObject2 RelativeLayout : RelativeLayouts) {
+            List<UiObject2> LinearLayouts = RelativeLayout.findObjects(By.depth(1).clazz(android.widget.LinearLayout.class));
+            if (LinearLayouts.size() == 2) {
+               UiObject2 LinearLayout=LinearLayouts.get(1);
+                List<UiObject2>  textViews=LinearLayout.findObjects(By.clazz(android.widget.TextView.class));
                 like = cover(textViews.get(1).getText());
                 break;
             }
