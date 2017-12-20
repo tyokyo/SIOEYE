@@ -40,6 +40,6 @@ public class WatchPage {
     public static final String WATCH_SEARCH_RESULT="cn.sioeye.sioeyeapp:id/user_avatar";
     //主播头像
     public static final String WATCH_AVATAR="cn.sioeye.sioeyeapp:id/media_avatar";
-
-
+    //个人界面弹出框
+    public static final String WATCH_AVATAR_PROFILE="cn.sioeye.sioeyeapp:id/root";
 }

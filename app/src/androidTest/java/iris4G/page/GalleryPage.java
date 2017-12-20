@@ -17,4 +17,8 @@ public class GalleryPage extends VP2 {
     public static String gallery_delete_bottom="com.hicam.gallery:id/gallery_bottom_delete_im";
     public static String gallery_root_view="com.hicam.gallery:id/gl_root_view";
     public static String gallery_indexText="com.hicam.gallery:id/indexText";
+    public static String gallery_bitrate_custom_min="com.hicam.gallery:id/live_bitrate_custom_min";
+    public static String gallery_bitrate_custom_max="com.hicam.gallery:id/live_bitrate_custom_max";
+    public static String gallery_bitrate_tips="com.hicam.gallery:id/live_bitrate_tips";
+    public static String gallery_bitrate_error_tips="com.hicam.gallery:id/live_bitrate_error_tips";
 }

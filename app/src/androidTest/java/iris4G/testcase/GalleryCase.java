@@ -3,6 +3,7 @@ package iris4G.testcase;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiSelector;
+import android.view.KeyEvent;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -216,5 +217,48 @@ public class GalleryCase extends VP2 {
                 logger.info("Pass");
             }else {Assert.fail("rankNumNotUpdate");}
         }else {Assert.fail("totalNumNotUpdate");}
+    }
+    @Test
+    /*case 15
+    用例编号：SI-2287:设置为固定码率（码率上下限相等）
+     1.随机设置一个固定码率；及前后码率值设置为一样；
+     */
+    public void testCheckGalleryFixedBitrate() throws Exception {
+        GalleryAction.navToGalleryBitrateSetting();
+        String inputNum = GalleryAction.getRandomBitrate(GalleryAction.getGalleryBitrateMin(), GalleryAction.getGalleryBitrateMax());
+        setText(GalleryPage.gallery_bitrate_custom_min,inputNum);
+        setText(GalleryPage.gallery_bitrate_custom_max,inputNum);
+        clickById(GalleryPage.gallery_ok);
+        if (gDevice.findObject(new UiSelector().text("Skip")).exists()){
+            Assert.fail("FixedBitrateSettingFailed");
+        }
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        clickByText("Yes");
+    }
+    @Test
+    /*case 16
+    用例编号：SI-2286:检查码率边界值
+    1设置比最小码率更小的值  ； 2.设置比最大码率更大的值 3.设置允许的范围值
+     */
+    public void testCheckGalleryBitrateBoundaryValue() throws Exception {
+        GalleryAction.navToGalleryBitrateSetting();
+        String small = GalleryAction.getRandomBitrate(0,GalleryAction.getGalleryBitrateMin());
+        String bigger= GalleryAction.getRandomBitrate(GalleryAction.getGalleryBitrateMax(),99999999);
+        setText(GalleryPage.gallery_bitrate_custom_min,small);
+        if (!gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_bitrate_error_tips)).exists()){
+            Assert.fail("notFindGalleryBitrateErrorTips");
+        }
+        setText(GalleryPage.gallery_bitrate_custom_min,GalleryAction.getRandomBitrate(GalleryAction.getGalleryBitrateMin(), GalleryAction.getGalleryBitrateMax()));
+        if (gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_bitrate_error_tips)).exists()){
+            Assert.fail("FindGalleryBitrateErrorTips");
+        }
+        setText(GalleryPage.gallery_bitrate_custom_max,bigger);
+        if (!gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_bitrate_error_tips)).exists()){
+            Assert.fail("notFindGalleryBitrateErrorTips");
+        }
+        setText(GalleryPage.gallery_bitrate_custom_max,GalleryAction.getRandomBitrate(GalleryAction.getGalleryBitrateMin(), GalleryAction.getGalleryBitrateMax()));
+        if (gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_bitrate_error_tips)).exists()){
+            Assert.fail("FindGalleryBitrateErrorTips");
+        }
     }
 }
