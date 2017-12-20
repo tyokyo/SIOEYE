@@ -1,5 +1,7 @@
 package cn.action;
 
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.StaleObjectException;
 import android.support.test.uiautomator.UiObject2;
@@ -18,6 +20,7 @@ import bean.VideoBean;
 import ckt.base.VP2;
 import cn.page.NewPage;
 import cn.page.PlayPage;
+import usa.page.Device;
 
 /**
  * Created by yajuan on 2017/8/7.
@@ -145,11 +148,11 @@ public class PlayAction extends VP2 {
     }
     //点击播放界面，弹出界面ui
     public static void clickPlayView() throws UiObjectNotFoundException{
-     clickById(PlayPage.BROADCAST_VIDEO_VIEW);
+       clickById(PlayPage.BROADCAST_VIEW_CONTAINER);
     }
     //点击暂停/播放
     public static void pauseVideo(){
-        clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
+        clickById(PlayPage.BROADCAST_VIDEO_VIEW);
     }
 
     //点击举报
@@ -177,18 +180,21 @@ public class PlayAction extends VP2 {
                 if (relativeLayout.hasObject(By.clazz(android.widget.ImageView.class).depth(1)) &&
                         relativeLayout.hasObject(By.clazz(android.widget.TextView.class).depth(1)) &&
                         relativeLayout.hasObject(By.clazz(android.widget.ImageView.class).depth(1))) {
+                    Asst.assertTrue(true);
                     break;
-                }
+                }else{ Asst.assertFalse(false);}
             }
-            Asst.assertTrue(true);
+
         }
     }
     //连续点击播放按钮
     public static void getContinuousClickPlay() throws UiObjectNotFoundException {
-        if (id_exists(PlayPage.BROADCAST_VIEW_VIDEO_STOP)){
+        if (id_exists(PlayPage.BROADCAST_VIDEO_VIEW)){
             for(int i=1;i<=3;i++){
-                clickById(PlayPage.BROADCAST_VIEW_VIDEO_STOP);
+                PlayAction.pauseVideo();
                 waitTime(1);
+                PlayAction.clickPlayView();
+
             }
         }
     }
