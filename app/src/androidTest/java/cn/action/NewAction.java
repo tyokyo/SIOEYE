@@ -1,21 +1,22 @@
 package cn.action;
 
+import android.graphics.Rect;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.StaleObjectException;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+
 import com.squareup.spoon.Spoon;
-import android.support.test.uiautomator.Direction;
+
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
+
 import ckt.base.VP2;
 import cn.page.DiscoverPage;
-import java.util.Random;
-
 import cn.page.NewPage;
 import cn.page.PlayPage;
-
-import android.graphics.Rect;
 
 
 /**
@@ -88,8 +89,12 @@ public class NewAction extends VP2 {
         for (UiObject2 linearLayout : linearLayouts) {
             List<UiObject2> textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
             if (textViews.size() == 3||textViews.size() == 2) {
-                like = cover(textViews.get(1).getText());
-                break;
+                try {
+                    like = cover(textViews.get(1).getText());
+                    break;
+                }catch (NumberFormatException e){
+                    logger.info("-NumberFormatException");
+                }
             }
         }
         return like;
