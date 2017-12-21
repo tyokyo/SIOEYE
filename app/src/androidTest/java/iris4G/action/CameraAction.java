@@ -426,6 +426,10 @@ public class CameraAction extends VP2 {
         waitTime(time);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         waitTime(2);
+        cameraSetting();
+        waitTime(1);
+        openCompoundButton("Video&Live(beta)");
+        waitTime(1);
     }
     public static void configVideoQuality(String videoQuality) throws Exception {
         CameraAction.cameraSetting();

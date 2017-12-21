@@ -317,7 +317,7 @@ public class Iris4GAction extends VP2 {
         gDevice.wait(Until.findObject(By.pkg("com.hicam.gallery")), 40000);
         String pkg = gDevice.getCurrentPackageName();
         logger.info("pkg:"+pkg);
-        waitTime(10);
+        waitTime(5);
         clickByPonit(60,60);
         waitTime(1);
         if (!id_exists(GalleryPage.gallery_delete_bottom)){
@@ -325,7 +325,7 @@ public class Iris4GAction extends VP2 {
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
             getObjectById(Iris4GPage.content_id).swipeLeft(60);
         }
-        waitTime(3);
+        waitTime(2);
     }
     public static void makeScreenOn() throws RemoteException {
         initDevice();
