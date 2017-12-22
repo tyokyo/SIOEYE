@@ -85,38 +85,44 @@ public class FollowingCase extends VP2 {
     @PerformanceTest
     public void testFwCmt120c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
-        MeAction.navToBroadcasts();
-        int broadcast_size=BroadcastAction.getBroadcastsSize();
-        if (broadcast_size>=1){
-            int index=BroadcastAction.getRandomBroadcastsIndex();
-            BroadcastAction.clickRandomBroadcastsVideo(index);
-            BroadcastAction.waitBroadcastLoading();
-            gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
-            //当前的评论数
-            VideoBean videoBean1 = PlayAction.getNumberPlayVideo();
-            //评论数
-            int  comments_before = videoBean1.getComment();
-            FollowersAction.clickToChatRoom();
-            String input_comments = getRandomString(120);
-            //输入评论内容
-            clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
-            shellInputText(input_comments);
-            //点击评论
-            clickByPoint(point);
-            waitTime(2);
-            //滑动显示最新消息
-            MeAction.displayNewMessages();
-            waitTime(2);
-            Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
-            //验证评论数+1
-            VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
-            int  after_comments = videoBean_after.getComment();
-            if (comments_before>=1000){
+        MeAction.navToFollowing();  //添加进入关注列表，选择关注好友的视频评论--zyj
+        int following_size= FollowingAction.getFollowingSize();
+        if (following_size>=1) {
+            //获取随机的一个用户信息
+            FollowingBean followingBean = FollowingAction.randomFollowingUser();
+            //选择一个用户
+            FollowingAction.clickRandomFollower(followingBean);
+            int broadcast_size = BroadcastAction.getFansBroadcastsSize();
+            if (broadcast_size >= 1) {
+                FollowingAction.clickFollowingBroadcast();
+                BroadcastAction.waitBroadcastLoading();
+                gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)), 60000);
+                //当前的评论数
+                VideoBean videoBean1 = PlayAction.getNumberPlayVideo();
+                //评论数
+                int comments_before = videoBean1.getComment();
+                FollowersAction.clickToChatRoom();
+                String input_comments = getRandomString(120);
+                //输入评论内容
+                clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
+                shellInputText(input_comments);
+                //点击评论
+                clickByPoint(point);
+                waitTime(2);
+                //滑动显示最新消息
+                MeAction.displayNewMessages();
+                waitTime(2);
+                Asst.assertEquals("comments success", true, getUiObjectByTextContains(input_comments).exists());
+                //验证评论数+1
+                VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
+                int after_comments = videoBean_after.getComment();
+                if (comments_before >= 1000) {
 
-            }else{
-                Asst.assertEquals(comments_before+1,after_comments);
-                Spoon.screenshot("testComments_Length_120",input_comments);
-                gDevice.pressBack();
+                } else {
+                    Asst.assertEquals(comments_before + 1, after_comments);
+                    Spoon.screenshot("testComments_Length_120", input_comments);
+                    gDevice.pressBack();
+                }
             }
         }
     }
@@ -125,38 +131,45 @@ public class FollowingCase extends VP2 {
     @PerformanceTest
     public void testFwCmt130c() throws UiObjectNotFoundException, IOException {
         Point point=MeAction.getPointToDoComment();
-        MeAction.navToBroadcasts();
-        int broadcast_size=BroadcastAction.getBroadcastsSize();
-        if (broadcast_size>=1){
-            int index=BroadcastAction.getRandomBroadcastsIndex();
-            BroadcastAction.clickRandomBroadcastsVideo(index);
-            BroadcastAction.waitBroadcastLoading();
-            gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)),60000);
-            //当前的评论数
-            VideoBean videoBean1 = PlayAction.getNumberPlayVideo();
-            int  comments_before = videoBean1.getComment();
-            FollowersAction.clickToChatRoom();
-            String input_comments = getRandomString(130);
-            //输入评论内容
-            clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
-            shellInputText(input_comments);
-            //点击评论
-            clickByPoint(point);
-            waitTime(2);
-            //滑动显示最新消息
-            MeAction.displayNewMessages();
-            waitTime(2);
-            input_comments=input_comments.substring(0,60);
-            Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
-            //验证评论数+1
-            VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
-            int  after_comments = videoBean_after.getComment();
-            if (comments_before>=1000){
-                Asst.assertEquals(comments_before,after_comments);
-            }else{
-                Asst.assertEquals(comments_before+1,after_comments);
-                Spoon.screenshot("testComments_Length_130",input_comments);
-                gDevice.pressBack();
+        MeAction.navToFollowing();  //添加进入关注列表，选择关注好友的视频评论--zyj
+        int following_size= FollowingAction.getFollowingSize();
+        if (following_size>=1) {
+            //获取随机的一个用户信息
+            FollowingBean followingBean = FollowingAction.randomFollowingUser();
+            //选择一个用户
+            FollowingAction.clickRandomFollower(followingBean);
+            int broadcast_size = BroadcastAction.getFansBroadcastsSize();
+            if (broadcast_size >= 1) {
+                FollowingAction.clickFollowingBroadcast();
+                BroadcastAction.waitBroadcastLoading();
+                gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)), 60000);
+                //当前的评论数
+                VideoBean videoBean1 = PlayAction.getNumberPlayVideo();
+                int comments_before = videoBean1.getComment();
+                FollowersAction.clickToChatRoom();
+                String input_comments = getRandomString(130);
+                //输入评论内容
+                clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
+                shellInputText(input_comments);
+                //点击评论
+                clickByPoint(point);
+                waitTime(2);
+                //滑动显示最新消息
+                MeAction.displayNewMessages();
+                waitTime(2);
+                input_comments = input_comments.substring(0, 60);
+                waitTime(3);
+                Asst.assertEquals("comments success", true, getUiObjectByTextContains(input_comments).exists());
+                //验证评论数+1
+                VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
+                int after_comments = videoBean_after.getComment();
+                if (comments_before >= 1000) {
+                    Asst.assertEquals(comments_before, after_comments);
+                } else {
+                    Asst.assertEquals(comments_before + 1, after_comments);
+                    Spoon.screenshot("testComments_Length_130", input_comments);
+                    gDevice.pressBack();
+                }
             }
         }
     }
@@ -170,8 +183,6 @@ public class FollowingCase extends VP2 {
         if (following_size>=1){
             //获取随机的一个用户信息
             FollowingBean followingBean =FollowingAction.randomFollowingUser();
-            logger.info(followingBean.toString());
-            int index=followingBean.getIndex_linearLayout();
             //选择一个用户
             FollowingAction.clickRandomFollower(followingBean);
             int broadcast_size=FollowingAction.hasBroadcasts();
@@ -228,8 +239,6 @@ public class FollowingCase extends VP2 {
         if (following_size>=1){
             //获取随机的一个用户信息
             FollowingBean followingBean =FollowingAction.randomFollowingUser();
-            logger.info(followingBean.toString());
-            int index=followingBean.getIndex_linearLayout();
             //选择一个用户
             FollowingAction.clickRandomFollower(followingBean);
             int broadcast_size=FollowingAction.hasBroadcasts();
@@ -278,8 +287,6 @@ public class FollowingCase extends VP2 {
         if (following_size>=1){
             //获取随机的一个用户信息
             FollowingBean followingBean =FollowingAction.randomFollowingUser();
-            logger.info(followingBean.toString());
-            int index=followingBean.getIndex_linearLayout();
             //选择一个用户
             FollowingAction.clickRandomFollower(followingBean);
             int broadcast_size=FollowingAction.hasBroadcasts();
@@ -331,8 +338,6 @@ public class FollowingCase extends VP2 {
         if (following_size>=1){
             //获取随机的一个用户信息
             FollowingBean followingBean =FollowingAction.randomFollowingUser();
-            logger.info(followingBean.toString());
-            int index=followingBean.getIndex_linearLayout();
             //选择一个用户
             FollowingAction.clickRandomFollower(followingBean);
             //随机播放一个视频
@@ -367,12 +372,10 @@ public class FollowingCase extends VP2 {
         int following_size= FollowingAction.getFollowingSize();
         if(following_size>=1){
             FollowingBean followingBean=FollowingAction.randomFollowingUser();
-            logger.info(followingBean.toString());
-            int indx=followingBean.getIndex_linearLayout();
             FollowingAction.clickRandomFollower(followingBean);
             int broadcast_size=FollowingAction.hasBroadcasts();
             if(broadcast_size>=1){
-                MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,10);//上下滑动视频列表
+                MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,5);//上下滑动视频列表
                 FollowingAction.clickFollowingBroadcast();//选择视频播放
                 //等待视频加载完成
                 BroadcastAction.waitBroadcastLoading();//等待加载评论区
@@ -393,35 +396,7 @@ public class FollowingCase extends VP2 {
             }
         }
     }
-    /****
-     上下滑动直播列表
-     选择一个视频播放
-     点击暂停播放
-     * */
-    @Test
-    public void testContinuousStopPlayVideo() throws UiObjectNotFoundException,IOException{
-        MeAction.navToFollowing();
-        waitTime(3);
-        int following_size=FollowingAction.getFollowingSize();
-        if(following_size>=1){
-            FollowingBean followingBean=FollowingAction.randomFollowingUser();
-            logger.info(followingBean.toString());
-            FollowingAction.clickRandomFollower(followingBean);
-            int broadcast_size=FollowingAction.hasBroadcasts();
-            if(broadcast_size>=1){
-                MeAction.swipeUpDown(MePage.USER_FOLLOW_LIST,3);
-                FollowingAction.clickFollowingBroadcast();//选择视频播放
-                BroadcastAction.waitBroadcastLoading();//等待加载评论区
-                waitTime(3);
-                PlayAction.clickPlayView();
-                PlayAction.pauseVideo();
-                PlayAction.getAdvertising();
-            }
-            else{
-                Spoon.screenshot("no_video");
-           }
-        }
-    }
+
 }
 
 
