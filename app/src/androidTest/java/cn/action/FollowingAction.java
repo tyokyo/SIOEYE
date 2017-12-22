@@ -49,7 +49,7 @@ public class FollowingAction extends VP2{
         Spoon.screenshot("clickRandomFollower","Name-"+followingBean.getName());
         waitUntilFind(MePage.USER_FOLLOW_LIST,10000);
     }
-    //关注数目
+    //关注/粉丝数目
     public static int getFollowingSize(){
         List<UiObject2> lisCollect = gDevice.findObjects(By.res(MePage.FOLLOWERING_AVATAR));
         int size = lisCollect.size();
