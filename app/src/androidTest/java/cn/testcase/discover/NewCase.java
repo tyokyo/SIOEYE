@@ -72,12 +72,10 @@ public class NewCase  extends VP2{
     */
     public void testToNewList() throws UiObjectNotFoundException{
         MainAction.clickDiscover();
-        for (int i = 0; i <5 ; i++) {
-            MainAction.clickDiscover();
-            DiscoverAction.navToNew();
-            //点击切换到最新列表，根据有无换页判断
-            Asst.assertEquals("testToNewListFail",false,id_exists(DiscoverPage.ID_PAGE_INDICATOR));
-        }
+        DiscoverAction.navToNew();
+        //点击切换到最新列表，根据有无换页判断
+        waitTime(3);
+        Asst.assertEquals("testToNewListFail",false,id_exists(DiscoverPage.ID_PAGE_INDICATOR));
         Spoon.screenshot("New","Popular");
     }
 
@@ -156,6 +154,7 @@ public class NewCase  extends VP2{
     public void testProfileSwipeList() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        waitTime(3);
         UiObject object = getObjectById(NewPage.ID_NEW_AVATOR);
         object.click();
         //点击主播头像，弹出详情框
