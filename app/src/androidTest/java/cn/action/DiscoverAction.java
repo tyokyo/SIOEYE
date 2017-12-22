@@ -27,6 +27,7 @@ import cn.page.DiscoverPage;
 import cn.page.MePage;
 import cn.page.NewPage;
 import cn.page.PlayPage;
+import usa.page.Device;
 import usa.page.Discover;
 
 /**
@@ -81,9 +82,9 @@ public class DiscoverAction extends VP2 {
     //统计推荐列表的个数
     public static int countRecommendList() throws UiObjectNotFoundException {
         int total = 0;
-        if (id_exists(Discover.ID_MAIN_TAB_RECOMMAND_LIST)){
-            List<UiObject2> list= gDevice.findObject(By.res(Discover.ID_MAIN_TAB_RECOMMAND_LIST)).findObjects(By.clazz(android.widget.LinearLayout.class));
-            total=list.size();
+        if (id_exists(DiscoverPage.ID_RECOMMEND_AVATAR)){
+            List<UiObject2> LinearLayouts=gDevice.findObjects(By.res("cn.sioeye.sioeyeapp:id/checked"));
+            total=LinearLayouts.size();
             logger.info("countRecommendList-"+total+"");
         }
         return total;
@@ -390,6 +391,16 @@ public class DiscoverAction extends VP2 {
                 ImageViews.get(0).click();
                 break;
             }
+        }
+    }
+    //点击弹出框中的更多选项，拉黑
+    public static void addBlackList() throws UiObjectNotFoundException {
+       List<UiObject2> object= getObject2ById(DiscoverPage.ID_DISCOVER_PROFILE).getChildren();
+        object.get(1).click();
+        waitTime(3);
+        if (text_exists("Add to blacklist")){
+            clickByText("Add to blacklist");  //点击拉黑
+            gDevice.pressBack();
         }
     }
 }
