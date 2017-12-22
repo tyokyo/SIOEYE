@@ -62,7 +62,7 @@ public class BroadcastAction extends VP2{
         logger.info("getBroadcastsSize:"+size);
         return  size;
     }
-    //fans-直播数目
+    //关注/fans-直播数目
     public static int getFansBroadcastsSize(){
         UiObject2 list = getObject2ById(MePage.USER_FOLLOW_LIST);
         List<UiObject2> lisCollect = list.findObjects(By.clazz(FrameLayout.class));
@@ -73,6 +73,7 @@ public class BroadcastAction extends VP2{
     public static int getRandomBroadcastsIndex(){
         waitHasObject(MePage.BROADCAST_CONTENT,20000);
         UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
+        waitTime(3);
         List<UiObject2> broadcasts = view.findObjects(By.res(MePage.BROADCAST_CONTENT));
         int size = broadcasts.size();
         logger.info("getRandomBroadcastsIndex-size:"+size);
@@ -160,7 +161,7 @@ public class BroadcastAction extends VP2{
     public static WatcherBean getWatcher() throws UiObjectNotFoundException, IOException {
         FollowersAction.clickToAbout();
         WatcherBean watcherBean = new WatcherBean();
-        UiObject u =  gDevice.findObject(new UiSelector().resourceId(PlayPage.BROADCAST_VIEW_WATCHER_COUNT));
+        waitTime(3);
         String watcher = getObject2ById(PlayPage.VIDEO_WATCH_NUMBER).getText();
         String comments = getObject2ById(PlayPage.VIDEO_LIKE_NUMBER).getText();
         String zan = getObject2ById(PlayPage.VIDEO_CHAT_NUMBER).getText();
