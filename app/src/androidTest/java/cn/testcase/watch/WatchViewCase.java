@@ -101,8 +101,6 @@ public class WatchViewCase extends VP2 {
             String dateStr=timeObj.getText();
             timeObj.click();
             BroadcastAction.waitBroadcastLoading();
-            //Asst.assertTrue("time out 60 seconds.",!getObjectById(MePage.BROADCAST_VIEW_VIDEO_LOADING).exists());
-            //click play screen center
             waitTime(dateInSeconds(dateStr));
             Spoon.screenshot("play_video");
         } catch (IndexOutOfBoundsException e) {
