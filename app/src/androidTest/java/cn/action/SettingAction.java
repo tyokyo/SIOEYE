@@ -1,5 +1,6 @@
 package cn.action;
 
+import android.support.test.uiautomator.StaleObjectException;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import com.squareup.spoon.Spoon;
@@ -36,10 +37,11 @@ public class SettingAction extends VP2 {
         clickByText("User Agreement");
         Spoon.screenshot("Agreement");
     }
-    //设置
-    public static void navToSetting() throws UiObjectNotFoundException {
+    //黑名单
+    public static void navToBlackList() throws UiObjectNotFoundException {
         MeAction.navToSettings();
-        Spoon.screenshot("HelpCenter");
+        clickByText("Blacklist");
+        Spoon.screenshot("Blacklist");
     }
     //推送通知
     public static void navToMessageNotification() throws UiObjectNotFoundException {
@@ -87,6 +89,10 @@ public class SettingAction extends VP2 {
     public static void navToUserGuide() throws UiObjectNotFoundException {
         clickById(MePage.USER_GUIDE);
         Spoon.screenshot("USER_GUIDE");
+    }
+    //从黑名单移除
+    public static void removeFromBlackList(){
+        clickById(MePage.ID_REMOVE);
     }
 
 
