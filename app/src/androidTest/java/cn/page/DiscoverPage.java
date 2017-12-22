@@ -18,6 +18,10 @@ public class DiscoverPage {
     public static final String ID_MAIN_TAB_PROFILE_MINI_HOME ="cn.sioeye.sioeyeapp:id/profile_mini_home";
     //nick name
     public static final String ID_MAIN_TAB_PROFILE_MINI_NAME ="cn.sioeye.sioeyeapp:id/tv_nickname";
+    //弹出框
+    public static final String ID_DISCOVER_PROFILE="cn.sioeye.sioeyeapp:id/root";
+    //推荐关注的用户头像
+    public static final String ID_RECOMMEND_AVATAR="cn.sioeye.sioeyeapp:id/checked";
     //弹出框中粉丝数目
     public static final String ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOWER ="cn.sioeye.sioeyeapp:id/profile_mini_num_follower";
     public static final String ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW ="cn.sioeye.sioeyeapp:id/profile_mini_num_following";
