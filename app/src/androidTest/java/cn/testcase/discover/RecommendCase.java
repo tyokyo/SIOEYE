@@ -20,6 +20,7 @@ import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.DiscoverAction;
+import cn.action.MainAction;
 import cn.page.App;
 import cn.page.DiscoverPage;
 
@@ -45,6 +46,7 @@ public class RecommendCase extends VP2 {
      */
     public void testSingleClickRecommendList0() throws UiObjectNotFoundException {
         //Single Check Recommend list 0单击推荐列表第一个人，检查弹出框PROFILE_MINI_HOME是否正确
+        MainAction.navToDiscover();
         int count =DiscoverAction.countRecommendList();
         if (count>=1){
             //两个参数分别为推荐列表第几个用户（0-3）和点击几次（1-2）
@@ -64,6 +66,7 @@ public class RecommendCase extends VP2 {
      * 双击推送列表好友后检查弹窗好友信息
      */
     public void testDoubleClickRecommend0() throws UiObjectNotFoundException {
+        MainAction.navToDiscover();
         int count =DiscoverAction.countRecommendList();
         if (count>=1){
             //double Check Recommend list 0双击推荐列表第二个人，检查是否正确弹出框PROFILE_MINI_HOME是否正确
@@ -255,7 +258,7 @@ public class RecommendCase extends VP2 {
         if (count>=1){
             String expect_name=DiscoverAction.navToRecommendList(0,1);
             //关闭弹出框
-            clickByClass("android.widget.ImageView",2);
+            gDevice.pressBack();
             logger.info(expect_name);
             Rect rect=getUiObjectByText("WHO TO FOLLOW").getVisibleBounds();
             int y=rect.centerY();
