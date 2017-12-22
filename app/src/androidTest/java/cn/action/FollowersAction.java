@@ -13,6 +13,6 @@ public class FollowersAction extends VP2 {
     }
     public static void clickToAbout(){
         clickById(PlayPage.TV_AUCHOR_ID);
-        //clickByText("主播");
+
     }
 }
