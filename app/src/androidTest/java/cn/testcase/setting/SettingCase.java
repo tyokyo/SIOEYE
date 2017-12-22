@@ -19,6 +19,7 @@ import ckt.annotation.PerformanceTest;
 import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
+import cn.action.MeAction;
 import cn.action.SettingAction;
 import cn.page.App;
 import cn.page.MePage;
@@ -55,7 +56,7 @@ public class SettingCase extends VP2 {
     @SanityTest
     @PerformanceTest
     public void testEnable() throws UiObjectNotFoundException {
-        SettingAction.navToSetting();
+        MeAction.navToSettings();
         boolean isChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
         logger.info(""+isChecked);
         if (isChecked==false){
@@ -67,7 +68,7 @@ public class SettingCase extends VP2 {
     @SanityTest
     @PerformanceTest
     public void testDisable() throws UiObjectNotFoundException {
-        SettingAction.navToSetting();
+        MeAction.navToSettings();
         boolean isChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
         logger.info(""+isChecked);
         if (isChecked==true){
@@ -93,7 +94,7 @@ public class SettingCase extends VP2 {
      * @author elon
      */
     public void tesDirectorEnable() throws UiObjectNotFoundException {
-        SettingAction.navToSetting();
+        MeAction.navToSettings();
         boolean isChecked=getObject2ById(MePage.SETTINGS_CB_DIRECTOR).isChecked();
         logger.info(""+isChecked);
         if (isChecked==false){
@@ -113,7 +114,7 @@ public class SettingCase extends VP2 {
     @SanityTest
     @PerformanceTest
     public void testThreeDNetwork() throws UiObjectNotFoundException {
-        SettingAction.navToSetting();
+        MeAction.navToSettings();
         boolean isChecked=getObject2ById(MePage.SETTINGS_3G_NETWORK).isChecked();
         logger.info(""+isChecked);
         if (isChecked==false){
@@ -226,7 +227,7 @@ public class SettingCase extends VP2 {
     }
 
     public void testDirectorDisable() throws UiObjectNotFoundException {
-        SettingAction.navToSetting();
+        MeAction.navToSettings();
         boolean isChecked=getObject2ById(MePage.SETTINGS_CB_DIRECTOR).isChecked();
         logger.info(""+isChecked);
         if (isChecked==true){
