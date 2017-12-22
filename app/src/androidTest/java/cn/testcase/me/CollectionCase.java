@@ -37,7 +37,7 @@ import cn.page.PlayPage;
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
 public class CollectionCase extends VP2{
-    Logger logger = Logger.getLogger(BroadCastsCase.class.getName());
+    Logger logger = Logger.getLogger(CollectionCase.class.getName());
     @Before
     public  void setup() throws UiObjectNotFoundException {
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
