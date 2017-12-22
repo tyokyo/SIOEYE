@@ -395,7 +395,7 @@ public class MeAction extends VP2{
             for (UiObject2 room: rooms) {
                 if (room.hasObject(By.text("Effective"))){
                     room.findObject(By.text("More")).click();
-                    waitUntilFind(MePage.LIVE_ROOM_MORE_OPTION_LIST,10000);
+                    waitUntilFind(MePage.MORE_OPTION_LIST,10000);
                     clickTerminateLiveRoom();
                     waitTime(3);
                 }
