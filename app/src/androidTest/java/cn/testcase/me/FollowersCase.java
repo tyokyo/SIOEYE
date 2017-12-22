@@ -54,8 +54,8 @@ public class FollowersCase extends VP2 {
         //进入粉丝界面
         MeAction.navToFans();
         //获取粉丝数
-        int following_size= FollowingAction.getFollowingSize();
-        if (following_size>=1){
+        int follower_size= FollowingAction.getFollowingSize();
+        if (follower_size>=1){
             waitTime(3);
             FollowingBean followingBean =FollowingAction.randomFansUser();
             int index=followingBean.getIndex_linearLayout();
@@ -90,12 +90,10 @@ public class FollowersCase extends VP2 {
         //进入粉丝界面
         MeAction.navToFans();
         //获取粉丝数
-        int following_size= FollowingAction.getFollowingSize();
-        if (following_size>=1){
+        int follower_size= FollowingAction.getFollowingSize();
+        if (follower_size>=1){
             waitTime(3);
             FollowingBean followingBean =FollowingAction.randomFansUser();
-            int index=followingBean.getIndex_linearLayout();
-            //随机选择一个fans
             FollowingAction.clickRandomFollower(followingBean);
             //进入直播列表 获取回放视频数目
             int brd_size= BroadcastAction.getFansBroadcastsSize();
@@ -120,6 +118,7 @@ public class FollowersCase extends VP2 {
                 //滑动显示最新消息
                 MeAction.displayNewMessages();
                 input_comments=input_comments.substring(0,10);
+                waitTime(3);
                 Asst.assertTrue("comments success",getObjectByTextContains(input_comments).exists());
                 //验证评论数+1
                 WatcherBean watcherBean_after = BroadcastAction.getWatcher();
@@ -137,10 +136,10 @@ public class FollowersCase extends VP2 {
             }
         }else{
             logger.info("no_user");
-            Spoon.screenshot("no_user","没有关注的用户");
+            Spoon.screenshot("no_user","没有粉丝");
         }
     }
-    //评论-关注的好友中的直播视频
+    //评论-粉丝的直播视频
     @Test
     @PerformanceTest
     public void testComments120c() throws UiObjectNotFoundException, IOException {
@@ -148,12 +147,10 @@ public class FollowersCase extends VP2 {
         //进入粉丝界面
         MeAction.navToFans();
         //获取粉丝数
-        int following_size= FollowingAction.getFollowingSize();
-        if (following_size>=1){
+        int follower_size= FollowingAction.getFollowingSize();
+        if (follower_size>=1){
             waitTime(3);
             FollowingBean followingBean =FollowingAction.randomFansUser();
-            int index=followingBean.getIndex_linearLayout();
-            //随机选择一个fans
             FollowingAction.clickRandomFollower(followingBean);
             //进入直播列表 获取回放视频数目
             int brd_size= BroadcastAction.getFansBroadcastsSize();
@@ -198,7 +195,7 @@ public class FollowersCase extends VP2 {
             Spoon.screenshot("no_user","没有关注的用户");
         }
     }
-    //评论-关注的好友中的直播视频
+    //评论-粉丝的直播视频
     @Test
     @PerformanceTest
     public void testComments20c() throws UiObjectNotFoundException, IOException {
@@ -206,11 +203,10 @@ public class FollowersCase extends VP2 {
         //进入粉丝界面
         MeAction.navToFans();
         //获取粉丝数
-        int following_size= FollowingAction.getFollowingSize();
-        if (following_size>=1){
+        int follower_size= FollowingAction.getFollowingSize();
+        if (follower_size>=1){
             waitTime(3);
             FollowingBean followingBean =FollowingAction.randomFansUser();
-            int index=followingBean.getIndex_linearLayout();
             //随机选择一个fans
             FollowingAction.clickRandomFollower(followingBean);
             //进入直播列表 获取回放视频数目
@@ -266,8 +262,8 @@ public class FollowersCase extends VP2 {
         //进入粉丝界面
         MeAction.navToFans();
         //获取粉丝数
-        int following_size= FollowingAction.getFollowingSize();
-        if (following_size>=1){
+        int follower_size= FollowingAction.getFollowingSize();
+        if (follower_size>=1){
             waitTime(3);
             FollowingBean followingBean =FollowingAction.randomFansUser();
             int index=followingBean.getIndex_linearLayout();
@@ -318,8 +314,8 @@ public class FollowersCase extends VP2 {
         //进入粉丝界面
         MeAction.navToFans();
         //获取粉丝数
-        int following_size= FollowingAction.getFollowingSize();
-        if (following_size>=1){
+        int follower_size= FollowingAction.getFollowingSize();
+        if (follower_size>=1){
             waitTime(3);
             FollowingBean followingBean =FollowingAction.randomFansUser();
             int index=followingBean.getIndex_linearLayout();
@@ -378,8 +374,8 @@ public class FollowersCase extends VP2 {
         //进入粉丝界面
         MeAction.navToFans();
         //获取粉丝数
-        int following_size= FollowingAction.getFollowingSize();
-        if (following_size>=1){
+        int follower_size= FollowingAction.getFollowingSize();
+        if (follower_size>=1){
             //滑动选择粉丝
             MeAction.swipeUpDown(MePage.FANS_SWIPE_LAYOUT,10);
             waitTime(3);
