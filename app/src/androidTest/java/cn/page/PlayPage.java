@@ -66,7 +66,11 @@ public class PlayPage {
     public static final String BROADCAST_VIEW_VIDEO_STOP="cn.sioeye.sioeyeapp:id/portrait_app_video_play";
     public static final String BROADCAST_VIEW_PAGE="cn.sioeye.sioeyeapp:id/action_bar_root";
     public static final String BROADCAST_VIEW_CONTAINER="cn.sioeye.sioeyeapp:id/video_view_container";
-
-
+    //播放界面状态提示
+    public static final String PLAY_STATUS="cn.sioeye.sioeyeapp:id/status";
+    //简介中主播的昵称、sioeyeid、粉丝数
+    public static final String ABOUT_NICKNAME="cn.sioeye.sioeyeapp:id/tv_nickname";
+    public static final String ABOUT_SIOEYE_ID="cn.sioeye.sioeyeapp:id/tv_sioeye_id_number";
+    public static final String ABOUT_FOLLOWER_NUMBER="cn.sioeye.sioeyeapp:id/tv_fans_number";
 
 }
