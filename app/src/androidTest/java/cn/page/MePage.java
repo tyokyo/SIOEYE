@@ -334,6 +334,11 @@ public class MePage {
     public static final String LIVE_ROOM_LIST="cn.sioeye.sioeyeapp:id/room_list";
     //BROADCAST_CONTENT
     public static final String LIVE_ROOM_BROADCAST_CONTENT="cn.sioeye.sioeyeapp:id/llt_broadcast_content";
-    public static final String LIVE_ROOM_MORE_OPTION_LIST="cn.sioeye.sioeyeapp:id/option_list";
-
+    public static final String MORE_OPTION_LIST="cn.sioeye.sioeyeapp:id/option_list";
+   //黑名单列表
+    public static final String ID_BLACKLIST="cn.sioeye.sioeyeapp:id/recycleview";
+    //移除黑名单
+    public static final String ID_REMOVE="cn.sioeye.sioeyeapp:id/user_follow";
+    //好友主页的关注
+    public static final String ID_PROFILE_FOLLOW="cn.sioeye.sioeyeapp:id/following";
 }
