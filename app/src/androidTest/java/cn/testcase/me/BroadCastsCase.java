@@ -276,6 +276,7 @@ public class BroadCastsCase extends VP2{
             input_comments=input_comments.substring(0,120);
             //滑动显示最新消息
             MeAction.displayNewMessages();
+            waitTime(3);
             Asst.assertEquals("comments success",true,getUiObjectByTextContains(input_comments).exists());
             //验证评论数+1
             VideoBean videoBean_after =PlayAction.getNumberPlayVideo();
