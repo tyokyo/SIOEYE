@@ -66,9 +66,9 @@ public class BlackListCase extends VP2{
         SettingAction.navToBlackList();
         int remove_before=getObject2ById(MePage.ID_BLACKLIST).getChildCount();
         if(remove_before>1){    //黑名单中有好友
-            SettingAction.removeFromBlackList();
-            int remove_after=getObject2ById(MePage.ID_BLACKLIST).getChildCount();
-            Asst.assertEquals("移除成功",remove_before-1,remove_after);
+           String str= SettingAction.removeFromBlackList();
+            waitTime(3);
+            Asst.assertTrue(!text_exists(str));
         }
     }
     /**
