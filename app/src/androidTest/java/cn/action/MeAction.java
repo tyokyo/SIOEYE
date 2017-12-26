@@ -13,6 +13,7 @@ import com.squareup.spoon.Spoon;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import bean.InfoBean;
@@ -454,5 +455,40 @@ public class MeAction extends VP2{
             }
         }
         return isCreated;
+    }
+    //获取直播介绍对象
+    public static UiObject2 getLiveStreamIntroduction(){
+        return  getUiObject2ByText("Live stream introduction");
+    }
+    //房间数
+    public static int getRoomNum(){
+        waitHasObject(MePage.LIVE_ROOM_LIST,20000);
+        List<UiObject2> lisRoom = gDevice.findObjects(By.res(MePage.BROADCAST_TITLE));
+        int size = lisRoom.size();
+        return size;
+    }
+    //获取第1个房间对象
+    public static UiObject2 getRoom(){
+        waitHasObject(MePage.LIVE_ROOM_LIST,10000);
+        UiObject2 view = gDevice.findObject(By.res(MePage.LIVE_ROOM_LIST));
+        waitTime(3);
+        List<UiObject2> broadcasts = view.findObjects(By.res(MePage.BROADCAST_TITLE));
+        logger.info("getRandomRoom:"+broadcasts.size());
+        UiObject2 room = broadcasts.get(0).getParent().getParent().getParent().getParent().getParent();
+        return  room;
+    }
+    //获取房间设置公开私有的按钮
+    public static UiObject2 getOpenOrPrivate(){
+        return getObject2ById(MePage.BROADCAST_VIDEO_MORE_OPTION_LIST).getChildren().get(0);
+    }
+    //点击房间编辑按钮
+    public static UiObject2 getEdit(UiObject2 obj){
+        return obj.getParent().getChildren().get(2).getChildren().get(2);
+    }
+    //在播放界面->简介下，获取直播间介绍
+    public static UiObject2 getRoomIntroduction(){
+        clickById(PlayPage.TV_AUCHOR_ID);
+        UiObject2 playAbout = getObject2ById(PlayPage.PLAY_ABOUT);
+        return playAbout.getChildren().get(0).getChildren().get(2);
     }
 }

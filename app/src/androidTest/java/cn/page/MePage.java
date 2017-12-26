@@ -326,6 +326,8 @@ public class MePage {
     public static final String CREATE_LIVE_ROOM="cn.sioeye.sioeyeapp:id/llt_muti_room_create";
     //直播间名字 Live stream channel name
     public static final String LIVE_ROOM_NAME="cn.sioeye.sioeyeapp:id/et_room_name";
+    //直播间搜索按钮
+    public static final String ID_LIVE_ROOM_SEARCH = "cn.sioeye.sioeyeapp:id/share";
     //2017/11/30修改，“我”界面滑动界面ID
     public static final String SCROLL_ME_VIEW = "cn.sioeye.sioeyeapp:id/scrollview";
     //直播间时间范围
@@ -341,4 +343,6 @@ public class MePage {
     public static final String ID_REMOVE="cn.sioeye.sioeyeapp:id/user_follow";
     //好友主页的关注
     public static final String ID_PROFILE_FOLLOW="cn.sioeye.sioeyeapp:id/following";
+    //直播介绍
+    public static final String ID_REMAIN = "cn.sioeye.sioeyeapp:id/remain";
 }

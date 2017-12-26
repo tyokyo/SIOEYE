@@ -3,6 +3,7 @@ package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.widget.CheckBox;
 
@@ -311,5 +312,213 @@ public class LiveConfigCase extends VP2{
             Asst.assertEquals("delete all success",false,MeAction.isLiveRoomEffective());
         }
         Spoon.screenshot("delete_all_live_room");
+    }
+    /**
+     *修改直播间属性：公开-私有
+     * jqx 2017.12.26
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testChangeLiveRoom() throws UiObjectNotFoundException {
+        //navigate to live configuration
+        MeAction.navToLiveConfiguration();
+        //enter live room
+        MeAction.clickLiveStreamChannel();
+        int live_channel_size = MeAction.getRoomNum();
+        if(live_channel_size>=1){
+            UiObject2 room = MeAction.getRoom();
+            //获取more按钮
+            UiObject2 moreButton = room.getChildren().get(2).getChildren().get(3);
+            //点击more按钮
+            moreButton.click();
+            waitTime(3);
+            String isOpen = MeAction.getOpenOrPrivate().getText();
+            Spoon.screenshot("open_private_live_room1");
+            MeAction.getOpenOrPrivate().click();
+            //再次点击“more”按钮，检查属性是否修改成功
+            waitTime(4);
+            moreButton.click();
+            Spoon.screenshot("open_private_live_room2");
+            String isPrivate = MeAction.getOpenOrPrivate().getText();
+            Asst.assertTrue(!isOpen.equals(isPrivate));
+        }
+        Spoon.screenshot("open_private_live_room3");
+    }
+    /**
+     *搜索直播间
+     * jqx 2017.12.26
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testSearchLiveRoom() throws UiObjectNotFoundException, IOException {
+        //navigate to live configuration
+        MeAction.navToLiveConfiguration();
+        //enter live room
+        MeAction.clickLiveStreamChannel();
+        int live_channel_size = MeAction.getRoomNum();
+        if(live_channel_size>=1){
+            String roomTitle = getObject2ById(MePage.BROADCAST_TITLE).getText();
+            //点击搜索按钮
+            clickById(MePage.ID_LIVE_ROOM_SEARCH);
+            shellInputText(roomTitle);
+        }
+        waitTime(3);
+        //如果搜索有结果，则pass
+        Asst.assertTrue(id_exists(MePage.BROADCAST_TITLE));
+        Spoon.screenshot("search_live_room");
+    }
+    /**
+     *修改直播房间介绍
+     * 1.修改直播房间简介
+     * 2.进入该直播房间，检查是否修改成功
+     * jqx 2017.12.26
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testLiveRoomDescription() throws UiObjectNotFoundException, IOException {
+        //navigate to live configuration
+        MeAction.navToLiveConfiguration();
+        //enter live room
+        MeAction.clickLiveStreamChannel();
+        int live_channel_size = MeAction.getRoomNum();
+        if(live_channel_size>=1){
+            //得到房间对象
+            UiObject2 room  = MeAction.getRoom();
+            //点击Edit按钮
+            MeAction.getEdit(room).click();
+            //点击房间简介
+            clickById(MePage.LIVE_ROOM_INFO);
+            Spoon.screenshot("live_room_intro_old");
+            getObjectById(MePage.LIVE_ROOM_INFO).clearTextField();
+            String expect = getRandomString(40);
+            shellInputText(expect);
+            gDevice.pressBack();
+            waitTime(2);
+            clickByText("OK");//保存
+            //点击进入该房间，检查房间介绍修改是否成功
+            room.click();
+            String actResult = MeAction.getRoomIntroduction().getText();
+            Asst.assertEquals("修改直播间介绍",expect,actResult);
+        }
+        Spoon.screenshot("search_live_intro_new");
+    }
+    /**
+     * 直播介绍
+     * 输入直播介绍后，保存，再进入，对比结果
+     * jqx 2017.12.26
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testLiveStreamIntroduction() throws UiObjectNotFoundException, IOException {
+        //navigate to live configuration
+        MeAction.navToLiveConfiguration();
+        //点击live stream introduction
+        MeAction.getLiveStreamIntroduction().click();
+        //clear text
+        getObjectById(MePage.LIVE_CONFIG_CONTENT).clearTextField();
+        String expect = getRandomString(35);
+        shellInputText(expect);
+        clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
+        //重新打开APP，进入直播设置界面
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
+        MeAction.navToLiveConfiguration();
+        MeAction.getLiveStreamIntroduction().click();
+        String active = getObjectById(MePage.LIVE_CONFIG_CONTENT).getText();
+        Asst.assertEquals("修改直播介绍",expect,active);
+        Spoon.screenshot("change_live_stream_introduction");
+        gDevice.pressBack();
+    }
+    /**
+     * 直播介绍（最多可以输入140个字符）
+     * 输入140个字符的直播介绍后，保存
+     * jqx 2017.12.26
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testLiveStreamIntro140c() throws UiObjectNotFoundException, IOException {
+        //navigate to live configuration
+        MeAction.navToLiveConfiguration();
+        //点击live stream introduction
+        MeAction.getLiveStreamIntroduction().click();
+        //clear text
+        getObjectById(MePage.LIVE_CONFIG_CONTENT).clearTextField();
+        String expect = getRandomString(140);
+        shellInputText(expect);
+        clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
+        //重新打开APP，进入直播设置界面
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
+        MeAction.navToLiveConfiguration();
+        MeAction.getLiveStreamIntroduction().click();
+        String active = getObjectById(MePage.LIVE_CONFIG_CONTENT).getText();
+        Asst.assertEquals("修改直播介绍为140个字符",expect,active);
+        Spoon.screenshot("change_live_stream_intro140c");
+        gDevice.pressBack();
+    }
+    /**
+     * 直播介绍（超出140个字符）
+     * 1.输入150个字符的直播介绍
+     * 2.只能输入140个字符的直播介绍，超出的10个字符不能输入进去
+     * jqx 2017.12.26
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testLiveStreamIntro150c() throws UiObjectNotFoundException, IOException {
+        //navigate to live configuration
+        MeAction.navToLiveConfiguration();
+        //点击live stream introduction
+        MeAction.getLiveStreamIntroduction().click();
+        //clear text
+        getObjectById(MePage.LIVE_CONFIG_CONTENT).clearTextField();
+        String expect = getRandomString(150);
+        shellInputText(expect);
+        clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
+        //重新打开APP，进入直播设置界面
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
+        MeAction.navToLiveConfiguration();
+        MeAction.getLiveStreamIntroduction().click();
+        String remain = getObjectById(MePage.ID_REMAIN).getText();
+        Asst.assertEquals("修改直播介绍为150个字符","0",remain);
+        Spoon.screenshot("change_live_stream_intro150c");
+        gDevice.pressBack();
+    }
+    /**
+     * 清空直播介绍
+     * 1.只能输入直播介绍后，保存
+     * 2.清空直播介绍，保存
+     * jqx 2017.12.26
+     * */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testLiveStreamIntroClear() throws UiObjectNotFoundException, IOException {
+        //navigate to live configuration
+        MeAction.navToLiveConfiguration();
+        //点击live stream introduction
+        MeAction.getLiveStreamIntroduction().click();
+        //clear text
+        getObjectById(MePage.LIVE_CONFIG_CONTENT).clearTextField();
+        String expect = getRandomString(50);
+        shellInputText(expect);
+        clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
+        //重新打开APP，进入直播设置界面
+        openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
+        MeAction.navToLiveConfiguration();
+        MeAction.getLiveStreamIntroduction().click();
+        //清空直播介绍
+        getObjectById(MePage.LIVE_CONFIG_CONTENT).clearTextField();
+        clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
+        waitTime(4);
+        //重新进入直播介绍，获取当前内容为空
+        MeAction.getLiveStreamIntroduction().click();
+        String remain = getObjectById(MePage.LIVE_CONFIG_CONTENT).getText();
+        Asst.assertEquals("清空直播介绍","",remain);
+        Spoon.screenshot("clear_live_stream_introduction");
+        gDevice.pressBack();
     }
 }
