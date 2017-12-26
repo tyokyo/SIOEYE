@@ -100,7 +100,7 @@ public class CustomLiveBitRateCase extends VP2 {
          String minBitrate="200";
          String maxBitrate="5000";
         configUserDefinedLiveQuality( resolution,Frame,minBitrate,maxBitrate);
-         String checkLiveQuality="480@25(0.2-5.0)";
+         String checkLiveQuality="480@25";
          CameraAction.checkLiveVideoQualityStatus(checkLiveQuality);
      }
 
@@ -117,7 +117,7 @@ public class CustomLiveBitRateCase extends VP2 {
         String minBitrate="400";
         String maxBitrate="10000";
         configUserDefinedLiveQuality( resolution,Frame,minBitrate,maxBitrate);
-        String checkLiveQuality="720@30(0.4-10.0)";
+        String checkLiveQuality="720@30";
         CameraAction.checkLiveVideoQualityStatus(checkLiveQuality);
     }
 
