@@ -533,6 +533,53 @@ public class DiscoverCase extends VP2 {
             Asst.fail();
         }
     }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**
+     *1.打开视频
+     *2.点击收藏按钮
+     *3.弹出登录界面
+     * By jqx 2017/12/26
+     * */
+    public void testUnLoginCollect() throws UiObjectNotFoundException, IOException {
+        AccountAction.logOutAccount();
+        //进入-发现
+        MainAction.clickDiscover();
+        //播放一个视频
+        DiscoverAction.navToPlayVideo();
+        //点击收藏按钮
+        clickById(PlayPage.COLLECTION);
+        //弹出登录界面
+        waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
+        Spoon.screenshot("loginIn_page");
+        Asst.assertFalse("ClickInputFail", !id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
+    @Test
+    @SanityTest
+    @PerformanceTest
+    /**
+     *1.打开视频
+     *2.点击分享按钮
+     *3.分享给粉丝，弹出登录界面
+     * By jqx 2017/12/26
+     * */
+    public void testUnLoginShareFans() throws UiObjectNotFoundException, IOException {
+        AccountAction.logOutAccount();
+        //进入-发现
+        MainAction.clickDiscover();
+        //播放一个视频
+        DiscoverAction.navToPlayVideo();
+        //点击分享按钮
+        UiObject2 share = getObject2ById(PlayPage.BROADCAST_VIEW_ZAN_FLOAT_LIKE).getParent().getChildren().get(1);
+        share.click();
+        //弹出分享框后，点击分享到Fans
+        clickByText("Fans");
+        //弹出登录界面
+        waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
+        Spoon.screenshot("loginIn_page");
+        Asst.assertFalse("ClickInputFail", !id_exists(AccountPage.ACCOUNT_WEIXIN));
+    }
 }
 
 

@@ -1,6 +1,7 @@
 package cn.action;
 
 import android.support.test.uiautomator.StaleObjectException;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import com.squareup.spoon.Spoon;
@@ -91,8 +92,12 @@ public class SettingAction extends VP2 {
         Spoon.screenshot("USER_GUIDE");
     }
     //从黑名单移除
-    public static void removeFromBlackList(){
-        clickById(MePage.ID_REMOVE);
+    public static String removeFromBlackList(){
+        UiObject2 object=getObject2ById(MePage.ID_BLACKLIST).getChildren().get(1).getChildren().get(0);
+        UiObject2 object1=object.getChildren().get(2);
+        String expect_name=object.getChildren().get(1).getChildren().get(0).getChildren().get(0).getChildren().get(0).getText();
+        object1.click();
+        return expect_name;
     }
 
 
