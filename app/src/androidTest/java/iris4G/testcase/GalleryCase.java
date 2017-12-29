@@ -38,9 +38,9 @@ public class GalleryCase extends VP2 {
         Iris4GAction.initIris4GWithoutDelete();
         if (!AccountAction.isLogin()) {
             AccountAction.loginAccount(Constant.getUserName("sioeye_id"),Constant.getPassword("sioeye_password"));}
-        CameraAction.makeSlo_MoSomeTime(5);
-        Iris4GAction.startGallery();
-        GalleryAction.makeGalleryLive();
+//        CameraAction.makeSlo_MoSomeTime(5);
+//        Iris4GAction.startGallery();
+//        GalleryAction.makeGalleryLive();
     }
     @Before
     public void setup() throws Exception {
@@ -216,7 +216,8 @@ public class GalleryCase extends VP2 {
         int originalTotal=GalleryAction.getTotalOfGallery();
         GalleryAction.deleteOneVideo();
         if (originalTotal==GalleryAction.getTotalOfGallery()+1){
-            if (originalRank==GalleryAction.getRankOfGallery()+1||(originalRank==GalleryAction.getRankOfGallery()&&originalRank==1)){
+            if (originalRank==GalleryAction.getRankOfGallery()+1||(originalRank==GalleryAction.getRankOfGallery()
+                    &&originalRank==1)){
                 logger.info("Pass");
             }else {Assert.fail("rankNumNotUpdate");}
         }else {Assert.fail("totalNumNotUpdate");}
@@ -228,7 +229,8 @@ public class GalleryCase extends VP2 {
      */
     public void testCheckGalleryFixedBitrate() throws Exception {
         GalleryAction.navToGalleryBitrateSetting();
-        String inputNum = GalleryAction.getRandomBitrate(GalleryAction.getGalleryBitrateMin(), GalleryAction.getGalleryBitrateMax());
+        String inputNum = GalleryAction.getRandomBitrate(GalleryAction.getGalleryBitrateMin(),
+                GalleryAction.getGalleryBitrateMax());
         setText(GalleryPage.gallery_bitrate_custom_min,inputNum);
         setText(GalleryPage.gallery_bitrate_custom_max,inputNum);
         clickById(GalleryPage.gallery_ok);
@@ -251,7 +253,8 @@ public class GalleryCase extends VP2 {
         if (!gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_bitrate_error_tips)).exists()){
             Assert.fail("notFindGalleryBitrateErrorTips");
         }
-        setText(GalleryPage.gallery_bitrate_custom_min,GalleryAction.getRandomBitrate(GalleryAction.getGalleryBitrateMin(), GalleryAction.getGalleryBitrateMax()));
+        setText(GalleryPage.gallery_bitrate_custom_min,GalleryAction.getRandomBitrate
+                (GalleryAction.getGalleryBitrateMin(), GalleryAction.getGalleryBitrateMax()));
         if (gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_bitrate_error_tips)).exists()){
             Assert.fail("FindGalleryBitrateErrorTips");
         }
@@ -259,9 +262,38 @@ public class GalleryCase extends VP2 {
         if (!gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_bitrate_error_tips)).exists()){
             Assert.fail("notFindGalleryBitrateErrorTips");
         }
-        setText(GalleryPage.gallery_bitrate_custom_max,GalleryAction.getRandomBitrate(GalleryAction.getGalleryBitrateMin(), GalleryAction.getGalleryBitrateMax()));
+        setText(GalleryPage.gallery_bitrate_custom_max,GalleryAction.getRandomBitrate
+                (GalleryAction.getGalleryBitrateMin(), GalleryAction.getGalleryBitrateMax()));
         if (gDevice.findObject(new UiSelector().resourceId(GalleryPage.gallery_bitrate_error_tips)).exists()){
             Assert.fail("FindGalleryBitrateErrorTips");
         }
     }
+    @Test
+    /* case 17
+    case编号：SI-1870:直播中亮灭屏   相册直播中亮灭屏， 亮灭屏同相机熄屏设置一致  5次
+     */
+    public void testCheckGalleryLiveWithScreenOffOn() throws Exception {
+        Iris4GAction.startGallery();
+        while (!GalleryAction.checkLiveBottom()) {
+            getObjectById(GalleryPage.gallery_root_view).swipeLeft(60);}
+        GalleryAction.startGalleryLive();
+        for (int i=0;i<10;i++){
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);
+            waitTime(1);
+        }
+        waitTime(2);
+        if (gDevice.isScreenOn()){GalleryAction.stopGalleryLive();
+        }else {
+            Assert.fail("ScreenIsOff");
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_POWER);//亮屏
+            GalleryAction.stopGalleryLive();
+        }
+    }
+    /* case 18
+     case编号：SI-1883:未登录账号      1录制一段720@25、或者480@25的普通视频 2点击直播button  3 登录账号  4 正常跳转
+到剪辑直播和立即直播界面
+     */
+    /*case 19
+    case编号：SI-2006:延时视频剪辑后直播  1延时视频剪辑后发起直播
+     */
 }

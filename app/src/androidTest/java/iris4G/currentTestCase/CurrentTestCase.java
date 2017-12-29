@@ -31,6 +31,28 @@ import iris4G.page.SettingPage;
 public class CurrentTestCase extends VP2 {
     Logger logger = Logger.getLogger(CurrentTestCase.class.getName());
     private int testTime=120;
+
+    public static String getStr(String str,String target, int times) {
+        int i = 0,s = 0,a =0;
+        while (i++ < times-1) {s = str.indexOf(target, s + 1);}
+        i=0;
+        while (i++ < times) {a = str.indexOf(target, a + 1);}
+        return str.substring(s+1,a);
+    }
+
+    /*
+    获取4G信号强度，并在屏幕上显示出来toast；返回
+     */
+    public static int get4GSignalStrength() throws IOException {
+        String [] dumpInformation=gDevice.executeShellCommand("dumpsys telephony.registry").split
+                ("mSignalStrength=SignalStrength: ");
+        int signalStrength=Integer.valueOf(getStr(dumpInformation[1]," ",9))+3;
+        String signalStrengthString= "4G信号："+String.valueOf(signalStrength)+"需要大于-79";
+        String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",signalStrengthString,8);
+        gDevice.executeShellCommand(command);
+        return signalStrength;
+    }
+
     /**
      * 格式化存储空间
      */
@@ -62,6 +84,7 @@ public class CurrentTestCase extends VP2 {
         Iris4GAction.stopSettings();
         waitTime(2);
     }
+
     /**
      *开启wifi
      */
@@ -78,6 +101,7 @@ public class CurrentTestCase extends VP2 {
         Iris4GAction.stopSettings();
         waitTime(2);
     }
+
     /**
      *进入相机
      */
@@ -86,6 +110,7 @@ public class CurrentTestCase extends VP2 {
         waitTime(10);
         logger.info("launchCamera");
     }
+
     /**
      *灭屏
      */
@@ -96,6 +121,7 @@ public class CurrentTestCase extends VP2 {
         }
         waitTime(2);
     }
+
     /**
      *亮屏
      */
@@ -150,10 +176,11 @@ public class CurrentTestCase extends VP2 {
         logger.info("LaunchCameraKeyForEnd");
         waitTime(5);
     }
+
     /**
      *亮屏录像
      */
-    private void p2pScreenOn() throws RemoteException {
+    private void p2pScreenOn() throws RemoteException, IOException {
         makeScreenOn();
         Iris4GAction.cameraKey();
         logger.info("LaunchCameraKeyForStart");
@@ -163,6 +190,7 @@ public class CurrentTestCase extends VP2 {
         logger.info("LaunchCameraKeyForEnd");
         waitTime(5);
     }
+
     /**
      *亮屏直播
      */
@@ -173,6 +201,7 @@ public class CurrentTestCase extends VP2 {
         checkLiveStatusAndTry2s(1);//0---灭屏；1---亮屏
         waitTime(1);
     }
+
     /**
      *灭屏屏直播
      */
@@ -184,6 +213,7 @@ public class CurrentTestCase extends VP2 {
         checkLiveStatusAndTry2s(0);
         waitTime(1);
     }
+
     /**
      *检查发起直播是否成功，并会重试一次
      * 两次失败会产生一个两分钟的电流锯齿波
@@ -241,6 +271,7 @@ public class CurrentTestCase extends VP2 {
         stopGalleryLive();
         waitTime(2);
     }
+
     /**
      * 相册灭屏直播，相册第一个视频可以直播
      */
@@ -256,6 +287,7 @@ public class CurrentTestCase extends VP2 {
         stopGalleryLive();
         waitTime(2);
     }
+
     /**
      * 检查相册直播是否发起成功，并会重试一次
      * 若两次均失败会产生一个两分钟的电流锯齿波
@@ -303,6 +335,7 @@ public class CurrentTestCase extends VP2 {
             waitTime(testTime-2);
         }
     }
+
     /**
      * 停止相册直播
      */
@@ -341,6 +374,7 @@ public class CurrentTestCase extends VP2 {
             Iris4GAction.startGallery();
         }
     }
+
     /**
      * 配置视频质量
      */
@@ -359,6 +393,7 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(2);
     }
+
     private void configUserDefinedLiveQuality(String resolution,String minBitrate,String maxBitrate) throws
             Exception {
         makeScreenOn();
@@ -395,6 +430,7 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(1);
     }
+
     private void configVideoAngle(String VideoAngle) throws Exception {
         makeScreenOn();
         CameraAction.cameraSetting();
@@ -414,6 +450,7 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(1);
     }
+
     private void clickLiveMute() throws Exception {
         makeScreenOn();
         CameraAction.cameraSetting();
@@ -436,6 +473,7 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(1);
     }
+
     private void changeUpDownTo(String UpDown) throws Exception {
         makeScreenOn();
         CameraAction.cameraSetting();
@@ -455,6 +493,7 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(1);
     }
+
     private void switchTo3G() throws Exception {
         makeScreenOn();
         SettingAction.navToPreferredNetworkType();
@@ -464,6 +503,7 @@ public class CurrentTestCase extends VP2 {
         Iris4GAction.stopSettings();
         waitTime(2);
     }
+
     private void switchTo4G() throws Exception {
         makeScreenOn();
         SettingAction.navToPreferredNetworkType();
@@ -473,6 +513,7 @@ public class CurrentTestCase extends VP2 {
         Iris4GAction.stopSettings();
         waitTime(2);
     }
+
     private void changeSleepTime(String sleepTime) throws Exception {
         makeScreenOn();
         SettingAction.navToSleepTime();
@@ -486,12 +527,14 @@ public class CurrentTestCase extends VP2 {
         Iris4GAction.stopSettings();
         waitTime(2);
     }
+
     private void makeToasts(String message,int time) throws IOException {
 //        initDevice();
         String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",message,time);
         logger.info(command);
         gDevice.executeShellCommand(command);
     }
+
     private void clickSwitch(String switchName) throws Exception {
         makeScreenOn();
         clickById(Iris4GPage.camera_setting_shortcut_id);
@@ -508,6 +551,7 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(1);
     }
+
     private void clickSwitchForVideo(String switchName) throws Exception {
         makeScreenOn();
         clickById(Iris4GPage.camera_setting_shortcut_id);
@@ -519,6 +563,7 @@ public class CurrentTestCase extends VP2 {
         gDevice.pressBack();
         waitTime(1);
     }
+
     private void liveOfBiggerZoom() throws Exception {
         makeScreenOn();
         Iris4GAction.cameraKey();
@@ -531,6 +576,7 @@ public class CurrentTestCase extends VP2 {
         makeScreenOn();
         makeLiveStop();
     }
+
     private void makeLive() throws Exception {
         Iris4GAction.cameraKey();
         waitUntilFind(Iris4GPage.recording_time_id,38000);
@@ -565,6 +611,7 @@ public class CurrentTestCase extends VP2 {
         }
 
     }
+
     @Before
     public void setup() throws Exception {
         initDevice();
@@ -606,6 +653,9 @@ public class CurrentTestCase extends VP2 {
             storageFormat();//格式化储存空间
             closeWifi();
             launchCamera();
+            while (get4GSignalStrength()<-79){//如果4G信号强度小于-79dbm则不开始测试
+                waitTime(5);
+            }
             makeToasts("Start"+i,5);
             waitTime(2);
             //开始录像测试

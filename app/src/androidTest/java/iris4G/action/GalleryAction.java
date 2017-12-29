@@ -12,6 +12,7 @@ import com.squareup.spoon.Spoon;
 
 import org.junit.Assert;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -246,13 +247,16 @@ public class GalleryAction extends VP2 {
     public static int getGalleryBitrateMin() throws UiObjectNotFoundException {
         String bitrateTips=getTex(GalleryPage.gallery_bitrate_tips);
         logger.info("bitrateMin:"+bitrateTips.substring(19,getAppointCharRankInString('k',bitrateTips)));
-        logger.info("bitMinInt:"+Integer.parseInt(bitrateTips.substring(19,getAppointCharRankInString('k',bitrateTips))));
+        logger.info("bitMinInt:"+Integer.parseInt(bitrateTips.substring(19,getAppointCharRankInString
+                ('k',bitrateTips))));
         return Integer.parseInt(bitrateTips.substring(19,getAppointCharRankInString('k',bitrateTips)));
     }
     public static int getGalleryBitrateMax() throws UiObjectNotFoundException {
         String bitrateTips=getTex(GalleryPage.gallery_bitrate_tips);
-        logger.info("bitrateMaxInt: "+Integer.parseInt(bitrateTips.substring(getAppointCharRankInString('~',bitrateTips)+1,bitrateTips.length()-5)));
-        return Integer.parseInt(bitrateTips.substring(getAppointCharRankInString('~',bitrateTips)+1,bitrateTips.length()-5));
+        logger.info("bitrateMaxInt: "+Integer.parseInt(bitrateTips.substring(getAppointCharRankInString
+                ('~',bitrateTips)+1,bitrateTips.length()-5)));
+        return Integer.parseInt(bitrateTips.substring(getAppointCharRankInString
+                ('~',bitrateTips)+1,bitrateTips.length()-5));
     }
     public static int getAppointCharRankInString(char appointChar,String appointString){
         int rankingInt=0;
@@ -275,5 +279,25 @@ public class GalleryAction extends VP2 {
         clickById(GalleryPage.gallery_live_bottom);
         clickById(GalleryPage.gallery_live);
     }
-
+    public static String getStr(String str,String target, int times) {
+        int i = 0,s = 0,a =0;
+        while (i++ < times-1) {s = str.indexOf(target, s + 1);}
+        i=0;
+        while (i++ < times) {a = str.indexOf(target, a + 1);}
+        return str.substring(s+1,a);
+    }
+    /*
+    获取信号强度，并在屏幕上显示出来toast；返回
+     */
+    public static int get4GSignalStrength() throws IOException {
+        String [] dumpInformation=gDevice.executeShellCommand("dumpsys telephony.registry").split
+                ("mSignalStrength=SignalStrength: ");
+        logger.info(dumpInformation[1].substring(0,dumpInformation[1].indexOf(" gsm|lte")));
+        int signalStrength=Integer.valueOf(getStr(dumpInformation[1]," ",9))+3;
+        logger.info("signalStrengthInt:"+signalStrength);
+        String signalStrengthString= String.valueOf(signalStrength);
+        String command = String.format("am broadcast -a com.sioeye.alert.action -e message %s -e time %d",signalStrengthString,5);
+        gDevice.executeShellCommand(command);
+        return signalStrength;
+    }
 }
