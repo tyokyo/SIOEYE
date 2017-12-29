@@ -58,7 +58,7 @@ public class DiscoverCase extends VP2 {
     Logger logger = Logger.getLogger(DiscoverCase.class.getName());
 
     //生成一个随机子字符串
-    public String getRandomString(int length) { //length表示生成字符串的长度
+    public static String getRandomString(int length) { //length表示生成字符串的长度
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
@@ -255,6 +255,7 @@ public class DiscoverCase extends VP2 {
         DiscoverAction.navToPlayVideo();
         //点击主播
         FollowersAction.clickToAbout();
+        waitTime(2);
         //点击关注图标
         clickFollow();
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
