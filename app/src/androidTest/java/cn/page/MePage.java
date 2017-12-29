@@ -237,6 +237,19 @@ public class MePage {
     public static final String WHO_CAN_VIEW_MY_BROADCAST_PUBLIC="cn.sioeye.sioeyeapp:id/iv_public";
     //秘密
     public static final String WHO_CAN_VIEW_MY_BROADCAST_PRIVATE="cn.sioeye.sioeyeapp:id/iv_privacy";
+    //添加自定义rtmp地址
+    public static final String ADD_LIVE_STREAN_ADDRESS="cn.sioeye.sioeyeapp:id/add_address_text";
+    //输入rtmp地址
+    public static final String PUT_RTMP_ADDRESS="cn.sioeye.sioeyeapp:id/tv_pushAddress";
+    //保存rtmp地址
+    public static final String SAVE_RTMP_ADDRESS="cn.sioeye.sioeyeapp:id/tv_save";
+    //已经添加的rtmp地址
+    public static final String ALREADY_ADD_ADDRESS="cn.sioeye.sioeyeapp:id/address";
+    //更多
+    public static final String RTMP_MORE="cn.sioeye.sioeyeapp:id/iv_more";
+    //rtmp更多操作
+    public static final String MORE_OPTIONS="cn.sioeye.sioeyeapp:id/llt_more";
+
     //选择的用户的头像
     public static final String SHOW_USERING="cn.sioeye.sioeyeapp:id/show_userimg";
     public static final String SELECT_PEOPLE="cn.sioeye.sioeyeapp:id/llt_select_people";
