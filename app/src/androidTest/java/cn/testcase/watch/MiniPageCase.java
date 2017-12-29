@@ -195,6 +195,7 @@ public class MiniPageCase extends VP2{
                 break;
             }
         }
+        waitTime(3);
         //有可能遇到点到自己时，没有WatchPage.WATCH_USER_MINI_FOLLOW的情况。下面是处理这种情况的代码。
         if(!id_exists(WatchPage.WATCH_USER_MINI_FOLLOW)){
             clickByText("Following");
