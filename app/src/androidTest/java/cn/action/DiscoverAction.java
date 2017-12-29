@@ -172,6 +172,7 @@ public class DiscoverAction extends VP2 {
         MeAction.navToFollowing();
         waitUntilFind(MePage.FOLLOWERING_VIEW, 6000);
         UiObject expectObj = scrollAndGetUIObject(target_nick_name);
+        waitTime(3);
         if (expectObj != null) {
             if (!expectObj.exists()) {
                 Spoon.screenshot("swip_to_find", target_nick_name + "Failed");
