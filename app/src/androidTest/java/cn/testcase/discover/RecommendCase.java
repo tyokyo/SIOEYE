@@ -229,7 +229,6 @@ public class RecommendCase extends VP2 {
         if (count>=1){
             String expect_name=DiscoverAction.navToRecommendList(0,1);
             //关闭弹出框
-            //clickByClass("android.widget.ImageView",2);
             gDevice.pressBack();
             logger.info(expect_name);
             Rect rect=getUiObjectByText("WHO TO FOLLOW").getVisibleBounds();
