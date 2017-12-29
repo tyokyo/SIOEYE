@@ -11,6 +11,8 @@ import android.support.test.uiautomator.Until;
 
 import com.squareup.spoon.Spoon;
 
+import org.hamcrest.Asst;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -351,6 +353,13 @@ public class MeAction extends VP2{
         String me = u.getChild(new UiSelector().resourceId(MePage.ABOUT_ME_CONTENT_TEXT)).getText();
         return  me;
     }
+    //获取直播可见性
+    public static String getPrivacy(){
+        MeAction.navToLiveConfiguration();
+        UiObject2 object=getObject2ById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS).getChildren().get(0);
+        String str=object.getChildren().get(1).getText(); //获取可见性
+        return str;
+    }
     //谁可以看我的直播-设置为 公开public
     public static void setToPublic() throws UiObjectNotFoundException {
         clickByText("Public");
@@ -365,6 +374,35 @@ public class MeAction extends VP2{
         clickByText("Visible to someone");
         waitUntilFind(MePage.SELECT_PEOPLE,10000);
     }
+    //添加自定义同步直播rtmp地址（输入20个字符）
+    public static void addRtmpAddress() throws IOException, UiObjectNotFoundException {
+        getObject2ById(MePage.LIVE_CONFIGURATION_SLV_VIDEO).click();
+        clickById(MePage.ACTIVITIES_CONTENT);
+        addManyRtmpAddress();
+    }
+    //重复添加rtmp地址
+    public static void addManyRtmpAddress() throws IOException, UiObjectNotFoundException {
+        clickById(MePage.ADD_LIVE_STREAN_ADDRESS);
+        clickById(MePage.PUT_RTMP_ADDRESS);
+        String input_address = getRandomString(20); //输入随机字符地址
+        shellInputText(input_address);
+        clickById(MePage.SAVE_RTMP_ADDRESS); //点击保存
+        Asst.assertTrue("comments success",getUiObjectByTextContains(input_address).exists());
+    }
+    //删除自定义同步直播rtmp地址
+    public static void delRtmpAddress() throws IOException, UiObjectNotFoundException {
+        getObject2ById(MePage.LIVE_CONFIGURATION_SLV_VIDEO).click();
+        clickById(MePage.ACTIVITIES_CONTENT);
+        waitTime(3);
+        if (text_exists("Address(es) already added")){
+            String str=getObject2ById(MePage.ALREADY_ADD_ADDRESS).getText();
+            clickById(MePage.RTMP_MORE);
+            getObject2ById(MePage.MORE_OPTIONS).getChildren().get(2).click();
+            waitTime(3);
+            Asst.assertTrue("删除成功",!text_exists(str));
+        }
+    }
+
     //评论区域-滑动更新,显示最新消息
     public static void displayNewMessages() throws UiObjectNotFoundException {
         if (id_exists(PlayPage.NEW_MESSAGES_DISPLAY)){
