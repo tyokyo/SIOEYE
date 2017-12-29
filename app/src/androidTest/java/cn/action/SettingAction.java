@@ -100,5 +100,4 @@ public class SettingAction extends VP2 {
         return expect_name;
     }
 
-
 }
