@@ -3,6 +3,7 @@ package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.widget.CheckBox;
@@ -520,5 +521,122 @@ public class LiveConfigCase extends VP2{
         Asst.assertEquals("清空直播介绍","",remain);
         Spoon.screenshot("clear_live_stream_introduction");
         gDevice.pressBack();
+    }
+    /**非公开时点击同步直播，检查提示
+     * creat by zyj 2017.12.27*/
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testUnPublicPrompt() throws UiObjectNotFoundException {
+        String str=MeAction.getPrivacy(); //获取可见性
+        if (!str.equals("Public")){
+            getObject2ById(MePage.LIVE_CONFIGURATION_SLV_VIDEO).click();
+            waitTime(3);
+            boolean boo=text_exists("Only public live streams and be simulcast to third party platforms");
+            Asst.assertEquals("有提示",true,boo);
+            clickById(MePage.ID_TV_OK);
+        }
+    }
+    /**
+     * 添加自定义同步直播地址（默认保存20个字符地址）
+     * creat by zyj 2017.12.27*/
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testAddLiveStreamAddress() throws UiObjectNotFoundException, IOException {
+        String str=MeAction.getPrivacy(); //获取可见性
+        if (!str.equals("Public")) {
+            clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
+            MeAction.setToPublic();
+            clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
+            waitTime(3);
+            MeAction.addRtmpAddress();
+        }else {
+            MeAction.addRtmpAddress();
+        }
+    }
+    /**
+     * 删除添加的rtmp地址
+     *creat by zyj 2017.12.27 */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testDeleteRtmpAddress() throws UiObjectNotFoundException, IOException {
+        String str=MeAction.getPrivacy(); //获取可见性
+        if (!str.equals("Public")) {
+            clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
+            MeAction.setToPublic();
+            clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
+            waitTime(3);
+            MeAction.delRtmpAddress();
+        }else {
+            MeAction.delRtmpAddress();
+        }
+    }
+    /**
+     * 会员添加5个rtmp地址
+     * *creat by zyj 2017.12.29*/
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testVipAddRtmpAddress() throws UiObjectNotFoundException, IOException {
+        boolean vip = id_exists(MePage.ID_VIP);
+        String str=MeAction.getPrivacy(); //获取可见性
+            if (vip){
+                if (!str.equals("Public")) {
+                    clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
+                    MeAction.setToPublic();  //设置为公开
+                    clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
+                    waitTime(3);
+                    MeAction.addRtmpAddress();  //进入添加1个地址
+                    while (id_exists(MePage.ADD_LIVE_STREAN_ADDRESS)){
+                        //再添加多个地址，直至不能添加
+                       MeAction.addManyRtmpAddress();
+                    }
+                }else{
+                    MeAction.addRtmpAddress();
+                    while (id_exists(MePage.ADD_LIVE_STREAN_ADDRESS)){
+                        MeAction.addManyRtmpAddress();
+                    }
+                }
+                Asst.assertTrue("添加成功",!id_exists(MePage.ADD_LIVE_STREAN_ADDRESS));
+            }
+    }
+    /**非会员添加多个地址（弹出开通会员的提示）
+     * *creat by zyj 2017.12.29 */
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testUnVipAddMoreAddress() throws UiObjectNotFoundException, IOException {
+        boolean vip = id_exists(MePage.ID_VIP);
+        String str = MeAction.getPrivacy(); //获取可见性
+        if (!vip) {
+            if (!str.equals("Public")) {
+                clickById(MePage.LIVE_CONFIGURATION_PRIVACY_SETTINGS);
+                MeAction.setToPublic();  //设置为公开
+                clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
+                waitTime(3);
+                getObject2ById(MePage.LIVE_CONFIGURATION_SLV_VIDEO).click();
+                clickById(MePage.ACTIVITIES_CONTENT);
+                waitTime(3);
+                if (!text_exists("Address(es) already added")) {
+                    MeAction.addManyRtmpAddress();  //进入添加1个地址
+                    clickById(MePage.ADD_LIVE_STREAN_ADDRESS);
+                } else {
+                    clickById(MePage.ADD_LIVE_STREAN_ADDRESS);
+                }
+            } else {
+                getObject2ById(MePage.LIVE_CONFIGURATION_SLV_VIDEO).click();
+                clickById(MePage.ACTIVITIES_CONTENT);
+                waitTime(3);
+                if (!text_exists("Address(es) already added")) {
+                    MeAction.addManyRtmpAddress();  //进入添加1个地址
+                    clickById(MePage.ADD_LIVE_STREAN_ADDRESS);
+                } else {
+                    clickById(MePage.ADD_LIVE_STREAN_ADDRESS);
+                }
+            }
+            Asst.assertTrue("添加成功", !text_exists("You can broadcast simultaneously to thrid party platforms after you become Sioeye VIP."));
+        }
     }
 }
