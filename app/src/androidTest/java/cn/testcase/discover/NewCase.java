@@ -332,11 +332,7 @@ public class NewCase  extends VP2{
         int zan_after = NewAction.getZanNumber();
         waitTime(5);
         Spoon.screenshot("after_zan"+zan_after);
-      //  if (zan_after>1000){
-
-       // }else {
-            Asst.assertEquals("点赞数加5",zan_before+5,zan_after);
-       // }
+        Asst.assertEquals("点赞数加5",zan_before+5,zan_after);
     }
 
     @Test
@@ -348,6 +344,7 @@ public class NewCase  extends VP2{
     public void testLocation() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        waitTime(3);
         getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
         waitTime(3);
         Boolean videoLocation = false;
@@ -377,6 +374,7 @@ public class NewCase  extends VP2{
         Point point= MeAction.getPointToDoComment();
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        waitTime(2);
         getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
         waitTime(3);
         //获取第一次进入的评论数
@@ -480,6 +478,7 @@ public class NewCase  extends VP2{
         NewAction.getRandomVideo(index).click();
         //点击主播
         FollowersAction.clickToAbout();
+        waitTime(3);
         //点击关注
         clickFollow();
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
@@ -500,6 +499,7 @@ public class NewCase  extends VP2{
         //进入发现界面
         MainAction.clickDiscover();
         DiscoverAction.navToNew();
+        waitTime(3);
         getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
         waitTime(3);
         //播放一个视频
