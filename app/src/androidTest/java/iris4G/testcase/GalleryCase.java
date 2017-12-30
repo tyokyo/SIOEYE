@@ -38,9 +38,9 @@ public class GalleryCase extends VP2 {
         Iris4GAction.initIris4GWithoutDelete();
         if (!AccountAction.isLogin()) {
             AccountAction.loginAccount(Constant.getUserName("sioeye_id"),Constant.getPassword("sioeye_password"));}
-//        CameraAction.makeSlo_MoSomeTime(5);
-//        Iris4GAction.startGallery();
-//        GalleryAction.makeGalleryLive();
+        CameraAction.makeSlo_MoSomeTime(5);
+        Iris4GAction.startGallery();
+        GalleryAction.makeGalleryLive();
     }
     @Before
     public void setup() throws Exception {
