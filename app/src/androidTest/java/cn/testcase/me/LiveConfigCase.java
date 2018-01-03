@@ -3,8 +3,6 @@ package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.widget.CheckBox;
 
@@ -328,18 +326,17 @@ public class LiveConfigCase extends VP2{
         MeAction.clickLiveStreamChannel();
         int live_channel_size = MeAction.getRoomNum();
         if(live_channel_size>=1){
-            UiObject2 room = MeAction.getRoom();
+            //得到房间对象-title
+            String roomTitle  = MeAction.getRoomTitle(0);
             //获取more按钮
-            UiObject2 moreButton = room.getChildren().get(2).getChildren().get(3);
-            //点击more按钮
-            moreButton.click();
+            MeAction.clickMoreRoom(roomTitle);
             waitTime(3);
             String isOpen = MeAction.getOpenOrPrivate().getText();
             Spoon.screenshot("open_private_live_room1");
             MeAction.getOpenOrPrivate().click();
             //再次点击“more”按钮，检查属性是否修改成功
             waitTime(4);
-            moreButton.click();
+            MeAction.clickMoreRoom(roomTitle);
             Spoon.screenshot("open_private_live_room2");
             String isPrivate = MeAction.getOpenOrPrivate().getText();
             Asst.assertTrue(!isOpen.equals(isPrivate));
@@ -386,10 +383,10 @@ public class LiveConfigCase extends VP2{
         MeAction.clickLiveStreamChannel();
         int live_channel_size = MeAction.getRoomNum();
         if(live_channel_size>=1){
-            //得到房间对象
-            UiObject2 room  = MeAction.getRoom();
+            //得到房间对象-title
+            String roomTitle  = MeAction.getRoomTitle(0);
             //点击Edit按钮
-            MeAction.getEdit(room).click();
+            MeAction.clickEditRoom(roomTitle);
             //点击房间简介
             clickById(MePage.LIVE_ROOM_INFO);
             Spoon.screenshot("live_room_intro_old");
@@ -398,11 +395,12 @@ public class LiveConfigCase extends VP2{
             shellInputText(expect);
             gDevice.pressBack();
             waitTime(2);
+            String descInput = getTex(MePage.LIVE_ROOM_INFO);
             clickByText("OK");//保存
             //点击进入该房间，检查房间介绍修改是否成功
-            room.click();
+            MeAction.clickEnterRoom(roomTitle);
             String actResult = MeAction.getRoomIntroduction().getText();
-            Asst.assertEquals("修改直播间介绍",expect,actResult);
+            Asst.assertEquals("修改直播间介绍",descInput,actResult);
         }
         Spoon.screenshot("search_live_intro_new");
     }

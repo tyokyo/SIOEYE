@@ -66,8 +66,13 @@ public class CollectionAction extends VP2 {
         gDevice.pressBack();
     }
     //播放界面点击收藏按钮
-    public static void getClickCollection(){
-        clickById(PlayPage.COLLECTION);
+    public static void getClickCollection() throws UiObjectNotFoundException {
+        waitUntilFind(By.res(PlayPage.PLAY_VIEWER),5000);
+        if (id_exists(PlayPage.COLLECTION)){
+            clickById(PlayPage.COLLECTION);
+        }else{
+            clickById(PlayPage.PLAY_VIEWER);
+            clickById(PlayPage.COLLECTION);
+        }
     }
-
 }

@@ -383,6 +383,11 @@ public class FollowingCase extends VP2 {
                 clickById(PlayPage.BROADCAST_VIEW_CONTAINER);
                 //如果没有全屏播放按钮
                 if (id_exists(PlayPage.BROADCAST_VIDEO_FULLPLAY)){
+
+                }else{
+                    clickById(PlayPage.PLAY_VIEWER);//点击全屏按钮播放
+                }
+                if (id_exists(PlayPage.BROADCAST_VIDEO_FULLPLAY)){
                     clickById(PlayPage.BROADCAST_VIDEO_FULLPLAY);//点击全屏按钮播放
                     waitUntilGone(PlayPage.BROADCAST_VIEW_VIDEO_LOADING,600000);//等待视频加载图标消失
                     waitTime(20);

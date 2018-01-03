@@ -11,6 +11,7 @@ import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -43,7 +44,17 @@ public class CollectionCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //确保App 处于登录状态
         AccountAction.inLogin();
-        CollectionAction.collectDiscoverVideo();
+    }
+    @BeforeClass
+    public void beforeClass() throws UiObjectNotFoundException {
+        AccountAction.inLogin();
+        try {
+            for (int i=0;i<5;i++){
+                CollectionAction.collectDiscoverVideo();
+            }
+        }catch (Exception e){
+
+        }
     }
     /**
      *1. 播放收藏视频*/

@@ -3,6 +3,7 @@ package cn.testcase.discover;
 import android.graphics.Rect;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import com.squareup.spoon.Spoon;
@@ -236,6 +237,7 @@ public class RecommendCase extends VP2 {
             int x=gDevice.getDisplayWidth();
             //你可能感兴趣-关闭按钮
             gDevice.click(x-5,y);
+            waitUntilFind(By.text(expect_name),10000);
             boolean expect_name_exist=text_exists(expect_name);
             Asst.assertEquals("关闭-你可能感兴趣",false,expect_name_exist);
         }

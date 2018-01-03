@@ -15,7 +15,6 @@ import org.hamcrest.Asst;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import bean.InfoBean;
@@ -503,10 +502,15 @@ public class MeAction extends VP2{
         waitHasObject(MePage.LIVE_ROOM_LIST,20000);
         List<UiObject2> lisRoom = gDevice.findObjects(By.res(MePage.BROADCAST_TITLE));
         int size = lisRoom.size();
+        logger.info("room size is "+size);
         return size;
     }
+    public static String getRoomTitle(int index){
+        List<UiObject2> lisRoom = gDevice.findObjects(By.res(MePage.BROADCAST_TITLE));
+        return  lisRoom.get(index).getText();
+    }
     //获取第1个房间对象
-    public static UiObject2 getRoom(){
+    public static UiObject2 getRoom(String title){
         waitHasObject(MePage.LIVE_ROOM_LIST,10000);
         UiObject2 view = gDevice.findObject(By.res(MePage.LIVE_ROOM_LIST));
         waitTime(3);
@@ -520,8 +524,39 @@ public class MeAction extends VP2{
         return getObject2ById(MePage.BROADCAST_VIDEO_MORE_OPTION_LIST).getChildren().get(0);
     }
     //点击房间编辑按钮
-    public static UiObject2 getEdit(UiObject2 obj){
-        return obj.getParent().getChildren().get(2).getChildren().get(2);
+    public static void clickEditRoom(String roomTitle){
+        UiObject2 view = gDevice.findObject(By.res(MePage.LIVE_ROOM_LIST));
+        waitTime(3);
+        List<UiObject2> broadcasts = view.findObjects(By.depth(1).clazz(android.widget.LinearLayout.class));
+        for (UiObject2 obj:broadcasts) {
+            if (obj.hasObject(By.text(roomTitle))){
+                obj.findObject(By.clazz(android.widget.TextView.class).text("Edit")).click();
+                break;
+            }
+        }
+    }
+    public static void clickEnterRoom(String roomTitle){
+        UiObject2 view = gDevice.findObject(By.res(MePage.LIVE_ROOM_LIST));
+        waitTime(3);
+        List<UiObject2> broadcasts = view.findObjects(By.depth(1).clazz(android.widget.LinearLayout.class));
+        for (UiObject2 obj:broadcasts) {
+            if (obj.hasObject(By.text(roomTitle))){
+                obj.click();
+                break;
+            }
+        }
+    }
+    //点击房间编辑按钮
+    public static void clickMoreRoom(String roomTitle){
+        UiObject2 view = gDevice.findObject(By.res(MePage.LIVE_ROOM_LIST));
+        waitTime(3);
+        List<UiObject2> broadcasts = view.findObjects(By.depth(1).clazz(android.widget.LinearLayout.class));
+        for (UiObject2 obj:broadcasts) {
+            if (obj.hasObject(By.text(roomTitle))){
+                obj.findObject(By.clazz(android.widget.TextView.class).text("More")).click();
+                break;
+            }
+        }
     }
     //在播放界面->简介下，获取直播间介绍
     public static UiObject2 getRoomIntroduction(){

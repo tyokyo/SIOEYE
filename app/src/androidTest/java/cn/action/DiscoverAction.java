@@ -27,8 +27,6 @@ import cn.page.DiscoverPage;
 import cn.page.MePage;
 import cn.page.NewPage;
 import cn.page.PlayPage;
-import usa.page.Device;
-import usa.page.Discover;
 
 /**
  * Created by caibing.yin on 2016/11/5.
@@ -403,6 +401,17 @@ public class DiscoverAction extends VP2 {
             clickByText("Add to blacklist");  //点击拉黑
             gDevice.pressBack();
         }
+    }
+    //update page
+    public static  void refresh(){
+        //刷新列表
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_Swipe_target);
+        swipe_target.swipe(Direction.DOWN, 0.8f);
+        logger.info("刷新列表");
+        waitUntilFind(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST, 30000);
+        swipe_target.swipe(Direction.DOWN, 0.8f);
+        logger.info("刷新列表");
+        waitUntilFind(DiscoverPage.ID_MAIN_TAB_RECOMMAND_LIST, 30000);
     }
 }
 

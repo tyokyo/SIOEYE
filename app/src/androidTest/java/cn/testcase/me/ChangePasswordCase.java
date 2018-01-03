@@ -1,10 +1,10 @@
 package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.Until;
+
 import com.squareup.spoon.Spoon;
+
 import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,14 +12,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import ckt.annotation.PerformanceTest;
 import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.MeAction;
-import cn.page.AccountPage;
 import cn.page.App;
 import cn.page.Constant;
 import cn.page.MePage;
@@ -106,7 +104,7 @@ public class ChangePasswordCase extends VP2{
         clickByText("Your Phone Number");
         Spoon.screenshot("testChangePhoneNumber");
         clickById(MePage.ACCOUNT_AND_TV_TOBING_PHONE);
-        String userPassword=Constant.randomStringGenerator(20);
+        String userPassword=getRandomTel();
         getObjectById(MePage.ACCOUNT_AND_TV_TOBING_PHONE_PASSWORD).setText(userPassword);
         clickById(MePage.ACCOUNT_AND_TV_TOBING_PHONE_NEXT);
         waitTime(3);

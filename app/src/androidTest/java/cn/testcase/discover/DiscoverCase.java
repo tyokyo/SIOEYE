@@ -343,12 +343,16 @@ public class DiscoverCase extends VP2 {
         AccountAction.logOutAccount();
         //进入-发现
         MainAction.clickDiscover();
-        //点击推荐对象
-        DiscoverAction.navToRecommendList(0, 1);
-        //弹出个人头像页面
-        waitUntilFind(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW, 1000);
-        Spoon.screenshot("Profile_page");
-        Asst.assertFalse("testUnLoginClickAvatarFail", !id_exists(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW));
+        DiscoverAction.refresh();
+        int count =DiscoverAction.countRecommendList();
+        if (count>=1){
+            //点击推荐对象
+            DiscoverAction.navToRecommendList(0, 1);
+            //弹出个人头像页面
+            waitUntilFind(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW, 1000);
+            Spoon.screenshot("Profile_page");
+            Asst.assertFalse("testUnLoginClickAvatarFail", !id_exists(DiscoverPage.ID_MAIN_TAB_PROFILE_MINI_NUM_FOLLOW));
+        }
     }
 
     @Test
@@ -550,6 +554,8 @@ public class DiscoverCase extends VP2 {
         //播放一个视频
         DiscoverAction.navToPlayVideo();
         //点击收藏按钮
+        waitTime(7);
+        clickById(PlayPage.PLAY_VIEWER);
         clickById(PlayPage.COLLECTION);
         //弹出登录界面
         waitUntilFind(AccountPage.ACCOUNT_WEIXIN, 5000);
