@@ -541,7 +541,7 @@ public class VP2 extends  VP{
     /**
      * 获得随机字符
      */
-    public static String getRandomString(int length) {
+    public  String getRandomString(int length) {
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
