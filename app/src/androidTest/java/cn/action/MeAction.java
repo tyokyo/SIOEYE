@@ -40,6 +40,17 @@ public class MeAction extends VP2{
         String eyeId=getUiObject2ByText("Sioeye ID").getParent().getParent().findObject(By.res(MePage.GETNICKNAMECONTENT)).getText();
         infoBean.setId(eyeId);
     }
+    //生成一个随机子字符串
+    public static String getRandomStrings(int length) { //length表示生成字符串的长度
+        String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
+    }
     public static MeBean getMeBean(){
         MeBean bean=new MeBean();
         String nickName= getObject2ById(MePage.WATCH_USER_MINI_NAME).getText();
@@ -384,7 +395,7 @@ public class MeAction extends VP2{
     public static void addManyRtmpAddress() throws IOException, UiObjectNotFoundException {
         clickById(MePage.ADD_LIVE_STREAN_ADDRESS);
         clickById(MePage.PUT_RTMP_ADDRESS);
-        String input_address = getRandomString(20); //输入随机字符地址
+        String input_address = getRandomStrings(20); //输入随机字符地址
         shellInputText(input_address);
         clickById(MePage.SAVE_RTMP_ADDRESS); //点击保存
         Asst.assertTrue("comments success",getUiObjectByTextContains(input_address).exists());
