@@ -7,6 +7,7 @@ import android.support.test.uiautomator.Until;
 
 import com.squareup.spoon.Spoon;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -30,6 +31,15 @@ public class CollectionAction extends VP2 {
         List<UiObject2> collection=list.findObjects(By.clazz(android.widget.LinearLayout.class));
         int size=collection.size();
         return size;
+    }
+    //获取所有收藏的视频标题列表
+    public static List<String> getCollectionsTitle(){
+        List<String> list = new ArrayList<>();
+        List<UiObject2> listObject=gDevice.findObjects(By.res(MePage.BROADCAST_TITLE));
+        for (UiObject2 object:listObject) {
+            list.add(object.getText());
+        }
+        return  list;
     }
     //随机获取一个Collection对象的index
     public static int getRandomCollectionIndex(){
