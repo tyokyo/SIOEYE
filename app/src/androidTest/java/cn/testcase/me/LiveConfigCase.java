@@ -548,9 +548,29 @@ public class LiveConfigCase extends VP2{
             MeAction.setToPublic();
             clickById(MePage.LIVE_CONFIGURATION_DONE_PRIVACY);
             waitTime(3);
-            MeAction.addRtmpAddress();
+            getObject2ById(MePage.LIVE_CONFIGURATION_SLV_VIDEO).click();
+            clickById(MePage.ACTIVITIES_CONTENT);
+            waitTime(3);
+            if (!text_exists("Address(es) already added")){
+                clickById(MePage.ADD_LIVE_STREAN_ADDRESS);
+                clickById(MePage.PUT_RTMP_ADDRESS);
+                String input_address = getRandomString(20); //输入随机字符地址
+                shellInputText(input_address);
+                clickById(MePage.SAVE_RTMP_ADDRESS); //点击保存
+                Asst.assertTrue("comments success",getUiObjectByTextContains(input_address).exists());
+            }
         }else {
-            MeAction.addRtmpAddress();
+            getObject2ById(MePage.LIVE_CONFIGURATION_SLV_VIDEO).click();
+            clickById(MePage.ACTIVITIES_CONTENT);
+            waitTime(3);
+            if (!text_exists("Address(es) already added")) {
+                clickById(MePage.ADD_LIVE_STREAN_ADDRESS);
+                clickById(MePage.PUT_RTMP_ADDRESS);
+                String input_address = getRandomString(20); //输入随机字符地址
+                shellInputText(input_address);
+                clickById(MePage.SAVE_RTMP_ADDRESS); //点击保存
+                Asst.assertTrue("comments success", getUiObjectByTextContains(input_address).exists());
+            }
         }
     }
     /**
