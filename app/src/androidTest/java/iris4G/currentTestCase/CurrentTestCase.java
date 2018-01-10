@@ -666,11 +666,10 @@ public class CurrentTestCase extends VP2 {
             launchCamera();
             int time=0;
             while (time<12){//要求4G信号强度连续1分钟大于-79dbm
-                if (get4GSignalStrength()<-79){
+                if (get4GSignalStrength()>-79){
                     time=time+1;
-                }else {
-                    time=0;
-                }
+                }else {time=0;}
+                logger.info("time:"+time*5+"秒");
                 waitTime(5);
             }
             makeToasts("Start"+i,5);
@@ -740,7 +739,7 @@ public class CurrentTestCase extends VP2 {
             p2pScreenOn();
             p2pScreenOff();
             clickSwitchForVideo(switchName[2]);//关闭录播
-            //主屏幕亮屏待机 6分钟
+            //主屏幕亮屏待机 10分钟
             gDevice.pressBack();
             gDevice.pressBack();
             gDevice.pressBack();
