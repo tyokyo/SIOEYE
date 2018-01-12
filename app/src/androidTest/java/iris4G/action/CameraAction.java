@@ -3,6 +3,7 @@ package iris4G.action;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
+import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import ckt.base.VP2;
+import cn.page.Constant;
 import iris4G.page.Iris4GPage;
 import iris4G.page.NavPage;
 
@@ -648,6 +650,12 @@ public class CameraAction extends VP2 {
         CameraAction.cameraSetting();
         Iris4GAction.ScrollViewByText("Altimeter");
     }
+    public static void navToCustomResolution() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Video Quality");
+
+    }
     /**
      * 直播视频质量设置
      * "480@30FPS(CD)",
@@ -729,4 +737,59 @@ public class CameraAction extends VP2 {
         }
         logger.info("关闭变焦功能成功");
     }
+    /**
+     * check 延时直播、慢镜头直播状态栏信息
+     */
+    public static boolean checkLiveModeInfo(String videoType) throws UiObjectNotFoundException {
+        UiObject camera_mode = gDevice.findObject(new UiSelector().resourceId("com.hicam:id/camera_mode"));
+        UiObject video_info = gDevice.findObject(new UiSelector().resourceId("com.hicam:id/info"));
+        if (camera_mode.exists() && video_info.getText().equals(videoType)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /*public static void specialLive(String liveType) throws Exception {
+        CameraAction.openCompoundButton(liveType);
+        waitTime(5);
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        //登录账号
+        AccountAction.loginAccount(useName, password);
+        //检查延时直播开关状态、状态栏信息、其他开关状态
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        HashSet<String> beforeTakeVideoList = Iris4GAction.FileList("/sdcard/video");
+        Iris4GAction.cameraKey();
+        CameraAction.cameraRecordTime();
+        waitTime(20);
+        CameraAction.cameraRecordTime();
+        Iris4GAction.cameraKey();
+        waitTime(5);
+        HashSet<String> afterTakeVideoList = Iris4GAction.FileList("/sdcard/Video");
+        HashSet<String> resultHashSet = Iris4GAction.result(afterTakeVideoList, beforeTakeVideoList);
+        getObject2ById(Iris4GPage.camera_setting_shortcut_id);
+        if (resultHashSet.size() == 1) {
+            String videoPath = resultHashSet.iterator().next();
+            logger.info("new file:" + videoPath);
+            String videoName = new File(videoPath).getName();
+            VideoNode activeNode = Iris4GAction.VideoInfo(videoPath);
+            int height = 480;
+            if (Iris4GAction.checkVideoInfo(height, activeNode)) {
+                logger.info("video info check success-" + videoPath);
+                FileManagerAction.playVideoByFileManager(videoName);
+                if (text_exists_match("^Can't play this video.*")) {
+                    logger.info(videoName + " play fail " + "-Can't play this video");
+                    clickById("android:id/button1");
+                    Asst.fail("Can't play this video");
+                } else {
+                    logger.info(videoName + " play success");
+                }
+            } else {
+                logger.info("video info check failed" + videoPath);
+                Asst.fail("video info check failed");
+            }
+        } else {
+            Asst.fail("video not exist");
+        }
+    }*/
 }
