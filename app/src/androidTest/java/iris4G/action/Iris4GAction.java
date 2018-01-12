@@ -243,7 +243,6 @@ public class Iris4GAction extends VP2 {
 
         getObjectById(Iris4GPage.content_id).swipeLeft(60);
         getObjectById(Iris4GPage.content_id).swipeLeft(60);
-        getObjectById(Iris4GPage.content_id).swipeLeft(60);
 
         String pkg = gDevice.getCurrentPackageName();
         logger.info("current-package:" + pkg);
