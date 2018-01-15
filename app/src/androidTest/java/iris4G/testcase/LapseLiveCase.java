@@ -122,7 +122,26 @@ public class LapseLiveCase extends VP2 {
         Asst.assertEquals("语音交互开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Voice interaction"));
         Asst.assertEquals("静音直播开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Live Mute"));
     }
-
+    /**
+     *  @Author jiali.liu
+     *  @description 延时视频录制中停止
+     *  @throws Exception
+     */
+    @Test
+    public void testLapseRecordingToStop() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(useName, password);
+        Asst.assertEquals("账号是否登录：",true,AccountAction.isLogin());
+        CameraAction.openCompoundButton("time-lapse broadcast");
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        Iris4GAction.cameraKey();
+        Iris4GAction.waitTime(5);
+        Iris4GAction.cameraKey();
+        Asst.assertEquals("是否在预览界面：",false,getObjectById("com.hicam:id/camera_live_shortcut").exists());
+    }
 }
 
 
