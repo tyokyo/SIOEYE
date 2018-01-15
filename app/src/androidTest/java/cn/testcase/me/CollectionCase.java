@@ -3,6 +3,7 @@ package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
@@ -26,6 +28,7 @@ import cn.action.CollectionAction;
 import cn.action.MainAction;
 import cn.action.MeAction;
 import cn.action.PlayAction;
+import cn.action.WatchAction;
 import cn.page.App;
 import cn.page.DiscoverPage;
 import cn.page.MePage;
@@ -44,14 +47,9 @@ public class CollectionCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //确保App 处于登录状态
         AccountAction.inLogin();
-        try {
-            for (int i=0;i<5;i++){
-                CollectionAction.collectDiscoverVideo();
-            }
-        }catch (Exception e){
 
-        }
     }
+
     /**
      *1. 播放收藏视频*/
     @Test
