@@ -358,4 +358,6 @@ public class MePage {
     public static final String ID_PROFILE_FOLLOW="cn.sioeye.sioeyeapp:id/following";
     //直播介绍
     public static final String ID_REMAIN = "cn.sioeye.sioeyeapp:id/remain";
+    //反馈联系方式
+    public static final String ID_CONTACT="cn.sioeye.sioeyeapp:id/et_contact";
 }
