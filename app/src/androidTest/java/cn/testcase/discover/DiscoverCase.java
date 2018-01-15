@@ -297,17 +297,6 @@ public class DiscoverCase extends VP2 {
         Spoon.screenshot("JumpSuccess");
         Asst.assertFalse("LoginFollowAnchor", id_exists(DiscoverPage.ID_PROFILE_AVATOR));
     }
-    @Test
-    @SanityTest
-    @PerformanceTest
-    /**
-     * 广告内容页面点返回上级
-     *1、点击广告页面里的返回键
-     *Result：迅速响应，返回上一级界面
-     * */
-    public void testClickADBack() {
-        //DiscoverAction.clickADBack();
-    }
 
     @Test
     @SanityTest
@@ -401,7 +390,6 @@ public class DiscoverCase extends VP2 {
      *Result:结果匹配搜索内容，成功搜索出该ID的联系人
      * */
     public void testToSearchByEmail() throws UiObjectNotFoundException, IOException {
-        //AccountAction.logInAccount("YCB123", "123456");
         DiscoverAction.navToSearch();
         shellInputText(Constant.userName);
         Spoon.screenshot("testToSearchByEmail");
