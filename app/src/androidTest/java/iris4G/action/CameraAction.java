@@ -4,6 +4,7 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
@@ -47,6 +48,30 @@ public class CameraAction extends VP2 {
                 break;
             }
         }
+    }
+    /**
+     * Click android.widget.CompoundButton按钮
+     * 检查录像并直播(同类型按钮)右边的按钮是否可点击，返回boolean类型值
+     */
+    public static boolean checkCompoundButtonIsClick(String textViewName) throws UiObjectNotFoundException {
+        UiScrollable settingsViews = new UiScrollable(new UiSelector().scrollable(true));
+        settingsViews.scrollTextIntoView(textViewName);
+        waitUntilFindText(textViewName,3000);
+        UiObject2 scrollView = getObject2ByClass(android.widget.ScrollView.class);
+        List<UiObject2> relatives = scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        UiObject2 clickBtn=null;
+        for (UiObject2 relateLayout : relatives) {
+            boolean compoundButton = relateLayout.hasObject(By.clazz(android.widget.CompoundButton.class));
+            boolean textView = relateLayout.hasObject(By.text(textViewName));
+            if (compoundButton == true && textView == true) {
+                clickBtn = relateLayout.findObject(By.clazz(android.widget.CompoundButton.class));
+                Spoon.screenshot("openCompoundButton",textViewName);
+                break;
+            }
+        }
+        boolean buttonResult =clickBtn.isClickable();
+        return buttonResult;
+
     }
     /**
      * 点击自动翻转按钮
@@ -637,6 +662,12 @@ public class CameraAction extends VP2 {
         Iris4GAction.ScrollViewByText("Account");
         clickByText("Account");
     }
+    public static void navToMoreSettings() throws Exception {
+        CameraAction.navConfig(Iris4GPage.nav_menu[0]);
+        CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
+    }
     public static void navToLocation() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
@@ -738,7 +769,7 @@ public class CameraAction extends VP2 {
         logger.info("关闭变焦功能成功");
     }
     /**
-     * check 延时直播、慢镜头直播状态栏信息
+     * check 状态栏信息
      */
     public static boolean checkLiveModeInfo(String videoType) throws UiObjectNotFoundException {
         UiObject camera_mode = gDevice.findObject(new UiSelector().resourceId("com.hicam:id/camera_mode"));

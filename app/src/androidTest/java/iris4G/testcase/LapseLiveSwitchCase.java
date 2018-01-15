@@ -2,6 +2,8 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.BySelector;
 
 import org.hamcrest.Asst;
 import org.junit.BeforeClass;
@@ -36,10 +38,10 @@ public class LapseLiveSwitchCase extends VP2 {
     /**
      * @throws Exception
      * @Author jiali.liu
-     * @description 未登录账号打开延时直播开关       OK
+     * @description 未登录账号打开延时直播开关
      */
     @Test
-    public  void TestOpenLapseLiveSwitchWhenLogout() throws Exception {
+    public void TestOpenLapseLiveSwitchWhenLogout() throws Exception {
         Iris4GAction.pmClear();
         Iris4GAction.startCamera();
         waitTime(5);
@@ -67,7 +69,7 @@ public class LapseLiveSwitchCase extends VP2 {
      * @throws Exception
      */
     @Test
-    public  void TestOpenLapseLiveSwitchWhenLogin() throws Exception {
+    public void testOpenLapseLiveSwitchWhenLogin() throws Exception {
         Iris4GAction.pmClear();
         Iris4GAction.startCamera();
         String useName = Constant.getUserName();
@@ -80,18 +82,13 @@ public class LapseLiveSwitchCase extends VP2 {
     }
     /**
      *  @Author jiali.liu
-     *  @description 自定义任意直播分辨率，打开延时开关后注销账号,检查状态栏信息是否恢复普通直播
+     *  @description 打开延时直播开关后注销账号
      *  @throws Exception
      */
     @Test
-    public  void TestOpenLapseLiveSwitchThenLogout()throws Exception {
+    public void testOpenLapseLiveSwitchThenLogout()throws Exception {
         Iris4GAction.pmClear();
         Iris4GAction.startCamera();
-        CameraAction.cameraSetting();
-        //自定义分辨率
-        CameraAction.navToCustomResolution();
-        waitTime(1);
-        Iris4GAction.scrollTextIntoView("User Defined(720@30FPS Bitrate0.2-10.0Mbps)");
         String useName = Constant.getUserName();
         String password = Constant.getPassword();
         AccountAction.loginAccount(useName, password);
@@ -100,6 +97,33 @@ public class LapseLiveSwitchCase extends VP2 {
         Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
     }
 
+    /**
+     *  @Author jiali.liu
+     *  @description 关闭延时直播开关后检查其他选项是否恢复可点击状态
+     *  @throws Exception
+     */
+    @Test
+    public void testCloseLapseLiveSwitch() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(useName, password);
+        Asst.assertEquals("账号是否登录：",true,AccountAction.isLogin());
+        CameraAction.openCompoundButton("time-lapse broadcast");
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        //检查自动重连、直播保存、定位服务、速度计、高度计、语音交互、静音直播开关是否可点击
+        gDevice.pressBack();
+        CameraAction.cameraSetting();
+        CameraAction.navToMoreSettings();
+        Asst.assertEquals("自动重连开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Auto reconnect(beta)"));
+        Asst.assertEquals("直播保存开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Live&Save"));
+        Asst.assertEquals("定位服务开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Live&Location"));
+        Asst.assertEquals("速度计开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Speedometer"));
+        Asst.assertEquals("高度计开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Altimeter"));
+        Asst.assertEquals("语音交互开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Voice interaction"));
+        Asst.assertEquals("静音直播开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Live Mute"));
+    }
 
 }
 
