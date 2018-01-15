@@ -38,12 +38,24 @@ public class FeedBackCase extends VP2{
     public void testFeedback_Space() throws UiObjectNotFoundException, IOException {
         SettingAction.navToFeedBack();
         getObjectById(MePage.HELP_FEEDBACK_CONTENT).clearTextField();
-        //String input = getRandomString(40);
-        //shellInputText(input);
-        clickById(MePage.HELP_DONE);
-        waitHasObject(MePage.SETTINGS_3G_NETWORK,10000);
-        boolean feedback_status=getObjectById(MePage.SETTINGS_3G_NETWORK).exists();
-        Asst.assertEquals("Submit success",true,feedback_status);
+        getObject2ById(MePage.ID_CONTACT).click();
+        String input_contact = getRandomString(10);
+        shellInputText(input_contact);
+       Boolean status=getObject2ById(MePage.HELP_DONE).isEnabled();
+        Asst.assertEquals("Submit success",false,status);
+        Spoon.screenshot("feedback");
+    }
+    //联系方式为空
+    //creat by zyj 2018.1.11
+    @Test
+    @PerformanceTest
+    public void testFeedbackNoContact() throws UiObjectNotFoundException, IOException {
+        SettingAction.navToFeedBack();
+        getObjectById(MePage.HELP_FEEDBACK_CONTENT).clearTextField();
+        String input = getRandomString(20);
+        shellInputText(input);
+        Boolean status=getObject2ById(MePage.HELP_DONE).isEnabled();
+        Asst.assertEquals("Submit success",false,status);
         Spoon.screenshot("feedback");
     }
     //Feedback 输入字符长度100
@@ -56,6 +68,9 @@ public class FeedBackCase extends VP2{
         String input = getRandomString(100);
         shellInputText(input);
         Spoon.screenshot("100c");
+        getObject2ById(MePage.ID_CONTACT).click();
+        String input_contact = getRandomString(10);
+        shellInputText(input_contact);
         clickById(MePage.HELP_DONE);
         waitHasObject(MePage.SETTINGS_3G_NETWORK,10000);
         boolean feedback_status=getObjectById(MePage.SETTINGS_3G_NETWORK).exists();
@@ -71,6 +86,9 @@ public class FeedBackCase extends VP2{
         getObjectById(MePage.HELP_FEEDBACK_CONTENT).clearTextField();
         String input = getRandomString(1000);
         shellInputText(input);
+        getObject2ById(MePage.ID_CONTACT).click();
+        String input_contact = getRandomString(10);
+        shellInputText(input_contact);
         logger.info("input char:"+getObjectById(MePage.HELP_FEEDBACK_CONTENT).getText().length());
         Spoon.screenshot("1000c");
         clickById(MePage.HELP_DONE);
@@ -88,6 +106,9 @@ public class FeedBackCase extends VP2{
         getObjectById(MePage.HELP_FEEDBACK_CONTENT).clearTextField();
         String input = getRandomString(500);
         shellInputText(input);
+        getObject2ById(MePage.ID_CONTACT).click();
+        String input_contact = getRandomString(10);
+        shellInputText(input_contact);
         logger.info("input char:"+getObjectById(MePage.HELP_FEEDBACK_CONTENT).getText().length());
         Spoon.screenshot("500c");
         clickById(MePage.HELP_DONE);

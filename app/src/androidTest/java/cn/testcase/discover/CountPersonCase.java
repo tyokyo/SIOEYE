@@ -92,7 +92,6 @@ public class CountPersonCase extends VP2 {
         int clickBeforeZan =before_playback.getZan();
         logger.info("点击Zan前"+before_playback.toString());
         Spoon.screenshot("Zan",""+clickBeforeZan);
-
         //now zan operation
         for(int times=0;times<5;times++){
             clickById(PlayPage.BROADCAST_VIEW_ZAN);
@@ -100,11 +99,9 @@ public class CountPersonCase extends VP2 {
         }
         gDevice.pressBack();
         waitTime(2);
-
         VideoBean after_playback=DiscoverAction.playBackVideo(false);
         logger.info("点击Zan后"+after_playback.toString());
         int clickAfterZan =after_playback.getZan();
-
         logger.info("5赞后人数"+clickAfterZan+"人");
         Spoon.screenshot("after_zan",""+clickAfterZan);
         if (clickAfterZan>1000){

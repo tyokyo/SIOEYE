@@ -390,11 +390,11 @@ public class NewCase  extends VP2{
         clickById(PlayPage.BROADCAST_VIEW_TIPTEXT);
         shellInputText(comment);
         clickByPoint(point);
-        gDevice.pressBack();
         waitTime(2);
         //滑动显示最新消息
         MeAction.displayNewMessages();
-        Asst.assertTrue("comments success",getUiObjectByTextContains(comment).exists());
+        waitTime(3);
+        Asst.assertTrue("comments success",text_exists_contain(comment));
         //验证评论数+1
         VideoBean videoBean_after = PlayAction.getNumberPlayVideo();
         int  cmtnum_after = videoBean_after.getComment();

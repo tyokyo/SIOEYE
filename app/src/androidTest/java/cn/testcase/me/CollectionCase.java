@@ -3,6 +3,7 @@ package cn.testcase.me;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
@@ -11,12 +12,15 @@ import com.squareup.spoon.Spoon;
 
 import org.hamcrest.Asst;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import ckt.annotation.PerformanceTest;
+import ckt.annotation.SanityTest;
 import ckt.base.VP2;
 import cn.action.AccountAction;
 import cn.action.BroadcastAction;
@@ -24,7 +28,9 @@ import cn.action.CollectionAction;
 import cn.action.MainAction;
 import cn.action.MeAction;
 import cn.action.PlayAction;
+import cn.action.WatchAction;
 import cn.page.App;
+import cn.page.DiscoverPage;
 import cn.page.MePage;
 import cn.page.PlayPage;
 
@@ -41,14 +47,9 @@ public class CollectionCase extends VP2{
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         //确保App 处于登录状态
         AccountAction.inLogin();
-        MeAction.navToCollection();
-        int size= CollectionAction.getCollectionSize();
-        if (size==0){
-            CollectionAction.collectDiscoverVideo();
-        }else{
-            gDevice.pressBack();
-        }
+
     }
+
     /**
      *1. 播放收藏视频*/
     @Test
@@ -128,7 +129,15 @@ public class CollectionCase extends VP2{
     @PerformanceTest
     public void testCollectDiscover() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
-        CollectionAction.collectDiscoverVideo();
+        UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_SWIPE_TARGET);
+        List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        int size = linearLayouts.size();
+        linearLayouts.get(size - 1).click();
+        BroadcastAction.waitBroadcastLoading();
+        gDevice.wait(Until.gone(By.res(PlayPage.BROADCAST_VIEW_VIDEO_LOADING)), 60000);
+        CollectionAction.getClickCollection();
+        Spoon.screenshot("testViewVideo");
+        gDevice.pressBack();
     }
     /**
      *6. 举报收藏视频*/

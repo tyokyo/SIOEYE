@@ -68,4 +68,16 @@ public class VipRightCase extends VP2 {
         Spoon.screenshot("testPurchase");
 
     }
+    /**点击用优惠码兑换，跳转到兑换界面
+     * creat by zyj 2018.1.12*/
+    @Test
+    @SanityTest
+    @PerformanceTest
+    public void testUseCouponForVIP() throws UiObjectNotFoundException {
+        MeAction.navToVipRights();
+        getObject2ById(MePage.VIP_RIGHT).swipe(Direction.UP,0.5f);
+        clickByText("Use coupon for VIP");
+        Asst.assertTrue(text_exists("Trade immediately"));
+    }
+
 }

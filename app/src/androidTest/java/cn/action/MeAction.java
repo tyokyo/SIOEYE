@@ -574,6 +574,7 @@ public class MeAction extends VP2{
     public static UiObject2 getRoomIntroduction(){
         clickById(PlayPage.TV_AUCHOR_ID);
         UiObject2 playAbout = getObject2ById(PlayPage.PLAY_ABOUT);
+        waitTime(3);
         return playAbout.getChildren().get(0).getChildren().get(2);
     }
 }
