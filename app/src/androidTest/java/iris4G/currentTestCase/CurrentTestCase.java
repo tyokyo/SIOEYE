@@ -1,7 +1,9 @@
 package iris4G.currentTestCase;
 
 import android.os.RemoteException;
+import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.Until;
 import android.view.KeyEvent;
 import com.squareup.spoon.Spoon;
 import org.junit.Before;
@@ -106,9 +108,18 @@ public class CurrentTestCase extends VP2 {
      *进入相机
      */
     private void launchCamera() throws Exception {
-        Iris4GAction.startCamera();
-        waitTime(10);
-        logger.info("launchCamera");
+        gDevice.pressHome();
+        waitTime(2);
+        gDevice.executeShellCommand("am start -n com.hicam/.application.HiCam");
+        gDevice.wait(Until.findObject(By.pkg("com.hicam")), 40000);
+        if (text_exists("Update")) {
+            clickByText("Cancel");
+        }
+        if (id_exists("android:id/button2")) {
+            clickById("android:id/button2");
+        }
+        String pkg = gDevice.getCurrentPackageName();
+        logger.info("current-package:" + pkg);
     }
 
     /**
@@ -653,7 +664,12 @@ public class CurrentTestCase extends VP2 {
             storageFormat();//格式化储存空间
             closeWifi();
             launchCamera();
-            while (get4GSignalStrength()<-79){//如果4G信号强度小于-79dbm则不开始测试
+            int time=0;
+            while (time<12){//要求4G信号强度连续1分钟大于-79dbm
+                if (get4GSignalStrength()>-79){
+                    time=time+1;
+                }else {time=0;}
+                logger.info("time:"+time*5+"秒");
                 waitTime(5);
             }
             makeToasts("Start"+i,5);
@@ -723,7 +739,7 @@ public class CurrentTestCase extends VP2 {
             p2pScreenOn();
             p2pScreenOff();
             clickSwitchForVideo(switchName[2]);//关闭录播
-            //主屏幕亮屏待机 6分钟
+            //主屏幕亮屏待机 10分钟
             gDevice.pressBack();
             gDevice.pressBack();
             gDevice.pressBack();
@@ -737,9 +753,6 @@ public class CurrentTestCase extends VP2 {
             configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
-//            configVideoQuality(liveQuality480HD);
-//            live2ScreenOn();
-//            live2ScreenOff();
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
             live2ScreenOff();
@@ -749,9 +762,6 @@ public class CurrentTestCase extends VP2 {
             configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
-//            configVideoQuality(liveQuality480HD);
-//            live2ScreenOn();
-//            live2ScreenOff();
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
             live2ScreenOff();
@@ -829,9 +839,6 @@ public class CurrentTestCase extends VP2 {
             configVideoQuality(liveQuality480);
             live2ScreenOn();
             live2ScreenOff();
-//            configVideoQuality(liveQuality480HD);
-//            live2ScreenOn();
-//            live2ScreenOff();
             configVideoQuality(liveQuality720HD);
             live2ScreenOn();
             live2ScreenOff();
