@@ -233,7 +233,6 @@ public class BroadCastsCase extends VP2{
             shellInputText(input_comments);
             //点击评论
             clickByPoint(point);
-            gDevice.pressBack();
             waitTime(2);
             //滑动显示最新消息
             MeAction.displayNewMessages();
@@ -271,7 +270,6 @@ public class BroadCastsCase extends VP2{
             shellInputText(input_comments);
             //点击评论
             clickByPoint(point);
-            gDevice.pressBack();
             waitTime(2);
             input_comments=input_comments.substring(0,120);
             //滑动显示最新消息
@@ -308,7 +306,6 @@ public class BroadCastsCase extends VP2{
             shellInputText(input_comments);
             //点击评论
             clickByPoint(point);
-            gDevice.pressBack();
             waitTime(2);
             //滑动显示最新消息
             MeAction.displayNewMessages();
