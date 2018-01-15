@@ -112,7 +112,6 @@ public class LiveConfigCase extends VP2{
         String expect = getRandomString(100);
         shellInputText(expect);
         clickById(MePage.LIVE_CONFIGURATION_DONE_TITLE);
-
         openAppByPackageName(App.SIOEYE_PACKAGE_NAME_CN);
         MeAction.navToLiveConfiguration();
         clickById(MePage.LIVE_CONFIGURATION_VIDEO_TITLE);
@@ -399,6 +398,7 @@ public class LiveConfigCase extends VP2{
             clickByText("OK");//保存
             //点击进入该房间，检查房间介绍修改是否成功
             MeAction.clickEnterRoom(roomTitle);
+            waitTime(3);
             String actResult = MeAction.getRoomIntroduction().getText();
             Asst.assertEquals("修改直播间介绍",descInput,actResult);
         }
