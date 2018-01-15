@@ -2,8 +2,6 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.BySelector;
 
 import org.hamcrest.Asst;
 import org.junit.BeforeClass;
@@ -25,8 +23,8 @@ import iris4G.action.Iris4GAction;
 
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 16)
-public class LapseLiveSwitchCase extends VP2 {
-    Logger logger = Logger.getLogger(LapseLiveSwitchCase.class.getName());
+public class LapseLiveCase extends VP2 {
+    Logger logger = Logger.getLogger(LapseLiveCase.class.getName());
 
     @BeforeClass
     public static void setup() throws Exception {
