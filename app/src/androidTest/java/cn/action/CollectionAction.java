@@ -1,6 +1,7 @@
 package cn.action;
 
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.Until;
@@ -62,9 +63,8 @@ public class CollectionAction extends VP2 {
         UiObject2 broadcast = collection.get(index);
         return  broadcast;
     }
-    //播放discover视频，并收藏
-    public static void collectDiscoverVideo() throws UiObjectNotFoundException {
-        MainAction.navToDiscover();
+    //播放视频，并收藏
+    public static void collectVideo() throws UiObjectNotFoundException {
         UiObject2 swipe_target = getObject2ById(DiscoverPage.ID_SWIPE_TARGET);
         List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.RelativeLayout.class));
         int size = linearLayouts.size();
