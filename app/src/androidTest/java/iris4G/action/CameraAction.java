@@ -83,6 +83,19 @@ public class CameraAction extends VP2 {
         Iris4GAction.ScrollViewByText("Auto");
         openCompoundButton("Auto");
     }
+
+    /**
+     * 设置直播视角
+     *
+     */
+    public static void setLiveAngle(String angleName) throws Exception {
+        CameraAction.cameraSetting();
+        CameraAction.navToMoreSettings();
+        Iris4GAction.scrollTextIntoView("Video Angle");
+        waitTime(2);
+        Iris4GAction.clickByText("Video Angle");
+        Iris4GAction.clickByText(angleName);
+    }
     //是否成功开启直播
     public static void checkLiveStatus(int retryTimes) {
         for (int i = 0; i < retryTimes; i++) {
