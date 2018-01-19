@@ -264,6 +264,7 @@ public class NewCase  extends VP2{
     public void testNewCoverCountWatch() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        waitTime(3);
         UiObject2 swipe_target = getObject2ById(NewPage.ID_NEW_VIDEO);
         swipe_target.swipe(Direction.DOWN,0.5f);
         waitTime(3);
@@ -288,6 +289,7 @@ public class NewCase  extends VP2{
     public void testNewCountZan() throws UiObjectNotFoundException {
         MainAction.navToDiscover();
         DiscoverAction.navToNew();
+        waitTime(3);
         //获取点赞前的点赞数
         int  zan_before= PlayAction.getNewZanNumber();
         clickById(PlayPage.TV_CHAT_ROOM_ID);
