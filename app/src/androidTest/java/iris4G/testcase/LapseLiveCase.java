@@ -2,6 +2,7 @@ package iris4G.testcase;
 
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiSelector;
 
 import org.hamcrest.Asst;
 import org.junit.BeforeClass;
@@ -121,6 +122,114 @@ public class LapseLiveCase extends VP2 {
         Asst.assertEquals("高度计开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Altimeter"));
         Asst.assertEquals("语音交互开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Voice interaction"));
         Asst.assertEquals("静音直播开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Live Mute"));
+    }
+    /**
+     *  @Author jiali.liu
+     *  @description 延时视频录制中停止
+     *  @throws Exception
+     */
+    @Test
+    public void testLapseRecordingToStop() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(useName, password);
+        Asst.assertEquals("账号是否登录：",true,AccountAction.isLogin());
+        CameraAction.openCompoundButton("time-lapse broadcast");
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        Iris4GAction.cameraKey();
+        Iris4GAction.waitTime(5);
+        Iris4GAction.cameraKey();
+        Asst.assertEquals("是否在预览界面：",false,getObjectById("com.hicam:id/camera_live_shortcut").exists());
+    }
+    /**
+     *  @Author jiali.liu
+     *  @description 延时视频直播中停止
+     *  @throws Exception
+     */
+    @Test
+    public void testLapseLivingToStop() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(useName, password);
+        Asst.assertEquals("账号是否登录：",true,AccountAction.isLogin());
+        CameraAction.openCompoundButton("time-lapse broadcast");
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        Iris4GAction.cameraKey();
+        //判断是否发起特效直播
+        waitTime(110);
+        Asst.assertEquals("是否发起直播：",true,gDevice.findObject(new UiSelector().text("broadcasting")).exists());
+        Iris4GAction.cameraKey();
+        Asst.assertEquals("是否在预览界面：",false,getObjectById("com.hicam:id/camera_live_shortcut").exists());
+    }
+    /**
+     *  @Author jiali.liu
+     *  @description 设置普通视角
+     *  @throws Exception
+     */
+    @Test
+    public void testLapseLiveSetMedium() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(useName, password);
+        Asst.assertEquals("账号是否登录：",true,AccountAction.isLogin());
+        CameraAction.openCompoundButton("time-lapse broadcast");
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        gDevice.pressBack();
+        CameraAction.setLiveAngle("Medium");
+        Iris4GAction.cameraKey();
+        waitTime(110);
+        //判断是否发起特效直播
+        Asst.assertEquals("是否发起直播：",true,gDevice.findObject(new UiSelector().text("broadcasting")).exists());
+    }
+    /**
+     *  @Author jiali.liu
+     *  @description 设置宽视角
+     *  @throws Exception
+     */
+    @Test
+    public void testLapseLiveSetWide() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(useName, password);
+        Asst.assertEquals("账号是否登录：",true,AccountAction.isLogin());
+        CameraAction.openCompoundButton("time-lapse broadcast");
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        gDevice.pressBack();
+        CameraAction.setLiveAngle("Wide");
+        Iris4GAction.cameraKey();
+        waitTime(110);
+        //判断是否发起特效直播
+        Asst.assertEquals("是否发起直播：",true,gDevice.findObject(new UiSelector().text("broadcasting")).exists());
+    }
+    /**
+     *  @Author jiali.liu
+     *  @description 设置超宽视角
+     *  @throws Exception
+     */
+    @Test
+    public void testLapseLiveSetSuperWide() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(useName, password);
+        Asst.assertEquals("账号是否登录：",true,AccountAction.isLogin());
+        CameraAction.openCompoundButton("time-lapse broadcast");
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        gDevice.pressBack();
+        CameraAction.setLiveAngle("Super Wide");
+        Iris4GAction.cameraKey();
+        waitTime(110);
+        //判断是否发起特效直播
+        Asst.assertEquals("是否发起直播：",true,gDevice.findObject(new UiSelector().text("broadcasting")).exists());
     }
 
 }
