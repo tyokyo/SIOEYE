@@ -299,7 +299,7 @@ public class LoginCase extends VP2 {
     1.读取本地config.properties文件中email
     请提前将config.properties保存在本地根目录
     结果：提示重置密码链接已经发送到注册邮箱中
-    2.为注册过的邮箱
+    2.未注册过的邮箱
     随机产生一个邮箱
     结果：无“提示重置密码链接已经发送到注册邮箱中”
      */
