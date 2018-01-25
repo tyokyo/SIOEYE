@@ -222,13 +222,12 @@ public class BroadcastAction extends VP2{
         int index = 0;
         boolean exit = true;
         int search = 1;
-
         while (exit){
             logger.info("================================");
             UiObject2 view = gDevice.findObject(By.res(MePage.BROADCASTS_LIST));
             List<UiObject2> broadcasts = view.findObjects(By.clazz(android.widget.LinearLayout.class).depth(1));
             logger.info("getRandomBroadcastsWithNoRoomIndex size is -"+broadcasts.size());
-            for (int j = 1; j <broadcasts.size() ; j++) {
+            for (int j = 0; j <broadcasts.size() ; j++) {
                 UiObject2 bsObject = broadcasts.get(j);
                 List<UiObject2> lines= bsObject.findObjects(By.clazz(android.widget.LinearLayout.class).depth(1));
                 int size = lines.size();
