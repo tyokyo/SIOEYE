@@ -47,7 +47,8 @@ public class NewAction extends VP2 {
 
     //返回随机视频的index
     public static int getRandomVideoIndex() {
-        getObject2ById(NewPage.ID_NEW_VIDEO).swipe(Direction.DOWN,0.5f);
+       UiObject2 object= getObject2ById(NewPage.ID_NEW_VIDEO);
+        object.swipe(Direction.DOWN,0.5f);
         List<UiObject2> relativeLayouts = gDevice.findObjects(By.res(NewPage.ID_NEW_VIDEO));
         //获取视频列表数目
         int size = relativeLayouts.size();
@@ -99,57 +100,12 @@ public class NewAction extends VP2 {
         return like;
     }
     //播放最新视频
-    public static int navToPlayNewlistVideo() throws UiObjectNotFoundException {
+    public static void navToPlayNewlistVideo() throws UiObjectNotFoundException {
         clickById(DiscoverPage.ID_MAIN_TAB_DISCOVER);
         clickById(DiscoverPage.ID_NEW_RECOMMEND);
-        int person = 0;
-        UiObject2 swipe_target = getObject2ById(NewPage.ID_NEW_VIDEO);
-        swipe_target.swipe(Direction.DOWN, 0.2f);
-        waitTime(5);
-        List<UiObject2> linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
-        logger.info(linearLayouts.size() + "");
-        int zanBeforeNumber = 0;
-        List<UiObject2> textViews;
-        for (UiObject2 linearLayout : linearLayouts) {
-            try {
-                textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
-                if (textViews.size() == 3) {
-                    person = Integer.parseInt(textViews.get(0).getText());
-                    //获取点赞数
-                    zanBeforeNumber = NewAction.getZanNumber();
-                    logger.info("赞前人数是" + zanBeforeNumber + "人");
-                    Spoon.screenshot("before_zan", "" + zanBeforeNumber);
-                    //点击视频进行播放
-                    textViews.get(0).getParent().getParent().getParent().click();
-                    waitTime(3);
-                    //等待视频加载完成
-                    BroadcastAction.waitBroadcastLoading();
-                    break;
-                }
-            } catch (StaleObjectException e) {
-                e.printStackTrace();
-            }
-        }
-        if (!id_exists(PlayPage.BROADCAST_VIEW_ZAN)) {
-            linearLayouts = swipe_target.findObjects(By.clazz(android.widget.LinearLayout.class));
-            for (UiObject2 linearLayout : linearLayouts) {
-                textViews = linearLayout.findObjects(By.depth(1).clazz(android.widget.TextView.class));
-                if (textViews.size() == 2) {
-                    if (linearLayout.getChildCount() == 2 && linearLayout.getParent().getChildCount() == 2) {
-                        person = Integer.parseInt(textViews.get(0).getText());
-                        //获取点赞数
-                        zanBeforeNumber = NewAction.getZanNumber();
-                        logger.info("赞前人数是" + zanBeforeNumber + "人");
-                        Spoon.screenshot("before_zan", "" + zanBeforeNumber);
-                        //点击视频进行播放
-                        textViews.get(0).getParent().getParent().getParent().click();
-                        waitTime(3);
-                        break;
-                    }
-                }
-            }
-        }
-        return zanBeforeNumber;
+        int index = NewAction.getRandomVideoIndex();
+        UiObject2 video =NewAction.getRandomVideo(index);
+        video.click();
 
 
     }
