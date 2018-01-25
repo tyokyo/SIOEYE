@@ -189,25 +189,9 @@ public class WatchAction extends VP2 {
      * 检查mini界面关注列表是否显示
      */
     public static boolean FollowList_isExist() {
-        List<UiObject2> list = new ArrayList<>();
         UiObject NobodyFollow = gDevice.findObject(new UiSelector().text("没有关注任何人"));
-        List<UiObject2> ralativelayouts = gDevice.findObjects(By.clazz(android.widget.RelativeLayout.class));
-        for (UiObject2 obj : ralativelayouts) {
-            List<UiObject2> children = obj.getChildren();
-            if (obj.getChildCount() == 2) {
-                if (children.get(0).getClassName().equals("android.widget.ImageView") &&
-                        children.get(1).getClassName().equals("android.widget.LinearLayout")) {
-                    list.add(obj);
-                }
-            } else if (obj.getChildCount() == 3) {
-                if (children.get(0).getClassName().equals("android.widget.ImageView") &&
-                        children.get(1).getClassName().equals("android.widget.LinearLayout") ^
-                                children.get(2).getClassName().equals("android.widget.ImageView")) {
-                    list.add(obj);
-                }
-            }
-        }
-        if (!list.isEmpty() || NobodyFollow.exists()) {
+       int num=getObject2ById(MePage.USER_FOLLOW_LIST).getChildCount();
+        if (num!=0 || NobodyFollow.exists()) {
             return true;
         } else {
             return false;
@@ -218,25 +202,9 @@ public class WatchAction extends VP2 {
      * 检查mini界面粉丝列表是否显示
      */
     public static boolean FansList_isExist() {
-        List<UiObject2> list = new ArrayList<>();
         UiObject NobodyFollow = gDevice.findObject(new UiSelector().text("还没有粉丝，关注成为ta的第一个粉丝吧"));
-        List<UiObject2> ralativelayouts = gDevice.findObjects(By.clazz(android.widget.RelativeLayout.class));
-        for (UiObject2 obj : ralativelayouts) {
-            List<UiObject2> children = obj.getChildren();
-            if (obj.getChildCount() == 2) {
-                if (children.get(0).getClassName().equals("android.widget.ImageView") &&
-                        children.get(1).getClassName().equals("android.widget.LinearLayout")) {
-                    list.add(obj);
-                }
-            } else if (obj.getChildCount() == 3) {
-                if (children.get(0).getClassName().equals("android.widget.ImageView") &&
-                        children.get(1).getClassName().equals("android.widget.LinearLayout") ^
-                                children.get(2).getClassName().equals("android.widget.ImageView")) {
-                    list.add(obj);
-                }
-            }
-        }
-        if (!list.isEmpty() || NobodyFollow.exists()) {
+        int num=getObject2ById(MePage.USER_FOLLOW_LIST).getChildCount();
+        if (num!=0 || NobodyFollow.exists()) {
             return true;
         } else {
             return false;
