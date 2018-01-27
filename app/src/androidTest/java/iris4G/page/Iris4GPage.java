@@ -8,6 +8,7 @@ public class Iris4GPage {
     public static String login_id_input = "com.hicam:id/login_id_input";
     public static String login_password_input = "com.hicam:id/login_password_input";
     public static String login_btn_login = "com.hicam:id/login_btn_login";
+    public static String account_login="com.hicam:id/accountlogin";
 
     public static String launcher_application_id = "com.android.launcher3:id/application_icon_icon";
     public static String camera_live_shortcut_id= "com.hicam:id/camera_live_shortcut";

@@ -66,6 +66,19 @@ public class AccountAction extends VP2 {
         }
         gDevice.pressBack();
     }
+    public static void login(String username, String password) throws Exception {
+        login_id_input(username);
+        login_password_input(password);
+        login_btn_login();
+        for (int i = 0; i < 20; i++) {
+            if (text_exists_match("^Login")) {
+                logger.info("Login wait 1 seconds");
+                waitTime(1);
+            } else {
+                logger.info("account login success");
+            }
+        }
+    }
 
     public static boolean isLoginSuccess() throws UiObjectNotFoundException {
         boolean isSuccess = false;
