@@ -67,6 +67,8 @@ public class Iris4GPage {
             "Slo_Mo",
             "Lapse"
     };
+    public static String videoAndLive="Video&Live(beta)";
+
     public static String[] video_Angle ={"Super Wide","Wide","Medium"};
 
     public static String[] lapse_time ={"2s","3s","5s","10s"};
