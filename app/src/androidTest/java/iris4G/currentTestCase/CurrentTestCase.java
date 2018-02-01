@@ -29,7 +29,7 @@ import iris4G.page.Iris4GPage;
 public class CurrentTestCase extends VP2 {
     Logger logger = Logger.getLogger(CurrentTestCase.class.getName());
 
-    private int standbyTime=360;
+    private int standbyTime=180;
 
     private String liveQuality480="480@25FPS(Bitrate0.3-4Mbps)",
                     liveQuality720HD="720@25FPS(Bitrate1.3-6Mbps)",
@@ -79,13 +79,12 @@ public class CurrentTestCase extends VP2 {
                 if (CurrenTestAction.getAndShow4GSignalStrength()>-79){
                     checkSignalStrengthTime=checkSignalStrengthTime+1;
                 }else {checkSignalStrengthTime=0;}
-                logger.info("time:"+checkSignalStrengthTime*5+"秒");
                 waitTime(5);
             }
             /*
             记录4G信号强度
              */
-            String fileName = "4G_" + System.currentTimeMillis() + ".txt";
+            String fileName = "4G_SignalStrength.txt";
             File signalStrength = new File("/mnt/sdcard/" + fileName);
             signalStrength.createNewFile();
             BufferedWriter out = new BufferedWriter(new FileWriter(signalStrength));

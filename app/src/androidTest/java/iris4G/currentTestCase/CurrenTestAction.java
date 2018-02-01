@@ -26,7 +26,7 @@ public class CurrenTestAction extends VP2 {
     private static Logger logger = Logger.getLogger(CurrenTestAction.class.getName());
 
 
-    private static int testTime=120;
+    private static int testTime=122;
 
     private static String[] videoAngle={
             "Medium",
@@ -233,11 +233,11 @@ public class CurrenTestAction extends VP2 {
 
     public static void liveWithBiggerZoom(String screenOnOff ,BufferedWriter out,String is4G) throws Exception {
         makeScreenOn();
-        clickById(Iris4GPage.recording_time_id);
-        clickById(Iris4GPage.recording_time_id);
+        clickByPonit(100,200);
+        Thread.sleep(80);
+        clickByPonit(100,201);
         getObjectById(Iris4GPage.content_id).swipeRight(80);
         makeLive(screenOnOff,out,is4G);
-        makeLiveStop();
         configVideoAngle(videoAngle[0]);//恢复变焦
     }
 
@@ -551,11 +551,11 @@ public class CurrenTestAction extends VP2 {
         String writeString = System.currentTimeMillis() + ":" + get4GSignalStrength()+"\n";
         out.write(writeString);
         out.flush(); // 把缓存区内容压入文件
-        waitTime(60);
+        waitTime(testTime/2);
         writeString = System.currentTimeMillis() + ":" + get4GSignalStrength()+"\n";
         out.write(writeString);
         out.flush(); // 把缓存区内容压入文件
-        waitTime(60);
+        waitTime(testTime/2);
         writeString = System.currentTimeMillis() + ":" + get4GSignalStrength()+"\n";
         out.write(writeString);
         out.flush(); // 把缓存区内容压入文件
@@ -564,11 +564,11 @@ public class CurrenTestAction extends VP2 {
         String writeString = System.currentTimeMillis() + ":" + get4GSignalStrength()+"\n";
         out.write(writeString);
         out.flush(); // 把缓存区内容压入文件
-        waitTime(58);
+        waitTime(testTime/2-2);
         writeString = System.currentTimeMillis() + ":" + get4GSignalStrength()+"\n";
         out.write(writeString);
         out.flush(); // 把缓存区内容压入文件
-        waitTime(58);
+        waitTime(testTime/2-2);
         writeString = System.currentTimeMillis() + ":" + get4GSignalStrength()+"\n";
         out.write(writeString);
         out.flush(); // 把缓存区内容压入文件
