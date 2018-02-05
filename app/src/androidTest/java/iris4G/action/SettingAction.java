@@ -189,4 +189,14 @@ public class SettingAction extends VP2 {
         logger.info(result);
         return result;
     }
+    //设置从不休眠
+    public static void setNeverTime() throws Exception {
+        Iris4GAction.startSettings();
+        clickByText("Device");
+        Iris4GAction.ScrollViewByText("Display");
+        clickByText("Display");
+        clickByText("Sleep");
+        Iris4GAction.ScrollViewByText("Never");
+        clickByText("Never");
+    }
 }
