@@ -8,6 +8,7 @@ public class Iris4GPage {
     public static String login_id_input = "com.hicam:id/login_id_input";
     public static String login_password_input = "com.hicam:id/login_password_input";
     public static String login_btn_login = "com.hicam:id/login_btn_login";
+    public static String account_login="com.hicam:id/accountlogin";
 
     public static String launcher_application_id = "com.android.launcher3:id/application_icon_icon";
     public static String camera_live_shortcut_id= "com.hicam:id/camera_live_shortcut";
@@ -23,6 +24,15 @@ public class Iris4GPage {
     public static String playvideobtn = "com.hicam.gallery:id/gallery_bottom_play_im";
     public static String lapsetime1 = "com.hicam:id/recording_time";
     public static String lapsetime2 = "com.hicam:id/recording_time2";
+
+    //录播 live id
+    public static String video_and_live_recording_live="com.hicam:id/recordinglivelayout";
+    public static String videoandliveloginsuccess="com.hicam:id/videoandliveloginsuccess";//will use sioeye ID: xxx to live steam
+    public static String video_and_live_recordingonly="com.hicam:id/recordingonly";//RecordingOnly
+    public static String video_and_live_changedaccount="com.hicam:id/changedaccount";//SwitchSioeyeID
+    public static String video_and_live_progressbar="com.hicam:id/pb_progressbar";
+
+
 
     //Can't play this video.
     //android:id/message
@@ -67,6 +77,8 @@ public class Iris4GPage {
             "Slo_Mo",
             "Lapse"
     };
+    public static String videoAndLive="Video&Live(beta)";
+
     public static String[] video_Angle ={"Super Wide","Wide","Medium"};
 
     public static String[] lapse_time ={"2s","3s","5s","10s"};

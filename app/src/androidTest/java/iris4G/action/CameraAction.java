@@ -793,6 +793,44 @@ public class CameraAction extends VP2 {
             return false;
         }
     }
+
+    /*
+    清除账号信息后通过账号登陆，然后开启录播开关
+     */
+    public static void loginAndOpenVideoLiveButton() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(useName, password);
+        CameraAction.navConfig(NavPage.navConfig_Video);
+        clickById(Iris4GPage.camera_setting_shortcut_id);
+        waitTime(1);
+        CameraAction.openCompoundButton(Iris4GPage.videoAndLive);
+        waitTime(2);
+    }
+    /*
+    停止直播录像等
+     */
+    public static void stopVideoOrLive() throws UiObjectNotFoundException {
+        if (id_exists(Iris4GPage.recording_time_id)){
+            gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        }
+    }
+    public static boolean checkVideoAndLiveButton() throws Exception {
+        clickById(Iris4GPage.camera_setting_shortcut_id);
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("Video Quality");
+        clickByText("Video Quality");
+        if (text_exists(Iris4GPage.video_quality[4])){
+            gDevice.pressBack();
+            waitTime(1);
+            gDevice.pressBack();
+            return false;
+        }else {
+            return true;
+        }
+    }
     /*public static void specialLive(String liveType) throws Exception {
         CameraAction.openCompoundButton(liveType);
         waitTime(5);

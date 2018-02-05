@@ -476,6 +476,7 @@ public class NewCase  extends VP2{
         //点击最新TAB
         DiscoverAction.navToNew();
         //播放一个视频
+        waitTime(2);
         int index=NewAction.getRandomVideoIndex();
         NewAction.getRandomVideo(index).click();
         //点击主播
@@ -628,6 +629,7 @@ public class NewCase  extends VP2{
      * */
     public void testToSearchByVideoName() throws UiObjectNotFoundException, IOException {
         NewAction.navToNewSearch();
+        waitTime(2);
         shellInputText("a");
         clickByText("Video");
         waitTime(2);
