@@ -14,7 +14,9 @@ import ckt.base.VP2;
 import cn.page.Constant;
 import iris4G.action.AccountAction;
 import iris4G.action.CameraAction;
+import iris4G.action.GalleryAction;
 import iris4G.action.Iris4GAction;
+import iris4G.action.SettingAction;
 
 /**
  * @time Created on 2017/11/16.
@@ -115,13 +117,13 @@ public class LapseLiveCase extends VP2 {
         gDevice.pressBack();
         CameraAction.cameraSetting();
         CameraAction.navToMoreSettings();
-        Asst.assertEquals("自动重连开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Auto reconnect(beta)"));
-        Asst.assertEquals("直播保存开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Live&Save"));
-        Asst.assertEquals("定位服务开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Live&Location"));
-        Asst.assertEquals("速度计开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Speedometer"));
-        Asst.assertEquals("高度计开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Altimeter"));
-        Asst.assertEquals("语音交互开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Voice interaction"));
-        Asst.assertEquals("静音直播开关是否可点击：",false,CameraAction.checkCompoundButtonIsClick("Live Mute"));
+        Asst.assertEquals("自动重连开关是否置灰：",false,CameraAction.checkCompoundButtonIsEnabled("Auto reconnect(beta)"));
+        Asst.assertEquals("直播保存开关是否置灰：",false,CameraAction.checkCompoundButtonIsEnabled("Live&Save"));
+        Asst.assertEquals("定位服务开关是否置灰：",false,CameraAction.checkCompoundButtonIsEnabled("Live&Location"));
+        Asst.assertEquals("速度计开关是否置灰：",false,CameraAction.checkCompoundButtonIsEnabled("Speedometer"));
+        Asst.assertEquals("高度计开关是否置灰：",false,CameraAction.checkCompoundButtonIsEnabled("Altimeter"));
+        Asst.assertEquals("语音交互开关是否置灰：",false,CameraAction.checkCompoundButtonIsEnabled("Voice interaction"));
+        Asst.assertEquals("静音直播开关是否置灰：",false,CameraAction.checkCompoundButtonIsEnabled("Live Mute"));
     }
     /**
      *  @Author jiali.liu
@@ -231,7 +233,69 @@ public class LapseLiveCase extends VP2 {
         //判断是否发起特效直播
         Asst.assertEquals("是否发起直播：",true,gDevice.findObject(new UiSelector().text("broadcasting")).exists());
     }
-
+    /**
+     *  @Author jiali.liu
+     *  @description 延时直播保存的录像视频在相册中再次发起直播
+     *  @throws Exception
+     */
+    @Test
+    public void testLapseLiveVideoInGallery() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String userName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(userName, password);
+        Asst.assertEquals("账号是否登录：",true,AccountAction.isLogin());
+        CameraAction.openCompoundButton("time-lapse broadcast");
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        gDevice.pressBack();
+        CameraAction.setLiveAngle("Super Wide");
+        Iris4GAction.cameraKey();
+        waitTime(110);
+        //判断是否发起特效直播
+        Asst.assertEquals("是否发起直播：",true,gDevice.findObject(new UiSelector().text("broadcasting")).exists());
+        //进入相册发起直播
+        Iris4GAction.startGallery();
+        GalleryAction.startGalleryLive();
+    }
+    /**
+     *  @Author jiali.liu
+     *  @description 开启远程控制，检查灭屏时间和其他设置项
+     *  @throws Exception
+     */
+    @Test
+    public void testOpenRemoteControl() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        String userName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.loginAccount(userName, password);
+        Asst.assertEquals("账号是否登录：",true,AccountAction.isLogin());
+        CameraAction.openCompoundButton("time-lapse broadcast");
+        Asst.assertEquals("状态栏信息合理：",true,CameraAction.checkLiveModeInfo("480@30"));
+        gDevice.pressBack();
+        CameraAction.cameraSetting();
+        Iris4GAction.scrollTextIntoView("Remote control");
+        CameraAction.openCompoundButton("Remote control");
+        clickByText("OK");
+        waitTime(20);
+        CameraAction.checkScreenStatus();
+        Iris4GAction.makeScreenOn();
+        clickByText("Manual");
+        Iris4GAction.stopCamera();
+        SettingAction.setNeverTime();
+        Iris4GAction.stopSettings();
+        Iris4GAction.startCamera();
+        CameraAction.cameraSetting();
+        CameraAction.navToMoreSettings();
+        Asst.assertEquals("自动重连开关是否置灰：",true,CameraAction.checkCompoundButtonIsEnabled("Auto reconnect(beta)"));
+        Asst.assertEquals("直播保存开关是否置灰：",true,CameraAction.checkCompoundButtonIsEnabled("Live&Save"));
+        Asst.assertEquals("定位服务开关是否置灰：",true,CameraAction.checkCompoundButtonIsEnabled("Live&Location"));
+        Asst.assertEquals("速度计开关是否置灰：",true,CameraAction.checkCompoundButtonIsEnabled("Speedometer"));
+        Asst.assertEquals("高度计开关是否置灰：",true,CameraAction.checkCompoundButtonIsEnabled("Altimeter"));
+        Asst.assertEquals("语音交互开关是否置灰：",true,CameraAction.checkCompoundButtonIsEnabled("Voice interaction"));
+        Asst.assertEquals("静音直播开关是否置灰：",true,CameraAction.checkCompoundButtonIsEnabled("Live Mute"));
+    }
 }
 
 
