@@ -53,7 +53,7 @@ public class CameraAction extends VP2 {
      * Click android.widget.CompoundButton按钮
      * 检查录像并直播(同类型按钮)右边的按钮是否可点击，返回boolean类型值
      */
-    public static boolean checkCompoundButtonIsClick(String textViewName) throws UiObjectNotFoundException {
+    public static boolean checkCompoundButtonIsEnabled(String textViewName) throws UiObjectNotFoundException {
         UiScrollable settingsViews = new UiScrollable(new UiSelector().scrollable(true));
         settingsViews.scrollTextIntoView(textViewName);
         waitUntilFindText(textViewName,3000);
@@ -69,7 +69,7 @@ public class CameraAction extends VP2 {
                 break;
             }
         }
-        boolean buttonResult =clickBtn.isClickable();
+        boolean buttonResult =clickBtn.isEnabled();
         return buttonResult;
 
     }
