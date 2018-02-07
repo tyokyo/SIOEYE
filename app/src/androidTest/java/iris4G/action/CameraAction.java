@@ -831,6 +831,38 @@ public class CameraAction extends VP2 {
             return true;
         }
     }
+    public static void loginByVideoAndLive() throws Exception {
+        Iris4GAction.pmClear();
+        Iris4GAction.startCamera();
+        VideoNode.navToVideoAndLiveLoginPage();
+        clickById(Iris4GPage.account_login);
+        String useName = Constant.getUserName();
+        String password = Constant.getPassword();
+        AccountAction.login(useName, password);
+    }
+    /*
+    可设置默认录像分辨率---然后发起起录播，8秒未发起录播的话判为失败
+     */
+    public static void makeVideoAndLiveButtonWithDR(String videoQuality) throws Exception {
+        CameraAction.configVideoQuality(videoQuality);
+        clickById(Iris4GPage.camera_setting_shortcut_id);
+        waitTime(1);
+        CameraAction.openCompoundButton(Iris4GPage.videoAndLive);
+        waitTime(2);
+        gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+        waitUntilFind(Iris4GPage.video_and_live_recording_live,10000);
+        if (!id_exists(Iris4GPage.video_and_live_recording_live)){
+            Assert.fail("makeVideoAndLiveFailed");
+        }
+        stopVideoOrLive();
+        waitTime(2);
+        clickById(Iris4GPage.camera_setting_shortcut_id);
+        waitTime(1);
+        CameraAction.openCompoundButton(Iris4GPage.videoAndLive);
+        waitTime(1);
+        gDevice.pressBack();
+        waitTime(1);
+    }
     /*public static void specialLive(String liveType) throws Exception {
         CameraAction.openCompoundButton(liveType);
         waitTime(5);
