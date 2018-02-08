@@ -299,6 +299,8 @@ public class CameraAction extends VP2 {
         //CameraAction.navConfig(Iris4GPage.nav_menu[1]);
         CameraAction.navConfig(navConfig);
         CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("Video Quality");
+        waitTime(1);
         clickByText("Video Quality");
         Iris4GAction.ScrollViewByText(quality);
         clickByText(quality);
@@ -863,6 +865,43 @@ public class CameraAction extends VP2 {
         gDevice.pressBack();
         waitTime(1);
     }
+    /*
+    配置视频质量后检查是否配置成功，+状态栏
+     */
+    public static void checkConfigVideoQuality(String navPage ,String videoQuality) throws Exception {
+        CameraAction.configVideoQuality(navPage,videoQuality);
+        CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("Video Quality");
+        waitTime(1);
+        String videoQualityInStandardBar=null;
+        if (navPage.equals("Video")){
+            videoQualityInStandardBar=videoQuality.substring(0,videoQuality.length()-3);
+        }else {
+            videoQualityInStandardBar=videoQuality.substring(0,videoQuality.length()-21);
+            videoQuality=videoQuality.substring(0,10)+videoQuality.substring(17,videoQuality.length());
+        }
+        String videoQualityBar=getTex(Iris4GPage.info);
+        if (!videoQualityBar.equals(videoQualityInStandardBar)){
+            Assert.fail("statusBarNotUpdate");
+        }else if (!text_exists(videoQuality)){
+            Assert.fail("videoSettingNotUpdate");
+        }
+    }
+    /*
+    lapse配置视频质量后检查是否配置成功，+状态栏
+     */
+    public static void checkConfigLapseQuality(String videoQuality) throws Exception {
+        CameraAction.configVideoQuality(NavPage.navConfig_Lapse,videoQuality);
+        CameraAction.cameraSetting();
+        waitTime(1);
+        Iris4GAction.ScrollViewByText("Video Quality");
+        waitTime(1);
+        if (!text_exists(videoQuality)){
+            Assert.fail("videoSettingNotUpdate");
+        }
+    }
+
     /*public static void specialLive(String liveType) throws Exception {
         CameraAction.openCompoundButton(liveType);
         waitTime(5);
