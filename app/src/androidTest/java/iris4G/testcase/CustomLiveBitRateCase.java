@@ -74,9 +74,9 @@ public class CustomLiveBitRateCase extends VP2 {
         clickByText(Frame);
         logger.info("setting Custom Live Frame");
         if (resolution.equals("480P")){
-            Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"(range: 200Kbps ~ 5,000Kbps)");
+            Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"(range: 200Kbps ~ 4,000Kbps)");
         }else {
-            Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"(range: 400Kbps ~ 10,000Kbps)");
+            Iris4GAction.ScrollViewByText(Iris4GPage.user_defined_scrollView,"(range: 400Kbps ~ 6,000Kbps)");
         }
 
         Iris4GAction.setText(Iris4GPage.user_defined_min_bitrate,minBitrate);
@@ -91,14 +91,14 @@ public class CustomLiveBitRateCase extends VP2 {
 
         /*
         Case 1
-        配置自定义480@25（0.2-5M），并检查配置是否正确
+        配置自定义480@25（0.2-4M），并检查配置是否正确
          */
      @Test
     public  void testCustom480P() throws Exception {
          String resolution=Iris4GPage.User_defined_resolution[0];
          String Frame=Iris4GPage.User_defined_rate[0];
          String minBitrate="200";
-         String maxBitrate="5000";
+         String maxBitrate="4000";
         configUserDefinedLiveQuality( resolution,Frame,minBitrate,maxBitrate);
          String checkLiveQuality="480@25";
          CameraAction.checkLiveVideoQualityStatus(checkLiveQuality);
@@ -108,14 +108,14 @@ public class CustomLiveBitRateCase extends VP2 {
 
     /*
     Case 2
-       配置自定义720@30（0.4-10.0M），并检查配置是否正确
+       配置自定义720@30（0.4-6.0M），并检查配置是否正确
       */
     @Test
     public  void testCustom720P() throws Exception {
         String resolution=Iris4GPage.User_defined_resolution[1];
         String Frame=Iris4GPage.User_defined_rate[1];
         String minBitrate="400";
-        String maxBitrate="10000";
+        String maxBitrate="6000";
         configUserDefinedLiveQuality( resolution,Frame,minBitrate,maxBitrate);
         String checkLiveQuality="720@30";
         CameraAction.checkLiveVideoQualityStatus(checkLiveQuality);
@@ -123,16 +123,16 @@ public class CustomLiveBitRateCase extends VP2 {
 
     /*
     Case 3
-       配置自定义480@25（0.2-5.0M），并检查是否直播成功
+       配置自定义480@25（0.2-4.0M），并检查是否直播成功
          */
     @Test
     public  void testCustom480P30LiveSucess() throws Exception {
         String resolution=Iris4GPage.User_defined_resolution[0];
         String Frame=Iris4GPage.User_defined_rate[0];
         String minBitrate="200";
-        String maxBitrate="5000";
+        String maxBitrate="4000";
         configUserDefinedLiveQuality( resolution,Frame,minBitrate,maxBitrate);
-        logger.info("setting userDefined 480@25(0.2-5.0M)");
+        logger.info("setting userDefined 480@25(0.2-4.0M)");
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         logger.info("start live...");
         CameraAction.checkLiveStatus(1);
@@ -149,16 +149,16 @@ public class CustomLiveBitRateCase extends VP2 {
 
     /*
     Case 4
-     配置自定义7200@30（0.4-10.0M），并检查是否直播成功
+     配置自定义7200@30（0.4-6.0M），并检查是否直播成功
      */
     @Test
     public  void testCustom720P30LiveSucess() throws Exception {
         String resolution=Iris4GPage.User_defined_resolution[1];
         String Frame=Iris4GPage.User_defined_rate[1];
         String minBitrate="400";
-        String maxBitrate="10000";
+        String maxBitrate="6000";
         configUserDefinedLiveQuality( resolution,Frame,minBitrate,maxBitrate);
-        logger.info("setting userDefined 480@30(0.4-10.0M)");
+        logger.info("setting userDefined 480@30(0.4-6.0M)");
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         logger.info("start live...");
         CameraAction.checkLiveStatus(1);

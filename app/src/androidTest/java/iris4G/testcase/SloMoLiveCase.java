@@ -1,11 +1,15 @@
 package iris4G.testcase;
 
+import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiObject;;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiSelector;
 import com.squareup.spoon.Spoon;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import ckt.base.VP2;
 import iris4G.action.AccountAction;
@@ -26,7 +30,6 @@ public class SloMoLiveCase extends VP2 {
         Iris4GAction.initIris4G();
 
     }
-
 
     private  void NavToSloMoLive() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
@@ -98,7 +101,6 @@ public class SloMoLiveCase extends VP2 {
             logger.info("will check other button status");
 }
 
-
     /*
        Case 3
        慢镜头直播
@@ -137,44 +139,110 @@ public class SloMoLiveCase extends VP2 {
         }
     }
 
-
-
-private  static boolean checkOtherliveSettingButton() throws Exception {
-    CameraAction.navConfig(Iris4GPage.nav_menu[0]);
-    CameraAction.cameraSetting();
-    CameraAction.scrollAndGetUIObject("Video Quality").click();
-    boolean  qualityBtton=getObjectById("com.hicam:id/settingImageView").exists();
-    if (qualityBtton==false){
-        logger.info("Video Quality  unavailable ");
-        return false;
+    /*
+     Case5
+    打开慢镜头直播开关后，检查状态栏
+     */
+    @Test
+    public  void testStatusBarOfSloMoLive() throws Exception {
+        loginAndOpenSloMoLiveButton();
+        if(!getUiObjectByText("480@25").exists() && getUiObjectByText("480@30").exists()){
+            logger.info("StatusBarOfSloMoLivePass");
+        }else {
+            logger.info("StatusBarOfSloMoLiveFailed");
+            Spoon.screenshot("StatusBarOfSloMoLiveFailed");
+        }
     }
-   else {
-        logger.info("Video Quality  available");
-        return true;
-   }
 
-}
+    /*
+     Case6
+    打开慢镜头直播开关后，检查置灰的直播设置选项
+     */
+    @Test
+    public  void testSettingStatusAfterOpenSloMoLiveButton() throws Exception {
+        loginAndOpenSloMoLiveButton();
+        Assert.assertEquals("VideoQualityIsNotClickable",false,checkVideoQualityButtonIsClikable());
+        CameraAction.navToMoreSettings();
+        Assert.assertEquals("Auto reconnect(beta)IsNotEnable",false,checkButtonStatusIsEnable("Auto reconnect(beta)"));
+        Assert.assertEquals("Live&SaveIsNotEnable",false,checkButtonStatusIsEnable("Live&Save"));
+        Assert.assertEquals("Live&LocationIsNotEnable",false,checkButtonStatusIsEnable("Live&Location"));
+        Assert.assertEquals("SpeedometerIsNotEnable",false,checkButtonStatusIsEnable("Speedometer"));
+        Assert.assertEquals("AltimeterIsNotEnable",false,checkButtonStatusIsEnable("Altimeter"));
+        Assert.assertEquals("Voice interactionIsNotEnable",false,checkButtonStatusIsEnable("Voice interaction"));
+        Assert.assertEquals("Live MuteIsNotEnable",false,checkButtonStatusIsEnable("Live Mute"));
+    }
+
+    /*
+    Case7
+   关闭慢镜头直播开关后，检查状态栏
+    */
+    @Test
+    public  void testStatusBarAfterCloseSloMoLiveButton() throws Exception {
+        loginAndOpenSloMoLiveButton();
+        waitTime(2);
+        CameraAction.openCompoundButton("Slow motion broadcast");
+        if(!getUiObjectByText("480@30").exists()&&getUiObjectByText("480@25").exists()){
+            logger.info("StatusBarAfterCloseSloMoLiveButtonPass");
+        }else{
+            logger.info("StatusBarAfterCloseSloMoLiveButtonFailed");
+            Spoon.screenshot("StatusBarAfterCloseSloMoLiveButtonFailed");
+        }
+    }
+
+    /*
+     Case8
+    关闭慢镜头直播开关后，检查置灰的直播设置选项是否恢复可用
+     */
+    @Test
+    public  void testSettingStatusAfterCloseSloMoLiveButton() throws Exception {
+        loginAndOpenSloMoLiveButton();
+        waitTime(2);
+        CameraAction.openCompoundButton("Slow motion broadcast");
+//        Assert.assertEquals("VideoQualityIsClickable",true,checkVideoQualityButtonIsClikable());
+        CameraAction.navToMoreSettings();
+        Assert.assertEquals("Auto reconnect(beta)IsEnable",true,checkButtonStatusIsEnable("Auto reconnect(beta)"));
+        Assert.assertEquals("Live&SaveIsEnable",true,checkButtonStatusIsEnable("Live&Save"));
+        Assert.assertEquals("Live&LocationIsEnable",true,checkButtonStatusIsEnable("Live&Location"));
+        Assert.assertEquals("SpeedometerIsEnable",true,checkButtonStatusIsEnable("Speedometer"));
+        Assert.assertEquals("AltimeterIsEnable",true,checkButtonStatusIsEnable("Altimeter"));
+        Assert.assertEquals("Voice interactionIsEnable",true,checkButtonStatusIsEnable("Voice interaction"));
+        Assert.assertEquals("Live MuteIsEnable",true,checkButtonStatusIsEnable("Live Mute"));
+    }
 
 
-    private  static boolean checkOtherliveSettingButton2() throws Exception {
+
+
+    /*
+    检查直播设置Video Quality的clickable属性，以判断直播是否质量是否置灰
+     */
+    private  static boolean checkVideoQualityButtonIsClikable() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
-        waitTime(1);
-        CameraAction.scrollAndGetUIObject("More settings");
-        clickByText("More settings");
-        CameraAction.scrollAndGetUIObject("Auto reconnect(beta)");
-        UiObject clickButton=new UiObject(new UiSelector().className("android.widget.RelativeLayout"));
-        boolean isClickButton=clickButton.isEnabled();
-        if (isClickButton) {
-            logger.info("Auto reconnect(beta)  available");
-            return true;
-        } else {
-            logger.info("Auto reconnect(beta)  unavailable ");
-            return false;
-        }
-
+        Iris4GAction.scrollTextIntoView("Video Quality");
+        boolean VideoQuality=Iris4GAction.scrollTextIntoView("Video Quality").isClickable();
+        return VideoQuality;
     }
 
+    /*
+    检查直播设置中的moreSetting中类似录播开关的enable属性，以判断开关是否置灰
+     */
+    private  static boolean checkButtonStatusIsEnable(String textViewName) throws Exception {
+        Iris4GAction.scrollTextIntoView(textViewName);
+        UiObject2 scrollView = getObject2ByClass(android.widget.ScrollView.class);
+        List<UiObject2> relatives = scrollView.findObjects(By.clazz(android.widget.RelativeLayout.class));
+        UiObject2 clickBtn=null;
+        for (UiObject2 relateLayout : relatives) {
+            boolean compoundButton = relateLayout.hasObject(By.clazz(android.widget.CompoundButton.class));
+            boolean textView = relateLayout.hasObject(By.text(textViewName));
+            if (compoundButton == true && textView == true) {
+                clickBtn = relateLayout.findObject(By.clazz(android.widget.CompoundButton.class));
+                Spoon.screenshot("CompoundButtonNameIs",textViewName);
+                break;
+            }
+        }
+        boolean buttonResult =clickBtn.isEnabled();
+        return buttonResult;
+    }
 
 
 }

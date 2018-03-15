@@ -694,6 +694,9 @@ public class CameraAction extends VP2 {
     public static void navToAltimeter() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
+        Iris4GAction.ScrollViewByText("More settings");
+        clickByText("More settings");
+        waitTime(1);
         Iris4GAction.ScrollViewByText("Altimeter");
     }
     public static void navToCustomResolution() throws Exception {
