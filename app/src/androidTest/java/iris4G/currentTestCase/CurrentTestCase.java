@@ -187,7 +187,7 @@ public class CurrentTestCase extends VP2 {
             CurrenTestAction.makeLive("OFF",out,"YES");
             CurrenTestAction.configUserDefinedLiveQuality("720P","400","400");
             CurrenTestAction.makeLive("OFF",out,"YES");
-            CurrenTestAction.configUserDefinedLiveQuality("720P","10000","10000");
+            CurrenTestAction.configUserDefinedLiveQuality("720P","6000","6000");
             CurrenTestAction.makeLive("OFF",out,"YES");
 
             //其他设置项 高度计
