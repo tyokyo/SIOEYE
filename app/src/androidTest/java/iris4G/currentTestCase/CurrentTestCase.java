@@ -183,7 +183,7 @@ public class CurrentTestCase extends VP2 {
             //自定义直播质量
             CurrenTestAction.configUserDefinedLiveQuality("480P","200","200");
             CurrenTestAction.makeLive("OFF",out,"YES");
-            CurrenTestAction.configUserDefinedLiveQuality("480P","5000","5000");
+            CurrenTestAction.configUserDefinedLiveQuality("480P","4000","4000");
             CurrenTestAction.makeLive("OFF",out,"YES");
             CurrenTestAction.configUserDefinedLiveQuality("720P","400","400");
             CurrenTestAction.makeLive("OFF",out,"YES");
