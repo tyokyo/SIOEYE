@@ -245,7 +245,7 @@ public class CurrenTestAction extends VP2 {
      *结束直播
      */
     public static void makeLiveStop() throws Exception {
-        waitTime(1);
+        waitTime(3);
         makeScreenOn();
         if (text_exists("OK")) {
             logger.info("Bad network, livestream has ended");
@@ -261,6 +261,7 @@ public class CurrenTestAction extends VP2 {
             }
         }else {
             gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
+            waitTime(12);
         }
         logger.info("LiveHasStop");
         waitTime(2);
@@ -336,7 +337,7 @@ public class CurrenTestAction extends VP2 {
             gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
             waitTime(1);
             clickByText("Yes");
-            waitTime(2);
+            waitTime(12);
             logger.info("galleryLiveHasStop");
         }
         if (id_exists(SettingPage.gallery_live_cancel)){
@@ -548,15 +549,15 @@ public class CurrenTestAction extends VP2 {
     直播时间，包涵输出当时的4G信号强度
      */
     public static void liveTime(BufferedWriter out) throws IOException {
-        String writeString = System.currentTimeMillis() + ":" + get4GSignalStrength()+"\n";
-        out.write(writeString);
-        out.flush(); // 把缓存区内容压入文件
+        int SignalStrengthBf=get4GSignalStrength();
         waitTime(testTime/2);
-        writeString = System.currentTimeMillis() + ":" + get4GSignalStrength()+"\n";
-        out.write(writeString);
-        out.flush(); // 把缓存区内容压入文件
+        int SignalStrengthMid=get4GSignalStrength();
         waitTime(testTime/2);
-        writeString = System.currentTimeMillis() + ":" + get4GSignalStrength()+"\n";
+        int SignalStrengthBeh=get4GSignalStrength();
+        java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#####.00");
+        double SignalStrength=((double) SignalStrengthBeh+(double)SignalStrengthBf+(double)SignalStrengthMid)/3;
+        df.format(SignalStrength);
+        String writeString = System.currentTimeMillis() + ":" + SignalStrength+"\n";
         out.write(writeString);
         out.flush(); // 把缓存区内容压入文件
     }

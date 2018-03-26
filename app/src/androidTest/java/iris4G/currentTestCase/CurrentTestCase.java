@@ -31,25 +31,24 @@ public class CurrentTestCase extends VP2 {
 
     private int standbyTime=180;
 
-    private String liveQuality480="480@25FPS(Bitrate0.3-4Mbps)",
-                    liveQuality720HD="720@25FPS(Bitrate1.3-6Mbps)",
-                    liveQualityUserDefined="User Defined(720@30FPS Bitrate0.4-10.0Mbps)";
+    private String liveQuality480="480@25FPS(Bitrate0.3-2Mbps)",
+            liveQuality720HD="720@25FPS(Bitrate1.3-6Mbps)";
     private String videoQuality1080P25="1080@25FPS",
-                    videoQuality720P60="720@60FPS",
-                    videoQuality720P25="720@25FPS",
-                    videoQuality480P120="480@120FPS",
-                    videoQuality480P25="480@25FPS";
+            videoQuality720P60="720@60FPS",
+            videoQuality720P25="720@25FPS",
+            videoQuality480P120="480@120FPS",
+            videoQuality480P25="480@25FPS";
     private String switchName[]={
-                    "Altimeter",//高度计0
-                    "Speedometer",//速度计1
-                    "Video&Live(beta)",//录播2
-                    "Anti-shake",//防抖3
-                    "Voice interaction",//语音交互4
+            "Altimeter",//高度计0
+            "Speedometer",//速度计1
+            "Video&Live(beta)",//录播2
+            "Anti-shake",//防抖3
+            "Voice interaction",//语音交互4
     };
     private String videoAngle[]={
-                    "Medium",
-                    "Wide",
-                    "Super Wide"
+            "Medium",
+            "Wide",
+            "Super Wide"
     };
 
 
@@ -184,11 +183,11 @@ public class CurrentTestCase extends VP2 {
             //自定义直播质量
             CurrenTestAction.configUserDefinedLiveQuality("480P","200","200");
             CurrenTestAction.makeLive("OFF",out,"YES");
-            CurrenTestAction.configUserDefinedLiveQuality("480P","5000","5000");
+            CurrenTestAction.configUserDefinedLiveQuality("480P","4000","4000");
             CurrenTestAction.makeLive("OFF",out,"YES");
             CurrenTestAction.configUserDefinedLiveQuality("720P","400","400");
             CurrenTestAction.makeLive("OFF",out,"YES");
-            CurrenTestAction.configUserDefinedLiveQuality("720P","10000","10000");
+            CurrenTestAction.configUserDefinedLiveQuality("720P","6000","6000");
             CurrenTestAction.makeLive("OFF",out,"YES");
 
             //其他设置项 高度计
