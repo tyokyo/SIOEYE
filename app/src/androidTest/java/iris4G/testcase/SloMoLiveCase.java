@@ -1,10 +1,15 @@
 package iris4G.testcase;
 
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiSelector;
+import android.view.KeyEvent;
+
 import com.squareup.spoon.Spoon;
+
+import org.hamcrest.Asst;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +19,11 @@ import java.util.List;
 import ckt.base.VP2;
 import iris4G.action.AccountAction;
 import iris4G.action.CameraAction;
+import iris4G.action.GalleryAction;
 import iris4G.action.Iris4GAction;
 import iris4G.page.Iris4GPage;
 
+import static android.R.attr.id;
 
 
 /**
@@ -161,7 +168,7 @@ public class SloMoLiveCase extends VP2 {
     @Test
     public  void testSettingStatusAfterOpenSloMoLiveButton() throws Exception {
         loginAndOpenSloMoLiveButton();
-        Assert.assertEquals("VideoQualityIsNotClickable",false,checkVideoQualityButtonIsClikable());
+        Assert.assertEquals("VideoQualityIsNotClickable",false,checkVideoQualityButtonIsEnable());
         CameraAction.navToMoreSettings();
         Assert.assertEquals("Auto reconnect(beta)IsNotEnable",false,checkButtonStatusIsEnable("Auto reconnect(beta)"));
         Assert.assertEquals("Live&SaveIsNotEnable",false,checkButtonStatusIsEnable("Live&Save"));
@@ -198,7 +205,7 @@ public class SloMoLiveCase extends VP2 {
         loginAndOpenSloMoLiveButton();
         waitTime(2);
         CameraAction.openCompoundButton("Slow motion broadcast");
-//        Assert.assertEquals("VideoQualityIsClickable",true,checkVideoQualityButtonIsClikable());
+        Assert.assertEquals("VideoQualityIsClickable",true,checkVideoQualityButtonIsEnable());
         CameraAction.navToMoreSettings();
         Assert.assertEquals("Auto reconnect(beta)IsEnable",true,checkButtonStatusIsEnable("Auto reconnect(beta)"));
         Assert.assertEquals("Live&SaveIsEnable",true,checkButtonStatusIsEnable("Live&Save"));
@@ -209,17 +216,134 @@ public class SloMoLiveCase extends VP2 {
         Assert.assertEquals("Live MuteIsEnable",true,checkButtonStatusIsEnable("Live Mute"));
     }
 
+    /*
+     Case9
+    慢速直播正在录像时，停止录像
+     */
+    @Test
+    public void testStopDuringRecording()  {
+        try {
+            loginAndOpenSloMoLiveButton();
+            Iris4GAction.cameraKey();
+            waitUntilFind("com.hicam:id/recording_time2",3000);
+            if (getUiObjectById("com.hicam:id/recording_time2").exists()){
+                Asst.assertEquals("SloMoRecording","After the completion will automatic broadcast",getTex("com.hicam:id/video_then_live_tip"));
+                waitTime(6);
+                CameraAction.checkMoValue(4);
+                Iris4GAction.cameraKey();
+                logger.info("stopRecording");
+                waitTime(1);
+                Asst.assertEquals("stopDuringSloMoLiveRecordingFailed",true,gDevice .findObject(new UiSelector().resourceId("com.hicam:id/camera_setting_shortcut")).exists());
+                Spoon.screenshot("stopDuringSloMoLiveRecording");
+            }else {
+                logger.info("SloMOLiveStartRecordingFailed");
+                Spoon.screenshot("SloMOLiveStartRecordingFailed");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /*
+     Case10
+    慢速直播正在直播时，停止直播
+     */
+    @Test
+    public void testStopDuringSloMOLive() throws Exception {
+        loginAndOpenSloMoLiveButton();
+        Iris4GAction.cameraKey();
+        waitTime(15);
+        waitUntilFindText("broadcasting",3000);
+        UiObject SloMoLiving=getObjectById("com.hicam:id/live_tip");
+        if (SloMoLiving.exists()&&getTex("com.hicam:id/live_tip").equals("broadcasting")){
+            Iris4GAction.cameraKey();
+            clickByText("Yes");
+        Asst.assertEquals("StopDuringSloMOLiveSucess",true,getObjectById("com.hicam:id/camera_live_shortcut").exists());
+        }else{
+            logger.info("SloMoLiveFailed");
+            Spoon.screenshot("SloMoLiveFailed");
+        }
+    }
+
+    /*
+    Case11
+   慢速直播切换超宽视场角
+    */
+    @Test
+    public  void testSuperWideAngle() throws Exception {
+        String angle="Super Wide";
+       switchSloMoliveAngleAndCheckAngle(angle);
+    }
+
+    /*
+   Case12
+  慢速直播切换宽视场角
+   */
+    @Test
+    public  void testWideAngle() throws Exception {
+        String angle="Wide";
+        switchSloMoliveAngleAndCheckAngle(angle);
+    }
+
+    /*
+   Case13
+  慢速直播切换普通视场角
+   */
+    @Test
+    public  void testMediumAngle() throws Exception {
+        String angle="Medium";
+        switchSloMoliveAngleAndCheckAngle(angle);
+    }
+
+
+    /*
+      Case14
+     发起慢速直播后，再发起相册直播
+      */
+    @Test
+    public void testStartGalleryLiveAfterSloMoLive() throws Exception {
+        loginAndOpenSloMoLiveButton();
+        Iris4GAction.cameraKey();
+        waitTime(60);
+        waitUntilGone("com.hicam:id/live_tip",3000);
+        Iris4GAction.startGallery();
+        boolean sloMoGalleryStatus=GalleryAction.makeGalleryLive();
+        Asst.assertEquals("StartGalleryLiveAfterSloMoLiveSucess",true,sloMoGalleryStatus);
+    }
 
 
 
     /*
-    检查直播设置Video Quality的clickable属性，以判断直播是否质量是否置灰
+    慢速直播模式切换视场角
      */
-    private  static boolean checkVideoQualityButtonIsClikable() throws Exception {
+    private void switchSloMoliveAngleAndCheckAngle(String angle){
+        try {
+            loginAndOpenSloMoLiveButton();
+            CameraAction.navToMoreSettings();
+            Iris4GAction.scrollTextIntoView("Video Angle");
+            clickByText("Video Angle");
+            Iris4GAction.scrollTextIntoView(angle);
+            clickByText(angle);
+            String  actAngle=Iris4GAction.getRightValue("Video Angle");
+            Asst.assertEquals("SloMoLiveSwitchAngleSucess",angle,actAngle);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    /*
+    检查直播设置Video Quality一栏的enable属性，以判断直播是否质量是否置灰
+     */
+    private  static boolean checkVideoQualityButtonIsEnable() throws Exception {
         CameraAction.navConfig(Iris4GPage.nav_menu[0]);
         CameraAction.cameraSetting();
         Iris4GAction.scrollTextIntoView("Video Quality");
-        boolean VideoQuality=Iris4GAction.scrollTextIntoView("Video Quality").isClickable();
+        UiObject videoQualityTab;
+        videoQualityTab = gDevice.findObject(new UiSelector().className("android.widget.RelativeLayout").index(6));
+        boolean VideoQuality=videoQualityTab.isEnabled();
         return VideoQuality;
     }
 
