@@ -221,6 +221,7 @@ public class VideoAndLive extends VP2 {
     public void testKeyDuringVideoAndLive() throws Exception {
         CameraAction.loginByVideoAndLive();
         waitUntilFind(Iris4GPage.video_and_live_recording_live,10000);
+        waitTime(2);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
         Thread.sleep(70);
         gDevice.pressKeyCode(KeyEvent.KEYCODE_CAMERA);
